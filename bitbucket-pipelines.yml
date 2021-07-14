@@ -1,11 +1,10 @@
-image: node:10.15.3
+image: node:15.6.0
 pipelines:
   default:
-    - parallel:
-        - step:
-            name: Build and Test
-            caches:
-              - node
-            script:
-              - yarn install
-              - yarn test
+      - step:
+          name: Build and Test
+          caches:
+            - node
+          script:
+            - yarn install
+            - yarn test
