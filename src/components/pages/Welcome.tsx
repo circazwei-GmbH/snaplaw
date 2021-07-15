@@ -1,6 +1,5 @@
 import React from 'react';
 import {Text, View, StyleSheet, Image} from "react-native";
-import {Link} from "react-router-native";
 import Button from '../basics/buttons/Button'
 
 export default function Welcome() {

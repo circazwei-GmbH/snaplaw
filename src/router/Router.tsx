@@ -3,7 +3,6 @@ import { Route } from "react-router-native";
 import SignIn from '../components/pages/SignIn'
 import SignUp from '../components/pages/SignUp'
 import Welcome from '../components/pages/Welcome'
-import {View} from "react-native";
 
 export default function Router() {
     return (
