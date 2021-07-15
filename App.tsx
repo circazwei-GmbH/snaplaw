@@ -26,7 +26,7 @@ export default function App() {
   return (
       <NativeRouter>
           <View style={styles.container}>
-              <Router />
+              <Router data-testid="router" />
           </View>
           <StatusBar style="auto" />
       </NativeRouter>

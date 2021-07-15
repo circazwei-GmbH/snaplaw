@@ -6,9 +6,9 @@ import Button from '../basics/buttons/Button'
 export default function Welcome() {
     return (
         <View style={styles.container}>
-            <Text style={styles.headline}>Welcome to Snaplaw</Text>
-            <Image source={require('../../../assets/welcome.png')} />
-            <View style={styles.actions}>
+            <Text accessibilityLabel="welcome-to-snaplaw" style={styles.headline}>Welcome to Snaplaw</Text>
+            <Image accessibilityLabel="welcome-image" source={require('../../../assets/welcome.png')} />
+            <View style={styles.actions} accessibilityLabel="actions">
                 <Button text="Sign in" to="signin" style={styles.signInButton} type="primary" />
                 <Button text="Sign up" to="signup" />
             </View>
@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
         flexDirection: 'column'
     },
     headline: {
-        fontSize: 48,
+        fontSize: 32,
+        width: 240,
         color: '#1696E2',
         textAlign: "center",
         textAlignVertical: 'center',

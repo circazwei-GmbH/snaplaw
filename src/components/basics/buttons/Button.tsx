@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import { useHistory } from "react-router-native";
 import { Pressable, StyleSheet, Text } from 'react-native'
 
-interface ButtonLinkPrimaryPropsInterface {
+interface ButtonPropsInterface {
     text: string;
     to: string;
     style?: object,
     type?: 'primary' | 'secondary'
 }
 
-export default function ButtonLinkPrimary({ text, to, style, type } : ButtonLinkPrimaryPropsInterface) {
+export default function Button({ text, to, style, type } : ButtonPropsInterface) {
     const history = useHistory()
     const [touched, setTouched] = useState(false)
 
