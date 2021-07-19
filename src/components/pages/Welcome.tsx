@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, View, StyleSheet, Image} from "react-native";
-import Button from '../basics/buttons/Button'
+import ButtonLink from '../basics/buttons/ButtonLink'
 
 export default function Welcome() {
     return (
@@ -8,8 +8,8 @@ export default function Welcome() {
             <Text accessibilityLabel="welcome-to-snaplaw" style={styles.headline}>Welcome to Snaplaw</Text>
             <Image accessibilityLabel="welcome-image" source={require('../../../assets/welcome.png')} />
             <View style={styles.actions} accessibilityLabel="actions">
-                <Button text="Sign in" to="signin" style={styles.signInButton} type="primary" />
-                <Button text="Sign up" to="signup" />
+                <ButtonLink text="Sign in" to="signin" style={styles.signInButton} type="primary" />
+                <ButtonLink text="Sign up" to="signup" />
             </View>
         </View>
     )

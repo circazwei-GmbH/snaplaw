@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../../../../../src/components/basics/buttons/Button'
+import ButtonLink from '../../../../../src/components/basics/buttons/ButtonLink'
 import { render, fireEvent, act, } from '@testing-library/react-native';
 import {NativeRouter, Route} from "react-router-native";
 import {Text, View} from "react-native";
@@ -29,7 +29,7 @@ describe('Button component', () => {
     test('Button displayed', async () => {
         const { findByText } = render(
             <NativeRouter>
-                <Button to="/test-route" text="testButton" />
+                <ButtonLink to="/test-route" text="testButton" />
             </NativeRouter>
         )
 
@@ -40,7 +40,7 @@ describe('Button component', () => {
     test('Button pressed', async () => {
         const { findByText } = render(
             <NativeRouter data-test-id="router">
-                <Button to="/test-route" text="testButton" />
+                <ButtonLink to="/test-route" text="testButton" />
                 <Route exact path="/" component={mainComponent} />
                 <Route path="/test-route" component={secondComponent} />
             </NativeRouter>
