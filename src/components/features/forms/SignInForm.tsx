@@ -3,8 +3,14 @@ import { View, StyleSheet } from "react-native";
 import TextField from "../../components/TextField";
 import PasswordField from '../../components/PasswordField'
 import Link from "../../basics/links/link";
+import {StackNavigationProp} from "@react-navigation/stack";
+import {RootStackParamList} from "../../../router/Router";
 
-export default function SignInForm() {
+type SignInFormProps = {
+    navigation: StackNavigationProp<RootStackParamList, 'SignIn'>
+}
+
+export default function SignInForm({navigation} : SignInFormProps) {
     return (
         <>
             <View style={styles.email}>
@@ -14,7 +20,7 @@ export default function SignInForm() {
                 <PasswordField placeholder="Password" icon="visibility-off" />
             </View>
             <View >
-                <Link style={styles.forgotLinkContainer} text="Forgot password?" />
+                <Link style={styles.forgotLinkContainer} text="Forgot password?" onPress={() => { navigation.navigate('Forgot') }}/>
             </View>
         </>
     )

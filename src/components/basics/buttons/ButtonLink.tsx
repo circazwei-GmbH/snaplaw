@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
-import { useHistory } from "react-router-native";
-import { Pressable, StyleSheet, Text } from 'react-native'
+import React from 'react';
+
 import Button from "./Button";
 
 interface ButtonPropsInterface {
@@ -10,11 +9,10 @@ interface ButtonPropsInterface {
     type?: 'primary' | 'secondary'
 }
 
-export default function ButtonLink({ text, to, style, type } : ButtonPropsInterface) {
-    const history = useHistory()
+export default function ButtonLink({ text, style, type } : ButtonPropsInterface) {
 
     const onPressHandler = () => {
-        history.push(to)
+        // tbd
     }
 
     return (

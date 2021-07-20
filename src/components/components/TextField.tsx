@@ -4,10 +4,9 @@ import {TextInput, View, StyleSheet, Text} from "react-native";
 interface TextFieldPropsInterface {
     placeholder?: string,
     fixed?: boolean,
-    icon?: string | null
 }
 
-export default function TextField({ placeholder, fixed = false, icon = null } : TextFieldPropsInterface) {
+export default function TextField({ placeholder, fixed = false } : TextFieldPropsInterface) {
     const [value, setValue] = useState('');
     const [focused, setFocused] = useState(false);
 
@@ -26,7 +25,8 @@ export default function TextField({ placeholder, fixed = false, icon = null } : 
                 style={[
                     styles.emptyInput,
                     focused ? styles.fullInput : null,
-                    focused ? null : styles.focuslessInput
+                    focused ? null : styles.focuslessInput,
+                    value ? styles.inputWithText : null
                 ]}
                 value={value}
                 onChangeText={textChangeHandler}
@@ -42,8 +42,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#EFF7FD',
         borderRadius: 10,
         height: 44,
+        fontSize: 15,
         paddingHorizontal: 16,
-        fontSize: 15
+        fontFamily: 'P'
     },
     fullInput: {
         backgroundColor: 'transparent',
@@ -51,8 +52,13 @@ const styles = StyleSheet.create({
         borderColor: '#BBD1DE',
         fontSize: 17
     },
+    inputWithText: {
+        fontSize: 17
+    },
     focuslessInput: {
-        backgroundColor: '#EFF7FD'
+        backgroundColor: '#EFF7FD',
+        borderWidth: 1,
+        borderColor: 'transparent'
     },
     label: {
         color: '#1696E2',

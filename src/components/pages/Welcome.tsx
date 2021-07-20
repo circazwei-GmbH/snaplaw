@@ -1,15 +1,21 @@
 import React from 'react';
 import {Text, View, StyleSheet, Image} from "react-native";
-import ButtonLink from '../basics/buttons/ButtonLink'
+import Button from '../basics/buttons/Button'
+import {StackNavigationProp} from "@react-navigation/stack";
+import {RootStackParamList} from "../../router/Router";
 
-export default function Welcome() {
+type WelcomeProp = {
+    navigation: StackNavigationProp<RootStackParamList, 'Welcome'>
+}
+
+export default function Welcome({ navigation } : WelcomeProp) {
     return (
         <View style={styles.container}>
             <Text accessibilityLabel="welcome-to-snaplaw" style={styles.headline}>Welcome to Snaplaw</Text>
             <Image accessibilityLabel="welcome-image" source={require('../../../assets/welcome.png')} />
             <View style={styles.actions} accessibilityLabel="actions">
-                <ButtonLink text="Sign in" to="signin" style={styles.signInButton} type="primary" />
-                <ButtonLink text="Sign up" to="signup" />
+                <Button text="Sign in" onPress={() => navigation.navigate('SignIn')} style={styles.signInButton} type="primary" />
+                <Button text="Sign up" onPress={() => navigation.navigate('SignUp')} />
             </View>
         </View>
     )

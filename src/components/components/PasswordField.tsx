@@ -9,7 +9,7 @@ interface TextFieldPropsInterface {
     onChange?: Function | undefined
 }
 
-export default function TextField({ placeholder, fixed = false, icon = null, onChange = undefined } : TextFieldPropsInterface) {
+export default function TextField({ placeholder, fixed = false, icon = null } : TextFieldPropsInterface) {
     const [value, setValue] = useState('');
     const [focused, setFocused] = useState(false);
     const [visible, setVisible] = useState(false)
@@ -42,7 +42,8 @@ export default function TextField({ placeholder, fixed = false, icon = null, onC
                 style={[
                     styles.emptyInput,
                     focused ? styles.fullInput : null,
-                    focused ? null : styles.focuslessInput
+                    focused ? null : styles.focuslessInput,
+                    value ? styles.inputWithText : null
                 ]}
                 value={visible ? value : hideText(value)}
                 onKeyPress={textChangeHandler}
@@ -50,7 +51,7 @@ export default function TextField({ placeholder, fixed = false, icon = null, onC
                 onBlur={() => setFocused(false)}
             />
             {icon ? (
-                <MaterialIcons onPress={iconPressHandler} color="#668395" style={styles.icon} size="20" name={icon} />
+                <MaterialIcons onPress={iconPressHandler} color="#668395" style={styles.icon} size={20} name={icon} />
             ) : null}
         </View>
     )
@@ -70,8 +71,13 @@ const styles = StyleSheet.create({
         borderColor: '#BBD1DE',
         fontSize: 17
     },
+    inputWithText: {
+        fontSize: 17
+    },
     focuslessInput: {
-        backgroundColor: '#EFF7FD'
+        backgroundColor: '#EFF7FD',
+        borderWidth: 1,
+        borderColor: 'transparent'
     },
     inputWithIcon: {
     },

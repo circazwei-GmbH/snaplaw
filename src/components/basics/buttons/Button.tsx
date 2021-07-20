@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import { useHistory } from "react-router-native";
-import { Pressable, StyleSheet, Text } from 'react-native'
+import {GestureResponderEvent, Pressable, StyleSheet, Text} from 'react-native'
+
+
 
 interface ButtonPropsInterface {
     text: string;
-    onPress: Function;
+    onPress: ((event: GestureResponderEvent) => void);
     style?: object,
     type?: 'primary' | 'secondary'
 }

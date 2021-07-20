@@ -1,18 +1,25 @@
 import React from 'react';
-import {View, Text, StyleSheet} from "react-native";
+import { Text, StyleSheet, Pressable} from "react-native";
 
 interface LinkPropsInterface {
-    text: string,
-    style?: object
+    text: string;
+    style?: object;
+    onPress?: Function | null;
 }
 
-export default function Link({ text, style } : LinkPropsInterface) {
+export default function Link({ text, style, onPress = null } : LinkPropsInterface) {
+    const onPressHandler = () => {
+        if (onPress) {
+            onPress();
+        }
+    }
+
     return (
-        <View>
+        <Pressable onPress={onPressHandler}>
             <Text style={[styles.link, style]}>
                 {text}
             </Text>
-        </View>
+        </Pressable>
     )
 }
 
