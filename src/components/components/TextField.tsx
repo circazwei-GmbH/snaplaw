@@ -1,38 +1,51 @@
 import React, {useState} from 'react';
-import {TextInput, View, StyleSheet, Text} from "react-native";
+import {TextInput, View, StyleSheet, Text, TextInputProps} from "react-native";
 
-interface TextFieldPropsInterface {
-    placeholder?: string,
-    fixed?: boolean,
+interface OnChanfeFunction {
+    (text: string): void
 }
 
-export default function TextField({ placeholder, fixed = false } : TextFieldPropsInterface) {
-    const [value, setValue] = useState('');
+interface TextFieldPropsInterface extends TextInputProps {
+    placeholder?: string,
+    fixed?: boolean,
+    validations?: Array<Function>,
+    errorMessage?: string,
+    value?: string,
+    onChangeFunction: OnChanfeFunction
+}
+
+export default function TextField({ placeholder, fixed = false, errorMessage, onChangeFunction, value, ...props } : TextFieldPropsInterface) {
+    const [localValue, setLocalValue] = useState(value);
     const [focused, setFocused] = useState(false);
 
     const textChangeHandler = (text: string) => {
-        setValue(text)
+        setLocalValue(text)
+        if (typeof onChangeFunction === 'function') {
+            onChangeFunction(text)
+        }
     }
 
     return (
         <View>
             <Text style={[
                 styles.label,
-                focused || value ? null : fixed ? styles.labelWithEmptyInputFixed : styles.labelWithEmptyInputDance,
+                focused || localValue ? null : fixed ? styles.labelWithEmptyInputFixed : styles.labelWithEmptyInputDance,
             ]}>{placeholder}<Text style={styles.redText}>*</Text></Text>
             <TextInput
+                {...props}
                 placeholder={!focused ? placeholder : ''}
                 style={[
                     styles.emptyInput,
                     focused ? styles.fullInput : null,
                     focused ? null : styles.focuslessInput,
-                    value ? styles.inputWithText : null
+                    localValue ? styles.inputWithText : null
                 ]}
-                value={value}
+                value={localValue}
                 onChangeText={textChangeHandler}
                 onFocus={() => setFocused(true)}
                 onBlur={() => setFocused(false)}
             />
+            <Text style={[styles.errorText, errorMessage ? null : styles.displayNone]}>{errorMessage}</Text>
         </View>
     )
 }
@@ -74,4 +87,11 @@ const styles = StyleSheet.create({
     redText: {
         color: "#FA7171"
     },
+    errorText: {
+        paddingTop: 5,
+        color: '#FA7171',
+    },
+    displayNone: {
+        display: "none"
+    }
 })

@@ -1,27 +1,86 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, StyleSheet, Text } from "react-native";
 import MainHeadline from "../basics/typography/MainHeadline";
 import AuthLayout from "../layouts/AuthLayout";
-import SignInForm from "../features/forms/SignInForm";
+import SignInForm, { FieldInterface } from "../features/forms/SignInForm";
 import Button from "../basics/buttons/Button";
 import SocialButton from "../basics/buttons/SocialButton";
 import {FontAwesome5} from "@expo/vector-icons";
 import Link from "../basics/links/link";
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../router/Router'
+import { email, length } from '../../validations/default';
 
 type SignInProps = {
     navigation: StackNavigationProp<RootStackParamList, 'SignIn'>
 }
 
 export default function SignIn({ navigation } : SignInProps) {
+    const [form, setForm] = useState({
+        email: {
+            value: '',
+            error: '',
+            displayError: false,
+            validators: [email('Sould be email')]
+        },
+        password: {
+            value: '',
+            error: '',
+            displayError: false,
+            validators: [length('too short', 6)]
+        }
+    });
+
+    const validate = (stateField: FieldInterface) => {
+        const localField = stateField;
+
+        for(let i = 0; i < localField.validators.length; i++) {
+            const validator = localField.validators[i];
+            const result = validator(localField.value)
+            if (result) {
+                localField.error = result;
+                localField.displayError = true;
+            } else {
+                localField.error = '';
+                localField.displayError = false;
+            }
+        }
+
+        return localField
+    }
+
+    const fieldChangeHandler = (fieldName: string, text: string) => {
+        const preparedForm = {
+            ...form,
+            [fieldName]: {
+                ...form[fieldName],
+                value: text,
+            }
+        };
+        if (preparedForm[fieldName].error) {
+            preparedForm[fieldName] = validate(preparedForm[fieldName])
+        }
+
+        setForm(preparedForm)
+    }
+
+    const submitHandler = () => {
+        const localForm = {
+            email: validate(form.email),
+            password: validate(form.password)
+        }
+        setForm(localForm)
+
+        if (localForm.email.error || localForm.password.error) {
+            return;
+        }
+
+        // TODO dispatch
+        console.log(localForm.email.value, localForm.password.value)
+    }
+
     return (
-        <View style={{
-            flex: 1,
-            alignSelf: 'stretch',
-            alignItems: 'center',
-            justifyContent: 'space-around',
-            flexDirection: 'column'}}
+        <View style={styles.mainContainer}
         >
             <AuthLayout>
                 <View style={styles.container}>
@@ -30,12 +89,12 @@ export default function SignIn({ navigation } : SignInProps) {
                             <MainHeadline text="Sign In" />
                         </View>
                         <View style={styles.width100}>
-                            <SignInForm navigation={navigation} />
+                            <SignInForm navigation={navigation} form={form} fieldChangeHandler={fieldChangeHandler} />
                         </View>
                     </View>
                     <View style={[styles.width100, styles.actions]}>
                         <View style={styles.width100}>
-                            <Button text="Sign In" type="primary" onPress={() => console.log('yay')} />
+                            <Button text="Sign In" type="primary" onPress={submitHandler} />
                         </View>
                         <View style={[styles.signInWithContainer]}>
                             <View style={styles.signInWith}>
@@ -66,6 +125,13 @@ export default function SignIn({ navigation } : SignInProps) {
 }
 
 const styles = StyleSheet.create({
+    mainContainer: {
+        flex: 1,
+        alignSelf: 'stretch',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        flexDirection: 'column'
+    },
     container: {
         flex: 1,
         alignItems: 'center',

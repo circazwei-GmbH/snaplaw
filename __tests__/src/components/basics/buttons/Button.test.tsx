@@ -1,6 +1,6 @@
 import React from 'react';
 import ButtonLink from '../../../../../src/components/basics/buttons/ButtonLink'
-import { render, fireEvent, act, } from '@testing-library/react-native';
+import { render, fireEvent } from '@testing-library/react-native';
 import {NativeRouter, Route} from "react-router-native";
 import {Text, View} from "react-native";
 
