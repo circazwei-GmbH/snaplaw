@@ -38,7 +38,8 @@ export default function TextField({ placeholder, fixed = false, errorMessage, on
                     styles.emptyInput,
                     focused ? styles.fullInput : null,
                     focused ? null : styles.focuslessInput,
-                    localValue ? styles.inputWithText : null
+                    localValue ? styles.inputWithText : null,
+                    errorMessage ? styles.errorBorder : null
                 ]}
                 value={localValue}
                 onChangeText={textChangeHandler}
@@ -93,5 +94,8 @@ const styles = StyleSheet.create({
     },
     displayNone: {
         display: "none"
+    },
+    errorBorder: {
+        borderColor: '#FA7171'
     }
 })
