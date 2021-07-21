@@ -2,14 +2,16 @@ import React, {useState} from 'react';
 import { View, StyleSheet, Text } from "react-native";
 import MainHeadline from "../basics/typography/MainHeadline";
 import AuthLayout from "../layouts/AuthLayout";
-import SignInForm, { FieldInterface, SignInFormInterface } from "../features/forms/SignInForm";
+import SignInForm, { SignInFormInterface } from "../features/forms/SignInForm";
+import { StackNavigationProp } from '@react-navigation/stack';
+import {RootStackParamList, ROUTE} from '../../router/RouterTypes'
+import { email, length } from '../../validations/default';
+import DontHaveAnyAccount from "../features/Auth/DontHaveAnyAccount";
+import {formFieldFill, validate} from "../../utils/forms";
 import Button from "../basics/buttons/Button";
 import SocialButton from "../basics/buttons/SocialButton";
 import {FontAwesome5} from "@expo/vector-icons";
-import Link from "../basics/links/link";
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../router/Router'
-import { email, length } from '../../validations/default';
+import ActionBlock from "../features/Auth/ActionsBlock";
 
 type SignInProps = {
     navigation: StackNavigationProp<RootStackParamList, 'SignIn'>
@@ -33,37 +35,9 @@ export default function SignIn({ navigation } : SignInProps) {
     let setForm: (form: SignInFormInterface) => void;
     [form, setForm] = useState(form);
 
-    const validate = (stateField: FieldInterface) => {
-        const localField = stateField;
-
-        for(let i = 0; i < localField.validators.length; i++) {
-            const validator = localField.validators[i];
-            const result = validator(localField.value)
-            if (result) {
-                localField.error = result;
-                localField.displayError = true;
-            } else {
-                localField.error = '';
-                localField.displayError = false;
-            }
-        }
-
-        return localField
-    }
-
     const fieldChangeHandler = (fieldName: "email" | "password", text: string) => {
-        const preparedForm = {
-            ...form,
-            [fieldName]: {
-                ...form[fieldName],
-                value: text,
-            }
-        };
-        if (preparedForm[fieldName].error) {
-            preparedForm[fieldName] = validate(preparedForm[fieldName])
-        }
 
-        setForm(preparedForm)
+        setForm(formFieldFill(fieldName, text, form))
     }
 
     const submitHandler = () => {
@@ -82,8 +56,7 @@ export default function SignIn({ navigation } : SignInProps) {
     }
 
     return (
-        <View style={styles.mainContainer}
-        >
+        <View style={styles.mainContainer}>
             <AuthLayout>
                 <View style={styles.container}>
                     <View style={styles.width100}>
@@ -93,32 +66,13 @@ export default function SignIn({ navigation } : SignInProps) {
                         <View style={styles.width100}>
                             <SignInForm navigation={navigation} form={form} fieldChangeHandler={fieldChangeHandler} />
                         </View>
+                       <ActionBlock submitHandler={submitHandler} buttonText="Sign In" />
                     </View>
                     <View style={[styles.width100, styles.actions]}>
-                        <View style={styles.width100}>
-                            <Button text="Sign In" type="primary" onPress={submitHandler} />
-                        </View>
-                        <View style={[styles.signInWithContainer]}>
-                            <View style={styles.signInWith}>
-                                <Text style={styles.signInWithLine} />
-                                <Text style={styles.signInWithText}>Or Sign in with</Text>
-                                <Text style={styles.signInWithLine} />
-                            </View>
-                        </View>
-                        <View style={styles.socialButtons}>
-                            <SocialButton>
-                                <FontAwesome5 name="google" size={24} />
-                            </SocialButton>
-                            <SocialButton>
-                                <FontAwesome5 name="facebook-f" size={24} />
-                            </SocialButton>
-                        </View>
-                        <View style={styles.dontHaveAccountContainer}>
-                            <Text style={styles.dontHaveAccount}>
-                                Don't have any account?
-                            </Text>
-                            <Link style={styles.signUpLink} text="Sign up" onPress={() => navigation.replace('SignUp')} />
-                        </View>
+                       <DontHaveAnyAccount
+                           linkHandler={() => navigation.replace(ROUTE.SIGNUP)}
+                           linkText="Sign up"
+                       />
                     </View>
                 </View>
             </AuthLayout>
@@ -132,7 +86,7 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         alignItems: 'center',
         justifyContent: 'space-around',
-        flexDirection: 'column'
+        flexDirection: 'column',
     },
     container: {
         flex: 1,
@@ -186,5 +140,8 @@ const styles = StyleSheet.create({
     signUpLink: {
         fontSize: 16,
         textAlign: 'center'
+    },
+    actionButton: {
+        marginTop: 30
     }
 })

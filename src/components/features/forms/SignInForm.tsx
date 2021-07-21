@@ -7,6 +7,7 @@ import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParamList} from "../../../router/Router";
 import { email, ValidatorInterface } from '../../../validations/default';
 
+// TODO move to abstract place because used in SignUp
 export interface FieldInterface {
     value: string,
     error: string,

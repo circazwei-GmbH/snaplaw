@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-around',
         flexDirection: 'column',
-        paddingTop: 90,
+        paddingTop: 50,
         paddingHorizontal: 16
     }
 })

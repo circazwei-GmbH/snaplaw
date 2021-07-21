@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View, StyleSheet, Image} from "react-native";
 import Button from '../basics/buttons/Button'
 import {StackNavigationProp} from "@react-navigation/stack";
-import {RootStackParamList} from "../../router/Router";
+import {RootStackParamList} from "../../router/RouterTypes";
 
 type WelcomeProp = {
     navigation: StackNavigationProp<RootStackParamList, 'Welcome'>

@@ -118,7 +118,8 @@ const styles = StyleSheet.create({
         color: '#FA7171',
     },
     displayNone: {
-        display: "none"
+        display: "none",
+        marginBottom: 8
     },
     errorBorder: {
         borderColor: '#FA7171'
