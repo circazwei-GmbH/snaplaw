@@ -4,8 +4,9 @@ import TextField from "../../components/TextField";
 import PasswordField from '../../components/PasswordField'
 import Link from "../../basics/links/link";
 import {StackNavigationProp} from "@react-navigation/stack";
-import {RootStackParamList} from "../../../router/RouterTypes";
+import {RootStackParamList, ROUTE} from "../../../router/RouterTypes";
 import { email, ValidatorInterface } from '../../../validations/default';
+import { t } from 'i18n-js'
 
 // TODO move to abstract place because used in SignUp
 export interface FieldInterface {
@@ -29,23 +30,20 @@ type SignInFormProps = {
 export default function SignInForm({navigation, fieldChangeHandler, form} : SignInFormProps) {
     return (
         <>
-            <View style={styles.email}>
-                <TextField placeholder="Email" textContentType="username" fixed errorMessage={form.email.error} value={form.email.value} onChangeFunction={(text) => fieldChangeHandler('email', text)} />
+            <View>
+                <TextField placeholder={t('sign_in.email_field')} textContentType="username" fixed errorMessage={form.email.error} value={form.email.value} onChangeFunction={(text) => fieldChangeHandler('email', text)} />
             </View>
             <View style={styles.password}>
-                <PasswordField placeholder="Password" errorMessage={form.password.error} value={form.password.value} onChange={(text) => fieldChangeHandler('password', text)} icon="visibility-off" />
+                <PasswordField placeholder={t('sign_in.password_field')} errorMessage={form.password.error} value={form.password.value} onChange={(text) => fieldChangeHandler('password', text)} icon="visibility-off" />
             </View>
             <View >
-                <Link style={styles.forgotLinkContainer} text="Forgot password?" onPress={() => { navigation.navigate('Forgot') }}/>
+                <Link style={styles.forgotLinkContainer} text={t('sign_in.forgot_password')} onPress={() => { navigation.navigate(ROUTE.FORGOT) }}/>
             </View>
         </>
     )
 }
 
 const styles = StyleSheet.create({
-    email: {
-
-    },
     password: {
         marginTop: 16
     },

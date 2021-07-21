@@ -2,7 +2,8 @@ import React from 'react';
 import {Text, View, StyleSheet, Image} from "react-native";
 import Button from '../basics/buttons/Button'
 import {StackNavigationProp} from "@react-navigation/stack";
-import {RootStackParamList} from "../../router/RouterTypes";
+import {RootStackParamList, ROUTE} from "../../router/RouterTypes";
+import i18n from 'i18n-js';
 
 type WelcomeProp = {
     navigation: StackNavigationProp<RootStackParamList, 'Welcome'>
@@ -11,11 +12,11 @@ type WelcomeProp = {
 export default function Welcome({ navigation } : WelcomeProp) {
     return (
         <View style={styles.container}>
-            <Text accessibilityLabel="welcome-to-snaplaw" style={styles.headline}>Welcome to Snaplaw</Text>
+            <Text accessibilityLabel="welcome-to-snaplaw" style={styles.headline}>{i18n.t('welcome.headline')}</Text>
             <Image accessibilityLabel="welcome-image" source={require('../../../assets/welcome.png')} />
             <View style={styles.actions} accessibilityLabel="actions">
-                <Button text="Sign in" onPress={() => navigation.navigate('SignIn')} style={styles.signInButton} type="primary" />
-                <Button text="Sign up" onPress={() => navigation.navigate('SignUp')} />
+                <Button text={i18n.t('welcome.sign_in')} onPress={() => navigation.navigate(ROUTE.SIGNIN)} style={styles.signInButton} type="primary" />
+                <Button text={i18n.t('welcome.sign_up')} onPress={() => navigation.navigate(ROUTE.SIGNUP)} />
             </View>
         </View>
     )

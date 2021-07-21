@@ -3,23 +3,25 @@ import {GestureResponderEvent, StyleSheet, Text, View} from 'react-native'
 import Button from "../../basics/buttons/Button";
 import SocialButton from "../../basics/buttons/SocialButton";
 import {FontAwesome5} from "@expo/vector-icons";
-
+import {t} from 'i18n-js'
 type ActionsBlockProps = {
     submitHandler: (event: GestureResponderEvent) => void,
-    buttonText: string
+    buttonTextKey: string,
+    underButtonTextKey: string
 }
 
-export default function ActionBlock({submitHandler, buttonText} : ActionsBlockProps) {
+export default function ActionBlock({submitHandler, buttonTextKey, underButtonTextKey} : ActionsBlockProps) {
     return (
         <View style={styles.container}>
             <View style={[styles.width100]}>
-                <Button text={buttonText} type="primary" onPress={submitHandler} />
+                <Button text={t(buttonTextKey)} type="primary" onPress={submitHandler} />
             </View>
             <View style={[styles.signInWithContainer]}>
                 <View style={styles.signInWith}>
                     <Text style={styles.signInWithLine} />
-                    <Text style={styles.signInWithText}>Or Sign in with</Text>
-                    <Text style={styles.signInWithLine} />
+                    <View style={styles.signInWithTextWrap}>
+                        <Text style={styles.signInWithText}>{t(underButtonTextKey)}</Text>
+                    </View>
                 </View>
             </View>
             <View style={styles.socialButtons}>
@@ -45,6 +47,7 @@ const styles = StyleSheet.create({
     signInWithContainer: {
         height: 20,
         marginTop: 20,
+        position: "relative"
     },
     signInWith: {
         flex: 1,
@@ -54,12 +57,21 @@ const styles = StyleSheet.create({
     },
     signInWithLine: {
         backgroundColor: '#DDDDDD',
-        width: '30%',
+        width: '95%',
         height: 1,
     },
-    signInWithText: {
+    signInWithTextWrap: {
         fontSize: 13,
-        fontFamily: 'P'
+        fontFamily: 'P',
+        position: "absolute",
+        left: 0,
+        right: 0,
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    signInWithText: {
+        backgroundColor: '#fff',
+        paddingHorizontal: 16
     },
     socialButtons: {
         alignItems: 'center',

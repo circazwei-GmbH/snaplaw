@@ -9,7 +9,7 @@ import DontHaveAnyAccount from "../features/Auth/DontHaveAnyAccount";
 import {formFieldFill, validate} from "../../utils/forms";
 import {email, length} from "../../validations/default";
 import ActionBlock from "../features/Auth/ActionsBlock";
-
+import { t } from 'i18n-js'
 
 type SignUpProps = {
     navigation: StackNavigationProp<RootStackParamList, 'SignUp'>
@@ -68,17 +68,18 @@ export default function SignUp({ navigation } : SignUpProps) {
                 <View style={styles.container}>
                     <View style={styles.width100}>
                         <View style={styles.headline}>
-                            <MainHeadline text="Sign Up" />
+                            <MainHeadline text={t('sign_up.headline')} />
                         </View>
                         <View style={styles.width100}>
                             <SignUpForm navigation={navigation} form={form} fieldChangeHandler={fieldChangeHandler} />
                         </View>
-                        <ActionBlock submitHandler={submitHandler} buttonText="Sign Up" />
+                        <ActionBlock submitHandler={submitHandler} buttonTextKey="sign_up.submit" underButtonTextKey="sign_up.alternative" />
                     </View>
                     <View style={[styles.width100, styles.actions]}>
                         <DontHaveAnyAccount
                             linkHandler={linkHandler}
-                            linkText="Sign in"
+                            linkText={t('sign_up.log_in')}
+                            messageTextKey="sign_up.to_login"
                         />
                     </View>
                 </View>

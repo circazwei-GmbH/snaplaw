@@ -5,6 +5,7 @@ import {RootStackParamList} from "../../../router/RouterTypes";
 import TextField from "../../components/TextField";
 import { FieldInterface } from './SignInForm'
 import PasswordField from '../../components/PasswordField'
+import { t } from 'i18n-js'
 
 export interface SignUpFormInterface {
     name: FieldInterface,
@@ -23,7 +24,7 @@ export default function SignUpForm({fieldChangeHandler, form} : SignUpFormProps)
         <View style={styles.container}>
             <View>
                 <TextField
-                    placeholder="Name"
+                    placeholder={t('sign_up.name_field')}
                     onChangeFunction={(text: string) => fieldChangeHandler('name', text)}
                     value={form.name.value}
                     fixed
@@ -32,7 +33,7 @@ export default function SignUpForm({fieldChangeHandler, form} : SignUpFormProps)
             </View>
             <View style={styles.field}>
                 <TextField
-                    placeholder="Email"
+                    placeholder={t('sign_up.email_field')}
                     onChangeFunction={(text: string) => fieldChangeHandler('email', text)}
                     value={form.email.value}
                     errorMessage={form.email.error}
@@ -40,7 +41,7 @@ export default function SignUpForm({fieldChangeHandler, form} : SignUpFormProps)
             </View>
             <View style={styles.field}>
                 <PasswordField
-                    placeholder="Password"
+                    placeholder={t('sign_up.password_field')}
                     onChange={(text: string) => fieldChangeHandler('password', text)}
                     value={form.name.value}
                     errorMessage={form.password.error}

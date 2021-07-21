@@ -1,17 +1,19 @@
 import React from 'react';
 import {Text, View, StyleSheet, GestureResponderEvent} from "react-native";
 import Link from "../../basics/links/link";
+import {t} from 'i18n-js'
 
 type AuthActionsProps = {
     linkHandler: (event: GestureResponderEvent) => void,
-    linkText: string
+    linkText: string,
+    messageTextKey: string
 }
 
-export default function DontHaveAnyAccount({linkHandler, linkText} : AuthActionsProps) {
+export default function DontHaveAnyAccount({linkHandler, linkText, messageTextKey} : AuthActionsProps) {
     return (
         <View>
             <Text style={styles.dontHaveAccount}>
-                Don't have any account?
+                {t(messageTextKey)}
             </Text>
             <Link style={styles.signUpLink} text={linkText} onPress={linkHandler} />
         </View>

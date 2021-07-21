@@ -9,6 +9,7 @@ import { email, length } from '../../validations/default';
 import DontHaveAnyAccount from "../features/Auth/DontHaveAnyAccount";
 import {formFieldFill, validate} from "../../utils/forms";
 import ActionBlock from "../features/Auth/ActionsBlock";
+import { t } from 'i18n-js'
 
 type SignInProps = {
     navigation: StackNavigationProp<RootStackParamList, 'SignIn'>
@@ -58,17 +59,18 @@ export default function SignIn({ navigation } : SignInProps) {
                 <View style={styles.container}>
                     <View style={styles.width100}>
                         <View style={styles.headline}>
-                            <MainHeadline text="Sign In" />
+                            <MainHeadline text={t('sign_in.headline')} />
                         </View>
                         <View style={styles.width100}>
                             <SignInForm navigation={navigation} form={form} fieldChangeHandler={fieldChangeHandler} />
                         </View>
-                       <ActionBlock submitHandler={submitHandler} buttonText="Sign In" />
+                       <ActionBlock submitHandler={submitHandler} buttonTextKey="sign_in.headline" underButtonTextKey="sign_in.alternative" />
                     </View>
                     <View style={[styles.width100, styles.actions]}>
                        <DontHaveAnyAccount
                            linkHandler={() => navigation.replace(ROUTE.SIGNUP)}
-                           linkText="Sign up"
+                           linkText={t('sign_in.sign_up')}
+                           messageTextKey="sign_in.to_sign_up"
                        />
                     </View>
                 </View>
