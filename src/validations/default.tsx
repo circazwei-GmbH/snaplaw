@@ -1,8 +1,12 @@
 export interface ValidatorInterface {
-    (message: string, length?: number): ((text: string) => string | undefined)
+    (text: string): string | undefined
 }
 
-export const length: ValidatorInterface = (message, length) => (text: string) => {
+export interface ValidatorBuilderInterface {
+    (message: string, length?: number): ValidatorInterface
+}
+
+export const length: ValidatorBuilderInterface = (message, length) => (text: string) => {
     if (!length) {
         return;
     }
@@ -11,7 +15,7 @@ export const length: ValidatorInterface = (message, length) => (text: string) =>
     }
 }
 
-export const email: ValidatorInterface = (message) => (text: string) => {
+export const email: ValidatorBuilderInterface = (message) => (text: string) => {
     if (text.search(/^[^@]+@{1,1}[^@]+\.[^.@\d]{2,}$/)) {
         return message
     }

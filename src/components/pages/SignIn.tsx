@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { View, StyleSheet, Text } from "react-native";
 import MainHeadline from "../basics/typography/MainHeadline";
 import AuthLayout from "../layouts/AuthLayout";
-import SignInForm, { FieldInterface } from "../features/forms/SignInForm";
+import SignInForm, { FieldInterface, SignInFormInterface } from "../features/forms/SignInForm";
 import Button from "../basics/buttons/Button";
 import SocialButton from "../basics/buttons/SocialButton";
 import {FontAwesome5} from "@expo/vector-icons";
@@ -16,7 +16,7 @@ type SignInProps = {
 }
 
 export default function SignIn({ navigation } : SignInProps) {
-    const [form, setForm] = useState({
+    let form: SignInFormInterface = {
         email: {
             value: '',
             error: '',
@@ -29,7 +29,9 @@ export default function SignIn({ navigation } : SignInProps) {
             displayError: false,
             validators: [length('too short', 6)]
         }
-    });
+    };
+    let setForm: (form: SignInFormInterface) => void;
+    [form, setForm] = useState(form);
 
     const validate = (stateField: FieldInterface) => {
         const localField = stateField;
@@ -49,7 +51,7 @@ export default function SignIn({ navigation } : SignInProps) {
         return localField
     }
 
-    const fieldChangeHandler = (fieldName: string, text: string) => {
+    const fieldChangeHandler = (fieldName: "email" | "password", text: string) => {
         const preparedForm = {
             ...form,
             [fieldName]: {
