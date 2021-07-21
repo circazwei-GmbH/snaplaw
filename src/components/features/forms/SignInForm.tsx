@@ -4,7 +4,7 @@ import TextField from "../../components/TextField";
 import PasswordField from '../../components/PasswordField'
 import Link from "../../basics/links/link";
 import {StackNavigationProp} from "@react-navigation/stack";
-import {RootStackParamList} from "../../../router/Router";
+import {RootStackParamList} from "../../../router/RouterTypes";
 import { email, ValidatorInterface } from '../../../validations/default';
 
 // TODO move to abstract place because used in SignUp

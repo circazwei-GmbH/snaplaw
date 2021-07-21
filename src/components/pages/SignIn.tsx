@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 import MainHeadline from "../basics/typography/MainHeadline";
 import AuthLayout from "../layouts/AuthLayout";
 import SignInForm, { SignInFormInterface } from "../features/forms/SignInForm";
@@ -8,9 +8,6 @@ import {RootStackParamList, ROUTE} from '../../router/RouterTypes'
 import { email, length } from '../../validations/default';
 import DontHaveAnyAccount from "../features/Auth/DontHaveAnyAccount";
 import {formFieldFill, validate} from "../../utils/forms";
-import Button from "../basics/buttons/Button";
-import SocialButton from "../basics/buttons/SocialButton";
-import {FontAwesome5} from "@expo/vector-icons";
 import ActionBlock from "../features/Auth/ActionsBlock";
 
 type SignInProps = {

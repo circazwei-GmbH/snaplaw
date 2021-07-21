@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, ScrollView, Text} from "react-native";
+import {View, StyleSheet} from "react-native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParamList, ROUTE} from "../../router/RouterTypes";
 import AuthLayout from "../layouts/AuthLayout";
@@ -8,9 +8,6 @@ import SignUpForm, { SignUpFormInterface } from '../features/forms/SignUpForm'
 import DontHaveAnyAccount from "../features/Auth/DontHaveAnyAccount";
 import {formFieldFill, validate} from "../../utils/forms";
 import {email, length} from "../../validations/default";
-import Button from "../basics/buttons/Button";
-import SocialButton from "../basics/buttons/SocialButton";
-import {FontAwesome5} from "@expo/vector-icons";
 import ActionBlock from "../features/Auth/ActionsBlock";
 
 
