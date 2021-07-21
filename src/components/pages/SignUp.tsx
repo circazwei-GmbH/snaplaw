@@ -55,6 +55,7 @@ export default function SignUp({ navigation } : SignUpProps) {
             return
         }
 
+        // TODO: tdb
         console.log(localForm.email.value, localForm.name.value, localForm.password.value)
     }
 
@@ -107,44 +108,5 @@ const styles = StyleSheet.create({
     },
     actions: {
         marginBottom: 30
-    },
-    signInWithContainer: {
-        height: 20,
-        marginTop: 20,
-    },
-    signInWith: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: "space-around",
-        alignItems: "center",
-    },
-    signInWithLine: {
-        backgroundColor: '#DDDDDD',
-        width: '30%',
-        height: 1,
-    },
-    signInWithText: {
-        fontSize: 13,
-        fontFamily: 'P'
-    },
-    socialButtons: {
-        alignItems: 'center',
-        flexDirection: 'row',
-        justifyContent: 'center'
-    },
-    dontHaveAccountContainer: {
-        marginTop: 51,
-    },
-    dontHaveAccount: {
-        fontSize: 15,
-        textAlign: 'center',
-        fontFamily: 'P',
-    },
-    signUpLink: {
-        fontSize: 16,
-        textAlign: 'center'
-    },
-    actionButton: {
-        marginTop: 30,
     }
 })

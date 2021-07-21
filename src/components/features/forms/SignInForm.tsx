@@ -31,13 +31,30 @@ export default function SignInForm({navigation, fieldChangeHandler, form} : Sign
     return (
         <>
             <View>
-                <TextField placeholder={t('sign_in.email_field')} textContentType="username" fixed errorMessage={form.email.error} value={form.email.value} onChangeFunction={(text) => fieldChangeHandler('email', text)} />
+                <TextField
+                    placeholder={t('sign_in.email_field')}
+                    textContentType="username"
+                    fixed
+                    errorMessage={form.email.error}
+                    value={form.email.value}
+                    onChangeFunction={(text) => fieldChangeHandler('email', text)}
+                />
             </View>
             <View style={styles.password}>
-                <PasswordField placeholder={t('sign_in.password_field')} errorMessage={form.password.error} value={form.password.value} onChange={(text) => fieldChangeHandler('password', text)} icon="visibility-off" />
+                <PasswordField
+                    placeholder={t('sign_in.password_field')}
+                    errorMessage={form.password.error}
+                    value={form.password.value}
+                    onChange={(text) => fieldChangeHandler('password', text)}
+                    icon="visibility-off"
+                />
             </View>
-            <View >
-                <Link style={styles.forgotLinkContainer} text={t('sign_in.forgot_password')} onPress={() => { navigation.navigate(ROUTE.FORGOT) }}/>
+            <View>
+                <Link
+                    style={styles.forgotLinkContainer}
+                    text={t('sign_in.forgot_password')}
+                    onPress={() => { navigation.navigate(ROUTE.FORGOT) }}
+                />
             </View>
         </>
     )

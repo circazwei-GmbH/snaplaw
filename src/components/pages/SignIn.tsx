@@ -64,7 +64,11 @@ export default function SignIn({ navigation } : SignInProps) {
                         <View style={styles.width100}>
                             <SignInForm navigation={navigation} form={form} fieldChangeHandler={fieldChangeHandler} />
                         </View>
-                       <ActionBlock submitHandler={submitHandler} buttonTextKey="sign_in.headline" underButtonTextKey="sign_in.alternative" />
+                       <ActionBlock
+                           submitHandler={submitHandler}
+                           buttonTextKey="sign_in.headline"
+                           underButtonTextKey="sign_in.alternative"
+                       />
                     </View>
                     <View style={[styles.width100, styles.actions]}>
                        <DontHaveAnyAccount
@@ -103,44 +107,5 @@ const styles = StyleSheet.create({
     actions: {
         paddingHorizontal: 21,
         marginBottom: 30
-    },
-    signInWithContainer: {
-        height: 20,
-        marginTop: 20,
-    },
-    signInWith: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: "space-around",
-        alignItems: "center",
-    },
-    signInWithLine: {
-        backgroundColor: '#DDDDDD',
-        width: '30%',
-        height: 1,
-    },
-    signInWithText: {
-        fontSize: 13,
-        fontFamily: 'P'
-    },
-    socialButtons: {
-        alignItems: 'center',
-        flexDirection: 'row',
-        justifyContent: 'center'
-    },
-    dontHaveAccountContainer: {
-        marginTop: 51,
-    },
-    dontHaveAccount: {
-        fontSize: 15,
-        textAlign: 'center',
-        fontFamily: 'P',
-    },
-    signUpLink: {
-        fontSize: 16,
-        textAlign: 'center'
-    },
-    actionButton: {
-        marginTop: 30
     }
 })
