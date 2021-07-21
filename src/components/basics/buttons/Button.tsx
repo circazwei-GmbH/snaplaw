@@ -1,21 +1,17 @@
 import React, {useState} from 'react';
-import { useHistory } from "react-router-native";
-import { Pressable, StyleSheet, Text } from 'react-native'
+import {GestureResponderEvent, Pressable, StyleSheet, Text} from 'react-native'
+
+
 
 interface ButtonPropsInterface {
     text: string;
-    to: string;
+    onPress: ((event: GestureResponderEvent) => void);
     style?: object,
     type?: 'primary' | 'secondary'
 }
 
-export default function Button({ text, to, style, type } : ButtonPropsInterface) {
-    const history = useHistory()
+export default function Button({ text, onPress, style, type } : ButtonPropsInterface) {
     const [touched, setTouched] = useState(false)
-
-    const onPressHandler = () => {
-        history.push(to)
-    }
 
     const onPressInHandler = () => {
         setTouched(true)
@@ -35,7 +31,7 @@ export default function Button({ text, to, style, type } : ButtonPropsInterface)
                     : styles.privaryButton,
                 touched ? styles.touch : null
             ]}
-            onPress={onPressHandler}
+            onPress={onPress}
             onPressIn={onPressInHandler}
             onPressOut={onPressOutHandler}
         >
