@@ -4,7 +4,7 @@ import MainHeadline from "../MainHeadline";
 
 describe('MainHeadline', () => {
     it('MainHeadline view', () => {
-        const { findByText } = render(<MainHeadline text="TestText" />)
-        expect(findByText('TestText')).toBeTruthy()
+        const { getByText } = render(<MainHeadline text="TestText" />)
+        expect(getByText('TestText')).toBeTruthy()
     })
 })

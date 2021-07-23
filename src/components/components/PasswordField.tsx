@@ -13,10 +13,10 @@ interface TextFieldPropsInterface {
     errorMessage?: string,
     value: string,
     onChange: OnChanfeFunction
-    icon?: string | null,
+    icon?: "visibility-off" | undefined,
 }
 
-export default function TextField({ placeholder, fixed = false, errorMessage, onChange, value, icon = null } : TextFieldPropsInterface) {
+export default function PasswordField({ placeholder, fixed = false, errorMessage, onChange, value, icon = undefined } : TextFieldPropsInterface) {
     const [localValue, setLocalValue] = useState(value);
     const [focused, setFocused] = useState(false);
     const [visible, setVisible] = useState(false)
@@ -25,7 +25,6 @@ export default function TextField({ placeholder, fixed = false, errorMessage, on
         if (typeof onChange === 'function') {
             onChange(text)
         }
-        console.log('String: ' + text)
         setLocalValue(text)
     }
 
@@ -58,7 +57,9 @@ export default function TextField({ placeholder, fixed = false, errorMessage, on
                     onBlur={() => setFocused(false)}
                 />
                 {icon ? (
-                    <MaterialIcons onPress={iconPressHandler} color="#668395" style={styles.icon} size={20} name={icon} />
+                    <View>
+                        <MaterialIcons testID="PasswordField.Icon" onPress={iconPressHandler} color="#668395" style={styles.icon} size={20} name={icon} />
+                        </View>
                 ) : null}
             </View>
             <Text style={[styles.errorText, errorMessage ? null : styles.displayNone]}>{errorMessage}</Text>
@@ -118,7 +119,8 @@ const styles = StyleSheet.create({
         color: '#FA7171',
     },
     displayNone: {
-        display: "none"
+        display: "none",
+        marginBottom: 8
     },
     errorBorder: {
         borderColor: '#FA7171'

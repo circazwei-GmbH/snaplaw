@@ -4,23 +4,19 @@ import SignUp from '../components/pages/SignUp'
 import Welcome from '../components/pages/Welcome'
 import ForgotPassword from '../components/pages/ForgotPassword'
 import { createStackNavigator } from '@react-navigation/stack';
+import { ROUTE } from "./RouterTypes";
 
 const Stack = createStackNavigator();
 
-export type RootStackParamList = {
-    Welcome: undefined,
-    SignIn: undefined,
-    SignUp: undefined,
-    Forgot: undefined
-}
+
 
 export default function Router() {
     return (
         <Stack.Navigator headerMode="none">
-            <Stack.Screen name="Welcome" component={Welcome}/>
-            <Stack.Screen name="SignIn" component={SignIn} />
-            <Stack.Screen name="SignUp" component={SignUp} />
-            <Stack.Screen name="Forgot" component={ForgotPassword} />
+            <Stack.Screen name={ROUTE.WELCOME} component={Welcome}/>
+            <Stack.Screen name={ROUTE.SIGNIN} component={SignIn} />
+            <Stack.Screen name={ROUTE.SIGNUP} component={SignUp} />
+            <Stack.Screen name={ROUTE.FORGOT} component={ForgotPassword} />
         </Stack.Navigator>
     )
 }

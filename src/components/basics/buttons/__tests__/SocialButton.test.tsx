@@ -4,12 +4,12 @@ import SocialButton from "../SocialButton";
 import {View} from "react-native";
 
 const Child = () => (
-    <View data-testID="child.test.element" />
+    <View accessibilityHint="child.test.element" />
 )
 
 describe('SocialButton', () => {
     it('SocialButton smoke', () => {
-        const { findByTestId } = render(<SocialButton><Child /></SocialButton>)
-        expect(findByTestId('child.test.element')).toBeTruthy()
+        const elem = render(<SocialButton><Child /></SocialButton>)
+        expect(elem.getAllByA11yHint('child.test.element')).toBeTruthy()
     })
 })

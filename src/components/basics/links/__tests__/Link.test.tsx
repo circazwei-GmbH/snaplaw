@@ -4,8 +4,8 @@ import Link from "../link";
 
 describe('Link', () => {
     it('Link view', () => {
-        const { findByText } = render(<Link text="TestLink" />)
-        expect(findByText('TestLink')).toBeTruthy()
+        const { getByText } = render(<Link text="TestLink" />)
+        expect(getByText('TestLink')).toBeTruthy()
     })
     it('Link click', async () => {
         const handler = jest.fn()

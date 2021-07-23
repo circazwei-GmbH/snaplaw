@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import {GestureResponderEvent, Pressable, StyleSheet, Text} from 'react-native'
 
-
-
 interface ButtonPropsInterface {
     text: string;
     onPress: ((event: GestureResponderEvent) => void);
