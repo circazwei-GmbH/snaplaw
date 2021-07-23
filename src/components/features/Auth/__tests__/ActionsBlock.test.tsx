@@ -2,11 +2,7 @@ import React from 'react';
 import ActionBlock from "../ActionsBlock";
 import { render, fireEvent } from '@testing-library/react-native'
 
-jest.mock('i18n-js', () => {
-    return {
-        t: (text: string) => text
-    }
-})
+
 
 describe('ActionsBlock', () => {
     it('Should elements viewed', () => {

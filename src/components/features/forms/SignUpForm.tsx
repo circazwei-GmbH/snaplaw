@@ -43,7 +43,7 @@ export default function SignUpForm({fieldChangeHandler, form} : SignUpFormProps)
                 <PasswordField
                     placeholder={t('sign_up.password_field')}
                     onChange={(text: string) => fieldChangeHandler('password', text)}
-                    value={form.name.value}
+                    value={form.password.value}
                     errorMessage={form.password.error}
                     icon="visibility-off"
                 />
