@@ -3,10 +3,8 @@ import {fireEvent, render} from "@testing-library/react-native";
 import SignUpForm, {SignUpFormInterface} from "../SignUpForm";
 import {createStackNavigator, StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from "../../../../router/RouterTypes";
-import {SignInFormInterface} from "../SignInForm";
 import {email, length} from "../../../../validations/default";
 import {NavigationContainer} from "@react-navigation/native";
-import {Text, View} from "react-native";
 
 type ParentProps = {
     navigation: StackNavigationProp<RootStackParamList, 'SignUp'>
@@ -43,7 +41,7 @@ describe('SignUpForm', () => {
             <SignUpForm navigation={navigation} form={form} fieldChangeHandler={jest.fn()} />
         )
 
-        const { getByPlaceholderText, getByText, queryByText } = render(
+        const { getByPlaceholderText } = render(
             <NavigationContainer>
                 <Stack.Navigator>
                     <Stack.Screen name="SignUpForm" component={Parent} />
