@@ -9,6 +9,8 @@ import * as Localization from 'expo-localization';
 import i18n from 'i18n-js';
 import en from './src/translator/en'
 import de from './src/translator/de'
+import { Provider } from 'react-redux'
+import store from './src/store/index'
 
 i18n.translations = { en, de }
 
@@ -37,12 +39,14 @@ export default function App() {
     }
 
   return (
-      <NavigationContainer theme={theme}>
-          <View style={styles.container}>
-              <Router data-testid="router" />
-          </View>
-          <StatusBar style="auto" />
-      </NavigationContainer>
+      <Provider store={store}>
+          <NavigationContainer theme={theme}>
+              <View style={styles.container}>
+                  <Router data-testid="router" />
+              </View>
+              <StatusBar style="auto" />
+          </NavigationContainer>
+      </Provider>
   );
 }
 
