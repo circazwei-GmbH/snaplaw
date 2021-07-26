@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, StyleSheet} from "react-native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParamList, ROUTE} from "../../router/RouterTypes";
@@ -10,6 +10,8 @@ import {formFieldFill, validate} from "../../utils/forms";
 import {email, length} from "../../validations/default";
 import ActionBlock from "../features/Auth/ActionsBlock";
 import { t } from 'i18n-js'
+import {requestSignUp} from "../../store/modules/auth/action-creators";
+import {useAppSelector, useAppDispatch} from "../../store/hooks";
 
 type SignUpProps = {
     navigation: StackNavigationProp<RootStackParamList, 'SignUp'>
@@ -38,6 +40,20 @@ export default function SignUp({ navigation } : SignUpProps) {
     };
     let setForm: (form: SignUpFormInterface) => void;
     [form, setForm] = useState(form)
+    const dispatch = useAppDispatch()
+    const emailError = useAppSelector(state => state.auth.signUp.error.email)
+
+    useEffect(() => {
+        if (emailError) {
+            setForm({
+                ...form,
+                email: {
+                    ...form.email,
+                    error: emailError
+                }
+            })
+        }
+    }, [emailError])
 
     const fieldChangeHandler = (fieldName: 'name' | 'email' | 'password', text: string) => {
         setForm(formFieldFill(fieldName, text, form))
@@ -55,8 +71,11 @@ export default function SignUp({ navigation } : SignUpProps) {
             return
         }
 
-        // TODO: tdb
-        console.log(localForm.email.value, localForm.name.value, localForm.password.value)
+        dispatch(requestSignUp(
+            localForm.name.value,
+            localForm.email.value,
+            localForm.password.value
+        ))
     }
 
     const linkHandler = () => {

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { View, StyleSheet } from "react-native";
 import MainHeadline from "../basics/typography/MainHeadline";
 import AuthLayout from "../layouts/AuthLayout";
@@ -10,6 +10,9 @@ import DontHaveAnyAccount from "../features/Auth/DontHaveAnyAccount";
 import {formFieldFill, validate} from "../../utils/forms";
 import ActionBlock from "../features/Auth/ActionsBlock";
 import { t } from 'i18n-js'
+import {useAppDispatch, useAppSelector} from "../../store/hooks";
+import {requestSignIn} from "../../store/modules/auth/action-creators";
+import { clearSignInErrors } from '../../store/modules/auth/slice'
 
 type SignInProps = {
     navigation: StackNavigationProp<RootStackParamList, 'SignIn'>
@@ -32,9 +35,37 @@ export default function SignIn({ navigation } : SignInProps) {
     };
     let setForm: (form: SignInFormInterface) => void;
     [form, setForm] = useState(form);
+    const dispatch = useAppDispatch()
+    const emailError = useAppSelector(state => state.auth.signIn.error.email)
+    const passwordError = useAppSelector(state => state.auth.signIn.error.password)
+
+    useEffect(() => {
+        setForm({
+            ...form,
+            email: {
+                ...form.email,
+                error: emailError
+            }
+        })
+    }, [emailError])
+
+    useEffect(() => {
+        setForm({
+            ...form,
+            password: {
+                ...form.password,
+                error: passwordError
+            }
+        })
+    }, [passwordError])
+
+    useEffect(() => {
+        return () => {
+            dispatch(clearSignInErrors())
+        }
+    }, [])
 
     const fieldChangeHandler = (fieldName: "email" | "password", text: string) => {
-
         setForm(formFieldFill(fieldName, text, form))
     }
 
@@ -49,8 +80,10 @@ export default function SignIn({ navigation } : SignInProps) {
             return;
         }
 
-        // TODO dispatch
-        console.log(localForm.email.value, localForm.password.value)
+        dispatch(requestSignIn(
+            localForm.email.value,
+            localForm.password.value
+        ))
     }
 
     return (
