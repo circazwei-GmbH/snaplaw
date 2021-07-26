@@ -36,7 +36,7 @@ export default function Verification({ route: {params: {email}} }:VerificationPr
                     </View>
                 </View>
                 <View style={styles.actionArea}>
-                    <Button text="Modal" type="primary" onPress={submitHandler} />
+                    <Button text={t('verification.submit')} type="primary" onPress={submitHandler} />
                 </View>
             </View>
         </HeaderNavigation>

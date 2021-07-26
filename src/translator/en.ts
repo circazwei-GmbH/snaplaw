@@ -29,6 +29,7 @@ export default {
         resend: {
             text: 'Didn’t receive the code?',
             link: 'Resend code'
-        }
+        },
+        submit: 'Verify'
     }
 }
