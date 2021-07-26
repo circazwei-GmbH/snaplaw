@@ -1,4 +1,4 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit'
+import {createSlice, PayloadAction, Draft} from '@reduxjs/toolkit'
 
 interface AuthState {
     signUp: {
@@ -34,21 +34,21 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        signUpFailed: (state, action: PayloadAction<{email: string}>) => {
+        signUpFailed: (state: Draft<AuthState>, action: PayloadAction<{email: string}>) => {
             state.signUp.error = action.payload
         },
-        signInFailed: (state, action: PayloadAction<{field: 'email' | 'password', message: string}>) => {
+        signInFailed: (state: Draft<AuthState>, action: PayloadAction<{field: 'email' | 'password', message: string}>) => {
             state.signIn.error[action.payload.field] = action.payload.message;
         },
-        clearSignInErrors: state => {
+        clearSignInErrors: (state: Draft<AuthState>) => {
             state.signIn.error = {email: '', password: ''}
         },
-        setToken: (state, action: PayloadAction<string>) => {
+        setToken: (state: Draft<AuthState>, action: PayloadAction<string>) => {
             state.token = action.payload
         },
-        killToken: state => {
-            state.token = undefined
-        }
+        killToken: (state: Draft<AuthState>) => {
+            state.token = ''
+        },
     }
 })
 
