@@ -6,7 +6,7 @@ interface BaseAction {
 export interface SignUpPayload {
     name: string,
     email: string,
-    password: string
+    password: string,
 }
 
 export interface RequestSignUpAction extends BaseAction {

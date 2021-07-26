@@ -74,7 +74,7 @@ export default function SignUp({ navigation } : SignUpProps) {
         dispatch(requestSignUp(
             localForm.name.value,
             localForm.email.value,
-            localForm.password.value
+            localForm.password.value,
         ))
     }
 

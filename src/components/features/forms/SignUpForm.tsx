@@ -37,6 +37,7 @@ export default function SignUpForm({fieldChangeHandler, form} : SignUpFormProps)
                     onChangeFunction={(text: string) => fieldChangeHandler('email', text)}
                     value={form.email.value}
                     errorMessage={form.email.error}
+                    keyboardType="email-address"
                 />
             </View>
             <View style={styles.field}>

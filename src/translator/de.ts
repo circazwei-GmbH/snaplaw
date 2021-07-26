@@ -22,5 +22,13 @@ export default {
         alternative: 'Oder loggen Sie sich ein mit',
         to_sign_up: 'Haben Sie noch kein Konto?',
         sign_up: 'Anmelden'
+    },
+    verification: {
+        title: 'Bestätigen Sie Ihre E-Mail',
+        description: 'Bitte geben Sie den 4-stelligen Code ein, der an %{email} gesendet wurde',
+        resend: {
+            text: 'Code nicht erhalten?',
+            link: 'Code erneut senden'
+        }
     }
 }

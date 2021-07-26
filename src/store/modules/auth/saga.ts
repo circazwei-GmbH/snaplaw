@@ -2,25 +2,34 @@ import { call, put, takeLatest } from 'redux-saga/effects'
 import {SIGNIN_REQUESTED, SIGNUP_REQUESTED} from "./action-creators";
 import {RequestSignInAction, RequestSignUpAction} from "./types";
 import API from '../../../services/auth/index'
-import { signUpFailed, signInFailed, setToken } from './slice'
+import { signUpFailed, signInFailed, setToken, clearSignInErrors } from './slice'
+import { setModalMessage } from '../main/slice'
+import {ROUTE} from "../../../router/RouterTypes";
+import * as RootNavigation from '../../../router/RootNavigation'
 
 function* fetchSignUp(action: RequestSignUpAction) {
     try {
-        const response = yield call(API.signUp, action.payload)
-        console.log(response)
+        yield put(signUpFailed({
+            email: ''
+        }))
+        // yield call(API.signUp, action.payload)
+        RootNavigation.navigate(ROUTE.VERIFICATION, {email: action.payload.email})
     } catch (error) {
-        if (error.response.data.code === 11000) {
+        console.log(typeof error)
+        if (error.response?.data?.code === 11000) {
             return yield put(signUpFailed({
                 email: 'Email already taken'
             }))
         }
-        //TODO: abstract error put to store
-        console.error('Saga', error)
+        yield put(setModalMessage(
+            'error.abstract'
+        ))
     }
 }
 
 function* fetchSignIn(action: RequestSignInAction) {
     try {
+        yield put(clearSignInErrors())
         const response = yield call(API.signIn, action.payload)
         yield put(setToken(response.data.token))
     } catch (error) {
@@ -36,8 +45,9 @@ function* fetchSignIn(action: RequestSignInAction) {
                 field: 'password'
             }))
         }
-        //TODO: abstract error put to store
-        console.error('Saga', error.response.data)
+        yield put(setModalMessage(
+            'error.abstract'
+        ))
     }
 }
 
