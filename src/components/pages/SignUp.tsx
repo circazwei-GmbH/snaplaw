@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet} from "react-native";
+import {View, StyleSheet, Keyboard, TouchableWithoutFeedback} from "react-native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParamList, ROUTE} from "../../router/RouterTypes";
 import AuthLayout from "../layouts/AuthLayout";
 import MainHeadline from "../basics/typography/MainHeadline";
 import SignUpForm, { SignUpFormInterface } from '../features/forms/SignUpForm'
-import DontHaveAnyAccount from "../features/Auth/DontHaveAnyAccount";
+import MessageAndLink from "../features/MessageAndLink";
 import {formFieldFill, validate} from "../../utils/forms";
 import {email, length} from "../../validations/default";
 import ActionBlock from "../features/Auth/ActionsBlock";
@@ -84,26 +84,28 @@ export default function SignUp({ navigation } : SignUpProps) {
 
     return (
         <View style={styles.mainContainer}>
-            <AuthLayout>
-                <View style={styles.container}>
-                    <View style={styles.width100}>
-                        <View style={styles.headline}>
-                            <MainHeadline text={t('sign_up.headline')} />
-                        </View>
+                <AuthLayout>
+                    <TouchableWithoutFeedback style={{flex: 1}} accessible={false} onPress={Keyboard.dismiss}>
+                    <View style={styles.container}>
                         <View style={styles.width100}>
-                            <SignUpForm navigation={navigation} form={form} fieldChangeHandler={fieldChangeHandler} />
+                            <View style={styles.headline}>
+                                <MainHeadline text={t('sign_up.headline')} />
+                            </View>
+                            <View style={styles.width100}>
+                                <SignUpForm navigation={navigation} form={form} fieldChangeHandler={fieldChangeHandler} />
+                            </View>
+                            <ActionBlock submitHandler={submitHandler} buttonTextKey="sign_up.submit" underButtonTextKey="sign_up.alternative" />
                         </View>
-                        <ActionBlock submitHandler={submitHandler} buttonTextKey="sign_up.submit" underButtonTextKey="sign_up.alternative" />
+                        <View style={[styles.width100, styles.actions]}>
+                            <MessageAndLink
+                                linkHandler={linkHandler}
+                                linkText={t('sign_up.log_in')}
+                                messageTextKey="sign_up.to_login"
+                            />
+                        </View>
                     </View>
-                    <View style={[styles.width100, styles.actions]}>
-                        <DontHaveAnyAccount
-                            linkHandler={linkHandler}
-                            linkText={t('sign_up.log_in')}
-                            messageTextKey="sign_up.to_login"
-                        />
-                    </View>
-                </View>
-            </AuthLayout>
+                    </TouchableWithoutFeedback>
+                </AuthLayout>
         </View>
     )
 }

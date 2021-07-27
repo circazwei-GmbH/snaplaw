@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import { View, StyleSheet } from "react-native";
+import {View, StyleSheet, Keyboard, TouchableWithoutFeedback} from "react-native";
 import MainHeadline from "../basics/typography/MainHeadline";
 import AuthLayout from "../layouts/AuthLayout";
 import SignInForm, { SignInFormInterface } from "../features/forms/SignInForm";
 import { StackNavigationProp } from '@react-navigation/stack';
 import {RootStackParamList, ROUTE} from '../../router/RouterTypes'
 import { email, length } from '../../validations/default';
-import DontHaveAnyAccount from "../features/Auth/DontHaveAnyAccount";
+import MessageAndLink from "../features/MessageAndLink";
 import {formFieldFill, validate} from "../../utils/forms";
 import ActionBlock from "../features/Auth/ActionsBlock";
 import { t } from 'i18n-js'
@@ -89,28 +89,30 @@ export default function SignIn({ navigation } : SignInProps) {
     return (
         <View style={styles.mainContainer}>
             <AuthLayout>
-                <View style={styles.container}>
-                    <View style={styles.width100}>
-                        <View style={styles.headline}>
-                            <MainHeadline text={t('sign_in.headline')} />
-                        </View>
+                <TouchableWithoutFeedback style={{flex: 1}} accessible={false} onPress={Keyboard.dismiss}>
+                    <View style={styles.container}>
                         <View style={styles.width100}>
-                            <SignInForm navigation={navigation} form={form} fieldChangeHandler={fieldChangeHandler} />
+                            <View style={styles.headline}>
+                                <MainHeadline text={t('sign_in.headline')} />
+                            </View>
+                            <View style={styles.width100}>
+                                <SignInForm navigation={navigation} form={form} fieldChangeHandler={fieldChangeHandler} />
+                            </View>
+                           <ActionBlock
+                               submitHandler={submitHandler}
+                               buttonTextKey="sign_in.headline"
+                               underButtonTextKey="sign_in.alternative"
+                           />
                         </View>
-                       <ActionBlock
-                           submitHandler={submitHandler}
-                           buttonTextKey="sign_in.headline"
-                           underButtonTextKey="sign_in.alternative"
-                       />
+                        <View style={[styles.width100, styles.actions]}>
+                           <MessageAndLink
+                               linkHandler={() => navigation.replace(ROUTE.SIGNUP)}
+                               linkText={t('sign_in.sign_up')}
+                               messageTextKey="sign_in.to_sign_up"
+                           />
+                        </View>
                     </View>
-                    <View style={[styles.width100, styles.actions]}>
-                       <DontHaveAnyAccount
-                           linkHandler={() => navigation.replace(ROUTE.SIGNUP)}
-                           linkText={t('sign_in.sign_up')}
-                           messageTextKey="sign_in.to_sign_up"
-                       />
-                    </View>
-                </View>
+                </TouchableWithoutFeedback>
             </AuthLayout>
         </View>
     )

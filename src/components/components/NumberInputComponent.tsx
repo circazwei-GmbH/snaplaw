@@ -1,14 +1,26 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {View, StyleSheet} from "react-native";
 import NumberInput from '../basics/NumberInput'
 
-export default function NumberInputComponent() {
+type NumberInputComponentProps = {
+    onChange: Function
+}
+
+export default function NumberInputComponent({ onChange }: NumberInputComponentProps) {
+    const [numbers, setNumbers] = useState([])
+
+    const changeNumberHandler = (number, position: number) => {
+        numbers[position] = number
+        setNumbers(numbers)
+        onChange(numbers.join(''))
+    }
+
     return (
         <View style={styles.container}>
-            <NumberInput style={[styles.margin, styles.resetMarginLeft]} />
-            <NumberInput style={[styles.margin]} />
-            <NumberInput style={[styles.margin]} />
-            <NumberInput style={[styles.margin, styles.resetMarginRight]} />
+            <NumberInput style={[styles.margin, styles.resetMarginLeft]} onChange={(number) => changeNumberHandler(number, 0)} />
+            <NumberInput style={[styles.margin]} onChange={(number) => changeNumberHandler(number, 1)} />
+            <NumberInput style={[styles.margin]} onChange={(number) => changeNumberHandler(number, 2)} />
+            <NumberInput style={[styles.margin, styles.resetMarginRight]} onChange={(number) => changeNumberHandler(number, 3)} />
         </View>
     )
 }

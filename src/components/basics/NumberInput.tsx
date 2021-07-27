@@ -2,12 +2,13 @@ import React from 'react'
 import {TextInput, StyleSheet} from "react-native";
 
 type NumberInputProps = {
-    style: StyleSheet
+    style: StyleSheet,
+    onChange?: Function
 }
 
-export default function NumberInput({style}: NumberInputProps) {
+export default function NumberInput({style, onChange}: NumberInputProps) {
     return (
-        <TextInput style={[styles.input, style]} />
+        <TextInput keyboardType="numeric" maxLength={1} onChangeText={onChange} style={[styles.input, style]} />
     )
 }
 

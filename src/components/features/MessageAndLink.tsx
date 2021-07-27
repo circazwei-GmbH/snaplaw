@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, View, StyleSheet, GestureResponderEvent} from "react-native";
-import Link from "../../basics/links/link";
+import Link from "../basics/links/link";
 import {t} from 'i18n-js'
 
 type AuthActionsProps = {
@@ -9,7 +9,7 @@ type AuthActionsProps = {
     messageTextKey: string
 }
 
-export default function DontHaveAnyAccount({linkHandler, linkText, messageTextKey} : AuthActionsProps) {
+export default function MessageAndLink({linkHandler, linkText, messageTextKey} : AuthActionsProps) {
     return (
         <View>
             <Text style={styles.dontHaveAccount}>
