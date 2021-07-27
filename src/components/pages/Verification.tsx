@@ -1,12 +1,12 @@
-import React from 'react';
-import {Text, View, StyleSheet, Image} from "react-native";
+import React, {useState} from 'react';
+import {Text, View, StyleSheet, Image, TouchableWithoutFeedback, Keyboard} from "react-native";
 import {useAppDispatch} from "../../store/hooks";
 import Button from "../basics/buttons/Button";
 import { setModalMessage } from '../../store/modules/main/slice'
 import HeaderNavigation from '../layouts/HeaderNavigation'
 import {t} from 'i18n-js'
 import NumberInputComponent from "../components/NumberInputComponent";
-import DontHaveAnyAccount from "../features/Auth/DontHaveAnyAccount";
+import MessageAndLink from "../features/MessageAndLink";
 
 type VerificationProps = {
     email: string
@@ -14,31 +14,35 @@ type VerificationProps = {
 
 export default function Verification({ route: {params: {email}} }:VerificationProps) {
     const dispatch = useAppDispatch()
+    const [number, setNumber] = useState('')
+
     const resendHandler = () => {
         dispatch(setModalMessage('We have just sent a verification code to your email'))
     }
 
     const submitHandler = () => {
-
+        console.log(number)
     }
 
     return (
         <HeaderNavigation pageName={t('verification.title')}>
-            <View style={styles.container}>
-                <View style={styles.topContainer}>
-                    <Image style={styles.image} accessibilityLabel="welcome-image" source={require('../../../assets/verification.png')} />
-                    <Text style={styles.description}>{t('verification.description', {email})}</Text>
-                </View>
-                <View style={styles.inputArea}>
-                    <NumberInputComponent />
-                    <View style={styles.resendArea}>
-                        <DontHaveAnyAccount linkHandler={resendHandler} linkText={t('verification.resend.link')} messageTextKey="verification.resend.text" />
+            <TouchableWithoutFeedback accessible={false} onPress={Keyboard.dismiss}>
+                <View style={styles.container}>
+                    <View style={styles.topContainer}>
+                        <Image style={styles.image} accessibilityLabel="welcome-image" source={require('../../../assets/verification.png')} />
+                        <Text style={styles.description}>{t('verification.description', {email})}</Text>
+                    </View>
+                    <View style={styles.inputArea}>
+                        <NumberInputComponent onChange={setNumber} />
+                        <View style={styles.resendArea}>
+                            <MessageAndLink linkHandler={resendHandler} linkText={t('verification.resend.link')} messageTextKey="verification.resend.text" />
+                        </View>
+                    </View>
+                    <View style={styles.actionArea}>
+                        <Button text={t('verification.submit')} type="primary" onPress={submitHandler} />
                     </View>
                 </View>
-                <View style={styles.actionArea}>
-                    <Button text={t('verification.submit')} type="primary" onPress={submitHandler} />
-                </View>
-            </View>
+            </TouchableWithoutFeedback>
         </HeaderNavigation>
     )
 }
