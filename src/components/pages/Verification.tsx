@@ -1,12 +1,14 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, View, StyleSheet, Image, TouchableWithoutFeedback, Keyboard} from "react-native";
-import {useAppDispatch} from "../../store/hooks";
+import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import Button from "../basics/buttons/Button";
-import { setModalMessage } from '../../store/modules/main/slice'
+import { setModal } from '../../store/modules/main/slice'
+import { verificationFailed } from '../../store/modules/auth/slice'
 import HeaderNavigation from '../layouts/HeaderNavigation'
 import {t} from 'i18n-js'
 import NumberInputComponent from "../components/NumberInputComponent";
 import MessageAndLink from "../features/MessageAndLink";
+import {requestVerification, requestVerificationResend} from "../../store/modules/auth/action-creators";
 
 type VerificationProps = {
     email: string
@@ -15,14 +17,35 @@ type VerificationProps = {
 export default function Verification({ route: {params: {email}} }:VerificationProps) {
     const dispatch = useAppDispatch()
     const [number, setNumber] = useState('')
+    const errorMessage = useAppSelector(state => state.auth.verification.error)
 
     const resendHandler = () => {
-        dispatch(setModalMessage('We have just sent a verification code to your email'))
+        dispatch(setModal({
+            message: 'Test',
+            actions: [
+                {
+                    name: 'No',
+                    colortype: 'error'
+                },
+                {
+                    action: requestVerificationResend(email),
+                    name: 'Yes',
+                    colortype: 'primary'
+                }
+            ]
+        }))
     }
 
     const submitHandler = () => {
-        console.log(number)
+        dispatch(verificationFailed(''))
+        dispatch(requestVerification(number, email))
     }
+
+    useEffect(() => {
+        return () => {
+            dispatch(verificationFailed(''))
+        }
+    }, [])
 
     return (
         <HeaderNavigation pageName={t('verification.title')}>
@@ -33,7 +56,7 @@ export default function Verification({ route: {params: {email}} }:VerificationPr
                         <Text style={styles.description}>{t('verification.description', {email})}</Text>
                     </View>
                     <View style={styles.inputArea}>
-                        <NumberInputComponent onChange={setNumber} />
+                        <NumberInputComponent onChange={setNumber} errorMessage={errorMessage} />
                         <View style={styles.resendArea}>
                             <MessageAndLink linkHandler={resendHandler} linkText={t('verification.resend.link')} messageTextKey="verification.resend.text" />
                         </View>

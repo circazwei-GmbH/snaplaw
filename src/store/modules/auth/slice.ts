@@ -12,6 +12,9 @@ interface AuthState {
             password: string
         }
     },
+    verification: {
+        error: string
+    }
     token: undefined | string,
 }
 
@@ -27,6 +30,9 @@ const initialState: AuthState = {
             password: ''
         },
     },
+    verification: {
+        error: ''
+    },
     token: undefined,
 }
 
@@ -40,6 +46,9 @@ export const authSlice = createSlice({
         signInFailed: (state: Draft<AuthState>, action: PayloadAction<{field: 'email' | 'password', message: string}>) => {
             state.signIn.error[action.payload.field] = action.payload.message;
         },
+        verificationFailed: (state: Draft<AuthState>, action: PayloadAction<string>) => {
+            state.verification.error = action.payload
+        },
         clearSignInErrors: (state: Draft<AuthState>) => {
             state.signIn.error = {email: '', password: ''}
         },
@@ -52,6 +61,6 @@ export const authSlice = createSlice({
     }
 })
 
-export const { signUpFailed, signInFailed, setToken, killToken, clearSignInErrors } = authSlice.actions
+export const { signUpFailed, signInFailed, setToken, killToken, clearSignInErrors, verificationFailed } = authSlice.actions
 
 export default authSlice.reducer

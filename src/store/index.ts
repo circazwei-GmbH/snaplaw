@@ -1,4 +1,4 @@
-import {configureStore, applyMiddleware, createStore, combineReducers} from '@reduxjs/toolkit'
+import {configureStore} from '@reduxjs/toolkit'
 import auth from './modules/auth/slice'
 import main from './modules/main/slice'
 import createSagaMiddleware from 'redux-saga'

@@ -1,29 +1,58 @@
 import {createSlice, PayloadAction, Draft} from '@reduxjs/toolkit'
 
+interface ModalActionInterface {
+    action?: any | undefined,
+    name: string,
+    colortype?: string | undefined
+}
+
+export interface ModalInterface {
+    message: string,
+    actions: ModalActionInterface[]
+}
+
 interface MainStateInterface {
-    modalMessage: string,
+    modal: ModalInterface,
 }
 
 const initialState: MainStateInterface = {
-    modalMessage: ''
+    modal: {
+        message: '',
+        actions: []
+    }
 }
 
 export const mainSlice = createSlice({
     name: 'main',
     initialState,
     reducers: {
-        setModalMessage: (state: Draft<MainStateInterface>, action: PayloadAction<string>) => {
-            state.modalMessage = action.payload
+        setMessage: (state: Draft<MainStateInterface>, action: PayloadAction<string>) => {
+            state.modal = {
+                message: action.payload,
+                actions: [
+                    {
+                        name: 'Ok',
+                        colortype: 'primary'
+                    }
+                ]
+            }
+        },
+        setModal: (state: Draft<MainStateInterface>, action: PayloadAction<{message: string, actions: ModalActionInterface[]}>) => {
+            state.modal = action.payload
         },
         closeModal: (state: Draft<MainStateInterface>) => {
-            state.modalMessage = ''
+            state.modal = {
+                message: '',
+                actions: []
+            }
         }
     },
 })
 
 export const {
-    setModalMessage,
-    closeModal
+    setMessage,
+    closeModal,
+    setModal
 } = mainSlice.actions
 
 export default mainSlice.reducer
