@@ -22,5 +22,14 @@ export default {
         alternative: 'Or sign in with',
         to_sign_up: 'Don’t have any account?',
         sign_up: 'Sign up'
+    },
+    verification: {
+        title: 'Verify you email',
+        description: 'Please enter the 4 digit code sent to %{email}',
+        resend: {
+            text: 'Didn’t receive the code?',
+            link: 'Resend code'
+        },
+        submit: 'Verify'
     }
 }

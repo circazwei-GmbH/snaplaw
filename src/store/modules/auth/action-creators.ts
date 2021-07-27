@@ -6,7 +6,7 @@ export const SIGNIN_REQUESTED = 'SIGNIN_REQUESTED'
 export const requestSignUp = (name: string, email: string, password: string): RequestSignUpAction => {
     return {
         type: SIGNUP_REQUESTED,
-        payload: { name, email, password }
+        payload: { name, email, password },
     }
 }
 

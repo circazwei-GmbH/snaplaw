@@ -12,7 +12,7 @@ interface AuthState {
             password: string
         }
     },
-    token: undefined | string
+    token: undefined | string,
 }
 
 const initialState: AuthState = {
@@ -27,7 +27,7 @@ const initialState: AuthState = {
             password: ''
         },
     },
-    token: undefined
+    token: undefined,
 }
 
 export const authSlice = createSlice({

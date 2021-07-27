@@ -11,6 +11,8 @@ import en from './src/translator/en'
 import de from './src/translator/de'
 import { Provider } from 'react-redux'
 import store from './src/store/index'
+import {navigationRef} from "./src/router/RootNavigation";
+import AbstractModal from "./src/components/features/Modals/AbstractModal";
 
 i18n.translations = { en, de }
 
@@ -40,12 +42,13 @@ export default function App() {
 
   return (
       <Provider store={store}>
-          <NavigationContainer theme={theme}>
+          <NavigationContainer theme={theme} ref={navigationRef}>
               <View style={styles.container}>
                   <Router data-testid="router" />
               </View>
               <StatusBar style="auto" />
           </NavigationContainer>
+          <AbstractModal />
       </Provider>
   );
 }
