@@ -6,7 +6,7 @@ interface ButtonPropsInterface {
     onPress: ((event: GestureResponderEvent) => void);
     style?: object,
     type?: 'primary' | 'secondary',
-    textColorType: 'primary' | 'red'
+    textColorType?: 'primary' | 'red'
 }
 
 export default function Button({ text, onPress, style, type, textColorType } : ButtonPropsInterface) {
@@ -19,7 +19,7 @@ export default function Button({ text, onPress, style, type, textColorType } : B
     const onPressOutHandler = () => {
         setTouched(false)
     }
-
+    console.log(textColorType, type, text)
     return (
         <Pressable
             style={[
@@ -37,7 +37,7 @@ export default function Button({ text, onPress, style, type, textColorType } : B
             <Text
                 style={[
                     styles.text,
-                    type === "secondary"
+                    type !== "primary"
                         ? styles.secondaryText
                         : styles.primaryText,
                     textColorType === 'primary'
@@ -56,8 +56,6 @@ export default function Button({ text, onPress, style, type, textColorType } : B
 
 const styles = StyleSheet.create({
     button: {
-        // width: '100%',
-
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
@@ -74,7 +72,6 @@ const styles = StyleSheet.create({
         fontSize: 17,
         lineHeight: 18,
         fontFamily: 'OS-SB',
-        color: '#fff',
     },
     privaryButton: {
         backgroundColor: '#1696E2',
