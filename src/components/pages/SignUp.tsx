@@ -23,19 +23,19 @@ export default function SignUp({ navigation } : SignUpProps) {
             value: '',
             error: '',
             displayError: false,
-            validators: [length('Field required', 1)]
+            validators: [length(t('sign_up.errors.name_required'), 1)]
         },
         email: {
             value: '',
             error: '',
             displayError: false,
-            validators: [email('Should be an email pattern')]
+            validators: [email(t('sign_up.errors.email_not_valid'))]
         },
         password: {
             value: '',
             error: '',
             displayError: false,
-            validators: [length('Should be at least 6 chars', 6)]
+            validators: [length(t('sign_up.errors.password_length'), 6)]
         }
     };
     let setForm: (form: SignUpFormInterface) => void;

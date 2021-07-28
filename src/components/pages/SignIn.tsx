@@ -24,13 +24,13 @@ export default function SignIn({ navigation } : SignInProps) {
             value: '',
             error: '',
             displayError: false,
-            validators: [email('Sould be email')]
+            validators: [email(t('sign_in.errors.email_not_valid'))]
         },
         password: {
             value: '',
             error: '',
             displayError: false,
-            validators: [length('too short', 6)]
+            validators: [length(t('sign_in.errors.password_length'), 6)]
         }
     };
     let setForm: (form: SignInFormInterface) => void;

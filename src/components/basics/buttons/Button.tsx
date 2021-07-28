@@ -5,10 +5,11 @@ interface ButtonPropsInterface {
     text: string;
     onPress: ((event: GestureResponderEvent) => void);
     style?: object,
-    type?: 'primary' | 'secondary'
+    type?: 'primary' | 'secondary',
+    textColorType?: 'primary' | 'red'
 }
 
-export default function Button({ text, onPress, style, type } : ButtonPropsInterface) {
+export default function Button({ text, onPress, style, type, textColorType } : ButtonPropsInterface) {
     const [touched, setTouched] = useState(false)
 
     const onPressInHandler = () => {
@@ -18,7 +19,7 @@ export default function Button({ text, onPress, style, type } : ButtonPropsInter
     const onPressOutHandler = () => {
         setTouched(false)
     }
-
+    console.log(textColorType, type, text)
     return (
         <Pressable
             style={[
@@ -36,9 +37,15 @@ export default function Button({ text, onPress, style, type } : ButtonPropsInter
             <Text
                 style={[
                     styles.text,
-                    !type || type === "secondary"
+                    type !== "primary"
                         ? styles.secondaryText
-                        : styles.primaryText
+                        : styles.primaryText,
+                    textColorType === 'primary'
+                        ? styles.secondaryText
+                        : null,
+                    textColorType === 'error'
+                        ? styles.errorText
+                        : null
                 ]}
             >
                 {text}
@@ -49,7 +56,6 @@ export default function Button({ text, onPress, style, type } : ButtonPropsInter
 
 const styles = StyleSheet.create({
     button: {
-        width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
@@ -65,7 +71,7 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 17,
         lineHeight: 18,
-        fontFamily: 'OS-SB'
+        fontFamily: 'OS-SB',
     },
     privaryButton: {
         backgroundColor: '#1696E2',
@@ -78,6 +84,9 @@ const styles = StyleSheet.create({
     },
     secondaryText: {
         color: '#1696E2',
+    },
+    errorText: {
+        color: '#FA7171'
     },
     touch: {
         opacity: 0.5
