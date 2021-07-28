@@ -1,13 +1,13 @@
 import React from 'react';
 import {fireEvent, render} from "@testing-library/react-native";
-import DontHaveAnyAccount from "../DontHaveAnyAccount";
+import MessageAndLink from "../MessageAndLink";
 
 const TEST_TEXT_LINK = 'test.link.text'
 const TEST_TEXT_MESSAGE = 'test.message.text'
 
 describe('DontHaveAnyAccount', () => {
     it('Should display the message', () => {
-        const { getByText } = render(<DontHaveAnyAccount
+        const { getByText } = render(<MessageAndLink
             linkHandler={jest.fn()}
             linkText={TEST_TEXT_LINK}
             messageTextKey={TEST_TEXT_MESSAGE}
@@ -17,7 +17,7 @@ describe('DontHaveAnyAccount', () => {
     })
     it('Should call link handler', () => {
         const handler = jest.fn()
-        const { getByText } = render(<DontHaveAnyAccount
+        const { getByText } = render(<MessageAndLink
             linkHandler={handler}
             linkText={TEST_TEXT_LINK}
             messageTextKey={TEST_TEXT_MESSAGE}

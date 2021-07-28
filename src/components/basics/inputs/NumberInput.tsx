@@ -8,7 +8,7 @@ type NumberInputProps = {
 
 export default function NumberInput({style, onChange}: NumberInputProps) {
     return (
-        <TextInput keyboardType="numeric" maxLength={1} onChangeText={onChange} style={[styles.input, style]} />
+        <TextInput testID="numeric.input" keyboardType="numeric" maxLength={1} onChangeText={onChange} style={[styles.input, style]} />
     )
 }
 
