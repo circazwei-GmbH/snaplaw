@@ -14,15 +14,12 @@ export default function AbstractModal() {
         dispatch(closeModal())
     }
 
-    const getStyleForCurrentButton = () => {
-
-    }
-
     return (
         <Modal
             visible={!!modal.message}
             transparent={true}
             animationType="fade"
+            testID="modal"
         >
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
@@ -30,8 +27,8 @@ export default function AbstractModal() {
                         <Text style={styles.messageText}>{modal.message}</Text>
                     </View>
                     <View style={styles.actions}>
-                        {modal.actions && modal.actions.map(action => (
-                            <View style={[styles.flex, modal.actions.length > 1 ? styles.buttonContainer : null]}>
+                        {modal.actions && modal.actions.map((action, index) => (
+                            <View key={index} style={[styles.flex, modal.actions.length > 1 ? styles.buttonContainer : null]}>
                                 <Button style={styles.buttonResets} textColorType={action.colortype} text={action.name} onPress={() => actionHandler(action.action)} />
                             </View>
                         ) )}

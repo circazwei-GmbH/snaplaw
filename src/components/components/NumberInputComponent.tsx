@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {View, StyleSheet, Text} from "react-native";
-import NumberInput from '../basics/NumberInput'
+import NumberInput from '../basics/inputs/NumberInput'
 
 type NumberInputComponentProps = {
     onChange: Function,
