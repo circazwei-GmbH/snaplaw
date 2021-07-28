@@ -19,7 +19,6 @@ export default function Button({ text, onPress, style, type, textColorType } : B
     const onPressOutHandler = () => {
         setTouched(false)
     }
-    console.log(textColorType, type, text)
     return (
         <Pressable
             style={[
