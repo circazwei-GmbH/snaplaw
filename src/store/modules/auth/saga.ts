@@ -28,7 +28,6 @@ function* fetchSignUp(action: RequestSignUpAction) {
         yield call(API.signUp, action.payload)
         RootNavigation.navigate(ROUTE.VERIFICATION, {email: action.payload.email})
     } catch (error) {
-        console.log(error.response)
         if (error.response?.data.code === USER_NOT_UNIQUE) {
             return yield put(signUpFailed({
                 email: t('sign_up.errors.email_taken')
@@ -46,7 +45,6 @@ function* fetchSignIn(action: RequestSignInAction) {
         const response = yield call(API.signIn, action.payload)
         yield put(setToken(response.data.token))
     } catch (error) {
-        console.error(error.response)
         if (error.response?.data.code === USER_NOT_FOUND_LOGIN) {
             return yield put(signInFailed({
                 message: t('sign_in.errors.user_not_found'),
@@ -90,7 +88,6 @@ function* fetchResendVerificationCode(action: VerificationResendAction) {
         yield call(API.resendVerification, action.payload)
         yield put(setMessage(t('verification.modal.text')))
     } catch (error) {
-        console.log(error.response)
         yield put(setMessage(t('errors.abstract')))
     }
 }
