@@ -19,7 +19,7 @@ const verification = (payload: VerificationPayload) => {
 }
 
 const resendVerification = (payload: VerificationResendPayload) => {
-    return httpClient.post('email-confirmation', payload)
+    return httpClient.post('resent-email-confirmation', payload)
 }
 
 export default {

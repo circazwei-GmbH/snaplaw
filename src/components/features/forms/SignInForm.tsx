@@ -35,6 +35,7 @@ export default function SignInForm({navigation, fieldChangeHandler, form} : Sign
                     placeholder={t('sign_in.email_field')}
                     textContentType="username"
                     fixed
+                    keyboardType="email-address"
                     errorMessage={form.email.error}
                     value={form.email.value}
                     onChangeFunction={(text) => fieldChangeHandler('email', text)}

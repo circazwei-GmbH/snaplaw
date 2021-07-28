@@ -8,7 +8,7 @@ import {
 import {RequestSignInAction, RequestSignUpAction, VerificationAction, VerificationResendAction} from "./types";
 import API from '../../../services/auth/index'
 import { signUpFailed, signInFailed, setToken, clearSignInErrors, verificationFailed } from './slice'
-import { setMessage } from '../main/slice'
+import { setMessage, setModal } from '../main/slice'
 import {ROUTE} from "../../../router/RouterTypes";
 import * as RootNavigation from '../../../router/RootNavigation'
 import {
@@ -18,6 +18,7 @@ import {
     USER_NOT_FOUND_LOGIN,
     USER_NOT_UNIQUE, VERIFICATION_CODE_IS_INCORRECT
 } from "../../../services/error-codes";
+import { t } from 'i18n-js'
 
 function* fetchSignUp(action: RequestSignUpAction) {
     try {
@@ -27,13 +28,14 @@ function* fetchSignUp(action: RequestSignUpAction) {
         yield call(API.signUp, action.payload)
         RootNavigation.navigate(ROUTE.VERIFICATION, {email: action.payload.email})
     } catch (error) {
+        console.log(error.response)
         if (error.response?.data.code === USER_NOT_UNIQUE) {
             return yield put(signUpFailed({
-                email: 'Email already taken'
+                email: t('sign_up.errors.email_taken')
             }))
         }
         yield put(setMessage(
-            'error.abstract'
+            t('errors.abstract')
         ))
     }
 }
@@ -44,15 +46,16 @@ function* fetchSignIn(action: RequestSignInAction) {
         const response = yield call(API.signIn, action.payload)
         yield put(setToken(response.data.token))
     } catch (error) {
+        console.error(error.response)
         if (error.response?.data.code === USER_NOT_FOUND_LOGIN) {
             return yield put(signInFailed({
-                message: 'Sorry, we can’t find account with this email',
+                message: t('sign_in.errors.user_not_found'),
                 field: 'email'
             }))
         }
         if (error.response?.data.code === PASSWORD_NOT_VALID) {
             return yield put(signInFailed({
-                message: 'Password not valid',
+                message: t('sign_in.errors.password_not_valid'),
                 field: 'password'
             }))
         }
@@ -60,7 +63,7 @@ function* fetchSignIn(action: RequestSignInAction) {
             return RootNavigation.navigate(ROUTE.VERIFICATION, {email: action.payload.email})
         }
         yield put(setMessage(
-            'error.abstract'
+            t('errors.abstract')
         ))
     }
 }
@@ -71,13 +74,13 @@ function* fetchVerification(action: VerificationAction) {
         yield put(setToken(response.data.token))
     } catch (error) {
         if (error.response?.data.code === USER_NOT_FOUND) {
-            return yield put(verificationFailed('User not found'))
+            return yield put(verificationFailed(t('verification.errors.user_not_found')))
         }
         if (error.response?.data.code === VERIFICATION_CODE_IS_INCORRECT) {
-            return yield put(verificationFailed('Code incorrect'))
+            return yield put(verificationFailed(t('verification.errors.code_incorrect')))
         }
         yield put(setMessage(
-            'error.abstract'
+            t('errors.abstract')
         ))
     }
 }
@@ -85,8 +88,10 @@ function* fetchVerification(action: VerificationAction) {
 function* fetchResendVerificationCode(action: VerificationResendAction) {
     try {
         yield call(API.resendVerification, action.payload)
+        yield put(setMessage(t('verification.modal.text')))
     } catch (error) {
-        yield put(setMessage('error.abstract'))
+        console.log(error.response)
+        yield put(setMessage(t('errors.abstract')))
     }
 }
 

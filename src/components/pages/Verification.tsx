@@ -20,20 +20,7 @@ export default function Verification({ route: {params: {email}} }:VerificationPr
     const errorMessage = useAppSelector(state => state.auth.verification.error)
 
     const resendHandler = () => {
-        dispatch(setModal({
-            message: 'Test',
-            actions: [
-                {
-                    name: 'No',
-                    colortype: 'error'
-                },
-                {
-                    action: requestVerificationResend(email),
-                    name: 'Yes',
-                    colortype: 'primary'
-                }
-            ]
-        }))
+        dispatch(requestVerificationResend(email))
     }
 
     const submitHandler = () => {
