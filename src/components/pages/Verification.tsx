@@ -11,7 +11,11 @@ import MessageAndLink from "../features/MessageAndLink";
 import {requestVerification, requestVerificationResend} from "../../store/modules/auth/action-creators";
 
 type VerificationProps = {
-    email: string
+    route: {
+        params: {
+            email: string
+        }
+    }
 }
 
 export default function Verification({ route: {params: {email}} }:VerificationProps) {
@@ -39,7 +43,7 @@ export default function Verification({ route: {params: {email}} }:VerificationPr
             <TouchableWithoutFeedback accessible={false} onPress={Keyboard.dismiss}>
                 <View style={styles.container}>
                     <View style={styles.topContainer}>
-                        <Image style={styles.image} accessibilityLabel="welcome-image" source={require('../../../assets/verification.png')} />
+                        <Image style={styles.image} accessibilityLabel="verification-image" source={require('../../../assets/verification.png')} />
                         <Text style={styles.description}>{t('verification.description', {email})}</Text>
                     </View>
                     <View style={styles.inputArea}>

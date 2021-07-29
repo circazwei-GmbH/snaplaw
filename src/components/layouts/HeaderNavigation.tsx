@@ -15,7 +15,7 @@ export default function HeaderNavigation({ children, pageName }: HeaderNavigatio
     return (
         <>
             <View style={styles.header}>
-                <Pressable onPress={backHandler}>
+                <Pressable testID="HeaderNavigation.back" onPress={backHandler}>
                     <MaterialIcons name="arrow-back-ios" size={16} />
                 </Pressable>
                 <Text style={styles.headerText}>
