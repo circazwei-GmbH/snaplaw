@@ -14,10 +14,10 @@ export default {
         to_login: 'Haben Sie bereits ein Konto?',
         log_in: 'Einloggen',
         errors: {
-            email_taken: 'Email already taken',
-            name_required: 'Name is required',
-            email_not_valid: 'Enter valid email',
-            password_length: 'Password should be at least 6 chars'
+            email_taken: 'E-Mail wurde bereits verwendet',
+            name_required: 'Name ist erforderlich',
+            email_not_valid: 'Bitte geben Sie eine gültige Email-Adresse ein',
+            password_length: 'Passwort muss mindestens 6 Zeichen lang sein'
         }
     },
     sign_in: {
@@ -29,10 +29,10 @@ export default {
         to_sign_up: 'Haben Sie noch kein Konto?',
         sign_up: 'Anmelden',
         errors: {
-            email_not_valid: 'Enter valid email',
-            password_length: 'Password should be at least 6 chars',
-            user_not_found: 'Sorry, we can’t find account with this email',
-            password_not_valid: 'Password not valid'
+            email_not_valid: 'Bitte geben Sie eine gültige Email-Adresse ein',
+            password_length: 'Passwort muss mindestens 6 Zeichen lang sein',
+            user_not_found: 'Entschuldigung, wir konnten das Konto mit dieser E-Mail nicht finden',
+            password_not_valid: 'Passwort ist ungültig'
         }
     },
     verification: {
@@ -44,11 +44,11 @@ export default {
         },
         submit: 'Bestätigen',
         errors: {
-            user_not_found: 'User not found',
-            code_incorrect: 'Code incorrect'
+            user_not_found: 'Benutzer wurde nicht gefunden',
+            code_incorrect: 'Code ist not korrekt'
         }
     },
     errors: {
-        abstract: 'Something went wrong. Service unavaliable. Try again later'
+        abstract: 'Leider ist etwas schiefgelaufen. Bitte versuchen Sie es später noch einmal.'
     }
 }
