@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { TextInput, View, StyleSheet, Text } from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
 
-interface OnChanfeFunction {
+interface OnChangeFunction {
     (text: string): void
 }
 
@@ -12,7 +12,7 @@ interface TextFieldPropsInterface {
     validations?: Array<Function>,
     errorMessage?: string,
     value: string,
-    onChange: OnChanfeFunction
+    onChange: OnChangeFunction
     icon?: "visibility-off" | undefined,
 }
 
