@@ -1,4 +1,4 @@
-import React, {ElementRef, ForwardedRef, forwardRef, ReactChild, ReactNode} from 'react'
+import React, {ForwardedRef, forwardRef, ReactNode} from 'react'
 import {TextInput, StyleSheet} from "react-native";
 
 type NumberInputProps = {
