@@ -1,16 +1,17 @@
-import React from 'react'
+import React, {ElementRef, ForwardedRef, forwardRef, ReactChild, ReactNode} from 'react'
 import {TextInput, StyleSheet} from "react-native";
 
 type NumberInputProps = {
     style: StyleSheet,
-    onChange?: Function
+    onChange?: Function,
 }
 
-export default function NumberInput({style, onChange}: NumberInputProps) {
-    return (
-        <TextInput testID="numeric.input" keyboardType="numeric" maxLength={1} onChangeText={onChange} style={[styles.input, style]} />
-    )
-}
+export default
+        forwardRef(({style, onChange}: NumberInputProps, ref: ForwardedRef<ReactNode>) => (
+            <TextInput ref={ref} testID="numeric.input" keyboardType="numeric" maxLength={1} onChangeText={onChange} style={[styles.input, style]} />
+        ))
+
+
 
 const styles = StyleSheet.create({
     input: {
