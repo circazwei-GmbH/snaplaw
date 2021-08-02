@@ -43,8 +43,17 @@ export default {
             link: 'Resend code'
         },
         submit: 'Verify',
-        modal: {
-            text: 'We have just sent a verification code to your email'
+        modals: {
+            information: {
+                text: 'We have just sent a verification code to your email'
+            },
+            confirm: {
+                text: 'The code has already expired. Send the code again?',
+                buttons: {
+                    no: 'No',
+                    yes: 'Yes'
+                }
+            }
         },
         errors: {
             user_not_found: 'User is not found',

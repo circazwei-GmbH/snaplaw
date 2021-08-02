@@ -1,5 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import {
+    requestVerificationResend,
     SIGNIN_REQUESTED,
     SIGNUP_REQUESTED,
     VERIFICATION_REQUESTED,
@@ -75,7 +76,20 @@ function* fetchVerification(action: VerificationAction) {
             return yield put(verificationFailed(t('verification.errors.user_not_found')))
         }
         if (error.response?.data.code === VERIFICATION_CODE_IS_INCORRECT) {
-            return yield put(verificationFailed(t('verification.errors.code_incorrect')))
+            return yield put(setModal({
+                message: t('verification.modals.confirm.text'),
+                actions: [
+                    {
+                        name: t('verification.modals.confirm.buttons.no'),
+                        colortype: 'error'
+                    },
+                    {
+                        name: t('verification.modals.confirm.buttons.yes'),
+                        colortype: 'primary',
+                        action: requestVerificationResend(action.payload.email)
+                    }
+                ]
+            }))
         }
         yield put(setMessage(
             t('errors.abstract')
@@ -86,7 +100,7 @@ function* fetchVerification(action: VerificationAction) {
 function* fetchResendVerificationCode(action: VerificationResendAction) {
     try {
         yield call(API.resendVerification, action.payload)
-        yield put(setMessage(t('verification.modal.text')))
+        yield put(setMessage(t('verification.modals.information.text')))
     } catch (error) {
         yield put(setMessage(t('errors.abstract')))
     }

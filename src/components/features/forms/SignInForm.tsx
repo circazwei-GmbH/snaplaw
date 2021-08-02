@@ -5,7 +5,7 @@ import PasswordField from '../../components/PasswordField'
 import Link from "../../basics/links/link";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParamList, ROUTE} from "../../../router/RouterTypes";
-import { email, ValidatorInterface } from '../../../validations/default';
+import { ValidatorInterface } from '../../../validations/default';
 import { t } from 'i18n-js'
 
 // TODO move to abstract place because used in SignUp
@@ -47,7 +47,6 @@ export default function SignInForm({navigation, fieldChangeHandler, form} : Sign
                     errorMessage={form.password.error}
                     value={form.password.value}
                     onChange={(text) => fieldChangeHandler('password', text)}
-                    icon="visibility-off"
                 />
             </View>
             <View>

@@ -42,6 +42,18 @@ export default {
             text: 'Code nicht erhalten?',
             link: 'Code erneut senden'
         },
+        modals: {
+            information: {
+                text: 'Wir haben bereits einen Bestätigungscode an Ihre E-Mail gesendet.'
+            },
+            confirm: {
+                text: 'Der Code ist bereits abgelaufen. Code noch einmal senden?',
+                buttons: {
+                    no: 'Nein',
+                    yes: 'Ja'
+                }
+            }
+        },
         submit: 'Bestätigen',
         errors: {
             user_not_found: 'Benutzer wurde nicht gefunden',
