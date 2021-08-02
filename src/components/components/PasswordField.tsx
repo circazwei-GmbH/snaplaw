@@ -13,10 +13,9 @@ interface TextFieldPropsInterface {
     errorMessage?: string,
     value: string,
     onChange: OnChangeFunction
-    icon?: "visibility-off" | undefined,
 }
 
-export default function PasswordField({ placeholder, fixed = false, errorMessage, onChange, value, icon = undefined } : TextFieldPropsInterface) {
+export default function PasswordField({ placeholder, fixed = false, errorMessage, onChange, value } : TextFieldPropsInterface) {
     const [localValue, setLocalValue] = useState(value);
     const [focused, setFocused] = useState(false);
     const [visible, setVisible] = useState(false)
@@ -34,11 +33,11 @@ export default function PasswordField({ placeholder, fixed = false, errorMessage
 
     return (
         <>
-            <View style={icon ? styles.container: null}>
+            <View style={styles.container}>
                 <Text style={[
                     styles.label,
                     focused || localValue ? null : fixed ? styles.labelWithEmptyInputFixed : styles.labelWithEmptyInputDance,
-                    icon ? styles.inputWithIcon : null,
+                    styles.inputWithIcon,
                 ]}>{placeholder}<Text style={styles.redText}>*</Text></Text>
                 <TextInput
                     placeholder={!focused ? placeholder : ''}
@@ -56,11 +55,9 @@ export default function PasswordField({ placeholder, fixed = false, errorMessage
                     onFocus={() => setFocused(true)}
                     onBlur={() => setFocused(false)}
                 />
-                {icon ? (
-                    <View>
-                        <MaterialIcons testID="PasswordField.Icon" onPress={iconPressHandler} color="#668395" style={styles.icon} size={20} name={icon} />
-                        </View>
-                ) : null}
+                <View>
+                    <MaterialIcons testID="PasswordField.Icon" onPress={iconPressHandler} color="#668395" style={styles.icon} size={20} name={visible ? 'visibility-off' : 'visibility'} />
+                </View>
             </View>
             <Text style={[styles.errorText, errorMessage ? null : styles.displayNone]}>{errorMessage}</Text>
         </>

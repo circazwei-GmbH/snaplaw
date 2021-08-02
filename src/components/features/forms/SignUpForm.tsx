@@ -46,7 +46,6 @@ export default function SignUpForm({fieldChangeHandler, form} : SignUpFormProps)
                     onChange={(text: string) => fieldChangeHandler('password', text)}
                     value={form.password.value}
                     errorMessage={form.password.error}
-                    icon="visibility-off"
                 />
             </View>
         </View>
