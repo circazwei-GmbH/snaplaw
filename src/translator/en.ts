@@ -12,7 +12,7 @@ export default {
         submit: 'Create',
         alternative: 'or sign up with ',
         to_login: 'Already have an account?',
-        log_in: 'Log in',
+        log_in: 'Sign in',
         errors: {
             email_taken: 'Email has already been taken',
             name_required: 'Name is required',

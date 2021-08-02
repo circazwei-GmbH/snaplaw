@@ -41,6 +41,7 @@ export default function PasswordField({ placeholder, fixed = false, errorMessage
                 ]}>{placeholder}<Text style={styles.redText}>*</Text></Text>
                 <TextInput
                     placeholder={!focused ? placeholder : ''}
+                    placeholderTextColor="#909090"
                     textContentType="password"
                     style={[
                         styles.emptyInput,

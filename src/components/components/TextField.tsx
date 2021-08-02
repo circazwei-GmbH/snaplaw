@@ -34,6 +34,7 @@ export default function TextField({ placeholder, fixed = false, errorMessage, on
             <TextInput
                 {...props}
                 placeholder={!focused ? placeholder : ''}
+                placeholderTextColor="#909090"
                 style={[
                     styles.emptyInput,
                     focused ? styles.fullInput : null,
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
     focuslessInput: {
         backgroundColor: '#EFF7FD',
         borderWidth: 1,
-        borderColor: 'transparent'
+        borderColor: 'transparent',
     },
     label: {
         color: '#1696E2',
