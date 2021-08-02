@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { TouchableOpacity, View, StyleSheet, Text } from 'react-native'
-//import { TouchableOpacity } from 'react-native-gesture-handler'
 import { MaterialIcons } from '@expo/vector-icons'
 
 interface ButtonPropsInterface {
@@ -41,6 +40,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 45,
     paddingHorizontal: 16,
+    marginTop: 10,
     backgroundColor: '#F8FCFF',
     elevation: 2
   },
