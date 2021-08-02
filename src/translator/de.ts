@@ -62,5 +62,5 @@ export default {
     },
     errors: {
         abstract: 'Leider ist etwas schiefgelaufen. Bitte versuchen Sie es später noch einmal.'
-    }
+    },
 }
