@@ -1,4 +1,4 @@
-import {createSlice, PayloadAction, Draft} from '@reduxjs/toolkit'
+import {createSlice, PayloadAction, Draft, createAction} from '@reduxjs/toolkit'
 
 interface AuthState {
     signUp: {
@@ -36,31 +36,39 @@ const initialState: AuthState = {
     token: undefined,
 }
 
+const signUpFailedAction = createAction<{email: string}, 'signUpFailed'>('signUpFailed')
+const signInFailedAction = createAction<{field: 'email' | 'password', message: string}, 'signInFailed'>('signInFailed')
+const verificationFailedAction = createAction<string, 'verificationFailed'>('verificationFailed')
+const clearSignInErrorsAction = createAction<undefined, 'clearSignInErrors'>('clearSignInErrors')
+const setTokenAction = createAction<string, 'setToken'>('setToken')
+const killTokenAction = createAction<undefined, 'killToken'>('killToken')
+
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        signUpFailed: (state: Draft<AuthState>, action: PayloadAction<{email: string}>) => {
+        [signUpFailedAction.type]: (state: Draft<AuthState>, action: PayloadAction<{email: string}>) => {
             state.signUp.error = action.payload
         },
-        signInFailed: (state: Draft<AuthState>, action: PayloadAction<{field: 'email' | 'password', message: string}>) => {
+        [signInFailedAction.type]: (state: Draft<AuthState>, action: PayloadAction<{field: 'email' | 'password', message: string}>) => {
             state.signIn.error[action.payload.field] = action.payload.message;
         },
-        verificationFailed: (state: Draft<AuthState>, action: PayloadAction<string>) => {
+        [verificationFailedAction.type]: (state: Draft<AuthState>, action: PayloadAction<string>) => {
             state.verification.error = action.payload
         },
-        clearSignInErrors: (state: Draft<AuthState>) => {
+        [clearSignInErrorsAction.type]: (state: Draft<AuthState>) => {
             state.signIn.error = {email: '', password: ''}
         },
-        setToken: (state: Draft<AuthState>, action: PayloadAction<string>) => {
+        [setTokenAction.type]: (state: Draft<AuthState>, action: PayloadAction<string>) => {
             state.token = action.payload
         },
-        killToken: (state: Draft<AuthState>) => {
+        [killTokenAction.type]: (state: Draft<AuthState>) => {
             state.token = ''
         },
     }
 })
 
 export const { signUpFailed, signInFailed, setToken, killToken, clearSignInErrors, verificationFailed } = authSlice.actions
+export const actions = authSlice.actions
 
 export default authSlice.reducer
