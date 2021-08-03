@@ -1,4 +1,5 @@
 import {
+    ForgotPasswordPayload,
     SignInPayload,
     SignUpPayload,
     VerificationPayload,
@@ -22,9 +23,14 @@ const resendVerification = (payload: VerificationResendPayload) => {
     return httpClient.post('resent-email-confirmation', payload)
 }
 
+const forgotPassword = (payload: ForgotPasswordPayload) => {
+    return httpClient.post('users/reset-password-confirmation', payload)
+}
+
 export default {
     signUp,
     signIn,
     verification,
-    resendVerification
+    resendVerification,
+    forgotPassword
 }

@@ -23,6 +23,10 @@ export interface VerificationResendPayload {
     email: string
 }
 
+export interface ForgotPasswordPayload {
+    email: string
+}
+
 export interface RequestSignUpAction extends BaseAction {
     payload: SignUpPayload
 }
@@ -37,4 +41,8 @@ export interface VerificationAction extends BaseAction {
 
 export interface VerificationResendAction extends BaseAction {
     payload: VerificationResendPayload
+}
+
+export interface ForgotPasswordAction extends BaseAction {
+    payload: ForgotPasswordPayload
 }

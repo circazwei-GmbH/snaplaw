@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View, StyleSheet, Image, TouchableWithoutFeedback, Keyboard} from "react-native";
+import {View, StyleSheet, TouchableWithoutFeedback, Keyboard} from "react-native";
 import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import Button from "../basics/buttons/Button";
-import { setModal } from '../../store/modules/main/slice'
 import { verificationFailed } from '../../store/modules/auth/slice'
 import HeaderNavigation from '../layouts/HeaderNavigation'
 import {t} from 'i18n-js'
 import NumberInputComponent from "../components/NumberInputComponent";
 import MessageAndLink from "../features/MessageAndLink";
 import {requestVerification, requestVerificationResend} from "../../store/modules/auth/action-creators";
+import ImageAndText from "../features/Auth/ImageAndText";
 
 type VerificationProps = {
     route: {
@@ -42,10 +42,7 @@ export default function Verification({ route: {params: {email}} }:VerificationPr
         <HeaderNavigation pageName={t('verification.title')}>
             <TouchableWithoutFeedback accessible={false} onPress={Keyboard.dismiss}>
                 <View style={styles.container}>
-                    <View style={styles.topContainer}>
-                        <Image style={styles.image} accessibilityLabel="verification-image" source={require('../../../assets/verification.png')} />
-                        <Text style={styles.description}>{t('verification.description', {email})}</Text>
-                    </View>
+                    <ImageAndText image={require('../../../assets/verification.png')} text={t('verification.description', {email})} />
                     <View style={styles.inputArea}>
                         <NumberInputComponent onChange={setNumber} errorMessage={errorMessage} />
                         <View style={styles.resendArea}>

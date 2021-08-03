@@ -60,6 +60,16 @@ export default {
             code_incorrect: 'Code is incorrect'
         }
     },
+    forgot_password: {
+        title: 'Forgot password',
+        description: 'Enter your registered email below to receive password reset instruction',
+        input: 'Email',
+        send: 'Send',
+        errors: {
+            email_not_valid: 'Please enter a valid email',
+            email_not_fount: 'Sorry, we couldn\'t find account with this email'
+        }
+    },
     errors: {
         abstract: 'Something went wrong. Try again later.'
     }
