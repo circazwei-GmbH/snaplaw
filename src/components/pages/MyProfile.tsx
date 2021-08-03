@@ -1,18 +1,24 @@
 import React from 'react'
-import { Text, View, StyleSheet, SafeAreaView, ScrollView } from 'react-native'
+import { Text, View, StyleSheet, ScrollView } from 'react-native'
 import { useAppDispatch } from "../../store/hooks"
 import { killToken } from '../../store/modules/auth/slice'
+import TopBar from '../layouts/TopBar'
 import ProfileButton from '../basics/buttons/ProfileButton'
 import MyProfileAvatarBox from '../features/MyProfileAvatarBox'
+import NotificationBell from '../components/NotificationBell'
 
-export default function MyProfile() {
+export default function MyProfile(): JSX.Element {
   const dispatch = useAppDispatch()
   const killTokenHandler = () => {
     dispatch(killToken())
   }
 
   return (
-    <SafeAreaView style={styles.safe}>
+    <TopBar
+      pageName="My Profile"
+      leftButton={<NotificationBell />}
+      style={styles.topBarBackground}
+    >
       <ScrollView contentContainerStyle={styles.container}>
         <MyProfileAvatarBox />
         <ProfileButton
@@ -54,7 +60,7 @@ export default function MyProfile() {
           onPress={() => alert('Hi')}
         />
       </ScrollView>
-    </SafeAreaView>
+    </TopBar>
   )
 }
 
@@ -66,4 +72,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     paddingBottom: 10,
   },
+  topBarBackground: {
+    backgroundColor: '#F8FCFF'
+  }
 })

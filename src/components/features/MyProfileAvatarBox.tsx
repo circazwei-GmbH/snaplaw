@@ -1,22 +1,23 @@
 import React, { useState } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native"
-import ProfileHeadline from '../basics/typography/ProfileHeadline'
 import UserAvatar from '../components/UserAvatar'
 import VerificationCounter from '../components/VerificationCounter'
 
 export default function MyProfileAvatarBox() {
   const [avatarSize, setAvatarSize] = useState('small')
 
-  const toggleAvatarSize = (size: string) => {
-    size === 'big' ? setAvatarSize('small') : setAvatarSize('big')
+  const toggleAvatarSize = (
+    size: string,
+    setSize: React.Dispatch<React.SetStateAction<string>>
+  ) => {
+    size === 'big' ? setSize('small') : setSize('big')
   }
 
   return (
     <View style={styles.container}>
-      <ProfileHeadline text="My Profile" />
       <TouchableOpacity
         style={styles.avatar}
-        onPress={() => toggleAvatarSize(avatarSize)}
+        onPress={() => toggleAvatarSize(avatarSize, setAvatarSize)}
       >
         <UserAvatar size={avatarSize} />
       </TouchableOpacity>
@@ -28,8 +29,7 @@ export default function MyProfileAvatarBox() {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    minHeight: 250,
-    paddingTop: 48,
+    minHeight: 200,
     paddingBottom: 18,
     backgroundColor: '#F8FCFF',
     elevation: 2
