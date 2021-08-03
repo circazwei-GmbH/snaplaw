@@ -1,14 +1,28 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import {
+    FORGOT_PASSWORD_REQUESTED,
     requestVerificationResend,
     SIGNIN_REQUESTED,
     SIGNUP_REQUESTED,
     VERIFICATION_REQUESTED,
     VERIFICATION_RESEND_REQUESTED
 } from "./action-creators";
-import {RequestSignInAction, RequestSignUpAction, VerificationAction, VerificationResendAction} from "./types";
+import {
+    ForgotPasswordAction,
+    RequestSignInAction,
+    RequestSignUpAction,
+    VerificationAction,
+    VerificationResendAction
+} from "./types";
 import API from '../../../services/auth/index'
-import { signUpFailed, signInFailed, setToken, clearSignInErrors, verificationFailed } from './slice'
+import {
+    signUpFailed,
+    signInFailed,
+    setToken,
+    clearSignInErrors,
+    verificationFailed,
+    forgotPasswordFailed
+} from './slice'
 import { setMessage, setModal } from '../main/slice'
 import {ROUTE} from "../../../router/RouterTypes";
 import * as RootNavigation from '../../../router/RootNavigation'
@@ -106,11 +120,24 @@ function* fetchResendVerificationCode(action: VerificationResendAction) {
     }
 }
 
+function* fetchForgotPassword(action: ForgotPasswordAction) {
+    try {
+        yield put(forgotPasswordFailed(''))
+        yield call(API.forgotPassword, action.payload)
+    } catch (error) {
+        if (error.response.status === 404) {
+            return yield put(forgotPasswordFailed(t('forgot_password.errors.email_not_fount')))
+        }
+        yield put(setMessage(t('errors.abstract')))
+    }
+}
+
 function* authSaga() {
     yield takeLatest(SIGNUP_REQUESTED, fetchSignUp)
     yield takeLatest(SIGNIN_REQUESTED, fetchSignIn)
     yield takeLatest(VERIFICATION_REQUESTED, fetchVerification)
     yield takeLatest(VERIFICATION_RESEND_REQUESTED, fetchResendVerificationCode)
+    yield takeLatest(FORGOT_PASSWORD_REQUESTED, fetchForgotPassword)
 }
 
 export default authSaga;
