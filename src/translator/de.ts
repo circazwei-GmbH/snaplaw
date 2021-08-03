@@ -60,6 +60,16 @@ export default {
             code_incorrect: 'Code ist not korrekt'
         }
     },
+    forgot_password: {
+        title: 'Passwort vergessen',
+        description: 'Geben Sie unten Ihre registrierte E-Mail-Adresse ein, um Anweisungen zum Zurücksetzen des Passworts zu erhalten',
+        input: 'E-Mail',
+        send: 'Send',
+        errors: {
+            email_not_valid: 'Bitte geben Sie eine gültige Email-Adresse ein',
+            email_not_fount: 'Entschuldigung, wir konnten das Konto mit dieser E-Mail nicht finden'
+        }
+    },
     errors: {
         abstract: 'Leider ist etwas schiefgelaufen. Bitte versuchen Sie es später noch einmal.'
     },
