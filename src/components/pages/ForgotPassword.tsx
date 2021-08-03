@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, Keyboard, TouchableWithoutFeedback} from "react-native";
 import Button from "../basics/buttons/Button";
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../router/RouterTypes'
 import HeaderNavigation from "../layouts/HeaderNavigation";
 import { t } from 'i18n-js'
 import ImageAndText from "../features/Auth/ImageAndText";
@@ -13,11 +11,7 @@ import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import {requestForgotPassword} from "../../store/modules/auth/action-creators";
 import {forgotPasswordFailed} from "../../store/modules/auth/slice";
 
-type ForgotPasswordProps = {
-    navigation: StackNavigationProp<RootStackParamList, 'Forgot'>
-}
-
-export default function ForgotPassword({} : ForgotPasswordProps) {
+export default function ForgotPassword() {
     const [form, setForm] = useState({
         email: {
             value: '',

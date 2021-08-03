@@ -9,7 +9,7 @@ type ImageAndTextProp = {
 export default function ImageAndText({ image, text } : ImageAndTextProp) {
     return (
         <View style={styles.topContainer}>
-            <Image style={styles.image} accessibilityLabel="verification-image" source={image} />
+            <Image style={styles.image} accessibilityLabel="asset-image" source={image} />
             <Text style={styles.description}>{text}</Text>
         </View>
     )
