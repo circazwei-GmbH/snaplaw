@@ -22,9 +22,9 @@ export const requestSignIn = (email: string, password: string): RequestSignInAct
     payload: { email, password }
 })
 
-export const requestVerification = (code: string, email: string): VerificationAction => ({
+export const requestVerification = (code: string, email: string, to: string): VerificationAction => ({
     type: VERIFICATION_REQUESTED,
-    payload: { code, email }
+    payload: { code, email, to }
 })
 
 export const requestVerificationResend = (email: string): VerificationResendAction => ({

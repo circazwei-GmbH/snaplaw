@@ -70,6 +70,15 @@ export default {
             email_not_fount: 'Sorry, we couldn\'t find account with this email'
         }
     },
+    change_password: {
+        title: 'Create new password',
+        description: 'Your new password must be different from the previously used password',
+        fields: {
+            new_password: 'New password',
+            confirm_password: 'Confirm new password'
+        },
+        save: 'Save'
+    },
     errors: {
         abstract: 'Something went wrong. Try again later.'
     }

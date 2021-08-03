@@ -5,6 +5,7 @@ import Welcome from '../components/pages/Welcome'
 import ForgotPassword from '../components/pages/ForgotPassword'
 import Homepage from '../components/pages/Homepage'
 import Verification from '../components/pages/Verification'
+import ChangePassword from "../components/pages/ChangePassword";
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { ROUTE } from "./RouterTypes";
@@ -26,6 +27,7 @@ export default function Router() {
             <Stack.Screen name={ROUTE.SIGNUP} component={SignUp} />
             <Stack.Screen name={ROUTE.FORGOT} component={ForgotPassword} />
             <Stack.Screen name={ROUTE.VERIFICATION} component={Verification} />
+            <Stack.Screen name={ROUTE.CHANGE_PASSWORD} component={ChangePassword} />
         </Stack.Navigator>)
     )
 }

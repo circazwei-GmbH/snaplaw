@@ -83,7 +83,18 @@ function* fetchSignIn(action: RequestSignInAction) {
 
 function* fetchVerification(action: VerificationAction) {
     try {
-        const response = yield call(API.verification, action.payload)
+        // const response = yield call(API.verification, action.payload)
+        const response = {
+            data: {
+                token: 'root token'
+            }
+        }
+        if (action.payload.to === ROUTE.CHANGE_PASSWORD) {
+            return RootNavigation.navigate(action.payload.to, {
+                email: action.payload.email,
+                token: response.data.token
+            })
+        }
         yield put(setToken(response.data.token))
     } catch (error) {
         if (error.response?.data.code === USER_NOT_FOUND) {
@@ -123,7 +134,11 @@ function* fetchResendVerificationCode(action: VerificationResendAction) {
 function* fetchForgotPassword(action: ForgotPasswordAction) {
     try {
         yield put(forgotPasswordFailed(''))
-        yield call(API.forgotPassword, action.payload)
+        // yield call(API.forgotPassword, action.payload)
+        RootNavigation.navigate(ROUTE.VERIFICATION, {
+            email: action.payload.email,
+            to: ROUTE.CHANGE_PASSWORD
+        })
     } catch (error) {
         if (error.response.status === 404) {
             return yield put(forgotPasswordFailed(t('forgot_password.errors.email_not_fount')))

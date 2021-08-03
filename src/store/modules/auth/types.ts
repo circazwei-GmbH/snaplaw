@@ -16,7 +16,8 @@ export interface SignInPayload {
 
 export interface VerificationPayload {
     email: string,
-    code: string
+    code: string,
+    to: string
 }
 
 export interface VerificationResendPayload {
