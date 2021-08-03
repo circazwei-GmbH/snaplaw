@@ -77,7 +77,10 @@ export default {
             new_password: 'New password',
             confirm_password: 'Confirm new password'
         },
-        save: 'Save'
+        save: 'Save',
+        errors: {
+            password_length: 'Password must be at least 6 characters',
+        }
     },
     errors: {
         abstract: 'Something went wrong. Try again later.'

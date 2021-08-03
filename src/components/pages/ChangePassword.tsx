@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Keyboard, TouchableWithoutFeedback, View, StyleSheet} from "react-native";
 import HeaderNavigation from "../layouts/HeaderNavigation";
 import ImageAndText from "../features/Auth/ImageAndText";
 import { t } from 'i18n-js'
 import PasswordField from "../components/PasswordField";
 import Button from "../basics/buttons/Button";
+import {FieldInterface} from "../features/forms/SignInForm";
+import {length} from "../../validations/default";
+import {formFieldFill, validate} from "../../utils/forms";
 
 type ChangePasswordProps = {
     route: {
@@ -15,7 +18,42 @@ type ChangePasswordProps = {
     }
 }
 
+export type ChangePasswordForm = {
+    password: FieldInterface,
+    confirm_password: FieldInterface
+}
+
 export default function ChangePassword({route: {params: {}}} : ChangePasswordProps) {
+    let form: ChangePasswordForm = {
+        password: {
+            value: '',
+            error: '',
+            displayError: false,
+            validators: [length(t('change_password.errors.password_length'), 6)]
+        },
+        confirm_password: {
+            value: '',
+            error: '',
+            displayError: false,
+            validators: [length(t('change_password.errors.password_length'), 6)]
+        }
+    }
+    let setForm: (form: ChangePasswordForm) => void;
+    [form, setForm] = useState(form);
+
+    const fieldHandler = (text: string, fieldName: string) => {
+        setForm(formFieldFill(fieldName, text, form))
+    }
+
+    const saveHandler = () => {
+        let localForm = {
+            password: validate(form.password),
+            confirm_password: validate(form.confirm_password)
+        }
+
+        setForm(localForm)
+    }
+
     return (
         <HeaderNavigation pageName={t('change_password.title')}>
             <TouchableWithoutFeedback accessible={false} onPress={Keyboard.dismiss}>
@@ -23,14 +61,25 @@ export default function ChangePassword({route: {params: {}}} : ChangePasswordPro
                     <View>
                         <ImageAndText image={require('../../../assets/change_password.png')} text={t('change_password.description')} />
                         <View style={styles.emailField}>
-                            <PasswordField fixed placeholder={t('change_password.fields.new_password')} value={''} onChange={() => {}} />
+                            <PasswordField
+                                errorMessage={form.password.error}
+                                fixed
+                                placeholder={t('change_password.fields.new_password')}
+                                value={form.password.value}
+                                onChange={(text: string) => fieldHandler(text, 'password')}
+                            />
                         </View>
                         <View style={styles.confirm_field}>
-                            <PasswordField placeholder={t('change_password.fields.confirm_password')} value={''} onChange={() => {}} />
+                            <PasswordField
+                                errorMessage={form.confirm_password.error}
+                                placeholder={t('change_password.fields.confirm_password')}
+                                value={form.confirm_password.value}
+                                onChange={(text: string) => fieldHandler(text, 'confirm_password')}
+                            />
                         </View>
                     </View>
                     <View style={styles.actions}>
-                        <Button type="primary" text={t('change_password.save')} onPress={() => {}} />
+                        <Button type="primary" text={t('change_password.save')} onPress={saveHandler} />
                     </View>
                 </View>
             </TouchableWithoutFeedback>
