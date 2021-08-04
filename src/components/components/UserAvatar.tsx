@@ -9,7 +9,7 @@ import { AntDesign } from '@expo/vector-icons'
 
 interface UserAvatarPropsInterface {
   size: string
-  url?: ImageSourcePropType
+  url?: string
 }
 
 export default function UserAvatar({ size, url }: UserAvatarPropsInterface) {
@@ -20,9 +20,9 @@ export default function UserAvatar({ size, url }: UserAvatarPropsInterface) {
         : styles.containerBig
     }>
       {
-        url
-          ? <Image source={url} />
-          : <AntDesign name="user" size={75} color="black" />
+        url === undefined
+          ? <AntDesign name="user" size={75} color="black" />
+          : <Image source={{ uri: url }} style={styles.image} />
       }
     </ View>
   )
@@ -36,9 +36,8 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     backgroundColor: '#fff',
-    borderWidth: 1,
-    borderColor: '#000',
     borderRadius: 32,
+    overflow: 'hidden'
   },
   containerBig: {
     justifyContent: 'center',
@@ -47,6 +46,10 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 300,
     backgroundColor: '#fff',
-
+    overflow: 'hidden'
+  },
+  image: {
+    width: '100%',
+    height: '100%',
   }
 })

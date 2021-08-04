@@ -42,7 +42,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     marginTop: 10,
     backgroundColor: '#F8FCFF',
-    elevation: 2
+    elevation: 1,
+    shadowColor: 'rgba(196, 211, 220, 0.6)',
+    shadowOffset: {
+      width: 0,
+      height: 0
+    },
+    shadowOpacity: 1,
+    shadowRadius: 1,
   },
   buttonText: {
     fontSize: 17,

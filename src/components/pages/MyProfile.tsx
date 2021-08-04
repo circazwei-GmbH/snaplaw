@@ -1,5 +1,6 @@
 import React from 'react'
-import { Text, View, StyleSheet, ScrollView } from 'react-native'
+import { StyleSheet, ScrollView } from 'react-native'
+import { t } from 'i18n-js'
 import { useAppDispatch } from "../../store/hooks"
 import { killToken } from '../../store/modules/auth/slice'
 import TopBar from '../layouts/TopBar'
@@ -15,48 +16,48 @@ export default function MyProfile(): JSX.Element {
 
   return (
     <TopBar
-      pageName="My Profile"
+      pageName={t('my_profile.headline')}
       leftButton={<NotificationBell />}
       style={styles.topBarBackground}
     >
       <ScrollView contentContainerStyle={styles.container}>
         <MyProfileAvatarBox />
         <ProfileButton
-          text="My profile"
+          text={t('my_profile.buttons_text.my_profile')}
           onPress={() => alert('Hi')}
           type="link"
         />
         <ProfileButton
-          text="Language"
+          text={t('my_profile.buttons_text.language')}
           onPress={() => alert('Hi')}
           type="link"
         />
         <ProfileButton
-          text="Notifications"
+          text={t('my_profile.buttons_text.notifications')}
           onPress={() => alert('Hi')}
           type="link"
         />
         <ProfileButton
-          text="Invite friends"
+          text={t('my_profile.buttons_text.invite_friends')}
           onPress={() => alert('Hi')}
           type="link"
         />
         <ProfileButton
-          text="Privacy Policy"
+          text={t('my_profile.buttons_text.private_policy')}
           onPress={() => alert('Hi')}
           type="link"
         />
         <ProfileButton
-          text="Change password"
+          text={t('my_profile.buttons_text.change_password')}
           onPress={() => alert('Hi')}
           type="link"
         />
         <ProfileButton
-          text="Sign out"
+          text={t('my_profile.buttons_text.sign_out')}
           onPress={killTokenHandler}
         />
         <ProfileButton
-          text="Delete profile"
+          text={t('my_profile.buttons_text.delete_profile')}
           onPress={() => alert('Hi')}
         />
       </ScrollView>

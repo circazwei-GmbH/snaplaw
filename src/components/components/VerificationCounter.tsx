@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Text, View, StyleSheet } from "react-native"
+import { t } from 'i18n-js'
 
 interface VerificationCounterPropsInterface {
   size: string
 }
 
 export default function ProfileHeadline({ size }: VerificationCounterPropsInterface) {
+  const [verifications, setVerifications] = useState<number>(0)
+
   return (
     <View style={
       size === 'small'
@@ -13,10 +16,10 @@ export default function ProfileHeadline({ size }: VerificationCounterPropsInterf
         : styles.horizontal
     }>
       <Text style={styles.textGray}>
-        You have been verified by
+        {t('my_profile.verified_gray')}
       </Text>
       <Text style={styles.textBlack}>
-        300 people
+        {`${verifications} ${t('my_profile.verified_black')}`}
       </Text>
     </View>
   )

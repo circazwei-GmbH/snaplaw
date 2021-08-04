@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native"
+import React, { useState, useEffect } from 'react'
+import { Text, View, StyleSheet, TouchableOpacity, ImageSourcePropType } from "react-native"
 import UserAvatar from '../components/UserAvatar'
 import VerificationCounter from '../components/VerificationCounter'
 
 export default function MyProfileAvatarBox() {
   const [avatarSize, setAvatarSize] = useState('small')
+  const [url, setUrl] = useState<undefined | string>(undefined)
 
   const toggleAvatarSize = (
     size: string,
@@ -19,7 +20,9 @@ export default function MyProfileAvatarBox() {
         style={styles.avatar}
         onPress={() => toggleAvatarSize(avatarSize, setAvatarSize)}
       >
-        <UserAvatar size={avatarSize} />
+        <UserAvatar
+          size={avatarSize}
+          url={url} />
       </TouchableOpacity>
       <VerificationCounter size={avatarSize} />
     </View>
@@ -29,10 +32,16 @@ export default function MyProfileAvatarBox() {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    minHeight: 190,
     paddingBottom: 18,
     backgroundColor: '#F8FCFF',
-    elevation: 2
+    elevation: 1,
+    shadowColor: 'rgba(196, 211, 220, 0.6)',
+    shadowOffset: {
+      width: 0,
+      height: 0
+    },
+    shadowOpacity: 1,
+    shadowRadius: 1,
   },
   avatar: {
     alignItems: 'center',
