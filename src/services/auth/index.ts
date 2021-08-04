@@ -1,4 +1,5 @@
 import {
+    ChangePasswordPayload,
     ForgotPasswordPayload,
     SignInPayload,
     SignUpPayload,
@@ -8,7 +9,7 @@ import {
 import httpClient from '../api'
 
 const signUp = (payload: SignUpPayload) => {
-    return httpClient.post('signup', payload)
+    return httpClient.post('signup', {...payload, locale: 'en'})
 }
 
 const signIn = (payload: SignInPayload) => {
@@ -20,11 +21,19 @@ const verification = (payload: VerificationPayload) => {
 }
 
 const resendVerification = (payload: VerificationResendPayload) => {
-    return httpClient.post('resent-email-confirmation', payload)
+    return httpClient.post('resent-email-confirmation', {...payload, locale: 'en'})
 }
 
 const forgotPassword = (payload: ForgotPasswordPayload) => {
-    return httpClient.post('users/reset-password-confirmation', payload)
+    return httpClient.post('reset-password-confirmation', {...payload, locale: 'en'})
+}
+
+const changePassword = ({ password, token }: ChangePasswordPayload) => {
+    return httpClient.post('set-new-password', { password }, {
+        headers: {
+            Authorization: token
+        }
+    })
 }
 
 export default {
@@ -32,5 +41,6 @@ export default {
     signIn,
     verification,
     resendVerification,
-    forgotPassword
+    forgotPassword,
+    changePassword
 }

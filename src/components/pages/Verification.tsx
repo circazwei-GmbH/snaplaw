@@ -27,7 +27,7 @@ export default function Verification({ route: {params: {email, to}} }:Verificati
     const resendHandler = () => {
         dispatch(requestVerificationResend(email))
     }
-console.log(to)
+
     const submitHandler = () => {
         dispatch(verificationFailed(''))
         dispatch(requestVerification(number, email, to))

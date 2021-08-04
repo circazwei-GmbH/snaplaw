@@ -80,6 +80,7 @@ export default {
         save: 'Save',
         errors: {
             password_length: 'Password must be at least 6 characters',
+            confirm_password: 'Passwords don\'t match.'
         }
     },
     errors: {

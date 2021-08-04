@@ -6,8 +6,10 @@ import { t } from 'i18n-js'
 import PasswordField from "../components/PasswordField";
 import Button from "../basics/buttons/Button";
 import {FieldInterface} from "../features/forms/SignInForm";
-import {length} from "../../validations/default";
+import {length, match} from "../../validations/default";
 import {formFieldFill, validate} from "../../utils/forms";
+import {useAppDispatch} from "../../store/hooks";
+import {requestChangePassword} from "../../store/modules/auth/action-creators";
 
 type ChangePasswordProps = {
     route: {
@@ -23,7 +25,7 @@ export type ChangePasswordForm = {
     confirm_password: FieldInterface
 }
 
-export default function ChangePassword({route: {params: {}}} : ChangePasswordProps) {
+export default function ChangePassword({route: {params: {token}}} : ChangePasswordProps) {
     let form: ChangePasswordForm = {
         password: {
             value: '',
@@ -35,9 +37,13 @@ export default function ChangePassword({route: {params: {}}} : ChangePasswordPro
             value: '',
             error: '',
             displayError: false,
-            validators: [length(t('change_password.errors.password_length'), 6)]
+            validators: [
+                length(t('change_password.errors.password_length'), 6),
+                match(t('change_password.errors.confirm_password'), 'password')
+            ]
         }
     }
+    const dispatch = useAppDispatch();
     let setForm: (form: ChangePasswordForm) => void;
     [form, setForm] = useState(form);
 
@@ -48,10 +54,12 @@ export default function ChangePassword({route: {params: {}}} : ChangePasswordPro
     const saveHandler = () => {
         let localForm = {
             password: validate(form.password),
-            confirm_password: validate(form.confirm_password)
+            confirm_password: validate(form.confirm_password, form)
         }
 
         setForm(localForm)
+
+        dispatch(requestChangePassword(token, localForm.password.value))
     }
 
     return (

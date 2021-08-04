@@ -1,5 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import {
+    CHANGE_PASSWORD_REQUESTED,
     FORGOT_PASSWORD_REQUESTED,
     requestVerificationResend,
     SIGNIN_REQUESTED,
@@ -8,6 +9,7 @@ import {
     VERIFICATION_RESEND_REQUESTED
 } from "./action-creators";
 import {
+    ChangePasswordAction,
     ForgotPasswordAction,
     RequestSignInAction,
     RequestSignUpAction,
@@ -83,12 +85,12 @@ function* fetchSignIn(action: RequestSignInAction) {
 
 function* fetchVerification(action: VerificationAction) {
     try {
-        // const response = yield call(API.verification, action.payload)
-        const response = {
-            data: {
-                token: 'root token'
-            }
-        }
+        const response = yield call(API.verification, action.payload)
+        // const response = {
+        //     data: {
+        //         token: 'root token'
+        //     }
+        // }
         if (action.payload.to === ROUTE.CHANGE_PASSWORD) {
             return RootNavigation.navigate(action.payload.to, {
                 email: action.payload.email,
@@ -128,13 +130,14 @@ function* fetchResendVerificationCode(action: VerificationResendAction) {
         yield put(setMessage(t('verification.modals.information.text')))
     } catch (error) {
         yield put(setMessage(t('errors.abstract')))
+        console.log(error.response)
     }
 }
 
 function* fetchForgotPassword(action: ForgotPasswordAction) {
     try {
         yield put(forgotPasswordFailed(''))
-        // yield call(API.forgotPassword, action.payload)
+        yield call(API.forgotPassword, action.payload)
         RootNavigation.navigate(ROUTE.VERIFICATION, {
             email: action.payload.email,
             to: ROUTE.CHANGE_PASSWORD
@@ -147,12 +150,21 @@ function* fetchForgotPassword(action: ForgotPasswordAction) {
     }
 }
 
+function* fetchChangePassword({ payload }: ChangePasswordAction) {
+    try {
+        yield call(API.changePassword, payload)
+    } catch (error) {
+        yield put(setMessage(t('errors.abstract')))
+    }
+}
+
 function* authSaga() {
     yield takeLatest(SIGNUP_REQUESTED, fetchSignUp)
     yield takeLatest(SIGNIN_REQUESTED, fetchSignIn)
     yield takeLatest(VERIFICATION_REQUESTED, fetchVerification)
     yield takeLatest(VERIFICATION_RESEND_REQUESTED, fetchResendVerificationCode)
     yield takeLatest(FORGOT_PASSWORD_REQUESTED, fetchForgotPassword)
+    yield takeLatest(CHANGE_PASSWORD_REQUESTED, fetchChangePassword)
 }
 
 export default authSaga;
