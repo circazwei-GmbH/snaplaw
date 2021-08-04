@@ -25,11 +25,13 @@ export default function ProfileHeadline({ size }: VerificationCounterPropsInterf
 const styles = StyleSheet.create({
   vertical: {
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingTop: 10
   },
   horizontal: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    paddingTop: 10
   },
   textBlack: {
     width: '30%',

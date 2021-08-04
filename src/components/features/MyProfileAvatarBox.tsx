@@ -29,7 +29,7 @@ export default function MyProfileAvatarBox() {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    minHeight: 200,
+    minHeight: 190,
     paddingBottom: 18,
     backgroundColor: '#F8FCFF',
     elevation: 2

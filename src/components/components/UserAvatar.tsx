@@ -1,5 +1,10 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, Text, Image, ImageSourcePropType } from "react-native"
+import {
+  View,
+  StyleSheet,
+  Image,
+  ImageSourcePropType
+} from "react-native"
 import { AntDesign } from '@expo/vector-icons'
 
 interface UserAvatarPropsInterface {
@@ -27,7 +32,7 @@ const styles = StyleSheet.create({
   containerSmall: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 18,
+    marginVertical: 8,
     width: 100,
     height: 100,
     backgroundColor: '#fff',
@@ -38,7 +43,7 @@ const styles = StyleSheet.create({
   containerBig: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 18,
+    marginVertical: 8,
     width: '100%',
     height: 300,
     backgroundColor: '#fff',
