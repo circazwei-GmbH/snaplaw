@@ -151,8 +151,7 @@ function* fetchForgotPassword(action: ForgotPasswordAction) {
 function* fetchChangePassword({ payload }: ChangePasswordAction) {
     try {
         yield call(API.changePassword, payload)
-        // navigate to login
-        RootNavigation.pop(3)
+        yield put(setToken(payload.token))
     } catch (error) {
         if (error.response?.data.code === NEW_PASSWORD_SAME_AS_OLD) {
             return yield put(changePasswordFailed(t('change_password.errors.new_password_are_same_as_old')))
