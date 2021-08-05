@@ -8,7 +8,8 @@ import {CHANGE_PASSWORD_REQUESTED} from "../../../store/modules/auth/action-crea
 
 const routeProp = {
     params: {
-        token: 'token'
+        token: 'token',
+        email: 'test@mail.com'
     }
 }
 
