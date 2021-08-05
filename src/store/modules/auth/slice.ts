@@ -52,6 +52,7 @@ const signUpFailedAction = createAction<{email: string}, 'signUpFailed'>('signUp
 const signInFailedAction = createAction<{field: 'email' | 'password', message: string}, 'signInFailed'>('signInFailed')
 const verificationFailedAction = createAction<string, 'verificationFailed'>('verificationFailed')
 const clearSignInErrorsAction = createAction<undefined, 'clearSignInErrors'>('clearSignInErrors')
+const clearSignUpErrorsAction = createAction<undefined, 'clearSignUpErrors'>('clearSignUpErrors')
 const setTokenAction = createAction<string, 'setToken'>('setToken')
 const killTokenAction = createAction<undefined, 'killToken'>('killToken')
 const forgotPasswordFailedAction = createAction<string, 'forgotPasswordFailed'>('forgotPasswordFailed')
@@ -73,6 +74,9 @@ export const authSlice = createSlice({
         [clearSignInErrorsAction.type]: (state: Draft<AuthState>) => {
             state.signIn.error = {email: '', password: ''}
         },
+        [clearSignUpErrorsAction.type]: (state: Draft<AuthState>) => {
+            state.signUp.error = {email: ''}
+        },
         [setTokenAction.type]: (state: Draft<AuthState>, action: PayloadAction<string>) => {
             state.token = action.payload
         },
@@ -88,7 +92,7 @@ export const authSlice = createSlice({
     }
 })
 
-export const { signUpFailed, signInFailed, setToken, killToken, clearSignInErrors, verificationFailed, forgotPasswordFailed, changePasswordFailed } = authSlice.actions
+export const { signUpFailed, signInFailed, setToken, killToken, clearSignInErrors, verificationFailed, forgotPasswordFailed, changePasswordFailed, clearSignUpErrors } = authSlice.actions
 export const actions = authSlice.actions
 
 export default authSlice.reducer
