@@ -59,6 +59,10 @@ export default function ChangePassword({route: {params: {token}}} : ChangePasswo
 
         setForm(localForm)
 
+        if (localForm.password.error || localForm.confirm_password.error) {
+            return
+        }
+
         dispatch(requestChangePassword(token, localForm.password.value))
     }
 
