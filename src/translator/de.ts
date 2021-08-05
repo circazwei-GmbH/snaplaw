@@ -70,6 +70,20 @@ export default {
             email_not_fount: 'Entschuldigung, wir konnten das Konto mit dieser E-Mail nicht finden'
         }
     },
+    change_password: {
+        title: 'Ein neues Passwort erstellen',
+        description: 'Ihr neues Passwort muss sich von den zuvor verwendeten Passwörtern unterscheiden',
+        fields: {
+            new_password: 'Neues Passwort',
+            confirm_password: 'Neues Passwort bestätigen'
+        },
+        save: 'Speichern',
+        errors: {
+            password_length: 'Passwort muss mindestens 6 Zeichen lang sein',
+            confirm_password: 'Passwörter stimmen nicht überein.',
+            new_password_are_same_as_old: 'Ihr neues Passwort muss sich von den zuvor verwendeten Passwörtern unterscheiden'
+        }
+    },
     errors: {
         abstract: 'Leider ist etwas schiefgelaufen. Bitte versuchen Sie es später noch einmal.'
     },

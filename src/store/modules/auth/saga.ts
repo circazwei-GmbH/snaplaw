@@ -97,7 +97,6 @@ function* fetchVerification(action: VerificationAction) {
         }
         yield put(setToken(response.data.token))
     } catch (error) {
-        console.log(error.response)
         if (error.response?.data.code === USER_NOT_FOUND) {
             return yield put(verificationFailed(t('verification.errors.user_not_found')))
         }
