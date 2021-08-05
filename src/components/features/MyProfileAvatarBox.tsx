@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, ImageSourcePropType } from "react-native"
+import React, { useState } from 'react'
+import { View, StyleSheet, TouchableOpacity } from "react-native"
 import UserAvatar from '../components/UserAvatar'
 import VerificationCounter from '../components/VerificationCounter'
 
 export default function MyProfileAvatarBox() {
   const [avatarSize, setAvatarSize] = useState('small')
-  const [url, setUrl] = useState<undefined | string>(undefined)
+  const [url] = useState<undefined | string>(undefined)
 
   const toggleAvatarSize = (
     size: string,
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     shadowColor: 'rgba(196, 211, 220, 0.6)',
     shadowOffset: {
       width: 0,
-      height: 0
+      height: 2
     },
     shadowOpacity: 1,
     shadowRadius: 1,
