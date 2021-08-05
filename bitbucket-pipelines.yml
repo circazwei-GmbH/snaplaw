@@ -14,9 +14,11 @@ pipelines:
           name: Build and Test
           caches:
             - node
+          artifacts:
+            - coverage/clover.xml
           script:
             - yarn install
-            - yarn test
+            - yarn test --coverage
       - step:
           name: Sonar
           image: openjdk:8
