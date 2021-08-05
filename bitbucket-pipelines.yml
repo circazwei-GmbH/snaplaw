@@ -15,7 +15,7 @@ pipelines:
           caches:
             - node
           artifacts:
-            - coverage/clover.xml
+            - coverage/lcov.info
           script:
             - yarn install
             - yarn test --coverage
