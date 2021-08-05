@@ -1,15 +1,15 @@
-import React from 'react';
-import {Text, View, StyleSheet, Image} from "react-native";
+import React from 'react'
+import { Text, View, StyleSheet, Image } from "react-native"
 import Button from '../basics/buttons/Button'
-import {StackNavigationProp} from "@react-navigation/stack";
-import {RootStackParamList, ROUTE} from "../../router/RouterTypes";
-import i18n from 'i18n-js';
+import { StackNavigationProp } from "@react-navigation/stack"
+import { RootStackParamList, ROUTE } from "../../router/RouterTypes"
+import i18n from 'i18n-js'
 
 type WelcomeProp = {
     navigation: StackNavigationProp<RootStackParamList, 'Welcome'>
 }
 
-export default function Welcome({ navigation } : WelcomeProp) {
+export default function Welcome({ navigation }: WelcomeProp) {
     return (
         <View style={styles.container}>
             <Text accessibilityLabel="welcome-to-snaplaw" style={styles.headline}>{i18n.t('welcome.headline')}</Text>

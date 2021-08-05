@@ -73,4 +73,19 @@ export default {
     errors: {
         abstract: 'Leider ist etwas schiefgelaufen. Bitte versuchen Sie es später noch einmal.'
     },
+    my_profile: {
+        headline: 'Mein Profil',
+        verified_gray: 'Sie wurden bestätigt von',
+        verified_black: 'personen',
+        buttons_text: {
+            my_profile: 'Mein profil',
+            language: 'Sprache',
+            notifications: 'Benachrichtigungen',
+            invite_friends: 'Freunde einladen',
+            private_policy: 'Datenschutz',
+            change_password: 'Passwort ändern',
+            sign_out: 'Ausloggen',
+            delete_profile: 'Profil löschen'
+        }
+    }
 }

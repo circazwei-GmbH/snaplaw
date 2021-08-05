@@ -4,7 +4,7 @@
     "slug": "snaplaw-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/snaplaw_icon.png",
+    "icon": "./assets/Snaplaw_Logo_2021.png",
     "splash": {
       "image": "./assets/snaplaw.png",
       "resizeMode": "contain",

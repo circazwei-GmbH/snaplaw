@@ -85,5 +85,20 @@ export default {
     },
     errors: {
         abstract: 'Something went wrong. Try again later.'
+    },
+    my_profile: {
+        headline: 'My Profile',
+        verified_gray: 'You have been verified by',
+        verified_black: 'people',
+        buttons_text: {
+            my_profile: 'My profile',
+            language: 'Language',
+            notifications: 'Notifications',
+            invite_friends: 'Invite friends',
+            private_policy: 'Privacy Policy',
+            change_password: 'Change password',
+            sign_out: 'Sign out',
+            delete_profile: 'Delete profile'
+        }
     }
 }

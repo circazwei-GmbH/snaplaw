@@ -1,6 +1,6 @@
-import React, {ReactElement} from 'react'
-import {View, StyleSheet, Text, Pressable} from "react-native";
-import { MaterialIcons } from '@expo/vector-icons';
+import React, { ReactElement } from 'react'
+import { View, StyleSheet, Text, Pressable } from "react-native"
+import { MaterialIcons } from '@expo/vector-icons'
 import * as RootNavigation from '../../router/RootNavigation'
 
 type HeaderNavigationPoprs = {
