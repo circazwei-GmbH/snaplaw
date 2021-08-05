@@ -80,7 +80,8 @@ export default {
         save: 'Save',
         errors: {
             password_length: 'Password must be at least 6 characters',
-            confirm_password: 'Passwords don\'t match.'
+            confirm_password: 'Passwords don\'t match.',
+            new_password_are_same_as_old: 'Your new password must be different from the previously used passwords'
         }
     },
     errors: {

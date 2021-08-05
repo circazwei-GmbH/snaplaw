@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Keyboard, TouchableWithoutFeedback, View, StyleSheet} from "react-native";
 import HeaderNavigation from "../layouts/HeaderNavigation";
 import ImageAndText from "../features/Auth/ImageAndText";
@@ -8,8 +8,9 @@ import Button from "../basics/buttons/Button";
 import {FieldInterface} from "../features/forms/SignInForm";
 import {length, match} from "../../validations/default";
 import {formFieldFill, validate} from "../../utils/forms";
-import {useAppDispatch} from "../../store/hooks";
+import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import {requestChangePassword} from "../../store/modules/auth/action-creators";
+import {changePasswordFailed} from "../../store/modules/auth/slice";
 
 type ChangePasswordProps = {
     route: {
@@ -46,6 +47,21 @@ export default function ChangePassword({route: {params: {token}}} : ChangePasswo
     const dispatch = useAppDispatch();
     let setForm: (form: ChangePasswordForm) => void;
     [form, setForm] = useState(form);
+    const errorMessage = useAppSelector(state => state.auth.changePassword.error)
+
+    useEffect(() => {
+        setForm({
+            ...form,
+            password: {
+                ...form.password,
+                error: errorMessage
+            }
+        })
+    }, [errorMessage])
+
+    useEffect(() => () => {
+        dispatch(changePasswordFailed(''))
+    }, [])
 
     const fieldHandler = (text: string, fieldName: string) => {
         setForm(formFieldFill(fieldName, text, form))

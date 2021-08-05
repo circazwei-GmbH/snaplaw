@@ -15,7 +15,15 @@ const routeProp = {
 
 const actionType = jest.fn()
 
-const reducer = (store = {}, action: any) => {
+const initialState = {
+    auth: {
+        changePassword: {
+            error: ''
+        }
+    }
+}
+
+const reducer = (store = initialState, action: any) => {
     actionType(action.type)
     return store
 }

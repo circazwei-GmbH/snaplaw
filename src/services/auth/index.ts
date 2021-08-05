@@ -3,7 +3,6 @@ import {
     ForgotPasswordPayload,
     SignInPayload,
     SignUpPayload,
-    VerificationPayload,
     VerificationResendPayload
 } from "../../store/modules/auth/types";
 import httpClient from '../api'
@@ -16,7 +15,7 @@ const signIn = (payload: SignInPayload) => {
     return httpClient.post('login', payload)
 }
 
-const verification = (payload: VerificationPayload) => {
+const verification = (payload: {email: string, code: string}) => {
     return httpClient.post('confirm-email', payload)
 }
 
@@ -31,7 +30,7 @@ const forgotPassword = (payload: ForgotPasswordPayload) => {
 const changePassword = ({ password, token }: ChangePasswordPayload) => {
     return httpClient.post('set-new-password', { password }, {
         headers: {
-            Authorization: token
+            Authorization: `Bearer ${token}`
         }
     })
 }

@@ -23,13 +23,13 @@ import {
     setToken,
     clearSignInErrors,
     verificationFailed,
-    forgotPasswordFailed
+    forgotPasswordFailed, changePasswordFailed
 } from './slice'
 import { setMessage, setModal } from '../main/slice'
 import {ROUTE} from "../../../router/RouterTypes";
 import * as RootNavigation from '../../../router/RootNavigation'
 import {
-    EMAIL_NOT_CONFIRMED,
+    EMAIL_NOT_CONFIRMED, NEW_PASSWORD_SAME_AS_OLD,
     PASSWORD_NOT_VALID,
     USER_NOT_FOUND,
     USER_NOT_FOUND_LOGIN,
@@ -85,12 +85,10 @@ function* fetchSignIn(action: RequestSignInAction) {
 
 function* fetchVerification(action: VerificationAction) {
     try {
-        const response = yield call(API.verification, action.payload)
-        // const response = {
-        //     data: {
-        //         token: 'root token'
-        //     }
-        // }
+        const response = yield call(API.verification, {
+            code: action.payload.code,
+            email: action.payload.email
+        })
         if (action.payload.to === ROUTE.CHANGE_PASSWORD) {
             return RootNavigation.navigate(action.payload.to, {
                 email: action.payload.email,
@@ -99,6 +97,7 @@ function* fetchVerification(action: VerificationAction) {
         }
         yield put(setToken(response.data.token))
     } catch (error) {
+        console.log(error.response)
         if (error.response?.data.code === USER_NOT_FOUND) {
             return yield put(verificationFailed(t('verification.errors.user_not_found')))
         }
@@ -153,7 +152,12 @@ function* fetchForgotPassword(action: ForgotPasswordAction) {
 function* fetchChangePassword({ payload }: ChangePasswordAction) {
     try {
         yield call(API.changePassword, payload)
+        // navigate to login
+        RootNavigation.pop(3)
     } catch (error) {
+        if (error.response?.data.code === NEW_PASSWORD_SAME_AS_OLD) {
+            return yield put(changePasswordFailed(t('change_password.errors.new_password_are_same_as_old')))
+        }
         yield put(setMessage(t('errors.abstract')))
     }
 }

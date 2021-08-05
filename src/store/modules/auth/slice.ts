@@ -18,6 +18,9 @@ interface AuthState {
     token: undefined | string,
     forgotPassword: {
         error: string
+    },
+    changePassword: {
+        error: string
     }
 }
 
@@ -39,6 +42,9 @@ const initialState: AuthState = {
     token: undefined,
     forgotPassword: {
         error: ''
+    },
+    changePassword: {
+        error: ''
     }
 }
 
@@ -49,6 +55,7 @@ const clearSignInErrorsAction = createAction<undefined, 'clearSignInErrors'>('cl
 const setTokenAction = createAction<string, 'setToken'>('setToken')
 const killTokenAction = createAction<undefined, 'killToken'>('killToken')
 const forgotPasswordFailedAction = createAction<string, 'forgotPasswordFailed'>('forgotPasswordFailed')
+const changePasswordFailedAction = createAction<string, 'changePasswordFailed'>('changePasswordFailed')
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -74,11 +81,14 @@ export const authSlice = createSlice({
         },
         [forgotPasswordFailedAction.type]: (state: Draft<AuthState>, action: PayloadAction<string>) => {
             state.forgotPassword.error = action.payload
+        },
+        [changePasswordFailedAction.type]: (state: Draft<AuthState>, action: PayloadAction<string>) => {
+            state.changePassword.error = action.payload
         }
     }
 })
 
-export const { signUpFailed, signInFailed, setToken, killToken, clearSignInErrors, verificationFailed, forgotPasswordFailed } = authSlice.actions
+export const { signUpFailed, signInFailed, setToken, killToken, clearSignInErrors, verificationFailed, forgotPasswordFailed, changePasswordFailed } = authSlice.actions
 export const actions = authSlice.actions
 
 export default authSlice.reducer

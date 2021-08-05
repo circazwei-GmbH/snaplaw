@@ -7,6 +7,10 @@ export function navigate(name: string, params?: any) {
     navigationRef.current?.navigate(name, params)
 }
 
-export function pop() {
-    navigationRef.current?.dispatch(StackActions.pop())
+export function pop(count?: number | undefined) {
+    navigationRef.current?.dispatch(StackActions.pop(count))
+}
+
+export function popToTop() {
+    navigationRef.current?.dispatch(StackActions.popToTop())
 }
