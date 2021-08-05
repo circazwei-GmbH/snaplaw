@@ -1,24 +1,24 @@
-import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, Keyboard, TouchableWithoutFeedback} from "react-native";
-import MainHeadline from "../basics/typography/MainHeadline";
-import AuthLayout from "../layouts/AuthLayout";
-import SignInForm, { SignInFormInterface } from "../features/forms/SignInForm";
-import { StackNavigationProp } from '@react-navigation/stack';
-import {RootStackParamList, ROUTE} from '../../router/RouterTypes'
-import { email, length } from '../../validations/default';
-import MessageAndLink from "../features/MessageAndLink";
-import {formFieldFill, validate} from "../../utils/forms";
-import ActionBlock from "../features/Auth/ActionsBlock";
+import React, { useEffect, useState } from 'react'
+import { View, StyleSheet, Keyboard, TouchableWithoutFeedback } from "react-native"
+import MainHeadline from "../basics/typography/MainHeadline"
+import AuthLayout from "../layouts/AuthLayout"
+import SignInForm, { SignInFormInterface } from "../features/forms/SignInForm"
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RootStackParamList, ROUTE } from '../../router/RouterTypes'
+import { email, length } from '../../validations/default'
+import MessageAndLink from "../features/MessageAndLink"
+import { formFieldFill, validate } from "../../utils/forms"
+import ActionBlock from "../features/Auth/ActionsBlock"
 import { t } from 'i18n-js'
-import {useAppDispatch, useAppSelector} from "../../store/hooks";
-import {requestSignIn} from "../../store/modules/auth/action-creators";
+import { useAppDispatch, useAppSelector } from "../../store/hooks"
+import { requestSignIn } from "../../store/modules/auth/action-creators"
 import { clearSignInErrors } from '../../store/modules/auth/slice'
 
 type SignInProps = {
     navigation: StackNavigationProp<RootStackParamList, 'SignIn'>
 }
 
-export default function SignIn({ navigation } : SignInProps) {
+export default function SignIn({ navigation }: SignInProps) {
     let form: SignInFormInterface = {
         email: {
             value: '',
@@ -32,9 +32,9 @@ export default function SignIn({ navigation } : SignInProps) {
             displayError: false,
             validators: [length(t('sign_in.errors.password_length'), 6)]
         }
-    };
+    }
     let setForm: (form: SignInFormInterface) => void;
-    [form, setForm] = useState(form);
+    [form, setForm] = useState(form)
     const dispatch = useAppDispatch()
     const emailError = useAppSelector(state => state.auth.signIn.error.email)
     const passwordError = useAppSelector(state => state.auth.signIn.error.password)
@@ -77,7 +77,7 @@ export default function SignIn({ navigation } : SignInProps) {
         setForm(localForm)
 
         if (localForm.email.error || localForm.password.error) {
-            return;
+            return
         }
 
         dispatch(requestSignIn(
@@ -89,7 +89,7 @@ export default function SignIn({ navigation } : SignInProps) {
     return (
         <View style={styles.mainContainer}>
             <AuthLayout>
-                <TouchableWithoutFeedback style={{flex: 1}} accessible={false} onPress={Keyboard.dismiss}>
+                <TouchableWithoutFeedback style={{ flex: 1 }} accessible={false} onPress={Keyboard.dismiss}>
                     <View style={styles.container}>
                         <View style={styles.width100}>
                             <View style={styles.headline}>
@@ -98,18 +98,18 @@ export default function SignIn({ navigation } : SignInProps) {
                             <View style={styles.width100}>
                                 <SignInForm navigation={navigation} form={form} fieldChangeHandler={fieldChangeHandler} />
                             </View>
-                           <ActionBlock
-                               submitHandler={submitHandler}
-                               buttonTextKey="sign_in.headline"
-                               underButtonTextKey="sign_in.alternative"
-                           />
+                            <ActionBlock
+                                submitHandler={submitHandler}
+                                buttonTextKey="sign_in.headline"
+                                underButtonTextKey="sign_in.alternative"
+                            />
                         </View>
                         <View style={[styles.width100, styles.actions]}>
-                           <MessageAndLink
-                               linkHandler={() => navigation.replace(ROUTE.SIGNUP)}
-                               linkText={t('sign_in.sign_up')}
-                               messageTextKey="sign_in.to_sign_up"
-                           />
+                            <MessageAndLink
+                                linkHandler={() => navigation.replace(ROUTE.SIGNUP)}
+                                linkText={t('sign_in.sign_up')}
+                                messageTextKey="sign_in.to_sign_up"
+                            />
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
