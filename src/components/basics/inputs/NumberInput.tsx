@@ -1,5 +1,5 @@
 import React, {ForwardedRef, forwardRef, ReactNode} from 'react'
-import {TextInput, StyleSheet} from "react-native";
+import {TextInput, StyleSheet, Platform} from "react-native";
 
 type NumberInputProps = {
     style: StyleSheet,
@@ -23,7 +23,14 @@ const styles = StyleSheet.create({
         borderBottomWidth: 2,
         borderBottomColor: '#1696E2',
         fontFamily: 'P',
-        fontSize: 32,
-        textAlign: "center"
+        textAlign: "center",
+        ...Platform.select({
+            ios: {
+                fontSize: 32,
+            },
+            android: {
+                fontSize: 24
+            }
+        })
     }
 })

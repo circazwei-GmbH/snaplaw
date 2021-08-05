@@ -1,4 +1,4 @@
-import {createSlice, PayloadAction, Draft} from '@reduxjs/toolkit'
+import {createSlice, PayloadAction, Draft, createAction} from '@reduxjs/toolkit'
 
 interface ModalActionInterface {
     action?: any | undefined,
@@ -22,11 +22,15 @@ const initialState: MainStateInterface = {
     }
 }
 
+const setMessageAction = createAction<string, 'setMessage'>('setMessage')
+const setModalAction = createAction<{message: string, actions: ModalActionInterface[]}, 'setModal'>('setModal')
+const closeModalAction = createAction<undefined, 'closeModal'>('closeModal')
+
 export const mainSlice = createSlice({
     name: 'main',
     initialState,
     reducers: {
-        setMessage: (state: Draft<MainStateInterface>, action: PayloadAction<string>) => {
+        [setMessageAction.type]: (state: Draft<MainStateInterface>, action: PayloadAction<string>) => {
             state.modal = {
                 message: action.payload,
                 actions: [
@@ -37,10 +41,10 @@ export const mainSlice = createSlice({
                 ]
             }
         },
-        setModal: (state: Draft<MainStateInterface>, action: PayloadAction<{message: string, actions: ModalActionInterface[]}>) => {
+        [setModalAction.type]: (state: Draft<MainStateInterface>, action: PayloadAction<{message: string, actions: ModalActionInterface[]}>) => {
             state.modal = action.payload
         },
-        closeModal: (state: Draft<MainStateInterface>) => {
+        [closeModalAction.type]: (state: Draft<MainStateInterface>) => {
             state.modal = {
                 message: '',
                 actions: []

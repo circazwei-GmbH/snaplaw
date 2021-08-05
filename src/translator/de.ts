@@ -42,10 +42,32 @@ export default {
             text: 'Code nicht erhalten?',
             link: 'Code erneut senden'
         },
+        modals: {
+            information: {
+                text: 'Wir haben bereits einen Bestätigungscode an Ihre E-Mail gesendet.'
+            },
+            confirm: {
+                text: 'Der Code ist bereits abgelaufen. Code noch einmal senden?',
+                buttons: {
+                    no: 'Nein',
+                    yes: 'Ja'
+                }
+            }
+        },
         submit: 'Bestätigen',
         errors: {
             user_not_found: 'Benutzer wurde nicht gefunden',
             code_incorrect: 'Code ist not korrekt'
+        }
+    },
+    forgot_password: {
+        title: 'Passwort vergessen',
+        description: 'Geben Sie unten Ihre registrierte E-Mail-Adresse ein, um Anweisungen zum Zurücksetzen des Passworts zu erhalten',
+        input: 'E-Mail',
+        send: 'Send',
+        errors: {
+            email_not_valid: 'Bitte geben Sie eine gültige Email-Adresse ein',
+            email_not_fount: 'Entschuldigung, wir konnten das Konto mit dieser E-Mail nicht finden'
         }
     },
     errors: {

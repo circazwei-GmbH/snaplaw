@@ -25,7 +25,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>com.snaplaw.app</string>
+          <string>sckit.TestProject</string>
         </array>
       </dict>
     </array>

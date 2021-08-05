@@ -12,7 +12,7 @@ export default {
         submit: 'Create',
         alternative: 'or sign up with ',
         to_login: 'Already have an account?',
-        log_in: 'Log in',
+        log_in: 'Sign in',
         errors: {
             email_taken: 'Email has already been taken',
             name_required: 'Name is required',
@@ -43,12 +43,31 @@ export default {
             link: 'Resend code'
         },
         submit: 'Verify',
-        modal: {
-            text: 'We have just sent a verification code to your email'
+        modals: {
+            information: {
+                text: 'We have just sent a verification code to your email'
+            },
+            confirm: {
+                text: 'The code has already expired. Send the code again?',
+                buttons: {
+                    no: 'No',
+                    yes: 'Yes'
+                }
+            }
         },
         errors: {
             user_not_found: 'User is not found',
             code_incorrect: 'Code is incorrect'
+        }
+    },
+    forgot_password: {
+        title: 'Forgot password',
+        description: 'Enter your registered email below to receive password reset instruction',
+        input: 'Email',
+        send: 'Send',
+        errors: {
+            email_not_valid: 'Please enter a valid email',
+            email_not_fount: 'Sorry, we couldn\'t find account with this email'
         }
     },
     errors: {

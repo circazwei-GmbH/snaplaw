@@ -16,7 +16,7 @@ describe('Verification', () => {
                 <Verification route={route} />
             </Provider>
         )
-        expect(getByA11yLabel('verification-image')).toBeTruthy()
+        expect(getByA11yLabel('asset-image')).toBeTruthy()
         expect(getByText('verification.description')).toBeTruthy()
         expect(getByText('verification.resend.link')).toBeTruthy()
         expect(getByText('verification.submit')).toBeTruthy()
