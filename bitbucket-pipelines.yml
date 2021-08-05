@@ -22,7 +22,7 @@ pipelines:
       - step:
           name: Sonar
           script:
-            - npm install -g typescript
+            - npm install -D typescript
             - cat coverage/lcov.info
             - curl --insecure -OL https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
             - unzip sonar-scanner-cli-4.6.2.2472-linux.zip
