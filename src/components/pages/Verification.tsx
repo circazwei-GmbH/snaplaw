@@ -13,12 +13,13 @@ import ImageAndText from "../features/Auth/ImageAndText";
 type VerificationProps = {
     route: {
         params: {
-            email: string
+            email: string,
+            to: string
         }
     }
 }
 
-export default function Verification({ route: {params: {email}} }:VerificationProps) {
+export default function Verification({ route: {params: {email, to}} }:VerificationProps) {
     const dispatch = useAppDispatch()
     const [number, setNumber] = useState('')
     const errorMessage = useAppSelector(state => state.auth.verification.error)
@@ -29,7 +30,7 @@ export default function Verification({ route: {params: {email}} }:VerificationPr
 
     const submitHandler = () => {
         dispatch(verificationFailed(''))
-        dispatch(requestVerification(number, email))
+        dispatch(requestVerification(number, email, to))
     }
 
     useEffect(() => {

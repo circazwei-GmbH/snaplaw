@@ -1,5 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import {
+    CHANGE_PASSWORD_REQUESTED,
     FORGOT_PASSWORD_REQUESTED,
     requestVerificationResend,
     SIGNIN_REQUESTED,
@@ -8,6 +9,7 @@ import {
     VERIFICATION_RESEND_REQUESTED
 } from "./action-creators";
 import {
+    ChangePasswordAction,
     ForgotPasswordAction,
     RequestSignInAction,
     RequestSignUpAction,
@@ -21,13 +23,13 @@ import {
     setToken,
     clearSignInErrors,
     verificationFailed,
-    forgotPasswordFailed
+    forgotPasswordFailed, changePasswordFailed
 } from './slice'
 import { setMessage, setModal } from '../main/slice'
 import {ROUTE} from "../../../router/RouterTypes";
 import * as RootNavigation from '../../../router/RootNavigation'
 import {
-    EMAIL_NOT_CONFIRMED,
+    EMAIL_NOT_CONFIRMED, NEW_PASSWORD_SAME_AS_OLD,
     PASSWORD_NOT_VALID,
     USER_NOT_FOUND,
     USER_NOT_FOUND_LOGIN,
@@ -83,7 +85,16 @@ function* fetchSignIn(action: RequestSignInAction) {
 
 function* fetchVerification(action: VerificationAction) {
     try {
-        const response = yield call(API.verification, action.payload)
+        const response = yield call(API.verification, {
+            code: action.payload.code,
+            email: action.payload.email
+        })
+        if (action.payload.to === ROUTE.CHANGE_PASSWORD) {
+            return RootNavigation.navigate(action.payload.to, {
+                email: action.payload.email,
+                token: response.data.token
+            })
+        }
         yield put(setToken(response.data.token))
     } catch (error) {
         if (error.response?.data.code === USER_NOT_FOUND) {
@@ -117,6 +128,7 @@ function* fetchResendVerificationCode(action: VerificationResendAction) {
         yield put(setMessage(t('verification.modals.information.text')))
     } catch (error) {
         yield put(setMessage(t('errors.abstract')))
+        console.log(error.response)
     }
 }
 
@@ -124,9 +136,25 @@ function* fetchForgotPassword(action: ForgotPasswordAction) {
     try {
         yield put(forgotPasswordFailed(''))
         yield call(API.forgotPassword, action.payload)
+        RootNavigation.navigate(ROUTE.VERIFICATION, {
+            email: action.payload.email,
+            to: ROUTE.CHANGE_PASSWORD
+        })
     } catch (error) {
         if (error.response.status === 404) {
             return yield put(forgotPasswordFailed(t('forgot_password.errors.email_not_fount')))
+        }
+        yield put(setMessage(t('errors.abstract')))
+    }
+}
+
+function* fetchChangePassword({ payload }: ChangePasswordAction) {
+    try {
+        yield call(API.changePassword, payload)
+        yield put(setToken(payload.token))
+    } catch (error) {
+        if (error.response?.data.code === NEW_PASSWORD_SAME_AS_OLD) {
+            return yield put(changePasswordFailed(t('change_password.errors.new_password_are_same_as_old')))
         }
         yield put(setMessage(t('errors.abstract')))
     }
@@ -138,6 +166,7 @@ function* authSaga() {
     yield takeLatest(VERIFICATION_REQUESTED, fetchVerification)
     yield takeLatest(VERIFICATION_RESEND_REQUESTED, fetchResendVerificationCode)
     yield takeLatest(FORGOT_PASSWORD_REQUESTED, fetchForgotPassword)
+    yield takeLatest(CHANGE_PASSWORD_REQUESTED, fetchChangePassword)
 }
 
 export default authSaga;

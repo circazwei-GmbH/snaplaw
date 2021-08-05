@@ -62,6 +62,7 @@ export default function ForgotPassword() {
                         <ImageAndText image={require('../../../assets/forgot_password.png')} text={t('forgot_password.description')} />
                         <View style={styles.inputArea}>
                             <TextField
+                                fixed
                                 keyboardType="email-address"
                                 onChangeFunction={enterEmailHandler}
                                 errorMessage={form.email.error}

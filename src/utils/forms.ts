@@ -9,20 +9,21 @@ export const formFieldFill = (fieldName: string, text: string, form: any) => {
         }
     };
     if (preparedForm[fieldName].error) {
-        preparedForm[fieldName] = validate(preparedForm[fieldName])
+        preparedForm[fieldName] = validate(preparedForm[fieldName], form)
     }
     return preparedForm
 }
 
-export const validate = (stateField: FieldInterface) => {
+export const validate = (stateField: FieldInterface, form?: any) => {
     const localField = stateField;
 
     for(let i = 0; i < localField.validators.length; i++) {
         const validator = localField.validators[i];
-        const result = validator(localField.value)
+        const result = validator(localField.value, form)
         if (result) {
             localField.error = result;
             localField.displayError = true;
+            break
         } else {
             localField.error = '';
             localField.displayError = false;

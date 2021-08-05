@@ -11,6 +11,7 @@ export const SIGNIN_REQUESTED = 'SIGNIN_REQUESTED';
 export const VERIFICATION_REQUESTED = 'VERIFICATION_REQUESTED';
 export const VERIFICATION_RESEND_REQUESTED = 'VERIFICATION_RESEND_REQUESTED';
 export const FORGOT_PASSWORD_REQUESTED = 'FORGOT_PASSWORD_REQUESTED';
+export const CHANGE_PASSWORD_REQUESTED = 'CHANGE_PASSWORD_REQUESTED';
 
 export const requestSignUp = (name: string, email: string, password: string): RequestSignUpAction => ({
     type: SIGNUP_REQUESTED,
@@ -22,9 +23,9 @@ export const requestSignIn = (email: string, password: string): RequestSignInAct
     payload: { email, password }
 })
 
-export const requestVerification = (code: string, email: string): VerificationAction => ({
+export const requestVerification = (code: string, email: string, to: string): VerificationAction => ({
     type: VERIFICATION_REQUESTED,
-    payload: { code, email }
+    payload: { code, email, to }
 })
 
 export const requestVerificationResend = (email: string): VerificationResendAction => ({
@@ -35,4 +36,9 @@ export const requestVerificationResend = (email: string): VerificationResendActi
 export const requestForgotPassword = (email: string): ForgotPasswordAction => ({
     type: FORGOT_PASSWORD_REQUESTED,
     payload: { email }
+})
+
+export const requestChangePassword = (token: string, password: string) => ({
+    type: CHANGE_PASSWORD_REQUESTED,
+    payload: { token, password }
 })
