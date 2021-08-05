@@ -80,6 +80,7 @@ function* fetchSignIn(action: RequestSignInAction) {
         yield put(setMessage(
             t('errors.abstract')
         ))
+        console.log(error.response)
     }
 }
 

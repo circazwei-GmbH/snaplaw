@@ -12,6 +12,7 @@ import ActionBlock from "../features/Auth/ActionsBlock";
 import { t } from 'i18n-js'
 import {requestSignUp} from "../../store/modules/auth/action-creators";
 import {useAppSelector, useAppDispatch} from "../../store/hooks";
+import {clearSignUpErrors} from "../../store/modules/auth/slice";
 
 type SignUpProps = {
     navigation: StackNavigationProp<RootStackParamList, 'SignUp'>
@@ -54,6 +55,10 @@ export default function SignUp({ navigation } : SignUpProps) {
             })
         }
     }, [emailError])
+
+    useEffect(() => () => {
+        dispatch(clearSignUpErrors())
+    }, [])
 
     const fieldChangeHandler = (fieldName: 'name' | 'email' | 'password', text: string) => {
         setForm(formFieldFill(fieldName, text, form))
