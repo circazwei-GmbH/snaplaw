@@ -21,7 +21,6 @@ pipelines:
             - yarn test --coverage
       - step:
           name: Sonar
-          image: openjdk:8
           script:
             - curl --insecure -OL https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
             - unzip sonar-scanner-cli-4.6.2.2472-linux.zip
