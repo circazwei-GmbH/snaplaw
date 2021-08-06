@@ -3,7 +3,7 @@ import { fireEvent, render } from "@testing-library/react-native";
 import MyProfileAvatarBox from "../MyProfileAvatarBox";
 import { toggleBoolValue } from "../../../utils/toggleBoolValue";
 
-jest.mock("../../../utils/toggleAvatarSize.ts");
+jest.mock("../../../utils/toggleBoolValue.ts");
 
 describe("MyProfileAvatarBox", () => {
   it("Should toggle avatar size", () => {

@@ -8,6 +8,11 @@ import * as RootNavigation from "../../../router/RootNavigation";
 
 jest.mock("../../../router/RootNavigation");
 
+afterEach(() => {
+  jest.resetAllMocks();
+  jest.restoreAllMocks();
+});
+
 describe("HeaderNavigation", () => {
   it("Should display name and children", () => {
     const Child = () => (
@@ -60,7 +65,6 @@ describe("HeaderNavigation", () => {
       </TopBar>
     );
 
-    RootNavigation.pop.mockClear();
     fireEvent.press(getByTestId("BackButton.back"));
     expect(RootNavigation.pop).toBeCalled();
   });
