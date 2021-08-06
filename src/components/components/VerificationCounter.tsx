@@ -7,7 +7,7 @@ interface VerificationCounterPropsInterface {
 }
 
 export default function ProfileHeadline({ size }: VerificationCounterPropsInterface) {
-  const [verifications, setVerifications] = useState<number>(0)
+  const [verifications] = useState<number>(0)
 
   return (
     <View style={
