@@ -1,4 +1,4 @@
-interface RouterConst {
+interface AuthRouterConst {
     WELCOME: "Welcome",
     SIGNIN: "SignIn",
     SIGNUP: "SignUp",
@@ -7,7 +7,7 @@ interface RouterConst {
     CHANGE_PASSWORD: 'ChangePassword'
 }
 
-export const ROUTE: RouterConst = {
+export const AUTH_ROUTE: AuthRouterConst = {
     WELCOME: 'Welcome',
     SIGNIN: 'SignIn',
     SIGNUP: 'SignUp',
@@ -17,10 +17,10 @@ export const ROUTE: RouterConst = {
 }
 
 export type RootStackParamList = {
-    [ROUTE.WELCOME]: undefined,
-    [ROUTE.SIGNIN]: undefined,
-    [ROUTE.SIGNUP]: undefined,
-    [ROUTE.FORGOT]: undefined,
-    [ROUTE.VERIFICATION]: {email: string, to: string},
-    [ROUTE.CHANGE_PASSWORD]: undefined
+    [AUTH_ROUTE.WELCOME]: undefined,
+    [AUTH_ROUTE.SIGNIN]: undefined,
+    [AUTH_ROUTE.SIGNUP]: undefined,
+    [AUTH_ROUTE.FORGOT]: undefined,
+    [AUTH_ROUTE.VERIFICATION]: {email: string, to: string},
+    [AUTH_ROUTE.CHANGE_PASSWORD]: undefined
 }

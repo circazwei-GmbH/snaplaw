@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {StackNavigationProp} from "@react-navigation/stack";
-import {RootStackParamList} from "../../../router/RouterTypes";
+import {RootStackParamList} from "../../../router/AuthRouterTypes";
 import TextField from "../../components/TextField";
 import { FieldInterface } from './SignInForm'
 import PasswordField from '../../components/PasswordField'

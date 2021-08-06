@@ -101,5 +101,12 @@ export default {
             sign_out: 'Sign out',
             delete_profile: 'Delete profile'
         }
+    },
+    change_language: {
+        title: 'Language',
+        languages: {
+            english: 'English',
+            germany: 'Germany'
+        }
     }
 }

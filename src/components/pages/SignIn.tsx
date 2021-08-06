@@ -4,7 +4,7 @@ import MainHeadline from "../basics/typography/MainHeadline"
 import AuthLayout from "../layouts/AuthLayout"
 import SignInForm, { SignInFormInterface } from "../features/forms/SignInForm"
 import { StackNavigationProp } from '@react-navigation/stack'
-import { RootStackParamList, ROUTE } from '../../router/RouterTypes'
+import { RootStackParamList, AUTH_ROUTE } from '../../router/AuthRouterTypes'
 import { email, length } from '../../validations/default'
 import MessageAndLink from "../features/MessageAndLink"
 import { formFieldFill, validate } from "../../utils/forms"
@@ -106,7 +106,7 @@ export default function SignIn({ navigation }: SignInProps) {
                         </View>
                         <View style={[styles.width100, styles.actions]}>
                             <MessageAndLink
-                                linkHandler={() => navigation.replace(ROUTE.SIGNUP)}
+                                linkHandler={() => navigation.replace(AUTH_ROUTE.SIGNUP)}
                                 linkText={t('sign_in.sign_up')}
                                 messageTextKey="sign_in.to_sign_up"
                             />

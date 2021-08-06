@@ -2,7 +2,7 @@ import React from 'react';
 import {fireEvent, render} from "@testing-library/react-native";
 import SignUpForm, {SignUpFormInterface} from "../SignUpForm";
 import {createStackNavigator, StackNavigationProp} from '@react-navigation/stack';
-import {RootStackParamList} from "../../../../router/RouterTypes";
+import {RootStackParamList} from "../../../../router/AuthRouterTypes";
 import {email, length} from "../../../../validations/default";
 import {NavigationContainer} from "@react-navigation/native";
 

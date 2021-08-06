@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, Keyboard, TouchableWithoutFeedback} from "react-native";
 import {StackNavigationProp} from "@react-navigation/stack";
-import {RootStackParamList, ROUTE} from "../../router/RouterTypes";
+import {RootStackParamList, AUTH_ROUTE} from "../../router/AuthRouterTypes";
 import AuthLayout from "../layouts/AuthLayout";
 import MainHeadline from "../basics/typography/MainHeadline";
 import SignUpForm, { SignUpFormInterface } from '../features/forms/SignUpForm'
@@ -84,7 +84,7 @@ export default function SignUp({ navigation } : SignUpProps) {
     }
 
     const linkHandler = () => {
-        navigation.replace(ROUTE.SIGNIN)
+        navigation.replace(AUTH_ROUTE.SIGNIN)
     }
 
     return (

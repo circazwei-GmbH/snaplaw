@@ -9,10 +9,13 @@ import Verification from '../components/pages/Verification'
 import ChangePassword from "../components/pages/ChangePassword";
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { ROUTE } from "./RouterTypes"
+import { AUTH_ROUTE } from "./AuthRouterTypes"
 import { useAppSelector } from "../store/hooks"
+import {PROFILE_ROUTER} from "./ProfileRouterTypes";
+import ChangeLanguage from "../components/pages/ChangeLanguage";
 
 const Stack = createStackNavigator()
+const ProfileStack = createStackNavigator()
 const Tab = createBottomTabNavigator()
 
 export default function Router() {
@@ -21,15 +24,22 @@ export default function Router() {
         token ? (
             <Tab.Navigator>
                 <Tab.Screen name="Homepage" component={Homepage} />
-                <Tab.Screen name="Settings" component={MyProfile} />
+                <Tab.Screen name="Settings">
+                    {() => (
+                        <ProfileStack.Navigator headerMode="none">
+                            <ProfileStack.Screen name={PROFILE_ROUTER.MY_PROFILE} component={MyProfile} />
+                            <ProfileStack.Screen name={PROFILE_ROUTER.CHANGE_LANGUAGE} component={ChangeLanguage} />
+                        </ProfileStack.Navigator>
+                    )}
+                </Tab.Screen>
             </Tab.Navigator>
         ) : (<Stack.Navigator headerMode="none">
-            <Stack.Screen name={ROUTE.WELCOME} component={Welcome} />
-            <Stack.Screen name={ROUTE.SIGNIN} component={SignIn} />
-            <Stack.Screen name={ROUTE.SIGNUP} component={SignUp} />
-            <Stack.Screen name={ROUTE.FORGOT} component={ForgotPassword} />
-            <Stack.Screen name={ROUTE.VERIFICATION} component={Verification} />
-            <Stack.Screen name={ROUTE.CHANGE_PASSWORD} component={ChangePassword} />
+            <Stack.Screen name={AUTH_ROUTE.WELCOME} component={Welcome} />
+            <Stack.Screen name={AUTH_ROUTE.SIGNIN} component={SignIn} />
+            <Stack.Screen name={AUTH_ROUTE.SIGNUP} component={SignUp} />
+            <Stack.Screen name={AUTH_ROUTE.FORGOT} component={ForgotPassword} />
+            <Stack.Screen name={AUTH_ROUTE.VERIFICATION} component={Verification} />
+            <Stack.Screen name={AUTH_ROUTE.CHANGE_PASSWORD} component={ChangePassword} />
         </Stack.Navigator>)
     )
 }

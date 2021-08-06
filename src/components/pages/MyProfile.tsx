@@ -7,6 +7,8 @@ import TopBar from '../layouts/TopBar'
 import ProfileButton from '../basics/buttons/ProfileButton'
 import MyProfileAvatarBox from '../features/MyProfileAvatarBox'
 import NotificationBell from '../components/NotificationBell'
+import * as RootNavigation from '../../router/RootNavigation'
+import {PROFILE_ROUTER} from "../../router/ProfileRouterTypes";
 
 export default function MyProfile(): JSX.Element {
   const dispatch = useAppDispatch()
@@ -29,7 +31,7 @@ export default function MyProfile(): JSX.Element {
         />
         <ProfileButton
           text={t('my_profile.buttons_text.language')}
-          onPress={() => alert('Hi')}
+          onPress={() => RootNavigation.navigate(PROFILE_ROUTER.CHANGE_LANGUAGE)}
           type="link"
         />
         <ProfileButton
