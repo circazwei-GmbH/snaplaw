@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {Keyboard, TouchableWithoutFeedback, View, StyleSheet} from "react-native";
 import HeaderNavigation from "../layouts/HeaderNavigation";
 import ImageAndText from "../features/Auth/ImageAndText";
-import { t } from 'i18n-js'
 import PasswordField from "../components/PasswordField";
 import Button from "../basics/buttons/Button";
 import {FieldInterface} from "../features/forms/SignInForm";
@@ -11,6 +10,7 @@ import {formFieldFill, validate} from "../../utils/forms";
 import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import {requestChangePassword} from "../../store/modules/auth/action-creators";
 import {changePasswordFailed} from "../../store/modules/auth/slice";
+import {useI18n} from "../../translator/i18n";
 
 type ChangePasswordProps = {
     route: {
@@ -27,6 +27,7 @@ export type ChangePasswordForm = {
 }
 
 export default function ChangePassword({route: {params: {token}}} : ChangePasswordProps) {
+    const {t} = useI18n()
     let form: ChangePasswordForm = {
         password: {
             value: '',

@@ -6,7 +6,7 @@ import Link from "../../basics/links/link";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParamList, AUTH_ROUTE} from "../../../router/AuthRouterTypes";
 import { ValidatorInterface } from '../../../validations/default';
-import { t } from 'i18n-js'
+import {useI18n} from "../../../translator/i18n";
 
 // TODO move to abstract place because used in SignUp
 export interface FieldInterface {
@@ -28,6 +28,7 @@ type SignInFormProps = {
 }
 
 export default function SignInForm({navigation, fieldChangeHandler, form} : SignInFormProps) {
+    const {t} = useI18n()
     return (
         <>
             <View>

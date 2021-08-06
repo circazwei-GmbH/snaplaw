@@ -3,16 +3,11 @@ import {StyleSheet, Switch, Text, View} from "react-native";
 
 type DefaultSwitchProps = {
     title: string,
+    value: boolean,
     onChange: (isEnabled: boolean) => void
 }
 
-export default function DefaultSwitch({ title, onChange } : DefaultSwitchProps) {
-    const [isEnabled, setIsEnabled] = useState(false)
-    const switchHandler = () => {
-        setIsEnabled(!isEnabled)
-        onChange(!isEnabled)
-    }
-
+export default function DefaultSwitch({ title, onChange, value } : DefaultSwitchProps) {
     return (
         <View style={styles.container}>
             <Text style={styles.buttonText}>
@@ -23,8 +18,8 @@ export default function DefaultSwitch({ title, onChange } : DefaultSwitchProps) 
                     false: '#E2E8ED',
                     true: '#1696E2'
                 }}
-                onValueChange={switchHandler}
-                value={isEnabled}
+                onValueChange={onChange}
+                value={value}
             />
         </View>
     )

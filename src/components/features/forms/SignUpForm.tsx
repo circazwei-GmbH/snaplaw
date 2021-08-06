@@ -5,7 +5,7 @@ import {RootStackParamList} from "../../../router/AuthRouterTypes";
 import TextField from "../../components/TextField";
 import { FieldInterface } from './SignInForm'
 import PasswordField from '../../components/PasswordField'
-import { t } from 'i18n-js'
+import {useI18n} from "../../../translator/i18n";
 
 export interface SignUpFormInterface {
     name: FieldInterface,
@@ -20,6 +20,7 @@ type SignUpFormProps = {
 }
 
 export default function SignUpForm({fieldChangeHandler, form} : SignUpFormProps) {
+    const {t} = useI18n()
     return (
         <View style={styles.container}>
             <View>

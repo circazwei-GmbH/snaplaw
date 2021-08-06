@@ -9,16 +9,17 @@ import MessageAndLink from "../features/MessageAndLink";
 import {formFieldFill, validate} from "../../utils/forms";
 import {email, length} from "../../validations/default";
 import ActionBlock from "../features/Auth/ActionsBlock";
-import { t } from 'i18n-js'
 import {requestSignUp} from "../../store/modules/auth/action-creators";
 import {useAppSelector, useAppDispatch} from "../../store/hooks";
 import {clearSignUpErrors} from "../../store/modules/auth/slice";
+import {useI18n} from "../../translator/i18n";
 
 type SignUpProps = {
     navigation: StackNavigationProp<RootStackParamList, 'SignUp'>
 }
 
 export default function SignUp({ navigation } : SignUpProps) {
+    const {t} = useI18n()
     let form: SignUpFormInterface = {
         name: {
             value: '',

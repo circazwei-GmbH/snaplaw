@@ -1,6 +1,5 @@
 import React from 'react'
 import { StyleSheet, ScrollView } from 'react-native'
-import { t } from 'i18n-js'
 import { useAppDispatch } from "../../store/hooks"
 import { killToken } from '../../store/modules/auth/slice'
 import TopBar from '../layouts/TopBar'
@@ -9,12 +8,15 @@ import MyProfileAvatarBox from '../features/MyProfileAvatarBox'
 import NotificationBell from '../components/NotificationBell'
 import * as RootNavigation from '../../router/RootNavigation'
 import {PROFILE_ROUTER} from "../../router/ProfileRouterTypes";
+import {useI18n} from "../../translator/i18n";
 
 export default function MyProfile(): JSX.Element {
   const dispatch = useAppDispatch()
   const killTokenHandler = () => {
     dispatch(killToken())
   }
+
+  const { t } = useI18n()
 
   return (
     <TopBar

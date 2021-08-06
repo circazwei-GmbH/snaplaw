@@ -3,20 +3,21 @@ import { Text, View, StyleSheet, Image } from "react-native"
 import Button from '../basics/buttons/Button'
 import { StackNavigationProp } from "@react-navigation/stack"
 import { RootStackParamList, AUTH_ROUTE } from "../../router/AuthRouterTypes"
-import i18n from 'i18n-js'
+import {useI18n} from "../../translator/i18n";
 
 type WelcomeProp = {
     navigation: StackNavigationProp<RootStackParamList, 'Welcome'>
 }
 
 export default function Welcome({ navigation }: WelcomeProp) {
+    const {t} = useI18n()
     return (
         <View style={styles.container}>
-            <Text accessibilityLabel="welcome-to-snaplaw" style={styles.headline}>{i18n.t('welcome.headline')}</Text>
+            <Text accessibilityLabel="welcome-to-snaplaw" style={styles.headline}>{t('welcome.headline')}</Text>
             <Image accessibilityLabel="welcome-image" source={require('../../../assets/welcome.png')} />
             <View style={styles.actions} accessibilityLabel="actions">
-                <Button text={i18n.t('welcome.sign_in')} onPress={() => navigation.navigate(AUTH_ROUTE.SIGNIN)} style={styles.signInButton} type="primary" />
-                <Button text={i18n.t('welcome.sign_up')} onPress={() => navigation.navigate(AUTH_ROUTE.SIGNUP)} />
+                <Button text={t('welcome.sign_in')} onPress={() => navigation.navigate(AUTH_ROUTE.SIGNIN)} style={styles.signInButton} type="primary" />
+                <Button text={t('welcome.sign_up')} onPress={() => navigation.navigate(AUTH_ROUTE.SIGNUP)} />
             </View>
         </View>
     )

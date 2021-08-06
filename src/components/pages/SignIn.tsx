@@ -9,16 +9,17 @@ import { email, length } from '../../validations/default'
 import MessageAndLink from "../features/MessageAndLink"
 import { formFieldFill, validate } from "../../utils/forms"
 import ActionBlock from "../features/Auth/ActionsBlock"
-import { t } from 'i18n-js'
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
 import { requestSignIn } from "../../store/modules/auth/action-creators"
 import { clearSignInErrors } from '../../store/modules/auth/slice'
+import {useI18n} from "../../translator/i18n";
 
 type SignInProps = {
     navigation: StackNavigationProp<RootStackParamList, 'SignIn'>
 }
 
 export default function SignIn({ navigation }: SignInProps) {
+    const {t} = useI18n()
     let form: SignInFormInterface = {
         email: {
             value: '',

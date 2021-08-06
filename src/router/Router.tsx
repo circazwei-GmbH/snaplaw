@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import SignIn from '../components/pages/SignIn'
 import SignUp from '../components/pages/SignUp'
 import Welcome from '../components/pages/Welcome'
@@ -10,9 +10,10 @@ import ChangePassword from "../components/pages/ChangePassword";
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { AUTH_ROUTE } from "./AuthRouterTypes"
-import { useAppSelector } from "../store/hooks"
+import {useAppDispatch, useAppSelector} from "../store/hooks"
 import {PROFILE_ROUTER} from "./ProfileRouterTypes";
 import ChangeLanguage from "../components/pages/ChangeLanguage";
+import {requestLanguage} from "../store/modules/profile/action-creators";
 
 const Stack = createStackNavigator()
 const ProfileStack = createStackNavigator()
@@ -20,6 +21,13 @@ const Tab = createBottomTabNavigator()
 
 export default function Router() {
     const token = useAppSelector(state => state.auth.token)
+
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(requestLanguage())
+    }, [dispatch])
+
     return (
         token ? (
             <Tab.Navigator>

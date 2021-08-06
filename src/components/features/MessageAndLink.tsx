@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View, StyleSheet, GestureResponderEvent} from "react-native";
 import Link from "../basics/links/link";
-import {t} from 'i18n-js'
+import {useI18n} from "../../translator/i18n";
 
 type AuthActionsProps = {
     linkHandler: (event: GestureResponderEvent) => void,
@@ -10,6 +10,7 @@ type AuthActionsProps = {
 }
 
 export default function MessageAndLink({linkHandler, linkText, messageTextKey} : AuthActionsProps) {
+    const {t} = useI18n()
     return (
         <View>
             <Text style={styles.dontHaveAccount}>

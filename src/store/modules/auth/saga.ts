@@ -35,9 +35,10 @@ import {
     USER_NOT_FOUND_LOGIN,
     USER_NOT_UNIQUE, VERIFICATION_CODE_IS_INCORRECT
 } from "../../../services/error-codes";
-import { t } from 'i18n-js'
+import {useI18n} from "../../../translator/i18n";
 
 function* fetchSignUp(action: RequestSignUpAction) {
+    const {t} = useI18n()
     try {
         yield put(signUpFailed({
             email: ''
