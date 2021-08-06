@@ -1,15 +1,14 @@
 import {createAction, createSlice, Draft, PayloadAction} from "@reduxjs/toolkit";
 import {LANGUAGE_ENGLISH, LANGUAGE_GERMANY} from "./constants";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export type LanguageType = 'LANGUAGE_ENGLISH' | 'LANGUAGE_GERMANY'
 
 type ProfileStateInterface = {
-    language: LanguageType
+    language: LanguageType | undefined
 }
 
 const initialState: ProfileStateInterface = {
-    language: LANGUAGE_ENGLISH
+    language: undefined
 }
 
 const setLanguageAction = createAction<string, 'setLanguage'>('setLanguage')
@@ -24,8 +23,6 @@ export const profileSlice = createSlice({
             } else {
                 state.language = action.payload
             }
-
-            AsyncStorage.setItem('lang', state.language)
         }
     }
 })

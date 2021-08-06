@@ -8,7 +8,7 @@ function* setLanguage({payload} : SetLanguageAction) {
     try {
         yield call(AsyncStorage.setItem, 'lang', payload)
     } catch (error) {
-        yield put(setMessage('error.abstract'))
+        yield put(setMessage('errors.abstract'))
     }
 }
 
@@ -17,7 +17,7 @@ function* requestLanguage() {
         const language = yield call(AsyncStorage.getItem, 'lang')
         yield put(Reduser.setLanguage(language))
     } catch (error) {
-        yield put(setMessage('error.abstract'))
+        yield put(setMessage('errors.abstract'))
     }
 }
 

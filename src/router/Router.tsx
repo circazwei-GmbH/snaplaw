@@ -21,6 +21,7 @@ const Tab = createBottomTabNavigator()
 
 export default function Router() {
     const token = useAppSelector(state => state.auth.token)
+    const language = useAppSelector(state => state.profile.language)
 
     const dispatch = useAppDispatch()
 
@@ -28,8 +29,12 @@ export default function Router() {
         dispatch(requestLanguage())
     }, [dispatch])
 
+    if (!language) {
+        return null
+    }
+
     return (
-        token ? (
+        !token ? (
             <Tab.Navigator>
                 <Tab.Screen name="Homepage" component={Homepage} />
                 <Tab.Screen name="Settings">

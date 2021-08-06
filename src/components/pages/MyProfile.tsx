@@ -8,7 +8,7 @@ import MyProfileAvatarBox from '../features/MyProfileAvatarBox'
 import NotificationBell from '../components/NotificationBell'
 import * as RootNavigation from '../../router/RootNavigation'
 import {PROFILE_ROUTER} from "../../router/ProfileRouterTypes";
-import {useI18n} from "../../translator/i18n";
+import { useI18n} from "../../translator/i18n";
 
 export default function MyProfile(): JSX.Element {
   const dispatch = useAppDispatch()

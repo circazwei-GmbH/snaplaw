@@ -103,7 +103,7 @@ export default {
         }
     },
     change_language: {
-        title: 'Language GEM',
+        title: 'Sprache',
         languages: {
             english: 'English',
             germany: 'Germany'
