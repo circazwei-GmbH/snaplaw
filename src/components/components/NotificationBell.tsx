@@ -3,7 +3,7 @@ import { View, StyleSheet } from "react-native"
 import { Feather } from '@expo/vector-icons'
 
 export default function NotificationBell(): JSX.Element {
-  const [haveNew, setHaveNew] = useState(true)
+  const [haveNew] = useState(true)
 
   return (
     <View style={styles.container}>
