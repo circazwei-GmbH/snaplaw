@@ -60,6 +60,7 @@ describe("HeaderNavigation", () => {
       </TopBar>
     );
 
+    RootNavigation.pop.mockClear();
     fireEvent.press(getByTestId("BackButton.back"));
     expect(RootNavigation.pop).toBeCalled();
   });

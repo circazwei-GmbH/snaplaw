@@ -3,15 +3,16 @@ import { View, StyleSheet, Image, ImageSourcePropType } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 interface UserAvatarPropsInterface {
-  size: string;
+  sizeSmall: boolean;
   url?: string;
 }
 
-export default function UserAvatar({ size, url }: UserAvatarPropsInterface) {
+export default function UserAvatar({
+  sizeSmall,
+  url,
+}: UserAvatarPropsInterface) {
   return (
-    <View
-      style={size === "small" ? styles.containerSmall : styles.containerBig}
-    >
+    <View style={sizeSmall ? styles.containerSmall : styles.containerBig}>
       {url === undefined ? (
         <AntDesign name="user" size={75} color="black" />
       ) : (

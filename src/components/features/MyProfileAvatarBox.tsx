@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import UserAvatar from "../components/UserAvatar";
 import VerificationCounter from "../components/VerificationCounter";
-import { toggleAvatarSize } from "../../utils/toggleAvatarSize";
+import { toggleBoolValue } from "../../utils/toggleBoolValue";
 
 export default function MyProfileAvatarBox(): JSX.Element {
-  const [avatarSize, setAvatarSize] = useState("small");
+  const [sizeSmall, setSizeSmall] = useState(true);
   const [url, setUrl] = useState<undefined | string>(undefined);
 
   return (
@@ -13,11 +13,11 @@ export default function MyProfileAvatarBox(): JSX.Element {
       <TouchableOpacity
         testID="MyProfileAvatarBox.toggle"
         style={styles.avatar}
-        onPress={() => toggleAvatarSize(avatarSize, setAvatarSize)}
+        onPress={() => toggleBoolValue(sizeSmall, setSizeSmall)}
       >
-        <UserAvatar size={avatarSize} url={url} />
+        <UserAvatar sizeSmall={sizeSmall} url={url} />
       </TouchableOpacity>
-      <VerificationCounter size={avatarSize} />
+      <VerificationCounter sizeSmall={sizeSmall} />
     </View>
   );
 }
