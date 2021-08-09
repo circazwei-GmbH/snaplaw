@@ -14,6 +14,7 @@ import {useAppDispatch, useAppSelector} from "../store/hooks"
 import {PROFILE_ROUTER} from "./ProfileRouterTypes";
 import ChangeLanguage from "../components/pages/ChangeLanguage";
 import {requestLanguage} from "../store/modules/profile/action-creators";
+import EditProfile from "../components/pages/EditProfile";
 
 const Stack = createStackNavigator()
 const ProfileStack = createStackNavigator()
@@ -42,6 +43,7 @@ export default function Router() {
                         <ProfileStack.Navigator headerMode="none">
                             <ProfileStack.Screen name={PROFILE_ROUTER.MY_PROFILE} component={MyProfile} />
                             <ProfileStack.Screen name={PROFILE_ROUTER.CHANGE_LANGUAGE} component={ChangeLanguage} />
+                            <ProfileStack.Screen name={PROFILE_ROUTER.EDIT_PROFILE} component={EditProfile} />
                         </ProfileStack.Navigator>
                     )}
                 </Tab.Screen>

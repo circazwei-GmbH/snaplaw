@@ -19,7 +19,7 @@ type LinkType = {
 const Links: LinkType[] = [
   {
     title: 'my_profile.buttons_text.my_profile',
-    handler: () => alert('Hi'),
+    handler: () => RootNavigation.navigate(PROFILE_ROUTER.EDIT_PROFILE),
     type: 'link'
   }
 ]
