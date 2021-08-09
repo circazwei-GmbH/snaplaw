@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import {} from "@testing-library/react-native";
-
-console.log("@testing-library/react-native");
 
 export default function NotificationBell(): JSX.Element {
   const [haveNew, setHaveNew] = useState(true);
