@@ -4,9 +4,9 @@ import TextField from "../../components/TextField";
 import PasswordField from '../../components/PasswordField'
 import Link from "../../basics/links/link";
 import {StackNavigationProp} from "@react-navigation/stack";
-import {RootStackParamList, ROUTE} from "../../../router/RouterTypes";
+import {RootStackParamList, AUTH_ROUTE} from "../../../router/AuthRouterTypes";
 import { ValidatorInterface } from '../../../validations/default';
-import { t } from 'i18n-js'
+import {useI18n} from "../../../translator/i18n";
 
 // TODO move to abstract place because used in SignUp
 export interface FieldInterface {
@@ -28,6 +28,7 @@ type SignInFormProps = {
 }
 
 export default function SignInForm({navigation, fieldChangeHandler, form} : SignInFormProps) {
+    const {t} = useI18n()
     return (
         <>
             <View>
@@ -53,7 +54,7 @@ export default function SignInForm({navigation, fieldChangeHandler, form} : Sign
                 <Link
                     style={styles.forgotLinkContainer}
                     text={t('sign_in.forgot_password')}
-                    onPress={() => { navigation.navigate(ROUTE.FORGOT) }}
+                    onPress={() => { navigation.navigate(AUTH_ROUTE.FORGOT) }}
                 />
             </View>
         </>

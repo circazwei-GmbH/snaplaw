@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import { View, StyleSheet, Image } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
@@ -5,6 +6,19 @@ import { AntDesign } from "@expo/vector-icons";
 interface UserAvatarPropsInterface {
   sizeSmall: boolean;
   url?: string;
+=======
+import React from 'react'
+import {
+  View,
+  StyleSheet,
+  Image
+} from "react-native"
+import { AntDesign } from '@expo/vector-icons'
+
+interface UserAvatarPropsInterface {
+  size: 'small' | 'big'
+  url?: string
+>>>>>>> e231a40fa121abc4978354ff4c91b65890c2dfbc
 }
 
 export default function UserAvatar({

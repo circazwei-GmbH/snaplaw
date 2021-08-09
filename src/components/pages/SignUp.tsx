@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, Keyboard, TouchableWithoutFeedback} from "react-native";
 import {StackNavigationProp} from "@react-navigation/stack";
-import {RootStackParamList, ROUTE} from "../../router/RouterTypes";
+import {RootStackParamList, AUTH_ROUTE} from "../../router/AuthRouterTypes";
 import AuthLayout from "../layouts/AuthLayout";
 import MainHeadline from "../basics/typography/MainHeadline";
 import SignUpForm, { SignUpFormInterface } from '../features/forms/SignUpForm'
@@ -9,15 +9,17 @@ import MessageAndLink from "../features/MessageAndLink";
 import {formFieldFill, validate} from "../../utils/forms";
 import {email, length} from "../../validations/default";
 import ActionBlock from "../features/Auth/ActionsBlock";
-import { t } from 'i18n-js'
 import {requestSignUp} from "../../store/modules/auth/action-creators";
 import {useAppSelector, useAppDispatch} from "../../store/hooks";
+import {clearSignUpErrors} from "../../store/modules/auth/slice";
+import {useI18n} from "../../translator/i18n";
 
 type SignUpProps = {
     navigation: StackNavigationProp<RootStackParamList, 'SignUp'>
 }
 
 export default function SignUp({ navigation } : SignUpProps) {
+    const {t} = useI18n()
     let form: SignUpFormInterface = {
         name: {
             value: '',
@@ -55,6 +57,10 @@ export default function SignUp({ navigation } : SignUpProps) {
         }
     }, [emailError])
 
+    useEffect(() => () => {
+        dispatch(clearSignUpErrors())
+    }, [])
+
     const fieldChangeHandler = (fieldName: 'name' | 'email' | 'password', text: string) => {
         setForm(formFieldFill(fieldName, text, form))
     }
@@ -79,7 +85,7 @@ export default function SignUp({ navigation } : SignUpProps) {
     }
 
     const linkHandler = () => {
-        navigation.replace(ROUTE.SIGNIN)
+        navigation.replace(AUTH_ROUTE.SIGNIN)
     }
 
     return (

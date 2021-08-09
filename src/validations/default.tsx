@@ -1,5 +1,11 @@
+import {FieldInterface} from "../components/features/forms/SignInForm";
+
+export interface FormInterface {
+    [fielName: string]: FieldInterface
+}
+
 export interface ValidatorInterface {
-    (text: string): string | undefined
+    (text: string, form: FormInterface): string | undefined
 }
 
 export interface ValidatorBuilderInterface {
@@ -19,4 +25,11 @@ export const email: ValidatorBuilderInterface = (message) => (text: string) => {
     if (text.search(/^[^@]+@{1,1}[^@]+\.[^.@\d]{2,}$/)) {
         return message
     }
+}
+
+export const match = (message, target) => (text: string, form: FormInterface) => {
+    if (form[target].value === text) {
+        return;
+    }
+    return message
 }

@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 import React, { ReactElement } from "react";
 import { View, StyleSheet, Text, SafeAreaView } from "react-native";
 import BackButton from "../basics/buttons/BackButton";
+=======
+import React, { ReactElement } from 'react'
+import { View, StyleSheet, Text } from "react-native"
+import BackButton from '../basics/buttons/BackButton'
+>>>>>>> e231a40fa121abc4978354ff4c91b65890c2dfbc
 
 interface TopBarProps {
   children: ReactElement;
@@ -10,7 +16,7 @@ interface TopBarProps {
   style?: object;
 }
 
-export default function HeaderNavigation({
+export default function TopBar({
   children,
   pageName,
   leftButton,
@@ -38,7 +44,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    paddingTop: 25,
+    paddingTop: 47,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",

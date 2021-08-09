@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, Keyboard, TouchableWithoutFeedback} from "react-native";
 import Button from "../basics/buttons/Button";
 import HeaderNavigation from "../layouts/HeaderNavigation";
-import { t } from 'i18n-js'
 import ImageAndText from "../features/Auth/ImageAndText";
 import TextField from "../components/TextField";
 import { email } from '../../validations/default';
@@ -10,8 +9,10 @@ import {formFieldFill, validate} from "../../utils/forms";
 import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import {requestForgotPassword} from "../../store/modules/auth/action-creators";
 import {forgotPasswordFailed} from "../../store/modules/auth/slice";
+import {useI18n} from "../../translator/i18n";
 
 export default function ForgotPassword() {
+    const {t} = useI18n()
     const [form, setForm] = useState({
         email: {
             value: '',
@@ -62,6 +63,7 @@ export default function ForgotPassword() {
                         <ImageAndText image={require('../../../assets/forgot_password.png')} text={t('forgot_password.description')} />
                         <View style={styles.inputArea}>
                             <TextField
+                                fixed
                                 keyboardType="email-address"
                                 onChangeFunction={enterEmailHandler}
                                 errorMessage={form.email.error}

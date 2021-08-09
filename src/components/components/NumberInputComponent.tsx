@@ -61,7 +61,7 @@ export default function NumberInputComponent({ onChange, errorMessage }: NumberI
                 : null}
         </>
     )
-};
+}
 
 const styles = StyleSheet.create({
     container: {

@@ -17,7 +17,6 @@ web-build/
 
 # OSX
 #
-.DS_Store
 
 # Xcode
 #
@@ -41,8 +40,6 @@ project.xcworkspace
 
 # Android/IntelliJ
 #
-build/
-.idea
 .gradle
 local.properties
 *.iml
@@ -50,7 +47,6 @@ local.properties
 
 # node.js
 #
-node_modules/
 npm-debug.log
 yarn-error.log
 
@@ -67,7 +63,5 @@ buck-out/
 /ios/Pods/
 
 # Expo
-.expo/
-web-build/
-
+coverage
 # @end expo-cli

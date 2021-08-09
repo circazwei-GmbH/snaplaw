@@ -1,30 +1,38 @@
 import {
+    ChangePasswordPayload,
     ForgotPasswordPayload,
     SignInPayload,
     SignUpPayload,
-    VerificationPayload,
     VerificationResendPayload
 } from "../../store/modules/auth/types";
 import httpClient from '../api'
 
 const signUp = (payload: SignUpPayload) => {
-    return httpClient.post('signup', payload)
+    return httpClient.post('signup', {...payload, locale: 'en'})
 }
 
 const signIn = (payload: SignInPayload) => {
     return httpClient.post('login', payload)
 }
 
-const verification = (payload: VerificationPayload) => {
+const verification = (payload: {email: string, code: string}) => {
     return httpClient.post('confirm-email', payload)
 }
 
 const resendVerification = (payload: VerificationResendPayload) => {
-    return httpClient.post('resent-email-confirmation', payload)
+    return httpClient.post('resent-email-confirmation', {...payload, locale: 'en'})
 }
 
 const forgotPassword = (payload: ForgotPasswordPayload) => {
-    return httpClient.post('users/reset-password-confirmation', payload)
+    return httpClient.post('reset-password-confirmation', {...payload, locale: 'en'})
+}
+
+const changePassword = ({ password, token }: ChangePasswordPayload) => {
+    return httpClient.post('set-new-password', { password }, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
 }
 
 export default {
@@ -32,5 +40,6 @@ export default {
     signIn,
     verification,
     resendVerification,
-    forgotPassword
+    forgotPassword,
+    changePassword
 }

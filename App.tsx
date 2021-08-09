@@ -1,23 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, {useEffect} from 'react';
 import { StyleSheet, View } from 'react-native';
 import Router from "./src/router/Router";
 import { useFonts } from 'expo-font';
 import 'react-native-gesture-handler';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
-import * as Localization from 'expo-localization';
-import i18n from 'i18n-js';
-import en from './src/translator/en'
-import de from './src/translator/de'
 import { Provider } from 'react-redux'
 import store from './src/store/index'
 import {navigationRef} from "./src/router/RootNavigation";
 import AbstractModal from "./src/components/features/Modals/AbstractModal";
 
-i18n.translations = { en, de }
-
-i18n.locale = Localization.locale
-i18n.fallbacks = true;
 
 const theme = {
     ...DefaultTheme,
@@ -35,6 +27,10 @@ export default function App() {
         'P': require('./assets/fonts/Poppins-Regular.ttf'),
         'P-L': require('./assets/fonts/OpenSans-Light.ttf')
     })
+
+    useEffect(() => {
+        
+    }, [])
 
     if (!fontLoaded) {
         return null;

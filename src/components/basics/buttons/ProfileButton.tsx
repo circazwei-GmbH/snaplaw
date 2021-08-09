@@ -5,11 +5,10 @@ import { MaterialIcons } from '@expo/vector-icons'
 interface ButtonPropsInterface {
   text: string
   onPress: (() => void)
-  style?: object
   type?: 'link'
 }
 
-export default function ProfileButton({ text, onPress, style, type }: ButtonPropsInterface) {
+export default function ProfileButton({ text, onPress, type }: ButtonPropsInterface) {
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -46,7 +45,7 @@ const styles = StyleSheet.create({
     shadowColor: 'rgba(196, 211, 220, 0.6)',
     shadowOffset: {
       width: 0,
-      height: 0
+      height: 2
     },
     shadowOpacity: 1,
     shadowRadius: 1,

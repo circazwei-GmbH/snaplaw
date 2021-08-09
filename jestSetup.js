@@ -1,8 +1,10 @@
-jest.mock('i18n-js', () => {
-    return {
-        t: (text) => text
-    }
-})
+jest.mock('./src/translator/Translator', () => ({
+    translator: (text) => text
+}))
+
+jest.mock('./src/translator/i18n', () => ({
+    useI18n: () => ({t: t => t})
+}))
 
 import 'react-native-gesture-handler/jestSetup';
 

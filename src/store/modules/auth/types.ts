@@ -1,4 +1,5 @@
-interface BaseAction {
+// TODO: move to abstract
+export interface BaseAction {
     type: string,
     payload: any
 }
@@ -16,7 +17,8 @@ export interface SignInPayload {
 
 export interface VerificationPayload {
     email: string,
-    code: string
+    code: string,
+    to: string
 }
 
 export interface VerificationResendPayload {
@@ -25,6 +27,11 @@ export interface VerificationResendPayload {
 
 export interface ForgotPasswordPayload {
     email: string
+}
+
+export interface ChangePasswordPayload {
+    password: string,
+    token: string
 }
 
 export interface RequestSignUpAction extends BaseAction {
@@ -45,4 +52,8 @@ export interface VerificationResendAction extends BaseAction {
 
 export interface ForgotPasswordAction extends BaseAction {
     payload: ForgotPasswordPayload
+}
+
+export interface ChangePasswordAction extends BaseAction {
+    payload: ChangePasswordPayload
 }
