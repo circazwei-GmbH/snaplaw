@@ -10,6 +10,20 @@ import * as RootNavigation from '../../router/RootNavigation'
 import {PROFILE_ROUTER} from "../../router/ProfileRouterTypes";
 import { useI18n} from "../../translator/i18n";
 
+type LinkType = {
+  title: string,
+  handler: () => void,
+  type?: 'link'
+}
+
+const Links: LinkType[] = [
+  {
+    title: 'my_profile.buttons_text.my_profile',
+    handler: () => alert('Hi'),
+    type: 'link'
+  }
+]
+
 export default function MyProfile(): JSX.Element {
   const dispatch = useAppDispatch()
   const killTokenHandler = () => {
@@ -26,11 +40,14 @@ export default function MyProfile(): JSX.Element {
     >
       <ScrollView contentContainerStyle={styles.container}>
         <MyProfileAvatarBox />
-        <ProfileButton
-          text={t('my_profile.buttons_text.my_profile')}
-          onPress={() => alert('Hi')}
-          type="link"
-        />
+        {Links.map((link, index) => (
+            <ProfileButton
+                text={t(link.title)}
+                onPress={link.handler}
+                type={link.type}
+                key={`${link.title}${index}`}
+            />
+        ))}
         <ProfileButton
           text={t('my_profile.buttons_text.language')}
           onPress={() => RootNavigation.navigate(PROFILE_ROUTER.CHANGE_LANGUAGE)}

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet, Switch, Text, View} from "react-native";
 
 type DefaultSwitchProps = {
@@ -14,6 +14,7 @@ export default function DefaultSwitch({ title, onChange, value } : DefaultSwitch
                 {title}
             </Text>
             <Switch
+                testID={`Switch.${title}`}
                 trackColor={{
                     false: '#E2E8ED',
                     true: '#1696E2'

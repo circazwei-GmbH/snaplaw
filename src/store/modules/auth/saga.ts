@@ -128,7 +128,6 @@ function* fetchResendVerificationCode(action: VerificationResendAction) {
         yield put(setMessage(Translator.getInstance().trans('verification.modals.information.text')))
     } catch (error) {
         yield put(setMessage(Translator.getInstance().trans('errors.abstract')))
-        console.log(error.response)
     }
 }
 
