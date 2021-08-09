@@ -40,7 +40,7 @@ describe("MyProfile", () => {
       </Provider>
     );
 
-    fireEvent.press(getByTestId("BackButton.back"));
+    fireEvent.press(getByTestId("MyProfile.my_profile"));
     expect(RootNavigation.navigate(PROFILE_ROUTER.EDIT_PROFILE)).toBeCalled();
   });
 });
