@@ -1,10 +1,13 @@
 import React from "react";
-import { fireEvent, render } from "@testing-library/react-native";
+import { fireEvent, render, screen } from "@testing-library/react-native";
 import { Provider } from "react-redux";
 import MyProfile from "../MyProfile";
 import * as RootNavigation from "../../../router/RootNavigation";
 import store from "../../../store/index";
 import { createStore } from "@reduxjs/toolkit";
+import { toggleBoolValue } from "../../../utils/toggleBoolValue";
+
+jest.mock("../../../utils/toggleBoolValue.ts");
 
 jest.mock("../../../router/RootNavigation");
 
@@ -31,6 +34,17 @@ describe("MyProfile", () => {
     expect(getByText("my_profile.buttons_text.change_password")).toBeTruthy();
     expect(getByText("my_profile.buttons_text.sign_out")).toBeTruthy();
     expect(getByText("my_profile.buttons_text.delete_profile")).toBeTruthy();
+  });
+
+  it("Press on avatar should toggle avatar size", () => {
+    const { getByTestId } = render(
+      <Provider store={store}>
+        <MyProfile />
+      </Provider>
+    );
+
+    fireEvent.press(getByTestId("MyProfileAvatarBox.toggle"));
+    expect(toggleBoolValue).toBeCalled();
   });
 
   it("Buttons should call navigate event", () => {
