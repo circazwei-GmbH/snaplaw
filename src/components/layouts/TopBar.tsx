@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { View, StyleSheet, Text, Pressable } from "react-native"
+import { View, StyleSheet, Text } from "react-native"
 import BackButton from '../basics/buttons/BackButton'
 
 interface TopBarProps {
@@ -39,7 +39,7 @@ export default function HeaderNavigation({
 
 const styles = StyleSheet.create({
   header: {
-    paddingTop: 25,
+    paddingTop: 47,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between"

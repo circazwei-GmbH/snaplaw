@@ -1,18 +1,36 @@
 import React from 'react'
 import { StyleSheet, ScrollView } from 'react-native'
-import { t } from 'i18n-js'
 import { useAppDispatch } from "../../store/hooks"
 import { killToken } from '../../store/modules/auth/slice'
 import TopBar from '../layouts/TopBar'
 import ProfileButton from '../basics/buttons/ProfileButton'
 import MyProfileAvatarBox from '../features/MyProfileAvatarBox'
 import NotificationBell from '../components/NotificationBell'
+import * as RootNavigation from '../../router/RootNavigation'
+import {PROFILE_ROUTER} from "../../router/ProfileRouterTypes";
+import { useI18n} from "../../translator/i18n";
+
+type LinkType = {
+  title: string,
+  handler: () => void,
+  type?: 'link'
+}
+
+const Links: LinkType[] = [
+  {
+    title: 'my_profile.buttons_text.my_profile',
+    handler: () => alert('Hi'),
+    type: 'link'
+  }
+]
 
 export default function MyProfile(): JSX.Element {
   const dispatch = useAppDispatch()
   const killTokenHandler = () => {
     dispatch(killToken())
   }
+
+  const { t } = useI18n()
 
   return (
     <TopBar
@@ -22,14 +40,17 @@ export default function MyProfile(): JSX.Element {
     >
       <ScrollView contentContainerStyle={styles.container}>
         <MyProfileAvatarBox />
-        <ProfileButton
-          text={t('my_profile.buttons_text.my_profile')}
-          onPress={() => alert('Hi')}
-          type="link"
-        />
+        {Links.map((link, index) => (
+            <ProfileButton
+                text={t(link.title)}
+                onPress={link.handler}
+                type={link.type}
+                key={`${link.title}${index}`}
+            />
+        ))}
         <ProfileButton
           text={t('my_profile.buttons_text.language')}
-          onPress={() => alert('Hi')}
+          onPress={() => RootNavigation.navigate(PROFILE_ROUTER.CHANGE_LANGUAGE)}
           type="link"
         />
         <ProfileButton

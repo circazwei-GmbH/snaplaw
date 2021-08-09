@@ -26,7 +26,7 @@ import {
     forgotPasswordFailed, changePasswordFailed
 } from './slice'
 import { setMessage, setModal } from '../main/slice'
-import {ROUTE} from "../../../router/RouterTypes";
+import {AUTH_ROUTE} from "../../../router/AuthRouterTypes";
 import * as RootNavigation from '../../../router/RootNavigation'
 import {
     EMAIL_NOT_CONFIRMED, NEW_PASSWORD_SAME_AS_OLD,
@@ -35,7 +35,7 @@ import {
     USER_NOT_FOUND_LOGIN,
     USER_NOT_UNIQUE, VERIFICATION_CODE_IS_INCORRECT
 } from "../../../services/error-codes";
-import { t } from 'i18n-js'
+import {Translator} from "../../../translator/i18n";
 
 function* fetchSignUp(action: RequestSignUpAction) {
     try {
@@ -43,15 +43,15 @@ function* fetchSignUp(action: RequestSignUpAction) {
             email: ''
         }))
         yield call(API.signUp, action.payload)
-        RootNavigation.navigate(ROUTE.VERIFICATION, {email: action.payload.email})
+        RootNavigation.navigate(AUTH_ROUTE.VERIFICATION, {email: action.payload.email})
     } catch (error) {
         if (error.response?.data.code === USER_NOT_UNIQUE) {
             return yield put(signUpFailed({
-                email: t('sign_up.errors.email_taken')
+                email: Translator.getInstance().trans('sign_up.errors.email_taken')
             }))
         }
         yield put(setMessage(
-            t('errors.abstract')
+            Translator.getInstance().trans('errors.abstract')
         ))
     }
 }
@@ -64,23 +64,22 @@ function* fetchSignIn(action: RequestSignInAction) {
     } catch (error) {
         if (error.response?.data.code === USER_NOT_FOUND_LOGIN) {
             return yield put(signInFailed({
-                message: t('sign_in.errors.user_not_found'),
+                message: Translator.getInstance().trans('sign_in.errors.user_not_found'),
                 field: 'email'
             }))
         }
         if (error.response?.data.code === PASSWORD_NOT_VALID) {
             return yield put(signInFailed({
-                message: t('sign_in.errors.password_not_valid'),
+                message: Translator.getInstance().trans('sign_in.errors.password_not_valid'),
                 field: 'password'
             }))
         }
         if (error.response?.data.code === EMAIL_NOT_CONFIRMED) {
-            return RootNavigation.navigate(ROUTE.VERIFICATION, {email: action.payload.email})
+            return RootNavigation.navigate(AUTH_ROUTE.VERIFICATION, {email: action.payload.email})
         }
         yield put(setMessage(
-            t('errors.abstract')
+            Translator.getInstance().trans('errors.abstract')
         ))
-        console.log(error.response)
     }
 }
 
@@ -90,7 +89,7 @@ function* fetchVerification(action: VerificationAction) {
             code: action.payload.code,
             email: action.payload.email
         })
-        if (action.payload.to === ROUTE.CHANGE_PASSWORD) {
+        if (action.payload.to === AUTH_ROUTE.CHANGE_PASSWORD) {
             return RootNavigation.navigate(action.payload.to, {
                 email: action.payload.email,
                 token: response.data.token
@@ -99,18 +98,18 @@ function* fetchVerification(action: VerificationAction) {
         yield put(setToken(response.data.token))
     } catch (error) {
         if (error.response?.data.code === USER_NOT_FOUND) {
-            return yield put(verificationFailed(t('verification.errors.user_not_found')))
+            return yield put(verificationFailed(Translator.getInstance().trans('verification.errors.user_not_found')))
         }
         if (error.response?.data.code === VERIFICATION_CODE_IS_INCORRECT) {
             return yield put(setModal({
-                message: t('verification.modals.confirm.text'),
+                message: Translator.getInstance().trans('verification.modals.confirm.text'),
                 actions: [
                     {
-                        name: t('verification.modals.confirm.buttons.no'),
+                        name: Translator.getInstance().trans('verification.modals.confirm.buttons.no'),
                         colortype: 'error'
                     },
                     {
-                        name: t('verification.modals.confirm.buttons.yes'),
+                        name: Translator.getInstance().trans('verification.modals.confirm.buttons.yes'),
                         colortype: 'primary',
                         action: requestVerificationResend(action.payload.email)
                     }
@@ -118,7 +117,7 @@ function* fetchVerification(action: VerificationAction) {
             }))
         }
         yield put(setMessage(
-            t('errors.abstract')
+            Translator.getInstance().trans('errors.abstract')
         ))
     }
 }
@@ -126,10 +125,9 @@ function* fetchVerification(action: VerificationAction) {
 function* fetchResendVerificationCode(action: VerificationResendAction) {
     try {
         yield call(API.resendVerification, action.payload)
-        yield put(setMessage(t('verification.modals.information.text')))
+        yield put(setMessage(Translator.getInstance().trans('verification.modals.information.text')))
     } catch (error) {
-        yield put(setMessage(t('errors.abstract')))
-        console.log(error.response)
+        yield put(setMessage(Translator.getInstance().trans('errors.abstract')))
     }
 }
 
@@ -137,15 +135,15 @@ function* fetchForgotPassword(action: ForgotPasswordAction) {
     try {
         yield put(forgotPasswordFailed(''))
         yield call(API.forgotPassword, action.payload)
-        RootNavigation.navigate(ROUTE.VERIFICATION, {
+        RootNavigation.navigate(AUTH_ROUTE.VERIFICATION, {
             email: action.payload.email,
-            to: ROUTE.CHANGE_PASSWORD
+            to: AUTH_ROUTE.CHANGE_PASSWORD
         })
     } catch (error) {
         if (error.response.status === 404) {
-            return yield put(forgotPasswordFailed(t('forgot_password.errors.email_not_fount')))
+            return yield put(forgotPasswordFailed(Translator.getInstance().trans('forgot_password.errors.email_not_fount')))
         }
-        yield put(setMessage(t('errors.abstract')))
+        yield put(setMessage(Translator.getInstance().trans('errors.abstract')))
     }
 }
 
@@ -155,9 +153,9 @@ function* fetchChangePassword({ payload }: ChangePasswordAction) {
         yield put(setToken(payload.token))
     } catch (error) {
         if (error.response?.data.code === NEW_PASSWORD_SAME_AS_OLD) {
-            return yield put(changePasswordFailed(t('change_password.errors.new_password_are_same_as_old')))
+            return yield put(changePasswordFailed(Translator.getInstance().trans('change_password.errors.new_password_are_same_as_old')))
         }
-        yield put(setMessage(t('errors.abstract')))
+        yield put(setMessage(Translator.getInstance().trans('errors.abstract')))
     }
 }
 

@@ -4,11 +4,11 @@ import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import Button from "../basics/buttons/Button";
 import { verificationFailed } from '../../store/modules/auth/slice'
 import HeaderNavigation from '../layouts/HeaderNavigation'
-import {t} from 'i18n-js'
 import NumberInputComponent from "../components/NumberInputComponent";
 import MessageAndLink from "../features/MessageAndLink";
 import {requestVerification, requestVerificationResend} from "../../store/modules/auth/action-creators";
 import ImageAndText from "../features/Auth/ImageAndText";
+import {useI18n} from "../../translator/i18n";
 
 type VerificationProps = {
     route: {
@@ -20,6 +20,7 @@ type VerificationProps = {
 }
 
 export default function Verification({ route: {params: {email, to}} }:VerificationProps) {
+    const {t} = useI18n()
     const dispatch = useAppDispatch()
     const [number, setNumber] = useState('')
     const errorMessage = useAppSelector(state => state.auth.verification.error)

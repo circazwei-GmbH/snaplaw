@@ -4,21 +4,22 @@ import MainHeadline from "../basics/typography/MainHeadline"
 import AuthLayout from "../layouts/AuthLayout"
 import SignInForm, { SignInFormInterface } from "../features/forms/SignInForm"
 import { StackNavigationProp } from '@react-navigation/stack'
-import { RootStackParamList, ROUTE } from '../../router/RouterTypes'
+import { RootStackParamList, AUTH_ROUTE } from '../../router/AuthRouterTypes'
 import { email, length } from '../../validations/default'
 import MessageAndLink from "../features/MessageAndLink"
 import { formFieldFill, validate } from "../../utils/forms"
 import ActionBlock from "../features/Auth/ActionsBlock"
-import { t } from 'i18n-js'
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
 import { requestSignIn } from "../../store/modules/auth/action-creators"
 import { clearSignInErrors } from '../../store/modules/auth/slice'
+import {useI18n} from "../../translator/i18n";
 
 type SignInProps = {
     navigation: StackNavigationProp<RootStackParamList, 'SignIn'>
 }
 
 export default function SignIn({ navigation }: SignInProps) {
+    const {t} = useI18n()
     let form: SignInFormInterface = {
         email: {
             value: '',
@@ -106,7 +107,7 @@ export default function SignIn({ navigation }: SignInProps) {
                         </View>
                         <View style={[styles.width100, styles.actions]}>
                             <MessageAndLink
-                                linkHandler={() => navigation.replace(ROUTE.SIGNUP)}
+                                linkHandler={() => navigation.replace(AUTH_ROUTE.SIGNUP)}
                                 linkText={t('sign_in.sign_up')}
                                 messageTextKey="sign_in.to_sign_up"
                             />

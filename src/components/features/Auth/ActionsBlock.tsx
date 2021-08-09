@@ -3,7 +3,7 @@ import {GestureResponderEvent, StyleSheet, Text, View} from 'react-native'
 import Button from "../../basics/buttons/Button";
 import SocialButton from "../../basics/buttons/SocialButton";
 import {FontAwesome5} from "@expo/vector-icons";
-import {t} from 'i18n-js'
+import {useI18n} from "../../../translator/i18n";
 type ActionsBlockProps = {
     submitHandler: (event: GestureResponderEvent) => void,
     buttonTextKey: string,
@@ -11,6 +11,7 @@ type ActionsBlockProps = {
 }
 
 export default function ActionBlock({submitHandler, buttonTextKey, underButtonTextKey} : ActionsBlockProps) {
+    const {t} = useI18n()
     return (
         <View style={styles.container}>
             <View style={[styles.width100]}>

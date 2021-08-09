@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Text, View, StyleSheet } from "react-native"
-import { t } from 'i18n-js'
+import {useI18n} from "../../translator/i18n";
 
 interface VerificationCounterPropsInterface {
   size: string
@@ -8,7 +8,7 @@ interface VerificationCounterPropsInterface {
 
 export default function ProfileHeadline({ size }: VerificationCounterPropsInterface) {
   const [verifications] = useState<number>(0)
-
+  const {t} = useI18n()
   return (
     <View style={
       size === 'small'

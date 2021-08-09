@@ -1,4 +1,5 @@
-interface BaseAction {
+// TODO: move to abstract
+export interface BaseAction {
     type: string,
     payload: any
 }
