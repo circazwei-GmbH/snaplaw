@@ -6,6 +6,7 @@ import * as Reduser from './slice'
 
 function* setLanguage({payload} : SetLanguageAction) {
     try {
+        yield put(Reduser.setLanguage(payload))
         yield call(AsyncStorage.setItem, 'lang', payload)
     } catch (error) {
         yield put(setMessage('errors.abstract'))

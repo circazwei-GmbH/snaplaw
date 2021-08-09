@@ -23,7 +23,7 @@ export class Translator {
         return this.instance
     }
 
-    public trans(key: string, args: any): string {
+    public trans(key: string, args?: any): string {
         return this.tranlator(key, args)
     }
 
