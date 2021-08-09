@@ -7,16 +7,24 @@ import {MediaTypeOptions} from 'expo-image-picker';
 import {useAppDispatch} from "../../store/hooks";
 import {setMessage} from "../../store/modules/main/slice";
 import Menu, {ButtonType} from "./Modals/Menu";
+import {useI18n} from "../../translator/i18n";
+import {uploadAvatar} from "../../store/modules/profile/action-creators";
 
 export default function UploadAvatar() {
     const [src, setSrc] = useState('https://n1s2.starhit.ru/6a/46/ae/6a46aeed947a183d67d1bc48211151bf/480x496_0_2bbde84177c9ff1c2299a26a0f69f69c@480x496_0xac120003_4430520541578509619.jpg')
     const [menuVisible, setMenuVisible] = useState(false);
     const dispatch = useAppDispatch();
+    const { t } = useI18n()
+
+    const postChooseFileHandler = (uri: string) => {
+        setMenuVisible(false)
+        dispatch(uploadAvatar(uri))
+    }
 
     const libraryWay = async () => {
-        const { status } = await ImagePicker.requestCameraPermissionsAsync()
+        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync()
         if (status !== ImagePicker.PermissionStatus.GRANTED) {
-            dispatch(setMessage('Grant camera permission'))
+            dispatch(setMessage(t('errors.galary_permission')))
             return
         }
 
@@ -27,9 +35,29 @@ export default function UploadAvatar() {
 
         if (!result.cancelled) {
             setSrc(result.uri)
+            postChooseFileHandler(result.uri)
         }
-        setMenuVisible(false)
     }
+
+    const cameraWay = async () => {
+        const status = await ImagePicker.requestCameraPermissionsAsync()
+
+        if (status !== ImagePicker.PermissionStatus.GRANTED) {
+            dispatch(setMessage(t('errors.camera_permission')))
+        }
+
+        const result = await ImagePicker.launchCameraAsync({
+            mediaTypes: MediaTypeOptions.Images,
+            quality: 0.5,
+        })
+
+        if (!result.cancelled) {
+            setSrc(result.uri)
+            postChooseFileHandler(result.uri)
+        }
+    }
+
+
 
     const uploadAvatarIconPressHandler = () => {
         setMenuVisible(true)
@@ -42,7 +70,7 @@ export default function UploadAvatar() {
         },
         {
             title: 'Camera',
-            handler: () => {}
+            handler: cameraWay
         }
     ]
 

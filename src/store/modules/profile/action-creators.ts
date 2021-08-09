@@ -3,6 +3,7 @@ import {BaseAction} from "../auth/types";
 
 export const SET_LANGUAGE = 'SET_LANGUAGE'
 export const REQUEST_LANGUAGE = 'REQUEST_LANGUAGE'
+export const UPLOAD_AVATAR = 'UPLOAD_AVATAR'
 
 export interface SetLanguageAction extends BaseAction {
     payload: LanguageType
@@ -10,6 +11,10 @@ export interface SetLanguageAction extends BaseAction {
 
 export interface RequestLanguageAction extends BaseAction {
     payload: undefined
+}
+
+export interface UploadAvatarAction extends BaseAction {
+    payload: string;
 }
 
 export const setLanguage = (language: LanguageType): SetLanguageAction => ({
@@ -20,4 +25,9 @@ export const setLanguage = (language: LanguageType): SetLanguageAction => ({
 export const requestLanguage = (): RequestLanguageAction => ({
     type: REQUEST_LANGUAGE,
     payload: undefined
+})
+
+export const uploadAvatar = (payload: string): UploadAvatarAction => ({
+    type: UPLOAD_AVATAR,
+    payload
 })
