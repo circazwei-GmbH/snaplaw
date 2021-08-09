@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 import React, { ReactElement } from "react";
 import { View, StyleSheet, Text, SafeAreaView } from "react-native";
 import BackButton from "../basics/buttons/BackButton";
-=======
-import React, { ReactElement } from 'react'
-import { View, StyleSheet, Text } from "react-native"
-import BackButton from '../basics/buttons/BackButton'
->>>>>>> e231a40fa121abc4978354ff4c91b65890c2dfbc
 
 interface TopBarProps {
   children: ReactElement;

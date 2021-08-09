@@ -1,28 +1,16 @@
-<<<<<<< HEAD
 import React, { useState } from "react";
 import { Text, View, StyleSheet } from "react-native";
-import { t } from "i18n-js";
-=======
-import React, { useState } from 'react'
-import { Text, View, StyleSheet } from "react-native"
-import {useI18n} from "../../translator/i18n";
->>>>>>> e231a40fa121abc4978354ff4c91b65890c2dfbc
+import { useI18n } from "../../translator/i18n";
 
 interface VerificationCounterPropsInterface {
   sizeSmall: boolean;
 }
 
-<<<<<<< HEAD
 export default function ProfileHeadline({
   sizeSmall,
 }: VerificationCounterPropsInterface) {
-  const [verifications, setVerifications] = useState<number>(0);
-
-=======
-export default function ProfileHeadline({ size }: VerificationCounterPropsInterface) {
-  const [verifications] = useState<number>(0)
-  const {t} = useI18n()
->>>>>>> e231a40fa121abc4978354ff4c91b65890c2dfbc
+  const [verifications] = useState<number>(0);
+  const { t } = useI18n();
   return (
     <View style={sizeSmall ? styles.vertical : styles.horizontal}>
       <Text style={styles.textGray}>{t("my_profile.verified_gray")}</Text>

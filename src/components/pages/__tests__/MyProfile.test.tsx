@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import store from "../../../store/index";
 import MyProfile from "../MyProfile";
 import * as RootNavigation from "../../../router/RootNavigation";
+import { PROFILE_ROUTER } from "../../../router/ProfileRouterTypes";
 
 jest.mock("../../../router/RootNavigation");
 
@@ -31,5 +32,15 @@ describe("MyProfile", () => {
     expect(getByText("my_profile.buttons_text.sign_out")).toBeTruthy();
     expect(getByText("my_profile.buttons_text.delete_profile")).toBeTruthy();
   });
-  it("'My profile' button should navigate to profile page", () => {});
+
+  it("'My profile' button should navigate to profile page", () => {
+    const { getByTestId } = render(
+      <Provider store={store}>
+        <MyProfile />
+      </Provider>
+    );
+
+    fireEvent.press(getByTestId("BackButton.back"));
+    expect(RootNavigation.navigate(PROFILE_ROUTER.EDIT_PROFILE)).toBeCalled();
+  });
 });

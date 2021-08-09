@@ -27,6 +27,7 @@ export default function MyProfile(): JSX.Element {
       <ScrollView contentContainerStyle={styles.container}>
         <MyProfileAvatarBox />
         <ProfileButton
+          testID="MyProfile.my_profile"
           text={t("my_profile.buttons_text.my_profile")}
           onPress={() => RootNavigation.navigate(PROFILE_ROUTER.EDIT_PROFILE)}
           type="link"
