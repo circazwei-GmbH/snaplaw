@@ -44,6 +44,7 @@ export default function UploadAvatar() {
 
         if (status !== ImagePicker.PermissionStatus.GRANTED) {
             dispatch(setMessage(t('errors.camera_permission')))
+            return
         }
 
         const result = await ImagePicker.launchCameraAsync({
