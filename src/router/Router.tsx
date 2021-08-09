@@ -34,7 +34,7 @@ export default function Router() {
     }
 
     return (
-        token ? (
+        !token ? (
             <Tab.Navigator>
                 <Tab.Screen name="Homepage" component={Homepage} />
                 <Tab.Screen name="Settings">

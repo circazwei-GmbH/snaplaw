@@ -7,7 +7,7 @@ type ProfileStateInterface = {
     language: LanguageType | undefined
 }
 
-const initialState: ProfileStateInterface = {
+export const initialState: ProfileStateInterface = {
     language: undefined
 }
 
