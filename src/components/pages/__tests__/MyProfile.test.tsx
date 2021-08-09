@@ -1,10 +1,10 @@
 import React from "react";
 import { fireEvent, render } from "@testing-library/react-native";
 import { Provider } from "react-redux";
-import store from "../../../store/index";
 import MyProfile from "../MyProfile";
 import * as RootNavigation from "../../../router/RootNavigation";
-import { PROFILE_ROUTER } from "../../../router/ProfileRouterTypes";
+import store from "../../../store/index";
+import { createStore } from "@reduxjs/toolkit";
 
 jest.mock("../../../router/RootNavigation");
 
@@ -33,7 +33,7 @@ describe("MyProfile", () => {
     expect(getByText("my_profile.buttons_text.delete_profile")).toBeTruthy();
   });
 
-  it("'My profile' button should navigate to profile page", () => {
+  it("Buttons should call navigate event", () => {
     const { getByTestId } = render(
       <Provider store={store}>
         <MyProfile />
@@ -41,6 +41,9 @@ describe("MyProfile", () => {
     );
 
     fireEvent.press(getByTestId("MyProfile.my_profile"));
-    expect(RootNavigation.navigate(PROFILE_ROUTER.EDIT_PROFILE)).toBeCalled();
+    expect(RootNavigation.navigate).toBeCalled();
+
+    fireEvent.press(getByTestId("MyProfile.language"));
+    expect(RootNavigation.navigate).toBeCalled();
   });
 });

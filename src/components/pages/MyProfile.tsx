@@ -33,6 +33,7 @@ export default function MyProfile(): JSX.Element {
           type="link"
         />
         <ProfileButton
+          testID="MyProfile.language"
           text={t("my_profile.buttons_text.language")}
           onPress={() =>
             RootNavigation.navigate(PROFILE_ROUTER.CHANGE_LANGUAGE)
