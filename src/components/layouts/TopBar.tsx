@@ -10,7 +10,7 @@ interface TopBarProps {
   style?: object
 }
 
-export default function HeaderNavigation({
+export default function TopBar({
   children,
   pageName,
   leftButton,
