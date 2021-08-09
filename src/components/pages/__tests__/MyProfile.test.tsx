@@ -3,14 +3,24 @@ import { fireEvent, render } from "@testing-library/react-native";
 import { Provider } from "react-redux";
 import store from "../../../store/index";
 import MyProfile from "../MyProfile";
+import * as RootNavigation from "../../../router/RootNavigation";
+
+jest.mock("../../../router/RootNavigation");
+
+afterEach(() => {
+  jest.resetAllMocks();
+  jest.restoreAllMocks();
+});
 
 describe("MyProfile", () => {
-  it("Should display buttons", () => {
+  it("Should display page title and buttons text", () => {
     const { getByText } = render(
       <Provider store={store}>
         <MyProfile />
       </Provider>
     );
+
+    expect(getByText("my_profile.headline")).toBeTruthy();
 
     expect(getByText("my_profile.buttons_text.my_profile")).toBeTruthy();
     expect(getByText("my_profile.buttons_text.language")).toBeTruthy();
@@ -21,4 +31,5 @@ describe("MyProfile", () => {
     expect(getByText("my_profile.buttons_text.sign_out")).toBeTruthy();
     expect(getByText("my_profile.buttons_text.delete_profile")).toBeTruthy();
   });
+  it("'My profile' button should navigate to profile page", () => {});
 });
