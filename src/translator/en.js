@@ -108,5 +108,8 @@ export default {
             english: 'English',
             germany: 'Germany'
         }
+    },
+    edit_profile: {
+        title: 'My Profile'
     }
 }

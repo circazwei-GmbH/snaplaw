@@ -1,100 +1,84 @@
-import React from 'react'
-import { StyleSheet, ScrollView } from 'react-native'
-import { useAppDispatch } from "../../store/hooks"
-import { killToken } from '../../store/modules/auth/slice'
-import TopBar from '../layouts/TopBar'
-import ProfileButton from '../basics/buttons/ProfileButton'
-import MyProfileAvatarBox from '../features/MyProfileAvatarBox'
-import NotificationBell from '../components/NotificationBell'
-import * as RootNavigation from '../../router/RootNavigation'
-import {PROFILE_ROUTER} from "../../router/ProfileRouterTypes";
-import { useI18n} from "../../translator/i18n";
-
-type LinkType = {
-  title: string,
-  handler: () => void,
-  type?: 'link'
-}
-
-const Links: LinkType[] = [
-  {
-    title: 'my_profile.buttons_text.my_profile',
-    handler: () => alert('Hi'),
-    type: 'link'
-  }
-]
+import React from "react";
+import { StyleSheet, ScrollView } from "react-native";
+import { useAppDispatch } from "../../store/hooks";
+import { killToken } from "../../store/modules/auth/slice";
+import TopBar from "../layouts/TopBar";
+import ProfileButton from "../basics/buttons/ProfileButton";
+import MyProfileAvatarBox from "../features/MyProfileAvatarBox";
+import NotificationBell from "../components/NotificationBell";
+import * as RootNavigation from "../../router/RootNavigation";
+import { PROFILE_ROUTER } from "../../router/ProfileRouterTypes";
+import { useI18n } from "../../translator/i18n";
 
 export default function MyProfile(): JSX.Element {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const killTokenHandler = () => {
-    dispatch(killToken())
-  }
+    dispatch(killToken());
+  };
 
-  const { t } = useI18n()
+  const { t } = useI18n();
 
   return (
     <TopBar
-      pageName={t('my_profile.headline')}
+      pageName={t("my_profile.headline")}
       leftButton={<NotificationBell />}
       style={styles.topBarBackground}
     >
       <ScrollView contentContainerStyle={styles.container}>
         <MyProfileAvatarBox />
-        {Links.map((link, index) => (
-            <ProfileButton
-                text={t(link.title)}
-                onPress={link.handler}
-                type={link.type}
-                key={`${link.title}${index}`}
-            />
-        ))}
         <ProfileButton
-          text={t('my_profile.buttons_text.language')}
-          onPress={() => RootNavigation.navigate(PROFILE_ROUTER.CHANGE_LANGUAGE)}
+          testID="MyProfile.my_profile"
+          text={t("my_profile.buttons_text.my_profile")}
+          onPress={() => RootNavigation.navigate(PROFILE_ROUTER.EDIT_PROFILE)}
           type="link"
         />
         <ProfileButton
-          text={t('my_profile.buttons_text.notifications')}
-          onPress={() => alert('Hi')}
+          testID="MyProfile.language"
+          text={t("my_profile.buttons_text.language")}
+          onPress={() =>
+            RootNavigation.navigate(PROFILE_ROUTER.CHANGE_LANGUAGE)
+          }
           type="link"
         />
         <ProfileButton
-          text={t('my_profile.buttons_text.invite_friends')}
-          onPress={() => alert('Hi')}
+          text={t("my_profile.buttons_text.notifications")}
+          onPress={() => alert("Hi")}
           type="link"
         />
         <ProfileButton
-          text={t('my_profile.buttons_text.private_policy')}
-          onPress={() => alert('Hi')}
+          text={t("my_profile.buttons_text.invite_friends")}
+          onPress={() => alert("Hi")}
           type="link"
         />
         <ProfileButton
-          text={t('my_profile.buttons_text.change_password')}
-          onPress={() => alert('Hi')}
+          text={t("my_profile.buttons_text.private_policy")}
+          onPress={() => alert("Hi")}
           type="link"
         />
         <ProfileButton
-          text={t('my_profile.buttons_text.sign_out')}
+          text={t("my_profile.buttons_text.change_password")}
+          onPress={() => alert("Hi")}
+          type="link"
+        />
+        <ProfileButton
+          text={t("my_profile.buttons_text.sign_out")}
           onPress={killTokenHandler}
         />
         <ProfileButton
-          text={t('my_profile.buttons_text.delete_profile')}
-          onPress={() => alert('Hi')}
+          text={t("my_profile.buttons_text.delete_profile")}
+          onPress={() => alert("Hi")}
         />
       </ScrollView>
     </TopBar>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
-  safe: {
-    flex: 1
-  },
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     paddingBottom: 10,
   },
   topBarBackground: {
-    backgroundColor: '#F8FCFF'
-  }
-})
+    backgroundColor: "#F8FCFF",
+  },
+});
