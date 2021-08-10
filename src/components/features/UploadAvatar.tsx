@@ -2,13 +2,13 @@ import React, {useState} from 'react'
 import {StyleSheet, TouchableOpacity, View} from "react-native";
 import UserAvatar from "../components/UserAvatar";
 import {MaterialCommunityIcons} from '@expo/vector-icons';
-import * as ImagePicker from 'expo-image-picker';
-import {MediaTypeOptions} from 'expo-image-picker';
 import {useAppDispatch} from "../../store/hooks";
-import {setMessage} from "../../store/modules/main/slice";
 import Menu, {ButtonType} from "./Modals/Menu";
 import {useI18n} from "../../translator/i18n";
-import {uploadAvatar} from "../../store/modules/profile/action-creators";
+import {uploadAvatar} from "../../store/modules/media/action-creators";
+import {cameraWay, libraryWay} from "../../services/media/media-picker";
+import {PermissionNotGranted} from "../../services/media/errors";
+import {setMessage} from "../../store/modules/main/slice";
 
 export default function UploadAvatar() {
     const [src, setSrc] = useState('https://n1s2.starhit.ru/6a/46/ae/6a46aeed947a183d67d1bc48211151bf/480x496_0_2bbde84177c9ff1c2299a26a0f69f69c@480x496_0xac120003_4430520541578509619.jpg')
@@ -19,46 +19,25 @@ export default function UploadAvatar() {
     const postChooseFileHandler = (uri: string) => {
         setMenuVisible(false)
         dispatch(uploadAvatar(uri))
+        setSrc(uri)
     }
 
-    const libraryWay = async () => {
-        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync()
-        if (status !== ImagePicker.PermissionStatus.GRANTED) {
-            dispatch(setMessage(t('errors.galary_permission')))
-            return
+    const buttonPickerHandler = (way: Function) => async () => {
+        try {
+            const uri = await way()
+
+            if (uri) {
+                postChooseFileHandler(uri)
+            }
+        } catch (error) {
+            if (error instanceof PermissionNotGranted) {
+                dispatch(setMessage(t(error.message)))
+            } else {
+                dispatch(setMessage(t('errors.abstract')))
+            }
         }
 
-        const result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: MediaTypeOptions.Images,
-            quality: 0.5
-        })
-
-        if (!result.cancelled) {
-            setSrc(result.uri)
-            postChooseFileHandler(result.uri)
-        }
     }
-
-    const cameraWay = async () => {
-        const status = await ImagePicker.requestCameraPermissionsAsync()
-
-        if (status !== ImagePicker.PermissionStatus.GRANTED) {
-            dispatch(setMessage(t('errors.camera_permission')))
-            return
-        }
-
-        const result = await ImagePicker.launchCameraAsync({
-            mediaTypes: MediaTypeOptions.Images,
-            quality: 0.5,
-        })
-
-        if (!result.cancelled) {
-            setSrc(result.uri)
-            postChooseFileHandler(result.uri)
-        }
-    }
-
-
 
     const uploadAvatarIconPressHandler = () => {
         setMenuVisible(true)
@@ -67,11 +46,11 @@ export default function UploadAvatar() {
     const menuButtons: ButtonType[] = [
         {
             title: 'Library',
-            handler: libraryWay
+            handler: buttonPickerHandler(libraryWay)
         },
         {
             title: 'Camera',
-            handler: cameraWay
+            handler: buttonPickerHandler(cameraWay)
         }
     ]
 
