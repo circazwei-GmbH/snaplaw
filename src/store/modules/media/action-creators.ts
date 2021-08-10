@@ -1,12 +1,20 @@
 import {BaseAction} from "../auth/types";
 
-export const UPLOAD_AVATAR = 'UPLOAD_AVATAR'
+export const UPLOAD_MEDIA = 'UPLOAD_MEDIA'
 
-export interface UploadAvatarAction extends BaseAction {
-    payload: string;
+export type MediaPayload = {
+    uri: string,
+    folder: string
 }
 
-export const uploadAvatar = (payload: string): UploadAvatarAction => ({
-    type: UPLOAD_AVATAR,
-    payload
+export interface UploadMediaAction extends BaseAction {
+    payload: MediaPayload;
+}
+
+export const uploadMedia = (uri: string, folder: string): UploadMediaAction => ({
+    type: UPLOAD_MEDIA,
+    payload: {
+        uri,
+        folder
+    }
 })

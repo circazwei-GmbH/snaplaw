@@ -1,7 +1,6 @@
 import React from 'react'
 import { StyleSheet, ScrollView } from 'react-native'
 import { useAppDispatch } from "../../store/hooks"
-import { killToken } from '../../store/modules/auth/slice'
 import TopBar from '../layouts/TopBar'
 import ProfileButton from '../basics/buttons/ProfileButton'
 import MyProfileAvatarBox from '../features/MyProfileAvatarBox'
@@ -9,6 +8,7 @@ import NotificationBell from '../components/NotificationBell'
 import * as RootNavigation from '../../router/RootNavigation'
 import {PROFILE_ROUTER} from "../../router/ProfileRouterTypes";
 import { useI18n} from "../../translator/i18n";
+import {clearToken} from "../../store/modules/auth/action-creators";
 
 type LinkType = {
   title: string,
@@ -27,7 +27,7 @@ const Links: LinkType[] = [
 export default function MyProfile(): JSX.Element {
   const dispatch = useAppDispatch()
   const killTokenHandler = () => {
-    dispatch(killToken())
+    dispatch(clearToken())
   }
 
   const { t } = useI18n()
