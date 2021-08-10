@@ -10,9 +10,7 @@ interface ButtonPropsInterface {
 
 export default function ProfileButton({ text, onPress, type }: ButtonPropsInterface) {
   return (
-    <TouchableOpacity
-      onPress={onPress}
-    >
+    <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
         <Text style={styles.buttonText}>
           {text}

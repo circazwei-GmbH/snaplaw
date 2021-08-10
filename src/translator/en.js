@@ -110,6 +110,11 @@ export default {
         }
     },
     edit_profile: {
-        title: 'My Profile'
+        title: 'My Profile',
+        buttons_text: {
+            edit: 'Edit',
+            cancel: 'Cancel',
+            save: 'Save'
+        }
     }
 }
