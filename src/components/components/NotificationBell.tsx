@@ -16,14 +16,15 @@ export default function NotificationBell(): JSX.Element {
 const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
-    alignItems: "center",
-    width: 45,
+    alignItems: "flex-start",
+    paddingLeft: 16,
+    width: 100,
     height: 45,
   },
   pinkDot: {
     position: "absolute",
     top: 7,
-    right: 10,
+    left: 28,
     width: 12,
     height: 12,
     backgroundColor: "#FF79CA",

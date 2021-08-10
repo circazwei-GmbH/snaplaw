@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import { Pressable, StyleSheet } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as RootNavigation from "../../../router/RootNavigation";
@@ -22,8 +22,9 @@ export default function BackButton(): JSX.Element {
 const styles = StyleSheet.create({
   backButton: {
     justifyContent: "center",
-    alignItems: "center",
-    width: 45,
+    alignItems: "flex-start",
+    paddingLeft: 16,
+    width: 100,
     height: 45,
   },
 });

@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { View, StyleSheet, Text, SafeAreaView } from "react-native";
+import { View, StyleSheet, Text, SafeAreaView, Platform } from "react-native";
 import BackButton from "../basics/buttons/BackButton";
 
 interface TopBarProps {
@@ -19,7 +19,11 @@ export default function TopBar({
 }: TopBarProps) {
   return (
     <SafeAreaView style={styles.safe}>
-      <View style={[styles.header, style]}>
+      <View 
+        style={[
+          Platform.OS === 'ios' ? styles.headerIOS : styles.headerANDROID, style
+        ]}
+      >
         {leftButton === undefined ? <BackButton /> : leftButton}
         <Text style={styles.headerText}>{pageName}</Text>
         {rightButton === undefined ? (
@@ -37,8 +41,14 @@ const styles = StyleSheet.create({
   safe: {
     flex: 1,
   },
-  header: {
+  headerIOS: {
     paddingTop: 47,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  headerANDROID: {
+    paddingTop: 25,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -49,7 +59,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   buttonPlaceholder: {
-    width: 45,
+    width: 80,
     height: 45,
   },
 });
