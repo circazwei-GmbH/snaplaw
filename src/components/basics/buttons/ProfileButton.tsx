@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity, View, StyleSheet, Text } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
+import { SimpleLineIcons } from "@expo/vector-icons";
 
 interface ButtonPropsInterface {
   testID?: string;
@@ -20,7 +20,7 @@ export default function ProfileButton({
       <View style={styles.container}>
         <Text style={styles.buttonText}>{text}</Text>
         {type === "link" ? (
-          <MaterialIcons name="arrow-forward-ios" size={16} color="#668395" />
+          <SimpleLineIcons name="arrow-right" size={16} color="#668395" />
         ) : null}
       </View>
     </TouchableOpacity>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Pressable, StyleSheet } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
+import { SimpleLineIcons } from "@expo/vector-icons";
 import * as RootNavigation from "../../../router/RootNavigation";
 
 export default function BackButton(): JSX.Element {
@@ -14,7 +14,7 @@ export default function BackButton(): JSX.Element {
       onPress={backHandler}
       style={styles.backButton}
     >
-      <MaterialIcons name="arrow-back-ios" size={24} />
+      <SimpleLineIcons name="arrow-left" size={16} color="#668395" />
     </Pressable>
   );
 }
