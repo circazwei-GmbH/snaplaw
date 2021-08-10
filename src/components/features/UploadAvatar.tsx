@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {StyleSheet, TouchableOpacity, View} from "react-native";
 import UserAvatar from "../components/UserAvatar";
 import {MaterialCommunityIcons} from '@expo/vector-icons';
-import {useAppDispatch} from "../../store/hooks";
+import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import Menu, {ButtonType} from "./Modals/Menu";
 import {useI18n} from "../../translator/i18n";
 import {uploadMedia} from "../../store/modules/media/action-creators";
@@ -10,17 +10,17 @@ import {cameraWay, libraryWay} from "../../services/media/media-picker";
 import {PermissionNotGranted} from "../../services/media/errors";
 import {setMessage} from "../../store/modules/main/slice";
 import {MEDIA_FOLDERS} from "../../store/modules/media/constants";
+import {updateAvatar} from "../../store/modules/profile/action-creators";
 
 export default function UploadAvatar() {
-    const [src, setSrc] = useState('https://n1s2.starhit.ru/6a/46/ae/6a46aeed947a183d67d1bc48211151bf/480x496_0_2bbde84177c9ff1c2299a26a0f69f69c@480x496_0xac120003_4430520541578509619.jpg')
     const [menuVisible, setMenuVisible] = useState(false);
     const dispatch = useAppDispatch();
     const { t } = useI18n()
+    const avatar = useAppSelector(state => state.profile.avatar)
 
     const postChooseFileHandler = (uri: string) => {
         setMenuVisible(false)
-        dispatch(uploadMedia(uri, MEDIA_FOLDERS.AVATAR))
-        setSrc(uri)
+        dispatch(uploadMedia(uri, MEDIA_FOLDERS.AVATAR, updateAvatar()))
     }
 
     const buttonPickerHandler = (way: Function) => async () => {
@@ -57,7 +57,7 @@ export default function UploadAvatar() {
 
     return (
         <View style={styles.container}>
-            <UserAvatar url={src} size="small" />
+            <UserAvatar url={avatar} size="small" />
             <View style={styles.uploadIcon}>
                 <TouchableOpacity onPress={uploadAvatarIconPressHandler}>
                     <MaterialCommunityIcons name="camera-plus-outline" size={24} color="#668395" />

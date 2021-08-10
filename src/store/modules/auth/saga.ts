@@ -38,6 +38,7 @@ import {
 import {Translator} from "../../../translator/i18n";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {TOKEN_STORAGE_KEY} from "./constants";
+import BaseApi from '../../../services/api'
 
 function* fetchSignUp(action: RequestSignUpAction) {
     try {
@@ -153,6 +154,7 @@ function* fetchChangePassword({ payload }: ChangePasswordAction) {
     try {
         yield call(API.changePassword, payload)
         yield put(setToken(payload.token))
+        yield call(BaseApi.setToken, payload.token)
     } catch (error) {
         if (error.response?.data.code === NEW_PASSWORD_SAME_AS_OLD) {
             return yield put(changePasswordFailed(Translator.getInstance().trans('change_password.errors.new_password_are_same_as_old')))
@@ -165,6 +167,7 @@ function* saveTokenHandler({payload} : SaveTokenAction) {
     try {
         yield call(AsyncStorage.setItem, TOKEN_STORAGE_KEY, payload)
         yield put(setToken(payload))
+        yield call(BaseApi.setToken, payload)
     } catch (error) {
         yield put(setMessage(Translator.getInstance().trans('errors.abstract')))
     }
@@ -174,6 +177,7 @@ function* requestTokenHandler({} : RequestTokenAction) {
     try {
         const token = yield call(AsyncStorage.getItem, TOKEN_STORAGE_KEY)
         yield put(setToken(token))
+        yield call(BaseApi.setToken, token)
     } catch (error) {
         yield put(setMessage(Translator.getInstance().trans('errors.abstract')))
     }
@@ -183,6 +187,7 @@ function* clearToken() {
     try {
         yield call(AsyncStorage.removeItem, TOKEN_STORAGE_KEY)
         yield put(killToken())
+        yield call(BaseApi.setToken, undefined)
     } catch (error) {
         yield put(setMessage(Translator.getInstance().trans('errors.abstract')))
     }
