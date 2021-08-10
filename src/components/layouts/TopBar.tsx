@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   buttonPlaceholder: {
-    width: 80,
+    width: 100,
     height: 45,
   },
 });
