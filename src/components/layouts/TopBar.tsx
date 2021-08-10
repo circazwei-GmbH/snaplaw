@@ -21,7 +21,9 @@ export default function TopBar({
     <SafeAreaView style={styles.safe}>
       <View 
         style={[
-          Platform.OS === 'ios' ? styles.headerIOS : styles.headerANDROID, style
+          Platform.OS === 'ios' ? styles.headerIOS : styles.headerANDROID,
+          styles.header, 
+          style
         ]}
       >
         {leftButton === undefined ? <BackButton /> : leftButton}
@@ -41,17 +43,17 @@ const styles = StyleSheet.create({
   safe: {
     flex: 1,
   },
-  headerIOS: {
-    paddingTop: 47,
+  header: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
   },
+  headerIOS: {
+    paddingTop: 47,
+    
+  },
   headerANDROID: {
     paddingTop: 25,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
   },
   headerText: {
     textAlign: "center",
