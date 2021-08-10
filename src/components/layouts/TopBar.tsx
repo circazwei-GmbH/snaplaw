@@ -18,7 +18,7 @@ export default function TopBar({
   style,
 }: TopBarProps) {
   return (
-    <SafeAreaView style={styles.safe}>
+    <>
       <View 
         style={[
           Platform.OS === 'ios' ? styles.headerIOS : styles.headerANDROID,
@@ -35,14 +35,11 @@ export default function TopBar({
         )}
       </View>
       {children}
-    </SafeAreaView>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  safe: {
-    flex: 1,
-  },
   header: {
     flexDirection: "row",
     alignItems: "center",
