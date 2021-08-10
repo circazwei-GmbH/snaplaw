@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
-import { Feather } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function NotificationBell(): JSX.Element {
   const [haveNew] = useState(true);
 
   return (
     <View style={styles.container}>
-      <Feather name="bell" size={24} color="#668395" />
+      <Ionicons name="notifications-outline" size={24} color="#668395" />
       {haveNew ? <View testID="bell.pinkDot" style={styles.pinkDot} /> : null}
     </View>
   );
@@ -16,14 +16,15 @@ export default function NotificationBell(): JSX.Element {
 const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
-    alignItems: "center",
-    width: 45,
+    alignItems: "flex-start",
+    paddingLeft: 16,
+    width: 100,
     height: 45,
   },
   pinkDot: {
     position: "absolute",
     top: 7,
-    right: 10,
+    left: 28,
     width: 12,
     height: 12,
     backgroundColor: "#FF79CA",
