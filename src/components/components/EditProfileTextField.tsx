@@ -39,7 +39,12 @@ export default function EditProfileTextField({
   };
 
   return (
-    <View>
+    <View
+      style={[
+        styles.inputContainer,
+        focused ? styles.borderFocused : styles.borderNotFocused,
+      ]}
+    >
       <Text
         style={[
           styles.label,
@@ -51,7 +56,6 @@ export default function EditProfileTextField({
         ]}
       >
         {placeholder}
-        <Text style={styles.redText}>*</Text>
       </Text>
       <TextInput
         {...props}
@@ -79,32 +83,39 @@ export default function EditProfileTextField({
 }
 
 const styles = StyleSheet.create({
-  emptyInput: {
-    backgroundColor: "#EFF7FD",
-    borderRadius: 10,
-    height: 44,
-    fontSize: 15,
+  inputContainer: {
+    height: 67,
+    justifyContent: "flex-end",
     paddingHorizontal: 16,
+    borderBottomWidth: 1,
+  },
+  borderNotFocused: {
+    borderBottomColor: "#EFF7FD",
+  },
+  borderFocused: {
+    borderBottomColor: "#C3E1F6",
+  },
+  emptyInput: {
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    height: 40,
+    fontSize: 15,
     fontFamily: "P",
   },
   fullInput: {
     backgroundColor: "transparent",
-    borderWidth: 1,
-    borderColor: "#BBD1DE",
     fontSize: 17,
   },
   inputWithText: {
     fontSize: 17,
   },
   focuslessInput: {
-    backgroundColor: "#EFF7FD",
     borderWidth: 1,
     borderColor: "transparent",
   },
   label: {
     color: "#1696E2",
     fontSize: 14,
-    marginBottom: 7,
   },
   labelWithEmptyInputFixed: {
     opacity: 0,

@@ -1,7 +1,7 @@
 import React from "react";
 import TopBar from "../layouts/TopBar";
 import { useI18n } from "../../translator/i18n";
-import { View, StyleSheet, TextInput } from "react-native";
+import { View, StyleSheet } from "react-native";
 import UploadAvatar from "../features/UploadAvatar";
 import TextButton from "../basics/buttons/TextButton";
 import EditProfileTextField from "../components/EditProfileTextField";
@@ -21,8 +21,12 @@ export default function EditProfile() {
       }
     >
       <View style={styles.container}>
-        <UploadAvatar />
-        <View style={styles.inputBox}></View>
+        <View style={styles.uploadAvatarBox}>
+          <UploadAvatar />
+        </View>
+        <View style={styles.inputBox}>
+          <EditProfileTextField placeholder={"First name"} />
+        </View>
       </View>
     </TopBar>
   );
@@ -30,11 +34,15 @@ export default function EditProfile() {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
+    flex: 1,
+  },
+  uploadAvatarBox: {
     alignItems: "center",
+    width: "100%",
+    paddingBottom: 15,
   },
   inputBox: {
+    justifyContent: "flex-start",
     width: "100%",
-    paddingBottom: 45,
   },
 });
