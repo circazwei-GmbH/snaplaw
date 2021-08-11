@@ -12,7 +12,7 @@ import {
     ChangePasswordAction,
     ForgotPasswordAction,
     RequestSignInAction,
-    RequestSignUpAction, RequestTokenAction, SaveTokenAction,
+    RequestSignUpAction, SaveTokenAction,
     VerificationAction,
     VerificationResendAction
 } from "./types";
@@ -173,7 +173,7 @@ function* saveTokenHandler({payload} : SaveTokenAction) {
     }
 }
 
-function* requestTokenHandler({} : RequestTokenAction) {
+function* requestTokenHandler() {
     try {
         const token = yield call(AsyncStorage.getItem, TOKEN_STORAGE_KEY)
         yield put(setToken(token))
