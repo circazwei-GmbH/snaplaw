@@ -10,7 +10,7 @@ import {cameraWay, libraryWay} from "../../services/media/media-picker";
 import {PermissionNotGranted} from "../../services/media/errors";
 import {setMessage} from "../../store/modules/main/slice";
 import {MEDIA_FOLDERS} from "../../store/modules/media/constants";
-import {updateAvatar} from "../../store/modules/profile/action-creators";
+import {deleteAvatar, updateAvatar} from "../../store/modules/profile/action-creators";
 
 export default function UploadAvatar() {
     const [menuVisible, setMenuVisible] = useState(false);
@@ -52,6 +52,13 @@ export default function UploadAvatar() {
         {
             title: 'Camera',
             handler: buttonPickerHandler(cameraWay)
+        },
+        {
+            title: 'Delete',
+            handler: () => {
+                dispatch(deleteAvatar())
+                setMenuVisible(false)
+            }
         }
     ]
 

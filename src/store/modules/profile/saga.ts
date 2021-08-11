@@ -1,5 +1,12 @@
 import {takeLatest, put, call} from "redux-saga/effects";
-import {REQUEST_LANGUAGE, SET_LANGUAGE, SetLanguageAction, UPDATE_AVATAR, UpdateAvatarAction} from "./action-creators";
+import {
+    DELETE_AVATAR,
+    REQUEST_LANGUAGE,
+    SET_LANGUAGE,
+    SetLanguageAction,
+    UPDATE_AVATAR,
+    UpdateAvatarAction
+} from "./action-creators";
 import {setMessage} from "../main/slice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Reduser from './slice'
@@ -35,12 +42,20 @@ function* updateAvatar({payload}: UpdateAvatarAction) {
     }
 }
 
-
+function* deleteAvatar() {
+    try {
+        yield call(API.updateUserAvatar, undefined)
+        yield put(setAvatar(undefined))
+    } catch (error) {
+        yield put(setMessage(Translator.getInstance().trans('errors.abstract')))
+    }
+}
 
 function* profileSaga() {
     yield takeLatest(SET_LANGUAGE, setLanguage)
     yield takeLatest(REQUEST_LANGUAGE, requestLanguage)
     yield takeLatest(UPDATE_AVATAR, updateAvatar)
+    yield takeLatest(DELETE_AVATAR, deleteAvatar)
 }
 
 export default profileSaga;
