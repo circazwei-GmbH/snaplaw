@@ -1,13 +1,13 @@
-import React, { ReactElement } from 'react'
-import { View, StyleSheet, Text } from "react-native"
-import BackButton from '../basics/buttons/BackButton'
+import React, { ReactElement } from "react";
+import { View, StyleSheet, Text, SafeAreaView, Platform } from "react-native";
+import BackButton from "../basics/buttons/BackButton";
 
 interface TopBarProps {
-  children: ReactElement
-  pageName?: string
-  leftButton?: JSX.Element
-  rightButton?: JSX.Element
-  style?: object
+  children: ReactElement;
+  pageName?: string;
+  leftButton?: JSX.Element;
+  rightButton?: JSX.Element;
+  style?: object;
 }
 
 export default function TopBar({
@@ -15,42 +15,50 @@ export default function TopBar({
   pageName,
   leftButton,
   rightButton,
-  style
+  style,
 }: TopBarProps) {
   return (
     <>
-      <View style={[styles.header, style]}>
-        {
-          leftButton === undefined ? <BackButton /> : leftButton
-        }
-        <Text style={styles.headerText}>
-          {pageName}
-        </Text>
-        {
-          rightButton === undefined
-            ? <View style={styles.buttonPlaceholder} />
-            : rightButton
-        }
+      <View 
+        style={[
+          Platform.OS === 'ios' ? styles.headerIOS : styles.headerANDROID,
+          styles.header, 
+          style
+        ]}
+      >
+        {leftButton === undefined ? <BackButton /> : leftButton}
+        <Text style={styles.headerText}>{pageName}</Text>
+        {rightButton === undefined ? (
+          <View style={styles.buttonPlaceholder} />
+        ) : (
+          rightButton
+        )}
       </View>
       {children}
     </>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   header: {
-    paddingTop: 47,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+  },
+  headerIOS: {
+    paddingTop: 47,
+    
+  },
+  headerANDROID: {
+    paddingTop: 25,
   },
   headerText: {
     textAlign: "center",
-    fontFamily: 'OS-SB',
-    fontSize: 17
+    fontFamily: "OS-SB",
+    fontSize: 17,
   },
   buttonPlaceholder: {
-    width: 45,
+    width: 100,
     height: 45,
-  }
-})
+  },
+});

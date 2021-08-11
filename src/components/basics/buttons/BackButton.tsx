@@ -1,29 +1,30 @@
-import React, { ReactElement } from 'react'
-import { Pressable, StyleSheet } from "react-native"
-import { MaterialIcons } from '@expo/vector-icons'
-import * as RootNavigation from '../../../router/RootNavigation'
+import React from "react";
+import { Pressable, StyleSheet } from "react-native";
+import { SimpleLineIcons } from "@expo/vector-icons";
+import * as RootNavigation from "../../../router/RootNavigation";
 
 export default function BackButton(): JSX.Element {
   const backHandler = () => {
-    RootNavigation.pop()
-  }
+    RootNavigation.pop();
+  };
 
   return (
     <Pressable
-      testID="HeaderNavigation.back"
+      testID="BackButton.back"
       onPress={backHandler}
       style={styles.backButton}
     >
-      <MaterialIcons name="arrow-back-ios" size={24} />
+      <SimpleLineIcons name="arrow-left" size={16} color="#668395" />
     </Pressable>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   backButton: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 45,
+    justifyContent: "center",
+    alignItems: "flex-start",
+    paddingLeft: 16,
+    width: 100,
     height: 45,
-  }
-})
+  },
+});
