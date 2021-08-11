@@ -1,8 +1,8 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import {
-    CHANGE_PASSWORD_REQUESTED,
-    FORGOT_PASSWORD_REQUESTED,
-    requestVerificationResend,
+    CHANGE_PASSWORD_REQUESTED, CLEAR_TOKEN,
+    FORGOT_PASSWORD_REQUESTED, REQUEST_TOKEN,
+    requestVerificationResend, SAVE_TOKEN, saveToken,
     SIGNIN_REQUESTED,
     SIGNUP_REQUESTED,
     VERIFICATION_REQUESTED,
@@ -12,7 +12,7 @@ import {
     ChangePasswordAction,
     ForgotPasswordAction,
     RequestSignInAction,
-    RequestSignUpAction,
+    RequestSignUpAction, RequestTokenAction, SaveTokenAction,
     VerificationAction,
     VerificationResendAction
 } from "./types";
@@ -23,7 +23,7 @@ import {
     setToken,
     clearSignInErrors,
     verificationFailed,
-    forgotPasswordFailed, changePasswordFailed
+    forgotPasswordFailed, changePasswordFailed, killToken
 } from './slice'
 import { setMessage, setModal } from '../main/slice'
 import {AUTH_ROUTE} from "../../../router/AuthRouterTypes";
@@ -36,6 +36,9 @@ import {
     USER_NOT_UNIQUE, VERIFICATION_CODE_IS_INCORRECT
 } from "../../../services/error-codes";
 import {Translator} from "../../../translator/i18n";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {TOKEN_STORAGE_KEY} from "./constants";
+import BaseApi from '../../../services/api'
 
 function* fetchSignUp(action: RequestSignUpAction) {
     try {
@@ -60,7 +63,7 @@ function* fetchSignIn(action: RequestSignInAction) {
     try {
         yield put(clearSignInErrors())
         const response = yield call(API.signIn, action.payload)
-        yield put(setToken(response.data.token))
+        yield put(saveToken(response.data.token))
     } catch (error) {
         if (error.response?.data.code === USER_NOT_FOUND_LOGIN) {
             return yield put(signInFailed({
@@ -95,7 +98,7 @@ function* fetchVerification(action: VerificationAction) {
                 token: response.data.token
             })
         }
-        yield put(setToken(response.data.token))
+        yield put(saveToken(response.data.token))
     } catch (error) {
         if (error.response?.data.code === USER_NOT_FOUND) {
             return yield put(verificationFailed(Translator.getInstance().trans('verification.errors.user_not_found')))
@@ -151,10 +154,41 @@ function* fetchChangePassword({ payload }: ChangePasswordAction) {
     try {
         yield call(API.changePassword, payload)
         yield put(setToken(payload.token))
+        yield call(BaseApi.setToken, payload.token)
     } catch (error) {
         if (error.response?.data.code === NEW_PASSWORD_SAME_AS_OLD) {
             return yield put(changePasswordFailed(Translator.getInstance().trans('change_password.errors.new_password_are_same_as_old')))
         }
+        yield put(setMessage(Translator.getInstance().trans('errors.abstract')))
+    }
+}
+
+function* saveTokenHandler({payload} : SaveTokenAction) {
+    try {
+        yield call(AsyncStorage.setItem, TOKEN_STORAGE_KEY, payload)
+        yield put(setToken(payload))
+        yield call(BaseApi.setToken, payload)
+    } catch (error) {
+        yield put(setMessage(Translator.getInstance().trans('errors.abstract')))
+    }
+}
+
+function* requestTokenHandler({} : RequestTokenAction) {
+    try {
+        const token = yield call(AsyncStorage.getItem, TOKEN_STORAGE_KEY)
+        yield put(setToken(token))
+        yield call(BaseApi.setToken, token)
+    } catch (error) {
+        yield put(setMessage(Translator.getInstance().trans('errors.abstract')))
+    }
+}
+
+function* clearToken() {
+    try {
+        yield call(AsyncStorage.removeItem, TOKEN_STORAGE_KEY)
+        yield put(killToken())
+        yield call(BaseApi.setToken, undefined)
+    } catch (error) {
         yield put(setMessage(Translator.getInstance().trans('errors.abstract')))
     }
 }
@@ -166,6 +200,9 @@ function* authSaga() {
     yield takeLatest(VERIFICATION_RESEND_REQUESTED, fetchResendVerificationCode)
     yield takeLatest(FORGOT_PASSWORD_REQUESTED, fetchForgotPassword)
     yield takeLatest(CHANGE_PASSWORD_REQUESTED, fetchChangePassword)
+    yield takeLatest(SAVE_TOKEN, saveTokenHandler)
+    yield takeLatest(REQUEST_TOKEN, requestTokenHandler)
+    yield takeLatest(CLEAR_TOKEN, clearToken)
 }
 
 export default authSaga;

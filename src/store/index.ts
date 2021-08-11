@@ -5,6 +5,7 @@ import profile from './modules/profile/slice'
 import createSagaMiddleware from 'redux-saga'
 import authSaga from './modules/auth/saga'
 import profileSaga from "./modules/profile/saga";
+import mediaSaga from "./modules/media/saga";
 
 const sagaAuthMiddleware = createSagaMiddleware()
 
@@ -19,6 +20,7 @@ const store = configureStore({
 
 sagaAuthMiddleware.run(authSaga)
 sagaAuthMiddleware.run(profileSaga)
+sagaAuthMiddleware.run(mediaSaga)
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch

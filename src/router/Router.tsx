@@ -15,6 +15,7 @@ import {PROFILE_ROUTER} from "./ProfileRouterTypes";
 import ChangeLanguage from "../components/pages/ChangeLanguage";
 import {requestLanguage} from "../store/modules/profile/action-creators";
 import EditProfile from "../components/pages/EditProfile";
+import {requestToken} from "../store/modules/auth/action-creators";
 
 const Stack = createStackNavigator()
 const ProfileStack = createStackNavigator()
@@ -28,6 +29,7 @@ export default function Router() {
 
     useEffect(() => {
         dispatch(requestLanguage())
+        dispatch(requestToken())
     }, [dispatch])
 
     if (!language) {
@@ -35,7 +37,7 @@ export default function Router() {
     }
 
     return (
-        !token ? (
+        token ? (
             <Tab.Navigator>
                 <Tab.Screen name="Homepage" component={Homepage} />
                 <Tab.Screen name="Settings">

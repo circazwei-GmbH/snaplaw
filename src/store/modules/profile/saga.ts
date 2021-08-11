@@ -1,15 +1,19 @@
 import {takeLatest, put, call} from "redux-saga/effects";
-import {REQUEST_LANGUAGE, SET_LANGUAGE, SetLanguageAction} from "./action-creators";
+import {REQUEST_LANGUAGE, SET_LANGUAGE, SetLanguageAction, UPDATE_AVATAR, UpdateAvatarAction} from "./action-creators";
 import {setMessage} from "../main/slice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Reduser from './slice'
+import {Translator} from "../../../translator/i18n";
+import {setAvatar} from "./slice";
+import API from '../../../services/profile/index'
+
 
 function* setLanguage({payload} : SetLanguageAction) {
     try {
         yield put(Reduser.setLanguage(payload))
         yield call(AsyncStorage.setItem, 'lang', payload)
     } catch (error) {
-        yield put(setMessage('errors.abstract'))
+        yield put(setMessage(Translator.getInstance().trans('errors.abstract')))
     }
 }
 
@@ -18,13 +22,25 @@ function* requestLanguage() {
         const language = yield call(AsyncStorage.getItem, 'lang')
         yield put(Reduser.setLanguage(language))
     } catch (error) {
-        yield put(setMessage('errors.abstract'))
+        yield put(setMessage(Translator.getInstance().trans('errors.abstract')))
     }
 }
+
+function* updateAvatar({payload}: UpdateAvatarAction) {
+    try {
+        yield call(API.updateUserAvatar, payload)
+        yield put(setAvatar(payload))
+    } catch (error) {
+        yield put(setMessage(Translator.getInstance().trans('errors.abstract')))
+    }
+}
+
+
 
 function* profileSaga() {
     yield takeLatest(SET_LANGUAGE, setLanguage)
     yield takeLatest(REQUEST_LANGUAGE, requestLanguage)
+    yield takeLatest(UPDATE_AVATAR, updateAvatar)
 }
 
 export default profileSaga;

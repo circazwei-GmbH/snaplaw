@@ -85,7 +85,9 @@ export default {
         }
     },
     errors: {
-        abstract: 'Leider ist etwas schiefgelaufen. Bitte versuchen Sie es später noch einmal.'
+        abstract: 'Leider ist etwas schiefgelaufen. Bitte versuchen Sie es später noch einmal.',
+        galary_permission: 'Es gibt keinen Zugang zur Galerie. Überprüfen Sie Ihre Berechtigungen in den Einstellungen.',
+        camera_permission: 'Es gibt keinen Zugang zur Kamera. Überprüfen Sie Ihre Berechtigungen in den Einstellungen.'
     },
     my_profile: {
         headline: 'Mein Profil',
