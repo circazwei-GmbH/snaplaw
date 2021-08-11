@@ -57,7 +57,7 @@ export default function UploadAvatar() {
 
     return (
         <View style={styles.container}>
-            <UserAvatar url={avatar} size="small" />
+            <UserAvatar url={avatar} sizeSmall />
             <View style={styles.uploadIcon}>
                 <TouchableOpacity onPress={uploadAvatarIconPressHandler}>
                     <MaterialCommunityIcons name="camera-plus-outline" size={24} color="#668395" />
