@@ -15,7 +15,7 @@ const uploadMedia = async (mediaUri: string, pathToUpload: string) => {
 const mediaProcess = async ({ uri, folder } : MediaPayload) => {
     const response = await presigned(folder)
     await uploadMedia(uri, response.data);
-    return uri.split('?')[0]
+    return response.data.split('?')[0]
 }
 
 export default {

@@ -11,6 +11,10 @@ const updateUserAvatar = (avatarPath: string | undefined) => {
     return httpClient.put(`api/users/${user._id}`, {avatar: avatarPath})
 }
 
+const requestMe = () =>
+    httpClient.get('me')
+
 export default {
-    updateUserAvatar
+    updateUserAvatar,
+    requestMe
 }

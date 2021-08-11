@@ -3,10 +3,11 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import UserAvatar from "../components/UserAvatar";
 import VerificationCounter from "../components/VerificationCounter";
 import { toggleBoolValue } from "../../utils/toggleBoolValue";
+import {useAppSelector} from "../../store/hooks";
 
 export default function MyProfileAvatarBox() {
   const [sizeSmall, setSizeSmall] = useState(true);
-  const [url] = useState<undefined | string>(undefined);
+  const url = useAppSelector(state => state.profile.user.avatar)
 
   return (
     <View style={styles.container}>

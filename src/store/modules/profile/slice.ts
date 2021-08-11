@@ -3,18 +3,23 @@ import {LANGUAGE_ENGLISH, LANGUAGE_GERMANY} from "./constants";
 
 export type LanguageType = 'LANGUAGE_ENGLISH' | 'LANGUAGE_GERMANY'
 
+type UserType = {
+
+}
+
 type ProfileStateInterface = {
     language: LanguageType | undefined,
-    avatar: string | undefined
+    user: UserType | undefined
 }
 
 export const initialState: ProfileStateInterface = {
     language: undefined,
-    avatar: undefined
+    user: undefined
 }
 
 const setLanguageAction = createAction<string, 'setLanguage'>('setLanguage')
 const setAvatarAction = createAction<string, 'setAvatar'>('setAvatar')
+const setUserAction = createAction<UserType, 'setUser'>('setUser')
 
 export const profileSlice = createSlice({
     name: 'profile',
@@ -28,11 +33,14 @@ export const profileSlice = createSlice({
             }
         },
         [setAvatarAction.type]: (state: Draft<ProfileStateInterface>, action: PayloadAction<string | undefined>) => {
-            state.avatar = action.payload
+            state.user.avatar = action.payload
+        },
+        [setUserAction.type]: (state: Draft<ProfileStateInterface>, action: PayloadAction<UserType>) => {
+            state.user = action.payload
         }
     }
 })
 
-export const { setLanguage, setAvatar } = profileSlice.actions
+export const { setLanguage, setAvatar, setUser } = profileSlice.actions
 
 export default profileSlice.reducer
