@@ -5,6 +5,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Reduser from './slice'
 import {Translator} from "../../../translator/i18n";
 import {setAvatar} from "./slice";
+import API from '../../../services/profile/index'
+
 
 function* setLanguage({payload} : SetLanguageAction) {
     try {
@@ -26,7 +28,7 @@ function* requestLanguage() {
 
 function* updateAvatar({payload}: UpdateAvatarAction) {
     try {
-        // TODO: call to update user endpoint
+        yield call(API.updateUserAvatar, payload)
         yield put(setAvatar(payload))
     } catch (error) {
         yield put(setMessage(Translator.getInstance().trans('errors.abstract')))

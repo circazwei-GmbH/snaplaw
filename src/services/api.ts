@@ -8,6 +8,8 @@ const setToken = (t: undefined | string) => {
     token = t
 }
 
+const getToken = () => token
+
 const attachTokenToConfig = (options?: AxiosRequestConfig): AxiosRequestConfig => {
     const authorization = `Bearer ${token}`
 
@@ -40,4 +42,4 @@ const post = (url: string, body: any, options?: AxiosRequestConfig) =>
 const put = (url: string, body: any, options?: AxiosRequestConfig) =>
     axios.put(`${API_HOST}/${url}`, body, attachTokenToConfig(options))
 
-export default { setToken, get, post, put, putWithoutHost }
+export default { getToken, setToken, get, post, put, putWithoutHost }
