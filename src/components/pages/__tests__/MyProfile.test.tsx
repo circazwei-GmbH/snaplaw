@@ -46,7 +46,7 @@ describe("MyProfile", () => {
       </Provider>
     );
 
-    titleAndButtonsText.map((item) => {
+    titleAndButtonsText.forEach((item) => {
       expect(getByText(item)).toBeTruthy();
     });
   });
