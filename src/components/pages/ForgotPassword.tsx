@@ -67,31 +67,33 @@ export default function ForgotPassword() {
 
   return (
     <HeaderNavigation pageName={t("forgot_password.title")}>
-      <View style={styles.container}>
-        <View>
-          <ImageAndText
-            image={require("../../../assets/forgot_password.png")}
-            text={t("forgot_password.description")}
-          />
-          <View style={styles.inputArea}>
-            <TextField
-              fixed
-              keyboardType="email-address"
-              onChangeFunction={enterEmailHandler}
-              errorMessage={form.email.error}
-              placeholder={t("forgot_password.input")}
+      <TouchableWithoutFeedback accessible={false} onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <View>
+            <ImageAndText
+              image={require("../../../assets/forgot_password.png")}
+              text={t("forgot_password.description")}
+            />
+            <View style={styles.inputArea}>
+              <TextField
+                fixed
+                keyboardType="email-address"
+                onChangeFunction={enterEmailHandler}
+                errorMessage={form.email.error}
+                placeholder={t("forgot_password.input")}
+              />
+            </View>
+          </View>
+          <View style={styles.emptySpace} />
+          <View style={styles.actionArea}>
+            <Button
+              text={t("forgot_password.send")}
+              onPress={sendHandler}
+              type="primary"
             />
           </View>
         </View>
-        <View style={styles.emptySpace} />
-        <View style={styles.actionArea}>
-          <Button
-            text={t("forgot_password.send")}
-            onPress={sendHandler}
-            type="primary"
-          />
-        </View>
-      </View>
+      </TouchableWithoutFeedback>
     </HeaderNavigation>
   );
 }
