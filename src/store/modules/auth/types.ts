@@ -34,6 +34,8 @@ export interface ChangePasswordPayload {
     token: string
 }
 
+export type SaveTokenPayload = string
+
 export interface RequestSignUpAction extends BaseAction {
     payload: SignUpPayload
 }
@@ -56,4 +58,16 @@ export interface ForgotPasswordAction extends BaseAction {
 
 export interface ChangePasswordAction extends BaseAction {
     payload: ChangePasswordPayload
+}
+
+export interface SaveTokenAction extends BaseAction {
+    payload: SaveTokenPayload
+}
+
+export interface RequestTokenAction extends BaseAction {
+    payload: undefined
+}
+
+export interface ClearTokenAction extends BaseAction {
+    payload: undefined
 }

@@ -85,7 +85,9 @@ export default {
         }
     },
     errors: {
-        abstract: 'Something went wrong. Try again later.'
+        abstract: 'Something went wrong. Try again later.',
+        galary_permission: 'There is no access to the gallery. Check your permissions in settings.',
+        camera_permission: 'There is no access to the camera. Check your permissions in settings.'
     },
     my_profile: {
         headline: 'My Profile',
