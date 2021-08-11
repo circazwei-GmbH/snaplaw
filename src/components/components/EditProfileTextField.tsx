@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
   },
   inputWithText: {
     fontSize: 17,
+    color: "#000",
   },
   focuslessInput: {
     borderWidth: 1,
