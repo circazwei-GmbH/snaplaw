@@ -7,7 +7,7 @@ import store from "../../../store/index";
 import { createStore } from "@reduxjs/toolkit";
 import { toggleBoolValue } from "../../../utils/toggleBoolValue";
 import { PROFILE_ROUTER } from "../../../router/ProfileRouterTypes";
-import { killToken } from "../../../store/modules/auth/slice";
+import {clearToken} from "../../../store/modules/auth/action-creators";
 
 jest.mock("../../../utils/toggleBoolValue.ts");
 
@@ -86,6 +86,6 @@ describe("MyProfile", () => {
     );
 
     fireEvent.press(getByText("my_profile.buttons_text.sign_out"));
-    expect(actions).toBeCalledWith(killToken());
+    expect(actions).toBeCalledWith(clearToken());
   });
 });
