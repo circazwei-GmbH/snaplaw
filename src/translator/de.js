@@ -112,6 +112,11 @@ export default {
         }
     },
     edit_profile: {
-        title: 'Mein Profil'
+        title: 'Mein Profil',
+        delete: 'Löschen'
+    },
+    upload_files: {
+        camera: 'Kamera',
+        gallary: 'Galerie'
     }
 }
