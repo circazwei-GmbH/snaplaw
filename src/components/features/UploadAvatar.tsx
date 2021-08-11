@@ -46,15 +46,15 @@ export default function UploadAvatar() {
 
     const menuButtons: ButtonType[] = [
         {
-            title: 'Library',
+            title: t('upload_files.gallary'),
             handler: buttonPickerHandler(libraryWay)
         },
         {
-            title: 'Camera',
+            title: t('upload_files.camera'),
             handler: buttonPickerHandler(cameraWay)
         },
         {
-            title: 'Delete',
+            title: t('edit_profile.delete'),
             handler: () => {
                 dispatch(deleteAvatar())
                 setMenuVisible(false)
