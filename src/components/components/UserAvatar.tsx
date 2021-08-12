@@ -16,7 +16,11 @@ export default function UserAvatar({
   };
   return (
     <View style={sizeSmall ? styles.containerSmall : styles.containerBig}>
-      <Image source={getAvatar()} style={styles.image} />
+      {url === undefined ? (
+        <AntDesign name="user" size={75} color="black" />
+      ) : (
+        <Image source={getAvatar()} style={styles.image} />
+      )}
     </View>
   );
 }
