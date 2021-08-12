@@ -12,15 +12,11 @@ export default function UserAvatar({
   url,
 }: UserAvatarPropsInterface): JSX.Element {
   const getAvatar = () => {
-    return url ? {uri: url} : require('../../../assets/user_profile.png')
-  }
+    return url ? { uri: url } : require("../../../assets/user_profile.png");
+  };
   return (
     <View style={sizeSmall ? styles.containerSmall : styles.containerBig}>
-      {url === undefined ? (
-        <AntDesign name="user" size={75} color="black" />
-      ) : (
-        <Image source={getAvatar()} style={styles.image} />
-      )}
+      <Image source={getAvatar()} style={styles.image} />
     </View>
   );
 }

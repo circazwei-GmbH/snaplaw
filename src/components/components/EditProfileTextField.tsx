@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   TextInput,
   View,
@@ -17,6 +17,7 @@ interface EditProfileTextFieldPropsInterface extends TextInputProps {
   validations?: Array<Function>;
   errorMessage?: string;
   value?: string;
+  edit: boolean;
   onChangeFunction: OnChangeFunction;
 }
 
@@ -26,6 +27,7 @@ export default function EditProfileTextField({
   errorMessage,
   onChangeFunction,
   value,
+  edit,
   ...props
 }: EditProfileTextFieldPropsInterface) {
   const [localValue, setLocalValue] = useState(value);
@@ -37,6 +39,12 @@ export default function EditProfileTextField({
       onChangeFunction(text);
     }
   };
+
+  useEffect(() => {
+    if (localValue !== value) {
+      setLocalValue(value);
+    }
+  }, [edit]);
 
   return (
     <View
@@ -68,7 +76,7 @@ export default function EditProfileTextField({
           localValue ? styles.inputWithText : null,
           errorMessage ? styles.errorBorder : null,
         ]}
-        value={localValue}
+        value={edit ? localValue : value}
         onChangeText={textChangeHandler}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
