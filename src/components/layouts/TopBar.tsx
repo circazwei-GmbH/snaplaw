@@ -19,11 +19,11 @@ export default function TopBar({
 }: TopBarProps) {
   return (
     <>
-      <View 
+      <View
         style={[
-          Platform.OS === 'ios' ? styles.headerIOS : styles.headerANDROID,
-          styles.header, 
-          style
+          Platform.OS === "ios" ? styles.headerIOS : styles.headerANDROID,
+          styles.header,
+          style,
         ]}
       >
         {leftButton === undefined ? <BackButton /> : leftButton}
@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
   },
   headerIOS: {
     paddingTop: 47,
-    
   },
   headerANDROID: {
     paddingTop: 25,

@@ -16,7 +16,7 @@ interface EditProfileTextFieldPropsInterface extends TextInputProps {
   fixed?: boolean;
   validations?: Array<Function>;
   errorMessage?: string;
-  value?: string;
+  value?: string | number;
   edit: boolean;
   onChangeFunction: OnChangeFunction;
 }
@@ -30,21 +30,13 @@ export default function EditProfileTextField({
   edit,
   ...props
 }: EditProfileTextFieldPropsInterface) {
-  const [localValue, setLocalValue] = useState(value);
   const [focused, setFocused] = useState(false);
 
   const textChangeHandler = (text: string) => {
-    setLocalValue(text);
     if (typeof onChangeFunction === "function") {
       onChangeFunction(text);
     }
   };
-
-  useEffect(() => {
-    if (localValue !== value) {
-      setLocalValue(value);
-    }
-  }, [edit]);
 
   return (
     <View
@@ -56,7 +48,7 @@ export default function EditProfileTextField({
       <Text
         style={[
           styles.label,
-          focused || localValue
+          focused || value
             ? null
             : fixed
             ? styles.labelWithEmptyInputFixed
@@ -73,10 +65,10 @@ export default function EditProfileTextField({
           styles.emptyInput,
           focused ? styles.fullInput : null,
           focused ? null : styles.focuslessInput,
-          localValue ? styles.inputWithText : null,
+          value ? styles.inputWithText : null,
           errorMessage ? styles.errorBorder : null,
         ]}
-        value={edit ? localValue : value}
+        value={value}
         onChangeText={textChangeHandler}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
