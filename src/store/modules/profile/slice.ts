@@ -4,22 +4,25 @@ import {LANGUAGE_ENGLISH, LANGUAGE_GERMANY} from "./constants";
 export type LanguageType = 'LANGUAGE_ENGLISH' | 'LANGUAGE_GERMANY'
 
 type UserType = {
-
+    avatar?: string
 }
 
 type ProfileStateInterface = {
     language: LanguageType | undefined,
-    user: UserType | undefined
+    user: UserType | undefined,
+    avatarLoading: boolean
 }
 
 export const initialState: ProfileStateInterface = {
     language: undefined,
-    user: undefined
+    user: undefined,
+    avatarLoading: false
 }
 
 const setLanguageAction = createAction<string, 'setLanguage'>('setLanguage')
 const setAvatarAction = createAction<string, 'setAvatar'>('setAvatar')
 const setUserAction = createAction<UserType, 'setUser'>('setUser')
+const setAvatarLoadingAction = createAction<boolean, 'setAvatarLoading'>('setAvatarLoading')
 
 export const profileSlice = createSlice({
     name: 'profile',
@@ -33,14 +36,20 @@ export const profileSlice = createSlice({
             }
         },
         [setAvatarAction.type]: (state: Draft<ProfileStateInterface>, action: PayloadAction<string | undefined>) => {
-            state.user.avatar = action.payload
+            state.user = {
+                ...state.user,
+                avatar: action.payload
+            }
         },
         [setUserAction.type]: (state: Draft<ProfileStateInterface>, action: PayloadAction<UserType>) => {
             state.user = action.payload
+        },
+        [setAvatarLoadingAction.type]: (state: Draft<ProfileStateInterface>, action: PayloadAction<boolean>) => {
+            state.avatarLoading = action.payload
         }
     }
 })
 
-export const { setLanguage, setAvatar, setUser } = profileSlice.actions
+export const { setLanguage, setAvatar, setUser, setAvatarLoading } = profileSlice.actions
 
 export default profileSlice.reducer

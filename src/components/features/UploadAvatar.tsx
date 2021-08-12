@@ -11,16 +11,18 @@ import {PermissionNotGranted} from "../../services/media/errors";
 import {setMessage} from "../../store/modules/main/slice";
 import {MEDIA_FOLDERS} from "../../store/modules/media/constants";
 import {deleteAvatar, updateAvatar} from "../../store/modules/profile/action-creators";
+import {setAvatarLoading} from "../../store/modules/profile/slice";
 
 export default function UploadAvatar() {
     const [menuVisible, setMenuVisible] = useState(false);
     const dispatch = useAppDispatch();
     const { t } = useI18n()
-    const avatar = useAppSelector(state => state.profile.user.avatar)
+    const avatar = useAppSelector(state => state.profile.user?.avatar)
 
     const postChooseFileHandler = (uri: string) => {
         setMenuVisible(false)
         dispatch(uploadMedia(uri, MEDIA_FOLDERS.AVATAR, updateAvatar()))
+        dispatch(setAvatarLoading(true))
     }
 
     const buttonPickerHandler = (way: Function) => async () => {

@@ -7,7 +7,7 @@ import {useAppSelector} from "../../store/hooks";
 
 export default function MyProfileAvatarBox() {
   const [sizeSmall, setSizeSmall] = useState(true);
-  const url = useAppSelector(state => state.profile.user.avatar)
+  const url = useAppSelector(state => state.profile.user?.avatar)
 
   return (
     <View style={styles.container}>

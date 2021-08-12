@@ -11,7 +11,7 @@ import {setMessage} from "../main/slice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Reduser from './slice'
 import {Translator} from "../../../translator/i18n";
-import {setAvatar, setUser} from "./slice";
+import {setAvatar, setAvatarLoading, setUser} from "./slice";
 import API from '../../../services/profile/index'
 
 
@@ -37,6 +37,7 @@ function* updateAvatar({payload}: UpdateAvatarAction) {
     try {
         yield call(API.updateUserAvatar, payload)
         yield put(setAvatar(payload))
+        yield put(setAvatarLoading(false))
     } catch (error) {
         yield put(setMessage(Translator.getInstance().trans('errors.abstract')))
     }
