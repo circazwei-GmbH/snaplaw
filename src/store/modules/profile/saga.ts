@@ -13,6 +13,7 @@ import * as Reduser from './slice'
 import {Translator} from "../../../translator/i18n";
 import {setAvatar, setAvatarLoading, setUser} from "./slice";
 import API from '../../../services/profile/index'
+import {LANGUAGE_ENGLISH} from "./constants";
 
 
 function* setLanguage({payload} : SetLanguageAction) {
@@ -27,7 +28,7 @@ function* setLanguage({payload} : SetLanguageAction) {
 function* requestLanguage() {
     try {
         const language = yield call(AsyncStorage.getItem, 'lang')
-        yield put(Reduser.setLanguage(language))
+        yield put(Reduser.setLanguage(language || LANGUAGE_ENGLISH))
     } catch (error) {
         yield put(setMessage(Translator.getInstance().trans('errors.abstract')))
     }

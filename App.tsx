@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useEffect} from 'react';
-import { StyleSheet, View } from 'react-native';
+import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 import Router from "./src/router/Router";
 import { useFonts } from 'expo-font';
 import 'react-native-gesture-handler';
@@ -28,12 +28,8 @@ export default function App() {
         'P-L': require('./assets/fonts/OpenSans-Light.ttf')
     })
 
-    useEffect(() => {
-        
-    }, [])
-
     if (!fontLoaded) {
-        return null;
+        return <Text>Loading Fonts</Text>;
     }
 
   return (

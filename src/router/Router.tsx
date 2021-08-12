@@ -16,6 +16,7 @@ import ChangeLanguage from "../components/pages/ChangeLanguage";
 import {requestLanguage} from "../store/modules/profile/action-creators";
 import EditProfile from "../components/pages/EditProfile";
 import {requestToken} from "../store/modules/auth/action-creators";
+import {Text} from "react-native";
 
 const Stack = createStackNavigator()
 const ProfileStack = createStackNavigator()
@@ -33,7 +34,7 @@ export default function Router() {
     }, [dispatch])
 
     if (!language) {
-        return null
+        return <Text>Loading Lang</Text>
     }
 
     return (
