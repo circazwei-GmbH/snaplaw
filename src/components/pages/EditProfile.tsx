@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import TopBar from "../layouts/TopBar";
 import { useI18n } from "../../translator/i18n";
 import { View, StyleSheet } from "react-native";
@@ -14,31 +14,11 @@ export default function EditProfile() {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
 
-  const [edit, setEdit] = useState(false);
-
-  const editHandler = () => toggleBoolValue(edit, setEdit);
-  const cancelHandler = () => {
-    setLocalValue({
-      name: userData?.name,
-      lastName: userData?.lastName,
-      dateOfBirth: userData?.dateOfBirth,
-      email: userData?.email,
-      phone: userData?.phone,
-      address: userData?.address,
-      postCode: userData?.postCode,
-    });
-    editHandler();
-  };
-  const saveHandler = () => {
-    dispatch(requestEditProfile(localValue));
-    editHandler();
-  };
-
   const userData: UserType | undefined = useAppSelector(
     (state) => state.profile.user
   );
 
-  const [localValue, setLocalValue] = useState<UserType>({
+  const globalValue: UserType | undefined = {
     name: userData?.name,
     lastName: userData?.lastName,
     dateOfBirth: userData?.dateOfBirth,
@@ -46,19 +26,20 @@ export default function EditProfile() {
     phone: userData?.phone,
     address: userData?.address,
     postCode: userData?.postCode,
-  });
+  };
 
-  useEffect(() => {
-    setLocalValue({
-      name: userData?.name,
-      lastName: userData?.lastName,
-      dateOfBirth: userData?.dateOfBirth,
-      email: userData?.email,
-      phone: userData?.phone,
-      address: userData?.address,
-      postCode: userData?.postCode,
-    });
-  }, [userData]);
+  const [edit, setEdit] = useState(false);
+  const [localValue, setLocalValue] = useState<UserType>(globalValue);
+
+  const editHandler = () => toggleBoolValue(edit, setEdit);
+  const cancelHandler = () => {
+    setLocalValue(globalValue);
+    editHandler();
+  };
+  const saveHandler = () => {
+    dispatch(requestEditProfile(localValue));
+    editHandler();
+  };
 
   return (
     <TopBar

@@ -14,7 +14,7 @@ export default function EditProfileForm({
   localValue,
   setLocalValue,
 }: EditProfileFormPropsInterface): JSX.Element {
-  const onChange = (newValue: string | number, fieldName: string) => {
+  const onChange = (newValue: string, fieldName: string) => {
     setLocalValue({
       ...localValue,
       [fieldName]: newValue,
@@ -47,7 +47,7 @@ export default function EditProfileForm({
       <EditProfileTextField
         placeholder={"E-Mail"}
         value={localValue.email}
-        editable={edit}
+        editable={false}
         edit={edit}
         onChangeFunction={(newValue) => onChange(newValue, "email")}
       />

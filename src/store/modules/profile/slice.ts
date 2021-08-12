@@ -16,7 +16,7 @@ export type UserType = {
   email?: string;
   phone?: string;
   address?: string;
-  postCode?: number;
+  postCode?: string;
 };
 
 type ProfileStateInterface = {
