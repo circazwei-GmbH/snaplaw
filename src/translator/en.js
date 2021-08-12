@@ -117,6 +117,6 @@ export default {
     },
     upload_files: {
         camera: 'Camera',
-        gallary: 'Gallary'
+        gallary: 'Gallery'
     }
 }
