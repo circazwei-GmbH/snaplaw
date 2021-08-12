@@ -30,8 +30,8 @@ const attachTokenToConfig = (options?: AxiosRequestConfig): AxiosRequestConfig =
     }
 }
 
-const putWithoutHost = (url: string, body: any) =>
-    axios.put(url, body)
+const putWithoutHost = (url: string, body: any, options?: AxiosRequestConfig) =>
+    axios.put(url, body, options)
 
 const get = (url: string) =>
     axios.get(`${API_HOST}/${url}`, attachTokenToConfig())
