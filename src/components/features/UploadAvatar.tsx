@@ -10,17 +10,19 @@ import {cameraWay, libraryWay} from "../../services/media/media-picker";
 import {PermissionNotGranted} from "../../services/media/errors";
 import {setMessage} from "../../store/modules/main/slice";
 import {MEDIA_FOLDERS} from "../../store/modules/media/constants";
-import {updateAvatar} from "../../store/modules/profile/action-creators";
+import {deleteAvatar, updateAvatar} from "../../store/modules/profile/action-creators";
+import {setAvatarLoading} from "../../store/modules/profile/slice";
 
 export default function UploadAvatar() {
     const [menuVisible, setMenuVisible] = useState(false);
     const dispatch = useAppDispatch();
     const { t } = useI18n()
-    const avatar = useAppSelector(state => state.profile.avatar)
+    const avatar = useAppSelector(state => state.profile.user?.avatar)
 
     const postChooseFileHandler = (uri: string) => {
         setMenuVisible(false)
         dispatch(uploadMedia(uri, MEDIA_FOLDERS.AVATAR, updateAvatar()))
+        dispatch(setAvatarLoading(true))
     }
 
     const buttonPickerHandler = (way: Function) => async () => {
@@ -46,12 +48,19 @@ export default function UploadAvatar() {
 
     const menuButtons: ButtonType[] = [
         {
-            title: 'Library',
+            title: t('upload_files.gallary'),
             handler: buttonPickerHandler(libraryWay)
         },
         {
-            title: 'Camera',
+            title: t('upload_files.camera'),
             handler: buttonPickerHandler(cameraWay)
+        },
+        {
+            title: t('edit_profile.delete'),
+            handler: () => {
+                dispatch(deleteAvatar())
+                setMenuVisible(false)
+            }
         }
     ]
 

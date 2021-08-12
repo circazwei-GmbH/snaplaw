@@ -39,6 +39,7 @@ import {Translator} from "../../../translator/i18n";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {TOKEN_STORAGE_KEY} from "./constants";
 import BaseApi from '../../../services/api'
+import {requestMe} from "../profile/action-creators";
 
 function* fetchSignUp(action: RequestSignUpAction) {
     try {
@@ -168,6 +169,7 @@ function* saveTokenHandler({payload} : SaveTokenAction) {
         yield call(AsyncStorage.setItem, TOKEN_STORAGE_KEY, payload)
         yield put(setToken(payload))
         yield call(BaseApi.setToken, payload)
+        yield put(requestMe())
     } catch (error) {
         yield put(setMessage(Translator.getInstance().trans('errors.abstract')))
     }
@@ -176,8 +178,12 @@ function* saveTokenHandler({payload} : SaveTokenAction) {
 function* requestTokenHandler() {
     try {
         const token = yield call(AsyncStorage.getItem, TOKEN_STORAGE_KEY)
+        if (!token) {
+            return;
+        }
         yield put(setToken(token))
         yield call(BaseApi.setToken, token)
+        yield put(requestMe())
     } catch (error) {
         yield put(setMessage(Translator.getInstance().trans('errors.abstract')))
     }

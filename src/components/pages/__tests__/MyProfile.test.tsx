@@ -20,7 +20,13 @@ afterEach(() => {
 
 const actions = jest.fn();
 
-const reduser = (state: any, action: any): any => {
+const initialState = {
+  profile: {
+    user: undefined
+  }
+}
+
+const reduser = (state: any = initialState, action: any): any => {
   actions(action);
   return state;
 };
