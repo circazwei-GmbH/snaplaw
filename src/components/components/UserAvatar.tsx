@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import {View, StyleSheet, Image, ActivityIndicator} from "react-native";
-import {useAppSelector} from "../../store/hooks";
+import React, { useState } from "react";
+import { View, StyleSheet, Image, ActivityIndicator } from "react-native";
+import { useAppSelector } from "../../store/hooks";
 
 interface UserAvatarPropsInterface {
   sizeSmall: boolean;
@@ -11,39 +11,50 @@ export default function UserAvatar({
   sizeSmall,
   url,
 }: UserAvatarPropsInterface): JSX.Element {
-  const [isLoading, setIsLoading] = useState(false)
-  const avatarLoading = useAppSelector(state => state.profile.avatarLoading)
+  const [isLoading, setIsLoading] = useState(false);
+  const avatarLoading = useAppSelector((state) => state.profile.avatarLoading);
   const getAvatar = () => {
-    return url ? {uri: url} : require('../../../assets/user_profile.png')
-  }
+    return url ? { uri: url } : require("../../../assets/user_profile.png");
+  };
 
   const onStartLoadHandler = () => {
-    setIsLoading(true)
-  }
+    setIsLoading(true);
+  };
 
   const onEndLoadHandler = () => {
-    setIsLoading(false)
-  }
+    setIsLoading(false);
+  };
 
   return (
-    <View style={[sizeSmall ? styles.containerSmall : styles.containerBig, styles.container]}>
-      <Image source={getAvatar()} style={styles.image} onLoadStart={onStartLoadHandler} onLoad={onEndLoadHandler} onLoadEnd={onEndLoadHandler} />
+    <View
+      style={[
+        !sizeSmall && url ? styles.containerBig : styles.containerSmall,
+        styles.container,
+      ]}
+    >
+      <Image
+        source={getAvatar()}
+        style={styles.image}
+        onLoadStart={onStartLoadHandler}
+        onLoad={onEndLoadHandler}
+        onLoadEnd={onEndLoadHandler}
+      />
       {isLoading || avatarLoading ? (
-          <View style={styles.activityContainer}>
-            <ActivityIndicator
-                style={styles.activityIndicator}
-                size="large"
-                color="#1696E2"
-            />
-          </View>
-      ): null}
+        <View style={styles.activityContainer}>
+          <ActivityIndicator
+            style={styles.activityIndicator}
+            size="large"
+            color="#1696E2"
+          />
+        </View>
+      ) : null}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    position: 'relative'
+    position: "relative",
   },
   activityContainer: {
     position: "absolute",
@@ -51,12 +62,11 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    justifyContent: 'center',
-    alignItems: 'center'
+    backgroundColor: "rgba(0,0,0,0.5)",
+    justifyContent: "center",
+    alignItems: "center",
   },
-  activityIndicator: {
-  },
+  activityIndicator: {},
   containerSmall: {
     justifyContent: "center",
     alignItems: "center",

@@ -4,15 +4,17 @@ import { useI18n } from "../../translator/i18n";
 
 interface VerificationCounterPropsInterface {
   sizeSmall: boolean;
+  doHaveUrl?: string;
 }
 
 export default function ProfileHeadline({
   sizeSmall,
+  doHaveUrl,
 }: VerificationCounterPropsInterface) {
   const [verifications] = useState<number>(0);
   const { t } = useI18n();
   return (
-    <View style={sizeSmall ? styles.vertical : styles.horizontal}>
+    <View style={!sizeSmall && doHaveUrl ? styles.horizontal : styles.vertical}>
       <Text style={styles.textGray}>{t("my_profile.verified_gray")}</Text>
       <Text style={styles.textBlack}>
         {`${verifications} ${t("my_profile.verified_black")}`}
@@ -31,9 +33,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingTop: 10,
+    paddingHorizontal: 16,
   },
   textBlack: {
-    width: "30%",
+    width: "50%",
     fontFamily: "OS-SB",
     fontSize: 16,
     fontWeight: "600",
@@ -41,7 +44,7 @@ const styles = StyleSheet.create({
     textAlign: "right",
   },
   textGray: {
-    width: "60%",
+    width: "50%",
     fontSize: 16,
     fontWeight: "400",
     color: "#909090",
