@@ -30,6 +30,33 @@ const attachTokenToConfig = (options?: AxiosRequestConfig): AxiosRequestConfig =
     }
 }
 
+const _call = async (
+    method: 'GET' | 'PUT' | 'POST',
+    url: 'string',
+    body: any,
+    options?: AxiosRequestConfig,
+    secondCall: boolean = false
+): Promise<any> => {
+    try {
+        return await axios.request(attachTokenToConfig({
+            ...options,
+            method,
+            url: `${API_HOST}/${url}`,
+            data: body,
+        }))
+    } catch (error) {
+        if (error.response?.status === 401 && !secondCall) {
+            const tokens = await axios.post(`${API_HOST}/refresh-token`, {
+                refreshToken: token
+            })
+            setToken(tokens.data.token)
+            return _call(method, url, body, options, true)
+        }
+        throw error
+    }
+
+}
+
 const putWithoutHost = (url: string, body: any, options?: AxiosRequestConfig) =>
     axios.put(url, body, options)
 
