@@ -41,6 +41,13 @@ export default function EditProfile() {
     editHandler();
   };
 
+  const onChange = (newValue: string, fieldName: string) => {
+    setLocalValue({
+      ...localValue,
+      [fieldName]: newValue,
+    });
+  };
+
   return (
     <TopBar
       pageName={t("edit_profile.title")}
@@ -76,7 +83,7 @@ export default function EditProfile() {
         <EditProfileForm
           edit={edit}
           localValue={localValue}
-          setLocalValue={setLocalValue}
+          onChangeAction={onChange}
         />
       </View>
     </TopBar>
