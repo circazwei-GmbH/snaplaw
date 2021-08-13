@@ -5,7 +5,6 @@ import { View, StyleSheet } from "react-native";
 import UploadAvatar from "../features/UploadAvatar";
 import TextButton from "../basics/buttons/TextButton";
 import EditProfileForm from "../features/forms/EditProfileForm";
-import { toggleBoolValue } from "../../utils/toggleBoolValue";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { UserType } from "../../store/../store/modules/profile/slice";
 import { requestEditProfile } from "../../store/modules/profile/action-creators";
@@ -31,14 +30,14 @@ export default function EditProfile() {
   const [edit, setEdit] = useState(false);
   const [localValue, setLocalValue] = useState<UserType>(globalValue);
 
-  const editHandler = () => toggleBoolValue(edit, setEdit);
+  const editHandler = () => setEdit(true);
   const cancelHandler = () => {
     setLocalValue(globalValue);
-    editHandler();
+    setEdit(false);
   };
   const saveHandler = () => {
     dispatch(requestEditProfile(localValue));
-    editHandler();
+    setEdit(false);
   };
 
   const onChange = (newValue: string, fieldName: string) => {
