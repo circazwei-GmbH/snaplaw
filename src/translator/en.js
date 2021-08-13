@@ -118,5 +118,14 @@ export default {
     upload_files: {
         camera: 'Camera',
         gallary: 'Gallery'
+    },
+    homepage: {
+        contract_types: {
+            purchase: 'Purchase contract',
+            work: 'Work contract',
+            rental: 'Rental contract',
+            free: 'Free-form contract',
+            car: 'Car sales contract'
+        }
     }
 }
