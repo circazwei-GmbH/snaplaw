@@ -14,6 +14,7 @@ import {Translator} from "../../../translator/i18n";
 import {setAvatar, setAvatarLoading, setUser} from "./slice";
 import API from '../../../services/profile/index'
 import {LANGUAGE_ENGLISH} from "./constants";
+import {responseError} from "../auth/action-creators";
 
 
 function* setLanguage({payload} : SetLanguageAction) {
@@ -58,7 +59,7 @@ function* requestMe() {
         const user = yield call(API.requestMe)
         yield put(setUser(user.data))
     } catch (error) {
-        yield put(setMessage(Translator.getInstance().trans('errors.abstract')))
+        yield put(responseError(error))
     }
 }
 

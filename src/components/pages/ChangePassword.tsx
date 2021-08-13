@@ -16,7 +16,8 @@ type ChangePasswordProps = {
     route: {
         params: {
             email: string,
-            token: string
+            token: string,
+            refresh: string
         }
     }
 }
@@ -26,7 +27,7 @@ export type ChangePasswordForm = {
     confirm_password: FieldInterface
 }
 
-export default function ChangePassword({route: {params: {token}}} : ChangePasswordProps) {
+export default function ChangePassword({route: {params: {token, refresh}}} : ChangePasswordProps) {
     const {t} = useI18n()
     let form: ChangePasswordForm = {
         password: {
@@ -80,7 +81,7 @@ export default function ChangePassword({route: {params: {token}}} : ChangePasswo
             return
         }
 
-        dispatch(requestChangePassword(token, localForm.password.value))
+        dispatch(requestChangePassword(token, refresh, localForm.password.value))
     }
 
     return (

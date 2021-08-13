@@ -2,7 +2,7 @@ import {
     ChangePasswordAction, ClearTokenAction,
     ForgotPasswordAction,
     RequestSignInAction,
-    RequestSignUpAction, RequestTokenAction, SaveTokenAction,
+    RequestSignUpAction, RequestTokenAction, ResponseErrorAction, SaveTokenAction,
     VerificationAction,
     VerificationResendAction
 } from "./types";
@@ -15,7 +15,8 @@ export const FORGOT_PASSWORD_REQUESTED = 'FORGOT_PASSWORD_REQUESTED';
 export const CHANGE_PASSWORD_REQUESTED = 'CHANGE_PASSWORD_REQUESTED';
 export const SAVE_TOKEN = 'SAVE_TOKEN';
 export const REQUEST_TOKEN = 'REQUEST_TOKEN';
-export const CLEAR_TOKEN = 'CLEAR_TOKEN'
+export const CLEAR_TOKEN = 'CLEAR_TOKEN';
+export const RESPONSE_ERROR = 'RESPONSE_ERROR';
 
 export const requestSignUp = (name: string, email: string, password: string): RequestSignUpAction => ({
     type: SIGNUP_REQUESTED,
@@ -42,14 +43,17 @@ export const requestForgotPassword = (email: string): ForgotPasswordAction => ({
     payload: { email }
 })
 
-export const requestChangePassword = (token: string, password: string): ChangePasswordAction => ({
+export const requestChangePassword = (token: string, refresh: string, password: string): ChangePasswordAction => ({
     type: CHANGE_PASSWORD_REQUESTED,
-    payload: { token, password }
+    payload: { token, password, refresh }
 })
 
-export const saveToken = (token: string): SaveTokenAction => ({
+export const saveToken = (token: string, refresh: string): SaveTokenAction => ({
     type: SAVE_TOKEN,
-    payload: token
+    payload: {
+        token,
+        refresh
+    }
 })
 
 export const requestToken = (): RequestTokenAction => ({
@@ -62,4 +66,20 @@ export const clearToken = (): ClearTokenAction => ({
     payload: undefined
 })
 
+export const responseError = (error: any): ResponseErrorAction => {
+    if (!error.response) {
+        console.error('ERROR', error.message)
+        return {
+            type: RESPONSE_ERROR,
+            payload: undefined
+        }
+    }
+    return {
+        type: RESPONSE_ERROR,
+        payload: {
+            status: error.response.status,
+            data: error.response.data
+        }
+    }
+}
 
