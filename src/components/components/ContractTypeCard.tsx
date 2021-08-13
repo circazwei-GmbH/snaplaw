@@ -18,7 +18,7 @@ export default function ContractTypeCard({ image, title } : ContractTypeCardProp
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'column',
-        paddingVertical: 50,
+        height: 220,
         backgroundColor: '#EFF7FD',
         margin: 3,
         justifyContent: 'center',
@@ -31,8 +31,7 @@ const styles = StyleSheet.create({
     text: {
         marginTop: 12,
         textAlign: 'center',
-        height: 50,
-        width: 85,
+        width: 140,
         color: '#202020',
         fontSize: 18,
         fontFamily: 'OS'
