@@ -108,7 +108,7 @@ export default {
         title: 'Language',
         languages: {
             english: 'English',
-            germany: 'Germany'
+            germany: 'German'
         }
     },
     edit_profile: {
