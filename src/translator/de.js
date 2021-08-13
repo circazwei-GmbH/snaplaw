@@ -107,8 +107,8 @@ export default {
     change_language: {
         title: 'Sprache',
         languages: {
-            english: 'English',
-            germany: 'Germany'
+            english: 'Englisch',
+            germany: 'Deutsch'
         }
     },
     edit_profile: {
@@ -118,5 +118,14 @@ export default {
     upload_files: {
         camera: 'Kamera',
         gallary: 'Galerie'
+    },
+    homepage: {
+        contract_types: {
+            purchase: 'Kaufvertrag',
+            work: 'Werkvertrag',
+            rental: 'Mietvertrag',
+            free: 'Freiformvertrag',
+            car: 'Autokaufvertrag'
+        }
     }
 }
