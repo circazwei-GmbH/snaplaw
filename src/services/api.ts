@@ -41,7 +41,6 @@ const _call = async (
     secondCall: boolean = false
 ): Promise<any> => {
     try {
-        console.log('REQUEST', url, token, refresh)
         return await axios.request(attachTokenToConfig({
             ...options,
             method,
