@@ -49,7 +49,8 @@ export default function Router() {
                 <Tab.Screen name="MyContracts" component={MyContracts} options={{
                     tabBarIcon: ({color, size}) => (
                         <Feather name="file-text" size={size} color={color} />
-                    )
+                    ),
+                    tabBarLabel: t('my_contracts.tab_name')
                 }} />
                 <Tab.Screen name="Homepage" component={Homepage} options={{
                     tabBarIcon: ({color, size}) => (

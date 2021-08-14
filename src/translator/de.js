@@ -139,4 +139,7 @@ export default {
       car: "Autokaufvertrag",
     },
   },
+  my_contracts: {
+    tab_name: 'Meine Verträge'
+  }
 };
