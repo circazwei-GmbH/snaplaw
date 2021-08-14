@@ -38,6 +38,7 @@ export default function UserAvatar({
         onLoadStart={onStartLoadHandler}
         onLoad={onEndLoadHandler}
         onLoadEnd={onEndLoadHandler}
+        testID="AvatarImage"
       />
       {isLoading || avatarLoading ? (
         <View style={styles.activityContainer}>
@@ -45,6 +46,7 @@ export default function UserAvatar({
             style={styles.activityIndicator}
             size="large"
             color="#1696E2"
+            testID="AvatarLoadingActivityIndicator"
           />
         </View>
       ) : null}
