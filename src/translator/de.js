@@ -99,6 +99,7 @@ export default {
       "Es gibt keinen Zugang zur Kamera. Überprüfen Sie Ihre Berechtigungen in den Einstellungen.",
   },
   my_profile: {
+    tab_name: 'Settings',
     headline: "Mein Profil",
     verified_gray: "Sie wurden  von",
     verified_black: "Personen bestätigt",
@@ -129,6 +130,7 @@ export default {
     gallary: "Galerie",
   },
   homepage: {
+    tab_name: 'Vertrag erstellen',
     contract_types: {
       purchase: "Kaufvertrag",
       work: "Werkvertrag",
