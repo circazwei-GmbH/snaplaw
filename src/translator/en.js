@@ -122,6 +122,8 @@ export default {
     },
     homepage: {
         tab_name: 'Create contract',
+        description: 'Please select the type of contract you need',
+        search: 'Search',
         contract_types: {
             purchase: 'Purchase contract',
             work: 'Work contract',

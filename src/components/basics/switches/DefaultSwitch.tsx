@@ -19,6 +19,7 @@ export default function DefaultSwitch({ title, onChange, value } : DefaultSwitch
                     false: '#E2E8ED',
                     true: '#1696E2'
                 }}
+                thumbColor={value ? '#1696E2' : '#fff'}
                 onValueChange={onChange}
                 value={value}
             />
