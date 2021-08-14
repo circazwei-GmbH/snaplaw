@@ -131,6 +131,8 @@ export default {
   },
   homepage: {
     tab_name: 'Vertrag erstellen',
+    description: 'Bitte wählen Sie den Vertragstyp aus',
+    search: 'Suche',
     contract_types: {
       purchase: "Kaufvertrag",
       work: "Werkvertrag",
