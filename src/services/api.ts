@@ -1,7 +1,7 @@
 import axios, {AxiosRequestConfig} from 'axios'
 import {setAuthTokens} from "./auth/tokens";
 
-const API_HOST = 'http://192.168.31.100:8080'
+const API_HOST = 'https://snaplaw-api.jsninjas.net'
 
 let token: undefined | string;
 let refresh: undefined | string;
