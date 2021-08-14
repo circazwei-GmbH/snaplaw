@@ -90,6 +90,7 @@ export default {
         camera_permission: 'There is no access to the camera. Check your permissions in settings.'
     },
     my_profile: {
+        tab_name: 'Settings',
         headline: 'My Profile',
         verified_gray: 'You have been verified by',
         verified_black: 'people',
@@ -120,6 +121,7 @@ export default {
         gallary: 'Gallery'
     },
     homepage: {
+        tab_name: 'Create contract',
         contract_types: {
             purchase: 'Purchase contract',
             work: 'Work contract',
