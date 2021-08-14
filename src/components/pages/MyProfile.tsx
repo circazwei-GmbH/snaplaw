@@ -24,51 +24,53 @@ export default function MyProfile(): JSX.Element {
       leftButton={<NotificationBell />}
       style={styles.topBarBackground}
     >
-      <ScrollView contentContainerStyle={styles.container}>
+      <>
         <MyProfileAvatarBox />
-        <ProfileButton
-          testID="MyProfile.my_profile"
-          text={t("my_profile.buttons_text.my_profile")}
-          onPress={() => RootNavigation.navigate(PROFILE_ROUTER.EDIT_PROFILE)}
-          type="link"
-        />
-        <ProfileButton
-          testID="MyProfile.language"
-          text={t("my_profile.buttons_text.language")}
-          onPress={() =>
-            RootNavigation.navigate(PROFILE_ROUTER.CHANGE_LANGUAGE)
-          }
-          type="link"
-        />
-        <ProfileButton
-          text={t("my_profile.buttons_text.notifications")}
-          onPress={() => alert("Hi")}
-          type="link"
-        />
-        <ProfileButton
-          text={t("my_profile.buttons_text.invite_friends")}
-          onPress={() => alert("Hi")}
-          type="link"
-        />
-        <ProfileButton
-          text={t("my_profile.buttons_text.private_policy")}
-          onPress={() => alert("Hi")}
-          type="link"
-        />
-        <ProfileButton
-          text={t("my_profile.buttons_text.change_password")}
-          onPress={() => alert("Hi")}
-          type="link"
-        />
-        <ProfileButton
-          text={t("my_profile.buttons_text.sign_out")}
-          onPress={killTokenHandler}
-        />
-        <ProfileButton
-          text={t("my_profile.buttons_text.delete_profile")}
-          onPress={() => alert("Hi")}
-        />
-      </ScrollView>
+        <ScrollView contentContainerStyle={styles.container}>
+          <ProfileButton
+              testID="MyProfile.my_profile"
+              text={t("my_profile.buttons_text.my_profile")}
+              onPress={() => RootNavigation.navigate(PROFILE_ROUTER.EDIT_PROFILE)}
+              type="link"
+          />
+          <ProfileButton
+              testID="MyProfile.language"
+              text={t("my_profile.buttons_text.language")}
+              onPress={() =>
+                  RootNavigation.navigate(PROFILE_ROUTER.CHANGE_LANGUAGE)
+              }
+              type="link"
+          />
+          <ProfileButton
+              text={t("my_profile.buttons_text.notifications")}
+              onPress={() => alert("Hi")}
+              type="link"
+          />
+          <ProfileButton
+              text={t("my_profile.buttons_text.invite_friends")}
+              onPress={() => alert("Hi")}
+              type="link"
+          />
+          <ProfileButton
+              text={t("my_profile.buttons_text.private_policy")}
+              onPress={() => alert("Hi")}
+              type="link"
+          />
+          <ProfileButton
+              text={t("my_profile.buttons_text.change_password")}
+              onPress={() => alert("Hi")}
+              type="link"
+          />
+          <ProfileButton
+              text={t("my_profile.buttons_text.sign_out")}
+              onPress={killTokenHandler}
+          />
+          <ProfileButton
+              text={t("my_profile.buttons_text.delete_profile")}
+              onPress={() => alert("Hi")}
+          />
+        </ScrollView>
+      </>
     </TopBar>
   );
 }
