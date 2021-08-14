@@ -9,7 +9,7 @@ type ContractTypeCardProps = {
 export default function ContractTypeCard({ image, title } : ContractTypeCardProps) {
     return (
         <View style={styles.container}>
-            <Image source={image} />
+            <Image source={image} testID={`Image.${title}`} />
             <Text style={styles.text}>{title}</Text>
         </View>
     )

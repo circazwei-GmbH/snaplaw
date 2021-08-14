@@ -7,7 +7,7 @@ interface VerificationCounterPropsInterface {
   doHaveUrl?: string;
 }
 
-export default function ProfileHeadline({
+export default function VerificationCounter({
   sizeSmall,
   doHaveUrl,
 }: VerificationCounterPropsInterface) {
