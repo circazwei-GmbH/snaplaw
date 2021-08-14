@@ -129,5 +129,8 @@ export default {
             free: 'Free-form contract',
             car: 'Car sales contract'
         }
+    },
+    my_contracts: {
+        tab_name: 'My contracts'
     }
 }
