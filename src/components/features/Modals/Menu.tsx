@@ -24,7 +24,11 @@ export default function Menu({onClose, visible, buttons} : MenuProps) {
                 <View style={styles.container}>
                     <View style={styles.listButtonContainer}>
                         {buttons.map((button, index) => (
-                            <Button key={index} style={styles.button} text={button.title} onPress={button.handler} />
+                            <Button key={index} style={[
+                                styles.button,
+                                0 === index ? styles.firstButton : null,
+                                buttons.length - 1 === index ? styles.lastButton : null
+                            ]} text={button.title} onPress={button.handler} />
                         ))}
                     </View>
                     <View style={styles.cancelButtonContainer}>
@@ -52,7 +56,17 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingBottom: 8
     },
+    firstButton: {
+        borderTopLeftRadius: 14,
+        borderTopRightRadius: 14,
+    },
+    lastButton: {
+        borderBottomLeftRadius: 14,
+        borderBottomRightRadius: 14
+    },
     button: {
-        marginBottom: 8
+        borderRadius: 0,
+        borderBottomColor: 'rgb(204, 204, 204)',
+        borderBottomWidth: 1,
     }
 })
