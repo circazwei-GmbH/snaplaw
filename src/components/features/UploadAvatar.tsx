@@ -68,7 +68,7 @@ export default function UploadAvatar() {
         <View style={styles.container}>
             <UserAvatar url={avatar} sizeSmall />
             <View style={styles.uploadIcon}>
-                <TouchableOpacity onPress={uploadAvatarIconPressHandler}>
+                <TouchableOpacity onPress={uploadAvatarIconPressHandler} testID="openMenuIcon">
                     <MaterialCommunityIcons name="camera-plus-outline" size={24} color="#668395" />
                 </TouchableOpacity>
             </View>
