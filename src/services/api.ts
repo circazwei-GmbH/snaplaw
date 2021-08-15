@@ -1,7 +1,6 @@
 import axios, {AxiosRequestConfig} from 'axios'
 import {setAuthTokens} from "./auth/tokens";
-
-const API_HOST = 'https://snaplaw-api.jsninjas.net'
+import { API_HOST } from '../env/env'
 
 let token: undefined | string;
 let refresh: undefined | string;
@@ -13,17 +12,8 @@ const setToken = (_token: undefined | string, _refresh: undefined | string) => {
 
 const getToken = () => token
 
-const attachTokenToConfig = (options?: AxiosRequestConfig): AxiosRequestConfig => {
+const attachTokenToConfig = (options: AxiosRequestConfig): AxiosRequestConfig => {
     const authorization = `Bearer ${token}`
-
-    if (!options) {
-        return {
-            headers: {
-                authorization
-            }
-        }
-    }
-
     return {
         ...options,
         headers: {
