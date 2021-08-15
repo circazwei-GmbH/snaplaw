@@ -1,6 +1,7 @@
 import React from 'react'
 import {View, StyleSheet, Modal} from "react-native";
 import Button from "../../basics/buttons/Button";
+import {useI18n} from "../../../translator/i18n";
 
 export type ButtonType = {
     title: string,
@@ -14,6 +15,7 @@ type MenuProps = {
 }
 
 export default function Menu({onClose, visible, buttons} : MenuProps) {
+    const { t } = useI18n()
     return (
         <View>
             <Modal
@@ -32,7 +34,7 @@ export default function Menu({onClose, visible, buttons} : MenuProps) {
                         ))}
                     </View>
                     <View style={styles.cancelButtonContainer}>
-                        <Button text="Cancel" type="primary" onPress={onClose} />
+                        <Button text={t('menu.cancel')} type="primary" onPress={onClose} />
                     </View>
                 </View>
             </Modal>
