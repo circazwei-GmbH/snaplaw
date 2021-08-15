@@ -134,5 +134,8 @@ export default {
     },
     my_contracts: {
         tab_name: 'My contracts'
+    },
+    menu: {
+        cancel: 'Cancel'
     }
 }

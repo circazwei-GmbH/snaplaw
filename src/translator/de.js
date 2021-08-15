@@ -143,5 +143,8 @@ export default {
   },
   my_contracts: {
     tab_name: 'Meine Verträge'
+  },
+  menu: {
+    cancel: 'Abbrechen'
   }
 };

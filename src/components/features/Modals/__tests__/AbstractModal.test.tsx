@@ -1,38 +1,36 @@
 import React from 'react';
-import {configureStore, createSlice, Draft, PayloadAction} from "@reduxjs/toolkit";
-import {render} from "@testing-library/react-native";
+import {createStore} from "@reduxjs/toolkit";
+import {fireEvent, render} from "@testing-library/react-native";
 import AbstractModal from "../AbstractModal";
 import { Provider } from 'react-redux'
 
 const initialState = {
-    modal: {
-        message: 'Test message',
-        actions: [
-            {
-                name: 'Ok',
-                colortype: 'primary'
-            },
-            {
-                name: 'Ok-test',
-                colortype: 'primary'
-            }
-        ]
+    main: {
+        modal: {
+            message: 'Test message',
+            actions: [
+                {
+                    name: 'Ok',
+                    colortype: 'primary',
+                    action: {
+                        type: 'some'
+                    }
+                },
+                {
+                    name: 'Ok-test',
+                    colortype: 'primary'
+                }
+            ]
+        }
     }
 }
+const actions = jest.fn()
+const reduser = (state = initialState, action: any) => {
+    actions(action)
+    return initialState
+}
 
-const main = createSlice({
-    name: 'main',
-    initialState,
-    reducers: {
-        test: () => {}
-    }
-})
-
-const store = configureStore({
-    reducer: {
-        main: main.reducer
-    }
-})
+const store = createStore(reduser)
 
 describe('AbstractModal', () => {
     it('Should displayed', () => {
@@ -43,9 +41,18 @@ describe('AbstractModal', () => {
         )
         expect(getByTestId('modal')).toBeTruthy()
         expect(getByTestId('modal').props.visible).toBeTruthy()
-        expect(getByText(initialState.modal.message)).toBeTruthy()
-        initialState.modal.actions.forEach((button) => {
+        expect(getByText(initialState.main.modal.message)).toBeTruthy()
+        initialState.main.modal.actions.forEach((button) => {
             expect(getByText(button.name)).toBeTruthy()
         })
+    })
+    it('Should call handler on click', () => {
+        const { getByText } = render(
+            <Provider store={store}>
+                <AbstractModal/>
+            </Provider>
+        )
+        fireEvent.press(getByText(initialState.main.modal.actions[0].name))
+        expect(actions).toBeCalledWith(initialState.main.modal.actions[0].action)
     })
 })
