@@ -99,9 +99,9 @@ export default {
       "Es gibt keinen Zugang zur Kamera. Überprüfen Sie Ihre Berechtigungen in den Einstellungen.",
   },
   my_profile: {
-    tab_name: "Settings",
+    tab_name: "Einstellungen",
     headline: "Mein Profil",
-    verified_gray: "Sie wurden  von",
+    verified_gray: "Sie wurden von",
     verified_black: "Personen bestätigt",
     buttons_text: {
       my_profile: "Mein Profil",
