@@ -1,7 +1,7 @@
 import React from "react";
 import { fireEvent, render } from "@testing-library/react-native";
 import { Provider } from "react-redux";
-import MyProfile from "../MyProfile";
+import MyProfile from "../settings/MyProfile";
 import * as RootNavigation from "../../../router/RootNavigation";
 import store from "../../../store/index";
 import { createStore } from "@reduxjs/toolkit";

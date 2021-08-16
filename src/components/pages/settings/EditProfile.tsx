@@ -1,8 +1,8 @@
 import React from 'react';
-import TopBar from '../layouts/TopBar'
-import {useI18n} from "../../translator/i18n";
+import TopBar from '../../layouts/TopBar'
+import {useI18n} from "../../../translator/i18n";
 import {View, StyleSheet} from "react-native";
-import UploadAvatar from "../features/UploadAvatar";
+import UploadAvatar from "../../features/UploadAvatar";
 
 export default function EditProfile() {
     const { t } = useI18n()

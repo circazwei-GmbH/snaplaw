@@ -1,7 +1,7 @@
 import React from 'react';
 import {fireEvent, render} from "@testing-library/react-native";
 import {Provider} from "react-redux";
-import ChangeLanguage from "../ChangeLanguage";
+import ChangeLanguage from "../settings/ChangeLanguage";
 import store from '../../../store/index'
 import {createStore} from "@reduxjs/toolkit";
 import {setLanguage} from "../../../store/modules/profile/action-creators";

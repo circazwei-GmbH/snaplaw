@@ -21,7 +21,7 @@ export default function UploadAvatar() {
 
     const postChooseFileHandler = (uri: string) => {
         setMenuVisible(false)
-        dispatch(uploadMedia(uri, MEDIA_FOLDERS.AVATAR, updateAvatar()))
+        dispatch(uploadMedia(uri, MEDIA_FOLDERS.AVATAR, updateAvatar('')))
         dispatch(setAvatarLoading(true))
     }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from "@testing-library/react-native";
-import Verification from "../Verification";
+import Verification from "../auth/Verification";
 import {Provider} from "react-redux";
 import store from '../../../store/index'
 

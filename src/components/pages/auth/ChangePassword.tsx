@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {Keyboard, TouchableWithoutFeedback, View, StyleSheet} from "react-native";
-import HeaderNavigation from "../layouts/HeaderNavigation";
-import ImageAndText from "../features/Auth/ImageAndText";
-import PasswordField from "../components/PasswordField";
-import Button from "../basics/buttons/Button";
-import {FieldInterface} from "../features/forms/SignInForm";
-import {length, match} from "../../validations/default";
-import {formFieldFill, validate} from "../../utils/forms";
-import {useAppDispatch, useAppSelector} from "../../store/hooks";
-import {requestChangePassword} from "../../store/modules/auth/action-creators";
-import {changePasswordFailed} from "../../store/modules/auth/slice";
-import {useI18n} from "../../translator/i18n";
+import HeaderNavigation from "../../layouts/HeaderNavigation";
+import ImageAndText from "../../features/Auth/ImageAndText";
+import PasswordField from "../../components/PasswordField";
+import Button from "../../basics/buttons/Button";
+import {FieldInterface} from "../../features/forms/SignInForm";
+import {length, match} from "../../../validations/default";
+import {formFieldFill, validate} from "../../../utils/forms";
+import {useAppDispatch, useAppSelector} from "../../../store/hooks";
+import {requestChangePassword} from "../../../store/modules/auth/action-creators";
+import {changePasswordFailed} from "../../../store/modules/auth/slice";
+import {useI18n} from "../../../translator/i18n";
 
 type ChangePasswordProps = {
     route: {
@@ -89,7 +89,7 @@ export default function ChangePassword({route: {params: {token, refresh}}} : Cha
             <TouchableWithoutFeedback accessible={false} onPress={Keyboard.dismiss}>
                 <View style={styles.container}>
                     <View>
-                        <ImageAndText image={require('../../../assets/change_password.png')} text={t('change_password.description')} />
+                        <ImageAndText image={require('../../../../assets/change_password.png')} text={t('change_password.description')} />
                         <View style={styles.emailField}>
                             <PasswordField
                                 errorMessage={form.password.error}

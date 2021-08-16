@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, TouchableWithoutFeedback, Keyboard} from "react-native";
-import {useAppDispatch, useAppSelector} from "../../store/hooks";
-import Button from "../basics/buttons/Button";
-import { verificationFailed } from '../../store/modules/auth/slice'
-import HeaderNavigation from '../layouts/HeaderNavigation'
-import NumberInputComponent from "../components/NumberInputComponent";
-import MessageAndLink from "../features/MessageAndLink";
-import {requestVerification, requestVerificationResend} from "../../store/modules/auth/action-creators";
-import ImageAndText from "../features/Auth/ImageAndText";
-import {useI18n} from "../../translator/i18n";
+import {useAppDispatch, useAppSelector} from "../../../store/hooks";
+import Button from "../../basics/buttons/Button";
+import { verificationFailed } from '../../../store/modules/auth/slice'
+import HeaderNavigation from '../../layouts/HeaderNavigation'
+import NumberInputComponent from "../../components/NumberInputComponent";
+import MessageAndLink from "../../features/MessageAndLink";
+import {requestVerification, requestVerificationResend} from "../../../store/modules/auth/action-creators";
+import ImageAndText from "../../features/Auth/ImageAndText";
+import {useI18n} from "../../../translator/i18n";
 
 type VerificationProps = {
     route: {
@@ -44,7 +44,7 @@ export default function Verification({ route: {params: {email, to}} }:Verificati
         <HeaderNavigation pageName={t('verification.title')}>
             <TouchableWithoutFeedback accessible={false} onPress={Keyboard.dismiss}>
                 <View style={styles.container}>
-                    <ImageAndText image={require('../../../assets/verification.png')} text={t('verification.description', {email})} />
+                    <ImageAndText image={require('../../../../assets/verification.png')} text={t('verification.description', {email})} />
                     <View style={styles.inputArea}>
                         <NumberInputComponent onChange={setNumber} errorMessage={errorMessage} />
                         <View style={styles.resendArea}>

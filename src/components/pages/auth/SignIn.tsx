@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { View, StyleSheet, Keyboard, TouchableWithoutFeedback } from "react-native"
-import MainHeadline from "../basics/typography/MainHeadline"
-import AuthLayout from "../layouts/AuthLayout"
-import SignInForm, { SignInFormInterface } from "../features/forms/SignInForm"
+import MainHeadline from "../../basics/typography/MainHeadline"
+import AuthLayout from "../../layouts/AuthLayout"
+import SignInForm, { SignInFormInterface } from "../../features/forms/SignInForm"
 import { StackNavigationProp } from '@react-navigation/stack'
-import { RootStackParamList, AUTH_ROUTE } from '../../router/AuthRouterTypes'
-import { email, length } from '../../validations/default'
-import MessageAndLink from "../features/MessageAndLink"
-import { formFieldFill, validate } from "../../utils/forms"
-import ActionBlock from "../features/Auth/ActionsBlock"
-import { useAppDispatch, useAppSelector } from "../../store/hooks"
-import { requestSignIn } from "../../store/modules/auth/action-creators"
-import { clearSignInErrors } from '../../store/modules/auth/slice'
-import {useI18n} from "../../translator/i18n";
+import { RootStackParamList, AUTH_ROUTE } from '../../../router/AuthRouterTypes'
+import { email, length } from '../../../validations/default'
+import MessageAndLink from "../../features/MessageAndLink"
+import { formFieldFill, validate } from "../../../utils/forms"
+import ActionBlock from "../../features/Auth/ActionsBlock"
+import { useAppDispatch, useAppSelector } from "../../../store/hooks"
+import { requestSignIn } from "../../../store/modules/auth/action-creators"
+import { clearSignInErrors } from '../../../store/modules/auth/slice'
+import {useI18n} from "../../../translator/i18n";
 
 type SignInProps = {
     navigation: StackNavigationProp<RootStackParamList, 'SignIn'>
