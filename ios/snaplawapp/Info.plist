@@ -47,11 +47,11 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Used to pick media</string>
+	<string>The app will use media for user profile and contract attachments.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Used to record vieo</string>
+	<string>The app will use media for user profile and contract attachments.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Used to pick media</string>
+	<string>The app will use media for user profile and contract attachments.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>SplashScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
