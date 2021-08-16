@@ -101,7 +101,7 @@ export default {
   my_profile: {
     tab_name: 'Einstellungen',
     headline: "Mein Profil",
-    verified_gray: "Sie wurden  von",
+    verified_gray: "Sie wurden von",
     verified_black: "Personen bestätigt",
     buttons_text: {
       my_profile: "Mein Profil",
@@ -130,9 +130,9 @@ export default {
     gallary: "Galerie",
   },
   homepage: {
-    tab_name: 'Vertrag erstellen',
-    description: 'Bitte wählen Sie den Vertragstyp aus',
-    search: 'Suche',
+    tab_name: "Vertrag erstellen",
+    description: "Bitte wählen Sie den Vertragstyp aus",
+    search: "Suche",
     contract_types: {
       purchase: "Kaufvertrag",
       work: "Werkvertrag",
@@ -142,9 +142,9 @@ export default {
     },
   },
   my_contracts: {
-    tab_name: 'Meine Verträge'
+    tab_name: "Meine Verträge",
   },
   menu: {
-    cancel: 'Abbrechen'
-  }
+    cancel: "Abbrechen",
+  },
 };
