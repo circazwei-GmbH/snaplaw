@@ -70,7 +70,7 @@ export default function ChangePassword({route: {params: {token, refresh}}} : Cha
     }
 
     const saveHandler = () => {
-        let localForm = {
+        const localForm = {
             password: validate(form.password),
             confirm_password: validate(form.confirm_password, form)
         }
