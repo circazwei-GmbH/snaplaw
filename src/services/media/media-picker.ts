@@ -10,7 +10,7 @@ export const libraryWay = async () => {
 
     const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: MediaTypeOptions.Images,
-        quality: 0
+        quality: 0.5,
     })
 
     if (!result.cancelled) {
@@ -29,7 +29,7 @@ export const cameraWay = async () => {
 
     const result = await ImagePicker.launchCameraAsync({
         mediaTypes: MediaTypeOptions.Images,
-        quality: 0,
+        quality: 0.5,
     })
 
     if (!result.cancelled) {
