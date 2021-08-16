@@ -17,7 +17,7 @@ interface TextFieldPropsInterface extends TextInputProps {
   validations?: Array<Function>;
   errorMessage?: string;
   value?: string;
-  onChanfeFunction: OnChanfeFunction;
+  onChangeFunction: OnChanfeFunction;
 }
 
 export default function TextField({

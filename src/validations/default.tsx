@@ -9,7 +9,7 @@ export interface ValidatorInterface {
 }
 
 export interface ValidatorBuilderInterface {
-    (message: string, length?: number): ValidatorInterface
+    (message: string, option?: number | string): ValidatorInterface
 }
 
 export const length: ValidatorBuilderInterface = (message, length) => (text: string) => {
@@ -27,7 +27,7 @@ export const email: ValidatorBuilderInterface = (message) => (text: string) => {
     }
 }
 
-export const match = (message, target) => (text: string, form: FormInterface) => {
+export const match = (message: string, target: string): ValidatorInterface => (text: string, form: FormInterface) => {
     if (form[target].value === text) {
         return;
     }
