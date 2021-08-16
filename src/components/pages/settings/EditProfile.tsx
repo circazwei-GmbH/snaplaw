@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import TopBar from "../layouts/TopBar";
-import { useI18n } from "../../translator/i18n";
+import TopBar from "../../layouts/TopBar";
+import { useI18n } from "../../../translator/i18n";
 import { View, StyleSheet } from "react-native";
-import UploadAvatar from "../features/UploadAvatar";
-import TextButton from "../basics/buttons/TextButton";
-import EditProfileForm from "../features/forms/EditProfileForm";
-import { useAppSelector, useAppDispatch } from "../../store/hooks";
-import { UserType } from "../../store/../store/modules/profile/slice";
-import { requestEditProfile } from "../../store/modules/profile/action-creators";
+import UploadAvatar from "../../features/UploadAvatar";
+import TextButton from "../../basics/buttons/TextButton";
+import EditProfileForm from "../../features/forms/EditProfileForm";
+import { useAppSelector, useAppDispatch } from "../../../store/hooks";
+import { UserType } from "../../../store/modules/profile/slice";
+import { requestEditProfile } from "../../../store/modules/profile/action-creators";
 
 export default function EditProfile() {
   const { t } = useI18n();
