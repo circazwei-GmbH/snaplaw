@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   TextInput,
   View,
@@ -7,43 +7,48 @@ import {
   TextInputProps,
 } from "react-native";
 
-interface OnChanfeFunction {
+interface OnChangeFunction {
   (text: string): void;
 }
 
-interface TextFieldPropsInterface extends TextInputProps {
+interface EditProfileTextFieldPropsInterface extends TextInputProps {
   placeholder?: string;
   fixed?: boolean;
   validations?: Array<Function>;
   errorMessage?: string;
-  value?: string;
-  onChanfeFunction: OnChanfeFunction;
+  value?: string | number;
+  edit: boolean;
+  onChangeFunction: OnChangeFunction;
 }
 
-export default function TextField({
+export default function EditProfileTextField({
   placeholder,
   fixed = false,
   errorMessage,
   onChangeFunction,
   value,
+  edit,
   ...props
-}: TextFieldPropsInterface) {
-  const [localValue, setLocalValue] = useState(value);
+}: EditProfileTextFieldPropsInterface) {
   const [focused, setFocused] = useState(false);
 
   const textChangeHandler = (text: string) => {
-    setLocalValue(text);
     if (typeof onChangeFunction === "function") {
       onChangeFunction(text);
     }
   };
 
   return (
-    <View>
+    <View
+      style={[
+        styles.inputContainer,
+        focused ? styles.borderFocused : styles.borderNotFocused,
+      ]}
+    >
       <Text
         style={[
           styles.label,
-          focused || localValue
+          focused || value
             ? null
             : fixed
             ? styles.labelWithEmptyInputFixed
@@ -51,7 +56,6 @@ export default function TextField({
         ]}
       >
         {placeholder}
-        <Text style={styles.redText}>*</Text>
       </Text>
       <TextInput
         {...props}
@@ -61,10 +65,10 @@ export default function TextField({
           styles.emptyInput,
           focused ? styles.fullInput : null,
           focused ? null : styles.focuslessInput,
-          localValue ? styles.inputWithText : null,
+          value ? styles.inputWithText : null,
           errorMessage ? styles.errorBorder : null,
         ]}
-        value={localValue}
+        value={value}
         onChangeText={textChangeHandler}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
@@ -79,32 +83,40 @@ export default function TextField({
 }
 
 const styles = StyleSheet.create({
-  emptyInput: {
-    backgroundColor: "#EFF7FD",
-    borderRadius: 10,
-    height: 44,
-    fontSize: 15,
+  inputContainer: {
+    height: 67,
+    justifyContent: "flex-end",
     paddingHorizontal: 16,
+    borderBottomWidth: 1,
+  },
+  borderNotFocused: {
+    borderBottomColor: "#EFF7FD",
+  },
+  borderFocused: {
+    borderBottomColor: "#C3E1F6",
+  },
+  emptyInput: {
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    height: 40,
+    fontSize: 15,
     fontFamily: "P",
   },
   fullInput: {
     backgroundColor: "transparent",
-    borderWidth: 1,
-    borderColor: "#BBD1DE",
     fontSize: 17,
   },
   inputWithText: {
     fontSize: 17,
+    color: "#000",
   },
   focuslessInput: {
-    backgroundColor: "#EFF7FD",
     borderWidth: 1,
     borderColor: "transparent",
   },
   label: {
     color: "#1696E2",
     fontSize: 14,
-    marginBottom: 7,
   },
   labelWithEmptyInputFixed: {
     opacity: 0,
