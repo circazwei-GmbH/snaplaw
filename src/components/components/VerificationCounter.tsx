@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { useI18n } from "../../translator/i18n";
 import { useAppSelector } from "../../store/hooks";
+import { LANGUAGE_ENGLISH } from "../../store/modules/profile/constants";
 
 interface VerificationCounterPropsInterface {
   sizeSmall: boolean;
@@ -21,7 +22,7 @@ export default function VerificationCounter({
       <Text
         style={[
           styles.textGray,
-          currentLanguage === "LANGUAGE_ENGLISH"
+          currentLanguage === LANGUAGE_ENGLISH
             ? styles.widthGrayEng
             : styles.widthGrayGer,
         ]}
@@ -31,7 +32,7 @@ export default function VerificationCounter({
       <Text
         style={[
           styles.textBlack,
-          currentLanguage === "LANGUAGE_ENGLISH"
+          currentLanguage === LANGUAGE_ENGLISH
             ? styles.widthBlackEng
             : styles.widthBlackGer,
         ]}
