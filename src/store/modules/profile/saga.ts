@@ -49,8 +49,8 @@ function* updateAvatar({ payload }: UpdateAvatarAction) {
 
 function* deleteAvatar() {
   try {
-    yield call(API.updateUserAvatar, undefined);
-    yield put(setAvatar(undefined));
+    yield call(API.updateUserAvatar, null);
+    yield put(setAvatar(null));
   } catch (error) {
     yield put(setMessage(Translator.getInstance().trans("errors.abstract")));
   }

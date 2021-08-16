@@ -17,7 +17,7 @@ export interface RequestLanguageAction extends BaseAction {
 }
 
 export interface UpdateAvatarAction extends BaseAction {
-  payload: undefined | string;
+  payload: null | string;
 }
 
 export interface DeleteAvatarAction extends BaseAction {
@@ -42,7 +42,7 @@ export const requestLanguage = (): RequestLanguageAction => ({
   payload: undefined,
 });
 
-export const updateAvatar = (uri?: string): UpdateAvatarAction => ({
+export const updateAvatar = (uri: string): UpdateAvatarAction => ({
   type: UPDATE_AVATAR,
   payload: uri,
 });
