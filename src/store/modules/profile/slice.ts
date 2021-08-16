@@ -8,9 +8,8 @@ import { LANGUAGE_ENGLISH, LANGUAGE_GERMANY } from "./constants";
 
 export type LanguageType = "LANGUAGE_ENGLISH" | "LANGUAGE_GERMANY";
 
-<<<<<<< HEAD
 export type UserType = {
-  avatar?: string;
+  avatar: string | null;
   name?: string;
   lastName?: string;
   dateOfBirth?: string;
@@ -19,11 +18,6 @@ export type UserType = {
   address?: string;
   postCode?: string;
 };
-=======
-type UserType = {
-    avatar: string | null
-}
->>>>>>> 4b228a7dbe92db6e90e078cad76ab91602aa61db
 
 type ProfileStateInterface = {
   language: LanguageType | undefined;
@@ -37,37 +31,55 @@ export const initialState: ProfileStateInterface = {
   avatarLoading: false,
 };
 
-const setLanguageAction = createAction<string, 'setLanguage'>('setLanguage')
-const setAvatarAction = createAction<string|null, 'setAvatar'>('setAvatar')
-const setUserAction = createAction<UserType, 'setUser'>('setUser')
-const setAvatarLoadingAction = createAction<boolean, 'setAvatarLoading'>('setAvatarLoading')
+const setLanguageAction = createAction<string, "setLanguage">("setLanguage");
+const setAvatarAction = createAction<string | null, "setAvatar">("setAvatar");
+const setUserAction = createAction<UserType, "setUser">("setUser");
+const setAvatarLoadingAction = createAction<boolean, "setAvatarLoading">(
+  "setAvatarLoading"
+);
 
 export const profileSlice = createSlice({
-    name: 'profile',
-    initialState,
-    reducers: {
-        [setLanguageAction.type]: (state: Draft<ProfileStateInterface>, action: PayloadAction<LanguageType>) => {
-            if (action.payload === state.language) {
-                state.language = action.payload === LANGUAGE_ENGLISH ? LANGUAGE_GERMANY : LANGUAGE_ENGLISH
-            } else {
-                state.language = action.payload
-            }
-        },
-        [setAvatarAction.type]: (state: Draft<ProfileStateInterface>, action: PayloadAction<string | null>) => {
-            state.user = {
-                ...state.user,
-                avatar: action.payload
-            }
-        },
-        [setUserAction.type]: (state: Draft<ProfileStateInterface>, action: PayloadAction<UserType>) => {
-            state.user = action.payload
-        },
-        [setAvatarLoadingAction.type]: (state: Draft<ProfileStateInterface>, action: PayloadAction<boolean>) => {
-            state.avatarLoading = action.payload
-        }
-    }
-})
+  name: "profile",
+  initialState,
+  reducers: {
+    [setLanguageAction.type]: (
+      state: Draft<ProfileStateInterface>,
+      action: PayloadAction<LanguageType>
+    ) => {
+      if (action.payload === state.language) {
+        state.language =
+          action.payload === LANGUAGE_ENGLISH
+            ? LANGUAGE_GERMANY
+            : LANGUAGE_ENGLISH;
+      } else {
+        state.language = action.payload;
+      }
+    },
+    [setAvatarAction.type]: (
+      state: Draft<ProfileStateInterface>,
+      action: PayloadAction<string | null>
+    ) => {
+      state.user = {
+        ...state.user,
+        avatar: action.payload,
+      };
+    },
+    [setUserAction.type]: (
+      state: Draft<ProfileStateInterface>,
+      action: PayloadAction<UserType>
+    ) => {
+      state.user = action.payload;
+    },
+    [setAvatarLoadingAction.type]: (
+      state: Draft<ProfileStateInterface>,
+      action: PayloadAction<boolean>
+    ) => {
+      state.avatarLoading = action.payload;
+    },
+  },
+});
 
-export const { setLanguage, setAvatar, setUser, setAvatarLoading } = profileSlice.actions
+export const { setLanguage, setAvatar, setUser, setAvatarLoading } =
+  profileSlice.actions;
 
-export default profileSlice.reducer
+export default profileSlice.reducer;
