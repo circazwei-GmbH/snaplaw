@@ -15,7 +15,7 @@ interface AuthState {
     verification: {
         error: string
     }
-    token: undefined | string,
+    token: undefined | TokensType,
     forgotPassword: {
         error: string
     },
@@ -48,12 +48,18 @@ const initialState: AuthState = {
     }
 }
 
+type TokensType = {
+    token: string,
+    refresh: string
+}
+
+
 const signUpFailedAction = createAction<{email: string}, 'signUpFailed'>('signUpFailed')
 const signInFailedAction = createAction<{field: 'email' | 'password', message: string}, 'signInFailed'>('signInFailed')
 const verificationFailedAction = createAction<string, 'verificationFailed'>('verificationFailed')
 const clearSignInErrorsAction = createAction<undefined, 'clearSignInErrors'>('clearSignInErrors')
 const clearSignUpErrorsAction = createAction<undefined, 'clearSignUpErrors'>('clearSignUpErrors')
-const setTokenAction = createAction<string, 'setToken'>('setToken')
+const setTokenAction = createAction<TokensType, 'setToken'>('setToken')
 const killTokenAction = createAction<undefined, 'killToken'>('killToken')
 const forgotPasswordFailedAction = createAction<string, 'forgotPasswordFailed'>('forgotPasswordFailed')
 const changePasswordFailedAction = createAction<string, 'changePasswordFailed'>('changePasswordFailed')
@@ -77,11 +83,11 @@ export const authSlice = createSlice({
         [clearSignUpErrorsAction.type]: (state: Draft<AuthState>) => {
             state.signUp.error = {email: ''}
         },
-        [setTokenAction.type]: (state: Draft<AuthState>, action: PayloadAction<string>) => {
+        [setTokenAction.type]: (state: Draft<AuthState>, action: PayloadAction<TokensType>) => {
             state.token = action.payload
         },
         [killTokenAction.type]: (state: Draft<AuthState>) => {
-            state.token = ''
+            state.token = undefined
         },
         [forgotPasswordFailedAction.type]: (state: Draft<AuthState>, action: PayloadAction<string>) => {
             state.forgotPassword.error = action.payload

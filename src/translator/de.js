@@ -99,11 +99,12 @@ export default {
       "Es gibt keinen Zugang zur Kamera. Überprüfen Sie Ihre Berechtigungen in den Einstellungen.",
   },
   my_profile: {
+    tab_name: "Einstellungen",
     headline: "Mein Profil",
-    verified_gray: "Sie wurden bestätigt von",
-    verified_black: "personen",
+    verified_gray: "Sie wurden von",
+    verified_black: "Personen bestätigt",
     buttons_text: {
-      my_profile: "Mein profil",
+      my_profile: "Mein Profil",
       language: "Sprache",
       notifications: "Benachrichtigungen",
       invite_friends: "Freunde einladen",
@@ -116,21 +117,34 @@ export default {
   change_language: {
     title: "Sprache",
     languages: {
-      english: "English",
-      germany: "Germany",
+      english: "Englisch",
+      germany: "Deutsch",
     },
   },
   edit_profile: {
     title: "Mein Profil",
     delete: "Löschen",
-    buttons_text: {
-      edit: "Editieren",
-      cancel: "Abbrechen",
-      save: "Speichern",
-    },
   },
   upload_files: {
     camera: "Kamera",
     gallary: "Galerie",
+  },
+  homepage: {
+    tab_name: "Vertrag erstellen",
+    description: "Bitte wählen Sie den Vertragstyp aus",
+    search: "Suche",
+    contract_types: {
+      purchase: "Kaufvertrag",
+      work: "Werkvertrag",
+      rental: "Mietvertrag",
+      free: "Freiformvertrag",
+      car: "Autokaufvertrag",
+    },
+  },
+  my_contracts: {
+    tab_name: "Meine Verträge",
+  },
+  menu: {
+    cancel: "Abbrechen",
   },
 };

@@ -10,7 +10,7 @@ export const libraryWay = async () => {
 
     const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: MediaTypeOptions.Images,
-        quality: 0.5
+        quality: 0.5,
     })
 
     if (!result.cancelled) {

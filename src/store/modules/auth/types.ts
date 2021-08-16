@@ -31,10 +31,14 @@ export interface ForgotPasswordPayload {
 
 export interface ChangePasswordPayload {
     password: string,
-    token: string
+    token: string,
+    refresh: string
 }
 
-export type SaveTokenPayload = string
+export type SaveTokenPayload = {
+    token: string,
+    refresh: string
+}
 
 export interface RequestSignUpAction extends BaseAction {
     payload: SignUpPayload
@@ -70,4 +74,11 @@ export interface RequestTokenAction extends BaseAction {
 
 export interface ClearTokenAction extends BaseAction {
     payload: undefined
+}
+
+export interface ResponseErrorAction extends BaseAction {
+    payload: {
+        status: Number,
+        data: any
+    } | undefined
 }

@@ -13,7 +13,7 @@ export interface UploadMediaAction extends BaseAction {
     payload: MediaPayload;
 }
 
-export const uploadMedia = (uri: string, folder: string, successAction: PayloadAction<string>): UploadMediaAction => ({
+export const uploadMedia = (uri: string, folder: string, successAction: PayloadAction<any>): UploadMediaAction => ({
     type: UPLOAD_MEDIA,
     payload: {
         uri,

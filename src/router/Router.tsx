@@ -17,6 +17,9 @@ import { requestLanguage } from "../store/modules/profile/action-creators";
 import EditProfile from "../components/pages/EditProfile";
 import { requestToken } from "../store/modules/auth/action-creators";
 import { Text } from "react-native";
+import { Feather } from "@expo/vector-icons";
+import { useI18n } from "../translator/i18n";
+import MyContracts from "../components/pages/MyContracts";
 
 const Stack = createStackNavigator();
 const ProfileStack = createStackNavigator();
@@ -25,6 +28,7 @@ const Tab = createBottomTabNavigator();
 export default function Router() {
   const token = useAppSelector((state) => state.auth.token);
   const language = useAppSelector((state) => state.profile.language);
+  const { t } = useI18n();
 
   const dispatch = useAppDispatch();
 
@@ -40,11 +44,40 @@ export default function Router() {
   return token ? (
     <Tab.Navigator
       tabBarOptions={{
+        activeTintColor: "#1696E2",
         keyboardHidesTabBar: true,
       }}
+      initialRouteName="Homepage"
     >
-      <Tab.Screen name="Homepage" component={Homepage} />
-      <Tab.Screen name="Settings">
+      <Tab.Screen
+        name="MyContracts"
+        component={MyContracts}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Feather name="file-text" size={size} color={color} />
+          ),
+          tabBarLabel: t("my_contracts.tab_name"),
+        }}
+      />
+      <Tab.Screen
+        name="Homepage"
+        component={Homepage}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Feather name="file-plus" size={size} color={color} />
+          ),
+          tabBarLabel: t("homepage.tab_name"),
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Feather name="settings" size={size} color={color} />
+          ),
+          tabBarLabel: t("my_profile.tab_name"),
+        }}
+      >
         {() => (
           <ProfileStack.Navigator headerMode="none">
             <ProfileStack.Screen

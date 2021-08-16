@@ -86,34 +86,35 @@ export default {
       new_password_are_same_as_old:
         "Your new password must be different from the previously used passwords",
     },
-  },
-  errors: {
-    abstract: "Something went wrong. Try again later.",
-    galary_permission:
-      "There is no access to the gallery. Check your permissions in settings.",
-    camera_permission:
-      "There is no access to the camera. Check your permissions in settings.",
-  },
-  my_profile: {
-    headline: "My Profile",
-    verified_gray: "You have been verified by",
-    verified_black: "people",
-    buttons_text: {
-      my_profile: "My profile",
-      language: "Language",
-      notifications: "Notifications",
-      invite_friends: "Invite friends",
-      private_policy: "Privacy Policy",
-      change_password: "Change password",
-      sign_out: "Sign out",
-      delete_profile: "Delete profile",
+    errors: {
+      abstract: "Something went wrong. Try again later.",
+      galary_permission:
+        "There is no access to the gallery. Check your permissions in settings.",
+      camera_permission:
+        "There is no access to the camera. Check your permissions in settings.",
     },
-  },
-  change_language: {
-    title: "Language",
-    languages: {
-      english: "English",
-      germany: "Germany",
+    my_profile: {
+        tab_name: 'Settings',
+        headline: 'My Profile',
+        verified_gray: 'You have been verified by',
+        verified_black: 'people',
+        buttons_text: {
+            my_profile: 'My profile',
+            language: 'Language',
+            notifications: 'Notifications',
+            invite_friends: 'Invite friends',
+            private_policy: 'Privacy Policy',
+            change_password: 'Change password',
+            sign_out: 'Sign out',
+            delete_profile: 'Delete profile'
+        }
+    },
+    change_language: {
+        title: 'Language',
+        languages: {
+            english: 'English',
+            germany: 'German'
+        }
     },
   },
   edit_profile: {
@@ -124,9 +125,26 @@ export default {
       cancel: "Cancel",
       save: "Save",
     },
-  },
-  upload_files: {
-    camera: "Camera",
-    gallary: "Gallery",
-  },
-};
+    upload_files: {
+        camera: 'Camera',
+        gallary: 'Gallery'
+    },
+    homepage: {
+        tab_name: 'Create contract',
+        description: 'Please select the type of contract you need',
+        search: 'Search',
+        contract_types: {
+            purchase: 'Purchase contract',
+            work: 'Work contract',
+            rental: 'Rental contract',
+            free: 'Free-form contract',
+            car: 'Car sales contract'
+        }
+    },
+    my_contracts: {
+        tab_name: 'My contracts'
+    },
+    menu: {
+        cancel: 'Cancel'
+    }
+}
