@@ -101,7 +101,7 @@ export default {
   my_profile: {
     tab_name: "Settings",
     headline: "Mein Profil",
-    verified_gray: "Sie wurden von",
+    verified_gray: "Sie wurden  von",
     verified_black: "Personen bestätigt",
     buttons_text: {
       my_profile: "Mein Profil",
