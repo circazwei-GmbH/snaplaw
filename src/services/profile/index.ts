@@ -22,6 +22,5 @@ const editProfileSaveChange = (userData: UserType) => {
 
 export default {
   updateUserAvatar,
-  requestMe,
   editProfileSaveChange,
 };
