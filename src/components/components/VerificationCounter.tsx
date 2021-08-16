@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { useI18n } from "../../translator/i18n";
+import { useAppSelector } from "../../store/hooks";
 
 interface VerificationCounterPropsInterface {
   sizeSmall: boolean;
@@ -13,10 +14,30 @@ export default function VerificationCounter({
 }: VerificationCounterPropsInterface) {
   const [verifications] = useState<number>(0);
   const { t } = useI18n();
+  const currentLanguage = useAppSelector((state) => state.profile.language);
+
+  console.log(currentLanguage);
+
   return (
     <View style={!sizeSmall && doHaveUrl ? styles.horizontal : styles.vertical}>
-      <Text style={styles.textGray}>{t("my_profile.verified_gray")}</Text>
-      <Text style={styles.textBlack}>
+      <Text
+        style={[
+          styles.textGray,
+          currentLanguage === "LANGUAGE_ENGLISH"
+            ? styles.widthGrayEng
+            : styles.widthGrayGer,
+        ]}
+      >
+        {t("my_profile.verified_gray")}
+      </Text>
+      <Text
+        style={[
+          styles.textBlack,
+          currentLanguage === "LANGUAGE_ENGLISH"
+            ? styles.widthBlackEng
+            : styles.widthBlackGer,
+        ]}
+      >
         {`${verifications} ${t("my_profile.verified_black")}`}
       </Text>
     </View>
@@ -36,7 +57,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   textBlack: {
-    width: "50%",
     fontFamily: "OS-SB",
     fontSize: 16,
     fontWeight: "600",
@@ -44,10 +64,21 @@ const styles = StyleSheet.create({
     textAlign: "right",
   },
   textGray: {
-    width: "50%",
     fontSize: 16,
     fontWeight: "400",
     color: "#909090",
     textAlign: "left",
+  },
+  widthBlackEng: {
+    width: "35%",
+  },
+  widthGrayEng: {
+    width: "65%",
+  },
+  widthBlackGer: {
+    width: "60%",
+  },
+  widthGrayGer: {
+    width: "40%",
   },
 });
