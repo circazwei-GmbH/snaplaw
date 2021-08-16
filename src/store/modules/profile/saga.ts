@@ -9,8 +9,14 @@ import {
   UpdateAvatarAction,
   REQUEST_EDIT_PROFILE,
   RequestEditProfileAction,
+  SAVE_BUTTON_EDIT_PROFILE,
+  SAVE_BUTTON_EDIT_PROFILE_MODAL,
+  saveButtonEditProfileModal,
+  CANCEL_BUTTON_EDIT_PROFILE,
+  CANCEL_BUTTON_EDIT_PROFILE_MODAL,
+  cancelButtonEditProfileModal,
 } from "./action-creators";
-import { setMessage } from "../main/slice";
+import { setMessage, setModal } from "../main/slice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Reduser from "./slice";
 import { Translator } from "../../../translator/i18n";
@@ -74,6 +80,52 @@ function* requestEditProfile({ payload }: RequestEditProfileAction) {
   }
 }
 
+function* saveButtonEditProfile({ payload }: RequestEditProfileAction) {
+  try {
+    yield put(
+      setModal({
+        message: "Do you want to save changes you made?",
+        actions: [
+          {
+            name: "Cancel",
+            colortype: "error",
+          },
+          {
+            action: saveButtonEditProfileModal(payload),
+            name: "Confirm ",
+            colortype: "primary",
+          },
+        ],
+      })
+    );
+  } catch {
+    yield put(setMessage(Translator.getInstance().trans("errors.abstract")));
+  }
+}
+
+function* cancelButtonEditProfile() {
+  try {
+    yield put(
+      setModal({
+        message: "You have unsaved changes. Are you sure you want to leave?",
+        actions: [
+          {
+            name: "No",
+            colortype: "error",
+          },
+          {
+            action: cancelButtonEditProfileModal(),
+            name: "Yes",
+            colortype: "primary",
+          },
+        ],
+      })
+    );
+  } catch {
+    yield put(setMessage(Translator.getInstance().trans("errors.abstract")));
+  }
+}
+
 function* profileSaga() {
   yield takeLatest(SET_LANGUAGE, setLanguage);
   yield takeLatest(REQUEST_LANGUAGE, requestLanguage);
@@ -81,6 +133,10 @@ function* profileSaga() {
   yield takeLatest(DELETE_AVATAR, deleteAvatar);
   yield takeLatest(REQUEST_ME, requestMe);
   yield takeLatest(REQUEST_EDIT_PROFILE, requestEditProfile);
+  yield takeLatest(SAVE_BUTTON_EDIT_PROFILE, saveButtonEditProfile);
+  yield takeLatest(SAVE_BUTTON_EDIT_PROFILE_MODAL, requestEditProfile);
+  yield takeLatest(CANCEL_BUTTON_EDIT_PROFILE, cancelButtonEditProfile);
+  yield takeLatest(CANCEL_BUTTON_EDIT_PROFILE_MODAL, requestMe);
 }
 
 export default profileSaga;

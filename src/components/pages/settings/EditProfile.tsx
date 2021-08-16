@@ -1,49 +1,108 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TopBar from "../../layouts/TopBar";
 import { useI18n } from "../../../translator/i18n";
 import { View, StyleSheet } from "react-native";
 import UploadAvatar from "../../features/UploadAvatar";
 import TextButton from "../../basics/buttons/TextButton";
-import EditProfileForm from "../../features/forms/EditProfileForm";
+import EditProfileForm, {
+  EditProfileFormInterface,
+} from "../../features/forms/EditProfileForm";
 import { useAppSelector, useAppDispatch } from "../../../store/hooks";
 import { UserType } from "../../../store/modules/profile/slice";
-import { requestEditProfile } from "../../../store/modules/profile/action-creators";
+import {
+  saveButtonEditProfile,
+  cancelButtonEditProfile,
+} from "../../../store/modules/profile/action-creators";
+import { email, length } from "../../../validations/default";
+import { validate } from "../../../utils/forms";
 
 export default function EditProfile() {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
-
+  const [edit, setEdit] = useState(false);\
   const userData: UserType | undefined = useAppSelector(
     (state) => state.profile.user
   );
 
-  const globalValue: UserType | undefined = {
-    name: userData?.name,
-    lastName: userData?.lastName,
-    dateOfBirth: userData?.dateOfBirth,
-    email: userData?.email,
-    phone: userData?.phone,
-    address: userData?.address,
-    postCode: userData?.postCode,
+  const formInitial: EditProfileFormInterface = {
+    name: {
+      value: userData?.name,
+      error: "",
+      displayError: false,
+      validators: [length(t("sign_up.errors.name_required"), 1)],
+    },
+    lastName: {
+      value: userData?.lastName,
+      error: "",
+      displayError: false,
+      validators: [length(t("sign_up.errors.name_required"), 1)],
+    },
+    dateOfBirth: {
+      value: userData?.dateOfBirth,
+      error: "",
+      displayError: false,
+      validators: [length(t("sign_up.errors.name_required"), 1)],
+    },
+    email: {
+      value: userData?.email,
+      error: "",
+      displayError: false,
+      validators: [email(t("sign_up.errors.email_not_valid"))],
+    },
+    phone: {
+      value: userData?.phone,
+      error: "",
+      displayError: false,
+      validators: [length(t("sign_up.errors.name_required"), 1)],
+    },
+    address: {
+      value: userData?.address,
+      error: "",
+      displayError: false,
+      validators: [length(t("sign_up.errors.name_required"), 1)],
+    },
+    postCode: {
+      value: userData?.postCode,
+      error: "",
+      displayError: false,
+      validators: [length(t("sign_up.errors.name_required"), 1)],
+    },
   };
 
-  const [edit, setEdit] = useState(false);
-  const [localValue, setLocalValue] = useState<UserType>(globalValue);
+  let [form, setForm] = useState<EditProfileFormInterface | any>(formInitial);
 
   const editHandler = () => setEdit(true);
   const cancelHandler = () => {
-    setLocalValue(globalValue);
-    setEdit(false);
+    dispatch(cancelButtonEditProfile());
+    editHandler()
   };
   const saveHandler = () => {
-    dispatch(requestEditProfile(localValue));
+    dispatch(
+      saveButtonEditProfile({
+        name: form.name.value,
+        lastName: form.lastName.value,
+        dateOfBirth: form.dateOfBirth.value,
+        email: form.email.value,
+        phone: form.phone.value,
+        address: form.address.value,
+        postCode: form.postCode.value,
+      })
+    );
     setEdit(false);
   };
 
-  const onChange = (newValue: string, fieldName: string) => {
-    setLocalValue({
-      ...localValue,
-      [fieldName]: newValue,
+  useEffect(() => {
+    setForm(formInitial);
+  }, [userData]);
+
+
+  const onChange = (newValue: string, fieldName: any) => {
+    setForm({
+      ...form,
+      [fieldName]: {
+        ...form[fieldName],
+        value: newValue,
+      },
     });
   };
 
@@ -81,8 +140,8 @@ export default function EditProfile() {
         </View>
         <EditProfileForm
           edit={edit}
-          localValue={localValue}
-          onChangeAction={onChange}
+          form={form}
+          onChangeHandler={onChange}
         />
       </View>
     </TopBar>
