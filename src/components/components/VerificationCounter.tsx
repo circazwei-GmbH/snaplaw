@@ -16,8 +16,6 @@ export default function VerificationCounter({
   const { t } = useI18n();
   const currentLanguage = useAppSelector((state) => state.profile.language);
 
-  console.log(currentLanguage);
-
   return (
     <View style={!sizeSmall && doHaveUrl ? styles.horizontal : styles.vertical}>
       <Text
