@@ -28,11 +28,11 @@ export default function UploadAvatar() {
     const buttonPickerHandler = (way: Function) => async () => {
         try {
             const uri = await way()
-
             if (uri) {
                 postChooseFileHandler(uri)
             }
         } catch (error) {
+            setMenuVisible(false)
             if (error instanceof PermissionNotGranted) {
                 dispatch(setMessage(t(error.message)))
             } else {
