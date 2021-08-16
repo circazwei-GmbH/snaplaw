@@ -1,12 +1,12 @@
 import React from 'react';
 import {View} from "react-native";
-import TopBar from '../layouts/TopBar'
-import DefaultSwitch from "../basics/switches/DefaultSwitch";
-import {useAppDispatch, useAppSelector} from "../../store/hooks";
-import {LANGUAGE_ENGLISH, LANGUAGE_GERMANY} from "../../store/modules/profile/constants";
-import {LanguageType} from "../../store/modules/profile/slice";
-import {useI18n} from "../../translator/i18n";
-import * as profileACs from '../../store/modules/profile/action-creators'
+import TopBar from '../../layouts/TopBar'
+import DefaultSwitch from "../../basics/switches/DefaultSwitch";
+import {useAppDispatch, useAppSelector} from "../../../store/hooks";
+import {LANGUAGE_ENGLISH, LANGUAGE_GERMANY} from "../../../store/modules/profile/constants";
+import {LanguageType} from "../../../store/modules/profile/slice";
+import {useI18n} from "../../../translator/i18n";
+import * as profileACs from '../../../store/modules/profile/action-creators'
 
 export default function ChangeLanguage() {
     const dispatch = useAppDispatch();

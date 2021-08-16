@@ -1,6 +1,6 @@
 import React from 'react';
 import {fireEvent, render} from "@testing-library/react-native";
-import ForgotPassword from "../ForgotPassword";
+import ForgotPassword from "../auth/ForgotPassword";
 import {Provider} from "react-redux";
 import store from "../../../store";
 import {createStore} from "@reduxjs/toolkit";

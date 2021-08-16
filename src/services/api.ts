@@ -28,7 +28,7 @@ const _call = async (
     url: string,
     body: any,
     options?: AxiosRequestConfig,
-    secondCall: boolean = false
+    secondCall = false
 ): Promise<any> => {
     try {
         return await axios.request(attachTokenToConfig({

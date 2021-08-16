@@ -5,16 +5,16 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
 } from "react-native";
-import Button from "../basics/buttons/Button";
-import HeaderNavigation from "../layouts/HeaderNavigation";
-import ImageAndText from "../features/Auth/ImageAndText";
-import TextField from "../components/TextField";
-import { email } from "../../validations/default";
-import { formFieldFill, validate } from "../../utils/forms";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { requestForgotPassword } from "../../store/modules/auth/action-creators";
-import { forgotPasswordFailed } from "../../store/modules/auth/slice";
-import { useI18n } from "../../translator/i18n";
+import Button from "../../basics/buttons/Button";
+import HeaderNavigation from "../../layouts/HeaderNavigation";
+import ImageAndText from "../../features/Auth/ImageAndText";
+import TextField from "../../components/TextField";
+import { email } from "../../../validations/default";
+import { formFieldFill, validate } from "../../../utils/forms";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { requestForgotPassword } from "../../../store/modules/auth/action-creators";
+import { forgotPasswordFailed } from "../../../store/modules/auth/slice";
+import { useI18n } from "../../../translator/i18n";
 
 export default function ForgotPassword() {
   const { t } = useI18n();
@@ -71,7 +71,7 @@ export default function ForgotPassword() {
         <View style={styles.container}>
           <View>
             <ImageAndText
-              image={require("../../../assets/forgot_password.png")}
+              image={require("../../../../assets/forgot_password.png")}
               text={t("forgot_password.description")}
             />
             <View style={styles.inputArea}>

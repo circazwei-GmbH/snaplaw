@@ -78,7 +78,7 @@ export interface ClearTokenAction extends BaseAction {
 
 export interface ResponseErrorAction extends BaseAction {
     payload: {
-        status: Number,
+        status: number,
         data: any
     } | undefined
 }
