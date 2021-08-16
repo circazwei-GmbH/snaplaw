@@ -2,7 +2,7 @@ import React from "react";
 import { fireEvent, render } from "@testing-library/react-native";
 import { Provider } from "react-redux";
 import store from "../../../store";
-import ChangePassword from "../ChangePassword";
+import ChangePassword from "../auth/ChangePassword";
 import { createStore } from "@reduxjs/toolkit";
 import { CHANGE_PASSWORD_REQUESTED } from "../../../store/modules/auth/action-creators";
 
