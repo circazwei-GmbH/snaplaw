@@ -45,6 +45,7 @@ export default function Router() {
     <Tab.Navigator
       tabBarOptions={{
         activeTintColor: "#1696E2",
+        keyboardHidesTabBar: true,
       }}
       initialRouteName="Homepage"
     >
