@@ -12,12 +12,12 @@ import {
 } from "./action-creators";
 import { setMessage } from "../main/slice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as Reduser from './slice'
-import {Translator} from "../../../translator/i18n";
-import {setAvatar, setAvatarLoading, setUser} from "./slice";
-import API from '../../../services/profile/index'
-import {LANGUAGE_ENGLISH} from "./constants";
-import {responseError} from "../auth/action-creators";
+import * as Reduser from "./slice";
+import { Translator } from "../../../translator/i18n";
+import { setAvatar, setAvatarLoading, setUser } from "./slice";
+import API from "../../../services/profile/index";
+import { LANGUAGE_ENGLISH } from "./constants";
+import { responseError } from "../auth/action-creators";
 
 function* setLanguage({ payload }: SetLanguageAction) {
   try {
@@ -57,12 +57,12 @@ function* deleteAvatar() {
 }
 
 function* requestMe() {
-    try {
-        const user = yield call(API.requestMe)
-        yield put(setUser(user.data))
-    } catch (error) {
-        yield put(responseError(error))
-    }
+  try {
+    const user = yield call(API.requestMe);
+    yield put(setUser(user.data));
+  } catch (error) {
+    yield put(responseError(error));
+  }
 }
 
 function* requestEditProfile({ payload }: RequestEditProfileAction) {
@@ -72,6 +72,7 @@ function* requestEditProfile({ payload }: RequestEditProfileAction) {
   } catch (error) {
     yield put(setMessage(Translator.getInstance().trans("errors.abstract")));
   }
+}
 
 function* profileSaga() {
   yield takeLatest(SET_LANGUAGE, setLanguage);
