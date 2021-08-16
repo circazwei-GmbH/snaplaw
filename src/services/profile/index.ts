@@ -2,7 +2,7 @@ import httpClient from '../api'
 import {getUserFromToken} from "../../utils";
 
 
-const updateUserAvatar = (avatarPath: string | undefined) => {
+const updateUserAvatar = (avatarPath: string | null) => {
     const token = httpClient.getToken()
     if (!token) {
         throw new Error('Trying to update user avatar with empty token');
