@@ -124,6 +124,20 @@ export default {
   edit_profile: {
     title: "Mein Profil",
     delete: "Löschen",
+    buttons_text: {
+      edit: "Editieren",
+      cancel: "Abbrechen",
+      save: "Speichern",
+    },
+    placeholders: {
+      name: "Vorname",
+      lastName: "Nachname",
+      dateOfBirth: "Geburtsdatum",
+      email: "E-Mail",
+      phone: "Nummer",
+      address: "Adresse (Straße, Stadt)",
+      postCode: "Postleitzahl",
+    },
   },
   upload_files: {
     camera: "Kamera",
