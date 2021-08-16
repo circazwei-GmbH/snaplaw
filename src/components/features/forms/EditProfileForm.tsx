@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { View, StyleSheet } from "react-native";
 import EditProfileTextField from "../../components/EditProfileTextField";
-import { UserType } from "../../../store/../store/modules/profile/slice";
 import { useI18n } from "../../../translator/i18n";
 import { ValidatorInterface } from "../../../validations/default";
 
@@ -42,6 +41,7 @@ export default function EditProfileForm({
         value={form.name.value}
         editable={edit}
         edit={edit}
+        textContentType="username"
         onChangeFunction={(newValue) => onChangeHandler(newValue, "name")}
       />
       <EditProfileTextField

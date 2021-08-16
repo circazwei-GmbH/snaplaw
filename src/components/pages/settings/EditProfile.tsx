@@ -19,7 +19,7 @@ import { validate } from "../../../utils/forms";
 export default function EditProfile() {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
-  const [edit, setEdit] = useState(false);\
+  const [edit, setEdit] = useState(false);
   const userData: UserType | undefined = useAppSelector(
     (state) => state.profile.user
   );
@@ -74,27 +74,30 @@ export default function EditProfile() {
   const editHandler = () => setEdit(true);
   const cancelHandler = () => {
     dispatch(cancelButtonEditProfile());
-    editHandler()
+    setEdit(false);
   };
   const saveHandler = () => {
-    dispatch(
-      saveButtonEditProfile({
-        name: form.name.value,
-        lastName: form.lastName.value,
-        dateOfBirth: form.dateOfBirth.value,
-        email: form.email.value,
-        phone: form.phone.value,
-        address: form.address.value,
-        postCode: form.postCode.value,
-      })
-    );
+    const localForm = {
+      name: validate(form.name.value),
+      lastName: validate(form.lastName.value),
+      dateOfBirth: validate(form.dateOfBirth.value),
+      email: validate(form.email.value),
+      phone: validate(form.phone.value),
+      address: validate(form.address.value),
+      postCode: validate(form.postCode.value),
+    };
+
+    if (localForm.email.error || localForm.name.error) {
+      return;
+    }
+
+    dispatch(saveButtonEditProfile(localForm));
     setEdit(false);
   };
 
   useEffect(() => {
     setForm(formInitial);
   }, [userData]);
-
 
   const onChange = (newValue: string, fieldName: any) => {
     setForm({
@@ -138,11 +141,7 @@ export default function EditProfile() {
         <View style={styles.uploadAvatarBox}>
           <UploadAvatar />
         </View>
-        <EditProfileForm
-          edit={edit}
-          form={form}
-          onChangeHandler={onChange}
-        />
+        <EditProfileForm edit={edit} form={form} onChangeHandler={onChange} />
       </View>
     </TopBar>
   );
