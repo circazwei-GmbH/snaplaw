@@ -37,6 +37,9 @@ const setUserAction = createAction<UserType, "setUser">("setUser");
 const setAvatarLoadingAction = createAction<boolean, "setAvatarLoading">(
   "setAvatarLoading"
 );
+const setUserProfileAction = createAction<UserType, "setUserProfile">(
+  "setUserProfile"
+);
 
 export const profileSlice = createSlice({
   name: "profile",
@@ -76,10 +79,30 @@ export const profileSlice = createSlice({
     ) => {
       state.avatarLoading = action.payload;
     },
+    [setUserProfileAction.type]: (
+      state: Draft<ProfileStateInterface>,
+      action: PayloadAction<UserType>
+    ) => {
+      state.user = {
+        ...state.user,
+        name: action.payload.name,
+        lastName: action.payload.lastName,
+        dateOfBirth: action.payload.dateOfBirth,
+        email: action.payload.email,
+        phone: action.payload.phone,
+        address: action.payload.address,
+        postCode: action.payload.postCode,
+      };
+    },
   },
 });
 
-export const { setLanguage, setAvatar, setUser, setAvatarLoading } =
-  profileSlice.actions;
+export const {
+  setLanguage,
+  setAvatar,
+  setUser,
+  setAvatarLoading,
+  setUserProfile,
+} = profileSlice.actions;
 
 export default profileSlice.reducer;

@@ -8,7 +8,7 @@ import EditProfileForm, {
   EditProfileFormInterface,
 } from "../../features/forms/EditProfileForm";
 import { useAppSelector, useAppDispatch } from "../../../store/hooks";
-import { UserType, setUser } from "../../../store/modules/profile/slice";
+import { UserType, setUserProfile } from "../../../store/modules/profile/slice";
 import { requestEditProfile } from "../../../store/modules/profile/action-creators";
 import { email, length } from "../../../validations/default";
 import { validate } from "../../../utils/forms";
@@ -123,7 +123,7 @@ export default function EditProfile() {
             colortype: "error",
           },
           {
-            action: setUser(globalValue),
+            action: setUserProfile(globalValue),
             name: "Yes",
             colortype: "primary",
           },

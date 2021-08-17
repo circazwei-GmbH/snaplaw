@@ -9,18 +9,12 @@ import {
   UpdateAvatarAction,
   REQUEST_EDIT_PROFILE,
   RequestEditProfileAction,
-  SAVE_BUTTON_EDIT_PROFILE,
-  SAVE_BUTTON_EDIT_PROFILE_MODAL,
-  saveButtonEditProfileModal,
-  CANCEL_BUTTON_EDIT_PROFILE,
-  CANCEL_BUTTON_EDIT_PROFILE_MODAL,
-  cancelButtonEditProfileModal,
 } from "./action-creators";
-import { setMessage, setModal } from "../main/slice";
+import { setMessage } from "../main/slice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Reduser from "./slice";
 import { Translator } from "../../../translator/i18n";
-import { setAvatar, setAvatarLoading, setUser } from "./slice";
+import { setAvatar, setAvatarLoading, setUser, setUserProfile } from "./slice";
 import API from "../../../services/profile/index";
 import { LANGUAGE_ENGLISH } from "./constants";
 import { responseError } from "../auth/action-creators";
@@ -74,7 +68,7 @@ function* requestMe() {
 function* requestEditProfile({ payload }: RequestEditProfileAction) {
   try {
     yield call(API.editProfileSaveChange, payload);
-    yield put(setUser(payload));
+    yield put(setUserProfile(payload));
   } catch (error) {
     yield put(setMessage(Translator.getInstance().trans("errors.abstract")));
   }
