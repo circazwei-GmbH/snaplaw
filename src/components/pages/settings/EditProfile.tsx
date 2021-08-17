@@ -8,13 +8,11 @@ import EditProfileForm, {
   EditProfileFormInterface,
 } from "../../features/forms/EditProfileForm";
 import { useAppSelector, useAppDispatch } from "../../../store/hooks";
-import { UserType } from "../../../store/modules/profile/slice";
-import {
-  saveButtonEditProfile,
-  cancelButtonEditProfile,
-} from "../../../store/modules/profile/action-creators";
+import { UserType, setUser } from "../../../store/modules/profile/slice";
+import { requestEditProfile } from "../../../store/modules/profile/action-creators";
 import { email, length } from "../../../validations/default";
 import { validate } from "../../../utils/forms";
+import { setModal } from "../../../store/modules/main/slice";
 
 export default function EditProfile() {
   const { t } = useI18n();
@@ -23,6 +21,16 @@ export default function EditProfile() {
   const userData: UserType | undefined = useAppSelector(
     (state) => state.profile.user
   );
+
+  const globalValue: UserType = {
+    name: userData?.name,
+    lastName: userData?.lastName,
+    dateOfBirth: userData?.dateOfBirth,
+    email: userData?.email,
+    phone: userData?.phone,
+    address: userData?.address,
+    postCode: userData?.postCode,
+  };
 
   const formInitial: EditProfileFormInterface = {
     name: {
@@ -69,22 +77,22 @@ export default function EditProfile() {
     },
   };
 
-  let [form, setForm] = useState<EditProfileFormInterface | any>(formInitial);
+  const [form, setForm] = useState<EditProfileFormInterface | any>(formInitial);
 
   const editHandler = () => setEdit(true);
   const cancelHandler = () => {
-    dispatch(cancelButtonEditProfile());
+    setForm(formInitial);
     setEdit(false);
   };
   const saveHandler = () => {
     const localForm = {
-      name: validate(form.name.value),
-      lastName: validate(form.lastName.value),
-      dateOfBirth: validate(form.dateOfBirth.value),
-      email: validate(form.email.value),
-      phone: validate(form.phone.value),
-      address: validate(form.address.value),
-      postCode: validate(form.postCode.value),
+      name: form.name.value,
+      lastName: form.lastName.value,
+      dateOfBirth: form.dateOfBirth.value,
+      email: form.email.value,
+      phone: form.phone.value,
+      address: form.address.value,
+      postCode: form.postCode.value,
     };
 
     if (localForm.email.error || localForm.name.error) {
@@ -95,8 +103,27 @@ export default function EditProfile() {
     setEdit(false);
   };
 
+  const pressCancel = () => {
+    dispatch(
+      setModal({
+        message: "You have unsaved changes. Are you sure you want to leave?",
+        actions: [
+          {
+            name: "No",
+            colortype: "error",
+          },
+          {
+            action: setUser(globalValue),
+            name: "Yes",
+            colortype: "primary",
+          },
+        ],
+      })
+    );
+  };
+
   useEffect(() => {
-    setForm(formInitial);
+    cancelHandler();
   }, [userData]);
 
   const onChange = (newValue: string, fieldName: any) => {
@@ -116,7 +143,7 @@ export default function EditProfile() {
         edit ? (
           <TextButton
             text={t("edit_profile.buttons_text.cancel")}
-            onPress={cancelHandler}
+            onPress={pressCancel}
             type="left"
           />
         ) : undefined

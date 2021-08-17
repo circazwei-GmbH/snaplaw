@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     paddingTop: 47,
   },
   headerANDROID: {
-    paddingTop: 25,
+    paddingTop: 35,
   },
   headerText: {
     textAlign: "center",
