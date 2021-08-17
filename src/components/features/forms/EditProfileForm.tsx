@@ -2,23 +2,16 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import EditProfileTextField from "../../components/EditProfileTextField";
 import { useI18n } from "../../../translator/i18n";
-import { ValidatorInterface } from "../../../validations/default";
-
-export interface EditProfileFieldInterface {
-  value?: string;
-  error: string;
-  displayError: boolean;
-  validators: Array<ValidatorInterface>;
-}
+import { FieldInterface } from "../../features/forms/SignInForm";
 
 export interface EditProfileFormInterface {
-  name: EditProfileFieldInterface;
-  lastName: EditProfileFieldInterface;
-  dateOfBirth: EditProfileFieldInterface;
-  email: EditProfileFieldInterface;
-  phone: EditProfileFieldInterface;
-  address: EditProfileFieldInterface;
-  postCode: EditProfileFieldInterface;
+  name: FieldInterface;
+  lastName: FieldInterface;
+  dateOfBirth: FieldInterface;
+  email: FieldInterface;
+  phone: FieldInterface;
+  address: FieldInterface;
+  postCode: FieldInterface;
 }
 
 interface EditProfileFormPropsInterface {

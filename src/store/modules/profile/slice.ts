@@ -85,13 +85,7 @@ export const profileSlice = createSlice({
     ) => {
       state.user = {
         ...state.user,
-        name: action.payload.name,
-        lastName: action.payload.lastName,
-        dateOfBirth: action.payload.dateOfBirth,
-        email: action.payload.email,
-        phone: action.payload.phone,
-        address: action.payload.address,
-        postCode: action.payload.postCode,
+        ...action.payload,
       };
     },
   },

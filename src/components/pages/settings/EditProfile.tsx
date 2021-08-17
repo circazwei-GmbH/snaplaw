@@ -11,7 +11,6 @@ import { useAppSelector, useAppDispatch } from "../../../store/hooks";
 import { UserType, setUserProfile } from "../../../store/modules/profile/slice";
 import { requestEditProfile } from "../../../store/modules/profile/action-creators";
 import { email, length } from "../../../validations/default";
-import { validate } from "../../../utils/forms";
 import { setModal } from "../../../store/modules/main/slice";
 
 export default function EditProfile() {
