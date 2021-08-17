@@ -157,4 +157,7 @@ export default {
   menu: {
     cancel: "Cancel",
   },
+  notifications: {
+    title: "Notifications",
+  },
 };

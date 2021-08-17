@@ -161,4 +161,7 @@ export default {
   menu: {
     cancel: "Abbrechen",
   },
+  notifications: {
+    title: "Benachrichtigungen",
+  },
 };
