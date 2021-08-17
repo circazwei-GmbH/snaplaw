@@ -12,15 +12,12 @@ export interface ModalInterface {
 }
 
 interface MainStateInterface {
-    modal: ModalInterface,
+    modal: ModalInterface | null,
     waiter: Array<string>
 }
 
 const initialState: MainStateInterface = {
-    modal: {
-        message: '',
-        actions: []
-    },
+    modal: null,
     waiter: []
 }
 
@@ -49,10 +46,7 @@ export const mainSlice = createSlice({
             state.modal = action.payload
         },
         [closeModalAction.type]: (state: Draft<MainStateInterface>) => {
-            state.modal = {
-                message: '',
-                actions: []
-            }
+            state.modal = null
         },
         [addToWaiterAction.type]: (state: Draft<MainStateInterface>, action: PayloadAction<string>) => {
             state.waiter.push(action.payload)
