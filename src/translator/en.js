@@ -151,6 +151,9 @@ export default {
       car: "Car sales contract",
     },
   },
+  purchase_contract: {
+    user_data: "USER DATA",
+  },
   my_contracts: {
     tab_name: "My contracts",
   },
@@ -160,4 +163,5 @@ export default {
   notifications: {
     title: "Notifications",
   },
+  create_contract: {},
 };

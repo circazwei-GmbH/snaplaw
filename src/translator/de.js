@@ -155,6 +155,9 @@ export default {
       car: "Autokaufvertrag",
     },
   },
+  purchase_contract: {
+    user_data: "BENUTZERDATEN",
+  },
   my_contracts: {
     tab_name: "Meine Verträge",
   },
