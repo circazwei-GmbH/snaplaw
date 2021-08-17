@@ -139,12 +139,12 @@ export default {
       postCode: "Postleitzahl",
     },
     modals: {
-      cancel: {
+      save: {
         message: "Möchten Sie die vorgenommenen Änderungen speichern?",
         confirm: "Bestätigen",
         cancel: "Abbrechen",
       },
-      save: {
+      cancel: {
         message:
           "Sie haben die ungespeicherten Änderungen. Sind Sie sicher, sie wollen weitergehen?",
         yes: "Ja",

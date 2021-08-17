@@ -135,12 +135,12 @@ export default {
       postCode: "Postal code",
     },
     modals: {
-      cancel: {
+      save: {
         message: "Do you want to save changes you made?",
         confirm: "Confirm",
         cancel: "Cancel",
       },
-      save: {
+      cancel: {
         message: "You have unsaved changes. Are you sure you want to leave?",
         yes: "Yes",
         no: "No",

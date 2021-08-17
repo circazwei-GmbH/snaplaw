@@ -96,15 +96,15 @@ export default function EditProfile() {
   const pressSave = () => {
     dispatch(
       setModal({
-        message: "Do you want to save changes you made?",
+        message: t("edit_profile.modals.save.message"),
         actions: [
           {
-            name: "Cancel",
+            name: t("edit_profile.modals.save.confirm"),
             colortype: "error",
           },
           {
             action: requestEditProfile(localForm),
-            name: "Confirm ",
+            name: t("edit_profile.modals.save.cancel"),
             colortype: "primary",
           },
         ],
@@ -115,15 +115,15 @@ export default function EditProfile() {
   const pressCancel = () => {
     dispatch(
       setModal({
-        message: "You have unsaved changes. Are you sure you want to leave?",
+        message: t("edit_profile.modals.cancel.message"),
         actions: [
           {
-            name: "No",
+            name: t("edit_profile.modals.cancel.no"),
             colortype: "error",
           },
           {
             action: setUserProfile(globalValue),
-            name: "Yes",
+            name: t("edit_profile.modals.cancel.yes"),
             colortype: "primary",
           },
         ],
