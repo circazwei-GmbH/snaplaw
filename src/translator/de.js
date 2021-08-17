@@ -138,6 +138,19 @@ export default {
       address: "Adresse (Straße, Stadt)",
       postCode: "Postleitzahl",
     },
+    modals: {
+      cancel: {
+        message: "Möchten Sie die vorgenommenen Änderungen speichern?",
+        confirm: "Bestätigen",
+        cancel: "Abbrechen",
+      },
+      save: {
+        message:
+          "Sie haben die ungespeicherten Änderungen. Sind Sie sicher, sie wollen weitergehen?",
+        yes: "Ja",
+        no: "Nein",
+      },
+    },
   },
   upload_files: {
     camera: "Kamera",

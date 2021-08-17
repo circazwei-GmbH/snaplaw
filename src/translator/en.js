@@ -134,6 +134,18 @@ export default {
       address: "Address (Street, City)",
       postCode: "Postal code",
     },
+    modals: {
+      cancel: {
+        message: "Do you want to save changes you made?",
+        confirm: "Confirm",
+        cancel: "Cancel",
+      },
+      save: {
+        message: "You have unsaved changes. Are you sure you want to leave?",
+        yes: "Yes",
+        no: "No",
+      },
+    },
   },
   upload_files: {
     camera: "Camera",
