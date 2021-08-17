@@ -9,9 +9,6 @@ export const REQUEST_ME = "REQUEST_ME";
 export const REQUEST_EDIT_PROFILE = "REQUEST_EDIT_PROFILE";
 export const SAVE_BUTTON_EDIT_PROFILE_MODAL = "SAVE_BUTTON_EDIT_PROFILE_MODAL";
 export const SAVE_BUTTON_EDIT_PROFILE = "SAVE_BUTTON_EDIT_PROFILE";
-export const CANCEL_BUTTON_EDIT_PROFILE_MODAL =
-  "CANCEL_BUTTON_EDIT_PROFILE_MODAL";
-export const CANCEL_BUTTON_EDIT_PROFILE = "CANCEL_BUTTON_EDIT_PROFILE";
 
 export interface SetLanguageAction extends BaseAction {
   payload: LanguageType;
@@ -39,10 +36,6 @@ export interface RequestEditProfileAction extends BaseAction {
 
 export interface SaveButtonEditProfileAction extends BaseAction {
   payload: object;
-}
-
-export interface CancelButtonEditProfileAction extends BaseAction {
-  payload: undefined;
 }
 
 export const setLanguage = (language: LanguageType): SetLanguageAction => ({
@@ -89,14 +82,4 @@ export const saveButtonEditProfileModal = (
 ): SaveButtonEditProfileAction => ({
   type: SAVE_BUTTON_EDIT_PROFILE_MODAL,
   payload: user,
-});
-
-export const cancelButtonEditProfile = (): CancelButtonEditProfileAction => ({
-  type: CANCEL_BUTTON_EDIT_PROFILE,
-  payload: undefined,
-});
-
-export const cancelButtonEditProfileModal = (): RequestMeAction => ({
-  type: CANCEL_BUTTON_EDIT_PROFILE_MODAL,
-  payload: undefined,
 });

@@ -103,29 +103,6 @@ function* saveButtonEditProfile({ payload }: RequestEditProfileAction) {
   }
 }
 
-function* cancelButtonEditProfile() {
-  try {
-    yield put(
-      setModal({
-        message: "You have unsaved changes. Are you sure you want to leave?",
-        actions: [
-          {
-            name: "No",
-            colortype: "error",
-          },
-          {
-            action: cancelButtonEditProfileModal(),
-            name: "Yes",
-            colortype: "primary",
-          },
-        ],
-      })
-    );
-  } catch {
-    yield put(setMessage(Translator.getInstance().trans("errors.abstract")));
-  }
-}
-
 function* profileSaga() {
   yield takeLatest(SET_LANGUAGE, setLanguage);
   yield takeLatest(REQUEST_LANGUAGE, requestLanguage);
@@ -135,8 +112,6 @@ function* profileSaga() {
   yield takeLatest(REQUEST_EDIT_PROFILE, requestEditProfile);
   yield takeLatest(SAVE_BUTTON_EDIT_PROFILE, saveButtonEditProfile);
   yield takeLatest(SAVE_BUTTON_EDIT_PROFILE_MODAL, requestEditProfile);
-  yield takeLatest(CANCEL_BUTTON_EDIT_PROFILE, cancelButtonEditProfile);
-  yield takeLatest(CANCEL_BUTTON_EDIT_PROFILE_MODAL, requestMe);
 }
 
 export default profileSaga;
