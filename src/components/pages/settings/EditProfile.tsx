@@ -78,29 +78,39 @@ export default function EditProfile() {
   };
 
   const [form, setForm] = useState<EditProfileFormInterface | any>(formInitial);
+  const localForm: UserType = {
+    name: form.name.value,
+    lastName: form.lastName.value,
+    dateOfBirth: form.dateOfBirth.value,
+    email: form.email.value,
+    phone: form.phone.value,
+    address: form.address.value,
+    postCode: form.postCode.value,
+  };
 
   const editHandler = () => setEdit(true);
   const cancelHandler = () => {
     setForm(formInitial);
     setEdit(false);
   };
-  const saveHandler = () => {
-    const localForm = {
-      name: form.name.value,
-      lastName: form.lastName.value,
-      dateOfBirth: form.dateOfBirth.value,
-      email: form.email.value,
-      phone: form.phone.value,
-      address: form.address.value,
-      postCode: form.postCode.value,
-    };
 
-    if (localForm.email.error || localForm.name.error) {
-      return;
-    }
-
-    dispatch(saveButtonEditProfile(localForm));
-    setEdit(false);
+  const pressSave = () => {
+    dispatch(
+      setModal({
+        message: "Do you want to save changes you made?",
+        actions: [
+          {
+            name: "Cancel",
+            colortype: "error",
+          },
+          {
+            action: requestEditProfile(localForm),
+            name: "Confirm ",
+            colortype: "primary",
+          },
+        ],
+      })
+    );
   };
 
   const pressCancel = () => {
@@ -152,7 +162,7 @@ export default function EditProfile() {
         edit ? (
           <TextButton
             text={t("edit_profile.buttons_text.save")}
-            onPress={saveHandler}
+            onPress={pressSave}
             type="right"
           />
         ) : (
