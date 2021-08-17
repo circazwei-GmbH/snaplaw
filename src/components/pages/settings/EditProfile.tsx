@@ -20,6 +20,9 @@ export default function EditProfile() {
   const userData: UserType | undefined = useAppSelector(
     (state) => state.profile.user
   );
+  const profileErrors: object = useAppSelector(
+    (state) => state.profile.profileErrors
+  );
 
   const globalValue: UserType = {
     name: userData?.name,
@@ -77,7 +80,7 @@ export default function EditProfile() {
   };
 
   const [form, setForm] = useState<EditProfileFormInterface | any>(formInitial);
-  const localForm: UserType = {
+  const localForm: EditProfileFormInterface = {
     name: form.name.value,
     lastName: form.lastName.value,
     dateOfBirth: form.dateOfBirth.value,
