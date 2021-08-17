@@ -13,18 +13,22 @@ export interface ModalInterface {
 
 interface MainStateInterface {
     modal: ModalInterface,
+    waiter: Array<string>
 }
 
 const initialState: MainStateInterface = {
     modal: {
         message: '',
         actions: []
-    }
+    },
+    waiter: []
 }
 
 const setMessageAction = createAction<string, 'setMessage'>('setMessage')
 const setModalAction = createAction<{message: string, actions: ModalActionInterface[]}, 'setModal'>('setModal')
 const closeModalAction = createAction<undefined, 'closeModal'>('closeModal')
+const addToWaiterAction = createAction<string, 'addToWAiter'>('addToWAiter')
+const removeFromWaiterAction = createAction<string, 'removeFromWaiter'>('removeFromWaiter')
 
 export const mainSlice = createSlice({
     name: 'main',
@@ -49,6 +53,12 @@ export const mainSlice = createSlice({
                 message: '',
                 actions: []
             }
+        },
+        [addToWaiterAction.type]: (state: Draft<MainStateInterface>, action: PayloadAction<string>) => {
+            state.waiter.push(action.payload)
+        },
+        [removeFromWaiterAction.type]: (state: Draft<MainStateInterface>, action: PayloadAction<string>) => {
+            state.waiter.splice(state.waiter.indexOf(action.payload), 1)
         }
     },
 })
@@ -56,7 +66,9 @@ export const mainSlice = createSlice({
 export const {
     setMessage,
     closeModal,
-    setModal
+    setModal,
+    addToWAiter,
+    removeFromWaiter
 } = mainSlice.actions
 
 export default mainSlice.reducer
