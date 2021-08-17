@@ -5,12 +5,16 @@ import API from '../../../services/contract/index'
 import {responseError} from "../auth/action-creators";
 import {addToWAiter, removeFromWaiter} from "../main/slice";
 import {CONTRACT_CREATION_WAIT} from "./constants";
+import {setInitedContract} from "./slice";
+import * as RootHavigation from '../../../router/RootNavigation'
+import {HOME_ROUTER} from "../../../router/HomeRouterType";
 
 function* createContract({payload}: RequestCreateContractAction) {
     try {
         yield put(addToWAiter(CONTRACT_CREATION_WAIT))
         const response = yield call(API.createContract, payload)
-        console.log(response.data)
+        yield put(setInitedContract(response.data.id))
+        RootHavigation.navigate(HOME_ROUTER.CONTRACT)
     } catch (error) {
         yield put(responseError(error));
     } finally {
