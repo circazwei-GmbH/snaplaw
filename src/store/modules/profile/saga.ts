@@ -80,29 +80,6 @@ function* requestEditProfile({ payload }: RequestEditProfileAction) {
   }
 }
 
-function* saveButtonEditProfile({ payload }: RequestEditProfileAction) {
-  try {
-    yield put(
-      setModal({
-        message: "Do you want to save changes you made?",
-        actions: [
-          {
-            name: "Cancel",
-            colortype: "error",
-          },
-          {
-            action: saveButtonEditProfileModal(payload),
-            name: "Confirm ",
-            colortype: "primary",
-          },
-        ],
-      })
-    );
-  } catch {
-    yield put(setMessage(Translator.getInstance().trans("errors.abstract")));
-  }
-}
-
 function* profileSaga() {
   yield takeLatest(SET_LANGUAGE, setLanguage);
   yield takeLatest(REQUEST_LANGUAGE, requestLanguage);
@@ -110,8 +87,6 @@ function* profileSaga() {
   yield takeLatest(DELETE_AVATAR, deleteAvatar);
   yield takeLatest(REQUEST_ME, requestMe);
   yield takeLatest(REQUEST_EDIT_PROFILE, requestEditProfile);
-  yield takeLatest(SAVE_BUTTON_EDIT_PROFILE, saveButtonEditProfile);
-  yield takeLatest(SAVE_BUTTON_EDIT_PROFILE_MODAL, requestEditProfile);
 }
 
 export default profileSaga;

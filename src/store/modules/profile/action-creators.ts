@@ -7,8 +7,6 @@ export const UPDATE_AVATAR = "UPDATE_AVATAR";
 export const DELETE_AVATAR = "DELETE_AVATAR";
 export const REQUEST_ME = "REQUEST_ME";
 export const REQUEST_EDIT_PROFILE = "REQUEST_EDIT_PROFILE";
-export const SAVE_BUTTON_EDIT_PROFILE_MODAL = "SAVE_BUTTON_EDIT_PROFILE_MODAL";
-export const SAVE_BUTTON_EDIT_PROFILE = "SAVE_BUTTON_EDIT_PROFILE";
 
 export interface SetLanguageAction extends BaseAction {
   payload: LanguageType;
@@ -32,10 +30,6 @@ export interface RequestMeAction extends BaseAction {
 
 export interface RequestEditProfileAction extends BaseAction {
   payload: UserType;
-}
-
-export interface SaveButtonEditProfileAction extends BaseAction {
-  payload: object;
 }
 
 export const setLanguage = (language: LanguageType): SetLanguageAction => ({
@@ -67,19 +61,5 @@ export const requestEditProfile = (
   user: UserType
 ): RequestEditProfileAction => ({
   type: REQUEST_EDIT_PROFILE,
-  payload: user,
-});
-
-export const saveButtonEditProfile = (
-  formData: object
-): SaveButtonEditProfileAction => ({
-  type: SAVE_BUTTON_EDIT_PROFILE,
-  payload: formData,
-});
-
-export const saveButtonEditProfileModal = (
-  user: UserType
-): SaveButtonEditProfileAction => ({
-  type: SAVE_BUTTON_EDIT_PROFILE_MODAL,
   payload: user,
 });
