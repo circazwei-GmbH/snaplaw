@@ -4,14 +4,18 @@ import EditProfileTextField from "../../components/EditProfileTextField";
 import { useI18n } from "../../../translator/i18n";
 import { FieldInterface } from "../../features/forms/SignInForm";
 
+export interface EditProfileFieldInterface extends FieldInterface {
+  value?: string;
+}
+
 export interface EditProfileFormInterface {
-  name: FieldInterface;
-  lastName: FieldInterface;
-  dateOfBirth: FieldInterface;
-  email: FieldInterface;
-  phone: FieldInterface;
-  address: FieldInterface;
-  postCode: FieldInterface;
+  name: EditProfileFieldInterface;
+  lastName: EditProfileFieldInterface;
+  dateOfBirth: EditProfileFieldInterface;
+  email: EditProfileFieldInterface;
+  phone: EditProfileFieldInterface;
+  address: EditProfileFieldInterface;
+  postCode: EditProfileFieldInterface;
 }
 
 interface EditProfileFormPropsInterface {
