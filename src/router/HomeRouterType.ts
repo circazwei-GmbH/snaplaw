@@ -3,7 +3,11 @@ export enum HOME_ROUTER {
     CONTRACT = 'Contract'
 }
 
+export type ContractNavigationProps = {
+    screenCount: number
+}
+
 export type HomeStackParamList = {
     [HOME_ROUTER.HOMEPAGE]: undefined,
-    [HOME_ROUTER.CONTRACT]: undefined
+    [HOME_ROUTER.CONTRACT]: ContractNavigationProps
 }

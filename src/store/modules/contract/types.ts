@@ -8,5 +8,6 @@ export interface RequestCreateContractAction extends BaseAction {
 }
 
 export interface Contract {
-    id: string
+    id: string,
+    type: CONTRACT_TYPES
 }

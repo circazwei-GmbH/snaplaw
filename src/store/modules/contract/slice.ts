@@ -15,8 +15,8 @@ const contractSlice = createSlice({
     name: 'contract',
     initialState,
     reducers: {
-        [setInitedContractAction.type]: (state: Draft<ContractState>, action: PayloadAction<string>) => {
-            state.currentContract = {id: action.payload}
+        [setInitedContractAction.type]: (state: Draft<ContractState>, action: PayloadAction<Contract>) => {
+            state.currentContract = action.payload
         }
     }
 })

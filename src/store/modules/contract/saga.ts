@@ -13,8 +13,11 @@ function* createContract({payload}: RequestCreateContractAction) {
     try {
         yield put(addToWAiter(CONTRACT_CREATION_WAIT))
         const response = yield call(API.createContract, payload)
-        yield put(setInitedContract(response.data.id))
-        RootHavigation.navigate(HOME_ROUTER.CONTRACT)
+        yield put(setInitedContract({
+            id: response.data.id,
+            type: payload
+        }))
+        RootHavigation.navigate(HOME_ROUTER.CONTRACT, {screenCount: 0})
     } catch (error) {
         yield put(responseError(error));
     } finally {
