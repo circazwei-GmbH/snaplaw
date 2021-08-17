@@ -1,11 +1,14 @@
 import React, {useEffect} from 'react';
 import TopBar from "../../layouts/TopBar";
-import {View} from "react-native";
-import Button from "../../basics/buttons/Button";
+import {View, StyleSheet} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 import {ContractNavigationProps, HOME_ROUTER} from "../../../router/HomeRouterType";
 import {contractScreensConfig} from "../../../store/modules/contract/contract-screens-types";
 import {useAppSelector} from "../../../store/hooks";
+import {useI18n} from "../../../translator/i18n";
+import ContractNextButton from "../../basics/buttons/ContractNextButton";
+import ContractBackButton from "../../basics/buttons/ContractBackButton";
+import ContractScreenCounter from "../../basics/ContractScreenCounter";
 
 type ContractProps = {
     route: {
@@ -16,6 +19,7 @@ type ContractProps = {
 export default function Contract({route: {params: {screenCount}}}: ContractProps) {
     const navigation = useNavigation()
     const contractType = useAppSelector(state => state.contract.currentContract?.type)
+    const { t } = useI18n();
     useEffect(() => {
         console.log("SCREEN mouned:", screenCount)
         return () => {
@@ -23,16 +27,51 @@ export default function Contract({route: {params: {screenCount}}}: ContractProps
         }
     }, [screenCount])
 
+    const nextHandler = () => {
+        navigation.push(HOME_ROUTER.CONTRACT, {screenCount: screenCount + 1})
+    }
+
+    const backButton = () => {
+        navigation.pop()
+    }
+
     if (!contractType) {
         return null;
     }
 
     return (
-        <TopBar pageName={'create contract'}>
-            <View>
-                <Button text={'To next'} onPress={() => navigation.push(HOME_ROUTER.CONTRACT, {screenCount: screenCount + 1})} />
-                {React.createElement(contractScreensConfig[contractType][screenCount].component)}
+        <TopBar pageName={t(`contracts.${contractType}.title`)}>
+            <View style={styles.container}>
+                <View>
+                    <ContractScreenCounter total={contractScreensConfig[contractType].length} current={screenCount} />
+                </View>
+                <View style={styles.formContainer}>
+                    {React.createElement(contractScreensConfig[contractType][screenCount].component)}
+                </View>
+                <View style={[styles.buttonContainer, screenCount === 0 ? styles.flexEnd : null]}>
+                    {screenCount > 0 ? (
+                        <ContractBackButton onPress={backButton} />
+                    ) : null}
+                    <ContractNextButton onPress={nextHandler} />
+                </View>
             </View>
         </TopBar>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flexDirection: "column"
+    },
+    buttonContainer: {
+        flexDirection: "row",
+        justifyContent: 'space-between',
+        paddingHorizontal: 29
+    },
+    flexEnd: {
+        justifyContent: "flex-end"
+    },
+    formContainer: {
+        // alignSelf: "flex-end"
+    }
+})
