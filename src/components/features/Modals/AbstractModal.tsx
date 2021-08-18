@@ -1,22 +1,27 @@
 import React from 'react';
-import {Modal, View, StyleSheet, Text, Pressable} from "react-native";
+import {Modal, View, StyleSheet, Text} from "react-native";
 import {useAppDispatch, useAppSelector} from "../../../store/hooks";
 import {closeModal, ModalInterface} from '../../../store/modules/main/slice'
 import Button from "../../basics/buttons/Button";
+import {BaseAction} from "../../../store/modules/auth/types";
 
 export default function AbstractModal() {
-    const modal: ModalInterface = useAppSelector(state => state.main.modal)
+    const modal: ModalInterface | null = useAppSelector(state => state.main.modal)
     const dispatch = useAppDispatch()
-    const actionHandler = (action) => {
+    const actionHandler = (action: BaseAction | undefined) => {
         if (action) {
             dispatch(action)
         }
         dispatch(closeModal())
     }
 
+    if (!modal) {
+        return null;
+    }
+
     return (
         <Modal
-            visible={!!modal.message}
+            visible={!!modal}
             transparent={true}
             animationType="fade"
             testID="modal"
@@ -41,11 +46,14 @@ export default function AbstractModal() {
 
 const styles = StyleSheet.create({
     centeredView: {
-        flex: 1,
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: "rgba(0,0,0,0.5)",
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 22,
-        backgroundColor: 'rgba(0,0,0,0.7)'
     },
     modalView: {
         backgroundColor: "white",

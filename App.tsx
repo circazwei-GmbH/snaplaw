@@ -9,6 +9,7 @@ import { Provider } from 'react-redux'
 import store from './src/store/index'
 import {navigationRef} from "./src/router/RootNavigation";
 import AbstractModal from "./src/components/features/Modals/AbstractModal";
+import SplashLoader from "./src/components/features/Modals/SplashLoader";
 
 
 const theme = {
@@ -41,6 +42,7 @@ export default function App() {
               <StatusBar style="auto" />
           </NavigationContainer>
           <AbstractModal />
+          <SplashLoader />
       </Provider>
   );
 }

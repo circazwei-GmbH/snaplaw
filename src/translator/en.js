@@ -1,3 +1,5 @@
+import {CONTRACT_TYPES} from "../store/modules/contract/constants";
+
 export default {
   welcome: {
     headline: "Welcome to Snaplaw",
@@ -168,5 +170,20 @@ export default {
   },
   menu: {
     cancel: "Cancel",
+  },
+  contracts: {
+    [CONTRACT_TYPES.PURCHASE]: {
+      title: 'Purchase contract',
+      user_data: {
+        title: 'user data'
+      },
+      product_data: {
+        title: 'product data'
+      }
+    },
+    buttons: {
+      next: 'Next',
+      back: 'Back'
+    },
   },
 };
