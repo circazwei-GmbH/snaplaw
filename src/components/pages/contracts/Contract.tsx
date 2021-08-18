@@ -23,10 +23,12 @@ export default function Contract({route: {params: {screenCount}}}: ContractProps
     const { t } = useI18n();
 
     const nextHandler = () => {
+        // @ts-ignore
         navigation.push(HOME_ROUTER.CONTRACT, {screenCount: screenCount + 1})
     }
 
     const backButton = () => {
+        // @ts-ignore
         navigation.pop()
     }
 
