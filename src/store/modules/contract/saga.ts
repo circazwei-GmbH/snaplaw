@@ -15,7 +15,8 @@ function* createContract({payload}: RequestCreateContractAction) {
         const response = yield call(API.createContract, payload)
         yield put(setInitedContract({
             id: response.data.id,
-            type: payload
+            type: payload,
+            screens: []
         }))
         RootHavigation.navigate(HOME_ROUTER.CONTRACT, {screenCount: 0})
     } catch (error) {

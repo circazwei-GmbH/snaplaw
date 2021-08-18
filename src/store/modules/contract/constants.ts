@@ -2,4 +2,8 @@ export const enum CONTRACT_TYPES {
     PURCHASE = 'PURCHASE'
 }
 
+export const enum CONTRACT_SCREEN_TYPES {
+    USER_DATA = 'USER_DATA'
+}
+
 export const CONTRACT_CREATION_WAIT = 'CONTRACT_CREATION_WAIT'
