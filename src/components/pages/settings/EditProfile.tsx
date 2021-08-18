@@ -99,12 +99,12 @@ export default function EditProfile() {
         message: t("edit_profile.modals.save.message"),
         actions: [
           {
-            name: t("edit_profile.modals.save.confirm"),
+            name: t("edit_profile.modals.save.cancel"),
             colortype: "error",
           },
           {
             action: requestEditProfile(localForm),
-            name: t("edit_profile.modals.save.cancel"),
+            name: t("edit_profile.modals.save.confirm"),
             colortype: "primary",
           },
         ],
