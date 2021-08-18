@@ -1,3 +1,5 @@
+import { CONTRACT_TYPES } from "../store/modules/contract/constants";
+
 export default {
   welcome: {
     headline: "Welcome to Snaplaw",
@@ -134,6 +136,18 @@ export default {
       address: "Address (Street, City)",
       postCode: "Postal code",
     },
+    modals: {
+      save: {
+        message: "Do you want to save changes you made?",
+        confirm: "Confirm",
+        cancel: "Cancel",
+      },
+      cancel: {
+        message: "You have unsaved changes. Are you sure you want to leave?",
+        yes: "Yes",
+        no: "No",
+      },
+    },
   },
   upload_files: {
     camera: "Camera",
@@ -163,5 +177,19 @@ export default {
   notifications: {
     title: "Notifications",
   },
-  create_contract: {},
+  contracts: {
+    [CONTRACT_TYPES.PURCHASE]: {
+      title: "Purchase contract",
+      user_data: {
+        title: "user data",
+      },
+      product_data: {
+        title: "product data",
+      },
+    },
+    buttons: {
+      next: "Next",
+      back: "Back",
+    },
+  },
 };
