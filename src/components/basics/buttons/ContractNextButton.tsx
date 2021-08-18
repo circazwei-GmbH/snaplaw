@@ -11,7 +11,7 @@ export default function ContractNextButton({ onPress }: ContractNextButtonProps)
     const { t } = useI18n()
     return (
         <Pressable onPress={onPress} style={styles.container}>
-            <Text style={styles.text}> {t('contracts.buttons.next')} </Text>
+            <Text style={styles.text}>{t('contracts.buttons.next')}</Text>
             <Feather name="arrow-right" size={24} color="#1696E2" />
         </Pressable>
     )

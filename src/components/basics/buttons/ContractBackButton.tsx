@@ -12,7 +12,7 @@ export default function ContractBackButton({ onPress }: ContractBackButtonProps)
     return (
         <Pressable onPress={onPress} style={styles.container}>
             <Feather name="arrow-left" size={24} color="#202020" />
-            <Text style={styles.text}> {t('contracts.buttons.back')} </Text>
+            <Text style={styles.text}>{t('contracts.buttons.back')}</Text>
         </Pressable>
     )
 }
