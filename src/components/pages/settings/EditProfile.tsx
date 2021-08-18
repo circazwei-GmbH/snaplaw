@@ -12,6 +12,7 @@ import { UserType, setUserProfile } from "../../../store/modules/profile/slice";
 import { requestEditProfile } from "../../../store/modules/profile/action-creators";
 import { email, length } from "../../../validations/default";
 import { setModal } from "../../../store/modules/main/slice";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function EditProfile() {
   const { t } = useI18n();
@@ -177,7 +178,9 @@ export default function EditProfile() {
         <View style={styles.uploadAvatarBox}>
           <UploadAvatar />
         </View>
-        <EditProfileForm edit={edit} form={form} onChangeHandler={onChange} />
+        <KeyboardAwareScrollView>
+          <EditProfileForm edit={edit} form={form} onChangeHandler={onChange} />
+        </KeyboardAwareScrollView>
       </View>
     </TopBar>
   );
