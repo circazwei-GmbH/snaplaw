@@ -8,9 +8,14 @@ import EditProfileForm, {
   EditProfileFormInterface,
 } from "../../features/forms/EditProfileForm";
 import { useAppSelector, useAppDispatch } from "../../../store/hooks";
-import { UserType, setUserProfile } from "../../../store/modules/profile/slice";
 import { requestEditProfile } from "../../../store/modules/profile/action-creators";
 import { email, length } from "../../../validations/default";
+import { formFieldFill, validate } from "../../../utils/forms";
+import {
+  UserType,
+  setUserProfile,
+  clearProfileErrors,
+} from "../../../store/modules/profile/slice";
 import { setModal } from "../../../store/modules/main/slice";
 
 export default function EditProfile() {
@@ -20,9 +25,7 @@ export default function EditProfile() {
   const userData: UserType | undefined = useAppSelector(
     (state) => state.profile.user
   );
-  const profileErrors: object = useAppSelector(
-    (state) => state.profile.profileErrors
-  );
+  const profileErrors = useAppSelector((state) => state.profile.profileErrors);
 
   const globalValue: UserType = {
     name: userData?.name,
@@ -134,19 +137,53 @@ export default function EditProfile() {
     );
   };
 
+  const onChange = (newValue: string, fieldName: any) => {
+    setForm(formFieldFill(fieldName, newValue, form));
+  };
+
   useEffect(() => {
     cancelHandler();
   }, [userData]);
 
-  const onChange = (newValue: string, fieldName: any) => {
+  useEffect(() => {
     setForm({
       ...form,
-      [fieldName]: {
-        ...form[fieldName],
-        value: newValue,
+      name: {
+        ...form.name,
+        error: profileErrors.name,
+      },
+      lastName: {
+        ...form.lastName,
+        error: profileErrors.lastName,
+      },
+      dateOfBirth: {
+        ...form.dateOfBirth,
+        error: profileErrors.dateOfBirth,
+      },
+      email: {
+        ...form.email,
+        error: profileErrors.email,
+      },
+      phone: {
+        ...form.phone,
+        error: profileErrors.phone,
+      },
+      address: {
+        ...form.address,
+        error: profileErrors.address,
+      },
+      postCode: {
+        ...form.postCode,
+        error: profileErrors.postCode,
       },
     });
-  };
+  }, [profileErrors]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearProfileErrors());
+    };
+  }, []);
 
   return (
     <TopBar
