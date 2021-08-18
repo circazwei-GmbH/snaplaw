@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import TopBar from "../../layouts/TopBar";
-import {View, StyleSheet} from "react-native";
+import {View, StyleSheet, Text} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 import {ContractNavigationProps, HOME_ROUTER} from "../../../router/HomeRouterType";
 import {contractScreensConfig} from "../../../store/modules/contract/contract-screens-types";
@@ -20,12 +20,6 @@ export default function Contract({route: {params: {screenCount}}}: ContractProps
     const navigation = useNavigation()
     const contractType = useAppSelector(state => state.contract.currentContract?.type)
     const { t } = useI18n();
-    useEffect(() => {
-        console.log("SCREEN mouned:", screenCount)
-        return () => {
-            console.log("SCREEN unmounted:", screenCount)
-        }
-    }, [screenCount])
 
     const nextHandler = () => {
         navigation.push(HOME_ROUTER.CONTRACT, {screenCount: screenCount + 1})
@@ -43,10 +37,15 @@ export default function Contract({route: {params: {screenCount}}}: ContractProps
         <TopBar pageName={t(`contracts.${contractType}.title`)}>
             <View style={styles.container}>
                 <View>
-                    <ContractScreenCounter total={contractScreensConfig[contractType].length} current={screenCount} />
-                </View>
-                <View style={styles.formContainer}>
-                    {React.createElement(contractScreensConfig[contractType][screenCount].component)}
+                    <View>
+                        <ContractScreenCounter total={contractScreensConfig[contractType].length} current={screenCount + 1} />
+                    </View>
+                    <View style={styles.titleContainer}>
+                        <Text style={styles.title}>{t(contractScreensConfig[contractType][screenCount].title)}</Text>
+                    </View>
+                    <View>
+                        {React.createElement(contractScreensConfig[contractType][screenCount].component)}
+                    </View>
                 </View>
                 <View style={[styles.buttonContainer, screenCount === 0 ? styles.flexEnd : null]}>
                     {screenCount > 0 ? (
@@ -61,17 +60,29 @@ export default function Contract({route: {params: {screenCount}}}: ContractProps
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: "column"
+        flex: 1,
+        flexDirection: "column",
+        justifyContent: 'space-between',
+        marginTop: 10
     },
     buttonContainer: {
         flexDirection: "row",
         justifyContent: 'space-between',
-        paddingHorizontal: 29
+        paddingHorizontal: 29,
+        marginBottom: 35
     },
     flexEnd: {
         justifyContent: "flex-end"
     },
-    formContainer: {
-        // alignSelf: "flex-end"
+    titleContainer: {
+        marginTop: 12,
+        marginBottom: 24,
+        paddingHorizontal: 16,
+    },
+    title: {
+        fontFamily: 'OS-B',
+        fontSize: 17,
+        color: '#202020',
+        textTransform: 'uppercase'
     }
 })

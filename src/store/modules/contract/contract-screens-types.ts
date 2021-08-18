@@ -4,16 +4,19 @@ import UserDataForm from "../../../components/features/forms/contract/UserDataFo
 import ProductDataForm from "../../../components/features/forms/contract/ProductDataForm";
 
 export interface ContractScreenConfigType {
-    component: React.ElementType
+    component: React.ElementType,
+    title: string
 }
 
 export const contractScreensConfig: Record<CONTRACT_TYPES, ContractScreenConfigType[]> = {
     [CONTRACT_TYPES.PURCHASE]: [
         {
-            component: UserDataForm
+            component: UserDataForm,
+            title: `contracts.${CONTRACT_TYPES.PURCHASE}.user_data.title`
         },
         {
-            component: ProductDataForm
+            component: ProductDataForm,
+            title: `contracts.${CONTRACT_TYPES.PURCHASE}.product_data.title`
         }
     ]
 }

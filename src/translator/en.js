@@ -161,10 +161,17 @@ export default {
   },
   contracts: {
     [CONTRACT_TYPES.PURCHASE]: {
-      title: 'Purchase contract'
+      title: 'Purchase contract',
+      user_data: {
+        title: 'user data'
+      },
+      product_data: {
+        title: 'product data'
+      }
     },
     buttons: {
-      next: 'Next'
-    }
+      next: 'Next',
+      back: 'Back'
+    },
   },
 };

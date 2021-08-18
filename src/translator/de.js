@@ -165,10 +165,17 @@ export default {
   },
   contracts: {
     [CONTRACT_TYPES.PURCHASE]: {
-      title: 'Kaufvertrag'
+      title: 'Kaufvertrag',
+      user_data: {
+        title: 'Benutzerdaten'
+      },
+      product_data: {
+        title: 'Produktdaten'
+      }
     },
     buttons: {
-      next: 'Next'
-    }
+      next: 'Weiter',
+      back: 'Zurück'
+    },
   },
 };
