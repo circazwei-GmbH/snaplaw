@@ -4,6 +4,7 @@ import { UserType } from "../../../store/../store/modules/profile/slice";
 import TextField from "../../components/TextField";
 import DefaultText from "../../basics/typography/DefaultText";
 import { useI18n } from "../../../translator/i18n";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 interface UserDataFormPropsInterface {
   edit: boolean;
@@ -19,40 +20,44 @@ export default function UserDataForm({
   const { t } = useI18n();
 
   return (
-    <View style={styles.inputBox}>
-      <DefaultText
-        text={t("purchase_contract.user_data")}
-        style={styles.formTitle}
-      />
-      <TextField
-        placeholder={t("edit_profile.placeholders.name")}
-        onChangeFunction={(newValue) => onChangeAction(newValue, "name")}
-      />
-      <TextField
-        placeholder={t("edit_profile.placeholders.lastName")}
-        onChangeFunction={(newValue) => onChangeAction(newValue, "lastName")}
-      />
-      <TextField
-        placeholder={t("edit_profile.placeholders.dateOfBirth")}
-        onChangeFunction={(newValue) => onChangeAction(newValue, "dateOfBirth")}
-      />
-      <TextField
-        placeholder={t("edit_profile.placeholders.email")}
-        onChangeFunction={(newValue) => onChangeAction(newValue, "email")}
-      />
-      <TextField
-        placeholder={t("edit_profile.placeholders.phone")}
-        onChangeFunction={(newValue) => onChangeAction(newValue, "phone")}
-      />
-      <TextField
-        placeholder={t("edit_profile.placeholders.address")}
-        onChangeFunction={(newValue) => onChangeAction(newValue, "address")}
-      />
-      <TextField
-        placeholder={t("edit_profile.placeholders.postCode")}
-        onChangeFunction={(newValue) => onChangeAction(newValue, "postCode")}
-      />
-    </View>
+    <KeyboardAwareScrollView>
+      <View style={styles.inputBox}>
+        <DefaultText
+          text={t("purchase_contract.user_data")}
+          style={styles.formTitle}
+        />
+        <TextField
+          placeholder={t("edit_profile.placeholders.name")}
+          onChangeFunction={(newValue) => onChangeAction(newValue, "name")}
+        />
+        <TextField
+          placeholder={t("edit_profile.placeholders.lastName")}
+          onChangeFunction={(newValue) => onChangeAction(newValue, "lastName")}
+        />
+        <TextField
+          placeholder={t("edit_profile.placeholders.dateOfBirth")}
+          onChangeFunction={(newValue) =>
+            onChangeAction(newValue, "dateOfBirth")
+          }
+        />
+        <TextField
+          placeholder={t("edit_profile.placeholders.email")}
+          onChangeFunction={(newValue) => onChangeAction(newValue, "email")}
+        />
+        <TextField
+          placeholder={t("edit_profile.placeholders.phone")}
+          onChangeFunction={(newValue) => onChangeAction(newValue, "phone")}
+        />
+        <TextField
+          placeholder={t("edit_profile.placeholders.address")}
+          onChangeFunction={(newValue) => onChangeAction(newValue, "address")}
+        />
+        <TextField
+          placeholder={t("edit_profile.placeholders.postCode")}
+          onChangeFunction={(newValue) => onChangeAction(newValue, "postCode")}
+        />
+      </View>
+    </KeyboardAwareScrollView>
   );
 }
 
