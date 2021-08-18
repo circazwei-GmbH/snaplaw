@@ -5,7 +5,17 @@ import TextField from "../../components/TextField";
 import DefaultText from "../../basics/typography/DefaultText";
 import { useI18n } from "../../../translator/i18n";
 
-export default function UserDataForm(): JSX.Element {
+interface UserDataFormPropsInterface {
+  edit: boolean;
+  localValue: UserType;
+  onChangeAction: Function;
+}
+
+export default function UserDataForm({
+  edit,
+  localValue,
+  onChangeAction,
+}: UserDataFormPropsInterface): JSX.Element {
   const { t } = useI18n();
 
   return (
@@ -50,6 +60,7 @@ const styles = StyleSheet.create({
   inputBox: {
     justifyContent: "flex-start",
     width: "100%",
+    height: 520,
     paddingHorizontal: 16,
   },
   formTitle: {
