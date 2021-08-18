@@ -15,6 +15,7 @@ import { PROFILE_ROUTER } from "./ProfileRouterTypes";
 import ChangeLanguage from "../components/pages/settings/ChangeLanguage";
 import { requestLanguage } from "../store/modules/profile/action-creators";
 import EditProfile from "../components/pages/settings/EditProfile";
+import Notifications from "../components/pages/settings/Notifications";
 import { requestToken } from "../store/modules/auth/action-creators";
 import { Text } from "react-native";
 import { Feather } from "@expo/vector-icons";
@@ -106,6 +107,10 @@ export default function Router() {
             <ProfileStack.Screen
               name={PROFILE_ROUTER.EDIT_PROFILE}
               component={EditProfile}
+            />
+            <ProfileStack.Screen
+              name={PROFILE_ROUTER.NOTIFICATIONS}
+              component={Notifications}
             />
           </ProfileStack.Navigator>
         )}

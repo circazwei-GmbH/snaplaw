@@ -39,7 +39,12 @@ export default function TextField({
   };
 
   return (
-    <View>
+    <View
+      style={[
+        styles.inputContainer,
+        focused ? styles.borderFocused : styles.borderNotFocused,
+      ]}
+    >
       <Text
         style={[
           styles.label,
@@ -79,6 +84,10 @@ export default function TextField({
 }
 
 const styles = StyleSheet.create({
+  inputContainer: {
+    height: 68,
+    justifyContent: "flex-end",
+  },
   emptyInput: {
     backgroundColor: "#EFF7FD",
     borderRadius: 10,
@@ -104,7 +113,7 @@ const styles = StyleSheet.create({
   label: {
     color: "#1696E2",
     fontSize: 14,
-    marginBottom: 7,
+    lineHeight: 22,
   },
   labelWithEmptyInputFixed: {
     opacity: 0,

@@ -1,4 +1,4 @@
-import {CONTRACT_TYPES} from "../store/modules/contract/constants";
+import { CONTRACT_TYPES } from "../store/modules/contract/constants";
 
 export default {
   welcome: {
@@ -165,25 +165,31 @@ export default {
       car: "Car sales contract",
     },
   },
+  purchase_contract: {
+    user_data: "USER DATA",
+  },
   my_contracts: {
     tab_name: "My contracts",
   },
   menu: {
     cancel: "Cancel",
   },
+  notifications: {
+    title: "Notifications",
+  },
   contracts: {
     [CONTRACT_TYPES.PURCHASE]: {
-      title: 'Purchase contract',
+      title: "Purchase contract",
       user_data: {
-        title: 'user data'
+        title: "user data",
       },
       product_data: {
-        title: 'product data'
-      }
+        title: "product data",
+      },
     },
     buttons: {
-      next: 'Next',
-      back: 'Back'
+      next: "Next",
+      back: "Back",
     },
   },
 };
