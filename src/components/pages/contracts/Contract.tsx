@@ -1,6 +1,6 @@
 import React from 'react';
 import TopBar from "../../layouts/TopBar";
-import {View, StyleSheet, Text} from "react-native";
+import {View, StyleSheet} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 import {ContractNavigationProps, HOME_ROUTER} from "../../../router/HomeRouterType";
 import {contractScreensConfig} from "../../../store/modules/contract/contract-screens-types";
@@ -9,6 +9,7 @@ import {useI18n} from "../../../translator/i18n";
 import ContractNextButton from "../../basics/buttons/ContractNextButton";
 import ContractBackButton from "../../basics/buttons/ContractBackButton";
 import ContractScreenCounter from "../../basics/ContractScreenCounter";
+import ContractFormTitle from "../../basics/typography/ContractFormTitle";
 
 type ContractProps = {
     route: {
@@ -41,7 +42,7 @@ export default function Contract({route: {params: {screenCount}}}: ContractProps
                         <ContractScreenCounter total={contractScreensConfig[contractType].length} current={screenCount + 1} />
                     </View>
                     <View style={styles.titleContainer}>
-                        <Text style={styles.title}>{t(contractScreensConfig[contractType][screenCount].title)}</Text>
+                        <ContractFormTitle title={t(contractScreensConfig[contractType][screenCount].title)} />
                     </View>
                     <View>
                         {React.createElement(contractScreensConfig[contractType][screenCount].component)}
@@ -78,11 +79,5 @@ const styles = StyleSheet.create({
         marginTop: 12,
         marginBottom: 24,
         paddingHorizontal: 16,
-    },
-    title: {
-        fontFamily: 'OS-B',
-        fontSize: 17,
-        color: '#202020',
-        textTransform: 'uppercase'
     }
 })
