@@ -9,24 +9,40 @@ export interface RequestCreateContractAction extends BaseAction {
 
 export type ScreenType = {
     type: CONTRACT_SCREEN_TYPES,
-    data: Record<string, string>
+    data: USER_DATA_FIELDS | Record<string, string>
+}
+
+export const enum USER_DATA_FIELDS {
+    name = 'name',
+    lastName = 'lastName',
+    dateOfBirth = 'dateOfBirth',
+    email = 'email',
+    phone = 'phone',
+    address = 'address',
+    postCode = 'postCode'
 }
 
 export interface UserDataScreenInterface {
     type: CONTRACT_SCREEN_TYPES.USER_DATA,
     data: {
-        name: string,
-        lastName: string,
-        dateOfBirth: string,
-        email: string,
-        phone: string,
-        address: string,
-        postCode: string
+        [USER_DATA_FIELDS.name]: string,
+        [USER_DATA_FIELDS.lastName]: string,
+        [USER_DATA_FIELDS.dateOfBirth]: string,
+        [USER_DATA_FIELDS.email]: string,
+        [USER_DATA_FIELDS.phone]: string,
+        [USER_DATA_FIELDS.address]: string,
+        [USER_DATA_FIELDS.postCode]: string
     }
 }
+
+export type ScreenDataType = UserDataScreenInterface | ScreenType
 
 export interface Contract {
     id: string,
     type: CONTRACT_TYPES,
-    screens: Array<UserDataScreenInterface | ScreenType>
+    screens: Array<ScreenDataType>
+}
+
+export interface RequestScreenDataAction extends BaseAction {
+    payload: number
 }

@@ -3,7 +3,8 @@ export const enum CONTRACT_TYPES {
 }
 
 export const enum CONTRACT_SCREEN_TYPES {
-    USER_DATA = 'USER_DATA'
+    USER_DATA = 'USER_DATA',
+    PRODUCT_DATA = 'PRODUCT_DATA'
 }
 
 export const CONTRACT_CREATION_WAIT = 'CONTRACT_CREATION_WAIT'
