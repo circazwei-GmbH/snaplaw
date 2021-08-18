@@ -185,6 +185,13 @@ export default {
       },
       product_data: {
         title: "product data",
+        placeholders: {
+          subject: "Subject of sales",
+          producer: "Producer",
+          designation: "Type designation",
+          serial: "Serial number",
+        },
+        switchTitle: "Please indicate if there is a serial number",
       },
     },
     buttons: {

@@ -190,6 +190,13 @@ export default {
       },
       product_data: {
         title: "Produktdaten",
+        placeholders: {
+          subject: "Kaufgegenstand",
+          producer: "Hersteller",
+          designation: "Typebezeichnung",
+          serial: "Seriennummer",
+        },
+        switchTitle: "Bitte geben Sie an, ob eine Seriennummer vorhanden ist",
       },
     },
     buttons: {
