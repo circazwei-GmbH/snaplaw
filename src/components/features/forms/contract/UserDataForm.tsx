@@ -9,11 +9,8 @@ import {CONTRACT_SCREEN_TYPES} from "../../../../store/modules/contract/constant
 import {useAppSelector} from "../../../../store/hooks";
 import {USER_DATA_FIELDS} from "../../../../store/modules/contract/types";
 
-interface UserDataFormPropsInterface {
 
-}
-
-export default function UserDataForm({}: UserDataFormPropsInterface): JSX.Element {
+export default function UserDataForm(): JSX.Element {
   const { t } = useI18n();
   const dispatch = useDispatch();
 
