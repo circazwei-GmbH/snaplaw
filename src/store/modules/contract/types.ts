@@ -35,7 +35,7 @@ export interface UserDataScreenInterface {
     }
 }
 
-export type ScreenDataType = UserDataScreenInterface | ScreenType
+export type ScreenDataType = UserDataScreenInterface
 
 export interface Contract {
     id: string,

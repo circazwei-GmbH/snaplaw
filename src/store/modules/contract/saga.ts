@@ -29,12 +29,12 @@ function* createContract({payload}: RequestCreateContractAction) {
 
 function* requestScreenData({payload}: RequestScreenDataAction) {
     const screenData = yield select<(state: RootState) => unknown>(state => state.contract.currentContract?.screens[payload])
+    const contractId = yield select<(state: RootState) => unknown>(state => state.contract.currentContract?.id)
     if (!screenData) {
-        console.log('request skiped')
         return;
     }
     try {
-        console.log(screenData)
+        yield call(API.saveScreenData, contractId, screenData)
     } catch (error) {
         yield put(responseError(error));
     }

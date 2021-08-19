@@ -36,10 +36,9 @@ const contractSlice = createSlice({
 
             const updatedScreen = {
                 type: action.payload.screenType,
-                data: {
-                    ...screen?.data,
+                data: Object.assign(screen ? screen.data : {}, {
                     [action.payload.fieldName]: action.payload.value
-                }
+                })
             }
 
             if (screen) {
