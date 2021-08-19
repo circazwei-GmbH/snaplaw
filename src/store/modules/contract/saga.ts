@@ -8,7 +8,6 @@ import {CONTRACT_CREATION_WAIT} from "./constants";
 import {setInitedContract} from "./slice";
 import * as RootHavigation from '../../../router/RootNavigation'
 import {HOME_ROUTER} from "../../../router/HomeRouterType";
-import {RootState} from "../../index";
 import {prefillUserData} from "../../../services/contract/user-data-prefiller";
 import {SelectType} from "../../hooks";
 
@@ -30,8 +29,8 @@ function* createContract({payload}: RequestCreateContractAction) {
 }
 
 function* requestScreenData({payload}: RequestScreenDataAction) {
-    const screenData = yield select<(state: RootState) => unknown>(state => state.contract.currentContract?.screens[payload])
-    const contractId = yield select<(state: RootState) => unknown>(state => state.contract.currentContract?.id)
+    const screenData = yield select<SelectType>(state => state.contract.currentContract?.screens[payload])
+    const contractId = yield select<SelectType>(state => state.contract.currentContract?.id)
     if (!screenData) {
         return;
     }
