@@ -1,4 +1,7 @@
-import {CONTRACT_SCREEN_TYPES, CONTRACT_TYPES} from "../store/modules/contract/constants";
+import {
+  CONTRACT_SCREEN_TYPES,
+  CONTRACT_TYPES,
+} from "../store/modules/contract/constants";
 
 export default {
   welcome: {
@@ -200,16 +203,16 @@ export default {
       },
     },
     confirmation_modal: {
-      message: 'Wollten Sie die Vertragserstellung wirklich abbrechen?',
+      message: "Wollten Sie die Vertragserstellung wirklich abbrechen?",
       buttons: {
-        ok: 'Ja',
-        cancel: 'Nein'
-      }
+        ok: "Ja",
+        cancel: "Nein",
+      },
     },
     buttons: {
       next: "Weiter",
       back: "Zurück",
-      cancel: 'Abbrechen'
+      cancel: "Abbrechen",
     },
   },
 };

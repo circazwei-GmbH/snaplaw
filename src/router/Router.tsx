@@ -21,7 +21,7 @@ import { Text } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { useI18n } from "../translator/i18n";
 import MyContracts from "../components/pages/MyContracts";
-import {HOME_ROUTER} from "./HomeRouterType";
+import { HOME_ROUTER } from "./HomeRouterType";
 import Contract from "../components/pages/contracts/Contract";
 
 const Stack = createStackNavigator();
@@ -72,18 +72,18 @@ export default function Router() {
           tabBarLabel: t("homepage.tab_name"),
         }}
       >
-          {() => (
-              <HomeStack.Navigator headerMode="none">
-                  <HomeStack.Screen
-                      name={HOME_ROUTER.HOMEPAGE}
-                      component={Homepage}
-                  />
-                  <HomeStack.Screen
-                      name={HOME_ROUTER.CONTRACT}
-                      component={Contract}
-                  />
-              </HomeStack.Navigator>
-          )}
+        {() => (
+          <HomeStack.Navigator headerMode="none">
+            <HomeStack.Screen
+              name={HOME_ROUTER.HOMEPAGE}
+              component={Homepage}
+            />
+            <HomeStack.Screen
+              name={HOME_ROUTER.CONTRACT}
+              component={Contract}
+            />
+          </HomeStack.Navigator>
+        )}
       </Tab.Screen>
       <Tab.Screen
         name="Settings"
