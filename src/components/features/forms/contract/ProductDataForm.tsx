@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useAppSelector } from "../../../../store/hooks";
 import TextField from "../../../components/TextField";
 import { ProductDataType } from "../../../../store/modules/contract/types";
@@ -7,6 +7,7 @@ import { useI18n } from "../../../../translator/i18n";
 import DefaultText from "../../../basics/typography/DefaultText";
 import DefaultSwitch from "../../../basics/switches/DefaultSwitch";
 import { toggleBoolValue } from "../../../../utils/toggleBoolValue";
+import {CONTRACT_SCREEN_TYPES} from "../../../../store/modules/contract/constants";
 
 interface ProductDataFormPropsInterface {
   form?: ProductDataType;
@@ -31,21 +32,21 @@ export default function ProductDataForm({
         <TextField
           value={form?.subject}
           placeholder={t(
-            `contracts.${contractType}.product_data.placeholders.subject`
+            `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.subject`
           )}
           onChangeFunction={(newValue) => onChangeAction(newValue, "subject")}
         />
         <TextField
           value={form?.producer}
           placeholder={t(
-            `contracts.${contractType}.product_data.placeholders.producer`
+            `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.producer`
           )}
           onChangeFunction={(newValue) => onChangeAction(newValue, "producer")}
         />
         <TextField
           value={form?.designation}
           placeholder={t(
-            `contracts.${contractType}.product_data.placeholders.designation`
+            `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.designation`
           )}
           onChangeFunction={(newValue) =>
             onChangeAction(newValue, "designation")
@@ -53,11 +54,11 @@ export default function ProductDataForm({
         />
       </View>
       <DefaultText
-        text={t(`contracts.${contractType}.product_data.switchTitle`)}
+        text={t(`contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.switchTitle`)}
         style={[styles.switchText, styles.switchPadding]}
       />
       <DefaultSwitch
-        title={t(`contracts.${contractType}.product_data.placeholders.serial`)}
+        title={t(`contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.serial`)}
         onChange={toggleHaveSerial}
         value={haveSerial}
       />
@@ -66,7 +67,7 @@ export default function ProductDataForm({
           <TextField
             value={form?.serial}
             placeholder={t(
-              `contracts.${contractType}.product_data.placeholders.serial`
+              `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.serial`
             )}
             onChangeFunction={(newValue) => onChangeAction(newValue, "serial")}
           />

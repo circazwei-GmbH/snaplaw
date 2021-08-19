@@ -1,4 +1,4 @@
-import { CONTRACT_TYPES } from "../store/modules/contract/constants";
+import {CONTRACT_SCREEN_TYPES, CONTRACT_TYPES} from "../store/modules/contract/constants";
 
 export default {
   welcome: {
@@ -180,10 +180,10 @@ export default {
   contracts: {
     [CONTRACT_TYPES.PURCHASE]: {
       title: "Purchase contract",
-      user_data: {
+      [CONTRACT_SCREEN_TYPES.USER_DATA]: {
         title: "user data",
       },
-      product_data: {
+      [CONTRACT_SCREEN_TYPES.PRODUCT_DATA]: {
         title: "product data",
         placeholders: {
           subject: "Subject of sales",
