@@ -13,12 +13,12 @@ export const contractScreensConfig: Record<CONTRACT_TYPES, ContractScreenConfigT
     [CONTRACT_TYPES.PURCHASE]: [
         {
             component: UserDataForm,
-            title: `contracts.${CONTRACT_TYPES.PURCHASE}.user_data.title`,
+            title: `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.USER_DATA}.title`,
             type: CONTRACT_SCREEN_TYPES.USER_DATA
         },
         {
             component: ProductDataForm,
-            title: `contracts.${CONTRACT_TYPES.PURCHASE}.product_data.title`,
+            title: `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.title`,
             type: CONTRACT_SCREEN_TYPES.PRODUCT_DATA
         }
     ]

@@ -1,4 +1,4 @@
-import { CONTRACT_TYPES } from "../store/modules/contract/constants";
+import {CONTRACT_SCREEN_TYPES, CONTRACT_TYPES} from "../store/modules/contract/constants";
 
 export default {
   welcome: {
@@ -185,10 +185,10 @@ export default {
   contracts: {
     [CONTRACT_TYPES.PURCHASE]: {
       title: "Kaufvertrag",
-      user_data: {
+      [CONTRACT_SCREEN_TYPES.USER_DATA]: {
         title: "Benutzerdaten",
       },
-      product_data: {
+      [CONTRACT_SCREEN_TYPES.PRODUCT_DATA]: {
         title: "Produktdaten",
         placeholders: {
           subject: "Kaufgegenstand",
@@ -199,9 +199,17 @@ export default {
         switchTitle: "Bitte geben Sie an, ob eine Seriennummer vorhanden ist",
       },
     },
+    confirmation_modal: {
+      message: 'Wollten Sie die Vertragserstellung wirklich abbrechen?',
+      buttons: {
+        ok: 'Ja',
+        cancel: 'Nein'
+      }
+    },
     buttons: {
       next: "Weiter",
       back: "Zurück",
+      cancel: 'Abbrechen'
     },
   },
 };

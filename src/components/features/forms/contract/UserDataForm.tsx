@@ -87,7 +87,6 @@ const styles = StyleSheet.create({
   inputBox: {
     justifyContent: "flex-start",
     width: "100%",
-    // height: 520,
     paddingHorizontal: 16,
   },
   formTitle: {
