@@ -192,9 +192,17 @@ export default {
         title: "Produktdaten",
       },
     },
+    confirmation_modal: {
+      message: 'Wollten Sie die Vertragserstellung wirklich abbrechen?',
+      buttons: {
+        ok: 'Ja',
+        cancel: 'Nein'
+      }
+    },
     buttons: {
       next: "Weiter",
       back: "Zurück",
+      cancel: 'Abbrechen'
     },
   },
 };

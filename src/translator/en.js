@@ -187,9 +187,17 @@ export default {
         title: "product data",
       },
     },
+    confirmation_modal: {
+      message: 'Are you sure, you want to cancel contract creation?',
+      buttons: {
+        ok: 'Yes',
+        cancel: 'No'
+      }
+    },
     buttons: {
       next: "Next",
       back: "Back",
+      cancel: 'Cancel'
     },
   },
 };
