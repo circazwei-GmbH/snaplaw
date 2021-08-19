@@ -12,6 +12,7 @@ export default function MyProfileAvatarBox() {
   return (
     <View style={styles.container}>
       <TouchableOpacity
+        activeOpacity={url ? 0.7 : 1}
         testID="MyProfileAvatarBox.toggle"
         style={styles.avatar}
         onPress={() => toggleBoolValue(sizeSmall, setSizeSmall)}
