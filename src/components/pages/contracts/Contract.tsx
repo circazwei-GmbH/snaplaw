@@ -15,8 +15,8 @@ import ContractScreenCounter from "../../basics/ContractScreenCounter";
 import ContractFormTitle from "../../basics/typography/ContractFormTitle";
 import { requestScreenData } from "../../../store/modules/contract/action-creators";
 import TextButton from "../../basics/buttons/TextButton";
-import {navigationPopToTop} from "../../../store/modules/main/action-creators";
-import {setModal} from "../../../store/modules/main/slice";
+import { navigationPopToTop } from "../../../store/modules/main/action-creators";
+import { setModal } from "../../../store/modules/main/slice";
 
 type ContractProps = {
   route: {
@@ -48,20 +48,22 @@ export default function Contract({
     navigation.pop();
   };
 
-    const cancelHandler = () => {
-        dispatch(setModal({
-            message: t('contracts.confirmation_modal.message'),
-            actions: [
-                {
-                    name: t('contracts.confirmation_modal.buttons.cancel')
-                },
-                {
-                    name: t('contracts.confirmation_modal.buttons.ok'),
-                    action: navigationPopToTop()
-                }
-            ]
-        }))
-    }
+  const cancelHandler = () => {
+    dispatch(
+      setModal({
+        message: t("contracts.confirmation_modal.message"),
+        actions: [
+          {
+            name: t("contracts.confirmation_modal.buttons.cancel"),
+          },
+          {
+            name: t("contracts.confirmation_modal.buttons.ok"),
+            action: navigationPopToTop(),
+          },
+        ],
+      })
+    );
+  };
 
   if (!contractType) {
     return null;
@@ -69,12 +71,14 @@ export default function Contract({
 
   return (
     <TopBar
-        leftButton={<TextButton
-            text={t('contracts.buttons.cancel')}
-            onPress={cancelHandler}
-            type="left"
-        />}
-        pageName={t(`contracts.${contractType}.title`)}
+      leftButton={
+        <TextButton
+          text={t("contracts.buttons.cancel")}
+          onPress={cancelHandler}
+          type="left"
+        />
+      }
+      pageName={t(`contracts.${contractType}.title`)}
     >
       <View style={styles.container}>
         <View>
@@ -102,7 +106,9 @@ export default function Contract({
           ]}
         >
           {screenCount > 0 ? <ContractBackButton onPress={backButton} /> : null}
-          {screenCount < contractScreensConfig[contractType].length - 1? <ContractNextButton onPress={nextHandler} /> : null}
+          {screenCount < contractScreensConfig[contractType].length - 1 ? (
+            <ContractNextButton onPress={nextHandler} />
+          ) : null}
         </View>
       </View>
     </TopBar>

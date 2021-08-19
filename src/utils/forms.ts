@@ -1,34 +1,34 @@
-import {FieldInterface} from "../components/features/forms/SignInForm";
+import { FieldInterface } from "../components/features/forms/SignInForm";
 
 export const formFieldFill = (fieldName: string, text: string, form: any) => {
-    const preparedForm = {
-        ...form,
-        [fieldName]: {
-            ...form[fieldName],
-            value: text,
-        }
-    };
-    if (preparedForm[fieldName].error) {
-        preparedForm[fieldName] = validate(preparedForm[fieldName], form)
-    }
-    return preparedForm
-}
+  const preparedForm = {
+    ...form,
+    [fieldName]: {
+      ...form[fieldName],
+      value: text,
+    },
+  };
+  if (preparedForm[fieldName].error) {
+    preparedForm[fieldName] = validate(preparedForm[fieldName], form);
+  }
+  return preparedForm;
+};
 
 export const validate = (stateField: FieldInterface, form?: any) => {
-    const localField = stateField;
+  const localField = stateField;
 
-    for(let i = 0; i < localField.validators.length; i++) {
-        const validator = localField.validators[i];
-        const result = validator(localField.value, form)
-        if (result) {
-            localField.error = result;
-            localField.displayError = true;
-            break
-        } else {
-            localField.error = '';
-            localField.displayError = false;
-        }
+  for (let i = 0; i < localField.validators.length; i++) {
+    const validator = localField.validators[i];
+    const result = validator(localField.value, form);
+    if (result) {
+      localField.error = result;
+      localField.displayError = true;
+      break;
+    } else {
+      localField.error = "";
+      localField.displayError = false;
     }
+  }
 
-    return localField
-}
+  return localField;
+};

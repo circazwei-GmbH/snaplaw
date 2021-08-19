@@ -1,35 +1,38 @@
-import {FieldInterface} from "../components/features/forms/SignInForm";
+import { FieldInterface } from "../components/features/forms/SignInForm";
 
 export interface FormInterface {
-    [fielName: string]: FieldInterface
+  [fielName: string]: FieldInterface;
 }
 
 export interface ValidatorInterface {
-    (text: string, form: FormInterface): string | undefined
+  (text: string, form: FormInterface): string | undefined;
 }
 
 export interface ValidatorBuilderInterface {
-    (message: string, option?: number | string): ValidatorInterface
+  (message: string, option?: number | string): ValidatorInterface;
 }
 
-export const length: ValidatorBuilderInterface = (message, length) => (text: string) => {
+export const length: ValidatorBuilderInterface =
+  (message, length) => (text: string) => {
     if (!length) {
-        return;
+      return;
     }
     if (text.length < length) {
-        return message
+      return message;
     }
-}
+  };
 
 export const email: ValidatorBuilderInterface = (message) => (text: string) => {
-    if (text.search(/^[^@]+@{1,1}[^@]+\.[^.@\d]{2,}$/)) {
-        return message
-    }
-}
+  if (text.search(/^[^@]+@{1,1}[^@]+\.[^.@\d]{2,}$/)) {
+    return message;
+  }
+};
 
-export const match = (message: string, target: string): ValidatorInterface => (text: string, form: FormInterface) => {
+export const match =
+  (message: string, target: string): ValidatorInterface =>
+  (text: string, form: FormInterface) => {
     if (form[target].value === text) {
-        return;
+      return;
     }
-    return message
-}
+    return message;
+  };

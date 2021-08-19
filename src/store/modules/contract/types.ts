@@ -43,23 +43,25 @@ export interface UserDataScreenInterface {
 }
 
 export const enum PRODUCT_DATA_FIELDS {
-  subject = 'subject',
-  producer = 'producer',
-  description = 'description',
-  serial = 'serial'
+  subject = "subject",
+  producer = "producer",
+  description = "description",
+  serial = "serial",
 }
 
 export interface ProductDataScreenInterface {
-  type: CONTRACT_SCREEN_TYPES.PRODUCT_DATA,
+  type: CONTRACT_SCREEN_TYPES.PRODUCT_DATA;
   data: {
-    [PRODUCT_DATA_FIELDS.subject]: string,
-    [PRODUCT_DATA_FIELDS.producer]: string,
-    [PRODUCT_DATA_FIELDS.description]: string,
-    [PRODUCT_DATA_FIELDS.serial]: string
-  }
+    [PRODUCT_DATA_FIELDS.subject]: string;
+    [PRODUCT_DATA_FIELDS.producer]: string;
+    [PRODUCT_DATA_FIELDS.description]: string;
+    [PRODUCT_DATA_FIELDS.serial]: string;
+  };
 }
 
-export type ScreenDataType = UserDataScreenInterface | ProductDataScreenInterface;
+export type ScreenDataType =
+  | UserDataScreenInterface
+  | ProductDataScreenInterface;
 
 export interface Contract {
   id: string;
