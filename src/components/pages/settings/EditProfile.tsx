@@ -178,9 +178,7 @@ export default function EditProfile() {
         <View style={styles.uploadAvatarBox}>
           <UploadAvatar />
         </View>
-        <KeyboardAwareScrollView>
-          <EditProfileForm edit={edit} form={form} onChangeHandler={onChange} />
-        </KeyboardAwareScrollView>
+        <EditProfileForm edit={edit} form={form} onChangeHandler={onChange} />
       </View>
     </TopBar>
   );
