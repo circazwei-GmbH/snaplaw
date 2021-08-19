@@ -1,55 +1,62 @@
-import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
-import { useAppSelector } from "../../../../store/hooks";
+import React, {useState} from "react";
+import {StyleSheet, View} from "react-native";
+import {useAppDispatch, useAppSelector} from "../../../../store/hooks";
 import TextField from "../../../components/TextField";
-import { ProductDataType } from "../../../../store/modules/contract/types";
-import { useI18n } from "../../../../translator/i18n";
+import {PRODUCT_DATA_FIELDS, ProductDataScreenInterface} from "../../../../store/modules/contract/types";
+import {useI18n} from "../../../../translator/i18n";
 import DefaultText from "../../../basics/typography/DefaultText";
 import DefaultSwitch from "../../../basics/switches/DefaultSwitch";
-import { toggleBoolValue } from "../../../../utils/toggleBoolValue";
+import {toggleBoolValue} from "../../../../utils/toggleBoolValue";
 import {CONTRACT_SCREEN_TYPES} from "../../../../store/modules/contract/constants";
+import {setScreenData} from "../../../../store/modules/contract/slice";
 
-interface ProductDataFormPropsInterface {
-  form?: ProductDataType;
-  onChangeAction: Function;
-}
-
-export default function ProductDataForm({
-  form,
-  onChangeAction,
-}: ProductDataFormPropsInterface): JSX.Element {
+export default function ProductDataForm(): JSX.Element {
+  const productData = useAppSelector(
+      (state => state.contract.currentContract?.screens.find(screen => screen.type === CONTRACT_SCREEN_TYPES.PRODUCT_DATA) as ProductDataScreenInterface | undefined)
+  )
   const { t } = useI18n();
   const contractType = useAppSelector(
     (state) => state.contract.currentContract?.type
   );
+  const dispatch = useAppDispatch()
 
   const [haveSerial, setHaveSerial] = useState<boolean>(false);
   const toggleHaveSerial = () => toggleBoolValue(haveSerial, setHaveSerial);
+
+  const onChangeAction = (value: string, fieldName: PRODUCT_DATA_FIELDS) => {
+    dispatch(
+        setScreenData({
+          screenType: CONTRACT_SCREEN_TYPES.PRODUCT_DATA,
+          fieldName,
+          value,
+        })
+    );
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.inputBox}>
         <TextField
-          value={form?.subject}
+          value={productData?.data[PRODUCT_DATA_FIELDS.subject]}
           placeholder={t(
             `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.subject`
           )}
-          onChangeFunction={(newValue) => onChangeAction(newValue, "subject")}
+          onChangeFunction={(newValue) => onChangeAction(newValue, PRODUCT_DATA_FIELDS.subject)}
         />
         <TextField
-          value={form?.producer}
+          value={productData?.data[PRODUCT_DATA_FIELDS.producer]}
           placeholder={t(
             `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.producer`
           )}
-          onChangeFunction={(newValue) => onChangeAction(newValue, "producer")}
+          onChangeFunction={(newValue) => onChangeAction(newValue, PRODUCT_DATA_FIELDS.producer)}
         />
         <TextField
-          value={form?.designation}
+          value={productData?.data[PRODUCT_DATA_FIELDS.description]}
           placeholder={t(
             `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.designation`
           )}
           onChangeFunction={(newValue) =>
-            onChangeAction(newValue, "designation")
+            onChangeAction(newValue, PRODUCT_DATA_FIELDS.description)
           }
         />
       </View>
@@ -65,11 +72,11 @@ export default function ProductDataForm({
       {haveSerial ? (
         <View style={styles.inputBox}>
           <TextField
-            value={form?.serial}
+            value={productData?.data[PRODUCT_DATA_FIELDS.serial]}
             placeholder={t(
               `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.serial`
             )}
-            onChangeFunction={(newValue) => onChangeAction(newValue, "serial")}
+            onChangeFunction={(newValue) => onChangeAction(newValue, PRODUCT_DATA_FIELDS.serial)}
           />
         </View>
       ) : null}
@@ -80,7 +87,6 @@ export default function ProductDataForm({
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height: 500,
   },
   inputBox: {
     justifyContent: "flex-start",

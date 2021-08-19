@@ -102,7 +102,7 @@ export default function Contract({
           ]}
         >
           {screenCount > 0 ? <ContractBackButton onPress={backButton} /> : null}
-          <ContractNextButton onPress={nextHandler} />
+          {screenCount < contractScreensConfig[contractType].length - 1? <ContractNextButton onPress={nextHandler} /> : null}
         </View>
       </View>
     </TopBar>

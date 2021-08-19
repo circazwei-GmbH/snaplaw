@@ -6,16 +6,16 @@ import { useDispatch } from "react-redux";
 import { setScreenData } from "../../../../store/modules/contract/slice";
 import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/constants";
 import { useAppSelector } from "../../../../store/hooks";
-import { USER_DATA_FIELDS } from "../../../../store/modules/contract/types";
+import {USER_DATA_FIELDS, UserDataScreenInterface} from "../../../../store/modules/contract/types";
 
 export default function UserDataForm(): JSX.Element {
   const { t } = useI18n();
   const dispatch = useDispatch();
 
   const userData = useAppSelector((state) =>
-    state.contract.currentContract?.screens.find(
+      (state.contract.currentContract?.screens.find(
       (screen) => screen.type === CONTRACT_SCREEN_TYPES.USER_DATA
-    )
+    ) as UserDataScreenInterface | undefined)
   );
 
   const onChangeAction = (value: string, fieldName: USER_DATA_FIELDS) => {
