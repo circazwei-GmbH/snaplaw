@@ -21,6 +21,7 @@ export default function Homepage(): JSX.Element {
           <TextField
             onChangeFunction={() => {}}
             placeholder={t("homepage.search")}
+            search={true}
           />
           <DefaultText
             text={t("homepage.description")}
@@ -77,6 +78,6 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   imageMargin: {
-    marginLeft: "12%",
+    marginLeft: "10%",
   },
 });

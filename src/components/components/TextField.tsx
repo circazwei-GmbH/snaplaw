@@ -6,6 +6,7 @@ import {
   Text,
   TextInputProps,
 } from "react-native";
+import { Feather } from "@expo/vector-icons";
 
 interface OnChanfeFunction {
   (text: string): void;
@@ -17,6 +18,7 @@ interface TextFieldPropsInterface extends TextInputProps {
   validations?: Array<Function>;
   errorMessage?: string;
   value?: string;
+  search?: boolean;
   onChangeFunction: OnChanfeFunction;
 }
 
@@ -26,6 +28,7 @@ export default function TextField({
   errorMessage,
   onChangeFunction,
   value,
+  search,
   ...props
 }: TextFieldPropsInterface) {
   const [localValue, setLocalValue] = useState(value);
@@ -39,12 +42,7 @@ export default function TextField({
   };
 
   return (
-    <View
-      style={[
-        styles.inputContainer,
-        focused ? styles.borderFocused : styles.borderNotFocused,
-      ]}
-    >
+    <View style={[styles.inputContainer]}>
       <Text
         style={[
           styles.label,
@@ -58,16 +56,26 @@ export default function TextField({
         {placeholder}
         <Text style={styles.redText}>*</Text>
       </Text>
+      {search && !focused ? (
+        <Feather
+          name="search"
+          size={16}
+          color="#668395"
+          style={styles.searchIcon}
+        />
+      ) : null}
       <TextInput
         {...props}
         placeholder={!focused ? placeholder : ""}
         placeholderTextColor="#909090"
+        returnKeyType={"done"}
         style={[
           styles.emptyInput,
           focused ? styles.fullInput : null,
           focused ? null : styles.focuslessInput,
           localValue ? styles.inputWithText : null,
           errorMessage ? styles.errorBorder : null,
+          search && !focused ? styles.search : null,
         ]}
         value={localValue}
         onChangeText={textChangeHandler}
@@ -95,6 +103,15 @@ const styles = StyleSheet.create({
     fontSize: 15,
     paddingHorizontal: 16,
     fontFamily: "P",
+  },
+  search: {
+    paddingLeft: 50,
+  },
+  searchIcon: {
+    position: "absolute",
+    top: "55%",
+    left: "5%",
+    zIndex: 1,
   },
   fullInput: {
     backgroundColor: "transparent",
