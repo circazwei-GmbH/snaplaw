@@ -9,6 +9,8 @@ import {setInitedContract} from "./slice";
 import * as RootHavigation from '../../../router/RootNavigation'
 import {HOME_ROUTER} from "../../../router/HomeRouterType";
 import {RootState} from "../../index";
+import {prefillUserData} from "../../../services/contract/user-data-prefiller";
+import {SelectType} from "../../hooks";
 
 function* createContract({payload}: RequestCreateContractAction) {
     try {
@@ -17,7 +19,7 @@ function* createContract({payload}: RequestCreateContractAction) {
         yield put(setInitedContract({
             id: response.data.id,
             type: payload,
-            screens: []
+            screens: [prefillUserData(yield select<SelectType>(state => state.profile.user))]
         }))
         RootHavigation.navigate(HOME_ROUTER.CONTRACT, {screenCount: 0})
     } catch (error) {
