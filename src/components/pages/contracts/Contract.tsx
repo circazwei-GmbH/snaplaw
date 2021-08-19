@@ -7,13 +7,13 @@ import {
   HOME_ROUTER,
 } from "../../../router/HomeRouterType";
 import { contractScreensConfig } from "../../../store/modules/contract/contract-screens-types";
-import { useAppSelector } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { useI18n } from "../../../translator/i18n";
 import ContractNextButton from "../../basics/buttons/ContractNextButton";
 import ContractBackButton from "../../basics/buttons/ContractBackButton";
 import ContractScreenCounter from "../../basics/ContractScreenCounter";
 import ContractFormTitle from "../../basics/typography/ContractFormTitle";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { requestScreenData } from "../../../store/modules/contract/action-creators";
 
 type ContractProps = {
   route: {
@@ -30,13 +30,18 @@ export default function Contract({
   const contractType = useAppSelector(
     (state) => state.contract.currentContract?.type
   );
+
   const { t } = useI18n();
+  const dispatch = useAppDispatch();
 
   const nextHandler = () => {
+    dispatch(requestScreenData(screenCount));
+    // @ts-ignore
     navigation.push(HOME_ROUTER.CONTRACT, { screenCount: screenCount + 1 });
   };
 
   const backButton = () => {
+    // @ts-ignore
     navigation.pop();
   };
 

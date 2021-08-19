@@ -1,56 +1,83 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import { UserType } from "../../../../store/modules/profile/slice";
+import { StyleSheet, View } from "react-native";
 import TextField from "../../../components/TextField";
 import { useI18n } from "../../../../translator/i18n";
+import { useDispatch } from "react-redux";
+import { setScreenData } from "../../../../store/modules/contract/slice";
+import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/constants";
+import { useAppSelector } from "../../../../store/hooks";
+import { USER_DATA_FIELDS } from "../../../../store/modules/contract/types";
 
-interface UserDataFormPropsInterface {
-  form?: UserType;
-  onChangeAction: Function;
-}
-
-export default function UserDataForm({
-  form,
-  onChangeAction,
-}: UserDataFormPropsInterface): JSX.Element {
+export default function UserDataForm(): JSX.Element {
   const { t } = useI18n();
+  const dispatch = useDispatch();
+
+  const userData = useAppSelector((state) =>
+    state.contract.currentContract?.screens.find(
+      (screen) => screen.type === CONTRACT_SCREEN_TYPES.USER_DATA
+    )
+  );
+
+  const onChangeAction = (value: string, fieldName: USER_DATA_FIELDS) => {
+    dispatch(
+      setScreenData({
+        screenType: CONTRACT_SCREEN_TYPES.USER_DATA,
+        fieldName,
+        value,
+      })
+    );
+  };
 
   return (
     <View style={styles.inputBox}>
       <TextField
-        value={form?.name}
         placeholder={t("edit_profile.placeholders.name")}
-        onChangeFunction={(newValue) => onChangeAction(newValue, "name")}
+        value={userData?.data[USER_DATA_FIELDS.name]}
+        onChangeFunction={(newValue) =>
+          onChangeAction(newValue, USER_DATA_FIELDS.name)
+        }
       />
       <TextField
-        value={form?.lastName}
         placeholder={t("edit_profile.placeholders.lastName")}
-        onChangeFunction={(newValue) => onChangeAction(newValue, "lastName")}
+        value={userData?.data[USER_DATA_FIELDS.lastName]}
+        onChangeFunction={(newValue) =>
+          onChangeAction(newValue, USER_DATA_FIELDS.lastName)
+        }
       />
       <TextField
-        value={form?.dateOfBirth}
         placeholder={t("edit_profile.placeholders.dateOfBirth")}
-        onChangeFunction={(newValue) => onChangeAction(newValue, "dateOfBirth")}
+        value={userData?.data[USER_DATA_FIELDS.dateOfBirth]}
+        onChangeFunction={(newValue) =>
+          onChangeAction(newValue, USER_DATA_FIELDS.dateOfBirth)
+        }
       />
       <TextField
-        value={form?.email}
         placeholder={t("edit_profile.placeholders.email")}
-        onChangeFunction={(newValue) => onChangeAction(newValue, "email")}
+        value={userData?.data[USER_DATA_FIELDS.email]}
+        onChangeFunction={(newValue) =>
+          onChangeAction(newValue, USER_DATA_FIELDS.email)
+        }
       />
       <TextField
-        value={form?.phone}
         placeholder={t("edit_profile.placeholders.phone")}
-        onChangeFunction={(newValue) => onChangeAction(newValue, "phone")}
+        value={userData?.data[USER_DATA_FIELDS.phone]}
+        onChangeFunction={(newValue) =>
+          onChangeAction(newValue, USER_DATA_FIELDS.phone)
+        }
       />
       <TextField
-        value={form?.address}
         placeholder={t("edit_profile.placeholders.address")}
-        onChangeFunction={(newValue) => onChangeAction(newValue, "address")}
+        value={userData?.data[USER_DATA_FIELDS.address]}
+        onChangeFunction={(newValue) =>
+          onChangeAction(newValue, USER_DATA_FIELDS.address)
+        }
       />
       <TextField
-        value={form?.postCode}
         placeholder={t("edit_profile.placeholders.postCode")}
-        onChangeFunction={(newValue) => onChangeAction(newValue, "postCode")}
+        value={userData?.data[USER_DATA_FIELDS.postCode]}
+        onChangeFunction={(newValue) =>
+          onChangeAction(newValue, USER_DATA_FIELDS.postCode)
+        }
       />
     </View>
   );
@@ -60,7 +87,11 @@ const styles = StyleSheet.create({
   inputBox: {
     justifyContent: "flex-start",
     width: "100%",
-    height: 500,
+    // height: 520,
     paddingHorizontal: 16,
+  },
+  formTitle: {
+    fontWeight: "600",
+    fontFamily: "OS-SB",
   },
 });

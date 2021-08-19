@@ -1,6 +1,6 @@
-import {call, put, takeLatest} from "redux-saga/effects";
-import {REQUEST_CREATE_CONTRACT} from "./action-creators";
-import {RequestCreateContractAction} from "./types";
+import {call, put, takeLatest, select} from "redux-saga/effects";
+import {REQUEST_CREATE_CONTRACT, REQUEST_SCREEN_DATA} from "./action-creators";
+import {RequestCreateContractAction, RequestScreenDataAction} from "./types";
 import API from '../../../services/contract/index'
 import {responseError} from "../auth/action-creators";
 import {addToWAiter, removeFromWaiter} from "../main/slice";
@@ -8,6 +8,8 @@ import {CONTRACT_CREATION_WAIT} from "./constants";
 import {setInitedContract} from "./slice";
 import * as RootHavigation from '../../../router/RootNavigation'
 import {HOME_ROUTER} from "../../../router/HomeRouterType";
+import {prefillUserData} from "../../../services/contract/user-data-prefiller";
+import {SelectType} from "../../hooks";
 
 function* createContract({payload}: RequestCreateContractAction) {
     try {
@@ -15,7 +17,8 @@ function* createContract({payload}: RequestCreateContractAction) {
         const response = yield call(API.createContract, payload)
         yield put(setInitedContract({
             id: response.data.id,
-            type: payload
+            type: payload,
+            screens: [prefillUserData(yield select<SelectType>(state => state.profile.user))]
         }))
         RootHavigation.navigate(HOME_ROUTER.CONTRACT, {screenCount: 0})
     } catch (error) {
@@ -25,8 +28,22 @@ function* createContract({payload}: RequestCreateContractAction) {
     }
 }
 
+function* requestScreenData({payload}: RequestScreenDataAction) {
+    const screenData = yield select<SelectType>(state => state.contract.currentContract?.screens[payload])
+    const contractId = yield select<SelectType>(state => state.contract.currentContract?.id)
+    if (!screenData) {
+        return;
+    }
+    try {
+        yield call(API.saveScreenData, contractId, screenData)
+    } catch (error) {
+        yield put(responseError(error));
+    }
+}
+
 function* contractSaga() {
     yield takeLatest(REQUEST_CREATE_CONTRACT, createContract)
+    yield takeLatest(REQUEST_SCREEN_DATA, requestScreenData)
 }
 
 export default contractSaga
