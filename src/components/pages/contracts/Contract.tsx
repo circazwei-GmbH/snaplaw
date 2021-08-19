@@ -14,6 +14,9 @@ import ContractBackButton from "../../basics/buttons/ContractBackButton";
 import ContractScreenCounter from "../../basics/ContractScreenCounter";
 import ContractFormTitle from "../../basics/typography/ContractFormTitle";
 import { requestScreenData } from "../../../store/modules/contract/action-creators";
+import TextButton from "../../basics/buttons/TextButton";
+import {navigationPopToTop} from "../../../store/modules/main/action-creators";
+import {setModal} from "../../../store/modules/main/slice";
 
 type ContractProps = {
   route: {
@@ -45,12 +48,34 @@ export default function Contract({
     navigation.pop();
   };
 
+    const cancelHandler = () => {
+        dispatch(setModal({
+            message: t('contracts.confirmation_modal.message'),
+            actions: [
+                {
+                    name: t('contracts.confirmation_modal.buttons.cancel')
+                },
+                {
+                    name: t('contracts.confirmation_modal.buttons.ok'),
+                    action: navigationPopToTop()
+                }
+            ]
+        }))
+    }
+
   if (!contractType) {
     return null;
   }
 
   return (
-    <TopBar pageName={t(`contracts.${contractType}.title`)}>
+    <TopBar
+        leftButton={<TextButton
+            text={t('contracts.buttons.cancel')}
+            onPress={cancelHandler}
+            type="left"
+        />}
+        pageName={t(`contracts.${contractType}.title`)}
+    >
       <View style={styles.container}>
         <View>
           <View>
