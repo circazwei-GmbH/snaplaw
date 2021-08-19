@@ -21,7 +21,7 @@ export default function Homepage(): JSX.Element {
           <TextField
             onChangeFunction={() => {}}
             placeholder={t("homepage.search")}
-            search={true}
+            search
           />
           <DefaultText
             text={t("homepage.description")}
