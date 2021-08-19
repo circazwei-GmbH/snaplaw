@@ -108,7 +108,7 @@ describe('UploadAvatar', () => {
             await getByTestId('MenuTestID').props.buttons[1].handler()
         })
         expect(cameraWay).toBeCalled()
-        expect(actions.mock.calls[0][0]).toEqual(uploadMedia('cameraurl', MEDIA_FOLDERS.AVATAR, updateAvatar()))
+        expect(actions.mock.calls[0][0]).toEqual(uploadMedia('cameraurl', MEDIA_FOLDERS.AVATAR, updateAvatar('')))
         expect(actions).toBeCalledWith(setAvatarLoading(true))
     })
     it('Should dispatch library option', async () => {
@@ -123,7 +123,7 @@ describe('UploadAvatar', () => {
             await getByTestId('MenuTestID').props.buttons[0].handler()
         })
         expect(libraryWay).toBeCalled()
-        expect(actions.mock.calls[0][0]).toEqual(uploadMedia('libraryurl', MEDIA_FOLDERS.AVATAR, updateAvatar()))
+        expect(actions.mock.calls[0][0]).toEqual(uploadMedia('libraryurl', MEDIA_FOLDERS.AVATAR, updateAvatar('')))
         expect(actions).toBeCalledWith(setAvatarLoading(true))
     })
     it('Should dispatch library option with some error', async () => {

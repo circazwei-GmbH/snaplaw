@@ -1,3 +1,5 @@
+import {CONTRACT_SCREEN_TYPES, CONTRACT_TYPES} from "../store/modules/contract/constants";
+
 export default {
   welcome: {
     headline: "Welcome to Snaplaw",
@@ -134,6 +136,18 @@ export default {
       address: "Address (Street, City)",
       postCode: "Postal code",
     },
+    modals: {
+      save: {
+        message: "Do you want to save changes you made?",
+        confirm: "Confirm",
+        cancel: "Cancel",
+      },
+      cancel: {
+        message: "You have unsaved changes. Are you sure you want to leave?",
+        yes: "Yes",
+        no: "No",
+      },
+    },
   },
   upload_files: {
     camera: "Camera",
@@ -151,10 +165,46 @@ export default {
       car: "Car sales contract",
     },
   },
+  purchase_contract: {
+    user_data: "USER DATA",
+  },
   my_contracts: {
     tab_name: "My contracts",
   },
   menu: {
     cancel: "Cancel",
+  },
+  notifications: {
+    title: "Notifications",
+  },
+  contracts: {
+    [CONTRACT_TYPES.PURCHASE]: {
+      title: "Purchase contract",
+      [CONTRACT_SCREEN_TYPES.USER_DATA]: {
+        title: "user data",
+      },
+      [CONTRACT_SCREEN_TYPES.PRODUCT_DATA]: {
+        title: "product data",
+        placeholders: {
+          subject: "Subject of sales",
+          producer: "Producer",
+          designation: "Type designation",
+          serial: "Serial number",
+        },
+        switchTitle: "Please indicate if there is a serial number",
+      },
+    },
+    confirmation_modal: {
+      message: 'Are you sure, you want to cancel contract creation?',
+      buttons: {
+        ok: 'Yes',
+        cancel: 'No'
+      }
+    },
+    buttons: {
+      next: "Next",
+      back: "Back",
+      cancel: 'Cancel'
+    },
   },
 };

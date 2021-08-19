@@ -15,15 +15,19 @@ import { PROFILE_ROUTER } from "./ProfileRouterTypes";
 import ChangeLanguage from "../components/pages/settings/ChangeLanguage";
 import { requestLanguage } from "../store/modules/profile/action-creators";
 import EditProfile from "../components/pages/settings/EditProfile";
+import Notifications from "../components/pages/settings/Notifications";
 import { requestToken } from "../store/modules/auth/action-creators";
 import { Text } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { useI18n } from "../translator/i18n";
 import MyContracts from "../components/pages/MyContracts";
+import {HOME_ROUTER} from "./HomeRouterType";
+import Contract from "../components/pages/contracts/Contract";
 
 const Stack = createStackNavigator();
 const ProfileStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+const HomeStack = createStackNavigator();
 
 export default function Router() {
   const token = useAppSelector((state) => state.auth.token);
@@ -61,14 +65,26 @@ export default function Router() {
       />
       <Tab.Screen
         name="Homepage"
-        component={Homepage}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Feather name="file-plus" size={size} color={color} />
           ),
           tabBarLabel: t("homepage.tab_name"),
         }}
-      />
+      >
+          {() => (
+              <HomeStack.Navigator headerMode="none">
+                  <HomeStack.Screen
+                      name={HOME_ROUTER.HOMEPAGE}
+                      component={Homepage}
+                  />
+                  <HomeStack.Screen
+                      name={HOME_ROUTER.CONTRACT}
+                      component={Contract}
+                  />
+              </HomeStack.Navigator>
+          )}
+      </Tab.Screen>
       <Tab.Screen
         name="Settings"
         options={{
@@ -91,6 +107,10 @@ export default function Router() {
             <ProfileStack.Screen
               name={PROFILE_ROUTER.EDIT_PROFILE}
               component={EditProfile}
+            />
+            <ProfileStack.Screen
+              name={PROFILE_ROUTER.NOTIFICATIONS}
+              component={Notifications}
             />
           </ProfileStack.Navigator>
         )}

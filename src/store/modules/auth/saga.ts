@@ -204,7 +204,7 @@ function* responseErrorHandler({payload} : ResponseErrorAction) {
         console.error('ERROR without body')
         return yield put(setMessage(Translator.getInstance().trans('errors.abstract')))
     }
-    if (payload.status === 401) {
+    if (payload.status === 401 || payload.data?.code === USER_NOT_FOUND) {
         console.error('token expired')
         return yield put(clearTokenAction());
     }

@@ -1,3 +1,5 @@
+import {CONTRACT_SCREEN_TYPES, CONTRACT_TYPES} from "../store/modules/contract/constants";
+
 export default {
   welcome: {
     headline: "Wilkommen bei Snaplaw",
@@ -138,6 +140,19 @@ export default {
       address: "Adresse (Straße, Stadt)",
       postCode: "Postleitzahl",
     },
+    modals: {
+      save: {
+        message: "Möchten Sie die vorgenommenen Änderungen speichern?",
+        confirm: "Bestätigen",
+        cancel: "Abbrechen",
+      },
+      cancel: {
+        message:
+          "Sie haben die ungespeicherten Änderungen. Sind Sie sicher, sie wollen weitergehen?",
+        yes: "Ja",
+        no: "Nein",
+      },
+    },
   },
   upload_files: {
     camera: "Kamera",
@@ -155,10 +170,46 @@ export default {
       car: "Autokaufvertrag",
     },
   },
+  purchase_contract: {
+    user_data: "BENUTZERDATEN",
+  },
   my_contracts: {
     tab_name: "Meine Verträge",
   },
   menu: {
     cancel: "Abbrechen",
+  },
+  notifications: {
+    title: "Benachrichtigungen",
+  },
+  contracts: {
+    [CONTRACT_TYPES.PURCHASE]: {
+      title: "Kaufvertrag",
+      [CONTRACT_SCREEN_TYPES.USER_DATA]: {
+        title: "Benutzerdaten",
+      },
+      [CONTRACT_SCREEN_TYPES.PRODUCT_DATA]: {
+        title: "Produktdaten",
+        placeholders: {
+          subject: "Kaufgegenstand",
+          producer: "Hersteller",
+          designation: "Typebezeichnung",
+          serial: "Seriennummer",
+        },
+        switchTitle: "Bitte geben Sie an, ob eine Seriennummer vorhanden ist",
+      },
+    },
+    confirmation_modal: {
+      message: 'Wollten Sie die Vertragserstellung wirklich abbrechen?',
+      buttons: {
+        ok: 'Ja',
+        cancel: 'Nein'
+      }
+    },
+    buttons: {
+      next: "Weiter",
+      back: "Zurück",
+      cancel: 'Abbrechen'
+    },
   },
 };

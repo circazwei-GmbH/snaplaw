@@ -1,23 +1,28 @@
-import React, { useState } from "react";
-import TopBar from "../layouts/TopBar";
-import { useI18n } from "../../translator/i18n";
+import React, { useState, useEffect } from "react";
+import TopBar from "../../layouts/TopBar";
+import { useI18n } from "../../../translator/i18n";
 import { View, StyleSheet } from "react-native";
-import UploadAvatar from "../features/UploadAvatar";
-import TextButton from "../basics/buttons/TextButton";
-import EditProfileForm from "../features/forms/EditProfileForm";
-import { useAppSelector, useAppDispatch } from "../../store/hooks";
-import { UserType } from "../../store/../store/modules/profile/slice";
-import { requestEditProfile } from "../../store/modules/profile/action-creators";
+import UploadAvatar from "../../features/UploadAvatar";
+import TextButton from "../../basics/buttons/TextButton";
+import EditProfileForm, {
+  EditProfileFormInterface,
+} from "../../features/forms/EditProfileForm";
+import { useAppSelector, useAppDispatch } from "../../../store/hooks";
+import { UserType, setUserProfile } from "../../../store/modules/profile/slice";
+import { requestEditProfile } from "../../../store/modules/profile/action-creators";
+import { email, length } from "../../../validations/default";
+import { setModal } from "../../../store/modules/main/slice";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function EditProfile() {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
-
+  const [edit, setEdit] = useState(false);
   const userData: UserType | undefined = useAppSelector(
     (state) => state.profile.user
   );
 
-  const globalValue: UserType | undefined = {
+  const globalValue: UserType = {
     name: userData?.name,
     lastName: userData?.lastName,
     dateOfBirth: userData?.dateOfBirth,
@@ -27,23 +32,117 @@ export default function EditProfile() {
     postCode: userData?.postCode,
   };
 
-  const [edit, setEdit] = useState(false);
-  const [localValue, setLocalValue] = useState<UserType>(globalValue);
+  const formInitial: EditProfileFormInterface = {
+    name: {
+      value: userData?.name,
+      error: "",
+      displayError: false,
+      validators: [length(t("sign_up.errors.name_required"), 1)],
+    },
+    lastName: {
+      value: userData?.lastName,
+      error: "",
+      displayError: false,
+      validators: [length(t("sign_up.errors.name_required"), 1)],
+    },
+    dateOfBirth: {
+      value: userData?.dateOfBirth,
+      error: "",
+      displayError: false,
+      validators: [length(t("sign_up.errors.name_required"), 1)],
+    },
+    email: {
+      value: userData?.email,
+      error: "",
+      displayError: false,
+      validators: [email(t("sign_up.errors.email_not_valid"))],
+    },
+    phone: {
+      value: userData?.phone,
+      error: "",
+      displayError: false,
+      validators: [length(t("sign_up.errors.name_required"), 1)],
+    },
+    address: {
+      value: userData?.address,
+      error: "",
+      displayError: false,
+      validators: [length(t("sign_up.errors.name_required"), 1)],
+    },
+    postCode: {
+      value: userData?.postCode,
+      error: "",
+      displayError: false,
+      validators: [length(t("sign_up.errors.name_required"), 1)],
+    },
+  };
+
+  const [form, setForm] = useState<EditProfileFormInterface | any>(formInitial);
+  const localForm: UserType = {
+    name: form.name.value,
+    lastName: form.lastName.value,
+    dateOfBirth: form.dateOfBirth.value,
+    email: form.email.value,
+    phone: form.phone.value,
+    address: form.address.value,
+    postCode: form.postCode.value,
+  };
 
   const editHandler = () => setEdit(true);
   const cancelHandler = () => {
-    setLocalValue(globalValue);
-    setEdit(false);
-  };
-  const saveHandler = () => {
-    dispatch(requestEditProfile(localValue));
+    setForm(formInitial);
     setEdit(false);
   };
 
-  const onChange = (newValue: string, fieldName: string) => {
-    setLocalValue({
-      ...localValue,
-      [fieldName]: newValue,
+  const pressSave = () => {
+    dispatch(
+      setModal({
+        message: t("edit_profile.modals.save.message"),
+        actions: [
+          {
+            name: t("edit_profile.modals.save.cancel"),
+            colortype: "error",
+          },
+          {
+            action: requestEditProfile(localForm),
+            name: t("edit_profile.modals.save.confirm"),
+            colortype: "primary",
+          },
+        ],
+      })
+    );
+  };
+
+  const pressCancel = () => {
+    dispatch(
+      setModal({
+        message: t("edit_profile.modals.cancel.message"),
+        actions: [
+          {
+            name: t("edit_profile.modals.cancel.no"),
+            colortype: "error",
+          },
+          {
+            action: setUserProfile(globalValue),
+            name: t("edit_profile.modals.cancel.yes"),
+            colortype: "primary",
+          },
+        ],
+      })
+    );
+  };
+
+  useEffect(() => {
+    cancelHandler();
+  }, [userData]);
+
+  const onChange = (newValue: string, fieldName: any) => {
+    setForm({
+      ...form,
+      [fieldName]: {
+        ...form[fieldName],
+        value: newValue,
+      },
     });
   };
 
@@ -54,7 +153,7 @@ export default function EditProfile() {
         edit ? (
           <TextButton
             text={t("edit_profile.buttons_text.cancel")}
-            onPress={cancelHandler}
+            onPress={pressCancel}
             type="left"
           />
         ) : undefined
@@ -63,7 +162,7 @@ export default function EditProfile() {
         edit ? (
           <TextButton
             text={t("edit_profile.buttons_text.save")}
-            onPress={saveHandler}
+            onPress={pressSave}
             type="right"
           />
         ) : (
@@ -79,11 +178,7 @@ export default function EditProfile() {
         <View style={styles.uploadAvatarBox}>
           <UploadAvatar />
         </View>
-        <EditProfileForm
-          edit={edit}
-          localValue={localValue}
-          onChangeAction={onChange}
-        />
+        <EditProfileForm edit={edit} form={form} onChangeHandler={onChange} />
       </View>
     </TopBar>
   );

@@ -1,17 +1,20 @@
 import React from 'react';
-import {Text, View, StyleSheet, Image, Dimensions} from "react-native";
+import {Text, View, StyleSheet, Image, Dimensions, Pressable, GestureResponderEvent} from "react-native";
 
 type ContractTypeCardProps = {
     image: any,
-    title: string
+    title: string,
+    onPress?: (event: GestureResponderEvent) => void
 }
 
-export default function ContractTypeCard({ image, title } : ContractTypeCardProps) {
+export default function ContractTypeCard({ image, title, onPress } : ContractTypeCardProps) {
     return (
-        <View style={styles.container}>
-            <Image source={image} testID={`Image.${title}`} />
-            <Text style={styles.text}>{title}</Text>
-        </View>
+        <Pressable onPress={onPress}>
+            <View style={styles.container}>
+                <Image source={image} testID={`Image.${title}`} />
+                <Text style={styles.text}>{title}</Text>
+            </View>
+        </Pressable>
     )
 }
 

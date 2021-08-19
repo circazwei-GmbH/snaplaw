@@ -1,74 +1,94 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { View, StyleSheet } from "react-native";
 import EditProfileTextField from "../../components/EditProfileTextField";
-import { UserType } from "../../../store/../store/modules/profile/slice";
 import { useI18n } from "../../../translator/i18n";
+import { FieldInterface } from "../../features/forms/SignInForm";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
+export interface EditProfileFieldInterface extends FieldInterface {
+  value?: string;
+}
+
+export interface EditProfileFormInterface {
+  name: EditProfileFieldInterface;
+  lastName: EditProfileFieldInterface;
+  dateOfBirth: EditProfileFieldInterface;
+  email: EditProfileFieldInterface;
+  phone: EditProfileFieldInterface;
+  address: EditProfileFieldInterface;
+  postCode: EditProfileFieldInterface;
+}
 
 interface EditProfileFormPropsInterface {
   edit: boolean;
-  localValue: UserType;
-  onChangeAction: Function;
+  form: EditProfileFormInterface;
+  onChangeHandler: Function;
 }
 
 export default function EditProfileForm({
   edit,
-  localValue,
-  onChangeAction,
+  form,
+  onChangeHandler,
 }: EditProfileFormPropsInterface): JSX.Element {
   const { t } = useI18n();
 
   return (
-    <View style={styles.inputBox}>
-      <EditProfileTextField
-        placeholder={t("edit_profile.placeholders.name")}
-        value={localValue.name}
-        editable={edit}
-        edit={edit}
-        onChangeFunction={(newValue) => onChangeAction(newValue, "name")}
-      />
-      <EditProfileTextField
-        placeholder={t("edit_profile.placeholders.lastName")}
-        value={localValue.lastName}
-        editable={edit}
-        edit={edit}
-        onChangeFunction={(newValue) => onChangeAction(newValue, "lastName")}
-      />
-      <EditProfileTextField
-        placeholder={t("edit_profile.placeholders.dateOfBirth")}
-        value={localValue.dateOfBirth}
-        editable={edit}
-        edit={edit}
-        onChangeFunction={(newValue) => onChangeAction(newValue, "dateOfBirth")}
-      />
-      <EditProfileTextField
-        placeholder={t("edit_profile.placeholders.email")}
-        value={localValue.email}
-        editable={false}
-        edit={edit}
-        onChangeFunction={(newValue) => onChangeAction(newValue, "email")}
-      />
-      <EditProfileTextField
-        placeholder={t("edit_profile.placeholders.phone")}
-        value={localValue.phone}
-        editable={edit}
-        edit={edit}
-        onChangeFunction={(newValue) => onChangeAction(newValue, "phone")}
-      />
-      <EditProfileTextField
-        placeholder={t("edit_profile.placeholders.address")}
-        value={localValue.address}
-        editable={edit}
-        edit={edit}
-        onChangeFunction={(newValue) => onChangeAction(newValue, "address")}
-      />
-      <EditProfileTextField
-        placeholder={t("edit_profile.placeholders.postCode")}
-        value={localValue.postCode}
-        editable={edit}
-        edit={edit}
-        onChangeFunction={(newValue) => onChangeAction(newValue, "postCode")}
-      />
-    </View>
+    <KeyboardAwareScrollView>
+      <View style={styles.inputBox}>
+        <EditProfileTextField
+          placeholder={t("edit_profile.placeholders.name")}
+          value={form.name.value}
+          editable={edit}
+          edit={edit}
+          textContentType="username"
+          onChangeFunction={(newValue) => onChangeHandler(newValue, "name")}
+        />
+        <EditProfileTextField
+          placeholder={t("edit_profile.placeholders.lastName")}
+          value={form.lastName.value}
+          editable={edit}
+          edit={edit}
+          onChangeFunction={(newValue) => onChangeHandler(newValue, "lastName")}
+        />
+        <EditProfileTextField
+          placeholder={t("edit_profile.placeholders.dateOfBirth")}
+          value={form.dateOfBirth.value}
+          editable={edit}
+          edit={edit}
+          onChangeFunction={(newValue) =>
+            onChangeHandler(newValue, "dateOfBirth")
+          }
+        />
+        <EditProfileTextField
+          placeholder={t("edit_profile.placeholders.email")}
+          value={form.email.value}
+          editable={false}
+          edit={edit}
+          onChangeFunction={(newValue) => onChangeHandler(newValue, "email")}
+        />
+        <EditProfileTextField
+          placeholder={t("edit_profile.placeholders.phone")}
+          value={form.phone.value}
+          editable={edit}
+          edit={edit}
+          onChangeFunction={(newValue) => onChangeHandler(newValue, "phone")}
+        />
+        <EditProfileTextField
+          placeholder={t("edit_profile.placeholders.address")}
+          value={form.address.value}
+          editable={edit}
+          edit={edit}
+          onChangeFunction={(newValue) => onChangeHandler(newValue, "address")}
+        />
+        <EditProfileTextField
+          placeholder={t("edit_profile.placeholders.postCode")}
+          value={form.postCode.value}
+          editable={edit}
+          edit={edit}
+          onChangeFunction={(newValue) => onChangeHandler(newValue, "postCode")}
+        />
+      </View>
+    </KeyboardAwareScrollView>
   );
 }
 

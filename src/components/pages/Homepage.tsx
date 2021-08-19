@@ -6,9 +6,13 @@ import TopBar from "../layouts/TopBar";
 import NotificationBell from "../components/NotificationBell";
 import TextField from "../components/TextField";
 import DefaultText from "../basics/typography/DefaultText";
+import {useAppDispatch} from "../../store/hooks";
+import {requestCreateContract} from "../../store/modules/contract/action-creators";
+import {CONTRACT_TYPES} from "../../store/modules/contract/constants";
 
 export default function Homepage() {
     const { t } = useI18n()
+    const dispatch = useAppDispatch()
 
     return (
         <TopBar
@@ -28,6 +32,7 @@ export default function Homepage() {
                         <ContractTypeCard
                             image={require('../../../assets/purchase_contract.png')}
                             title={t('homepage.contract_types.purchase')}
+                            onPress={() => dispatch(requestCreateContract(CONTRACT_TYPES.PURCHASE))}
                         />
                         <ContractTypeCard
                             image={require('../../../assets/car_contract.png')}

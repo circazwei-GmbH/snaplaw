@@ -28,6 +28,7 @@ const Base64 = {
             throw new Error("'atob' failed: The string to be decoded is not correctly encoded.");
         }
         for (let bc = 0, bs = 0, buffer, i = 0;
+             // eslint-disable-next-line no-cond-assign
              buffer = str.charAt(i++);
 
              ~buffer && (bs = bc % 4 ? bs * 64 + buffer : buffer,
@@ -40,7 +41,7 @@ const Base64 = {
     }
 };
 
-export const getUserFromToken = (token: string) => {
+export const getUserFromToken = (token: string): Record<string, unknown> | undefined => {
     try {
         return JSON.parse(Base64.atob(token.split('.')[1]))
     } catch (error) {
