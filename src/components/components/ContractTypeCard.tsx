@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Image,
   Pressable,
+  Dimensions,
   GestureResponderEvent,
 } from "react-native";
 import { useAppSelector } from "../../store/hooks";
@@ -45,7 +46,7 @@ export default function ContractTypeCard({
 const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
-    width: "48%",
+    width: Dimensions.get("screen").width / 2 - 22,
     height: 220,
     backgroundColor: "#EFF7FD",
     margin: 3,
