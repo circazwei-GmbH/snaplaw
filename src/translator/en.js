@@ -213,6 +213,8 @@ export default {
         title: "additional information",
         titleTwo: "Please add product description",
         placeholder: "Write here everything that you think is important",
+        button: "Upload file",
+        checkbox: "Accessories are sold with this product",
       },
       [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
         title: "Confirmation",

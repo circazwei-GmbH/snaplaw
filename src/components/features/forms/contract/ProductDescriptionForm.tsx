@@ -1,17 +1,21 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View, Text } from "react-native";
 import DefaultText from "../../../basics/typography/DefaultText";
 import MultilineTextField from "../../../components/MultilineTextField";
 import { useI18n } from "../../../../translator/i18n";
 import { useAppSelector } from "../../../../store/hooks";
 import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/constants";
 import IconButton from "../../../basics/buttons/IconButton";
+import Checkbox from "../../../basics/checkboxes/Checkbox";
+import { toggleBoolValue } from "../../../../utils/toggleBoolValue";
 
 export default function ProductDescriptionForm() {
   const { t } = useI18n();
   const contractType = useAppSelector(
     (state) => state.contract.currentContract?.type
   );
+  const [first, setFirst] = useState(false);
+  const [second, setSecond] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -26,10 +30,25 @@ export default function ProductDescriptionForm() {
           `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.placeholder`
         )}
       />
-      <IconButton />
+      <IconButton
+        text={t(
+          `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.button`
+        )}
+        onPress={() => {}}
+      />
+      <Checkbox
+        isChecked={first}
+        onChange={() => toggleBoolValue(first, setFirst)}
+        textView={
+          <Text style={styles.checkboxText}>
+            fhglaskduhfgailurkhgfalskdjufughaeuirghaklerdsughaeklirughalekrughafjrgkekrgjherguherlughaergaewrtgwaerghawergeqgrwegqerggrsthgwrthwrthwrthwrthwrth
+          </Text>
+        }
+      />
     </View>
   );
 }
+//t(`contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.checkbox`)
 
 const styles = StyleSheet.create({
   container: {
@@ -39,5 +58,14 @@ const styles = StyleSheet.create({
   },
   titleTwo: {
     fontSize: 16,
+  },
+  checkbox: {
+    marginTop: 26,
+  },
+  checkboxText: {
+    width: "85%",
+    marginLeft: 18,
+    fontSize: 16,
+    marginTop: 50,
   },
 });

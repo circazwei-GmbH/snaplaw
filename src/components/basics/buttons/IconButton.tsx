@@ -1,22 +1,19 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet, Text } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 
 interface IconButtonPropsInterface {
-  icon: object;
-  text: string;
+  text?: string;
   onPress: () => void;
 }
 
 export default function IconButton({
   text,
   onPress,
-  icon,
 }: IconButtonPropsInterface): JSX.Element {
-  const library = require("@expo/vector-icons");
-
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
-      <library.AntDesign name="pluscircle" size={16} color="#668395" />
+      <AntDesign name="pluscircle" size={32} color="#668395" />
       <Text style={[styles.text]}>{text}</Text>
     </TouchableOpacity>
   );
@@ -24,13 +21,19 @@ export default function IconButton({
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
     width: 150,
     height: 45,
+    zIndex: 1,
   },
   text: {
-    fontSize: 17,
+    marginLeft: 12,
+    fontSize: 16,
     fontWeight: "400",
+    fontFamily: "OS",
+    textDecorationLine: "underline",
     color: "#1696E2",
   },
 });

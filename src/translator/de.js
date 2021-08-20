@@ -216,6 +216,8 @@ export default {
         title: "additionale Information",
         titleTwo: "Bitte geben Sie die Beschreibung des Artikels an",
         placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
+        button: "Upload file",
+        checkbox: "Accessories are sold with this product",
       },
       [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
         title: "Besätigung",
