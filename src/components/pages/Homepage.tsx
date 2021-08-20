@@ -10,7 +10,7 @@ import { useAppDispatch } from "../../store/hooks";
 import { requestCreateContract } from "../../store/modules/contract/action-creators";
 import { CONTRACT_TYPES } from "../../store/modules/contract/constants";
 
-export default function Homepage() {
+export default function Homepage(): JSX.Element {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
 
@@ -21,10 +21,7 @@ export default function Homepage() {
           <TextField
             onChangeFunction={() => {}}
             placeholder={t("homepage.search")}
-          />
-          <DefaultText
-            text={t("homepage.description")}
-            style={styles.description}
+            search
           />
         </View>
         <ScrollView>
@@ -61,18 +58,16 @@ export default function Homepage() {
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 11,
-    marginTop: 20,
-  },
-  description: {
-    marginTop: 34,
-    marginBottom: 7,
+    width: "100%",
+    paddingHorizontal: 16,
+    marginBottom: 16,
   },
   cardContainer: {
-    flexWrap: "wrap",
+    width: "100%",
     flexDirection: "row",
+    flexWrap: "wrap",
     justifyContent: "flex-start",
-    alignItems: "center",
-    margin: 8,
+    paddingHorizontal: 16,
+    paddingBottom: 16,
   },
 });

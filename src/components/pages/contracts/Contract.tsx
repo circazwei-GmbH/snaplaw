@@ -17,6 +17,7 @@ import { requestScreenData } from "../../../store/modules/contract/action-creato
 import TextButton from "../../basics/buttons/TextButton";
 import { navigationPopToTop } from "../../../store/modules/main/action-creators";
 import { setModal } from "../../../store/modules/main/slice";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 type ContractProps = {
   route: {
@@ -82,22 +83,26 @@ export default function Contract({
     >
       <View style={styles.container}>
         <View>
-          <View>
-            <ContractScreenCounter
-              total={contractScreensConfig[contractType].length}
-              current={screenCount + 1}
-            />
-          </View>
-          <View style={styles.titleContainer}>
-            <ContractFormTitle
-              title={t(contractScreensConfig[contractType][screenCount].title)}
-            />
-          </View>
-          <View>
-            {React.createElement(
-              contractScreensConfig[contractType][screenCount].component
-            )}
-          </View>
+          <KeyboardAwareScrollView>
+            <View>
+              <ContractScreenCounter
+                total={contractScreensConfig[contractType].length}
+                current={screenCount + 1}
+              />
+            </View>
+            <View style={styles.titleContainer}>
+              <ContractFormTitle
+                title={t(
+                  contractScreensConfig[contractType][screenCount].title
+                )}
+              />
+            </View>
+            <View>
+              {React.createElement(
+                contractScreensConfig[contractType][screenCount].component
+              )}
+            </View>
+          </KeyboardAwareScrollView>
         </View>
         <View
           style={[
@@ -133,7 +138,7 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     marginTop: 12,
-    marginBottom: 24,
+    marginBottom: 5,
     paddingHorizontal: 16,
   },
 });

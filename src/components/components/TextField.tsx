@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   TextInput,
   View,
   StyleSheet,
   Text,
   TextInputProps,
+  TouchableOpacity,
 } from "react-native";
+import { Feather, Entypo } from "@expo/vector-icons";
 
 interface OnChanfeFunction {
   (text: string): void;
@@ -17,6 +19,7 @@ interface TextFieldPropsInterface extends TextInputProps {
   validations?: Array<Function>;
   errorMessage?: string;
   value?: string;
+  search?: boolean;
   onChangeFunction: OnChanfeFunction;
 }
 
@@ -26,10 +29,12 @@ export default function TextField({
   errorMessage,
   onChangeFunction,
   value,
+  search,
   ...props
 }: TextFieldPropsInterface) {
   const [localValue, setLocalValue] = useState(value);
   const [focused, setFocused] = useState(false);
+  const input: any = useRef();
 
   const textChangeHandler = (text: string) => {
     setLocalValue(text);
@@ -37,29 +42,47 @@ export default function TextField({
       onChangeFunction(text);
     }
   };
+  const cancelButtonHandler = () => {
+    setLocalValue("");
+    input.current.blur();
+  };
 
   return (
-    <View
-      style={[
-        styles.inputContainer,
-        focused ? styles.borderFocused : styles.borderNotFocused,
-      ]}
-    >
-      <Text
-        style={[
-          styles.label,
-          focused || localValue
-            ? null
-            : fixed
-            ? styles.labelWithEmptyInputFixed
-            : styles.labelWithEmptyInputDance,
-        ]}
-      >
-        {placeholder}
-        <Text style={styles.redText}>*</Text>
-      </Text>
+    <View style={[styles.inputContainer]}>
+      {search ? null : (
+        <Text
+          style={[
+            styles.label,
+            focused || localValue
+              ? null
+              : fixed
+              ? styles.labelWithEmptyInputFixed
+              : styles.labelWithEmptyInputDance,
+          ]}
+        >
+          {placeholder}
+          <Text style={styles.redText}>*</Text>
+        </Text>
+      )}
+      {search && !focused ? (
+        <Feather
+          name="search"
+          size={16}
+          color="#668395"
+          style={styles.searchIcon}
+        />
+      ) : null}
+      {search && focused ? (
+        <TouchableOpacity
+          style={styles.crossButton}
+          onPress={cancelButtonHandler}
+        >
+          <Entypo name="cross" size={20} color="#668395" />
+        </TouchableOpacity>
+      ) : null}
       <TextInput
         {...props}
+        ref={input}
         placeholder={!focused ? placeholder : ""}
         placeholderTextColor="#909090"
         style={[
@@ -68,6 +91,7 @@ export default function TextField({
           focused ? null : styles.focuslessInput,
           localValue ? styles.inputWithText : null,
           errorMessage ? styles.errorBorder : null,
+          search && !focused ? styles.search : null,
         ]}
         value={localValue}
         onChangeText={textChangeHandler}
@@ -95,6 +119,25 @@ const styles = StyleSheet.create({
     fontSize: 15,
     paddingHorizontal: 16,
     fontFamily: "P",
+  },
+  search: {
+    paddingLeft: 50,
+  },
+  searchIcon: {
+    position: "absolute",
+    top: "55%",
+    left: "5%",
+    zIndex: 1,
+  },
+  crossButton: {
+    position: "absolute",
+    justifyContent: "center",
+    alignItems: "center",
+    width: 45,
+    height: 45,
+    top: "35%",
+    right: 0,
+    zIndex: 1,
   },
   fullInput: {
     backgroundColor: "transparent",
