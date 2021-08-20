@@ -2,6 +2,7 @@ import {
   CONTRACT_SCREEN_TYPES,
   CONTRACT_TYPES,
 } from "../store/modules/contract/constants";
+import { CONDITION_VALUE } from "../store/modules/contract/types";
 
 export default {
   welcome: {
@@ -195,6 +196,15 @@ export default {
           serial: "Serial number",
         },
         switchTitle: "Please indicate if there is a serial number",
+      },
+      [CONTRACT_SCREEN_TYPES.PRODUCT_CONDITION]: {
+        title: "product condition",
+        checkboxes: {
+          [CONDITION_VALUE.NEW]: "New",
+          [CONDITION_VALUE.HIGH_QUALITY]: "High quality",
+          [CONDITION_VALUE.USED]: "Used",
+          [CONDITION_VALUE.DEFECTIVE]: "Defective",
+        },
       },
     },
     confirmation_modal: {

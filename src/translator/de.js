@@ -2,6 +2,7 @@ import {
   CONTRACT_SCREEN_TYPES,
   CONTRACT_TYPES,
 } from "../store/modules/contract/constants";
+import { CONDITION_VALUE } from "../store/modules/contract/purchase/product-condition";
 
 export default {
   welcome: {
@@ -200,6 +201,15 @@ export default {
           serial: "Seriennummer",
         },
         switchTitle: "Bitte geben Sie an, ob eine Seriennummer vorhanden ist",
+      },
+      [CONTRACT_SCREEN_TYPES.PRODUCT_CONDITION]: {
+        title: "Zustand des Artikels",
+        checkboxes: {
+          [CONDITION_VALUE.NEW]: "Neu",
+          [CONDITION_VALUE.HIGH_QUALITY]: "Neuwertig",
+          [CONDITION_VALUE.USED]: "Gebraucht",
+          [CONDITION_VALUE.DEFECTIVE]: "Defekt",
+        },
       },
     },
     confirmation_modal: {
