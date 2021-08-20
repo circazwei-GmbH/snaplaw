@@ -1,4 +1,5 @@
 import { CONTRACT_SCREEN_TYPES } from "../constants";
+import {BaseScreenDataInterface} from "../base-types";
 
 export const enum USER_DATA_FIELDS {
   name = "name",
@@ -10,7 +11,7 @@ export const enum USER_DATA_FIELDS {
   postCode = "postCode",
 }
 
-export interface UserDataScreenInterface {
+export interface UserDataScreenInterface extends BaseScreenDataInterface{
   type: CONTRACT_SCREEN_TYPES.USER_DATA;
   data: {
     [USER_DATA_FIELDS.name]: string;
