@@ -2,6 +2,8 @@ import {
   CONTRACT_SCREEN_TYPES,
   CONTRACT_TYPES,
 } from "../store/modules/contract/constants";
+import { CONDITION_VALUE } from "../store/modules/contract/purchase/product-condition";
+import { CONFIRMATION_FIELDS } from "../store/modules/contract/purchase/confirmation";
 
 export default {
   welcome: {
@@ -201,10 +203,28 @@ export default {
         },
         switchTitle: "Bitte geben Sie an, ob eine Seriennummer vorhanden ist",
       },
+      [CONTRACT_SCREEN_TYPES.PRODUCT_CONDITION]: {
+        title: "Zustand des Artikels",
+        checkboxes: {
+          [CONDITION_VALUE.NEW]: "Neu",
+          [CONDITION_VALUE.HIGH_QUALITY]: "Neuwertig",
+          [CONDITION_VALUE.USED]: "Gebraucht",
+          [CONDITION_VALUE.DEFECTIVE]: "Defekt",
+        },
+      },
       [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
         title: "additionale Information",
         titleTwo: "Bitte geben Sie die Beschreibung des Artikels an",
         placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
+      },
+      [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
+        title: "Besätigung",
+        confirmation: {
+          [CONFIRMATION_FIELDS.FIRST]:
+            "Der Verkäufer versichert, dass der oben beschriebene Artikel in seinem alleinigen Eigentum steht, nicht gestohlen ist und frei von Rechten Dritter ist.",
+          [CONFIRMATION_FIELDS.SECOND]:
+            "Die Käuferdaten wurden überprüft und stimmen überein.",
+        },
       },
     },
     confirmation_modal: {

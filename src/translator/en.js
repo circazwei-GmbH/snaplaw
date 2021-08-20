@@ -2,6 +2,10 @@ import {
   CONTRACT_SCREEN_TYPES,
   CONTRACT_TYPES,
 } from "../store/modules/contract/constants";
+import {
+  CONDITION_VALUE,
+  CONFIRMATION_FIELDS,
+} from "../store/modules/contract/types";
 
 export default {
   welcome: {
@@ -196,10 +200,28 @@ export default {
         },
         switchTitle: "Please indicate if there is a serial number",
       },
+      [CONTRACT_SCREEN_TYPES.PRODUCT_CONDITION]: {
+        title: "product condition",
+        checkboxes: {
+          [CONDITION_VALUE.NEW]: "New",
+          [CONDITION_VALUE.HIGH_QUALITY]: "High quality",
+          [CONDITION_VALUE.USED]: "Used",
+          [CONDITION_VALUE.DEFECTIVE]: "Defective",
+        },
+      },
       [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
         title: "additional information",
         titleTwo: "Please add product description",
         placeholder: "Write here everything that you think is important",
+      },
+      [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
+        title: "Confirmation",
+        confirmation: {
+          [CONFIRMATION_FIELDS.FIRST]:
+            "The seller assures that the goods described above are his exclusive property, have not been stolen and are free from the rights of third parties.",
+          [CONFIRMATION_FIELDS.SECOND]:
+            "Buyer details have been verified and match.",
+        },
       },
     },
     confirmation_modal: {

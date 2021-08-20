@@ -5,6 +5,7 @@ import MultilineTextField from "../../../components/MultilineTextField";
 import { useI18n } from "../../../../translator/i18n";
 import { useAppSelector } from "../../../../store/hooks";
 import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/constants";
+import IconButton from "../../../basics/buttons/IconButton";
 
 export default function ProductDescriptionForm() {
   const { t } = useI18n();
@@ -25,6 +26,7 @@ export default function ProductDescriptionForm() {
           `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.placeholder`
         )}
       />
+      <IconButton />
     </View>
   );
 }
