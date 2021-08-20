@@ -23,10 +23,6 @@ export default function Homepage(): JSX.Element {
             placeholder={t("homepage.search")}
             search
           />
-          <DefaultText
-            text={t("homepage.description")}
-            style={styles.description}
-          />
         </View>
         <ScrollView>
           <View style={styles.cardContainer}>
@@ -36,7 +32,6 @@ export default function Homepage(): JSX.Element {
               onPress={() =>
                 dispatch(requestCreateContract(CONTRACT_TYPES.PURCHASE))
               }
-              imageMargin={styles.imageMargin}
             />
             <ContractTypeCard
               image={require("../../../assets/car_contract.png")}
@@ -65,19 +60,14 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     paddingHorizontal: 16,
-  },
-  description: {
-    marginTop: 34,
-    marginBottom: 7,
+    marginBottom: 16,
   },
   cardContainer: {
     width: "100%",
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "flex-start",
-    padding: 16,
-  },
-  imageMargin: {
-    marginLeft: "10%",
+    paddingHorizontal: 16,
+    paddingBottom: 16,
   },
 });

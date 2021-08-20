@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   TextInput,
   View,
   StyleSheet,
   Text,
   TextInputProps,
+  TouchableOpacity,
 } from "react-native";
-import { Feather } from "@expo/vector-icons";
+import { Feather, Entypo } from "@expo/vector-icons";
 
 interface OnChanfeFunction {
   (text: string): void;
@@ -33,6 +34,7 @@ export default function TextField({
 }: TextFieldPropsInterface) {
   const [localValue, setLocalValue] = useState(value);
   const [focused, setFocused] = useState(false);
+  const input: any = useRef();
 
   const textChangeHandler = (text: string) => {
     setLocalValue(text);
@@ -40,22 +42,28 @@ export default function TextField({
       onChangeFunction(text);
     }
   };
+  const cancelButtonHandler = () => {
+    setLocalValue("");
+    input.current.blur();
+  };
 
   return (
     <View style={[styles.inputContainer]}>
-      <Text
-        style={[
-          styles.label,
-          focused || localValue
-            ? null
-            : fixed
-            ? styles.labelWithEmptyInputFixed
-            : styles.labelWithEmptyInputDance,
-        ]}
-      >
-        {placeholder}
-        <Text style={styles.redText}>*</Text>
-      </Text>
+      {search ? null : (
+        <Text
+          style={[
+            styles.label,
+            focused || localValue
+              ? null
+              : fixed
+              ? styles.labelWithEmptyInputFixed
+              : styles.labelWithEmptyInputDance,
+          ]}
+        >
+          {placeholder}
+          <Text style={styles.redText}>*</Text>
+        </Text>
+      )}
       {search && !focused ? (
         <Feather
           name="search"
@@ -64,8 +72,17 @@ export default function TextField({
           style={styles.searchIcon}
         />
       ) : null}
+      {search && focused ? (
+        <TouchableOpacity
+          style={styles.crossButton}
+          onPress={cancelButtonHandler}
+        >
+          <Entypo name="cross" size={20} color="#668395" />
+        </TouchableOpacity>
+      ) : null}
       <TextInput
         {...props}
+        ref={input}
         placeholder={!focused ? placeholder : ""}
         placeholderTextColor="#909090"
         returnKeyType={"done"}
@@ -111,6 +128,16 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: "55%",
     left: "5%",
+    zIndex: 1,
+  },
+  crossButton: {
+    position: "absolute",
+    justifyContent: "center",
+    alignItems: "center",
+    width: 45,
+    height: 45,
+    top: "35%",
+    right: 0,
     zIndex: 1,
   },
   fullInput: {
