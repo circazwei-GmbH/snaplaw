@@ -201,6 +201,11 @@ export default {
         },
         switchTitle: "Bitte geben Sie an, ob eine Seriennummer vorhanden ist",
       },
+      [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
+        title: "additionale Information",
+        titleTwo: "Bitte geben Sie die Beschreibung des Artikels an",
+        placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
+      },
     },
     confirmation_modal: {
       message: "Wollten Sie die Vertragserstellung wirklich abbrechen?",

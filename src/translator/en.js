@@ -196,6 +196,11 @@ export default {
         },
         switchTitle: "Please indicate if there is a serial number",
       },
+      [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
+        title: "additional information",
+        titleTwo: "Please add product description",
+        placeholder: "Write here everything that you think is important",
+      },
     },
     confirmation_modal: {
       message: "Are you sure, you want to cancel contract creation?",
