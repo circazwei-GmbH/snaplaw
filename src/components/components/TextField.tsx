@@ -48,7 +48,7 @@ export default function TextField({
   };
 
   return (
-    <View style={[styles.inputContainer]}>
+    <View style={styles.inputContainer}>
       {search ? null : (
         <Text
           style={[

@@ -212,6 +212,11 @@ export default {
           [CONFIRMATION_FIELDS.FIRST]: 'The seller assures that the goods described above are his exclusive property, have not been stolen and are free from the rights of third parties.',
           [CONFIRMATION_FIELDS.SECOND]: 'Buyer details have been verified and match.'
         }
+      },
+      [CONTRACT_SCREEN_TYPES.PAYMENT]: {
+        title: 'Payment',
+        product_price: '1. Please enter the product price',
+        payment_method: '2. Please select a payment method'
       }
     },
     confirmation_modal: {

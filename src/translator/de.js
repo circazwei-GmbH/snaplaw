@@ -218,6 +218,11 @@ export default {
           [CONFIRMATION_FIELDS.FIRST]: 'Der Verkäufer versichert, dass der oben beschriebene Artikel in seinem alleinigen Eigentum steht, nicht gestohlen ist und frei von Rechten Dritter ist.',
           [CONFIRMATION_FIELDS.SECOND]: 'Die Käuferdaten wurden überprüft und stimmen überein.'
         }
+      },
+      [CONTRACT_SCREEN_TYPES.PAYMENT]: {
+        title: 'Bezahlung',
+        product_price: '1. Bitte geben Sie den Preis des Artikels an',
+        payment_method: '2. Bitte Zahlungsart wählen'
       }
     },
     confirmation_modal: {
