@@ -18,7 +18,7 @@ const initialState: ContractState = {
 type ScreenData = {
   screenType: CONTRACT_SCREEN_TYPES;
   fieldName: string;
-  value: string;
+  value: unknown;
 };
 
 const setInitedContractAction = createAction<string, "setInitedContract">(

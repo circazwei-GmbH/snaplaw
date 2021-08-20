@@ -3,6 +3,7 @@ import {
   CONTRACT_TYPES,
 } from "../store/modules/contract/constants";
 import { CONDITION_VALUE } from "../store/modules/contract/purchase/product-condition";
+import {CONFIRMATION_FIELDS} from "../store/modules/contract/purchase/confirmation";
 
 export default {
   welcome: {
@@ -211,6 +212,13 @@ export default {
           [CONDITION_VALUE.DEFECTIVE]: "Defekt",
         },
       },
+      [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
+        title: 'Besätigung',
+        confirmation: {
+          [CONFIRMATION_FIELDS.FIRST]: 'Der Verkäufer versichert, dass der oben beschriebene Artikel in seinem alleinigen Eigentum steht, nicht gestohlen ist und frei von Rechten Dritter ist.',
+          [CONFIRMATION_FIELDS.SECOND]: 'Die Käuferdaten wurden überprüft und stimmen überein.'
+        }
+      }
     },
     confirmation_modal: {
       message: "Wollten Sie die Vertragserstellung wirklich abbrechen?",
