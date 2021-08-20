@@ -13,6 +13,7 @@ import {
   CONDITION_VALUE,
   CONDITIONS,
 } from "./purchase/product-condition";
+import {ConfirmationScreenInterface, CONFIRMATION_FIELDS, CONFIRMATION} from "./purchase/confirmation";
 
 export type ContractType = CONTRACT_TYPES.PURCHASE;
 
@@ -23,7 +24,8 @@ export interface RequestCreateContractAction extends BaseAction {
 export type ScreenDataType =
   | UserDataScreenInterface
   | ProductDataScreenInterface
-  | ProductConditionScreenInterface;
+  | ProductConditionScreenInterface
+  | ConfirmationScreenInterface;
 
 export interface Contract {
   id: string;
@@ -38,3 +40,4 @@ export interface RequestScreenDataAction extends BaseAction {
 export { ProductDataScreenInterface, PRODUCT_DATA_FIELDS };
 export { UserDataScreenInterface, USER_DATA_FIELDS };
 export { ProductConditionScreenInterface, CONDITION_VALUE, CONDITIONS };
+export { ConfirmationScreenInterface, CONFIRMATION_FIELDS, CONFIRMATION }

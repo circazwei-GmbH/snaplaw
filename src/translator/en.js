@@ -2,7 +2,7 @@ import {
   CONTRACT_SCREEN_TYPES,
   CONTRACT_TYPES,
 } from "../store/modules/contract/constants";
-import { CONDITION_VALUE } from "../store/modules/contract/types";
+import {CONDITION_VALUE, CONFIRMATION_FIELDS} from "../store/modules/contract/types";
 
 export default {
   welcome: {
@@ -206,6 +206,13 @@ export default {
           [CONDITION_VALUE.DEFECTIVE]: "Defective",
         },
       },
+      [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
+        title: 'Confirmation',
+        confirmation: {
+          [CONFIRMATION_FIELDS.FIRST]: 'The seller assures that the goods described above are his exclusive property, have not been stolen and are free from the rights of third parties.',
+          [CONFIRMATION_FIELDS.SECOND]: 'Buyer details have been verified and match.'
+        }
+      }
     },
     confirmation_modal: {
       message: "Are you sure, you want to cancel contract creation?",

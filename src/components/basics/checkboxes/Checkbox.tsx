@@ -17,7 +17,7 @@ export default function Checkbox({
 }: CheckboxProps) {
   return (
     <CheckBox
-      style={style}
+      style={[styles.checkbox, style]}
       isChecked={isChecked}
       onClick={onChange}
       rightText={text}
@@ -29,6 +29,10 @@ export default function Checkbox({
 }
 
 const styles = StyleSheet.create({
+  checkbox: {
+    alignItems: 'flex-start',
+    flexDirection: 'row'
+  },
   checkboxText: {
     fontFamily: "P",
     fontSize: 17,
