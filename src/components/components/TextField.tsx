@@ -85,7 +85,6 @@ export default function TextField({
         ref={input}
         placeholder={!focused ? placeholder : ""}
         placeholderTextColor="#909090"
-        returnKeyType={"done"}
         style={[
           styles.emptyInput,
           focused ? styles.fullInput : null,
