@@ -1,10 +1,10 @@
-import {BaseAction} from "../auth/types";
+import { BaseAction } from "../auth/types";
 
-export const NAVIGATION_POP_TO_TOP = 'NAVIGATION_POP_TO_TOP';
+export const NAVIGATION_POP_TO_TOP = "NAVIGATION_POP_TO_TOP";
 
-interface NavigationPopToTopAction extends BaseAction {}
+type NavigationPopToTopAction = BaseAction;
 
 export const navigationPopToTop = (): NavigationPopToTopAction => ({
-    type: NAVIGATION_POP_TO_TOP,
-    payload: undefined
-})
+  type: NAVIGATION_POP_TO_TOP,
+  payload: undefined,
+});

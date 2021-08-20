@@ -1,4 +1,8 @@
-import {CONTRACT_SCREEN_TYPES, CONTRACT_TYPES} from "../store/modules/contract/constants";
+import {
+  CONTRACT_SCREEN_TYPES,
+  CONTRACT_TYPES,
+} from "../store/modules/contract/constants";
+import { CONDITION_VALUE } from "../store/modules/contract/types";
 
 export default {
   welcome: {
@@ -193,18 +197,27 @@ export default {
         },
         switchTitle: "Please indicate if there is a serial number",
       },
+      [CONTRACT_SCREEN_TYPES.PRODUCT_CONDITION]: {
+        title: "product condition",
+        checkboxes: {
+          [CONDITION_VALUE.NEW]: "New",
+          [CONDITION_VALUE.HIGH_QUALITY]: "High quality",
+          [CONDITION_VALUE.USED]: "Used",
+          [CONDITION_VALUE.DEFECTIVE]: "Defective",
+        },
+      },
     },
     confirmation_modal: {
-      message: 'Are you sure, you want to cancel contract creation?',
+      message: "Are you sure, you want to cancel contract creation?",
       buttons: {
-        ok: 'Yes',
-        cancel: 'No'
-      }
+        ok: "Yes",
+        cancel: "No",
+      },
     },
     buttons: {
       next: "Next",
       back: "Back",
-      cancel: 'Cancel'
+      cancel: "Cancel",
     },
   },
 };

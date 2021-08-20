@@ -7,7 +7,7 @@ import store from "../../../store/index";
 import { createStore } from "@reduxjs/toolkit";
 import { toggleBoolValue } from "../../../utils/toggleBoolValue";
 import { PROFILE_ROUTER } from "../../../router/ProfileRouterTypes";
-import {clearToken} from "../../../store/modules/auth/action-creators";
+import { clearToken } from "../../../store/modules/auth/action-creators";
 
 jest.mock("../../../utils/toggleBoolValue.ts");
 
@@ -22,9 +22,9 @@ const actions = jest.fn();
 
 const initialState = {
   profile: {
-    user: undefined
-  }
-}
+    user: undefined,
+  },
+};
 
 const reduser = (state: any = initialState, action: any): any => {
   actions(action);

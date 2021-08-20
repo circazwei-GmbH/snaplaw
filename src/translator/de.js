@@ -1,4 +1,8 @@
-import {CONTRACT_SCREEN_TYPES, CONTRACT_TYPES} from "../store/modules/contract/constants";
+import {
+  CONTRACT_SCREEN_TYPES,
+  CONTRACT_TYPES,
+} from "../store/modules/contract/constants";
+import { CONDITION_VALUE } from "../store/modules/contract/purchase/product-condition";
 
 export default {
   welcome: {
@@ -198,18 +202,27 @@ export default {
         },
         switchTitle: "Bitte geben Sie an, ob eine Seriennummer vorhanden ist",
       },
+      [CONTRACT_SCREEN_TYPES.PRODUCT_CONDITION]: {
+        title: "Zustand des Artikels",
+        checkboxes: {
+          [CONDITION_VALUE.NEW]: "Neu",
+          [CONDITION_VALUE.HIGH_QUALITY]: "Neuwertig",
+          [CONDITION_VALUE.USED]: "Gebraucht",
+          [CONDITION_VALUE.DEFECTIVE]: "Defekt",
+        },
+      },
     },
     confirmation_modal: {
-      message: 'Wollten Sie die Vertragserstellung wirklich abbrechen?',
+      message: "Wollten Sie die Vertragserstellung wirklich abbrechen?",
       buttons: {
-        ok: 'Ja',
-        cancel: 'Nein'
-      }
+        ok: "Ja",
+        cancel: "Nein",
+      },
     },
     buttons: {
       next: "Weiter",
       back: "Zurück",
-      cancel: 'Abbrechen'
+      cancel: "Abbrechen",
     },
   },
 };
