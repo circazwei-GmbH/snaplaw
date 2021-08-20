@@ -5,7 +5,7 @@ import {
   StyleSheet,
   Text,
   TextInputProps,
-  TouchableOpacity,
+  TouchableOpacity, StyleProp, TextStyle,
 } from "react-native";
 import { Feather, Entypo } from "@expo/vector-icons";
 
@@ -21,6 +21,7 @@ interface TextFieldPropsInterface extends TextInputProps {
   value?: string;
   search?: boolean;
   onChangeFunction: OnChanfeFunction;
+  containerStyle?: StyleProp<TextStyle>
 }
 
 export default function TextField({
@@ -30,6 +31,7 @@ export default function TextField({
   onChangeFunction,
   value,
   search,
+                                    containerStyle,
   ...props
 }: TextFieldPropsInterface) {
   const [localValue, setLocalValue] = useState(value);
@@ -48,7 +50,7 @@ export default function TextField({
   };
 
   return (
-    <View style={styles.inputContainer}>
+    <View style={[containerStyle, styles.inputContainer]}>
       {search ? null : (
         <Text
           style={[
