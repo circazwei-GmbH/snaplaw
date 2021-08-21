@@ -83,26 +83,22 @@ export default function Contract({
     >
       <View style={styles.container}>
         <View>
-          <KeyboardAwareScrollView>
-            <View>
-              <ContractScreenCounter
-                total={contractScreensConfig[contractType].length}
-                current={screenCount + 1}
-              />
-            </View>
-            <View style={styles.titleContainer}>
-              <ContractFormTitle
-                title={t(
-                  contractScreensConfig[contractType][screenCount].title
-                )}
-              />
-            </View>
-            <View>
-              {React.createElement(
-                contractScreensConfig[contractType][screenCount].component
-              )}
-            </View>
-          </KeyboardAwareScrollView>
+          <View>
+            <ContractScreenCounter
+              total={contractScreensConfig[contractType].length}
+              current={screenCount + 1}
+            />
+          </View>
+          <View style={styles.titleContainer}>
+            <ContractFormTitle
+              title={t(contractScreensConfig[contractType][screenCount].title)}
+            />
+          </View>
+          <View>
+            {React.createElement(
+              contractScreensConfig[contractType][screenCount].component
+            )}
+          </View>
         </View>
         <View
           style={[
