@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 import DefaultText from "../../../basics/typography/DefaultText";
 import MultilineTextField from "../../../components/MultilineTextField";
 import { useI18n } from "../../../../translator/i18n";
@@ -14,58 +14,85 @@ export default function ProductDescriptionForm() {
   const contractType = useAppSelector(
     (state) => state.contract.currentContract?.type
   );
-  const [first, setFirst] = useState(false);
-  const [second, setSecond] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const checkboxHandler = () => toggleBoolValue(checked, setChecked);
 
   return (
     <View style={styles.container}>
-      <DefaultText
-        text={t(
-          `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.titleTwo`
-        )}
-        style={styles.titleTwo}
-      />
-      <MultilineTextField
-        placeholder={t(
-          `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.placeholder`
-        )}
-      />
-      <IconButton
-        text={t(
-          `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.button`
-        )}
-        onPress={() => {}}
-      />
-      <Checkbox
-        isChecked={first}
-        onChange={() => toggleBoolValue(first, setFirst)}
-        textView={
-          <Text style={styles.checkboxText}>
-            fhglaskduhfgailurkhgfalskdjufughaeuirghaklerdsughaeklirughalekrughafjrgkekrgjherguherlughaergaewrtgwaerghawergeqgrwegqerggrsthgwrthwrthwrthwrthwrth
-          </Text>
-        }
-      />
+      <ScrollView>
+        <DefaultText
+          text={t(
+            `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.titleTwo`
+          )}
+          style={styles.titleTwo}
+        />
+        <MultilineTextField
+          placeholder={t(
+            `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.placeholder`
+          )}
+        />
+        <IconButton
+          text={t(
+            `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.button`
+          )}
+          onPress={() => {}}
+        />
+        <Checkbox
+          isChecked={checked}
+          onChange={checkboxHandler}
+          text={t(
+            `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.checkbox`
+          )}
+          textStyle={styles.checkboxText}
+          style={styles.checkbox}
+        />
+        {checked ? (
+          <>
+            <IconButton
+              text={t(
+                `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.button`
+              )}
+              onPress={() => {}}
+            />
+            <DefaultText
+              text={t(
+                `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.titleThree`
+              )}
+              style={[styles.titleTwo, styles.titleThree]}
+            />
+            <MultilineTextField
+              placeholder={t(
+                `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.placeholder`
+              )}
+            />
+          </>
+        ) : null}
+      </ScrollView>
     </View>
   );
 }
-//t(`contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.checkbox`)
 
 const styles = StyleSheet.create({
+  scroll: {
+    flex: 1,
+  },
   container: {
-    width: "100%",
     height: 500,
     paddingHorizontal: 16,
+    backgroundColor: "#ff0",
   },
   titleTwo: {
     fontSize: 16,
   },
+  titleThree: {
+    marginTop: 23,
+  },
   checkbox: {
-    marginTop: 26,
+    marginVertical: 23,
   },
   checkboxText: {
     width: "85%",
     marginLeft: 18,
     fontSize: 16,
-    marginTop: 50,
   },
 });

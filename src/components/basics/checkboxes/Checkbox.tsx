@@ -5,17 +5,17 @@ import { StyleProp, StyleSheet, TextStyle } from "react-native";
 type CheckboxProps = {
   isChecked: boolean;
   onChange: () => void;
-  text?: string;
-  textView: React.ReactNode;
+  text: string;
   style?: StyleProp<TextStyle> | undefined;
+  textStyle?: StyleProp<TextStyle> | undefined;
 };
 
 export default function Checkbox({
   isChecked,
   onChange,
   text,
-  textView,
   style,
+  textStyle,
 }: CheckboxProps) {
   return (
     <CheckBox
@@ -23,17 +23,17 @@ export default function Checkbox({
       isChecked={isChecked}
       onClick={onChange}
       rightText={text}
-      rightTextView={textView}
       checkBoxColor="#1696E2"
       checkedCheckBoxColor="#1696E2"
-      rightTextStyle={styles.checkboxText}
+      rightTextStyle={[styles.checkboxText, textStyle]}
     />
   );
 }
 
 const styles = StyleSheet.create({
   checkbox: {
-    marginTop: -30,
+    alignItems: "flex-start",
+    flexDirection: "row",
   },
   checkboxText: {
     fontFamily: "P",

@@ -60,7 +60,6 @@ export default function MultilineTextField({
 
 const styles = StyleSheet.create({
   inputContainer: {
-    height: 140,
     justifyContent: "flex-end",
     marginTop: 16,
     marginBottom: 24,
