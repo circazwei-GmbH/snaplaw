@@ -79,7 +79,6 @@ const styles = StyleSheet.create({
   container: {
     height: 500,
     paddingHorizontal: 16,
-    backgroundColor: "#ff0",
   },
   titleTwo: {
     fontSize: 16,
