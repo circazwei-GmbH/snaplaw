@@ -8,6 +8,7 @@ import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/consta
 import IconButton from "../../../basics/buttons/IconButton";
 import Checkbox from "../../../basics/checkboxes/Checkbox";
 import { toggleBoolValue } from "../../../../utils/toggleBoolValue";
+import DescriptionPhotos from "../../../components/DescriptionPhotos";
 
 export default function ProductDescriptionForm() {
   const { t } = useI18n();
@@ -16,6 +17,14 @@ export default function ProductDescriptionForm() {
   );
   const [checked, setChecked] = useState(false);
   const checkboxHandler = () => toggleBoolValue(checked, setChecked);
+  const photos: string[] = [
+    "https://image.flaticon.com/icons/png/512/49/49342.png",
+    "https://image.flaticon.com/icons/png/512/49/49342.png",
+    "https://image.flaticon.com/icons/png/512/49/49342.png",
+    "https://image.flaticon.com/icons/png/512/49/49342.png",
+    "https://image.flaticon.com/icons/png/512/49/49342.png",
+    "https://image.flaticon.com/icons/png/512/49/49342.png",
+  ];
 
   return (
     <View style={styles.container}>
@@ -37,6 +46,7 @@ export default function ProductDescriptionForm() {
           )}
           onPress={() => {}}
         />
+        <DescriptionPhotos photos={photos} />
         <Checkbox
           isChecked={checked}
           onChange={checkboxHandler}
