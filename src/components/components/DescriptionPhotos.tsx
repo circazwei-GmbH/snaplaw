@@ -1,7 +1,7 @@
-import React from "react";
-import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { View, StyleSheet, Image, TouchableOpacity, Modal } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-
+import ProductDescriptionModal from "../features/Modals/ProductDescriptionModal";
 export interface DescriptionPhotosPropsInterface {
   photos: string[];
 }
@@ -9,16 +9,32 @@ export interface DescriptionPhotosPropsInterface {
 export default function DescriptionPhotos({
   photos,
 }: DescriptionPhotosPropsInterface) {
+  const [modalVisible, setModalVisible] = useState(false);
+  const toggleModal = () => setModalVisible(!modalVisible);
+
   return (
     <View style={styles.container}>
       {photos.map((item) => {
         return (
-          <View style={styles.child}>
-            <TouchableOpacity style={styles.button} onPress={() => alert("Hi")}>
-              <AntDesign name="pluscircle" size={18} color="#668395" />
+          <>
+            <ProductDescriptionModal
+              url={item}
+              modalVisible={modalVisible}
+              toggleModal={toggleModal}
+            />
+            <TouchableOpacity onPress={toggleModal} style={styles.child}>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                style={styles.removeButton}
+                onPress={() => alert("Hi")}
+              >
+                <View style={styles.removeButtonBackground}>
+                  <AntDesign name="pluscircle" size={18} color="#668395" />
+                </View>
+              </TouchableOpacity>
+              <Image source={{ uri: item }} style={styles.image} />
             </TouchableOpacity>
-            <Image source={{ uri: item }} style={styles.image} />
-          </View>
+          </>
         );
       })}
     </View>
@@ -35,21 +51,46 @@ const styles = StyleSheet.create({
   },
   child: {
     width: "25%",
-    height: 95,
+    height: 90,
     justifyContent: "center",
     alignItems: "center",
   },
   image: {
-    width: "75%",
-    height: "75%",
+    width: 60,
+    height: 60,
+    borderRadius: 5,
   },
-  button: {
+  imageModal: {
     position: "absolute",
-    alignItems: "flex-end",
-    top: "5%",
-    right: "5%",
-    width: 40,
-    height: 40,
+    top: "20%",
+    width: "100%",
+    height: "60%",
+    zIndex: 2,
+  },
+  removeButton: {
+    width: 30,
+    height: 30,
+    position: "absolute",
+    justifyContent: "center",
+    alignItems: "center",
+    top: 0,
+    right: 0,
     zIndex: 1,
+  },
+  removeButtonBackground: {
+    width: 21,
+    height: 21,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
+    borderRadius: 15,
+  },
+  openButton: {
+    width: "100%",
+    height: "100%",
+  },
+  modal: {
+    height: "100%",
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
   },
 });
