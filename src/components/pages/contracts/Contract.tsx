@@ -82,7 +82,7 @@ export default function Contract({
       pageName={t(`contracts.${contractType}.title`)}
     >
       <View style={styles.container}>
-        <View>
+        <KeyboardAwareScrollView>
           <View>
             <ContractScreenCounter
               total={contractScreensConfig[contractType].length}
@@ -94,12 +94,12 @@ export default function Contract({
               title={t(contractScreensConfig[contractType][screenCount].title)}
             />
           </View>
-          <View>
+          <View style={styles.dynamicComponentContainer}>
             {React.createElement(
               contractScreensConfig[contractType][screenCount].component
             )}
           </View>
-        </View>
+        </KeyboardAwareScrollView>
         <View
           style={[
             styles.buttonContainer,
@@ -127,7 +127,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 29,
+    marginTop: 10,
     marginBottom: 35,
+  },
+  dynamicComponentContainer: {
+    flex: 1
   },
   flexEnd: {
     justifyContent: "flex-end",
@@ -138,3 +142,4 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 });
+
