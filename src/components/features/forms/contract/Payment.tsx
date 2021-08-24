@@ -50,7 +50,9 @@ export default function Payment() {
             <DefaultText style={styles.text} text={t(`contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PAYMENT}.product_price`)} />
             <View style={styles.priceBlock}>
                 <TextField containerStyle={styles.costField} value={screenData?.data[PAYMENT_FIELDS.COST]} onChangeFunction={(test) => updateDataHandler(PAYMENT_FIELDS.COST, test)} placeholder={t(`contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.cost`)} />
-                <Select style={styles.select} items={items} selectedValue={selected} onValueChange={setSelected} />
+                <View style={styles.select}>
+                    <Select items={items} selectedValue={selected} onValueChange={setSelected} />
+                </View>
             </View>
             <DefaultText style={styles.text} text={t(`contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PAYMENT}.payment_method`)} />
             <View style={styles.checkboxContainer}>
@@ -75,10 +77,6 @@ const styles = StyleSheet.create({
     checkboxContainer: {
         marginTop: 14
     },
-    costField: {
-        marginTop: 16,
-        width: '70%'
-    },
     checkboxes: {
         marginTop: 10
     },
@@ -88,9 +86,14 @@ const styles = StyleSheet.create({
     },
     priceBlock: {
         flexDirection: "row",
+        justifyContent: 'space-between',
         alignItems: 'flex-end'
     },
     select: {
-        width: '20%'
+        width: '33%'
+    },
+    costField: {
+        marginTop: 16,
+        width: '65%'
     }
 })
