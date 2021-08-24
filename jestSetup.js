@@ -1,5 +1,3 @@
-import React from "react";
-
 jest.mock("./src/translator/Translator", () => ({
   translator: (text) => text,
 }));
