@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect} from 'react'
 import {StyleSheet, View} from "react-native";
 import DefaultText from "../../../basics/typography/DefaultText";
 import {useI18n} from "../../../../translator/i18n";
@@ -9,6 +9,7 @@ import Checkbox from "../../../basics/checkboxes/Checkbox";
 import {PAYMENT_FIELDS, PAYMENT_METHODS, PaymentScreenInterface} from "../../../../store/modules/contract/types";
 import {setScreenData} from "../../../../store/modules/contract/slice";
 import Select from "../../../basics/selects/Select";
+import {CURRENSIES, CURRENSY} from "../../../../store/modules/contract/purchase/payment";
 
 export default function Payment() {
     const { t } = useI18n()
@@ -28,22 +29,17 @@ export default function Payment() {
         }))
     }
 
-    const items = [
-        {
-            label: 'USD',
-            value: 'USD'
-        },
-        {
-            label: 'EUR',
-            value: 'EUR'
-        }
-    ]
+    useEffect(() => {
+        dispatch(setScreenData({
+            screenType: CONTRACT_SCREEN_TYPES.PAYMENT,
+            fieldName: PAYMENT_FIELDS.CURRENCY,
+            value: CURRENSY.EUR
+        }))
+    }, [])
 
     if (!contractType) {
         return null;
     }
-
-    const [selected, setSelected] = useState(items[0])
 
     return (
         <View style={styles.container}>
@@ -51,7 +47,7 @@ export default function Payment() {
             <View style={styles.priceBlock}>
                 <TextField containerStyle={styles.costField} value={screenData?.data[PAYMENT_FIELDS.COST]} onChangeFunction={(test) => updateDataHandler(PAYMENT_FIELDS.COST, test)} placeholder={t(`contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.cost`)} />
                 <View style={styles.select}>
-                    <Select items={items} selectedValue={selected} onValueChange={setSelected} />
+                    <Select items={CURRENSIES} selectedValue={CURRENSIES.find(currency => screenData?.data[PAYMENT_FIELDS.CURRENCY] === currency.value)} onValueChange={(item) => updateDataHandler(PAYMENT_FIELDS.CURRENCY, item.value)} />
                 </View>
             </View>
             <DefaultText style={styles.text} text={t(`contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PAYMENT}.payment_method`)} />
