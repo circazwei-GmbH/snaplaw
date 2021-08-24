@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Select Select should display 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#EFF7FD",
+      "borderRadius": 10,
+      "color": "#202020",
+      "flexDirection": "row",
+      "height": 44,
+      "justifyContent": "center",
+      "paddingHorizontal": 16,
+    }
+  }
+>
+  <TextInput
+    item={
+      Object {
+        "label": "Test-label",
+        "value": "Test",
+      }
+    }
+    items={
+      Array [
+        Object {
+          "label": "Test-label",
+          "value": "Test",
+        },
+      ]
+    }
+    onItemChange={[MockFunction]}
+    placeholder="Test-label"
+    value="Test-label"
+  />
+  <Text />
+</View>
+`;
