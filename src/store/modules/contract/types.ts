@@ -1,5 +1,5 @@
 import { BaseAction } from "../auth/types";
-import {CONTRACT_TYPES} from "./constants";
+import { CONTRACT_TYPES } from "./constants";
 import {
   ProductDataScreenInterface,
   PRODUCT_DATA_FIELDS,
@@ -13,9 +13,17 @@ import {
   CONDITION_VALUE,
   CONDITIONS,
 } from "./purchase/product-condition";
-import {ConfirmationScreenInterface, CONFIRMATION_FIELDS, CONFIRMATION} from "./purchase/confirmation";
-import {BaseScreenDataInterface} from "./base-types";
-import { PaymentScreenInterface, PAYMENT_METHODS, PAYMENT_FIELDS } from './purchase/payment'
+import {
+  ConfirmationScreenInterface,
+  CONFIRMATION_FIELDS,
+  CONFIRMATION,
+} from "./purchase/confirmation";
+import { BaseScreenDataInterface } from "./base-types";
+import {
+  PaymentScreenInterface,
+  PAYMENT_METHODS,
+  PAYMENT_FIELDS,
+} from "./purchase/payment";
 
 export type ContractType = CONTRACT_TYPES.PURCHASE;
 

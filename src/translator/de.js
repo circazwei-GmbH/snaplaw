@@ -3,7 +3,7 @@ import {
   CONTRACT_TYPES,
 } from "../store/modules/contract/constants";
 import { CONDITION_VALUE } from "../store/modules/contract/purchase/product-condition";
-import {CONFIRMATION_FIELDS} from "../store/modules/contract/purchase/confirmation";
+import { CONFIRMATION_FIELDS } from "../store/modules/contract/purchase/confirmation";
 
 export default {
   welcome: {
@@ -213,20 +213,22 @@ export default {
         },
       },
       [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
-        title: 'Besätigung',
+        title: "Besätigung",
         confirmation: {
-          [CONFIRMATION_FIELDS.FIRST]: 'Der Verkäufer versichert, dass der oben beschriebene Artikel in seinem alleinigen Eigentum steht, nicht gestohlen ist und frei von Rechten Dritter ist.',
-          [CONFIRMATION_FIELDS.SECOND]: 'Die Käuferdaten wurden überprüft und stimmen überein.'
-        }
+          [CONFIRMATION_FIELDS.FIRST]:
+            "Der Verkäufer versichert, dass der oben beschriebene Artikel in seinem alleinigen Eigentum steht, nicht gestohlen ist und frei von Rechten Dritter ist.",
+          [CONFIRMATION_FIELDS.SECOND]:
+            "Die Käuferdaten wurden überprüft und stimmen überein.",
+        },
       },
       [CONTRACT_SCREEN_TYPES.PAYMENT]: {
-        title: 'Bezahlung',
-        product_price: '1. Bitte geben Sie den Preis des Artikels an',
-        payment_method: '2. Bitte Zahlungsart wählen',
+        title: "Bezahlung",
+        product_price: "1. Bitte geben Sie den Preis des Artikels an",
+        payment_method: "2. Bitte Zahlungsart wählen",
         fields: {
-          cost: 'Cost'
-        }
-      }
+          cost: "Cost",
+        },
+      },
     },
     confirmation_modal: {
       message: "Wollten Sie die Vertragserstellung wirklich abbrechen?",

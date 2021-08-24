@@ -1,3 +1,5 @@
+import React from "react";
+
 jest.mock("./src/translator/Translator", () => ({
   translator: (text) => text,
 }));
@@ -24,3 +26,25 @@ jest.mock("react-native/Libraries/Animated/src/NativeAnimatedHelper");
 jest.mock("./src/env/env", () => ({
   API_HOST: "test_host",
 }));
+
+jest.mock("react-native-woodpicker", () => {
+  const React = require("react");
+  return {
+    Picker: (props) => {
+      return React.createElement("TextInput", {
+        ...props,
+        placeholder: props.item.label,
+        value: props.item.label,
+      });
+    },
+  };
+});
+
+jest.mock("react-native-keyboard-aware-scroll-view", () => {
+  const React = require("react");
+  return {
+    KeyboardAwareScrollView: (props) => {
+      return React.createElement("View", props);
+    },
+  };
+});
