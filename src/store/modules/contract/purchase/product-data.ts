@@ -1,5 +1,5 @@
 import { CONTRACT_SCREEN_TYPES } from "../constants";
-import {BaseScreenDataInterface} from "../base-types";
+import { BaseScreenDataInterface } from "../base-types";
 
 export const enum PRODUCT_DATA_FIELDS {
   subject = "subject",
@@ -8,7 +8,7 @@ export const enum PRODUCT_DATA_FIELDS {
   serial = "serial",
 }
 
-export interface ProductDataScreenInterface extends BaseScreenDataInterface{
+export interface ProductDataScreenInterface extends BaseScreenDataInterface {
   type: CONTRACT_SCREEN_TYPES.PRODUCT_DATA;
   data: {
     [PRODUCT_DATA_FIELDS.subject]: string;

@@ -1,5 +1,5 @@
 import { CONTRACT_SCREEN_TYPES } from "../constants";
-import {BaseScreenDataInterface} from "../base-types";
+import { BaseScreenDataInterface } from "../base-types";
 
 export enum CONDITION_VALUE {
   NEW = "NEW",
@@ -10,7 +10,8 @@ export enum CONDITION_VALUE {
 
 export const PRODUCT_CONDITION_FIELD_NAME = "value";
 
-export interface ProductConditionScreenInterface extends BaseScreenDataInterface{
+export interface ProductConditionScreenInterface
+  extends BaseScreenDataInterface {
   type: CONTRACT_SCREEN_TYPES.PRODUCT_CONDITION;
   data: {
     [PRODUCT_CONDITION_FIELD_NAME]: CONDITION_VALUE;

@@ -1,9 +1,10 @@
-import {CONTRACT_SCREEN_TYPES, CONTRACT_TYPES} from "./constants";
+import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
 import React from "react";
 import UserDataForm from "../../../components/features/forms/contract/UserDataForm";
 import ProductDataForm from "../../../components/features/forms/contract/ProductDataForm";
 import ProductCondition from "../../../components/features/forms/contract/ProductCondition";
 import Confirmation from "../../../components/features/forms/contract/Confirmation";
+import Payment from "../../../components/features/forms/contract/Payment";
 
 export interface ContractScreenConfigType {
   component: React.ElementType;
@@ -34,7 +35,12 @@ export const contractScreensConfig: Record<
     {
       component: Confirmation,
       title: `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.CONFIRMATION}.title`,
-      type: CONTRACT_SCREEN_TYPES.CONFIRMATION
-    }
+      type: CONTRACT_SCREEN_TYPES.CONFIRMATION,
+    },
+    {
+      component: Payment,
+      title: `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.PAYMENT}.title`,
+      type: CONTRACT_SCREEN_TYPES.PAYMENT,
+    },
   ],
 };

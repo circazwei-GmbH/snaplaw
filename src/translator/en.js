@@ -2,7 +2,10 @@ import {
   CONTRACT_SCREEN_TYPES,
   CONTRACT_TYPES,
 } from "../store/modules/contract/constants";
-import {CONDITION_VALUE, CONFIRMATION_FIELDS} from "../store/modules/contract/types";
+import {
+  CONDITION_VALUE,
+  CONFIRMATION_FIELDS,
+} from "../store/modules/contract/types";
 
 export default {
   welcome: {
@@ -207,12 +210,29 @@ export default {
         },
       },
       [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
-        title: 'Confirmation',
+        title: "Confirmation",
         confirmation: {
-          [CONFIRMATION_FIELDS.FIRST]: 'The seller assures that the goods described above are his exclusive property, have not been stolen and are free from the rights of third parties.',
-          [CONFIRMATION_FIELDS.SECOND]: 'Buyer details have been verified and match.'
-        }
-      }
+          [CONFIRMATION_FIELDS.FIRST]:
+            "The seller assures that the goods described above are his exclusive property, have not been stolen and are free from the rights of third parties.",
+          [CONFIRMATION_FIELDS.SECOND]:
+            "Buyer details have been verified and match.",
+        },
+      },
+      [CONTRACT_SCREEN_TYPES.PAYMENT]: {
+        title: "Payment",
+        product_price: "1. Please enter the product price",
+        payment_method: "2. Please select a payment method",
+        fields: {
+          cost: "Cost",
+          name: "Cardholder name",
+          card: "Card number",
+        },
+        checkboxes: {
+          cash: "Cash",
+          paypal: "PayPal",
+          transfer: "Money transfer",
+        },
+      },
     },
     confirmation_modal: {
       message: "Are you sure, you want to cancel contract creation?",

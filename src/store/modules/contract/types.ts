@@ -1,5 +1,5 @@
 import { BaseAction } from "../auth/types";
-import {CONTRACT_TYPES} from "./constants";
+import { CONTRACT_TYPES } from "./constants";
 import {
   ProductDataScreenInterface,
   PRODUCT_DATA_FIELDS,
@@ -13,8 +13,17 @@ import {
   CONDITION_VALUE,
   CONDITIONS,
 } from "./purchase/product-condition";
-import {ConfirmationScreenInterface, CONFIRMATION_FIELDS, CONFIRMATION} from "./purchase/confirmation";
-import {BaseScreenDataInterface} from "./base-types";
+import {
+  ConfirmationScreenInterface,
+  CONFIRMATION_FIELDS,
+  CONFIRMATION,
+} from "./purchase/confirmation";
+import { BaseScreenDataInterface } from "./base-types";
+import {
+  PaymentScreenInterface,
+  PAYMENT_METHODS,
+  PAYMENT_FIELDS,
+} from "./purchase/payment";
 
 export type ContractType = CONTRACT_TYPES.PURCHASE;
 
@@ -35,4 +44,5 @@ export interface RequestScreenDataAction extends BaseAction {
 export { ProductDataScreenInterface, PRODUCT_DATA_FIELDS };
 export { UserDataScreenInterface, USER_DATA_FIELDS };
 export { ProductConditionScreenInterface, CONDITION_VALUE, CONDITIONS };
-export { ConfirmationScreenInterface, CONFIRMATION_FIELDS, CONFIRMATION }
+export { ConfirmationScreenInterface, CONFIRMATION_FIELDS, CONFIRMATION };
+export { PaymentScreenInterface, PAYMENT_METHODS, PAYMENT_FIELDS };

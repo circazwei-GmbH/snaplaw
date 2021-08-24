@@ -30,8 +30,8 @@ export default function Checkbox({
 
 const styles = StyleSheet.create({
   checkbox: {
-    alignItems: 'flex-start',
-    flexDirection: 'row'
+    alignItems: "flex-start",
+    flexDirection: "row",
   },
   checkboxText: {
     fontFamily: "P",
