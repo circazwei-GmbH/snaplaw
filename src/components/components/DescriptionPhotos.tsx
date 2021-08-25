@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { View, StyleSheet, Image, TouchableOpacity, Modal } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import ProductDescriptionModal from "../features/Modals/ProductDescriptionModal";
+import { DescriptionPhotoInterface } from "../../store/modules/contract/types";
+
 export interface DescriptionPhotosPropsInterface {
-  photos: string[];
+  photos: DescriptionPhotoInterface[];
 }
 
 export default function DescriptionPhotos({
@@ -18,7 +20,7 @@ export default function DescriptionPhotos({
         return (
           <>
             <ProductDescriptionModal
-              url={item}
+              url={item.url}
               modalVisible={modalVisible}
               toggleModal={toggleModal}
             />
@@ -32,7 +34,7 @@ export default function DescriptionPhotos({
                   <AntDesign name="pluscircle" size={18} color="#668395" />
                 </View>
               </TouchableOpacity>
-              <Image source={{ uri: item }} style={styles.image} />
+              <Image source={{ uri: item.url }} style={styles.image} />
             </TouchableOpacity>
           </>
         );

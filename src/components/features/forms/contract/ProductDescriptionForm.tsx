@@ -7,7 +7,6 @@ import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/consta
 import IconButton from "../../../basics/buttons/IconButton";
 import Checkbox from "../../../basics/checkboxes/Checkbox";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-import { toggleBoolValue } from "../../../../utils/toggleBoolValue";
 import DescriptionPhotos from "../../../components/DescriptionPhotos";
 import { setScreenData } from "../../../../store/modules/contract/slice";
 import Menu, { ButtonType } from "../../Modals/Menu";
@@ -35,20 +34,44 @@ export default function ProductDescriptionForm() {
         (screen) => screen.type === CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION
       ) as ProductDescriptionScreenInterface | undefined
   );
+  const checked =
+    productDescription?.data[PRODUCT_DESCRIPTION_FIELDS.hasAccessories];
+  const description =
+    productDescription?.data[PRODUCT_DESCRIPTION_FIELDS.description];
+  const descriptionAccessories =
+    productDescription?.data[PRODUCT_DESCRIPTION_FIELDS.descriptionAccessories];
+  const photosProduct =
+    productDescription?.data[PRODUCT_DESCRIPTION_FIELDS.productPhotos];
+  const photosAccessories =
+    productDescription?.data[PRODUCT_DESCRIPTION_FIELDS.accessoriesPhotos];
 
-  const [checked, setChecked] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
-  const checkboxHandler = (value: boolean) => {
+
+  const onChangeHandler = (
+    value: string | boolean,
+    fieldName: PRODUCT_DESCRIPTION_FIELDS
+  ) => {
     dispatch(
       setScreenData({
         screenType: CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION,
-        fieldName: PRODUCT_DESCRIPTION_FIELDS.hasAccessories,
-        value: value,
+        fieldName,
+        value,
       })
     );
   };
 
-  const photos: DescriptionPhotoInterface[] = [];
+  const photoHandler = (
+    value: DescriptionPhotoInterface,
+    fieldName: PRODUCT_DESCRIPTION_FIELDS
+  ) => {
+    dispatch(
+      setScreenData({
+        screenType: CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION,
+        fieldName,
+        value,
+      })
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -60,33 +83,25 @@ export default function ProductDescriptionForm() {
           style={styles.titleTwo}
         />
         <MultilineTextField
+          value={description}
           placeholder={t(
             `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.placeholder`
           )}
+          onChangeFunction={(newValue) =>
+            onChangeHandler(newValue, PRODUCT_DESCRIPTION_FIELDS.description)
+          }
         />
         <IconButton
           text={t(
             `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.button`
           )}
-          onPress={() => {}}
+          onPress={() => console.log(Date.now())}
         />
-        <DescriptionPhotos photos={photos} />
+        <DescriptionPhotos photos={photosProduct} />
         <Checkbox
-          isChecked={
-            productDescription?.data[
-              PRODUCT_DESCRIPTION_FIELDS.hasAccessories
-            ] === undefined
-              ? false
-              : productDescription?.data[
-                  PRODUCT_DESCRIPTION_FIELDS.hasAccessories
-                ]
-          }
+          isChecked={checked === undefined ? false : checked}
           onChange={() =>
-            checkboxHandler(
-              !productDescription?.data[
-                PRODUCT_DESCRIPTION_FIELDS.hasAccessories
-              ]
-            )
+            onChangeHandler(!checked, PRODUCT_DESCRIPTION_FIELDS.hasAccessories)
           }
           text={t(
             `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.checkbox`
@@ -109,9 +124,16 @@ export default function ProductDescriptionForm() {
               style={[styles.titleTwo, styles.titleThree]}
             />
             <MultilineTextField
+              value={descriptionAccessories}
               placeholder={t(
                 `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.placeholder`
               )}
+              onChangeFunction={(newValue) =>
+                onChangeHandler(
+                  newValue,
+                  PRODUCT_DESCRIPTION_FIELDS.descriptionAccessories
+                )
+              }
             />
           </>
         ) : null}
