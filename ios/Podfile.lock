@@ -37,6 +37,9 @@ PODS:
   - ExpoModulesCore/Interfaces (0.2.0):
     - ExpoModulesCore/Core
     - UMCore
+  - EXScreenOrientation (3.2.1):
+    - React-Core
+    - UMCore
   - EXSplashScreen (0.11.2):
     - React-Core
     - UMCore
@@ -359,6 +362,7 @@ DEPENDENCIES:
   - EXLocalization (from `../node_modules/expo-localization/ios`)
   - EXPermissions (from `../node_modules/expo-permissions/ios`)
   - ExpoModulesCore (from `../node_modules/expo-modules-core/ios`)
+  - EXScreenOrientation (from `../node_modules/expo-screen-orientation/ios`)
   - EXSplashScreen (from `../node_modules/expo-splash-screen/ios`)
   - EXStructuredHeaders (from `../node_modules/expo-structured-headers/ios`)
   - EXUpdates (from `../node_modules/expo-updates/ios`)
@@ -432,6 +436,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-permissions/ios"
   ExpoModulesCore:
     :path: "../node_modules/expo-modules-core/ios"
+  EXScreenOrientation:
+    :path: "../node_modules/expo-screen-orientation/ios"
   EXSplashScreen:
     :path: "../node_modules/expo-splash-screen/ios"
   EXStructuredHeaders:
@@ -529,6 +535,7 @@ SPEC CHECKSUMS:
   EXLocalization: 356f4e16a606cec21a77d6250528fde526152b45
   EXPermissions: 916efb5b817cb0a40160c0cd2f369af3c23a78be
   ExpoModulesCore: 2734852616127a6c1fc23012197890a6f3763dc7
+  EXScreenOrientation: d94f791c7ade3639352f34fcf5353f7c554b7d69
   EXSplashScreen: 6208ca88470ff5979fd49a08ef3feb01143a2b79
   EXStructuredHeaders: e52b880264d15b8ad07d36670226c29476af6334
   EXUpdates: af3ecad91644a171deaa310326e73b4e70f6963c
