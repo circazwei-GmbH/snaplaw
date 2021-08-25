@@ -229,6 +229,11 @@ export default {
           cost: "Cost",
         },
       },
+      [CONTRACT_SCREEN_TYPES.SIGN]: {
+        title: 'Vertrag unterzeichnen',
+        signature: '1.Bitte Ihre Unterschift eingeben',
+        invite: '2.Bitte Benutzer einladen'
+      }
     },
     confirmation_modal: {
       message: "Wollten Sie die Vertragserstellung wirklich abbrechen?",
