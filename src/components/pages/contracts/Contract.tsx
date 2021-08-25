@@ -17,6 +17,7 @@ import { requestScreenData } from "../../../store/modules/contract/action-creato
 import TextButton from "../../basics/buttons/TextButton";
 import { navigationPopToTop } from "../../../store/modules/main/action-creators";
 import { setModal } from "../../../store/modules/main/slice";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 type ContractProps = {
   route: {
@@ -81,7 +82,7 @@ export default function Contract({
       pageName={t(`contracts.${contractType}.title`)}
     >
       <View style={styles.container}>
-        <View>
+        <KeyboardAwareScrollView>
           <View>
             <ContractScreenCounter
               total={contractScreensConfig[contractType].length}
@@ -93,12 +94,12 @@ export default function Contract({
               title={t(contractScreensConfig[contractType][screenCount].title)}
             />
           </View>
-          <View>
+          <View style={styles.dynamicComponentContainer}>
             {React.createElement(
               contractScreensConfig[contractType][screenCount].component
             )}
           </View>
-        </View>
+        </KeyboardAwareScrollView>
         <View
           style={[
             styles.buttonContainer,
@@ -126,7 +127,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 29,
+    marginTop: 10,
     marginBottom: 35,
+  },
+  dynamicComponentContainer: {
+    flex: 1,
   },
   flexEnd: {
     justifyContent: "flex-end",

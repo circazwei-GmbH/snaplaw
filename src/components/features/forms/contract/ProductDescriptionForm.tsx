@@ -20,6 +20,11 @@ import {
   DescriptionPhotoInterface,
   PRODUCT_DESCRIPTION_FIELDS,
 } from "../../../../store/modules/contract/types";
+import { PayloadAction } from "@reduxjs/toolkit";
+import {
+  deleteAvatar,
+  updateAvatar,
+} from "../../../../store/modules/profile/action-creators";
 
 export default function ProductDescriptionForm() {
   const { t } = useI18n();
@@ -75,7 +80,9 @@ export default function ProductDescriptionForm() {
 
   const postChooseFileHandler = (uri: string) => {
     setMenuVisible(false);
-    dispatch(uploadMedia(uri, MEDIA_FOLDERS.PRODUCT_DESCRIPTION));
+    dispatch(
+      uploadMedia(uri, MEDIA_FOLDERS.PRODUCT_DESCRIPTION, updateAvatar(""))
+    );
   };
 
   const buttonPickerHandler = (way: Function) => async () => {

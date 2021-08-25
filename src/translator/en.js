@@ -226,6 +226,26 @@ export default {
             "Buyer details have been verified and match.",
         },
       },
+      [CONTRACT_SCREEN_TYPES.PAYMENT]: {
+        title: "Payment",
+        product_price: "1. Please enter the product price",
+        payment_method: "2. Please select a payment method",
+        fields: {
+          cost: "Cost",
+          name: "Cardholder name",
+          card: "Card number",
+        },
+        checkboxes: {
+          cash: "Cash",
+          paypal: "PayPal",
+          transfer: "Money transfer",
+        },
+      },
+      [CONTRACT_SCREEN_TYPES.SIGN]: {
+        title: "sign contract",
+        signature: "1.Please enter your signature",
+        invite: "2.Please invite user",
+      },
     },
     confirmation_modal: {
       message: "Are you sure, you want to cancel contract creation?",

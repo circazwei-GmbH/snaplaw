@@ -229,6 +229,19 @@ export default {
             "Die Käuferdaten wurden überprüft und stimmen überein.",
         },
       },
+      [CONTRACT_SCREEN_TYPES.PAYMENT]: {
+        title: "Bezahlung",
+        product_price: "1. Bitte geben Sie den Preis des Artikels an",
+        payment_method: "2. Bitte Zahlungsart wählen",
+        fields: {
+          cost: "Cost",
+        },
+      },
+      [CONTRACT_SCREEN_TYPES.SIGN]: {
+        title: "Vertrag unterzeichnen",
+        signature: "1.Bitte Ihre Unterschift eingeben",
+        invite: "2.Bitte Benutzer einladen",
+      },
     },
     confirmation_modal: {
       message: "Wollten Sie die Vertragserstellung wirklich abbrechen?",
