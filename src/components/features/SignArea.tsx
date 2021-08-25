@@ -1,11 +1,15 @@
 import React from 'react'
-import {StyleSheet, Text, View} from "react-native";
+import {StyleSheet, View} from "react-native";
+import { Signature } from '@scale-at/expo-pixi'
+import TextButton from "../basics/buttons/TextButton";
+
 
 export default function SignArea() {
-
+    let localRef: Signature | null = null;
     return (
         <View style={styles.container}>
-            <Text>Sign Area</Text>
+            <Signature onChange={() => {}} ref={ref => (localRef = ref)} style={styles.pixi} />
+            <TextButton text={'Clear'} onPress={() => localRef?.clear()} type="left" />
         </View>
     )
 }
@@ -17,5 +21,10 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: '#fff',
         height: '80%'
+    },
+    pixi: {
+        flex: 1,
+        borderWidth: 1,
+        borderColor: '#BBD1DE',
     }
 })
