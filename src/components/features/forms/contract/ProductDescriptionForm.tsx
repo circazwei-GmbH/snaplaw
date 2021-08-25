@@ -73,6 +73,42 @@ export default function ProductDescriptionForm() {
     );
   };
 
+  const postChooseFileHandler = (uri: string) => {
+    setMenuVisible(false);
+    dispatch(uploadMedia(uri, MEDIA_FOLDERS.PRODUCT_DESCRIPTION));
+  };
+
+  const buttonPickerHandler = (way: Function) => async () => {
+    try {
+      const uri = await way();
+      if (uri) {
+        postChooseFileHandler(uri);
+      }
+    } catch (error) {
+      setMenuVisible(false);
+      if (error instanceof PermissionNotGranted) {
+        dispatch(setMessage(t(error.message)));
+      } else {
+        dispatch(setMessage(t("errors.abstract")));
+      }
+    }
+  };
+
+  const choosePhotoHandler = () => setMenuVisible(true);
+
+  const menuButtons: ButtonType[] = [
+    {
+      title: t("upload_files.gallary"),
+      handler: buttonPickerHandler(libraryWay),
+    },
+    {
+      title: t("upload_files.camera"),
+      handler: buttonPickerHandler(cameraWay),
+    },
+  ];
+
+  console.log(photosProduct);
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -95,9 +131,13 @@ export default function ProductDescriptionForm() {
           text={t(
             `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.button`
           )}
-          onPress={() => console.log(Date.now())}
+          onPress={choosePhotoHandler}
         />
-        <DescriptionPhotos photos={photosProduct} />
+        {
+          //  <DescriptionPhotos
+          //    photos={photosProduct === undefined ? [] : photosProduct}
+          //  />
+        }
         <Checkbox
           isChecked={checked === undefined ? false : checked}
           onChange={() =>
@@ -138,6 +178,11 @@ export default function ProductDescriptionForm() {
           </>
         ) : null}
       </ScrollView>
+      <Menu
+        visible={menuVisible}
+        buttons={menuButtons}
+        onClose={() => setMenuVisible(false)}
+      />
     </View>
   );
 }

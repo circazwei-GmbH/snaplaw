@@ -11,7 +11,7 @@ export const enum PRODUCT_DESCRIPTION_FIELDS {
 
 export interface DescriptionPhotoInterface {
   url: string;
-  id: string;
+  id: number;
   isLoading: boolean;
 }
 
@@ -20,9 +20,9 @@ export interface ProductDescriptionScreenInterface
   type: CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION;
   data: {
     [PRODUCT_DESCRIPTION_FIELDS.description]: string;
-    [PRODUCT_DESCRIPTION_FIELDS.productPhotos]: DescriptionPhotoInterface;
+    [PRODUCT_DESCRIPTION_FIELDS.productPhotos]: DescriptionPhotoInterface[];
     [PRODUCT_DESCRIPTION_FIELDS.hasAccessories]: boolean;
     [PRODUCT_DESCRIPTION_FIELDS.descriptionAccessories]: string;
-    [PRODUCT_DESCRIPTION_FIELDS.accessoriesPhotos]: DescriptionPhotoInterface;
+    [PRODUCT_DESCRIPTION_FIELDS.accessoriesPhotos]: DescriptionPhotoInterface[];
   };
 }
