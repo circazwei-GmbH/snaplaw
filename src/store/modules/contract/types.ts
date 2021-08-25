@@ -20,8 +20,8 @@ import {
 } from "./purchase/confirmation";
 import {
   ProductDescriptionScreenInterface,
+  DescriptionPhotoInterface,
   PRODUCT_DESCRIPTION_FIELDS,
-  PRODUCT_DESCRIPTION,
 } from "./purchase/product-description";
 import { BaseScreenDataInterface } from "./base-types";
 
@@ -47,6 +47,6 @@ export { ProductConditionScreenInterface, CONDITION_VALUE, CONDITIONS };
 export { ConfirmationScreenInterface, CONFIRMATION_FIELDS, CONFIRMATION };
 export {
   ProductDescriptionScreenInterface,
+  DescriptionPhotoInterface,
   PRODUCT_DESCRIPTION_FIELDS,
-  PRODUCT_DESCRIPTION,
 };

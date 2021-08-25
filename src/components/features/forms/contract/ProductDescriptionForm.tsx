@@ -7,9 +7,10 @@ import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/consta
 import IconButton from "../../../basics/buttons/IconButton";
 import Checkbox from "../../../basics/checkboxes/Checkbox";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-import Menu, { ButtonType } from "../../Modals/Menu";
 import { toggleBoolValue } from "../../../../utils/toggleBoolValue";
 import DescriptionPhotos from "../../../components/DescriptionPhotos";
+import { setScreenData } from "../../../../store/modules/contract/slice";
+import Menu, { ButtonType } from "../../Modals/Menu";
 import { uploadMedia } from "../../../../store/modules/media/action-creators";
 import { cameraWay, libraryWay } from "../../../../services/media/media-picker";
 import { PermissionNotGranted } from "../../../../services/media/errors";
@@ -17,12 +18,14 @@ import { setMessage } from "../../../../store/modules/main/slice";
 import { MEDIA_FOLDERS } from "../../../../store/modules/media/constants";
 import {
   ProductDescriptionScreenInterface,
+  DescriptionPhotoInterface,
   PRODUCT_DESCRIPTION_FIELDS,
-  PRODUCT_DESCRIPTION,
 } from "../../../../store/modules/contract/types";
 
 export default function ProductDescriptionForm() {
   const { t } = useI18n();
+  const dispatch = useAppDispatch();
+
   const contractType = useAppSelector(
     (state) => state.contract.currentContract?.type
   );
@@ -32,11 +35,20 @@ export default function ProductDescriptionForm() {
         (screen) => screen.type === CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION
       ) as ProductDescriptionScreenInterface | undefined
   );
+
   const [checked, setChecked] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
-  const dispatch = useAppDispatch();
-  const checkboxHandler = () => toggleBoolValue(checked, setChecked);
-  const photos: string[] = [];
+  const checkboxHandler = (value: boolean) => {
+    dispatch(
+      setScreenData({
+        screenType: CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION,
+        fieldName: PRODUCT_DESCRIPTION_FIELDS.hasAccessories,
+        value: value,
+      })
+    );
+  };
+
+  const photos: DescriptionPhotoInterface[] = [];
 
   return (
     <View style={styles.container}>
@@ -60,15 +72,29 @@ export default function ProductDescriptionForm() {
         />
         <DescriptionPhotos photos={photos} />
         <Checkbox
-          isChecked={checked}
-          onChange={checkboxHandler}
+          isChecked={
+            productDescription?.data[
+              PRODUCT_DESCRIPTION_FIELDS.hasAccessories
+            ] === undefined
+              ? false
+              : productDescription?.data[
+                  PRODUCT_DESCRIPTION_FIELDS.hasAccessories
+                ]
+          }
+          onChange={() =>
+            checkboxHandler(
+              !productDescription?.data[
+                PRODUCT_DESCRIPTION_FIELDS.hasAccessories
+              ]
+            )
+          }
           text={t(
             `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.checkbox`
           )}
           textStyle={styles.checkboxText}
           style={styles.checkbox}
         />
-        {checked ? (
+        {productDescription?.data[PRODUCT_DESCRIPTION_FIELDS.hasAccessories] ? (
           <>
             <IconButton
               text={t(
