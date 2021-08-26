@@ -10,6 +10,6 @@ module.exports = {
     "\\.(css|less|scss)$": "identity-obj-proxy",
   },
   transformIgnorePatterns: [
-    "node_modules/(?!(jest-)?react-native|@react-native-community|expo(nent)?|@expo(nent)?/.*|@codler/react-native-keyboard-aware-scroll-view|react-navigation|react-router-native|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|fonts)",
+    "node_modules/(?!(jest-)?react-native|@react-native-community|expo(nent)?|@expo(nent)?/.*|@codler/react-native-keyboard-aware-scroll-view|react-navigation|react-router-native|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|fonts|@scale-at/.*)",
   ],
 };

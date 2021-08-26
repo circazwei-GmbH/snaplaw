@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     marginBottom: 35,
   },
   dynamicComponentContainer: {
-    flex: 1
+    flex: 1,
   },
   flexEnd: {
     justifyContent: "flex-end",
@@ -142,4 +142,3 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 });
-

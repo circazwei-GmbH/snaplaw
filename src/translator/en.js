@@ -234,10 +234,10 @@ export default {
         },
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
-        title: 'sign contract',
-        signature: '1.Please enter your signature',
-        invite: '2.Please invite user'
-      }
+        title: "sign contract",
+        signature: "1.Please enter your signature",
+        invite: "2.Please invite user",
+      },
     },
     confirmation_modal: {
       message: "Are you sure, you want to cancel contract creation?",

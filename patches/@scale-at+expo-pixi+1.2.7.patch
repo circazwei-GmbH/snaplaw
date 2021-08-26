@@ -1,0 +1,32 @@
+diff --git a/node_modules/@scale-at/expo-pixi/lib/components/Signature.js b/node_modules/@scale-at/expo-pixi/lib/components/Signature.js
+index eec55d9..94e1bff 100644
+--- a/node_modules/@scale-at/expo-pixi/lib/components/Signature.js
++++ b/node_modules/@scale-at/expo-pixi/lib/components/Signature.js
+@@ -41,7 +41,7 @@ export default class Signature extends React.Component<Props> {
+     this._setupPanResponder();
+   }
+ 
+-  componentWillMount() {
++  UNSAFE_componentWillMount() {
+     global.__ExpoSignatureId++;
+   }
+ 
+diff --git a/node_modules/@scale-at/expo-pixi/lib/index.d.ts b/node_modules/@scale-at/expo-pixi/lib/index.d.ts
+index 6583849..06fefdf 100644
+--- a/node_modules/@scale-at/expo-pixi/lib/index.d.ts
++++ b/node_modules/@scale-at/expo-pixi/lib/index.d.ts
+@@ -3,12 +3,13 @@ import * as React from 'react';
+ type Props = {
+   strokeColor?: number | string;
+   strokeAlpha?: number;
+-  onChange: () => void;
++  onChange?: (renderer: unknown) => void;
+   onReady?: () => WebGLRenderingContext;
+   style?: object;
+ };
+ 
+ export class Signature extends React.Component<Props> {
+   clear: () => void;
++  undo: () => void;
+   takeSnapshotAsync: () => Promise<{ uri: string }>;
+ }
