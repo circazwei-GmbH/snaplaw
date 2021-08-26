@@ -11,32 +11,39 @@ export interface DescriptionPhotosPropsInterface {
 export default function DescriptionPhotos({
   photos,
 }: DescriptionPhotosPropsInterface) {
+  const [url, setUrl] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const toggleModal = () => setModalVisible(!modalVisible);
+  const openModalSetUrl = (url: string) => {
+    toggleModal();
+    setUrl(url);
+  };
 
   return (
     <View style={styles.container}>
-      {photos.map((item) => {
+      <ProductDescriptionModal
+        url={url}
+        modalVisible={modalVisible}
+        toggleModal={toggleModal}
+      />
+      {photos.map((item, i) => {
         return (
-          <>
-            <ProductDescriptionModal
-              url={item.url}
-              modalVisible={modalVisible}
-              toggleModal={toggleModal}
-            />
-            <TouchableOpacity onPress={toggleModal} style={styles.child}>
-              <TouchableOpacity
-                activeOpacity={0.8}
-                style={styles.removeButton}
-                onPress={() => alert("Hi")}
-              >
-                <View style={styles.removeButtonBackground}>
-                  <AntDesign name="pluscircle" size={18} color="#668395" />
-                </View>
-              </TouchableOpacity>
-              <Image source={{ uri: item.url }} style={styles.image} />
+          <TouchableOpacity
+            onPress={() => openModalSetUrl(item.url)}
+            style={styles.child}
+            key={item.id + i}
+          >
+            <TouchableOpacity
+              activeOpacity={0.8}
+              style={styles.removeButton}
+              onPress={() => alert("Hi")}
+            >
+              <View style={styles.removeButtonBackground}>
+                <AntDesign name="closecircle" size={18} color="#668395" />
+              </View>
             </TouchableOpacity>
-          </>
+            <Image source={{ uri: item.url }} style={styles.image} />
+          </TouchableOpacity>
         );
       })}
     </View>
@@ -58,8 +65,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   image: {
-    width: 60,
-    height: 60,
+    width: 70,
+    height: 70,
     borderRadius: 5,
   },
   imageModal: {
@@ -70,8 +77,8 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
   removeButton: {
-    width: 30,
-    height: 30,
+    width: 25,
+    height: 25,
     position: "absolute",
     justifyContent: "center",
     alignItems: "center",
@@ -90,9 +97,5 @@ const styles = StyleSheet.create({
   openButton: {
     width: "100%",
     height: "100%",
-  },
-  modal: {
-    height: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.3)",
   },
 });

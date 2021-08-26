@@ -27,7 +27,7 @@ export default function ProductDescriptionModal({
 const styles = StyleSheet.create({
   modal: {
     height: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.3)",
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
   },
   imageModal: {
     position: "absolute",

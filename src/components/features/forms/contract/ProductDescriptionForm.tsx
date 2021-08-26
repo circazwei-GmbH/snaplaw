@@ -20,7 +20,6 @@ import {
   DescriptionPhotoInterface,
   PRODUCT_DESCRIPTION_FIELDS,
 } from "../../../../store/modules/contract/types";
-import { PayloadAction } from "@reduxjs/toolkit";
 import {
   deleteAvatar,
   updateAvatar,
@@ -81,7 +80,17 @@ export default function ProductDescriptionForm() {
   const postChooseFileHandler = (uri: string) => {
     setMenuVisible(false);
     dispatch(
-      uploadMedia(uri, MEDIA_FOLDERS.PRODUCT_DESCRIPTION, updateAvatar(""))
+      uploadMedia(
+        uri,
+        MEDIA_FOLDERS.PRODUCT_DESCRIPTION,
+        setScreenData({
+          screenType: CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION,
+          fieldName: PRODUCT_DESCRIPTION_FIELDS.productPhotos,
+          value: [
+            ...
+          ]
+        })
+      )
     );
   };
 
@@ -114,77 +123,75 @@ export default function ProductDescriptionForm() {
     },
   ];
 
-  console.log(photosProduct);
+  console.log(contractType);
 
   return (
     <View style={styles.container}>
-      <ScrollView>
-        <DefaultText
-          text={t(
-            `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.titleTwo`
-          )}
-          style={styles.titleTwo}
-        />
-        <MultilineTextField
-          value={description}
-          placeholder={t(
-            `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.placeholder`
-          )}
-          onChangeFunction={(newValue) =>
-            onChangeHandler(newValue, PRODUCT_DESCRIPTION_FIELDS.description)
-          }
-        />
-        <IconButton
-          text={t(
-            `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.button`
-          )}
-          onPress={choosePhotoHandler}
-        />
-        {
-          //  <DescriptionPhotos
-          //    photos={photosProduct === undefined ? [] : photosProduct}
-          //  />
+      <DefaultText
+        text={t(
+          `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.titleTwo`
+        )}
+        style={styles.titleTwo}
+      />
+      <MultilineTextField
+        value={description}
+        placeholder={t(
+          `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.placeholder`
+        )}
+        onChangeFunction={(newValue) =>
+          onChangeHandler(newValue, PRODUCT_DESCRIPTION_FIELDS.description)
         }
-        <Checkbox
-          isChecked={checked === undefined ? false : checked}
-          onChange={() =>
-            onChangeHandler(!checked, PRODUCT_DESCRIPTION_FIELDS.hasAccessories)
-          }
-          text={t(
-            `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.checkbox`
-          )}
-          textStyle={styles.checkboxText}
-          style={styles.checkbox}
-        />
-        {productDescription?.data[PRODUCT_DESCRIPTION_FIELDS.hasAccessories] ? (
-          <>
-            <IconButton
-              text={t(
-                `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.button`
-              )}
-              onPress={() => {}}
-            />
-            <DefaultText
-              text={t(
-                `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.titleThree`
-              )}
-              style={[styles.titleTwo, styles.titleThree]}
-            />
-            <MultilineTextField
-              value={descriptionAccessories}
-              placeholder={t(
-                `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.placeholder`
-              )}
-              onChangeFunction={(newValue) =>
-                onChangeHandler(
-                  newValue,
-                  PRODUCT_DESCRIPTION_FIELDS.descriptionAccessories
-                )
-              }
-            />
-          </>
-        ) : null}
-      </ScrollView>
+      />
+      <IconButton
+        text={t(
+          `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.button`
+        )}
+        onPress={choosePhotoHandler}
+      />
+      {
+        // <DescriptionPhotos
+        //   photos={photosProduct === undefined ? [] : photosProduct}
+        // />
+      }
+      <Checkbox
+        isChecked={checked === undefined ? false : checked}
+        onChange={() =>
+          onChangeHandler(!checked, PRODUCT_DESCRIPTION_FIELDS.hasAccessories)
+        }
+        text={t(
+          `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.checkbox`
+        )}
+        textStyle={styles.checkboxText}
+        style={styles.checkbox}
+      />
+      {productDescription?.data[PRODUCT_DESCRIPTION_FIELDS.hasAccessories] ? (
+        <>
+          <IconButton
+            text={t(
+              `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.button`
+            )}
+            onPress={() => {}}
+          />
+          <DefaultText
+            text={t(
+              `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.titleThree`
+            )}
+            style={[styles.titleTwo, styles.titleThree]}
+          />
+          <MultilineTextField
+            value={descriptionAccessories}
+            placeholder={t(
+              `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.placeholder`
+            )}
+            onChangeFunction={(newValue) =>
+              onChangeHandler(
+                newValue,
+                PRODUCT_DESCRIPTION_FIELDS.descriptionAccessories
+              )
+            }
+          />
+        </>
+      ) : null}
       <Menu
         visible={menuVisible}
         buttons={menuButtons}
