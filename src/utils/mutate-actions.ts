@@ -11,7 +11,6 @@ export const mutateFileUploadsAction = (
       payload: uri,
     };
   }
-  console.log(action);
   return {
     ...action,
     payload: {
