@@ -1,5 +1,11 @@
-import React, { useState } from "react";
-import { View, StyleSheet, Image, TouchableOpacity, Modal } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import ProductDescriptionModal from "../features/Modals/ProductDescriptionModal";
 import { DescriptionPhotoInterface } from "../../store/modules/contract/types";
@@ -12,6 +18,7 @@ export default function DescriptionPhotos({
   photos,
 }: DescriptionPhotosPropsInterface) {
   const [url, setUrl] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
   const toggleModal = () => setModalVisible(!modalVisible);
   const openModalSetUrl = (url: string) => {
@@ -31,7 +38,7 @@ export default function DescriptionPhotos({
           <TouchableOpacity
             onPress={() => openModalSetUrl(item.url)}
             style={styles.child}
-            key={item.id + i}
+            key={item.id}
           >
             <TouchableOpacity
               activeOpacity={0.8}
@@ -42,7 +49,21 @@ export default function DescriptionPhotos({
                 <AntDesign name="closecircle" size={18} color="#668395" />
               </View>
             </TouchableOpacity>
-            <Image source={{ uri: item.url }} style={styles.image} />
+            {isLoading ? (
+              <View style={styles.activityIndicatorContainer}>
+                <ActivityIndicator
+                  size="large"
+                  color="#1696E2"
+                  style={styles.activityIndicator}
+                />
+              </View>
+            ) : null}
+            <Image
+              source={{ uri: item.url }}
+              style={styles.image}
+              onLoadEnd={() => setIsLoading(false)}
+              onLoadStart={() => setIsLoading(true)}
+            />
           </TouchableOpacity>
         );
       })}
@@ -74,7 +95,18 @@ const styles = StyleSheet.create({
     top: "20%",
     width: "100%",
     height: "60%",
-    zIndex: 2,
+    zIndex: 3,
+  },
+  activityIndicatorContainer: {
+    position: "absolute",
+    justifyContent: "center",
+    width: 70,
+    height: 70,
+  },
+  activityIndicator: {
+    backgroundColor: "rgba(0,0,0, 0.3)",
+    height: "100%",
+    borderRadius: 5,
   },
   removeButton: {
     width: 25,
@@ -84,7 +116,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     top: 0,
     right: 0,
-    zIndex: 1,
+    zIndex: 2,
   },
   removeButtonBackground: {
     width: 21,
