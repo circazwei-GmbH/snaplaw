@@ -1,12 +1,14 @@
 import { BaseAction } from "../auth/types";
 import { PayloadAction } from "@reduxjs/toolkit";
+import { MEDIA_FOLDERS } from "./constants";
 
 export const UPLOAD_MEDIA = "UPLOAD_MEDIA";
 
 export type MediaPayload = {
   uri: string;
   folder: string;
-  successAction: PayloadAction<string>;
+  successAction: PayloadAction<unknown>;
+  mutationPath?: string;
 };
 
 export interface UploadMediaAction extends BaseAction {
@@ -15,13 +17,15 @@ export interface UploadMediaAction extends BaseAction {
 
 export const uploadMedia = (
   uri: string,
-  folder: string,
-  successAction: PayloadAction<any>
+  folder: MEDIA_FOLDERS,
+  successAction: PayloadAction<unknown>,
+  mutationPath?: string
 ): UploadMediaAction => ({
   type: UPLOAD_MEDIA,
   payload: {
     uri,
     folder,
     successAction,
+    mutationPath,
   },
 });

@@ -12,7 +12,6 @@ export const enum PRODUCT_DESCRIPTION_FIELDS {
 export interface DescriptionPhotoInterface {
   url: string;
   id: number;
-  isLoading: boolean;
 }
 
 export interface ProductDescriptionScreenInterface

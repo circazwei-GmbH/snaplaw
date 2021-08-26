@@ -236,6 +236,11 @@ export default {
         fields: {
           cost: "Cost",
         },
+        checkboxes: {
+          cash: "Bar",
+          paypal: "Paypal",
+          transfer: "Überweisung",
+        },
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "Vertrag unterzeichnen",

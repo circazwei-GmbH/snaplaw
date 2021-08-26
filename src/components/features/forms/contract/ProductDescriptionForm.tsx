@@ -17,17 +17,13 @@ import { setMessage } from "../../../../store/modules/main/slice";
 import { MEDIA_FOLDERS } from "../../../../store/modules/media/constants";
 import {
   ProductDescriptionScreenInterface,
-  DescriptionPhotoInterface,
   PRODUCT_DESCRIPTION_FIELDS,
 } from "../../../../store/modules/contract/types";
-import {
-  deleteAvatar,
-  updateAvatar,
-} from "../../../../store/modules/profile/action-creators";
 
 export default function ProductDescriptionForm() {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
+  const [menuVisible, setMenuVisible] = useState(false);
 
   const contractType = useAppSelector(
     (state) => state.contract.currentContract?.type
@@ -38,6 +34,7 @@ export default function ProductDescriptionForm() {
         (screen) => screen.type === CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION
       ) as ProductDescriptionScreenInterface | undefined
   );
+
   const checked =
     productDescription?.data[PRODUCT_DESCRIPTION_FIELDS.hasAccessories];
   const description =
@@ -49,23 +46,8 @@ export default function ProductDescriptionForm() {
   const photosAccessories =
     productDescription?.data[PRODUCT_DESCRIPTION_FIELDS.accessoriesPhotos];
 
-  const [menuVisible, setMenuVisible] = useState(false);
-
   const onChangeHandler = (
     value: string | boolean,
-    fieldName: PRODUCT_DESCRIPTION_FIELDS
-  ) => {
-    dispatch(
-      setScreenData({
-        screenType: CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION,
-        fieldName,
-        value,
-      })
-    );
-  };
-
-  const photoHandler = (
-    value: DescriptionPhotoInterface,
     fieldName: PRODUCT_DESCRIPTION_FIELDS
   ) => {
     dispatch(
@@ -86,10 +68,9 @@ export default function ProductDescriptionForm() {
         setScreenData({
           screenType: CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION,
           fieldName: PRODUCT_DESCRIPTION_FIELDS.productPhotos,
-          value: [
-            ...
-          ]
-        })
+          value: photosProduct ?? [],
+        }),
+        "value"
       )
     );
   };
@@ -123,8 +104,6 @@ export default function ProductDescriptionForm() {
     },
   ];
 
-  console.log(contractType);
-
   return (
     <View style={styles.container}>
       <DefaultText
@@ -148,13 +127,9 @@ export default function ProductDescriptionForm() {
         )}
         onPress={choosePhotoHandler}
       />
-      {
-        // <DescriptionPhotos
-        //   photos={photosProduct === undefined ? [] : photosProduct}
-        // />
-      }
+      <DescriptionPhotos photos={photosProduct ?? []} />
       <Checkbox
-        isChecked={checked === undefined ? false : checked}
+        isChecked={checked ?? false}
         onChange={() =>
           onChangeHandler(!checked, PRODUCT_DESCRIPTION_FIELDS.hasAccessories)
         }
@@ -164,7 +139,7 @@ export default function ProductDescriptionForm() {
         textStyle={styles.checkboxText}
         style={styles.checkbox}
       />
-      {productDescription?.data[PRODUCT_DESCRIPTION_FIELDS.hasAccessories] ? (
+      {checked ? (
         <>
           <IconButton
             text={t(

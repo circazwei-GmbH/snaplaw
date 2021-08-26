@@ -1,16 +1,24 @@
 import React from "react";
-import { TouchableOpacity, StyleSheet, Text } from "react-native";
+import {
+  TouchableOpacity,
+  StyleSheet,
+  Text,
+  StyleProp,
+  TextStyle,
+} from "react-native";
 
 interface ButtonPropsInterface {
   text: string;
   onPress: () => void;
   type: "left" | "right";
+  styleText?: StyleProp<TextStyle>;
 }
 
 export default function TextButton({
   text,
   onPress,
   type,
+  styleText,
 }: ButtonPropsInterface): JSX.Element {
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
@@ -18,6 +26,7 @@ export default function TextButton({
         style={[
           styles.text,
           type === "left" ? styles.buttonLeft : styles.buttonRight,
+          styleText,
         ]}
       >
         {text}
