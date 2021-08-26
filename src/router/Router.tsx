@@ -23,8 +23,8 @@ import { useI18n } from "../translator/i18n";
 import MyContracts from "../components/pages/MyContracts";
 import { HOME_ROUTER } from "./HomeRouterType";
 import Contract from "../components/pages/contracts/Contract";
-import {orientationChange} from "../store/modules/main/action-creators";
-import * as ScreenOrientation from 'expo-screen-orientation';
+import { orientationChange } from "../store/modules/main/action-creators";
+import * as ScreenOrientation from "expo-screen-orientation";
 
 const Stack = createStackNavigator();
 const ProfileStack = createStackNavigator();
@@ -41,7 +41,7 @@ export default function Router() {
   useEffect(() => {
     dispatch(requestLanguage());
     dispatch(requestToken());
-    dispatch(orientationChange(ScreenOrientation.OrientationLock.PORTRAIT))
+    dispatch(orientationChange(ScreenOrientation.OrientationLock.PORTRAIT));
   }, [dispatch]);
 
   if (!language) {
