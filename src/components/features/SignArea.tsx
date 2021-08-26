@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { RefSetter, Signature } from "@scale-at/expo-pixi";
 import TextButton from "../basics/buttons/TextButton";
-import UndoButton from "../basics/buttons/UnduButton";
+import UndoButton from "../basics/buttons/UndoButton";
 
 type SignaAreaProps = {
   refSetter: RefSetter;
