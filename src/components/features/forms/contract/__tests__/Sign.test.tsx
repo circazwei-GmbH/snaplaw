@@ -12,6 +12,7 @@ const initialState = {
   contract: {
     currentContract: {
       type: CONTRACT_TYPES.PURCHASE,
+      screens: []
     },
   },
 };
