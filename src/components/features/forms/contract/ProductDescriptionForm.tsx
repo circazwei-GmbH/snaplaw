@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
 import DefaultText from "../../../basics/typography/DefaultText";
 import MultilineTextField from "../../../components/MultilineTextField";
@@ -45,6 +45,17 @@ export default function ProductDescriptionForm() {
     productDescription?.data[PRODUCT_DESCRIPTION_FIELDS.productPhotos];
   const photosAccessories =
     productDescription?.data[PRODUCT_DESCRIPTION_FIELDS.accessoriesPhotos];
+
+  const removePhoto = (id: number) => {
+    const newValue = photosProduct?.filter((item) => item.id !== id);
+    dispatch(
+      setScreenData({
+        screenType: CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION,
+        fieldName: PRODUCT_DESCRIPTION_FIELDS.productPhotos,
+        value: newValue,
+      })
+    );
+  };
 
   const onChangeHandler = (
     value: string | boolean,
@@ -127,7 +138,10 @@ export default function ProductDescriptionForm() {
         )}
         onPress={choosePhotoHandler}
       />
-      <DescriptionPhotos photos={photosProduct ?? []} />
+      <DescriptionPhotos
+        photos={photosProduct ?? []}
+        onPressDelete={removePhoto}
+      />
       <Checkbox
         isChecked={checked ?? false}
         onChange={() =>

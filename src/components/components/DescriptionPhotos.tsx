@@ -12,10 +12,12 @@ import { DescriptionPhotoInterface } from "../../store/modules/contract/types";
 
 export interface DescriptionPhotosPropsInterface {
   photos: DescriptionPhotoInterface[];
+  onPressDelete: (id: number) => void;
 }
 
 export default function DescriptionPhotos({
   photos,
+  onPressDelete,
 }: DescriptionPhotosPropsInterface) {
   const [url, setUrl] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -43,7 +45,7 @@ export default function DescriptionPhotos({
             <TouchableOpacity
               activeOpacity={0.8}
               style={styles.removeButton}
-              onPress={() => alert("Hi")}
+              onPress={() => onPressDelete(item.id)}
             >
               <View style={styles.removeButtonBackground}>
                 <AntDesign name="closecircle" size={18} color="#668395" />
