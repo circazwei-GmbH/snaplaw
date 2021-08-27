@@ -1,6 +1,6 @@
 import React from "react";
 import CheckBox from "react-native-check-box";
-import { StyleProp, StyleSheet, TextStyle } from "react-native";
+import {StyleProp, StyleSheet, Text, TextStyle, Pressable} from "react-native";
 
 type CheckboxProps = {
   isChecked: boolean;
@@ -16,26 +16,30 @@ export default function Checkbox({
   style,
 }: CheckboxProps) {
   return (
-    <CheckBox
-      style={[styles.checkbox, style]}
-      isChecked={isChecked}
-      onClick={onChange}
-      rightText={text}
-      checkBoxColor="#1696E2"
-      checkedCheckBoxColor="#1696E2"
-      rightTextStyle={styles.checkboxText}
-    />
+    <Pressable style={[styles.container, style]} onPress={onChange}>
+      <CheckBox
+          isChecked={isChecked}
+          onClick={onChange}
+          checkBoxColor="#1696E2"
+          checkedCheckBoxColor="#1696E2"
+          rightTextStyle={styles.checkboxText}
+      />
+      <Text style={styles.checkboxText}>
+        {text}
+      </Text>
+    </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  checkbox: {
-    alignItems: "flex-start",
-    flexDirection: "row",
+  container: {
+    flexDirection: "row"
   },
   checkboxText: {
     fontFamily: "P",
     fontSize: 17,
     color: "#202020",
+    paddingLeft: 14,
+    flex: 1
   },
 });
