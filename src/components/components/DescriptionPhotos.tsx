@@ -48,7 +48,7 @@ export default function DescriptionPhotos({
             key={item.id}
           >
             <TouchableOpacity
-              activeOpacity={0.8}
+              activeOpacity={0.9}
               style={styles.removeButton}
               onPress={() => onPressDelete(item.id, fieldName)}
             >
