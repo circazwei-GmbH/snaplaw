@@ -3,6 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { RefSetter, Signature } from "@scale-at/expo-pixi";
 import TextButton from "../basics/buttons/TextButton";
 import UndoButton from "../basics/buttons/UndoButton";
+import {useI18n} from "../../translator/i18n";
 
 type SignaAreaProps = {
   refSetter: RefSetter;
@@ -10,6 +11,7 @@ type SignaAreaProps = {
 };
 
 export default function SignArea({ refSetter, signInstance }: SignaAreaProps) {
+  const { t } = useI18n()
   return (
     <View style={styles.container}>
       <View style={styles.signatureContainer}>
@@ -22,7 +24,7 @@ export default function SignArea({ refSetter, signInstance }: SignaAreaProps) {
         />
         <TextButton
           styleText={styles.clearButton}
-          text={"Clear"}
+          text={t('sign_form.buttons.clear')}
           onPress={() => signInstance?.clear()}
           type="left"
         />
