@@ -12,10 +12,14 @@ index eec55d9..94e1bff 100644
    }
  
 diff --git a/node_modules/@scale-at/expo-pixi/lib/index.d.ts b/node_modules/@scale-at/expo-pixi/lib/index.d.ts
-index 6583849..06fefdf 100644
+index 6583849..5ecbe88 100644
 --- a/node_modules/@scale-at/expo-pixi/lib/index.d.ts
 +++ b/node_modules/@scale-at/expo-pixi/lib/index.d.ts
-@@ -3,12 +3,13 @@ import * as React from 'react';
+@@ -1,14 +1,18 @@
+ import * as React from 'react';
+ 
++export type RefSetter = (ref: Signature) => void
++
  type Props = {
    strokeColor?: number | string;
    strokeAlpha?: number;
@@ -23,6 +27,7 @@ index 6583849..06fefdf 100644
 +  onChange?: (renderer: unknown) => void;
    onReady?: () => WebGLRenderingContext;
    style?: object;
++  ref: RefSetter
  };
  
  export class Signature extends React.Component<Props> {

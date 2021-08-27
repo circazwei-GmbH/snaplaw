@@ -41,7 +41,7 @@ export default function Router() {
   useEffect(() => {
     dispatch(requestLanguage());
     dispatch(requestToken());
-    dispatch(orientationChange(ScreenOrientation.OrientationLock.PORTRAIT));
+    dispatch(orientationChange(ScreenOrientation.OrientationLock.PORTRAIT_UP));
   }, [dispatch]);
 
   if (!language) {

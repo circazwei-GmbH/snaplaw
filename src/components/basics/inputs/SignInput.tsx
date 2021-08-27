@@ -23,7 +23,7 @@ export default function SignInput({
   signHandler,
 }: SignInputProps) {
   return (
-    <View style={[styles.container, style]}>
+    <View style={[styles.container, signUri ? styles.border : null, style]}>
       <View style={styles.signContainer}>
         <Image
           style={styles.image}
@@ -64,8 +64,13 @@ const styles = StyleSheet.create({
   dividerContainer: {
     paddingVertical: 7,
   },
+  border: {
+    borderColor: '#BBD1DE',
+    borderWidth: 1
+  },
   signContainer: {
-    width: "70%",
+    width: "76%",
+    padding: 3,
     alignItems: "center",
     justifyContent: "center",
   },

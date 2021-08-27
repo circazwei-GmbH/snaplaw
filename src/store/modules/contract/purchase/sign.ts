@@ -11,3 +11,5 @@ export interface SignScreenInterface extends BaseScreenDataInterface {
     [SIGN_FIELDS.SIGN]: string;
   };
 }
+
+export const SIGN_LOADER = 'SIGN_LOADER'
