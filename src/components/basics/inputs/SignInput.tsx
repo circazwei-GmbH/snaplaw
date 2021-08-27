@@ -65,8 +65,8 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
   },
   border: {
-    borderColor: '#BBD1DE',
-    borderWidth: 1
+    borderColor: "#BBD1DE",
+    borderWidth: 1,
   },
   signContainer: {
     width: "76%",

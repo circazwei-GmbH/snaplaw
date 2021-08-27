@@ -12,4 +12,4 @@ export interface SignScreenInterface extends BaseScreenDataInterface {
   };
 }
 
-export const SIGN_LOADER = 'SIGN_LOADER'
+export const SIGN_LOADER = "SIGN_LOADER";

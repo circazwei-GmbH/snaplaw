@@ -253,15 +253,16 @@ export default {
     },
   },
   sign_form: {
-    title: 'Sign contract with your finger',
+    title: "Sign contract with your finger",
     buttons: {
-      cancel: 'Cancel',
-      create: 'Create',
-      clear: 'Clear'
+      cancel: "Cancel",
+      create: "Create",
+      clear: "Clear",
     },
     description: {
-      first: 'By tapping ',
-      second: ', I agree that the signature will be the electronic representation of my signature for all purposes when I use them on documents.'
-    }
-  }
+      first: "By tapping ",
+      second:
+        ", I agree that the signature will be the electronic representation of my signature for all purposes when I use them on documents.",
+    },
+  },
 };
