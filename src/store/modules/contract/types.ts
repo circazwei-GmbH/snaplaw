@@ -24,6 +24,11 @@ import {
   PAYMENT_METHODS,
   PAYMENT_FIELDS,
 } from "./purchase/payment";
+import {
+  ProductDescriptionScreenInterface,
+  DescriptionPhotoInterface,
+  PRODUCT_DESCRIPTION_FIELDS,
+} from "./purchase/product-description";
 
 export type ContractType = CONTRACT_TYPES.PURCHASE;
 
@@ -46,3 +51,8 @@ export { UserDataScreenInterface, USER_DATA_FIELDS };
 export { ProductConditionScreenInterface, CONDITION_VALUE, CONDITIONS };
 export { ConfirmationScreenInterface, CONFIRMATION_FIELDS, CONFIRMATION };
 export { PaymentScreenInterface, PAYMENT_METHODS, PAYMENT_FIELDS };
+export {
+  ProductDescriptionScreenInterface,
+  DescriptionPhotoInterface,
+  PRODUCT_DESCRIPTION_FIELDS,
+};

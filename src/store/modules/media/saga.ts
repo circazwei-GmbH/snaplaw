@@ -16,7 +16,6 @@ function* uploadMedia({ payload }: UploadMediaAction) {
       )
     );
   } catch (error) {
-    console.log(error, error.response);
     yield put(setMessage(Translator.getInstance().trans("errors.abstract")));
   }
 }

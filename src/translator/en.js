@@ -209,6 +209,14 @@ export default {
           [CONDITION_VALUE.DEFECTIVE]: "Defective",
         },
       },
+      [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
+        title: "additional information",
+        titleTwo: "Please add product description",
+        titleThree: "Please add accessories description",
+        placeholder: "Write here everything that you think is important",
+        button: "Upload file",
+        checkbox: "Accessories are sold with this product",
+      },
       [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
         title: "Confirmation",
         confirmation: {
