@@ -1,9 +1,6 @@
-import {
-  createSlice,
-  PayloadAction,
-  Draft,
-  createAction,
-} from "@reduxjs/toolkit";
+import {createAction, createSlice, Draft, PayloadAction,} from "@reduxjs/toolkit";
+import {OrientationLock} from "expo-screen-orientation";
+import {AllowOrientationType} from "./action-creators";
 
 interface ModalActionInterface {
   action?: any | undefined;
@@ -19,11 +16,13 @@ export interface ModalInterface {
 interface MainStateInterface {
   modal: ModalInterface | null;
   waiter: Array<string>;
+  orientation: AllowOrientationType
 }
 
 const initialState: MainStateInterface = {
   modal: null,
   waiter: [],
+  orientation: OrientationLock.PORTRAIT_UP
 };
 
 const setMessageAction = createAction<string, "setMessage">("setMessage");
@@ -36,6 +35,7 @@ const addToWaiterAction = createAction<string, "addToWAiter">("addToWAiter");
 const removeFromWaiterAction = createAction<string, "removeFromWaiter">(
   "removeFromWaiter"
 );
+const setOrientationAction = createAction<OrientationType, 'setOrientation'>('setOrientation')
 
 export const mainSlice = createSlice({
   name: "main",
@@ -79,6 +79,12 @@ export const mainSlice = createSlice({
     ) => {
       state.waiter.splice(state.waiter.indexOf(action.payload), 1);
     },
+    [setOrientationAction.type]: (
+        state: Draft<MainStateInterface>,
+        action: PayloadAction<OrientationType>
+    ) => {
+      state.orientation = action.payload
+    }
   },
 });
 
@@ -88,6 +94,7 @@ export const {
   setModal,
   addToWAiter,
   removeFromWaiter,
+    setOrientation
 } = mainSlice.actions;
 
 export default mainSlice.reducer;

@@ -5,8 +5,8 @@ export const NAVIGATION_POP_TO_TOP = "NAVIGATION_POP_TO_TOP";
 export const ORIENTATION = "ORIENTATION";
 
 type NavigationPopToTopAction = BaseAction;
-type AllowOrientationType =
-  | ScreenOrientation.OrientationLock.PORTRAIT
+export type AllowOrientationType =
+  | ScreenOrientation.OrientationLock.PORTRAIT_UP
   | ScreenOrientation.OrientationLock.LANDSCAPE_RIGHT;
 export interface OrientationAction extends BaseAction {
   payload: AllowOrientationType;
