@@ -12,12 +12,12 @@ const initialState = {
   contract: {
     currentContract: {
       type: CONTRACT_TYPES.PURCHASE,
-      screens: []
+      screens: [],
     },
   },
   main: {
-    waiter: []
-  }
+    waiter: [],
+  },
 };
 const reduser = () => initialState;
 const store = createStore(reduser);

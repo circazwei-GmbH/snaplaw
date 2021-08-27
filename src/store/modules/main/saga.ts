@@ -1,4 +1,4 @@
-import {call, put, takeLatest} from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 import {
   NAVIGATION_POP_TO_TOP,
   ORIENTATION,
@@ -6,7 +6,7 @@ import {
 } from "./action-creators";
 import * as RootNavigation from "../../../router/RootNavigation";
 import * as ScreenOrientation from "expo-screen-orientation";
-import {setOrientation} from "./slice";
+import { setOrientation } from "./slice";
 
 function* navigateToTop() {
   RootNavigation.popToTop();
@@ -15,9 +15,9 @@ function* navigateToTop() {
 function* changeOrientation({ payload }: OrientationAction) {
   try {
     yield call(ScreenOrientation.lockAsync, payload);
-    yield put(setOrientation(payload))
+    yield put(setOrientation(payload));
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 }
 

@@ -262,15 +262,16 @@ export default {
     },
   },
   sign_form: {
-    title: 'Vertrag mit dem Finger unterschreiben',
+    title: "Vertrag mit dem Finger unterschreiben",
     buttons: {
-      cancel: 'Abbrechen',
-      create: 'Erstellen',
-      clear: 'Löschen'
+      cancel: "Abbrechen",
+      create: "Erstellen",
+      clear: "Löschen",
     },
     description: {
-      first: 'Indem ich auf ',
-      second: ' klicke, stimme ich zu, dass die Unterschrift die elektronische Darstellung meiner Unterschrift für alle Zwecke ist, wenn ich sie auf Dokumenten verwende.'
-    }
-  }
+      first: "Indem ich auf ",
+      second:
+        " klicke, stimme ich zu, dass die Unterschrift die elektronische Darstellung meiner Unterschrift für alle Zwecke ist, wenn ich sie auf Dokumenten verwende.",
+    },
+  },
 };

@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {Modal, SafeAreaView, StyleSheet, Text, View} from "react-native";
+import React, { useState } from "react";
+import { Modal, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import SignArea from "../SignArea";
 import TopBar from "../../layouts/TopBar";
 import TextButton from "../../basics/buttons/TextButton";
@@ -9,9 +9,12 @@ import { uploadMedia } from "../../../store/modules/media/action-creators";
 import { MEDIA_FOLDERS } from "../../../store/modules/media/constants";
 import { setScreenData } from "../../../store/modules/contract/slice";
 import { CONTRACT_SCREEN_TYPES } from "../../../store/modules/contract/constants";
-import {SIGN_FIELDS, SIGN_LOADER} from "../../../store/modules/contract/purchase/sign";
-import {useI18n} from "../../../translator/i18n";
-import {addToWAiter} from "../../../store/modules/main/slice";
+import {
+  SIGN_FIELDS,
+  SIGN_LOADER,
+} from "../../../store/modules/contract/purchase/sign";
+import { useI18n } from "../../../translator/i18n";
+import { addToWAiter } from "../../../store/modules/main/slice";
 import SplashLoader from "./SplashLoader";
 
 type SignModalProps = {
@@ -22,16 +25,16 @@ type SignModalProps = {
 export default function SignModal({ visible, onClose }: SignModalProps) {
   const dispatch = useAppDispatch();
   const [signatureRef, setSignatureRef] = useState<Signature>();
-  const { t } = useI18n()
+  const { t } = useI18n();
 
   const refSetter = (ref: Signature) => {
     setSignatureRef(ref);
   };
 
   const takeSignature = async () => {
-    dispatch(addToWAiter(SIGN_LOADER))
+    dispatch(addToWAiter(SIGN_LOADER));
     const signData = await signatureRef?.takeSnapshotAsync({
-      format: 'png'
+      format: "png",
     });
     if (!signData) {
       return;
@@ -60,23 +63,31 @@ export default function SignModal({ visible, onClose }: SignModalProps) {
         <SafeAreaView style={styles.safeArea}>
           <TopBar
             leftButton={
-              <TextButton text={t(`sign_form.buttons.cancel`)} onPress={onClose} type="left" />
+              <TextButton
+                text={t(`sign_form.buttons.cancel`)}
+                onPress={onClose}
+                type="left"
+              />
             }
-            pageName={t('sign_form.title')}
+            pageName={t("sign_form.title")}
             style={styles.topBar}
             rightButton={
-              <TextButton text={t(`sign_form.buttons.create`)} onPress={takeSignature} type="right" />
+              <TextButton
+                text={t(`sign_form.buttons.create`)}
+                onPress={takeSignature}
+                type="right"
+              />
             }
           >
             <View style={styles.container}>
               <SignArea refSetter={refSetter} signInstance={signatureRef} />
               <View style={styles.textContainer}>
-                <Text
-                    style={styles.text}
-                >
-                  {t('sign_form.description.first')}
-                  <Text style={[styles.text, styles.bold]}>{t('sign_form.buttons.create')}</Text>
-                  {t('sign_form.description.second')}
+                <Text style={styles.text}>
+                  {t("sign_form.description.first")}
+                  <Text style={[styles.text, styles.bold]}>
+                    {t("sign_form.buttons.create")}
+                  </Text>
+                  {t("sign_form.description.second")}
                 </Text>
               </View>
             </View>
@@ -102,10 +113,10 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 12,
     marginTop: 12,
-    fontFamily: 'P'
+    fontFamily: "P",
   },
   bold: {
-    fontFamily: 'OS-B'
+    fontFamily: "OS-B",
   },
   textContainer: {
     flexDirection: "row",
