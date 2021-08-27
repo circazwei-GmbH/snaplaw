@@ -12,14 +12,15 @@ index eec55d9..94e1bff 100644
    }
  
 diff --git a/node_modules/@scale-at/expo-pixi/lib/index.d.ts b/node_modules/@scale-at/expo-pixi/lib/index.d.ts
-index 6583849..5ecbe88 100644
+index 6583849..e16878a 100644
 --- a/node_modules/@scale-at/expo-pixi/lib/index.d.ts
 +++ b/node_modules/@scale-at/expo-pixi/lib/index.d.ts
-@@ -1,14 +1,18 @@
+@@ -1,14 +1,19 @@
  import * as React from 'react';
- 
-+export type RefSetter = (ref: Signature) => void
++import {SnapshotOptions} from "expo-gl/src/GLView.types";
 +
++export type RefSetter = (ref: Signature) => void
+ 
  type Props = {
    strokeColor?: number | string;
    strokeAlpha?: number;
@@ -32,6 +33,7 @@ index 6583849..5ecbe88 100644
  
  export class Signature extends React.Component<Props> {
    clear: () => void;
+-  takeSnapshotAsync: () => Promise<{ uri: string }>;
 +  undo: () => void;
-   takeSnapshotAsync: () => Promise<{ uri: string }>;
++  takeSnapshotAsync: (options: SnapshotOptions) => Promise<{ uri: string }>;
  }
