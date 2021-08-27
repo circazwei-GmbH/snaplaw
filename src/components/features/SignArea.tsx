@@ -13,7 +13,7 @@ export default function SignArea({ refSetter, signInstance }: SignaAreaProps) {
   return (
     <View style={styles.container}>
       <View style={styles.signatureContainer}>
-        <Signature ref={refSetter} style={styles.pixi} />
+        <Signature ref={refSetter} style={styles.pixi}  />
       </View>
       <View style={styles.buttonContainer}>
         <UndoButton

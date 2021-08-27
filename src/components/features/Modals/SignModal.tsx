@@ -26,7 +26,9 @@ export default function SignModal({ visible, onClose }: SignModalProps) {
   };
 
   const takeSignature = async () => {
-    const signData = await signatureRef?.takeSnapshotAsync();
+    const signData = await signatureRef?.takeSnapshotAsync({
+      format: 'png'
+    });
     if (!signData) {
       return;
     }
