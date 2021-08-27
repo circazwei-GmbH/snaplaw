@@ -3,7 +3,6 @@ import { createStore } from "@reduxjs/toolkit";
 import { fireEvent, render } from "@testing-library/react-native";
 import { Provider } from "react-redux";
 import ProductDescriptionForm from "../ProductDescriptionForm";
-import { P } from "../../../../../store/modules/contract/types";
 import {
   CONTRACT_SCREEN_TYPES,
   CONTRACT_TYPES,
@@ -14,7 +13,7 @@ import { PRODUCT_DESCRIPTION_FIELDS } from "../../../../../store/modules/contrac
 const initialState = {
   contract: {
     currentContract: {
-      type: "some-type",
+      type: "PURCHASE",
       screens: [],
     },
   },
@@ -55,7 +54,7 @@ describe("ProductDescription", () => {
     );
     expect(actions).toBeCalledWith(
       setScreenData({
-        screenType: CONTRACT_SCREEN_TYPES.PRODUCT_CONDITION,
+        screenType: CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION,
         fieldName: PRODUCT_DESCRIPTION_FIELDS.hasAccessories,
         value: true,
       })
