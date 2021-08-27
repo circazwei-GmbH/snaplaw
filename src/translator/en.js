@@ -243,8 +243,8 @@ export default {
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "sign contract",
-        signature: "1.Please enter your signature",
-        invite: "2.Please invite user",
+        signature: "1. Please enter your signature",
+        invite: "2. Please invite user",
       },
     },
     confirmation_modal: {
