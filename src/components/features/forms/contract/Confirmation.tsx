@@ -58,7 +58,6 @@ export default function Confirmation() {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
-    marginTop: 15,
   },
   checkbox: {
     marginTop: 10,
