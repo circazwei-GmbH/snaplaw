@@ -88,7 +88,7 @@ export default function Payment() {
         </View>
       </View>
       <DefaultText
-        style={styles.text}
+        style={[styles.text, styles.secondText]}
         text={t(
           `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PAYMENT}.payment_method`
         )}
@@ -182,8 +182,10 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    marginTop: 24,
   },
+    secondText: {
+      marginTop: 24
+    },
   priceBlock: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -193,7 +195,6 @@ const styles = StyleSheet.create({
     width: "33%",
   },
   costField: {
-    marginTop: 16,
     width: "65%",
   },
 });
