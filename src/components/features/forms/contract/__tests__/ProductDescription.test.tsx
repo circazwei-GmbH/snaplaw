@@ -13,7 +13,7 @@ import { PRODUCT_DESCRIPTION_FIELDS } from "../../../../../store/modules/contrac
 const initialState = {
   contract: {
     currentContract: {
-      type: "PURCHASE",
+      type: CONTRACT_TYPES.PURCHASE,
       screens: [],
     },
   },

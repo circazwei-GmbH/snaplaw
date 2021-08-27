@@ -77,10 +77,15 @@ export default function ProductDescriptionForm() {
 
   const postChooseFileHandler = (uri: string) => {
     const currentArray =
-      currentField === "productPhotos" ? photosProduct : photosAccessories;
-    let newArray = [...(currentArray ?? [])];
+      currentField === PRODUCT_DESCRIPTION_FIELDS.productPhotos
+        ? photosProduct
+        : photosAccessories;
+    let descriptionPhotos = [...(currentArray ?? [])];
     setMenuVisible(false);
-    newArray.push({ url: "", id: Date.now() + newArray.length });
+    descriptionPhotos.push({
+      url: "",
+      id: Date.now() + descriptionPhotos.length,
+    });
     dispatch(
       uploadMedia(
         uri,
@@ -88,9 +93,9 @@ export default function ProductDescriptionForm() {
         setScreenData({
           screenType: CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION,
           fieldName: currentField,
-          value: newArray,
+          value: descriptionPhotos,
         }),
-        `value.${newArray.length - 1}.url`
+        `value.${descriptionPhotos.length - 1}.url`
       )
     );
   };
