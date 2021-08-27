@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
@@ -8,16 +8,21 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import ProductDescriptionModal from "../features/Modals/ProductDescriptionModal";
-import { DescriptionPhotoInterface } from "../../store/modules/contract/types";
+import {
+  DescriptionPhotoInterface,
+  PRODUCT_DESCRIPTION_FIELDS,
+} from "../../store/modules/contract/types";
 
 export interface DescriptionPhotosPropsInterface {
   photos: DescriptionPhotoInterface[];
-  onPressDelete: (id: number) => void;
+  onPressDelete: Function;
+  fieldName: PRODUCT_DESCRIPTION_FIELDS;
 }
 
 export default function DescriptionPhotos({
   photos,
   onPressDelete,
+  fieldName,
 }: DescriptionPhotosPropsInterface) {
   const [url, setUrl] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -45,7 +50,7 @@ export default function DescriptionPhotos({
             <TouchableOpacity
               activeOpacity={0.8}
               style={styles.removeButton}
-              onPress={() => onPressDelete(item.id)}
+              onPress={() => onPressDelete(item.id, fieldName)}
             >
               <View style={styles.removeButtonBackground}>
                 <AntDesign name="closecircle" size={18} color="#668395" />

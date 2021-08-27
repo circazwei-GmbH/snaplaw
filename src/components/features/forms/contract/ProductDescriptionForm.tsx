@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
 import DefaultText from "../../../basics/typography/DefaultText";
 import MultilineTextField from "../../../components/MultilineTextField";
@@ -24,6 +24,9 @@ export default function ProductDescriptionForm() {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
   const [menuVisible, setMenuVisible] = useState(false);
+  const [currentField, setCurrentField] = useState(
+    PRODUCT_DESCRIPTION_FIELDS.productPhotos
+  );
 
   const contractType = useAppSelector(
     (state) => state.contract.currentContract?.type
@@ -46,12 +49,14 @@ export default function ProductDescriptionForm() {
   const photosAccessories =
     productDescription?.data[PRODUCT_DESCRIPTION_FIELDS.accessoriesPhotos];
 
-  const removePhoto = (id: number) => {
-    const newValue = photosProduct?.filter((item) => item.id !== id);
+  const removePhoto = (id: number, fieldName: PRODUCT_DESCRIPTION_FIELDS) => {
+    const currentArray =
+      fieldName === "productPhotos" ? photosProduct : photosAccessories;
+    const newValue = currentArray?.filter((item) => item.id !== id);
     dispatch(
       setScreenData({
         screenType: CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION,
-        fieldName: PRODUCT_DESCRIPTION_FIELDS.productPhotos,
+        fieldName,
         value: newValue,
       })
     );
@@ -71,7 +76,9 @@ export default function ProductDescriptionForm() {
   };
 
   const postChooseFileHandler = (uri: string) => {
-    let newArray = [...(photosProduct ?? [])];
+    const currentArray =
+      currentField === "productPhotos" ? photosProduct : photosAccessories;
+    let newArray = [...(currentArray ?? [])];
     setMenuVisible(false);
     newArray.push({ url: "", id: Date.now() + newArray.length });
     dispatch(
@@ -80,7 +87,7 @@ export default function ProductDescriptionForm() {
         MEDIA_FOLDERS.PRODUCT_DESCRIPTION,
         setScreenData({
           screenType: CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION,
-          fieldName: PRODUCT_DESCRIPTION_FIELDS.productPhotos,
+          fieldName: currentField,
           value: newArray,
         }),
         `value.${newArray.length - 1}.url`
@@ -88,32 +95,36 @@ export default function ProductDescriptionForm() {
     );
   };
 
-  const buttonPickerHandler = (way: Function) => async () => {
-    try {
-      const uri = await way();
-      if (uri) {
-        postChooseFileHandler(uri);
+  const buttonPickerHandler =
+    (way: Function, fieldName: PRODUCT_DESCRIPTION_FIELDS) => async () => {
+      try {
+        const uri = await way();
+        if (uri) {
+          postChooseFileHandler(uri);
+        }
+      } catch (error) {
+        setMenuVisible(false);
+        if (error instanceof PermissionNotGranted) {
+          dispatch(setMessage(t(error.message)));
+        } else {
+          dispatch(setMessage(t("errors.abstract")));
+        }
       }
-    } catch (error) {
-      setMenuVisible(false);
-      if (error instanceof PermissionNotGranted) {
-        dispatch(setMessage(t(error.message)));
-      } else {
-        dispatch(setMessage(t("errors.abstract")));
-      }
-    }
-  };
+    };
 
-  const choosePhotoHandler = () => setMenuVisible(true);
+  const choosePhotoHandler = (fieldName: PRODUCT_DESCRIPTION_FIELDS) => {
+    setCurrentField(fieldName);
+    setMenuVisible(true);
+  };
 
   const menuButtons: ButtonType[] = [
     {
       title: t("upload_files.gallary"),
-      handler: buttonPickerHandler(libraryWay),
+      handler: buttonPickerHandler(libraryWay, currentField),
     },
     {
       title: t("upload_files.camera"),
-      handler: buttonPickerHandler(cameraWay),
+      handler: buttonPickerHandler(cameraWay, currentField),
     },
   ];
 
@@ -138,11 +149,14 @@ export default function ProductDescriptionForm() {
         text={t(
           `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.button`
         )}
-        onPress={choosePhotoHandler}
+        onPress={() =>
+          choosePhotoHandler(PRODUCT_DESCRIPTION_FIELDS.productPhotos)
+        }
       />
       <DescriptionPhotos
         photos={photosProduct ?? []}
         onPressDelete={removePhoto}
+        fieldName={PRODUCT_DESCRIPTION_FIELDS.productPhotos}
       />
       <Checkbox
         isChecked={checked ?? false}
@@ -161,7 +175,14 @@ export default function ProductDescriptionForm() {
             text={t(
               `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.button`
             )}
-            onPress={() => {}}
+            onPress={() =>
+              choosePhotoHandler(PRODUCT_DESCRIPTION_FIELDS.accessoriesPhotos)
+            }
+          />
+          <DescriptionPhotos
+            photos={photosAccessories ?? []}
+            onPressDelete={removePhoto}
+            fieldName={PRODUCT_DESCRIPTION_FIELDS.accessoriesPhotos}
           />
           <DefaultText
             text={t(
