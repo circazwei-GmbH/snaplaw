@@ -10,9 +10,10 @@ import SignModal from "../../Modals/SignModal";
 import { orientationChange } from "../../../../store/modules/main/action-creators";
 import { OrientationLock } from "expo-screen-orientation";
 import {
-  SIGN_FIELDS,
+  SIGN_FIELDS, SIGN_LOADER,
   SignScreenInterface,
 } from "../../../../store/modules/contract/purchase/sign";
+import {removeFromWaiter} from "../../../../store/modules/main/slice";
 
 export default function Sign() {
   const { t } = useI18n();
@@ -46,6 +47,7 @@ export default function Sign() {
     }
     setSignVisible(false);
     dispatch(orientationChange(OrientationLock.PORTRAIT));
+    dispatch(removeFromWaiter(SIGN_LOADER))
   }, [screenData?.data[SIGN_FIELDS.SIGN]]);
 
   if (!currentType) {

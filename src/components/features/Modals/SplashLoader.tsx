@@ -7,7 +7,7 @@ export default function SplashLoader() {
 
   return (
     <View>
-      <Modal visible={isWaiter} transparent={true}>
+      <Modal visible={isWaiter} transparent={true} supportedOrientations={["portrait-upside-down", "landscape-right"]}>
         <View style={styles.activityContainer}>
           <ActivityIndicator size="large" color="#1696E2" />
         </View>

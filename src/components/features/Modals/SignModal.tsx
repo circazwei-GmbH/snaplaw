@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import {Modal, SafeAreaView, StyleSheet, Text, View} from "react-native";
 import SignArea from "../SignArea";
 import TopBar from "../../layouts/TopBar";
@@ -9,8 +9,10 @@ import { uploadMedia } from "../../../store/modules/media/action-creators";
 import { MEDIA_FOLDERS } from "../../../store/modules/media/constants";
 import { setScreenData } from "../../../store/modules/contract/slice";
 import { CONTRACT_SCREEN_TYPES } from "../../../store/modules/contract/constants";
-import { SIGN_FIELDS } from "../../../store/modules/contract/purchase/sign";
+import {SIGN_FIELDS, SIGN_LOADER} from "../../../store/modules/contract/purchase/sign";
 import {useI18n} from "../../../translator/i18n";
+import {addToWAiter} from "../../../store/modules/main/slice";
+import SplashLoader from "./SplashLoader";
 
 type SignModalProps = {
   visible: boolean;
@@ -27,6 +29,7 @@ export default function SignModal({ visible, onClose }: SignModalProps) {
   };
 
   const takeSignature = async () => {
+    dispatch(addToWAiter(SIGN_LOADER))
     const signData = await signatureRef?.takeSnapshotAsync({
       format: 'png'
     });
@@ -78,6 +81,7 @@ export default function SignModal({ visible, onClose }: SignModalProps) {
               </View>
             </View>
           </TopBar>
+          <SplashLoader />
         </SafeAreaView>
       </Modal>
     </View>
