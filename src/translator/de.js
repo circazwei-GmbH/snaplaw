@@ -217,8 +217,8 @@ export default {
         titleTwo: "Bitte geben Sie die Beschreibung des Artikels an",
         titleThree: "Please add accessories description",
         placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
-        button: "Upload file",
-        checkbox: "Accessories are sold with this product",
+        button: "Datei hochladen",
+        checkbox: "Folgendes Zubehör wird mitverkauft",
       },
       [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
         title: "Besätigung",
