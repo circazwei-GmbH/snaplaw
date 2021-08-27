@@ -81,7 +81,7 @@ export const mainSlice = createSlice({
     },
     [setOrientationAction.type]: (
         state: Draft<MainStateInterface>,
-        action: PayloadAction<OrientationType>
+        action: PayloadAction<AllowOrientationType>
     ) => {
       state.orientation = action.payload
     }
