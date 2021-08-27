@@ -7,6 +7,7 @@ type CheckboxProps = {
   onChange: () => void;
   text: string;
   style?: StyleProp<TextStyle> | undefined;
+  textStyle?: StyleProp<TextStyle> | undefined;
 };
 
 export default function Checkbox({
@@ -14,6 +15,7 @@ export default function Checkbox({
   onChange,
   text,
   style,
+  textStyle,
 }: CheckboxProps) {
   return (
     <CheckBox
@@ -23,7 +25,7 @@ export default function Checkbox({
       rightText={text}
       checkBoxColor="#1696E2"
       checkedCheckBoxColor="#1696E2"
-      rightTextStyle={styles.checkboxText}
+      rightTextStyle={[styles.checkboxText, textStyle]}
     />
   );
 }
