@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   buttonPlaceholder: {
-    width: 100,
+    width: 120,
     height: 45,
   },
 });
