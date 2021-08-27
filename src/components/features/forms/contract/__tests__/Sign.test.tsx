@@ -15,6 +15,9 @@ const initialState = {
       screens: []
     },
   },
+  main: {
+    waiter: []
+  }
 };
 const reduser = () => initialState;
 const store = createStore(reduser);
