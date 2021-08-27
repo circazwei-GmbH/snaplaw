@@ -244,8 +244,8 @@ export default {
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "Vertrag unterzeichnen",
-        signature: "1.Bitte Ihre Unterschift eingeben",
-        invite: "2.Bitte Benutzer einladen",
+        signature: "1. Bitte Ihre Unterschift eingeben",
+        invite: "2. Bitte Benutzer einladen",
       },
     },
     confirmation_modal: {
