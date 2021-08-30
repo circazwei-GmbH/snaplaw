@@ -12,6 +12,7 @@ import {
   PRODUCT_DESCRIPTION_FIELDS,
 } from "../../store/modules/contract/types";
 import FastImage from "react-native-fast-image";
+import {buildMediaSource} from "../../utils/helpers";
 
 export interface DescriptionPhotosPropsInterface {
   photos: DescriptionPhotoInterface[];
@@ -66,7 +67,7 @@ export default function DescriptionPhotos({
               </View>
             ) : null}
             <FastImage
-              source={{ uri: item.url }}
+              source={buildMediaSource(item.url)}
               style={styles.image}
               onLoadEnd={() => setIsLoading(false)}
               onLoadStart={() => setIsLoading(true)}
