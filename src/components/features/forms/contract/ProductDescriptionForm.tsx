@@ -124,11 +124,11 @@ export default function ProductDescriptionForm() {
   const menuButtons: ButtonType[] = [
     {
       title: t("upload_files.gallary"),
-      handler: buttonPickerHandler(libraryWay, currentField),
+      handler: buttonPickerHandler(libraryWay),
     },
     {
       title: t("upload_files.camera"),
-      handler: buttonPickerHandler(cameraWay, currentField),
+      handler: buttonPickerHandler(cameraWay),
     },
   ];
 

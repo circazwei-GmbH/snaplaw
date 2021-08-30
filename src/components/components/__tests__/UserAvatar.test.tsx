@@ -3,6 +3,7 @@ import { fireEvent, render } from "@testing-library/react-native";
 import { Provider } from "react-redux";
 import UserAvatar from "../UserAvatar";
 import { createStore } from "@reduxjs/toolkit";
+import {buildMediaSource} from "../../../utils/helpers";
 
 const initialState = {
   profile: {
@@ -64,8 +65,6 @@ describe("UserAvatar", () => {
       </Provider>
     );
 
-    expect(queryByTestId("AvatarImage").props.source).toEqual({
-      uri: TEST_URI,
-    });
+    expect(queryByTestId("AvatarImage").props.source).toEqual(buildMediaSource(TEST_URI));
   });
 });
