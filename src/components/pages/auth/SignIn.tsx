@@ -107,7 +107,7 @@ export default function SignIn({ navigation }: SignInProps) {
           accessible={false}
           onPress={Keyboard.dismiss}
         >
-          <View style={styles.container}>
+          <View style={[styles.container, styles.width100]}>
             <View style={styles.width100}>
               <View style={styles.headline}>
                 <MainHeadline text={t("sign_in.headline")} />
@@ -142,7 +142,6 @@ export default function SignIn({ navigation }: SignInProps) {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    alignSelf: "stretch",
     alignItems: "center",
     justifyContent: "space-around",
     flexDirection: "column",
@@ -152,9 +151,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "column",
-    alignSelf: "stretch",
   },
   headline: {
+    height: 45,
     marginBottom: 10,
   },
   width100: {
