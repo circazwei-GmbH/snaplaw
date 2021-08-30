@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Image, ActivityIndicator } from "react-native";
+import { View, StyleSheet, ActivityIndicator } from "react-native";
 import { useAppSelector } from "../../store/hooks";
+import { buildMediaSource } from "../../utils/helpers";
+import FastImage from "react-native-fast-image";
 
 interface UserAvatarPropsInterface {
   sizeSmall: boolean;
-  url?: string;
+  url?: string | null;
 }
 
 export default function UserAvatar({
@@ -14,7 +16,9 @@ export default function UserAvatar({
   const [isLoading, setIsLoading] = useState(false);
   const avatarLoading = useAppSelector((state) => state.profile.avatarLoading);
   const getAvatar = () => {
-    return url ? { uri: url } : require("../../../assets/user_profile.png");
+    return url
+      ? buildMediaSource(url)
+      : require("../../../assets/user_profile.png");
   };
 
   const onStartLoadHandler = () => {
@@ -32,7 +36,7 @@ export default function UserAvatar({
         styles.container,
       ]}
     >
-      <Image
+      <FastImage
         source={getAvatar()}
         style={styles.image}
         onLoadStart={onStartLoadHandler}

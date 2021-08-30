@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
+import { StyleSheet, View } from "react-native";
 import DefaultText from "../../../basics/typography/DefaultText";
 import MultilineTextField from "../../../components/MultilineTextField";
 import { useI18n } from "../../../../translator/i18n";
@@ -100,22 +100,21 @@ export default function ProductDescriptionForm() {
     );
   };
 
-  const buttonPickerHandler =
-    (way: Function, fieldName: PRODUCT_DESCRIPTION_FIELDS) => async () => {
-      try {
-        const uri = await way();
-        if (uri) {
-          postChooseFileHandler(uri);
-        }
-      } catch (error) {
-        setMenuVisible(false);
-        if (error instanceof PermissionNotGranted) {
-          dispatch(setMessage(t(error.message)));
-        } else {
-          dispatch(setMessage(t("errors.abstract")));
-        }
+  const buttonPickerHandler = (way: Function) => async () => {
+    try {
+      const uri = await way();
+      if (uri) {
+        postChooseFileHandler(uri);
       }
-    };
+    } catch (error) {
+      setMenuVisible(false);
+      if (error instanceof PermissionNotGranted) {
+        dispatch(setMessage(t(error.message)));
+      } else {
+        dispatch(setMessage(t("errors.abstract")));
+      }
+    }
+  };
 
   const choosePhotoHandler = (fieldName: PRODUCT_DESCRIPTION_FIELDS) => {
     setCurrentField(fieldName);
@@ -171,7 +170,6 @@ export default function ProductDescriptionForm() {
         text={t(
           `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.checkbox`
         )}
-        textStyle={styles.checkboxText}
         style={styles.checkbox}
       />
       {checked ? (

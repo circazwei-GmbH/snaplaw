@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   StyleSheet,
-  Image,
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
@@ -12,6 +11,7 @@ import {
   DescriptionPhotoInterface,
   PRODUCT_DESCRIPTION_FIELDS,
 } from "../../store/modules/contract/types";
+import FastImage from "react-native-fast-image";
 
 export interface DescriptionPhotosPropsInterface {
   photos: DescriptionPhotoInterface[];
@@ -40,7 +40,7 @@ export default function DescriptionPhotos({
         modalVisible={modalVisible}
         toggleModal={toggleModal}
       />
-      {photos.map((item, i) => {
+      {photos.map((item) => {
         return (
           <TouchableOpacity
             onPress={() => openModalSetUrl(item.url)}
@@ -65,7 +65,7 @@ export default function DescriptionPhotos({
                 />
               </View>
             ) : null}
-            <Image
+            <FastImage
               source={{ uri: item.url }}
               style={styles.image}
               onLoadEnd={() => setIsLoading(false)}
