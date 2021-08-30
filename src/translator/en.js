@@ -137,7 +137,7 @@ export default {
     placeholders: {
       name: "First name",
       lastName: "Last name",
-      dateOfBirth: "Date of birth",
+      dateOfBirth: "Date of birth (DD-MM-YYYY)",
       email: "E-mail",
       phone: "Phone",
       address: "Address (Street, City)",
