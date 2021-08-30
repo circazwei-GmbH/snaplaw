@@ -42,7 +42,6 @@ export default function SignInForm({
         <TextField
           placeholder={t("sign_in.email_field")}
           textContentType="username"
-          fixed
           keyboardType="email-address"
           errorMessage={form.email.error}
           value={form.email.value}

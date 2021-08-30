@@ -15,6 +15,7 @@ export default function MainHeadline({ text }: MainHeadlinePropsInterface) {
 
 const styles = StyleSheet.create({
   text: {
+    height: 45,
     fontFamily: "OS-SB",
     fontSize: 32,
     color: "#1696E2",
