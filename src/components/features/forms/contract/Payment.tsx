@@ -65,6 +65,7 @@ export default function Payment() {
       />
       <View style={styles.priceBlock}>
         <TextField
+          keyboardType="numeric"
           containerStyle={styles.costField}
           value={screenData?.data[PAYMENT_FIELDS.COST]}
           onChangeFunction={(test) =>
@@ -183,9 +184,9 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
   },
-    secondText: {
-      marginTop: 24
-    },
+  secondText: {
+    marginTop: 24,
+  },
   priceBlock: {
     flexDirection: "row",
     justifyContent: "space-between",
