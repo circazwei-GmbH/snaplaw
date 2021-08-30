@@ -1,12 +1,12 @@
 import { MEDIA_HOST } from "../env/env";
 import BaseApi from "../services/api";
-import { ImageURISource } from "react-native";
+import {Source} from "react-native-fast-image";
 
 export const buildMediaPath = (src: string): string => {
   return `${MEDIA_HOST}/${src}`;
 };
 
-export const buildMediaSource = (uri: string): ImageURISource => {
+export const buildMediaSource = (uri: string): Source => {
   const token = BaseApi.getToken();
   console.log({
     uri: buildMediaPath(uri),
