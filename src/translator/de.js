@@ -235,6 +235,8 @@ export default {
         payment_method: "2. Bitte Zahlungsart wählen",
         fields: {
           cost: "Cost",
+          name: "Name des Karteninhabers",
+          card: "Kartennummer",
         },
         checkboxes: {
           cash: "Bar",
