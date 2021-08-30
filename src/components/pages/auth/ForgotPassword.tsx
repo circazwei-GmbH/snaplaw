@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Keyboard,
   TouchableWithoutFeedback,
+  Dimensions,
 } from "react-native";
 import Button from "../../basics/buttons/Button";
 import HeaderNavigation from "../../layouts/HeaderNavigation";
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   emptySpace: {
-    height: 250,
+    height: Dimensions.get("window").height / 4,
   },
   actionArea: {
     marginBottom: 80,

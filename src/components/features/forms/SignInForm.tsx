@@ -42,14 +42,13 @@ export default function SignInForm({
         <TextField
           placeholder={t("sign_in.email_field")}
           textContentType="username"
-          fixed
           keyboardType="email-address"
           errorMessage={form.email.error}
           value={form.email.value}
           onChangeFunction={(text) => fieldChangeHandler("email", text)}
         />
       </View>
-      <View style={styles.password}>
+      <View>
         <PasswordField
           placeholder={t("sign_in.password_field")}
           errorMessage={form.password.error}
@@ -71,9 +70,6 @@ export default function SignInForm({
 }
 
 const styles = StyleSheet.create({
-  password: {
-    marginTop: 16,
-  },
   forgotLinkContainer: {
     textAlign: "right",
     marginTop: 14,

@@ -100,22 +100,21 @@ export default function ProductDescriptionForm() {
     );
   };
 
-  const buttonPickerHandler =
-    (way: Function, fieldName: PRODUCT_DESCRIPTION_FIELDS) => async () => {
-      try {
-        const uri = await way();
-        if (uri) {
-          postChooseFileHandler(uri);
-        }
-      } catch (error) {
-        setMenuVisible(false);
-        if (error instanceof PermissionNotGranted) {
-          dispatch(setMessage(t(error.message)));
-        } else {
-          dispatch(setMessage(t("errors.abstract")));
-        }
+  const buttonPickerHandler = (way: Function) => async () => {
+    try {
+      const uri = await way();
+      if (uri) {
+        postChooseFileHandler(uri);
       }
-    };
+    } catch (error) {
+      setMenuVisible(false);
+      if (error instanceof PermissionNotGranted) {
+        dispatch(setMessage(t(error.message)));
+      } else {
+        dispatch(setMessage(t("errors.abstract")));
+      }
+    }
+  };
 
   const choosePhotoHandler = (fieldName: PRODUCT_DESCRIPTION_FIELDS) => {
     setCurrentField(fieldName);
@@ -125,11 +124,11 @@ export default function ProductDescriptionForm() {
   const menuButtons: ButtonType[] = [
     {
       title: t("upload_files.gallary"),
-      handler: buttonPickerHandler(libraryWay, currentField),
+      handler: buttonPickerHandler(libraryWay),
     },
     {
       title: t("upload_files.camera"),
-      handler: buttonPickerHandler(cameraWay, currentField),
+      handler: buttonPickerHandler(cameraWay),
     },
   ];
 

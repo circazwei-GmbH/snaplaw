@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import dayjs from "dayjs";
 import TextField from "../../../components/TextField";
 import { useI18n } from "../../../../translator/i18n";
 import { useDispatch } from "react-redux";

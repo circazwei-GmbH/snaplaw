@@ -114,7 +114,7 @@ export default function TextField({
 
 const styles = StyleSheet.create({
   inputContainer: {
-    height: 68,
+    minHeight: 68,
     justifyContent: "flex-end",
   },
   emptyInput: {
