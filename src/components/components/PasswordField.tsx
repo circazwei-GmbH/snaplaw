@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   emptyInput: {
     backgroundColor: "#EFF7FD",
     borderRadius: 10,
-    minHeight: 44,
+    height: 44,
     paddingHorizontal: 16,
     fontSize: 15,
   },
