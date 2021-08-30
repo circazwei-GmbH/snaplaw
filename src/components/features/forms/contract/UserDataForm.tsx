@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
+import dayjs from "dayjs";
 import TextField from "../../../components/TextField";
 import { useI18n } from "../../../../translator/i18n";
 import { useDispatch } from "react-redux";
@@ -10,6 +11,7 @@ import {
   USER_DATA_FIELDS,
   UserDataScreenInterface,
 } from "../../../../store/modules/contract/types";
+import { birthDateFormat } from "../../../../utils/birthDateFormat";
 
 export default function UserDataForm(): JSX.Element {
   const { t } = useI18n();
@@ -49,13 +51,16 @@ export default function UserDataForm(): JSX.Element {
         }
       />
       <TextField
+        maxLength={10}
+        keyboardType="number-pad"
         placeholder={t("edit_profile.placeholders.dateOfBirth")}
-        value={userData?.data[USER_DATA_FIELDS.dateOfBirth]}
+        value={birthDateFormat(userData?.data[USER_DATA_FIELDS.dateOfBirth])}
         onChangeFunction={(newValue) =>
           onChangeAction(newValue, USER_DATA_FIELDS.dateOfBirth)
         }
       />
       <TextField
+        editable={false}
         placeholder={t("edit_profile.placeholders.email")}
         value={userData?.data[USER_DATA_FIELDS.email]}
         onChangeFunction={(newValue) =>
@@ -63,6 +68,7 @@ export default function UserDataForm(): JSX.Element {
         }
       />
       <TextField
+        keyboardType="phone-pad"
         placeholder={t("edit_profile.placeholders.phone")}
         value={userData?.data[USER_DATA_FIELDS.phone]}
         onChangeFunction={(newValue) =>
@@ -77,6 +83,7 @@ export default function UserDataForm(): JSX.Element {
         }
       />
       <TextField
+        keyboardType="number-pad"
         placeholder={t("edit_profile.placeholders.postCode")}
         value={userData?.data[USER_DATA_FIELDS.postCode]}
         onChangeFunction={(newValue) =>

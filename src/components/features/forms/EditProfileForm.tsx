@@ -4,6 +4,7 @@ import EditProfileTextField from "../../components/EditProfileTextField";
 import { useI18n } from "../../../translator/i18n";
 import { FieldInterface } from "../../features/forms/SignInForm";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { birthDateFormat } from "../../../utils/birthDateFormat";
 
 export interface EditProfileFieldInterface extends FieldInterface {
   value?: string;
@@ -51,8 +52,10 @@ export default function EditProfileForm({
           onChangeFunction={(newValue) => onChangeHandler(newValue, "lastName")}
         />
         <EditProfileTextField
+          maxLength={10}
+          keyboardType="number-pad"
           placeholder={t("edit_profile.placeholders.dateOfBirth")}
-          value={form.dateOfBirth.value}
+          value={birthDateFormat(form.dateOfBirth.value)}
           editable={edit}
           edit={edit}
           onChangeFunction={(newValue) =>
@@ -67,6 +70,7 @@ export default function EditProfileForm({
           onChangeFunction={(newValue) => onChangeHandler(newValue, "email")}
         />
         <EditProfileTextField
+          keyboardType="phone-pad"
           placeholder={t("edit_profile.placeholders.phone")}
           value={form.phone.value}
           editable={edit}
@@ -81,6 +85,7 @@ export default function EditProfileForm({
           onChangeFunction={(newValue) => onChangeHandler(newValue, "address")}
         />
         <EditProfileTextField
+          keyboardType="number-pad"
           placeholder={t("edit_profile.placeholders.postCode")}
           value={form.postCode.value}
           editable={edit}
