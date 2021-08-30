@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
+import { StyleSheet, View } from "react-native";
 import DefaultText from "../../../basics/typography/DefaultText";
 import MultilineTextField from "../../../components/MultilineTextField";
 import { useI18n } from "../../../../translator/i18n";
@@ -170,7 +170,6 @@ export default function ProductDescriptionForm() {
         text={t(
           `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.checkbox`
         )}
-        textStyle={styles.checkboxText}
         style={styles.checkbox}
       />
       {checked ? (

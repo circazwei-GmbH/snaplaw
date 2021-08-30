@@ -8,6 +8,9 @@ const updateUserAvatar = (avatarPath: string | null) => {
     throw new Error("Trying to update user avatar with empty token");
   }
   const user = getUserFromToken(token);
+  if (!user) {
+    throw new Error("Trying to update user avatar with empty user");
+  }
   return httpClient.put(`api/users/${user._id}`, { avatar: avatarPath });
 };
 
@@ -17,6 +20,9 @@ const editProfileSaveChange = (userData: UserType) => {
     throw new Error("Trying to update user data with empty token");
   }
   const user = getUserFromToken(token);
+  if (!user) {
+    throw new Error("Trying to update user avatar with empty user");
+  }
   return httpClient.put(`api/users/${user._id}`, userData);
 };
 
