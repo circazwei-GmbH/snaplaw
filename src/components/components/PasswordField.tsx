@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   emptyInput: {
     backgroundColor: "#EFF7FD",
     borderRadius: 10,
-    height: 44,
+    minHeight: 44,
     paddingHorizontal: 16,
     fontSize: 15,
   },
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   label: {
     color: "#1696E2",
     fontSize: 14,
-    marginBottom: 7,
+    lineHeight: 22,
   },
   labelWithEmptyInputFixed: {
     opacity: 0,
@@ -135,7 +135,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   container: {
-    position: "relative",
+    justifyContent: "flex-end",
+    minHeight: 68,
   },
   errorText: {
     paddingTop: 5,
