@@ -94,6 +94,7 @@ export default function TextField({
           focused ? styles.fullInput : null,
           focused ? null : styles.focuslessInput,
           localValue ? styles.inputWithText : null,
+          props.editable === undefined ? null : styles.inputNotEditable,
           errorMessage ? styles.errorBorder : null,
           search && !focused ? styles.search : null,
         ]}
@@ -148,6 +149,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#BBD1DE",
     fontSize: 17,
+  },
+  inputNotEditable: {
+    backgroundColor: "#F2F2F2",
   },
   inputWithText: {
     fontSize: 17,
