@@ -1,3 +1,5 @@
-export const MEDIA_FOLDERS = {
-    AVATAR: 'avatar'
+export enum MEDIA_FOLDERS {
+  AVATAR = "avatar",
+  SIGNATURE = "signature",
+  PRODUCT_DESCRIPTION = "productDescription",
 }

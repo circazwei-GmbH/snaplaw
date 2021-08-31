@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import TopBar from "../../layouts/TopBar";
 import { useI18n } from "../../../translator/i18n";
-import { View, StyleSheet } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import UploadAvatar from "../../features/UploadAvatar";
 import TextButton from "../../basics/buttons/TextButton";
 import EditProfileForm, {
@@ -105,12 +110,12 @@ export default function EditProfile() {
         message: t("edit_profile.modals.save.message"),
         actions: [
           {
-            name: t("edit_profile.modals.save.confirm"),
+            name: t("edit_profile.modals.save.cancel"),
             colortype: "error",
           },
           {
             action: requestEditProfile(localForm),
-            name: t("edit_profile.modals.save.cancel"),
+            name: t("edit_profile.modals.save.confirm"),
             colortype: "primary",
           },
         ],
@@ -213,12 +218,14 @@ export default function EditProfile() {
         )
       }
     >
-      <View style={styles.container}>
-        <View style={styles.uploadAvatarBox}>
-          <UploadAvatar />
+      <TouchableWithoutFeedback accessible={false} onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <View style={styles.uploadAvatarBox}>
+            <UploadAvatar />
+          </View>
+          <EditProfileForm edit={edit} form={form} onChangeHandler={onChange} />
         </View>
-        <EditProfileForm edit={edit} form={form} onChangeHandler={onChange} />
-      </View>
+      </TouchableWithoutFeedback>
     </TopBar>
   );
 }

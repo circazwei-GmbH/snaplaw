@@ -1,0 +1,17 @@
+diff --git a/node_modules/pixi.js/lib/core/renderers/webgl/WebGLState.js b/node_modules/pixi.js/lib/core/renderers/webgl/WebGLState.js
+index c823589..3150080 100755
+--- a/node_modules/pixi.js/lib/core/renderers/webgl/WebGLState.js
++++ b/node_modules/pixi.js/lib/core/renderers/webgl/WebGLState.js
+@@ -81,6 +81,12 @@ var WebGLState = function () {
+ 
+         // check we have vao..
+         this.nativeVaoExtension = gl.getExtension('OES_vertex_array_object') || gl.getExtension('MOZ_OES_vertex_array_object') || gl.getExtension('WEBKIT_OES_vertex_array_object');
++        if (this.nativeVaoExtension) {
++            const keys = Object.keys(this.nativeVaoExtension)
++            if (!keys.length) {
++                this.nativeVaoExtension = null
++            }
++        }
+     }
+ 
+     /**

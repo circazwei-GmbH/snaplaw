@@ -1,0 +1,31 @@
+diff --git a/node_modules/pixi-gl-core/src/VertexArrayObject.js b/node_modules/pixi-gl-core/src/VertexArrayObject.js
+index 3e4e8eb..8960f6e 100644
+--- a/node_modules/pixi-gl-core/src/VertexArrayObject.js
++++ b/node_modules/pixi-gl-core/src/VertexArrayObject.js
+@@ -16,9 +16,17 @@ function VertexArrayObject(gl, state)
+ 
+     if(!VertexArrayObject.FORCE_NATIVE)
+     {
++
+         this.nativeVaoExtension = gl.getExtension('OES_vertex_array_object') ||
+                                   gl.getExtension('MOZ_OES_vertex_array_object') ||
+                                   gl.getExtension('WEBKIT_OES_vertex_array_object');
++
++        if (this.nativeVaoExtension) {
++            const keys = Object.keys(this.nativeVaoExtension)
++            if (!keys.length) {
++                this.nativeVaoExtension = null
++            }
++        }
+     }
+ 
+     this.nativeState = state;
+@@ -84,7 +92,7 @@ VertexArrayObject.FORCE_NATIVE = false;
+  */
+ VertexArrayObject.prototype.bind = function()
+ {
+-    if(this.nativeVao)
++    if(this.nativeVao && this.nativeVaoExtension)
+     {
+         this.nativeVaoExtension.bindVertexArrayOES(this.nativeVao);
+ 

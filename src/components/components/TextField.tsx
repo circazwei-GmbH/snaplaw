@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   TextInput,
   View,
   StyleSheet,
   Text,
   TextInputProps,
+  TouchableOpacity,
+  StyleProp,
+  TextStyle,
 } from "react-native";
+import { Feather, Entypo } from "@expo/vector-icons";
 
 interface OnChanfeFunction {
   (text: string): void;
@@ -17,7 +21,9 @@ interface TextFieldPropsInterface extends TextInputProps {
   validations?: Array<Function>;
   errorMessage?: string;
   value?: string;
+  search?: boolean;
   onChangeFunction: OnChanfeFunction;
+  containerStyle?: StyleProp<TextStyle>;
 }
 
 export default function TextField({
@@ -26,10 +32,13 @@ export default function TextField({
   errorMessage,
   onChangeFunction,
   value,
+  search,
+  containerStyle,
   ...props
 }: TextFieldPropsInterface) {
   const [localValue, setLocalValue] = useState(value);
   const [focused, setFocused] = useState(false);
+  const input: any = useRef();
 
   const textChangeHandler = (text: string) => {
     setLocalValue(text);
@@ -37,24 +46,47 @@ export default function TextField({
       onChangeFunction(text);
     }
   };
+  const cancelButtonHandler = () => {
+    setLocalValue("");
+    input.current.blur();
+  };
 
   return (
-    <View>
-      <Text
-        style={[
-          styles.label,
-          focused || localValue
-            ? null
-            : fixed
-            ? styles.labelWithEmptyInputFixed
-            : styles.labelWithEmptyInputDance,
-        ]}
-      >
-        {placeholder}
-        <Text style={styles.redText}>*</Text>
-      </Text>
+    <View style={[containerStyle, styles.inputContainer]}>
+      {search ? null : (
+        <Text
+          style={[
+            styles.label,
+            focused || localValue
+              ? null
+              : fixed
+              ? styles.labelWithEmptyInputFixed
+              : styles.labelWithEmptyInputDance,
+          ]}
+        >
+          {placeholder}
+          <Text style={styles.redText}>*</Text>
+        </Text>
+      )}
+      {search && !focused ? (
+        <Feather
+          name="search"
+          size={16}
+          color="#668395"
+          style={styles.searchIcon}
+        />
+      ) : null}
+      {search && focused ? (
+        <TouchableOpacity
+          style={styles.crossButton}
+          onPress={cancelButtonHandler}
+        >
+          <Entypo name="cross" size={20} color="#668395" />
+        </TouchableOpacity>
+      ) : null}
       <TextInput
         {...props}
+        ref={input}
         placeholder={!focused ? placeholder : ""}
         placeholderTextColor="#909090"
         style={[
@@ -62,7 +94,9 @@ export default function TextField({
           focused ? styles.fullInput : null,
           focused ? null : styles.focuslessInput,
           localValue ? styles.inputWithText : null,
+          props.editable === undefined ? null : styles.inputNotEditable,
           errorMessage ? styles.errorBorder : null,
+          search && !focused ? styles.search : null,
         ]}
         value={localValue}
         onChangeText={textChangeHandler}
@@ -79,6 +113,10 @@ export default function TextField({
 }
 
 const styles = StyleSheet.create({
+  inputContainer: {
+    minHeight: 68,
+    justifyContent: "flex-end",
+  },
   emptyInput: {
     backgroundColor: "#EFF7FD",
     borderRadius: 10,
@@ -87,11 +125,33 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     fontFamily: "P",
   },
+  search: {
+    paddingLeft: 50,
+  },
+  searchIcon: {
+    position: "absolute",
+    top: "55%",
+    left: "5%",
+    zIndex: 1,
+  },
+  crossButton: {
+    position: "absolute",
+    justifyContent: "center",
+    alignItems: "center",
+    width: 45,
+    height: 45,
+    top: "35%",
+    right: 0,
+    zIndex: 1,
+  },
   fullInput: {
     backgroundColor: "transparent",
     borderWidth: 1,
     borderColor: "#BBD1DE",
     fontSize: 17,
+  },
+  inputNotEditable: {
+    backgroundColor: "#F2F2F2",
   },
   inputWithText: {
     fontSize: 17,
@@ -104,7 +164,7 @@ const styles = StyleSheet.create({
   label: {
     color: "#1696E2",
     fontSize: 14,
-    marginBottom: 7,
+    lineHeight: 22,
   },
   labelWithEmptyInputFixed: {
     opacity: 0,

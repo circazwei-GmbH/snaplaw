@@ -84,7 +84,7 @@ export default function EditProfileTextField({
 
 const styles = StyleSheet.create({
   inputContainer: {
-    height: 67,
+    height: 68,
     justifyContent: "flex-end",
     paddingHorizontal: 16,
     borderBottomWidth: 1,

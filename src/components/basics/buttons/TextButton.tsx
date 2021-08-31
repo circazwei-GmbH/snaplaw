@@ -1,23 +1,39 @@
 import React from "react";
-import { TouchableOpacity, StyleSheet, Text } from "react-native";
+import {
+  TouchableOpacity,
+  StyleSheet,
+  Text,
+  StyleProp,
+  TextStyle,
+} from "react-native";
 
 interface ButtonPropsInterface {
   text: string;
   onPress: () => void;
   type: "left" | "right";
+  styleText?: StyleProp<TextStyle>;
+  disabled?: boolean;
 }
 
 export default function TextButton({
   text,
   onPress,
   type,
+  styleText,
+  disabled,
 }: ButtonPropsInterface): JSX.Element {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
+    <TouchableOpacity
+      onPress={disabled ? () => {} : onPress}
+      activeOpacity={disabled ? 1 : 0.2}
+      style={styles.container}
+    >
       <Text
         style={[
           styles.text,
           type === "left" ? styles.buttonLeft : styles.buttonRight,
+          styleText,
+          disabled ? styles.disabled : null,
         ]}
       >
         {text}
@@ -29,7 +45,7 @@ export default function TextButton({
 const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
-    width: 100,
+    width: 120,
     height: 45,
   },
   text: {
@@ -44,5 +60,8 @@ const styles = StyleSheet.create({
   buttonLeft: {
     textAlign: "left",
     paddingLeft: 16,
+  },
+  disabled: {
+    color: "#E5E5E5",
   },
 });

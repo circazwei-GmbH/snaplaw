@@ -1,3 +1,12 @@
+import {
+  CONTRACT_SCREEN_TYPES,
+  CONTRACT_TYPES,
+} from "../store/modules/contract/constants";
+import {
+  CONDITION_VALUE,
+  CONFIRMATION_FIELDS,
+} from "../store/modules/contract/types";
+
 export default {
   welcome: {
     headline: "Welcome to Snaplaw",
@@ -128,7 +137,7 @@ export default {
     placeholders: {
       name: "First name",
       lastName: "Last name",
-      dateOfBirth: "Date of birth",
+      dateOfBirth: "Date of birth (DD-MM-YYYY)",
       email: "E-mail",
       phone: "Phone",
       address: "Address (Street, City)",
@@ -163,10 +172,105 @@ export default {
       car: "Car sales contract",
     },
   },
+  purchase_contract: {
+    user_data: "USER DATA",
+  },
   my_contracts: {
     tab_name: "My contracts",
   },
   menu: {
     cancel: "Cancel",
+  },
+  notifications: {
+    title: "Notifications",
+  },
+  contracts: {
+    [CONTRACT_TYPES.PURCHASE]: {
+      title: "Purchase contract",
+      [CONTRACT_SCREEN_TYPES.USER_DATA]: {
+        title: "user data",
+      },
+      [CONTRACT_SCREEN_TYPES.PRODUCT_DATA]: {
+        title: "product data",
+        placeholders: {
+          subject: "Subject of sales",
+          producer: "Producer",
+          designation: "Type designation",
+          serial: "Serial number",
+        },
+        switchTitle: "Please indicate if there is a serial number",
+      },
+      [CONTRACT_SCREEN_TYPES.PRODUCT_CONDITION]: {
+        title: "product condition",
+        checkboxes: {
+          [CONDITION_VALUE.NEW]: "New",
+          [CONDITION_VALUE.HIGH_QUALITY]: "High quality",
+          [CONDITION_VALUE.USED]: "Used",
+          [CONDITION_VALUE.DEFECTIVE]: "Defective",
+        },
+      },
+      [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
+        title: "additional information",
+        titleTwo: "Please add product description",
+        titleThree: "Please add accessories description",
+        placeholder: "Write here everything that you think is important",
+        button: "Upload file",
+        checkbox: "Accessories are sold with this product",
+      },
+      [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
+        title: "Confirmation",
+        confirmation: {
+          [CONFIRMATION_FIELDS.FIRST]:
+            "The seller assures that the goods described above are his exclusive property, have not been stolen and are free from the rights of third parties.",
+          [CONFIRMATION_FIELDS.SECOND]:
+            "Buyer details have been verified and match.",
+        },
+      },
+      [CONTRACT_SCREEN_TYPES.PAYMENT]: {
+        title: "Payment",
+        product_price: "1. Please enter the product price",
+        payment_method: "2. Please select a payment method",
+        fields: {
+          cost: "Cost",
+          name: "Cardholder name",
+          card: "Card number",
+        },
+        checkboxes: {
+          cash: "Cash",
+          paypal: "PayPal",
+          transfer: "Money transfer",
+        },
+      },
+      [CONTRACT_SCREEN_TYPES.SIGN]: {
+        title: "sign contract",
+        signature: "1. Please enter your signature",
+        invite: "2. Please invite user",
+      },
+    },
+    confirmation_modal: {
+      message: "Are you sure, you want to cancel contract creation?",
+      buttons: {
+        ok: "Yes",
+        cancel: "No",
+      },
+    },
+    buttons: {
+      next: "Next",
+      back: "Back",
+      cancel: "Cancel",
+    },
+  },
+  sign_form: {
+    title: "Sign contract with your finger",
+    buttons: {
+      cancel: "Cancel",
+      create: "Create",
+      clear: "Clear",
+    },
+    description: {
+      first: "By tapping ",
+      second:
+        ", I agree that the signature will be the electronic representation of my signature for all purposes when I use them on documents.",
+    },
   },
 };

@@ -1,45 +1,55 @@
 import {
-    ChangePasswordPayload,
-    ForgotPasswordPayload,
-    SignInPayload,
-    SignUpPayload,
-    VerificationResendPayload
+  ChangePasswordPayload,
+  ForgotPasswordPayload,
+  SignInPayload,
+  SignUpPayload,
+  VerificationResendPayload,
 } from "../../store/modules/auth/types";
-import httpClient from '../api'
+import httpClient from "../api";
 
 const signUp = (payload: SignUpPayload) => {
-    return httpClient.post('signup', {...payload, locale: 'en'})
-}
+  return httpClient.post("signup", { ...payload, locale: "en" });
+};
 
 const signIn = (payload: SignInPayload) => {
-    return httpClient.post('login', payload)
-}
+  return httpClient.post("login", payload);
+};
 
-const verification = (payload: {email: string, code: string}) => {
-    return httpClient.post('confirm-email', payload)
-}
+const verification = (payload: { email: string; code: string }) => {
+  return httpClient.post("confirm-email", payload);
+};
 
 const resendVerification = (payload: VerificationResendPayload) => {
-    return httpClient.post('resent-email-confirmation', {...payload, locale: 'en'})
-}
+  return httpClient.post("resent-email-confirmation", {
+    ...payload,
+    locale: "en",
+  });
+};
 
 const forgotPassword = (payload: ForgotPasswordPayload) => {
-    return httpClient.post('reset-password-confirmation', {...payload, locale: 'en'})
-}
+  return httpClient.post("reset-password-confirmation", {
+    ...payload,
+    locale: "en",
+  });
+};
 
 const changePassword = ({ password, token }: ChangePasswordPayload) => {
-    return httpClient.post('set-new-password', { password }, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    })
-}
+  return httpClient.post(
+    "set-new-password",
+    { password },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};
 
 export default {
-    signUp,
-    signIn,
-    verification,
-    resendVerification,
-    forgotPassword,
-    changePassword
-}
+  signUp,
+  signIn,
+  verification,
+  resendVerification,
+  forgotPassword,
+  changePassword,
+};

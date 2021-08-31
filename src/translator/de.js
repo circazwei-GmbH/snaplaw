@@ -1,3 +1,10 @@
+import {
+  CONTRACT_SCREEN_TYPES,
+  CONTRACT_TYPES,
+} from "../store/modules/contract/constants";
+import { CONDITION_VALUE } from "../store/modules/contract/purchase/product-condition";
+import { CONFIRMATION_FIELDS } from "../store/modules/contract/purchase/confirmation";
+
 export default {
   welcome: {
     headline: "Wilkommen bei Snaplaw",
@@ -132,7 +139,7 @@ export default {
     placeholders: {
       name: "Vorname",
       lastName: "Nachname",
-      dateOfBirth: "Geburtsdatum",
+      dateOfBirth: "Geburtsdatum (DD-MM-YYYY)",
       email: "E-Mail",
       phone: "Nummer",
       address: "Adresse (Straße, Stadt)",
@@ -168,10 +175,105 @@ export default {
       car: "Autokaufvertrag",
     },
   },
+  purchase_contract: {
+    user_data: "BENUTZERDATEN",
+  },
   my_contracts: {
     tab_name: "Meine Verträge",
   },
   menu: {
     cancel: "Abbrechen",
+  },
+  notifications: {
+    title: "Benachrichtigungen",
+  },
+  contracts: {
+    [CONTRACT_TYPES.PURCHASE]: {
+      title: "Kaufvertrag",
+      [CONTRACT_SCREEN_TYPES.USER_DATA]: {
+        title: "Benutzerdaten",
+      },
+      [CONTRACT_SCREEN_TYPES.PRODUCT_DATA]: {
+        title: "Produktdaten",
+        placeholders: {
+          subject: "Kaufgegenstand",
+          producer: "Hersteller",
+          designation: "Typebezeichnung",
+          serial: "Seriennummer",
+        },
+        switchTitle: "Bitte geben Sie an, ob eine Seriennummer vorhanden ist",
+      },
+      [CONTRACT_SCREEN_TYPES.PRODUCT_CONDITION]: {
+        title: "Zustand des Artikels",
+        checkboxes: {
+          [CONDITION_VALUE.NEW]: "Neu",
+          [CONDITION_VALUE.HIGH_QUALITY]: "Neuwertig",
+          [CONDITION_VALUE.USED]: "Gebraucht",
+          [CONDITION_VALUE.DEFECTIVE]: "Defekt",
+        },
+      },
+      [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
+        title: "additionale Information",
+        titleTwo: "Bitte geben Sie die Beschreibung des Artikels an",
+        titleThree: "Bitte fügen Sie eine Beschreibung des Zubehörs hinzu",
+        placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
+        button: "Datei hochladen",
+        checkbox: "Folgendes Zubehör wird mitverkauft",
+      },
+      [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
+        title: "Besätigung",
+        confirmation: {
+          [CONFIRMATION_FIELDS.FIRST]:
+            "Der Verkäufer versichert, dass der oben beschriebene Artikel in seinem alleinigen Eigentum steht, nicht gestohlen ist und frei von Rechten Dritter ist.",
+          [CONFIRMATION_FIELDS.SECOND]:
+            "Die Käuferdaten wurden überprüft und stimmen überein.",
+        },
+      },
+      [CONTRACT_SCREEN_TYPES.PAYMENT]: {
+        title: "Bezahlung",
+        product_price: "1. Bitte geben Sie den Preis des Artikels an",
+        payment_method: "2. Bitte Zahlungsart wählen",
+        fields: {
+          cost: "Cost",
+          name: "Name des Karteninhabers",
+          card: "Kartennummer",
+        },
+        checkboxes: {
+          cash: "Bar",
+          paypal: "Paypal",
+          transfer: "Überweisung",
+        },
+      },
+      [CONTRACT_SCREEN_TYPES.SIGN]: {
+        title: "Vertrag unterzeichnen",
+        signature: "1. Bitte Ihre Unterschift eingeben",
+        invite: "2. Bitte Benutzer einladen",
+      },
+    },
+    confirmation_modal: {
+      message: "Wollten Sie die Vertragserstellung wirklich abbrechen?",
+      buttons: {
+        ok: "Ja",
+        cancel: "Nein",
+      },
+    },
+    buttons: {
+      next: "Weiter",
+      back: "Zurück",
+      cancel: "Abbrechen",
+    },
+  },
+  sign_form: {
+    title: "Vertrag mit dem Finger unterschreiben",
+    buttons: {
+      cancel: "Abbrechen",
+      create: "Erstellen",
+      clear: "Löschen",
+    },
+    description: {
+      first: "Indem ich auf ",
+      second:
+        " klicke, stimme ich zu, dass die Unterschrift die elektronische Darstellung meiner Unterschrift für alle Zwecke ist, wenn ich sie auf Dokumenten verwende.",
+    },
   },
 };
