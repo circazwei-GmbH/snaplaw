@@ -1,4 +1,4 @@
-import { LanguageType, UserType } from "./slice";
+import { LanguageType, UserType, UserTypeNoAvatar } from "./slice";
 import { BaseAction } from "../auth/types";
 
 export const SET_LANGUAGE = "SET_LANGUAGE";

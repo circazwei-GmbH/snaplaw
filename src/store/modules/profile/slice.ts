@@ -19,6 +19,8 @@ export type UserType = {
   postCode?: string;
 };
 
+export type UserTypeNoAvatar = Omit<UserType, "avatar">;
+
 type ProfileStateInterface = {
   language: LanguageType | undefined;
   user: UserType | undefined;

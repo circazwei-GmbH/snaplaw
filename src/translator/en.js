@@ -155,6 +155,7 @@ export default {
         no: "No",
       },
     },
+    error: "The field can't be empty",
   },
   upload_files: {
     camera: "Camera",

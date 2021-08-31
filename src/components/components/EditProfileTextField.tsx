@@ -13,17 +13,15 @@ interface OnChangeFunction {
 
 interface EditProfileTextFieldPropsInterface extends TextInputProps {
   placeholder?: string;
-  fixed?: boolean;
   validations?: Array<Function>;
   errorMessage?: string;
-  value?: string | number;
+  value: string | undefined;
   edit: boolean;
   onChangeFunction: OnChangeFunction;
 }
 
 export default function EditProfileTextField({
   placeholder,
-  fixed = false,
   errorMessage,
   onChangeFunction,
   value,
@@ -45,28 +43,16 @@ export default function EditProfileTextField({
         focused ? styles.borderFocused : styles.borderNotFocused,
       ]}
     >
-      <Text
-        style={[
-          styles.label,
-          focused || value
-            ? null
-            : fixed
-            ? styles.labelWithEmptyInputFixed
-            : styles.labelWithEmptyInputDance,
-        ]}
-      >
-        {placeholder}
-      </Text>
+      <Text style={[styles.label]}>{placeholder}</Text>
       <TextInput
         {...props}
-        placeholder={!focused ? placeholder : ""}
+        placeholder={!focused && !errorMessage ? placeholder : ""}
         placeholderTextColor="#909090"
         style={[
           styles.emptyInput,
           focused ? styles.fullInput : null,
           focused ? null : styles.focuslessInput,
           value ? styles.inputWithText : null,
-          errorMessage ? styles.errorBorder : null,
         ]}
         value={value}
         onChangeText={textChangeHandler}
@@ -84,7 +70,7 @@ export default function EditProfileTextField({
 
 const styles = StyleSheet.create({
   inputContainer: {
-    height: 68,
+    minHeight: 68,
     justifyContent: "flex-end",
     paddingHorizontal: 16,
     borderBottomWidth: 1,
@@ -118,12 +104,6 @@ const styles = StyleSheet.create({
     color: "#1696E2",
     fontSize: 14,
   },
-  labelWithEmptyInputFixed: {
-    opacity: 0,
-  },
-  labelWithEmptyInputDance: {
-    display: "none",
-  },
   redText: {
     color: "#FA7171",
   },
@@ -134,8 +114,5 @@ const styles = StyleSheet.create({
   displayNone: {
     display: "none",
     marginBottom: 8,
-  },
-  errorBorder: {
-    borderColor: "#FA7171",
   },
 });
