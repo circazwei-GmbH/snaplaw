@@ -19,12 +19,12 @@ describe("TextButton", () => {
     fireEvent.press(getByText("Test"));
     expect(handler).toBeCalled();
   });
-  it('TextButton on disabled test', () => {
+  it("TextButton on disabled test", () => {
     const handler = jest.fn();
     const { getByText } = render(
-      <TextButton text={"Test"} onPress={handler} type="right" disabled/>
+      <TextButton text={"Test"} onPress={handler} type="right" disabled />
     );
     fireEvent.press(getByText("Test"));
     expect(handler).not.toBeCalled();
-  })
+  });
 });

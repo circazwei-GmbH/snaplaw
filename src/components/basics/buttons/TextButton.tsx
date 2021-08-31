@@ -12,7 +12,7 @@ interface ButtonPropsInterface {
   onPress: () => void;
   type: "left" | "right";
   styleText?: StyleProp<TextStyle>;
-  disabled?: boolean
+  disabled?: boolean;
 }
 
 export default function TextButton({
@@ -20,7 +20,7 @@ export default function TextButton({
   onPress,
   type,
   styleText,
-  disabled
+  disabled,
 }: ButtonPropsInterface): JSX.Element {
   return (
     <TouchableOpacity
@@ -33,7 +33,7 @@ export default function TextButton({
           styles.text,
           type === "left" ? styles.buttonLeft : styles.buttonRight,
           styleText,
-          disabled ? styles.disabled : null
+          disabled ? styles.disabled : null,
         ]}
       >
         {text}
@@ -62,6 +62,6 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
   },
   disabled: {
-    color: '#E5E5E5'
-  }
+    color: "#E5E5E5",
+  },
 });

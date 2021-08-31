@@ -8,15 +8,19 @@ import { useI18n } from "../../translator/i18n";
 type SignaAreaProps = {
   refSetter: RefSetter;
   signInstance: Signature | undefined;
-  onChange: () => void,
+  onChange: () => void;
 };
 
-export default function SignArea({ refSetter, signInstance, onChange }: SignaAreaProps) {
+export default function SignArea({
+  refSetter,
+  signInstance,
+  onChange,
+}: SignaAreaProps) {
   const { t } = useI18n();
   const clear = () => {
-    signInstance?.clear()
-    onChange()
-  }
+    signInstance?.clear();
+    onChange();
+  };
   return (
     <View style={styles.container}>
       <View style={styles.signatureContainer}>
