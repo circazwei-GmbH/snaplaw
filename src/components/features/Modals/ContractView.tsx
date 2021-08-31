@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import {Modal, StyleSheet, View} from "react-native";
 import Pdf from "react-native-pdf";
 import TextButton from "../../basics/buttons/TextButton";
 import {useI18n} from "../../../translator/i18n";
 import {useAppDispatch, useAppSelector} from "../../../store/hooks";
 import {buildPDFSource} from "../../../services/contract";
-import {setModal} from "../../../store/modules/main/slice";
+import {setMessage, setModal} from "../../../store/modules/main/slice";
 import {navigationPopToTop} from "../../../store/modules/main/action-creators";
 
 type ContractViewProps = {
@@ -14,18 +14,10 @@ type ContractViewProps = {
 }
 
 export default function ContractView({ visible, onClose }: ContractViewProps) {
-  const [uri, setUri] = useState<string|undefined>(undefined)
   const { t } = useI18n()
   const dispatch = useAppDispatch()
   const locale = useAppSelector(state => state.profile.language)
   const contractId = useAppSelector(state => state.contract.currentContract?.id)
-  useEffect(() => {
-      if (visible) {
-        setUri(contractId)
-      } else {
-        setUri(undefined)
-      }
-  }, [visible])
 
   const onSaveHandler = () => {
     onClose()
@@ -40,6 +32,11 @@ export default function ContractView({ visible, onClose }: ContractViewProps) {
     }))
   }
 
+  const onError = () => {
+    onClose()
+    dispatch(setMessage(t('errors.abstract')))
+  }
+
   return (
     <View>
       <Modal visible={visible}>
@@ -48,7 +45,7 @@ export default function ContractView({ visible, onClose }: ContractViewProps) {
             <TextButton styleText={styles.buttonText} text={t('contracts.pdf_view.edit')} onPress={onClose} type="left" />
             <TextButton styleText={styles.buttonText} text={t('contracts.pdf_view.save')} onPress={onSaveHandler} type="right" />
           </View>
-          {uri ? <Pdf style={styles.pdf}  source={buildPDFSource(uri, locale)} /> : null}
+          {visible && contractId ? <Pdf style={styles.pdf} onError={onError} source={buildPDFSource(contractId, locale)} /> : null}
         </View>
       </Modal>
     </View>
