@@ -3,8 +3,10 @@ import {Modal, StyleSheet, View} from "react-native";
 import Pdf from "react-native-pdf";
 import TextButton from "../../basics/buttons/TextButton";
 import {useI18n} from "../../../translator/i18n";
-import {useAppSelector} from "../../../store/hooks";
+import {useAppDispatch, useAppSelector} from "../../../store/hooks";
 import {buildPDFSource} from "../../../services/contract";
+import {setModal} from "../../../store/modules/main/slice";
+import {navigationPopToTop} from "../../../store/modules/main/action-creators";
 
 type ContractViewProps = {
   visible: boolean,
@@ -12,24 +14,41 @@ type ContractViewProps = {
 }
 
 export default function ContractView({ visible, onClose }: ContractViewProps) {
-  const [uri, setUri] = useState<string|null>(null)
+  const [uri, setUri] = useState<string|undefined>(undefined)
   const { t } = useI18n()
+  const dispatch = useAppDispatch()
   const locale = useAppSelector(state => state.profile.language)
+  const contractId = useAppSelector(state => state.contract.currentContract?.id)
   useEffect(() => {
       if (visible) {
-        setUri('http://www.africau.edu/images/default/sample.pdf')
+        setUri(contractId)
       } else {
-        setUri(null)
+        setUri(undefined)
       }
   }, [visible])
+
+  const onSaveHandler = () => {
+    onClose()
+    dispatch(setModal({
+      message: t('contracts.messages.found_in_pregress_folder'),
+      actions: [
+        {
+          name: t("contracts.confirmation_modal.buttons.ok"),
+          action: navigationPopToTop()
+        }
+      ]
+    }))
+  }
+
   return (
     <View>
       <Modal visible={visible}>
         <View style={styles.container}>
           <View style={styles.buttonContainer}>
-            <TextButton styleText={styles.buttonText} text={t('')} onPress={onClose} type="left" />
+            <TextButton styleText={styles.buttonText} text={t('contracts.pdf_view.edit')} onPress={onClose} type="left" />
+            <TextButton styleText={styles.buttonText} text={t('contracts.pdf_view.save')} onPress={onSaveHandler} type="right" />
           </View>
-          {uri ? (<Pdf style={styles.pdf}  source={buildPDFSource(uri, locale)} />) : null}
+          {uri ? <Pdf style={styles.pdf}  source={buildPDFSource(uri, locale)} /> : null}
         </View>
       </Modal>
     </View>
@@ -51,7 +70,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
-    justifyContent: 'flex-start'
+    justifyContent: 'space-between'
   },
   buttonText: {
     color: '#FFF'

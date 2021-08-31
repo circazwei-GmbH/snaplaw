@@ -14,12 +14,13 @@ const saveScreenData = (id: string, screen: BaseScreenDataInterface) =>
     screenType: screen.type,
   });
 
-export const buildPDFSource = (id: string, locale: LanguageType | undefined) => ({
+export const buildPDFSource = (id: string, locale: LanguageType | undefined) => {
+  return ({
   uri: `${API_HOST}/api/contracts/${id}/${locale === LANGUAGE_GERMANY ? 'de' : 'en'}/pdf`,
   headers: {
     Authorization: `Bearer ${httpClient.getToken()}`
   }
-})
+})}
 
 export default {
   createContract,
