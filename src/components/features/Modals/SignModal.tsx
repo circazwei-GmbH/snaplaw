@@ -25,6 +25,7 @@ type SignModalProps = {
 export default function SignModal({ visible, onClose }: SignModalProps) {
   const dispatch = useAppDispatch();
   const [signatureRef, setSignatureRef] = useState<Signature>();
+  const [createDisabled, setCreateDisabled] = useState(true);
   const { t } = useI18n();
 
   const refSetter = (ref: Signature) => {
@@ -54,6 +55,10 @@ export default function SignModal({ visible, onClose }: SignModalProps) {
     );
   };
 
+  const onChange = () => {
+    setCreateDisabled(signatureRef?.getLinesCount() === 0);
+  };
+
   return (
     <View>
       <Modal
@@ -75,12 +80,17 @@ export default function SignModal({ visible, onClose }: SignModalProps) {
               <TextButton
                 text={t(`sign_form.buttons.create`)}
                 onPress={takeSignature}
+                disabled={createDisabled}
                 type="right"
               />
             }
           >
             <View style={styles.container}>
-              <SignArea refSetter={refSetter} signInstance={signatureRef} />
+              <SignArea
+                refSetter={refSetter}
+                signInstance={signatureRef}
+                onChange={onChange}
+              />
               <View style={styles.textContainer}>
                 <Text style={styles.text}>
                   {t("sign_form.description.first")}

@@ -10,13 +10,21 @@ describe("TextButton", () => {
     );
     expect(getByText("Test")).toBeTruthy();
   });
-  it("TextButton click test", async () => {
+  it("TextButton click test", () => {
     const handler = jest.fn();
     const { getByText } = render(
       <TextButton text={"Test"} onPress={handler} type="right" />
     );
 
-    fireEvent(getByText("Test"), "press");
+    fireEvent.press(getByText("Test"));
     expect(handler).toBeCalled();
+  });
+  it("TextButton on disabled test", () => {
+    const handler = jest.fn();
+    const { getByText } = render(
+      <TextButton text={"Test"} onPress={handler} type="right" disabled />
+    );
+    fireEvent.press(getByText("Test"));
+    expect(handler).not.toBeCalled();
   });
 });

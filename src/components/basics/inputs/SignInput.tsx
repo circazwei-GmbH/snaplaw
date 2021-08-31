@@ -1,7 +1,6 @@
 import React from "react";
 import {
   GestureResponderEvent,
-  Image,
   Pressable,
   StyleProp,
   StyleSheet,
@@ -10,6 +9,8 @@ import {
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import VerticalDivider from "../dividers/VerticalDivieder";
+import FastImage from "react-native-fast-image";
+import { buildMediaSource } from "../../../utils/helpers";
 
 type SignInputProps = {
   style?: StyleProp<TextStyle>;
@@ -25,11 +26,13 @@ export default function SignInput({
   return (
     <View style={[styles.container, signUri ? styles.border : null, style]}>
       <View style={styles.signContainer}>
-        <Image
-          style={styles.image}
-          source={{ uri: signUri }}
-          testID="SignImageID"
-        />
+        {signUri ? (
+          <FastImage
+            style={styles.image}
+            source={buildMediaSource(signUri)}
+            testID="SignImageID"
+          />
+        ) : null}
       </View>
       <View style={styles.rightPart}>
         <View style={styles.dividerContainer}>

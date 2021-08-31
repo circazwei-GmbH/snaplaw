@@ -12,7 +12,7 @@ import {
   PRODUCT_DESCRIPTION_FIELDS,
 } from "../../store/modules/contract/types";
 import FastImage from "react-native-fast-image";
-import {buildMediaSource} from "../../utils/helpers";
+import { buildMediaSource } from "../../utils/helpers";
 
 export interface DescriptionPhotosPropsInterface {
   photos: DescriptionPhotoInterface[];
