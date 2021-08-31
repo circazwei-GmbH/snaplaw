@@ -17,7 +17,7 @@ import { requestEditProfile } from "../../../store/modules/profile/action-creato
 import { email, length } from "../../../validations/default";
 import { formFieldFill, validate } from "../../../utils/forms";
 import {
-  UserType,
+  UserTypeNoAvatar,
   setUserProfile,
   clearProfileErrors,
 } from "../../../store/modules/profile/slice";
@@ -27,12 +27,12 @@ export default function EditProfile() {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
   const [edit, setEdit] = useState(false);
-  const userData: UserType | undefined = useAppSelector(
+  const userData: UserTypeNoAvatar | undefined = useAppSelector(
     (state) => state.profile.user
   );
   const profileErrors = useAppSelector((state) => state.profile.profileErrors);
 
-  const globalValue: UserType = {
+  const globalValue: UserTypeNoAvatar = {
     name: userData?.name,
     lastName: userData?.lastName,
     dateOfBirth: userData?.dateOfBirth,
@@ -98,7 +98,7 @@ export default function EditProfile() {
     postCode: validate(form.postCode),
   };
 
-  const formToSave: UserType = {
+  const formToSave: UserTypeNoAvatar = {
     name: form.name.value,
     lastName: form.lastName.value,
     dateOfBirth: form.dateOfBirth.value,
