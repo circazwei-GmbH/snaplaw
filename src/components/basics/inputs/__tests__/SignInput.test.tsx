@@ -1,6 +1,7 @@
 import React from "react";
 import { fireEvent, render } from "@testing-library/react-native";
 import SignInput from "../SignInput";
+import {buildMediaSource} from "../../../../utils/helpers";
 
 const TEST_IMAGE = "test_uri";
 
@@ -10,9 +11,7 @@ describe("SignInput", () => {
       <SignInput signUri={TEST_IMAGE} signHandler={jest.fn()} />
     );
     expect(getByTestId("SignImageID")).toBeTruthy();
-    expect(getByTestId("SignImageID").props.source).toEqual({
-      uri: TEST_IMAGE,
-    });
+    expect(getByTestId("SignImageID").props.source).toEqual(buildMediaSource(TEST_IMAGE));
   });
   it("Should call handler", () => {
     const handler = jest.fn();
