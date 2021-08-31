@@ -258,6 +258,7 @@ export default {
       next: "Next",
       back: "Back",
       cancel: "Cancel",
+      view: "View contract",
     },
   },
   sign_form: {
