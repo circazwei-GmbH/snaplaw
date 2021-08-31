@@ -19,7 +19,6 @@ import { formFieldFill, validate } from "../../../utils/forms";
 import {
   UserTypeNoAvatar,
   setUserProfile,
-  clearProfileErrors,
 } from "../../../store/modules/profile/slice";
 import { setModal } from "../../../store/modules/main/slice";
 
@@ -30,7 +29,6 @@ export default function EditProfile() {
   const userData: UserTypeNoAvatar | undefined = useAppSelector(
     (state) => state.profile.user
   );
-  const profileErrors = useAppSelector((state) => state.profile.profileErrors);
 
   const globalValue: UserTypeNoAvatar = {
     name: userData?.name,
@@ -88,15 +86,6 @@ export default function EditProfile() {
   };
 
   const [form, setForm] = useState<EditProfileFormInterface | any>(formInitial);
-  const localForm: EditProfileFormInterface = {
-    name: validate(form.name),
-    lastName: validate(form.lastName),
-    dateOfBirth: validate(form.dateOfBirth),
-    email: validate(form.email),
-    phone: validate(form.phone),
-    address: validate(form.address),
-    postCode: validate(form.postCode),
-  };
 
   const formToSave: UserTypeNoAvatar = {
     name: form.name.value,
@@ -115,6 +104,18 @@ export default function EditProfile() {
   };
 
   const pressSave = () => {
+    const localForm: EditProfileFormInterface = {
+      name: validate(form.name),
+      lastName: validate(form.lastName),
+      dateOfBirth: validate(form.dateOfBirth),
+      email: validate(form.email),
+      phone: validate(form.phone),
+      address: validate(form.address),
+      postCode: validate(form.postCode),
+    };
+
+    setForm(localForm);
+
     if (
       form.name.error ||
       form.lastName.error ||
@@ -171,46 +172,6 @@ export default function EditProfile() {
   useEffect(() => {
     cancelHandler();
   }, [userData]);
-
-  useEffect(() => {
-    setForm({
-      ...form,
-      name: {
-        ...form.name,
-        error: profileErrors.name,
-      },
-      lastName: {
-        ...form.lastName,
-        error: profileErrors.lastName,
-      },
-      dateOfBirth: {
-        ...form.dateOfBirth,
-        error: profileErrors.dateOfBirth,
-      },
-      email: {
-        ...form.email,
-        error: profileErrors.email,
-      },
-      phone: {
-        ...form.phone,
-        error: profileErrors.phone,
-      },
-      address: {
-        ...form.address,
-        error: profileErrors.address,
-      },
-      postCode: {
-        ...form.postCode,
-        error: profileErrors.postCode,
-      },
-    });
-  }, [profileErrors]);
-
-  useEffect(() => {
-    return () => {
-      dispatch(clearProfileErrors());
-    };
-  }, []);
 
   return (
     <TopBar

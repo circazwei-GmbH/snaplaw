@@ -25,30 +25,12 @@ type ProfileStateInterface = {
   language: LanguageType | undefined;
   user: UserType | undefined;
   avatarLoading: boolean;
-  profileErrors: {
-    name: string;
-    lastName: string;
-    dateOfBirth: string;
-    email: string;
-    phone: string;
-    address: string;
-    postCode: string;
-  };
 };
 
 export const initialState: ProfileStateInterface = {
   language: undefined,
   user: undefined,
   avatarLoading: false,
-  profileErrors: {
-    name: "",
-    lastName: "",
-    dateOfBirth: "",
-    email: "",
-    phone: "",
-    address: "",
-    postCode: "",
-  },
 };
 
 const setLanguageAction = createAction<string, "setLanguage">("setLanguage");
@@ -59,9 +41,6 @@ const setAvatarLoadingAction = createAction<boolean, "setAvatarLoading">(
 );
 const setUserProfileAction = createAction<UserType, "setUserProfile">(
   "setUserProfile"
-);
-const clearProfileErrorsAction = createAction<undefined, "clearProfileErrors">(
-  "clearProfileErrors"
 );
 
 export const profileSlice = createSlice({
@@ -111,17 +90,6 @@ export const profileSlice = createSlice({
         ...action.payload,
       };
     },
-    [clearProfileErrorsAction.type]: (state: Draft<ProfileStateInterface>) => {
-      state.profileErrors = {
-        name: "",
-        lastName: "",
-        dateOfBirth: "",
-        email: "",
-        phone: "",
-        address: "",
-        postCode: "",
-      };
-    },
   },
 });
 
@@ -131,7 +99,6 @@ export const {
   setUser,
   setAvatarLoading,
   setUserProfile,
-  clearProfileErrors,
 } = profileSlice.actions;
 
 export default profileSlice.reducer;
