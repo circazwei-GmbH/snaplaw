@@ -273,4 +273,7 @@ export default {
         ", I agree that the signature will be the electronic representation of my signature for all purposes when I use them on documents.",
     },
   },
+  invite_page: {
+    title: "Invite",
+  },
 };

@@ -15,6 +15,8 @@ import {
   SignScreenInterface,
 } from "../../../../store/modules/contract/purchase/sign";
 import { removeFromWaiter } from "../../../../store/modules/main/slice";
+import * as RootNavigation from "../../../../router/RootNavigation";
+import { HOME_ROUTER } from "../../../../router/HomeRouterType";
 
 export default function Sign() {
   const { t } = useI18n();
@@ -40,6 +42,10 @@ export default function Sign() {
           : OrientationLock.PORTRAIT_UP
       )
     );
+  };
+
+  const inviteHandler = () => {
+    RootNavigation.navigate(HOME_ROUTER.INVITE);
   };
 
   useEffect(() => {
@@ -78,7 +84,7 @@ export default function Sign() {
         <InviteInput
           style={styles.inputInBlock}
           invitedName={name}
-          inviteHandler={() => {}}
+          inviteHandler={inviteHandler}
         />
       </View>
       <SignModal visible={signVisible} onClose={signModalHandler} />

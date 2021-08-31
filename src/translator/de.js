@@ -276,4 +276,7 @@ export default {
         " klicke, stimme ich zu, dass die Unterschrift die elektronische Darstellung meiner Unterschrift für alle Zwecke ist, wenn ich sie auf Dokumenten verwende.",
     },
   },
+  invite_page: {
+    title: "Einladen",
+  },
 };
