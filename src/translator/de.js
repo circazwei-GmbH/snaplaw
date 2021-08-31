@@ -215,7 +215,7 @@ export default {
       [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
         title: "additionale Information",
         titleTwo: "Bitte geben Sie die Beschreibung des Artikels an",
-        titleThree: "Please add accessories description",
+        titleThree: "Bitte fügen Sie eine Beschreibung des Zubehörs hinzu",
         placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
         button: "Datei hochladen",
         checkbox: "Folgendes Zubehör wird mitverkauft",

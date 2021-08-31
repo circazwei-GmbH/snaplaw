@@ -55,8 +55,8 @@ export default function Router() {
         keyboardHidesTabBar: true,
         style: {
           height: 53,
-          paddingBottom: 5,
           paddingTop: 5,
+          paddingBottom: 5,
         },
       }}
       initialRouteName="Homepage"
