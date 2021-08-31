@@ -53,6 +53,11 @@ export default function Router() {
       tabBarOptions={{
         activeTintColor: "#1696E2",
         keyboardHidesTabBar: true,
+        style: {
+          height: 53,
+          paddingTop: 5,
+          paddingBottom: 5,
+        },
       }}
       initialRouteName="Homepage"
     >

@@ -148,6 +148,7 @@ export default function ProductDescriptionForm() {
         onChangeFunction={(newValue) =>
           onChangeHandler(newValue, PRODUCT_DESCRIPTION_FIELDS.description)
         }
+        checked={checked}
       />
       <IconButton
         text={t(

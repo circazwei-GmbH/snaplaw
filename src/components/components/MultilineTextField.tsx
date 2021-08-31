@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  TextInput,
-  View,
-  StyleSheet,
-  Text,
-  TextInputProps,
-} from "react-native";
+import { TextInput, View, StyleSheet, TextInputProps } from "react-native";
 
 interface OnChangeFunction {
   (text: string): void;
@@ -13,16 +7,16 @@ interface OnChangeFunction {
 
 interface MultilineTextFieldPropsInterface extends TextInputProps {
   placeholder?: string;
-  fixed?: boolean;
   value?: string;
+  checked?: boolean;
   onChangeFunction: OnChangeFunction;
 }
 
 export default function MultilineTextField({
   placeholder,
-  fixed = false,
-  onChangeFunction,
   value,
+  checked,
+  onChangeFunction,
   ...props
 }: MultilineTextFieldPropsInterface) {
   const [localValue, setLocalValue] = useState(value);
@@ -48,6 +42,7 @@ export default function MultilineTextField({
           focused ? styles.fullInput : null,
           focused ? null : styles.focuslessInput,
           localValue ? styles.inputWithText : null,
+          checked ? styles.heightChecked : styles.heightNotChecked,
         ]}
         value={localValue}
         onChangeText={textChangeHandler}
@@ -68,11 +63,16 @@ const styles = StyleSheet.create({
     textAlignVertical: "top",
     backgroundColor: "#EFF7FD",
     borderRadius: 10,
-    height: 140,
     fontSize: 15,
     paddingHorizontal: 16,
     paddingVertical: 11,
     fontFamily: "P",
+  },
+  heightChecked: {
+    height: 70,
+  },
+  heightNotChecked: {
+    height: 140,
   },
   fullInput: {
     backgroundColor: "transparent",
