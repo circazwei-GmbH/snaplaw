@@ -8,14 +8,19 @@ import { useI18n } from "../../translator/i18n";
 type SignaAreaProps = {
   refSetter: RefSetter;
   signInstance: Signature | undefined;
+  onChange: () => void,
 };
 
-export default function SignArea({ refSetter, signInstance }: SignaAreaProps) {
+export default function SignArea({ refSetter, signInstance, onChange }: SignaAreaProps) {
   const { t } = useI18n();
+  const clear = () => {
+    signInstance?.clear()
+    onChange()
+  }
   return (
     <View style={styles.container}>
       <View style={styles.signatureContainer}>
-        <Signature ref={refSetter} style={styles.pixi} />
+        <Signature ref={refSetter} style={styles.pixi} onChange={onChange} />
       </View>
       <View style={styles.buttonContainer}>
         <UndoButton
@@ -25,7 +30,7 @@ export default function SignArea({ refSetter, signInstance }: SignaAreaProps) {
         <TextButton
           styleText={styles.clearButton}
           text={t("sign_form.buttons.clear")}
-          onPress={() => signInstance?.clear()}
+          onPress={clear}
           type="left"
         />
       </View>
