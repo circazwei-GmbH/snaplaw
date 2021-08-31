@@ -8,12 +8,6 @@ export const buildMediaPath = (src: string): string => {
 
 export const buildMediaSource = (uri: string): Source => {
   const token = BaseApi.getToken();
-  console.log({
-    uri: buildMediaPath(uri),
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
   return {
     uri: buildMediaPath(uri),
     headers: {

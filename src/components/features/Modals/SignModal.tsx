@@ -56,7 +56,6 @@ export default function SignModal({ visible, onClose }: SignModalProps) {
   };
 
   const onChange = () => {
-    console.log(signatureRef?.getLinesCount())
     setCreateDisabled(signatureRef?.getLinesCount() === 0)
   }
 
