@@ -6,18 +6,14 @@ import { FieldInterface } from "../../features/forms/SignInForm";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { birthDateFormat } from "../../../utils/birthDateFormat";
 
-export interface EditProfileFieldInterface extends FieldInterface {
-  value?: string;
-}
-
 export interface EditProfileFormInterface {
-  name: EditProfileFieldInterface;
-  lastName: EditProfileFieldInterface;
-  dateOfBirth: EditProfileFieldInterface;
-  email: EditProfileFieldInterface;
-  phone: EditProfileFieldInterface;
-  address: EditProfileFieldInterface;
-  postCode: EditProfileFieldInterface;
+  name: FieldInterface;
+  lastName: FieldInterface;
+  dateOfBirth: FieldInterface;
+  email: FieldInterface;
+  phone: FieldInterface;
+  address: FieldInterface;
+  postCode: FieldInterface;
 }
 
 interface EditProfileFormPropsInterface {
@@ -41,6 +37,7 @@ export default function EditProfileForm({
           value={form.name.value}
           editable={edit}
           edit={edit}
+          errorMessage={form.name.error}
           textContentType="username"
           onChangeFunction={(newValue) => onChangeHandler(newValue, "name")}
         />
@@ -49,6 +46,7 @@ export default function EditProfileForm({
           value={form.lastName.value}
           editable={edit}
           edit={edit}
+          errorMessage={form.lastName.error}
           onChangeFunction={(newValue) => onChangeHandler(newValue, "lastName")}
         />
         <EditProfileTextField
@@ -58,6 +56,7 @@ export default function EditProfileForm({
           value={birthDateFormat(form.dateOfBirth.value)}
           editable={edit}
           edit={edit}
+          errorMessage={form.dateOfBirth.error}
           onChangeFunction={(newValue) =>
             onChangeHandler(newValue, "dateOfBirth")
           }
@@ -67,6 +66,7 @@ export default function EditProfileForm({
           value={form.email.value}
           editable={false}
           edit={edit}
+          errorMessage={form.email.error}
           onChangeFunction={(newValue) => onChangeHandler(newValue, "email")}
         />
         <EditProfileTextField
@@ -75,6 +75,7 @@ export default function EditProfileForm({
           value={form.phone.value}
           editable={edit}
           edit={edit}
+          errorMessage={form.phone.error}
           onChangeFunction={(newValue) => onChangeHandler(newValue, "phone")}
         />
         <EditProfileTextField
@@ -82,6 +83,7 @@ export default function EditProfileForm({
           value={form.address.value}
           editable={edit}
           edit={edit}
+          errorMessage={form.address.error}
           onChangeFunction={(newValue) => onChangeHandler(newValue, "address")}
         />
         <EditProfileTextField
@@ -90,6 +92,7 @@ export default function EditProfileForm({
           value={form.postCode.value}
           editable={edit}
           edit={edit}
+          errorMessage={form.postCode.error}
           onChangeFunction={(newValue) => onChangeHandler(newValue, "postCode")}
         />
       </View>

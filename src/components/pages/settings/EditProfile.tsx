@@ -89,6 +89,16 @@ export default function EditProfile() {
 
   const [form, setForm] = useState<EditProfileFormInterface | any>(formInitial);
   const localForm: EditProfileFormInterface = {
+    name: validate(form.name),
+    lastName: validate(form.lastName),
+    dateOfBirth: validate(form.dateOfBirth),
+    email: validate(form.email),
+    phone: validate(form.phone),
+    address: validate(form.address),
+    postCode: validate(form.postCode),
+  };
+
+  const formToSave: UserType = {
     name: form.name.value,
     lastName: form.lastName.value,
     dateOfBirth: form.dateOfBirth.value,
@@ -105,6 +115,18 @@ export default function EditProfile() {
   };
 
   const pressSave = () => {
+    if (
+      form.name.error ||
+      form.lastName.error ||
+      form.dateOfBirth.error ||
+      form.email.error ||
+      form.phone.error ||
+      form.address.error ||
+      form.postCode.error
+    ) {
+      return;
+    }
+
     dispatch(
       setModal({
         message: t("edit_profile.modals.save.message"),
@@ -114,7 +136,7 @@ export default function EditProfile() {
             colortype: "error",
           },
           {
-            action: requestEditProfile(localForm),
+            action: requestEditProfile(formToSave),
             name: t("edit_profile.modals.save.confirm"),
             colortype: "primary",
           },
