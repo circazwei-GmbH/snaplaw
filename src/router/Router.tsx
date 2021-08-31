@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { StyleSheet } from "react-native";
 import SignIn from "../components/pages/auth/SignIn";
 import SignUp from "../components/pages/auth/SignUp";
 import Welcome from "../components/pages/Welcome";
@@ -53,6 +54,11 @@ export default function Router() {
       tabBarOptions={{
         activeTintColor: "#1696E2",
         keyboardHidesTabBar: true,
+        style: {
+          height: 53,
+          paddingBottom: 5,
+          paddingTop: 5,
+        },
       }}
       initialRouteName="Homepage"
     >
@@ -133,3 +139,14 @@ export default function Router() {
     </Stack.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  myContract: {
+    marginLeft: 16,
+    alignSelf: "flex-start",
+  },
+  settings: {
+    marginRight: 16,
+    alignSelf: "flex-end",
+  },
+});

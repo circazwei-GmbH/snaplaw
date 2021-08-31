@@ -126,9 +126,10 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
+    height: 45,
+    marginBottom: 5,
     paddingHorizontal: 29,
-    marginTop: 10,
-    marginBottom: 35,
   },
   dynamicComponentContainer: {
     flex: 1,
