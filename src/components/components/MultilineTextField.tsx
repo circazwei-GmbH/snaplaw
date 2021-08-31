@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  TextInput,
-  View,
-  StyleSheet,
-  Text,
-  TextInputProps,
-} from "react-native";
+import { TextInput, View, StyleSheet, TextInputProps } from "react-native";
 
 interface OnChangeFunction {
   (text: string): void;
