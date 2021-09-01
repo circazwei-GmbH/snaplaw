@@ -18,36 +18,36 @@ export default function Invite(): JSX.Element {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
   const url = useAppSelector((state) => state.profile.user?.avatar);
-  const users = useAppSelector((state) => state.contract.inviteEmailsList);
-  const emails = [];
-  users?.forEach((item) => {
-    emails.push({
-      email: item.email,
-      id: item.id,
-    });
-  });
+  const emails = useAppSelector((state) => state.contract.inviteEmailsList);
+
+  const getEmails = () => {
+    dispatch(requestUsersEmail());
+  };
 
   useEffect(() => {
-    dispatch(requestUsersEmail());
+    getEmails();
   }, []);
 
   return (
     <TopBar pageName={t("invite_page.title")}>
-      <View style={styles.container}>
-        <UserAvatar sizeSmall url={url} />
-        <DefaultText text={t("invite_page.invitation")} style={styles.text} />
-        <InviteTextField
-          placeholder={t("edit_profile.placeholders.email")}
-          onChangeFunction={() => {}}
-          list={emails}
-        />
-        <Button
-          text={t("invite_page.title")}
-          type={"primary"}
-          style={styles.button}
-          onPress={() => {}}
-        />
-      </View>
+      <TouchableWithoutFeedback accessible={false} onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <UserAvatar sizeSmall url={url} />
+          <DefaultText text={t("invite_page.invitation")} style={styles.text} />
+          <InviteTextField
+            placeholder={t("edit_profile.placeholders.email")}
+            onChangeFunction={() => {}}
+            list={emails}
+            getEmails={getEmails}
+          />
+          <Button
+            text={t("invite_page.title")}
+            type={"primary"}
+            style={styles.button}
+            onPress={() => {}}
+          />
+        </View>
+      </TouchableWithoutFeedback>
     </TopBar>
   );
 }
@@ -67,6 +67,3 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
 });
-
-//<TouchableWithoutFeedback accessible={false} onPress={Keyboard.dismiss}>
-//</TouchableWithoutFeedback>

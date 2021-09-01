@@ -24,6 +24,7 @@ interface InviteTextFieldPropsInterface extends TextInputProps {
   onChangeFunction: OnChangeFunction;
   containerStyle?: StyleProp<TextStyle>;
   list?: object[];
+  getEmails: Function;
 }
 
 export default function InviteTextField({
@@ -33,6 +34,7 @@ export default function InviteTextField({
   value,
   containerStyle,
   list,
+  getEmails,
   ...props
 }: InviteTextFieldPropsInterface) {
   const [localValue, setLocalValue] = useState(value);
@@ -45,15 +47,25 @@ export default function InviteTextField({
       onChangeFunction(text);
     }
   };
-  const cancelButtonHandler = () => {
+  const inputButtonHandler = () => {
     setFocused(!focused);
     // input.current.blur();
   };
   const listItemPressHandler = (newValue: string) => setLocalValue(newValue);
 
+  const renderItem = (item: object): JSX.Element => (
+    <TouchableOpacity
+      activeOpacity={1}
+      style={styles.listItem}
+      onPress={() => listItemPressHandler(item.email)}
+    >
+      <Text style={styles.listItemText}>{item.email}</Text>
+    </TouchableOpacity>
+  );
+
   return (
     <View style={[containerStyle, styles.inputContainer]}>
-      <TouchableOpacity style={styles.button} onPress={cancelButtonHandler}>
+      <TouchableOpacity style={styles.button} onPress={inputButtonHandler}>
         {focused ? (
           <SimpleLineIcons name="arrow-up" size={16} color="#668395" />
         ) : (
@@ -86,20 +98,16 @@ export default function InviteTextField({
         <FlatList
           style={styles.list}
           data={list}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => {
-            return (
-              <TouchableOpacity
-                activeOpacity={1}
-                style={styles.listItem}
-                onPress={() => listItemPressHandler(item.email)}
-              >
-                <Text style={styles.listItemText}>{item.email}</Text>
-              </TouchableOpacity>
-            );
-          }}
-          onEndReached={() => alert("Hi!")}
-          onEndReachedThreshold={0.1}
+          keyExtractor={(item) => `${item.id}`}
+          renderItem={({ item }) => renderItem(item)}
+          onEndReached={() => getEmails()}
+          onEndReachedThreshold={0.0001}
+          keyboardShouldPersistTaps="handled"
+          getItemLayout={(data, index) => ({
+            length: 50,
+            offset: 50 * index,
+            index,
+          })}
         />
       ) : null}
     </View>

@@ -9,12 +9,12 @@ import { CONTRACT_SCREEN_TYPES } from "./constants";
 
 interface ContractState {
   currentContract: Contract | undefined;
-  inviteEmailsList: object[] | undefined;
+  inviteEmailsList: object[];
 }
 
 const initialState: ContractState = {
   currentContract: undefined,
-  inviteEmailsList: undefined,
+  inviteEmailsList: [],
 };
 
 type ScreenData = {
@@ -80,7 +80,7 @@ const contractSlice = createSlice({
       state: Draft<ContractState>,
       action: PayloadAction<object[]>
     ) => {
-      state.inviteEmailsList = action.payload;
+      state.inviteEmailsList = [...state.inviteEmailsList, ...action.payload];
     },
   },
 });

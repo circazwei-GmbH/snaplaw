@@ -65,10 +65,19 @@ function* requestScreenData({ payload }: RequestScreenDataAction) {
 
 function* requestUsersEmail() {
   try {
-    const result = yield axios.get(
-      "https://jsonplaceholder.typicode.com/users"
-    );
-    yield put(setInviteEmails(result.data));
+    const result = yield axios
+      .get("https://jsonplaceholder.typicode.com/users")
+      .then((response) => {
+        let emails = [];
+        response?.data.forEach((item) => {
+          emails.push({
+            email: item.email,
+            id: Date.now() + item.id,
+          });
+        });
+        return emails;
+      });
+    yield put(setInviteEmails(result));
   } catch (error) {
     console.log(error);
     yield put(setMessage(Translator.getInstance().trans("errors.abstract")));
