@@ -266,7 +266,7 @@ export default {
     },
     messages: {
       found_in_pregress_folder:
-        "The contract is sent to Buyer. The contract can be found in ^In progress^ folder.",
+        "Don't forget to invite the buyer. The contract can be found in ^In progress^ folder.",
     },
   },
   sign_form: {
@@ -282,4 +282,5 @@ export default {
         ", I agree that the signature will be the electronic representation of my signature for all purposes when I use them on documents.",
     },
   },
+  ok: "OK"
 };
