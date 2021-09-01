@@ -138,7 +138,7 @@ export default {
       name: "First name",
       lastName: "Last name",
       dateOfBirth: "Date of birth (DD-MM-YYYY)",
-      email: "E-mail",
+      email: "Email",
       phone: "Phone",
       address: "Address (Street, City)",
       postCode: "Postal code",

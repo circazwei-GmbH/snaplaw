@@ -9,10 +9,12 @@ import { CONTRACT_SCREEN_TYPES } from "./constants";
 
 interface ContractState {
   currentContract: Contract | undefined;
+  inviteEmailsList: object[] | undefined;
 }
 
 const initialState: ContractState = {
   currentContract: undefined,
+  inviteEmailsList: undefined,
 };
 
 type ScreenData = {
@@ -26,6 +28,9 @@ const setInitedContractAction = createAction<string, "setInitedContract">(
 );
 const setScreenDataAction = createAction<ScreenData, "setScreenData">(
   "setScreenData"
+);
+const setInviteEmailsListAction = createAction<object[], "setInviteEmails">(
+  "setInviteEmails"
 );
 
 const contractSlice = createSlice({
@@ -71,9 +76,16 @@ const contractSlice = createSlice({
         state.currentContract.screens.push(updatedScreen);
       }
     },
+    [setInviteEmailsListAction.type]: (
+      state: Draft<ContractState>,
+      action: PayloadAction<object[]>
+    ) => {
+      state.inviteEmailsList = action.payload;
+    },
   },
 });
 
-export const { setInitedContract, setScreenData } = contractSlice.actions;
+export const { setInitedContract, setScreenData, setInviteEmails } =
+  contractSlice.actions;
 
 export default contractSlice.reducer;
