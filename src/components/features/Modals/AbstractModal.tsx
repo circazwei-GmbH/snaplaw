@@ -1,9 +1,10 @@
 import React from "react";
-import { Modal, View, StyleSheet, Text } from "react-native";
+import { Modal, View, StyleSheet } from "react-native";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { closeModal, ModalInterface } from "../../../store/modules/main/slice";
 import Button from "../../basics/buttons/Button";
 import { BaseAction } from "../../../store/modules/auth/types";
+import TextBoldPrecessor from "../../basics/typography/TextBoldPrecessor";
 
 export default function AbstractModal() {
   const modal: ModalInterface | null = useAppSelector(
@@ -31,7 +32,7 @@ export default function AbstractModal() {
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <View style={styles.message}>
-            <Text style={styles.messageText}>{modal.message}</Text>
+            <TextBoldPrecessor message={modal.message} />
           </View>
           <View style={styles.actions}>
             {modal.actions &&
@@ -112,4 +113,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 0,
     shadowOpacity: 0,
   },
+  messageTextBold: {
+    fontFamily: 'OS-B'
+  }
 });

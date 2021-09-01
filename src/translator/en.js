@@ -265,7 +265,7 @@ export default {
       save: 'Save'
     },
     messages: {
-      found_in_pregress_folder: 'The contract is sent to Buyer. The contract can be found in In progress folder.'
+      found_in_pregress_folder: 'The contract is sent to Buyer. The contract can be found in ^In progress^ folder.'
     }
   },
   sign_form: {
