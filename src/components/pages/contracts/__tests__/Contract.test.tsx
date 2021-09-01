@@ -6,8 +6,8 @@ import { createStore } from "@reduxjs/toolkit";
 import { CONTRACT_TYPES } from "../../../../store/modules/contract/constants";
 import { useNavigation } from "@react-navigation/native";
 import { HOME_ROUTER } from "../../../../router/HomeRouterType";
-import {LANGUAGE_ENGLISH} from "../../../../store/modules/profile/constants";
-import {LanguageType} from "../../../../store/modules/profile/slice";
+import { LANGUAGE_ENGLISH } from "../../../../store/modules/profile/constants";
+import { LanguageType } from "../../../../store/modules/profile/slice";
 
 jest.mock("../../../../store/modules/contract/contract-screens-types", () => {
   const {
@@ -54,8 +54,8 @@ type InitialStateType = {
     currentContract: Record<"type", CONTRACT_TYPES> | undefined;
   };
   profile: {
-    language: LanguageType
-  }
+    language: LanguageType;
+  };
 };
 
 const initialState: InitialStateType = {
@@ -65,8 +65,8 @@ const initialState: InitialStateType = {
     },
   },
   profile: {
-    language: LANGUAGE_ENGLISH
-  }
+    language: LANGUAGE_ENGLISH,
+  },
 };
 
 const actions = jest.fn();

@@ -28,7 +28,7 @@ import {
   DescriptionPhotoInterface,
   PRODUCT_DESCRIPTION_FIELDS,
 } from "./purchase/product-description";
-import {BaseScreenDataInterface} from "./base-types";
+import { BaseScreenDataInterface } from "./base-types";
 
 export type ContractType = CONTRACT_TYPES.PURCHASE;
 

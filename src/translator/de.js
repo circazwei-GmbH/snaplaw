@@ -265,12 +265,13 @@ export default {
       view: "Vertrag anschauen",
     },
     pdf_view: {
-      edit: 'Editieren',
-      save: 'Speichern'
+      edit: "Editieren",
+      save: "Speichern",
     },
     messages: {
-      found_in_pregress_folder: 'Der Vertrag wird an den Käufer gesendet. Den Vertrag finden Sie im In Bearbeitung Ordner.'
-    }
+      found_in_pregress_folder:
+        "Der Vertrag wird an den Käufer gesendet. Den Vertrag finden Sie im In Bearbeitung Ordner.",
+    },
   },
   sign_form: {
     title: "Vertrag mit dem Finger unterschreiben",

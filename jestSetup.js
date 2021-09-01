@@ -47,7 +47,8 @@ jest.mock("react-native-keyboard-aware-scroll-view", () => {
   };
 });
 
-jest.mock('react-native-pdf', () => {
+jest.mock("react-native-pdf", () => {
   const React = require("react");
-  return (props) => React.createElement('View', {...props, testID: 'react-native-pdf'})
-})
+  return (props) =>
+    React.createElement("View", { ...props, testID: "react-native-pdf" });
+});
