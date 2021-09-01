@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import TopBar from "../../layouts/TopBar";
 import { View, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -19,7 +19,7 @@ import { navigationPopToTop } from "../../../store/modules/main/action-creators"
 import { setModal } from "../../../store/modules/main/slice";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import ContractViewButton from "../../basics/buttons/ContractViewButton";
-import ContractView from '../../features/Modals/ContractView'
+import ContractView from "../../features/Modals/ContractView";
 
 type ContractProps = {
   route: {
@@ -36,7 +36,7 @@ export default function Contract({
   const contractType = useAppSelector(
     (state) => state.contract.currentContract?.type
   );
-  const [contractViewVisible, setContractViewVisible] = useState(false)
+  const [contractViewVisible, setContractViewVisible] = useState(false);
   const { t } = useI18n();
   const dispatch = useAppDispatch();
 
@@ -69,12 +69,12 @@ export default function Contract({
   };
 
   const viewHandler = () => {
-    setContractViewVisible(true)
-  }
+    setContractViewVisible(true);
+  };
 
   const closeViewerHandler = () => {
-    setContractViewVisible(false)
-  }
+    setContractViewVisible(false);
+  };
 
   if (!contractType) {
     return null;
@@ -124,7 +124,10 @@ export default function Contract({
             <ContractViewButton onPress={viewHandler} />
           ) : null}
         </View>
-        <ContractView visible={contractViewVisible} onClose={closeViewerHandler} />
+        <ContractView
+          visible={contractViewVisible}
+          onClose={closeViewerHandler}
+        />
       </View>
     </TopBar>
   );

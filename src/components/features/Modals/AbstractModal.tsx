@@ -114,6 +114,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0,
   },
   messageTextBold: {
-    fontFamily: 'OS-B'
-  }
+    fontFamily: "OS-B",
+  },
 });

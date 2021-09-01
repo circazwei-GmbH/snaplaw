@@ -10,7 +10,7 @@ import { AllowOrientationType } from "./action-creators";
 interface ModalActionInterface {
   action?: any | undefined;
   name: string;
-  colortype?: 'primary' | 'red' | undefined;
+  colortype?: "primary" | "red" | undefined;
 }
 
 export interface ModalInterface {

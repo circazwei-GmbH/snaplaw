@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import SignArea from "../SignArea";
 import TopBar from "../../layouts/TopBar";
@@ -33,8 +33,8 @@ export default function SignModal({ visible, onClose }: SignModalProps) {
   };
 
   useEffect(() => {
-      setCreateDisabled(true)
-  }, [visible])
+    setCreateDisabled(true);
+  }, [visible]);
 
   const takeSignature = async () => {
     dispatch(addToWAiter(SIGN_LOADER));
