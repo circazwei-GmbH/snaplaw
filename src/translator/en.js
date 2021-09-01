@@ -275,5 +275,7 @@ export default {
   },
   invite_page: {
     title: "Invite",
+    invitation:
+      "Enter the email address of the partner and invite him to the contract",
   },
 };
