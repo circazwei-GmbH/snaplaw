@@ -28,7 +28,7 @@ export default function ContractView({ visible, onClose }: ContractViewProps) {
         message: t("contracts.messages.found_in_pregress_folder"),
         actions: [
           {
-            name: t("contracts.confirmation_modal.buttons.ok"),
+            name: t("ok"),
             action: navigationPopToTop(),
           },
         ],

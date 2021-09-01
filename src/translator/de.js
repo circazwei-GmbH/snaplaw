@@ -270,7 +270,7 @@ export default {
     },
     messages: {
       found_in_pregress_folder:
-        "Der Vertrag wird an den Käufer gesendet. Den Vertrag finden Sie im In Bearbeitung Ordner.",
+        "Vergessen Sie bitte nicht, den Kunden einzuladen. Den Vertrag finden Sie im ^In Bearbeitung^ Ordner.",
     },
   },
   sign_form: {
@@ -286,4 +286,5 @@ export default {
         " klicke, stimme ich zu, dass die Unterschrift die elektronische Darstellung meiner Unterschrift für alle Zwecke ist, wenn ich sie auf Dokumenten verwende.",
     },
   },
+  ok: "OK"
 };

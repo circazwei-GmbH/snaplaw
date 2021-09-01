@@ -62,7 +62,7 @@ describe("ContractView", () => {
         message: "contracts.messages.found_in_pregress_folder",
         actions: [
           {
-            name: "contracts.confirmation_modal.buttons.ok",
+            name: "ok",
             action: navigationPopToTop(),
           },
         ],
