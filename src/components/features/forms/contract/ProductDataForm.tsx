@@ -20,6 +20,8 @@ export default function ProductDataForm(): JSX.Element {
         (screen) => screen.type === CONTRACT_SCREEN_TYPES.PRODUCT_DATA
       ) as ProductDataScreenInterface | undefined
   );
+  const screenErrors = useAppSelector(state => state.contract.contractErrors ? state.contract.contractErrors[CONTRACT_SCREEN_TYPES.PRODUCT_DATA] : undefined)
+
   const { t } = useI18n();
   const contractType = useAppSelector(
     (state) => state.contract.currentContract?.type
@@ -44,6 +46,7 @@ export default function ProductDataForm(): JSX.Element {
       <View style={styles.inputBox}>
         <TextField
           value={productData?.data[PRODUCT_DATA_FIELDS.subject]}
+          errorMessage={screenErrors?.[PRODUCT_DATA_FIELDS.subject]}
           placeholder={t(
             `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.subject`
           )}
@@ -53,6 +56,7 @@ export default function ProductDataForm(): JSX.Element {
         />
         <TextField
           value={productData?.data[PRODUCT_DATA_FIELDS.producer]}
+          errorMessage={screenErrors?.[PRODUCT_DATA_FIELDS.producer]}
           placeholder={t(
             `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.producer`
           )}

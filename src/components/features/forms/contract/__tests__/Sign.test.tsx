@@ -1,12 +1,22 @@
 import React from "react";
 import { createStore } from "@reduxjs/toolkit";
-import { render } from "@testing-library/react-native";
+import {fireEvent, render} from "@testing-library/react-native";
 import { Provider } from "react-redux";
 import Sign from "../Sign";
 import {
   CONTRACT_SCREEN_TYPES,
   CONTRACT_TYPES,
 } from "../../../../../store/modules/contract/constants";
+
+jest.mock("@react-navigation/native", () => {
+  const navigation = {
+    push: jest.fn(),
+    pop: jest.fn(),
+  };
+  return {
+    useNavigation: () => navigation,
+  };
+});
 
 const initialState = {
   contract: {
@@ -41,6 +51,15 @@ describe("Sign", () => {
       )
     ).toBeTruthy();
   });
+  it('test', () => {
+    const { queryByTestId } = render(
+      <Provider store={store}>
+        <Sign />
+      </Provider>
+    );
+    fireEvent.press(queryByTestId('SignInputPressID'))
+    expect(true).toBeTruthy()
+  })
   it("Should not dispaly on empty contract", () => {
     // @ts-ignore
     initialState.contract.currentContract = undefined;
@@ -56,4 +75,5 @@ describe("Sign", () => {
       )
     ).not.toBeTruthy();
   });
+
 });
