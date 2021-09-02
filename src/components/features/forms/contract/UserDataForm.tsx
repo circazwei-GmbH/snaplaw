@@ -11,6 +11,7 @@ import {
   UserDataScreenInterface,
 } from "../../../../store/modules/contract/types";
 import { birthDateFormat } from "../../../../utils/birthDateFormat";
+import {validateScreen} from "../../../../store/modules/contract/action-creators";
 
 export default function UserDataForm(): JSX.Element {
   const { t } = useI18n();
@@ -22,6 +23,8 @@ export default function UserDataForm(): JSX.Element {
         (screen) => screen.type === CONTRACT_SCREEN_TYPES.USER_DATA
       ) as UserDataScreenInterface | undefined
   );
+  const contractType = useAppSelector(state => state.contract.currentContract?.type)
+  const screenErrors = useAppSelector(state => state.contract.contractErrors ? state.contract.contractErrors[CONTRACT_SCREEN_TYPES.USER_DATA] : undefined)
 
   const onChangeAction = (value: string, fieldName: USER_DATA_FIELDS) => {
     dispatch(
@@ -31,12 +34,16 @@ export default function UserDataForm(): JSX.Element {
         value,
       })
     );
+    if (screenErrors?.[fieldName] && contractType) {
+      dispatch(validateScreen(contractType, CONTRACT_SCREEN_TYPES.USER_DATA))
+    }
   };
 
   return (
     <View style={styles.inputBox}>
       <TextField
         placeholder={t("edit_profile.placeholders.name")}
+        errorMessage={screenErrors?.[USER_DATA_FIELDS.name]}
         value={userData?.data[USER_DATA_FIELDS.name]}
         onChangeFunction={(newValue) =>
           onChangeAction(newValue, USER_DATA_FIELDS.name)
@@ -45,6 +52,7 @@ export default function UserDataForm(): JSX.Element {
       <TextField
         placeholder={t("edit_profile.placeholders.lastName")}
         value={userData?.data[USER_DATA_FIELDS.lastName]}
+        errorMessage={screenErrors?.[USER_DATA_FIELDS.lastName]}
         onChangeFunction={(newValue) =>
           onChangeAction(newValue, USER_DATA_FIELDS.lastName)
         }
@@ -54,6 +62,7 @@ export default function UserDataForm(): JSX.Element {
         keyboardType="number-pad"
         placeholder={t("edit_profile.placeholders.dateOfBirth")}
         value={birthDateFormat(userData?.data[USER_DATA_FIELDS.dateOfBirth])}
+        errorMessage={screenErrors?.[USER_DATA_FIELDS.dateOfBirth]}
         onChangeFunction={(newValue) =>
           onChangeAction(newValue, USER_DATA_FIELDS.dateOfBirth)
         }
@@ -61,6 +70,7 @@ export default function UserDataForm(): JSX.Element {
       <TextField
         editable={false}
         placeholder={t("edit_profile.placeholders.email")}
+        errorMessage={screenErrors?.[USER_DATA_FIELDS.email]}
         value={userData?.data[USER_DATA_FIELDS.email]}
         onChangeFunction={(newValue) =>
           onChangeAction(newValue, USER_DATA_FIELDS.email)
@@ -70,6 +80,7 @@ export default function UserDataForm(): JSX.Element {
         keyboardType="phone-pad"
         placeholder={t("edit_profile.placeholders.phone")}
         value={userData?.data[USER_DATA_FIELDS.phone]}
+        errorMessage={screenErrors?.[USER_DATA_FIELDS.phone]}
         onChangeFunction={(newValue) =>
           onChangeAction(newValue, USER_DATA_FIELDS.phone)
         }
@@ -77,6 +88,7 @@ export default function UserDataForm(): JSX.Element {
       <TextField
         placeholder={t("edit_profile.placeholders.address")}
         value={userData?.data[USER_DATA_FIELDS.address]}
+        errorMessage={screenErrors?.[USER_DATA_FIELDS.address]}
         onChangeFunction={(newValue) =>
           onChangeAction(newValue, USER_DATA_FIELDS.address)
         }
@@ -85,6 +97,7 @@ export default function UserDataForm(): JSX.Element {
         keyboardType="number-pad"
         placeholder={t("edit_profile.placeholders.postCode")}
         value={userData?.data[USER_DATA_FIELDS.postCode]}
+        errorMessage={screenErrors?.[USER_DATA_FIELDS.postCode]}
         onChangeFunction={(newValue) =>
           onChangeAction(newValue, USER_DATA_FIELDS.postCode)
         }

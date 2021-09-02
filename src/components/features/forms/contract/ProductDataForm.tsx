@@ -47,7 +47,6 @@ export default function ProductDataForm(): JSX.Element {
       })
     );
     if (screenErrors?.[fieldName] && contractType) {
-      console.log('----START----')
       dispatch(validateScreen(contractType, CONTRACT_SCREEN_TYPES.PRODUCT_DATA))
     }
   };

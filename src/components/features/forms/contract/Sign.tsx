@@ -39,7 +39,6 @@ export default function Sign() {
   const navigator = useNavigation();
 
   const signModalHandler = (currentContract: Contract) => {
-    console.log('------START-----')
     dispatch(clearErrors())
     const emptyScreen = contractValidator(currentContract.type, currentContract.screens)
     if (emptyScreen !== null) {

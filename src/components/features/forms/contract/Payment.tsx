@@ -17,6 +17,7 @@ import {
   CURRENSIES,
   CURRENSY,
 } from "../../../../store/modules/contract/purchase/payment";
+import {validateScreen} from "../../../../store/modules/contract/action-creators";
 
 export default function Payment() {
   const { t } = useI18n();
@@ -30,6 +31,8 @@ export default function Payment() {
         (screen) => screen.type === CONTRACT_SCREEN_TYPES.PAYMENT
       ) as PaymentScreenInterface
   );
+  const screenErrors = useAppSelector(state => state.contract.contractErrors ? state.contract.contractErrors[CONTRACT_SCREEN_TYPES.PAYMENT] : undefined)
+
   const dispatch = useAppDispatch();
   const updateDataHandler = (fieldName: PAYMENT_FIELDS, value: string) => {
     dispatch(
@@ -39,6 +42,9 @@ export default function Payment() {
         value,
       })
     );
+    if (screenErrors?.[fieldName] && contractType) {
+      dispatch(validateScreen(contractType, CONTRACT_SCREEN_TYPES.PAYMENT))
+    }
   };
 
   useEffect(() => {
@@ -66,6 +72,7 @@ export default function Payment() {
       <View style={styles.priceBlock}>
         <TextField
           keyboardType="numeric"
+          errorMessage={screenErrors?.[PAYMENT_FIELDS.COST]}
           containerStyle={styles.costField}
           value={screenData?.data[PAYMENT_FIELDS.COST]}
           onChangeFunction={(test) =>
@@ -151,6 +158,7 @@ export default function Payment() {
             onChangeFunction={(text) =>
               updateDataHandler(PAYMENT_FIELDS.CARD_NAME, text)
             }
+            errorMessage={screenErrors?.[PAYMENT_FIELDS.CARD_NAME]}
             value={screenData?.data[PAYMENT_FIELDS.CARD_NAME]}
             placeholder={t(
               `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.name`
@@ -160,6 +168,7 @@ export default function Payment() {
             onChangeFunction={(text) =>
               updateDataHandler(PAYMENT_FIELDS.CARD_NUMBER, text)
             }
+            errorMessage={screenErrors?.[PAYMENT_FIELDS.CARD_NUMBER]}
             value={screenData?.data[PAYMENT_FIELDS.CARD_NUMBER]}
             placeholder={t(
               `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.card`

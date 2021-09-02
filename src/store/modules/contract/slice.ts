@@ -96,7 +96,6 @@ const contractSlice = createSlice({
           [action.payload.field]: action.payload.message
         }
       }
-      console.log(action.payload.message, action.payload.screenType, action.payload.field)
     },
     [clearErrorsAction.type]: (
       state: Draft<ContractState>,

@@ -16,6 +16,10 @@ export interface ValidatiorWithCheckInterface {
   (message: string, option: number, fieldChecking: string): ValidatorInterface
 }
 
+export interface ValidationWithCheckOnScecificValueInterface {
+  (message: string, option: number, fieldChecking: string, scpecificValue: unknown): ValidatorInterface
+}
+
 export const length: ValidatorBuilderInterface =
   (message, length) => (text: string | undefined) => {
     if (!length) {
@@ -43,6 +47,15 @@ export const match =
 
 export const lengthCheckIfAnotherFieldIsTrue: ValidatiorWithCheckInterface = (message, length, field) => (text: string | undefined, form: Record<string, unknown>) => {
   if (form && !form[field]) {
+    return;
+  }
+  if (!text || text.length < length) {
+    return message
+  }
+}
+
+export const lengthCheckIfAnotherFieldHasSpecificValue: ValidationWithCheckOnScecificValueInterface = (message, length, field, specificValue) => (text: string | undefined, form: Record<string, unknown>) => {
+  if ((form && !form[field]) || form[field] !== specificValue) {
     return;
   }
   if (!text || text.length < length) {

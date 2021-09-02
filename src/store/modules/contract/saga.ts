@@ -15,6 +15,7 @@ import { prefillUserData } from "../../../services/contract/user-data-prefiller"
 import { SelectType } from "../../hooks";
 import {contractValidationConfig, screenFieldValidator} from "./validation";
 import {BaseScreenDataInterface} from "./base-types";
+import {Translator} from "../../../translator/i18n";
 
 function* createContract({ payload }: RequestCreateContractAction) {
   try {
@@ -65,7 +66,7 @@ function* screenValidate({ payload: { contractType, screenType } }: ScreenValida
       if (validated) {
         yield put(setFieldError({
           screenType,
-          message: validated,
+          message: Translator.getInstance().trans(validated),
           field
         }))
       } else {
