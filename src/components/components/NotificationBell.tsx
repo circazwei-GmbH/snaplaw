@@ -1,15 +1,23 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { PROFILE_ROUTER } from "../../router/ProfileRouterTypes";
+import * as RootNavigation from "../../router/RootNavigation";
 
 export default function NotificationBell(): JSX.Element {
   const [haveNew] = useState(true);
+  const onPressHandler = () =>
+    RootNavigation.navigate(PROFILE_ROUTER.NOTIFICATIONS);
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      testID="bell.button"
+      style={styles.container}
+      onPress={onPressHandler}
+    >
       <Ionicons name="notifications-outline" size={24} color="#668395" />
       {haveNew ? <View testID="bell.pinkDot" style={styles.pinkDot} /> : null}
-    </View>
+    </TouchableOpacity>
   );
 }
 
