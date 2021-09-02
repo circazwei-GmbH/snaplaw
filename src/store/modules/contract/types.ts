@@ -46,10 +46,6 @@ export interface RequestScreenDataAction extends BaseAction {
   payload: number;
 }
 
-export interface RequestUsersEmailAction extends BaseAction {
-  payload: object[];
-}
-
 export { ProductDataScreenInterface, PRODUCT_DATA_FIELDS };
 export { UserDataScreenInterface, USER_DATA_FIELDS };
 export { ProductConditionScreenInterface, CONDITION_VALUE, CONDITIONS };

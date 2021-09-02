@@ -32,6 +32,9 @@ const setScreenDataAction = createAction<ScreenData, "setScreenData">(
 const setInviteEmailsListAction = createAction<object[], "setInviteEmails">(
   "setInviteEmails"
 );
+const clearInviteEmailsListAction = createAction<object[], "clearInviteEmails">(
+  "clearInviteEmails"
+);
 
 const contractSlice = createSlice({
   name: "contract",
@@ -82,10 +85,17 @@ const contractSlice = createSlice({
     ) => {
       state.inviteEmailsList = [...state.inviteEmailsList, ...action.payload];
     },
+    [clearInviteEmailsListAction.type]: (state: Draft<ContractState>) => {
+      state.inviteEmailsList = [];
+    },
   },
 });
 
-export const { setInitedContract, setScreenData, setInviteEmails } =
-  contractSlice.actions;
+export const {
+  setInitedContract,
+  setScreenData,
+  setInviteEmails,
+  clearInviteEmails,
+} = contractSlice.actions;
 
 export default contractSlice.reducer;

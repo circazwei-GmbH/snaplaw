@@ -1,8 +1,4 @@
-import {
-  RequestCreateContractAction,
-  RequestScreenDataAction,
-  RequestUsersEmailAction,
-} from "./types";
+import { RequestCreateContractAction, RequestScreenDataAction } from "./types";
 import { CONTRACT_TYPES } from "./constants";
 
 export const REQUEST_CREATE_CONTRACT = "REQUEST_CREATE_CONTRACT";

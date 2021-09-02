@@ -12,6 +12,8 @@ import {
 } from "react-native";
 import { SimpleLineIcons } from "@expo/vector-icons";
 
+const LIST_ITEM_HEIGHT = 50;
+
 interface OnChangeFunction {
   (text: string): void;
 }
@@ -23,7 +25,7 @@ interface InviteTextFieldPropsInterface extends TextInputProps {
   value?: string;
   onChangeFunction: OnChangeFunction;
   containerStyle?: StyleProp<TextStyle>;
-  list?: object[];
+  list: object[];
   getEmails: Function;
 }
 
@@ -47,10 +49,12 @@ export default function InviteTextField({
       onChangeFunction(text);
     }
   };
+
   const inputButtonHandler = () => {
     setFocused(!focused);
     // input.current.blur();
   };
+
   const listItemPressHandler = (newValue: string) => setLocalValue(newValue);
 
   const renderItem = (item: object): JSX.Element => (
@@ -94,7 +98,7 @@ export default function InviteTextField({
       >
         {errorMessage}
       </Text>
-      {focused ? (
+      {focused && list?.length > 0 ? (
         <FlatList
           style={styles.list}
           data={list}
@@ -104,8 +108,8 @@ export default function InviteTextField({
           onEndReachedThreshold={0.0001}
           keyboardShouldPersistTaps="handled"
           getItemLayout={(data, index) => ({
-            length: 50,
-            offset: 50 * index,
+            length: LIST_ITEM_HEIGHT,
+            offset: LIST_ITEM_HEIGHT * index,
             index,
           })}
         />
@@ -116,7 +120,7 @@ export default function InviteTextField({
 
 const styles = StyleSheet.create({
   listItem: {
-    height: 50,
+    height: LIST_ITEM_HEIGHT,
     justifyContent: "center",
     borderBottomColor: "#EFF7FD",
     borderBottomWidth: 1,
@@ -185,5 +189,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 10,
     elevation: 3,
+    zIndex: 2,
   },
 });
