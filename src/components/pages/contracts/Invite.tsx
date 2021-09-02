@@ -45,7 +45,7 @@ export default function Invite(): JSX.Element {
   };
 
   const onChangeHandler = (newValue: string) => {
-    setFakeEmailStoreValue(formFieldFill("email", newValue, emailValue));
+    setEmailValue(formFieldFill("email", newValue, emailValue));
     setTimeout(() => {
       dispatch(clearInviteEmails());
       dispatch(requestUsersEmail());
@@ -63,18 +63,16 @@ export default function Invite(): JSX.Element {
       return;
     }
 
-    setFakeEmailStoreValue(emailValue.email.value);
-  };
-
-  console.log(fakeStoreEmailValue);
-
-  const onListItemPress = (newValue: string) => {
-    setFakeEmailStoreValue(newValue);
+    alert("Yo, user is invited!");
   };
 
   useEffect(() => {
     getEmails();
   }, []);
+
+  useEffect(() => {
+    setEmailValue(formFieldFill("email", fakeStoreEmailValue, emailValue));
+  }, [fakeStoreEmailValue]);
 
   return (
     <TopBar pageName={t("invite_page.title")}>
@@ -89,7 +87,7 @@ export default function Invite(): JSX.Element {
             list={emails}
             getEmails={getEmails}
             errorMessage={emailValue.email.error}
-            onListItemPress={onListItemPress}
+            setValue={setFakeEmailStoreValue}
           />
           <Button
             text={t("invite_page.title")}

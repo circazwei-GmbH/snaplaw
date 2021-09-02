@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   TextInput,
   View,
@@ -28,7 +28,7 @@ interface InviteTextFieldPropsInterface extends TextInputProps {
   containerStyle?: StyleProp<TextStyle>;
   list: object[];
   getEmails: Function;
-  onListItemPress: Function;
+  setValue: Function;
 }
 
 export default function InviteTextField({
@@ -39,7 +39,7 @@ export default function InviteTextField({
   containerStyle,
   list,
   getEmails,
-  onListItemPress,
+  setValue,
   ...props
 }: InviteTextFieldPropsInterface) {
   const [localValue, setLocalValue] = useState(value);
@@ -53,6 +53,12 @@ export default function InviteTextField({
     }
   };
 
+  useEffect(() => {
+    setValue(localValue);
+  }, [localValue]);
+
+  const onPressListItem = (newValue: string) => setLocalValue(newValue);
+
   const inputButtonHandler = () => {
     setFocused(!focused);
     // input.current.blur();
@@ -62,7 +68,7 @@ export default function InviteTextField({
     <TouchableOpacity
       activeOpacity={1}
       style={styles.listItem}
-      onPress={() => onListItemPress(item.email)}
+      onPress={() => onPressListItem(item.email)}
     >
       <Text style={styles.listItemText}>{item.email}</Text>
     </TouchableOpacity>
