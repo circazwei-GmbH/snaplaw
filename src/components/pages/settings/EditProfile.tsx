@@ -13,20 +13,24 @@ import EditProfileForm, {
   EditProfileFormInterface,
 } from "../../features/forms/EditProfileForm";
 import { useAppSelector, useAppDispatch } from "../../../store/hooks";
-import { UserType, setUserProfile } from "../../../store/modules/profile/slice";
 import { requestEditProfile } from "../../../store/modules/profile/action-creators";
 import { email, length } from "../../../validations/default";
+import { formFieldFill, validate } from "../../../utils/forms";
+import {
+  UserTypeNoAvatar,
+  setUserProfile,
+} from "../../../store/modules/profile/slice";
 import { setModal } from "../../../store/modules/main/slice";
 
 export default function EditProfile() {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
   const [edit, setEdit] = useState(false);
-  const userData: UserType | undefined = useAppSelector(
+  const userData: UserTypeNoAvatar | undefined = useAppSelector(
     (state) => state.profile.user
   );
 
-  const globalValue: UserType = {
+  const globalValue: UserTypeNoAvatar = {
     name: userData?.name,
     lastName: userData?.lastName,
     dateOfBirth: userData?.dateOfBirth,
@@ -41,48 +45,49 @@ export default function EditProfile() {
       value: userData?.name,
       error: "",
       displayError: false,
-      validators: [length(t("sign_up.errors.name_required"), 1)],
+      validators: [length(t("edit_profile.error"), 1)],
     },
     lastName: {
       value: userData?.lastName,
       error: "",
       displayError: false,
-      validators: [length(t("sign_up.errors.name_required"), 1)],
+      validators: [length(t("edit_profile.error"), 1)],
     },
     dateOfBirth: {
       value: userData?.dateOfBirth,
       error: "",
       displayError: false,
-      validators: [length(t("sign_up.errors.name_required"), 1)],
+      validators: [length(t("edit_profile.error"), 1)],
     },
     email: {
       value: userData?.email,
       error: "",
       displayError: false,
-      validators: [email(t("sign_up.errors.email_not_valid"))],
+      validators: [email(t("edit_profile.error"))],
     },
     phone: {
       value: userData?.phone,
       error: "",
       displayError: false,
-      validators: [length(t("sign_up.errors.name_required"), 1)],
+      validators: [length(t("edit_profile.error"), 1)],
     },
     address: {
       value: userData?.address,
       error: "",
       displayError: false,
-      validators: [length(t("sign_up.errors.name_required"), 1)],
+      validators: [length(t("edit_profile.error"), 1)],
     },
     postCode: {
       value: userData?.postCode,
       error: "",
       displayError: false,
-      validators: [length(t("sign_up.errors.name_required"), 1)],
+      validators: [length(t("edit_profile.error"), 1)],
     },
   };
 
   const [form, setForm] = useState<EditProfileFormInterface | any>(formInitial);
-  const localForm: UserType = {
+
+  const formToSave: UserTypeNoAvatar = {
     name: form.name.value,
     lastName: form.lastName.value,
     dateOfBirth: form.dateOfBirth.value,
@@ -99,6 +104,30 @@ export default function EditProfile() {
   };
 
   const pressSave = () => {
+    const localForm: EditProfileFormInterface = {
+      name: validate(form.name),
+      lastName: validate(form.lastName),
+      dateOfBirth: validate(form.dateOfBirth),
+      email: validate(form.email),
+      phone: validate(form.phone),
+      address: validate(form.address),
+      postCode: validate(form.postCode),
+    };
+
+    setForm(localForm);
+
+    if (
+      form.name.error ||
+      form.lastName.error ||
+      form.dateOfBirth.error ||
+      form.email.error ||
+      form.phone.error ||
+      form.address.error ||
+      form.postCode.error
+    ) {
+      return;
+    }
+
     dispatch(
       setModal({
         message: t("edit_profile.modals.save.message"),
@@ -108,7 +137,7 @@ export default function EditProfile() {
             colortype: "error",
           },
           {
-            action: requestEditProfile(localForm),
+            action: requestEditProfile(formToSave),
             name: t("edit_profile.modals.save.confirm"),
             colortype: "primary",
           },
@@ -136,19 +165,13 @@ export default function EditProfile() {
     );
   };
 
+  const onChange = (newValue: string, fieldName: any) => {
+    setForm(formFieldFill(fieldName, newValue, form));
+  };
+
   useEffect(() => {
     cancelHandler();
   }, [userData]);
-
-  const onChange = (newValue: string, fieldName: any) => {
-    setForm({
-      ...form,
-      [fieldName]: {
-        ...form[fieldName],
-        value: newValue,
-      },
-    });
-  };
 
   return (
     <TopBar

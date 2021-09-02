@@ -18,7 +18,6 @@ import {
   CONFIRMATION_FIELDS,
   CONFIRMATION,
 } from "./purchase/confirmation";
-import { BaseScreenDataInterface } from "./base-types";
 import {
   PaymentScreenInterface,
   PAYMENT_METHODS,
@@ -29,6 +28,7 @@ import {
   DescriptionPhotoInterface,
   PRODUCT_DESCRIPTION_FIELDS,
 } from "./purchase/product-description";
+import { BaseScreenDataInterface } from "./base-types";
 
 export type ContractType = CONTRACT_TYPES.PURCHASE;
 

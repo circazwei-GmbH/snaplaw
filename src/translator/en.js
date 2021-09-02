@@ -155,6 +155,7 @@ export default {
         no: "No",
       },
     },
+    error: "The field can't be empty",
   },
   upload_files: {
     camera: "Camera",
@@ -258,6 +259,15 @@ export default {
       next: "Next",
       back: "Back",
       cancel: "Cancel",
+      view: "View contract",
+    },
+    pdf_view: {
+      edit: "Edit",
+      save: "Save",
+    },
+    messages: {
+      found_in_pregress_folder:
+        "Don't forget to invite the buyer. The contract can be found in ^In progress^ folder.",
     },
   },
   sign_form: {
@@ -273,6 +283,7 @@ export default {
         ", I agree that the signature will be the electronic representation of my signature for all purposes when I use them on documents.",
     },
   },
+  ok: "OK",
   invite_page: {
     title: "Invite",
     invitation:

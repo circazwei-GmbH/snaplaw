@@ -158,6 +158,7 @@ export default {
         no: "Nein",
       },
     },
+    error: "Das Feld kann nicht leer sein",
   },
   upload_files: {
     camera: "Kamera",
@@ -261,6 +262,15 @@ export default {
       next: "Weiter",
       back: "Zurück",
       cancel: "Abbrechen",
+      view: "Vertrag anschauen",
+    },
+    pdf_view: {
+      edit: "Editieren",
+      save: "Speichern",
+    },
+    messages: {
+      found_in_pregress_folder:
+        "Vergessen Sie bitte nicht, den Kunden einzuladen. Den Vertrag finden Sie im ^In Bearbeitung^ Ordner.",
     },
   },
   sign_form: {
@@ -276,6 +286,7 @@ export default {
         " klicke, stimme ich zu, dass die Unterschrift die elektronische Darstellung meiner Unterschrift für alle Zwecke ist, wenn ich sie auf Dokumenten verwende.",
     },
   },
+  ok: "OK",
   invite_page: {
     title: "Einladen",
     invitation:

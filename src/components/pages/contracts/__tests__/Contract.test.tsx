@@ -6,6 +6,8 @@ import { createStore } from "@reduxjs/toolkit";
 import { CONTRACT_TYPES } from "../../../../store/modules/contract/constants";
 import { useNavigation } from "@react-navigation/native";
 import { HOME_ROUTER } from "../../../../router/HomeRouterType";
+import { LANGUAGE_ENGLISH } from "../../../../store/modules/profile/constants";
+import { LanguageType } from "../../../../store/modules/profile/slice";
 
 jest.mock("../../../../store/modules/contract/contract-screens-types", () => {
   const {
@@ -51,6 +53,9 @@ type InitialStateType = {
   contract: {
     currentContract: Record<"type", CONTRACT_TYPES> | undefined;
   };
+  profile: {
+    language: LanguageType;
+  };
 };
 
 const initialState: InitialStateType = {
@@ -58,6 +63,9 @@ const initialState: InitialStateType = {
     currentContract: {
       type: CONTRACT_TYPES.PURCHASE,
     },
+  },
+  profile: {
+    language: LANGUAGE_ENGLISH,
   },
 };
 
@@ -91,6 +99,7 @@ describe("Contract", () => {
     );
 
     fireEvent.press(getByText("contracts.buttons.next"));
+    // @ts-ignore
     expect(useNavigation().push).toBeCalledWith(HOME_ROUTER.CONTRACT, {
       screenCount: 1,
     });
@@ -104,6 +113,7 @@ describe("Contract", () => {
     );
 
     fireEvent.press(getByText("contracts.buttons.back"));
+    // @ts-ignore
     expect(useNavigation().pop).toBeCalled();
   });
   it("Should no render on undefined type", () => {

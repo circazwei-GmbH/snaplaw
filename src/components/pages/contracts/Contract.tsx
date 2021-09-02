@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TopBar from "../../layouts/TopBar";
 import { View, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -19,6 +19,8 @@ import InviteButton from "../../basics/buttons/InviteButton";
 import { navigationPopToTop } from "../../../store/modules/main/action-creators";
 import { setModal } from "../../../store/modules/main/slice";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import ContractViewButton from "../../basics/buttons/ContractViewButton";
+import ContractView from "../../features/Modals/ContractView";
 
 type ContractProps = {
   route: {
@@ -35,7 +37,7 @@ export default function Contract({
   const contractType = useAppSelector(
     (state) => state.contract.currentContract?.type
   );
-
+  const [contractViewVisible, setContractViewVisible] = useState(false);
   const { t } = useI18n();
   const dispatch = useAppDispatch();
 
@@ -65,6 +67,14 @@ export default function Contract({
         ],
       })
     );
+  };
+
+  const viewHandler = () => {
+    setContractViewVisible(true);
+  };
+
+  const closeViewerHandler = () => {
+    setContractViewVisible(false);
   };
 
   if (!contractType) {
@@ -112,7 +122,14 @@ export default function Contract({
           {screenCount < contractScreensConfig[contractType].length - 1 ? (
             <ContractNextButton onPress={nextHandler} />
           ) : null}
+          {screenCount === contractScreensConfig[contractType].length - 1 ? (
+            <ContractViewButton onPress={viewHandler} />
+          ) : null}
         </View>
+        <ContractView
+          visible={contractViewVisible}
+          onClose={closeViewerHandler}
+        />
       </View>
     </TopBar>
   );
