@@ -187,8 +187,8 @@ export default {
   },
   notifications: {
     title: "Benachrichtigungen",
-    title_second_black: "You have the following",
-    title_second_blue: " notifications",
+    title_second_black: "Sie haben die folgenden",
+    title_second_blue: " Benachrichtigungen",
   },
   contracts: {
     [CONTRACT_TYPES.PURCHASE]: {
