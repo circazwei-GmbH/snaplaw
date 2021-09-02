@@ -52,12 +52,13 @@ const styles = StyleSheet.create({
     paddingTop: 35,
   },
   headerText: {
+    width: "44%",
     textAlign: "center",
     fontFamily: "OS-SB",
     fontSize: 17,
   },
   buttonPlaceholder: {
-    width: 120,
+    width: "28%",
     height: 45,
   },
 });

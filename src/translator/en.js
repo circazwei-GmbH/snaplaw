@@ -288,5 +288,6 @@ export default {
     title: "Invite",
     invitation:
       "Enter the email address of the partner and invite him to the contract",
+    error: "Please enter a valid email",
   },
 };

@@ -14,22 +14,62 @@ import UserAvatar from "../../components/UserAvatar";
 import { useAppSelector, useAppDispatch } from "../../../store/hooks";
 import { requestUsersEmail } from "../../../store/modules/contract/action-creators";
 import { clearInviteEmails } from "../../../store/modules/contract/slice";
+import { FieldInterface } from "../../features/forms/SignInForm";
+import { email } from "../../../validations/default";
+import { formFieldFill, validate } from "../../../utils/forms";
 
 export default function Invite(): JSX.Element {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
   const url = useAppSelector((state) => state.profile.user?.avatar);
   const emails = useAppSelector((state) => state.contract.inviteEmailsList);
+  const [fakeStoreEmailValue, setFakeEmailStoreValue] = useState("");
+
+  interface InviteEmailInterface {
+    email: FieldInterface;
+  }
+
+  const emailInitialValue: InviteEmailInterface = {
+    email: {
+      value: fakeStoreEmailValue,
+      error: "",
+      displayError: false,
+      validators: [email(t("invite_page.error"))],
+    },
+  };
+  const [emailValue, setEmailValue] =
+    useState<InviteEmailInterface>(emailInitialValue);
 
   const getEmails = () => {
     dispatch(requestUsersEmail());
   };
 
-  const onChangeHandler = () => {
+  const onChangeHandler = (newValue: string) => {
+    setFakeEmailStoreValue(formFieldFill("email", newValue, emailValue));
     setTimeout(() => {
       dispatch(clearInviteEmails());
       dispatch(requestUsersEmail());
     }, 500);
+  };
+
+  const inviteHandler = () => {
+    const emailLocalValue: InviteEmailInterface = {
+      email: validate(emailValue.email),
+    };
+
+    setEmailValue(emailLocalValue);
+
+    if (emailValue.email.error) {
+      return;
+    }
+
+    setFakeEmailStoreValue(emailValue.email.value);
+  };
+
+  console.log(fakeStoreEmailValue);
+
+  const onListItemPress = (newValue: string) => {
+    setFakeEmailStoreValue(newValue);
   };
 
   useEffect(() => {
@@ -43,16 +83,19 @@ export default function Invite(): JSX.Element {
           <UserAvatar sizeSmall url={url} />
           <DefaultText text={t("invite_page.invitation")} style={styles.text} />
           <InviteTextField
+            value={fakeStoreEmailValue}
             placeholder={t("edit_profile.placeholders.email")}
-            onChangeFunction={onChangeHandler}
+            onChangeFunction={(newValue) => onChangeHandler(newValue)}
             list={emails}
             getEmails={getEmails}
+            errorMessage={emailValue.email.error}
+            onListItemPress={onListItemPress}
           />
           <Button
             text={t("invite_page.title")}
             type={"primary"}
             style={styles.button}
-            onPress={() => {}}
+            onPress={inviteHandler}
           />
         </View>
       </TouchableWithoutFeedback>

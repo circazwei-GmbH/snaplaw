@@ -9,6 +9,7 @@ import {
   StyleProp,
   TextStyle,
   FlatList,
+  Dimensions,
 } from "react-native";
 import { SimpleLineIcons } from "@expo/vector-icons";
 
@@ -27,6 +28,7 @@ interface InviteTextFieldPropsInterface extends TextInputProps {
   containerStyle?: StyleProp<TextStyle>;
   list: object[];
   getEmails: Function;
+  onListItemPress: Function;
 }
 
 export default function InviteTextField({
@@ -37,6 +39,7 @@ export default function InviteTextField({
   containerStyle,
   list,
   getEmails,
+  onListItemPress,
   ...props
 }: InviteTextFieldPropsInterface) {
   const [localValue, setLocalValue] = useState(value);
@@ -55,13 +58,11 @@ export default function InviteTextField({
     // input.current.blur();
   };
 
-  const listItemPressHandler = (newValue: string) => setLocalValue(newValue);
-
   const renderItem = (item: object): JSX.Element => (
     <TouchableOpacity
       activeOpacity={1}
       style={styles.listItem}
-      onPress={() => listItemPressHandler(item.email)}
+      onPress={() => onListItemPress(item.email)}
     >
       <Text style={styles.listItemText}>{item.email}</Text>
     </TouchableOpacity>
@@ -100,7 +101,10 @@ export default function InviteTextField({
       </Text>
       {focused && list?.length > 0 ? (
         <FlatList
-          style={styles.list}
+          style={[
+            styles.list,
+            errorMessage ? styles.listTopPositionError : styles.listTopPosition,
+          ]}
           data={list}
           keyExtractor={(item) => `${item.id}`}
           renderItem={({ item }) => renderItem(item)}
@@ -183,12 +187,17 @@ const styles = StyleSheet.create({
   },
   list: {
     width: "100%",
-    height: "530%",
-    top: 55,
+    height: Dimensions.get("window").height / 4,
     position: "absolute",
     backgroundColor: "#fff",
     borderRadius: 10,
     elevation: 3,
     zIndex: 2,
+  },
+  listTopPosition: {
+    top: 55,
+  },
+  listTopPositionError: {
+    top: 75,
   },
 });

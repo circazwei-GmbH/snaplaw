@@ -291,5 +291,6 @@ export default {
     title: "Einladen",
     invitation:
       "Geben Sie die E-Mail-Adresse des Partners ein und laden Sie ihn zum Vertrag ein",
+    error: "Bitte geben Sie eine gültige Email-Adresse ein",
   },
 };

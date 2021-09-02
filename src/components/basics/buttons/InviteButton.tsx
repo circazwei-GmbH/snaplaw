@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "flex-end",
     paddingRight: 16,
-    width: 120,
+    width: "28%",
     height: 45,
   },
 });
