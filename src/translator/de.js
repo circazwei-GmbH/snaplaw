@@ -187,6 +187,8 @@ export default {
   },
   notifications: {
     title: "Benachrichtigungen",
+    title_second_black: "You have the following",
+    title_second_blue: " notifications",
   },
   contracts: {
     [CONTRACT_TYPES.PURCHASE]: {
@@ -286,5 +288,5 @@ export default {
         " klicke, stimme ich zu, dass die Unterschrift die elektronische Darstellung meiner Unterschrift für alle Zwecke ist, wenn ich sie auf Dokumenten verwende.",
     },
   },
-  ok: "OK"
+  ok: "OK",
 };

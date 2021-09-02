@@ -184,6 +184,8 @@ export default {
   },
   notifications: {
     title: "Notifications",
+    title_second_black: "You have the following",
+    title_second_blue: " notifications",
   },
   contracts: {
     [CONTRACT_TYPES.PURCHASE]: {
@@ -283,5 +285,5 @@ export default {
         ", I agree that the signature will be the electronic representation of my signature for all purposes when I use them on documents.",
     },
   },
-  ok: "OK"
+  ok: "OK",
 };
