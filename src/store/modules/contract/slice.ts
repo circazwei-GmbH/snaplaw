@@ -5,7 +5,7 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 import { Contract } from "./types";
-import {CONTRACT_SCREEN_TYPES, CONTRACT_TYPES} from "./constants";
+import {CONTRACT_SCREEN_TYPES} from "./constants";
 
 interface ContractState {
   currentContract: Contract | undefined;
@@ -26,7 +26,7 @@ type ScreenData = {
 type FieldErrorData = {
   screenType: CONTRACT_SCREEN_TYPES,
   field: string,
-  message: string
+  message: string | undefined
 }
 
 const setInitedContractAction = createAction<string, "setInitedContract">(
@@ -100,7 +100,6 @@ const contractSlice = createSlice({
     },
     [clearErrorsAction.type]: (
       state: Draft<ContractState>,
-      action: PayloadAction<undefined>
     ) => {
       state.contractErrors = undefined
     }

@@ -269,6 +269,9 @@ export default {
       found_in_pregress_folder:
         "Don't forget to invite the buyer. The contract can be found in ^In progress^ folder.",
     },
+    validation: {
+      field_empty: "The field can't be empty"
+    }
   },
   sign_form: {
     title: "Sign contract with your finger",

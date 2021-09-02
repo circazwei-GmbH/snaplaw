@@ -272,6 +272,9 @@ export default {
       found_in_pregress_folder:
         "Vergessen Sie bitte nicht, den Kunden einzuladen. Den Vertrag finden Sie im ^In Bearbeitung^ Ordner.",
     },
+    validation: {
+      field_empty: "Das Feld kann nicht leer sein"
+    }
   },
   sign_form: {
     title: "Vertrag mit dem Finger unterschreiben",

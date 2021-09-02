@@ -12,12 +12,16 @@ export interface ValidatorBuilderInterface {
   (message: string, option?: number | string): ValidatorInterface;
 }
 
+export interface ValidatiorWithCheckInterface {
+  (message: string, option: number, fieldChecking: string): ValidatorInterface
+}
+
 export const length: ValidatorBuilderInterface =
-  (message, length) => (text: string) => {
+  (message, length) => (text: string | undefined) => {
     if (!length) {
       return;
     }
-    if (text.length < length) {
+    if (!text || text.length < length) {
       return message;
     }
   };
@@ -36,3 +40,12 @@ export const match =
     }
     return message;
   };
+
+export const lengthCheckIfAnotherFieldIsTrue: ValidatiorWithCheckInterface = (message, length, field) => (text: string | undefined, form: Record<string, unknown>) => {
+  if (form && !form[field]) {
+    return;
+  }
+  if (!text || text.length < length) {
+    return message
+  }
+}

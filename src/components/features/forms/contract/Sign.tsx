@@ -20,6 +20,7 @@ import {Contract} from "../../../../store/modules/contract/types";
 import {useNavigation} from "@react-navigation/native";
 import {contractScreensConfig} from "../../../../store/modules/contract/contract-screens-types";
 import {validateScreen} from "../../../../store/modules/contract/action-creators";
+import {clearErrors} from "../../../../store/modules/contract/slice";
 
 export default function Sign() {
   const { t } = useI18n();
@@ -38,13 +39,16 @@ export default function Sign() {
   const navigator = useNavigation();
 
   const signModalHandler = (currentContract: Contract) => {
+    console.log('------START-----')
+    dispatch(clearErrors())
     const emptyScreen = contractValidator(currentContract.type, currentContract.screens)
     if (emptyScreen !== null) {
+      // @ts-ignore
       navigator.pop(contractScreensConfig[currentContract.type].length  - 1 - emptyScreen)
       dispatch(validateScreen(currentContract.type, contractScreensConfig[currentContract.type][emptyScreen].type))
       return;
     }
-    return
+
     setSignVisible(!signVisible);
     dispatch(
       orientationChange(

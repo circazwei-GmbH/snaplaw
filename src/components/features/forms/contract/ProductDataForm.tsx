@@ -1,17 +1,15 @@
-import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
-import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import React, {useState} from "react";
+import {StyleSheet, View} from "react-native";
+import {useAppDispatch, useAppSelector} from "../../../../store/hooks";
 import TextField from "../../../components/TextField";
-import {
-  PRODUCT_DATA_FIELDS,
-  ProductDataScreenInterface,
-} from "../../../../store/modules/contract/types";
-import { useI18n } from "../../../../translator/i18n";
+import {PRODUCT_DATA_FIELDS, ProductDataScreenInterface,} from "../../../../store/modules/contract/types";
+import {useI18n} from "../../../../translator/i18n";
 import DefaultText from "../../../basics/typography/DefaultText";
 import DefaultSwitch from "../../../basics/switches/DefaultSwitch";
-import { toggleBoolValue } from "../../../../utils/toggleBoolValue";
-import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/constants";
-import { setScreenData } from "../../../../store/modules/contract/slice";
+import {toggleBoolValue} from "../../../../utils/toggleBoolValue";
+import {CONTRACT_SCREEN_TYPES} from "../../../../store/modules/contract/constants";
+import {setScreenData} from "../../../../store/modules/contract/slice";
+import {validateScreen} from "../../../../store/modules/contract/action-creators";
 
 export default function ProductDataForm(): JSX.Element {
   const productData = useAppSelector(
@@ -29,7 +27,16 @@ export default function ProductDataForm(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const [haveSerial, setHaveSerial] = useState<boolean>(false);
-  const toggleHaveSerial = () => toggleBoolValue(haveSerial, setHaveSerial);
+  const toggleHaveSerial = () => {
+    toggleBoolValue(haveSerial, setHaveSerial);
+    dispatch(
+      setScreenData({
+        screenType: CONTRACT_SCREEN_TYPES.PRODUCT_DATA,
+        fieldName: PRODUCT_DATA_FIELDS.isSerial,
+        value: !haveSerial,
+      })
+    );
+  }
 
   const onChangeAction = (value: string, fieldName: PRODUCT_DATA_FIELDS) => {
     dispatch(
@@ -39,6 +46,10 @@ export default function ProductDataForm(): JSX.Element {
         value,
       })
     );
+    if (screenErrors?.[fieldName] && contractType) {
+      console.log('----START----')
+      dispatch(validateScreen(contractType, CONTRACT_SCREEN_TYPES.PRODUCT_DATA))
+    }
   };
 
   return (
@@ -66,6 +77,7 @@ export default function ProductDataForm(): JSX.Element {
         />
         <TextField
           value={productData?.data[PRODUCT_DATA_FIELDS.description]}
+          errorMessage={screenErrors?.[PRODUCT_DATA_FIELDS.description]}
           placeholder={t(
             `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.designation`
           )}
@@ -91,6 +103,7 @@ export default function ProductDataForm(): JSX.Element {
         <View style={styles.inputBox}>
           <TextField
             value={productData?.data[PRODUCT_DATA_FIELDS.serial]}
+            errorMessage={screenErrors?.[PRODUCT_DATA_FIELDS.serial]}
             placeholder={t(
               `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.serial`
             )}
