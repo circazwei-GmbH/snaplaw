@@ -4,12 +4,16 @@ export interface FormInterface {
   [fielName: string]: FieldInterface;
 }
 
-export interface ValidatorInterface {
+export interface ValidatorFormInterface {
   (text: string, form: FormInterface): string | undefined;
 }
 
+export interface ValidatorInterface {
+  (text: string, form: Record<string, unknown>): string | undefined
+}
+
 export interface ValidatorBuilderInterface {
-  (message: string, option?: number | string): ValidatorInterface;
+  (message: string, option?: number | string): ValidatorFormInterface;
 }
 
 export interface ValidatiorWithCheckInterface {
@@ -37,7 +41,7 @@ export const email: ValidatorBuilderInterface = (message) => (text: string) => {
 };
 
 export const match =
-  (message: string, target: string): ValidatorInterface =>
+  (message: string, target: string): ValidatorFormInterface =>
   (text: string, form: FormInterface) => {
     if (form[target].value === text) {
       return;
