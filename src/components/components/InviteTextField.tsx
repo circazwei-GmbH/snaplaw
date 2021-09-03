@@ -57,6 +57,12 @@ export default function InviteTextField({
     setValue(localValue);
   }, [localValue]);
 
+  useEffect(() => {
+    if (list.length === 0 && focused) {
+      getEmails();
+    }
+  }, [focused]);
+
   const onPressListItem = (newValue: string) => setLocalValue(newValue);
 
   const inputButtonHandler = () => {

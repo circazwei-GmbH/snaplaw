@@ -67,10 +67,6 @@ export default function Invite(): JSX.Element {
   };
 
   useEffect(() => {
-    getEmails();
-  }, []);
-
-  useEffect(() => {
     setEmailValue(formFieldFill("email", fakeStoreEmailValue, emailValue));
   }, [fakeStoreEmailValue]);
 

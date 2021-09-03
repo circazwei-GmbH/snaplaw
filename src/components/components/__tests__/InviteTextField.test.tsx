@@ -10,7 +10,7 @@ const testList: object[] = [
   },
 ];
 
-describe("InviteTextField", () => {
+const getEmails = describe("InviteTextField", () => {
   it("Should be visible", () => {
     const { getByPlaceholderText } = render(
       <InviteTextField
@@ -19,6 +19,7 @@ describe("InviteTextField", () => {
         onChangeFunction={jest.fn}
         list={testList}
         getEmails={jest.fn}
+        setValue={jest.fn}
       />
     );
     expect(getByPlaceholderText("TestPlaceholder")).toBeTruthy();
@@ -32,6 +33,7 @@ describe("InviteTextField", () => {
         onChangeFunction={handler}
         list={testList}
         getEmails={jest.fn}
+        setValue={jest.fn}
       />
     );
     fireEvent.changeText(getByPlaceholderText("TestPlaceholder"), testText);
