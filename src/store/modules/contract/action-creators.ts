@@ -1,5 +1,6 @@
 import { RequestCreateContractAction, RequestScreenDataAction } from "./types";
 import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
+import {contractScreensConfig} from "./contract-screens-types";
 
 export const REQUEST_CREATE_CONTRACT = "REQUEST_CREATE_CONTRACT";
 export const REQUEST_SCREEN_DATA = "REQUEST_SCREEN_DATA";
@@ -13,10 +14,11 @@ export const requestCreateContract = (
 });
 
 export const requestScreenData = (
+  contractType: CONTRACT_TYPES,
   screenPosition: number
 ): RequestScreenDataAction => ({
   type: REQUEST_SCREEN_DATA,
-  payload: screenPosition,
+  payload: contractScreensConfig[contractType][screenPosition].type,
 });
 
 export const validateScreen = (

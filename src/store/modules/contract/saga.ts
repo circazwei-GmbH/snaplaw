@@ -48,11 +48,12 @@ function* createContract({ payload }: RequestCreateContractAction) {
 
 function* requestScreenData({ payload }: RequestScreenDataAction) {
   const screenData = yield select<SelectType>(
-    (state) => state.contract.currentContract?.screens[payload]
+    (state) => state.contract.currentContract?.screens.find(screen => screen.type === payload)
   );
   const contractId = yield select<SelectType>(
     (state) => state.contract.currentContract?.id
   );
+  console.log(screenData, payload)
   if (!screenData) {
     return;
   }
