@@ -133,13 +133,17 @@ export const contractValidator = (
   screens: Array<BaseScreenDataInterface>
 ) => {
   const contractConfig = contractScreensConfig[contractType];
+
   let firstEmptyScreen = null;
   for (let i = 0; contractConfig.length > i; i++) {
     const currentScreen = screens.find(
       (screen) => screen.type === contractConfig[i].type
     );
-    if (!currentScreen) {
+    const validationConfig = contractValidationConfig[contractType][contractConfig[i].type];
+    if (!currentScreen && Object.keys(validationConfig).length) {
       return i;
+    } else if (!currentScreen) {
+      // just continue
     } else {
       const validationConfig =
         contractValidationConfig[contractType][currentScreen.type];

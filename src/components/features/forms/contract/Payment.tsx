@@ -109,6 +109,7 @@ export default function Payment() {
       <View style={styles.checkboxContainer}>
         <Checkbox
           style={styles.checkboxes}
+          isError={!!screenErrors?.[PAYMENT_FIELDS.PAYMENT_METHOD]}
           isChecked={
             screenData?.data[PAYMENT_FIELDS.PAYMENT_METHOD] ===
             PAYMENT_METHODS.CASH
@@ -125,6 +126,7 @@ export default function Payment() {
         />
         <Checkbox
           style={styles.checkboxes}
+          isError={!!screenErrors?.[PAYMENT_FIELDS.PAYMENT_METHOD]}
           isChecked={
             screenData?.data[PAYMENT_FIELDS.PAYMENT_METHOD] ===
             PAYMENT_METHODS.PAYPAL
@@ -141,6 +143,7 @@ export default function Payment() {
         />
         <Checkbox
           style={styles.checkboxes}
+          isError={!!screenErrors?.[PAYMENT_FIELDS.PAYMENT_METHOD]}
           isChecked={
             screenData?.data[PAYMENT_FIELDS.PAYMENT_METHOD] ===
             PAYMENT_METHODS.TRANSFER
