@@ -11,7 +11,7 @@ interface ButtonPropsInterface {
   onPress: (event: GestureResponderEvent) => void;
   style?: object;
   type?: "primary" | "secondary";
-  textColorType?: "primary" | "red";
+  textColorType?: "primary" | "red" | "error";
 }
 
 export default function Button({
