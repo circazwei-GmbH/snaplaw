@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Checkbox from "../../../basics/checkboxes/Checkbox";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import {
@@ -14,6 +14,8 @@ import {
 } from "../../../../store/modules/contract/constants";
 import { PRODUCT_CONDITION_FIELD_NAME } from "../../../../store/modules/contract/purchase/product-condition";
 import { useI18n } from "../../../../translator/i18n";
+import { validateScreen } from "../../../../store/modules/contract/action-creators";
+import AbstractErrorMessage from "../../../basics/typography/AbstractErrorMessage";
 
 export default function ProductCondition() {
   const dispatch = useAppDispatch();
@@ -24,6 +26,14 @@ export default function ProductCondition() {
         (screen) => screen.type === CONTRACT_SCREEN_TYPES.PRODUCT_CONDITION
       ) as ProductConditionScreenInterface | undefined
   );
+  const contractType = useAppSelector(
+    (state) => state.contract.currentContract?.type
+  );
+
+  const screenErrors = useAppSelector(
+    (state) =>
+      state.contract.contractErrors?.[CONTRACT_SCREEN_TYPES.PRODUCT_CONDITION]
+  );
 
   const setSelected = (value: CONDITION_VALUE) => {
     dispatch(
@@ -33,6 +43,11 @@ export default function ProductCondition() {
         value,
       })
     );
+    if (screenErrors?.[PRODUCT_CONDITION_FIELD_NAME] && contractType) {
+      dispatch(
+        validateScreen(contractType, CONTRACT_SCREEN_TYPES.PRODUCT_CONDITION)
+      );
+    }
   };
 
   return (
@@ -41,6 +56,7 @@ export default function ProductCondition() {
         <Checkbox
           style={index === 0 ? undefined : styles.checkbox}
           key={condition}
+          isError={!!screenErrors?.[PRODUCT_CONDITION_FIELD_NAME]}
           text={t(
             `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.PRODUCT_CONDITION}.checkboxes.${condition}`
           )}
@@ -50,6 +66,7 @@ export default function ProductCondition() {
           onChange={() => setSelected(condition)}
         />
       ))}
+      <AbstractErrorMessage message={screenErrors?.[PRODUCT_CONDITION_FIELD_NAME]} />
     </View>
   );
 }
@@ -60,5 +77,17 @@ const styles = StyleSheet.create({
   },
   checkbox: {
     marginTop: 10,
+  },
+  errorContainer: {
+    flexDirection: "row",
+    marginTop: 18,
+  },
+  dot: {
+    paddingRight: 10,
+    color: "#FA7171",
+    fontSize: 16,
+  },
+  errorText: {
+    fontFamily: "OS-SB",
   },
 });

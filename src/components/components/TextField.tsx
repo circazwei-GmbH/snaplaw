@@ -52,7 +52,11 @@ export default function TextField({
   };
 
   return (
-    <View style={[containerStyle, styles.inputContainer]}>
+    <View style={[
+      containerStyle,
+      styles.inputContainer,
+      value || focused ? null : styles.paddingForLabel
+    ]}>
       {search ? null : (
         <Text
           style={[
@@ -114,8 +118,11 @@ export default function TextField({
 
 const styles = StyleSheet.create({
   inputContainer: {
-    minHeight: 68,
+    // minHeight: 68,
     justifyContent: "flex-end",
+  },
+  paddingForLabel: {
+    paddingTop: 22
   },
   emptyInput: {
     backgroundColor: "#EFF7FD",

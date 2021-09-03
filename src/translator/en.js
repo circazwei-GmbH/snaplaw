@@ -269,6 +269,10 @@ export default {
       found_in_pregress_folder:
         "Don't forget to invite the buyer. The contract can be found in ^In progress^ folder.",
     },
+    validation: {
+      field_empty: "The field can't be empty",
+      product_condition: "Please specify the product condition",
+    },
   },
   sign_form: {
     title: "Sign contract with your finger",
@@ -283,5 +287,5 @@ export default {
         ", I agree that the signature will be the electronic representation of my signature for all purposes when I use them on documents.",
     },
   },
-  ok: "OK"
+  ok: "OK",
 };

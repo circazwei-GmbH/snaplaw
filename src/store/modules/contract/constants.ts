@@ -3,13 +3,13 @@ export const enum CONTRACT_TYPES {
 }
 
 export const enum CONTRACT_SCREEN_TYPES {
-  USER_DATA = "USER_DATA",
-  PRODUCT_DATA = "PRODUCT_DATA",
-  PRODUCT_CONDITION = "PRODUCT_CONDITION",
-  CONFIRMATION = "CONFIRMATION",
-  PRODUCT_DESCRIPTION = "PRODUCT_DESCRIPTION",
-  PAYMENT = "PAYMENT",
-  SIGN = "SIGN",
+  USER_DATA = "userData",
+  PRODUCT_DATA = "productData",
+  PRODUCT_CONDITION = "productCondition",
+  CONFIRMATION = "confirmation",
+  PRODUCT_DESCRIPTION = "additionalInformation",
+  PAYMENT = "payment",
+  SIGN = "signContract",
 }
 
 export const CONTRACT_CREATION_WAIT = "CONTRACT_CREATION_WAIT";
