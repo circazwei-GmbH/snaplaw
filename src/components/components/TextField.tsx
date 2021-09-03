@@ -55,7 +55,7 @@ export default function TextField({
     <View style={[
       containerStyle,
       styles.inputContainer,
-      value || focused ? null : styles.paddingForLabel
+      (value || focused) && !search ? null : styles.paddingForLabel
     ]}>
       {search ? null : (
         <Text
@@ -118,7 +118,6 @@ export default function TextField({
 
 const styles = StyleSheet.create({
   inputContainer: {
-    // minHeight: 68,
     justifyContent: "flex-end",
   },
   paddingForLabel: {
@@ -137,7 +136,7 @@ const styles = StyleSheet.create({
   },
   searchIcon: {
     position: "absolute",
-    top: "55%",
+    top: "80%",
     left: "5%",
     zIndex: 1,
   },
@@ -147,7 +146,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: 45,
     height: 45,
-    top: "35%",
+    top: "50%",
     right: 0,
     zIndex: 1,
   },
