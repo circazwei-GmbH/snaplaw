@@ -43,7 +43,7 @@ export interface Contract {
 }
 
 export interface RequestScreenDataAction extends BaseAction {
-  payload: number;
+  payload: CONTRACT_SCREEN_TYPES;
 }
 
 export interface ScreenValidateAction extends BaseAction {

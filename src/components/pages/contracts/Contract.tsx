@@ -41,7 +41,10 @@ export default function Contract({
   const dispatch = useAppDispatch();
 
   const nextHandler = () => {
-    dispatch(requestScreenData(screenCount));
+    if (!contractType) {
+      return;
+    }
+    dispatch(requestScreenData(contractType, screenCount));
     // @ts-ignore
     navigation.push(HOME_ROUTER.CONTRACT, { screenCount: screenCount + 1 });
   };
