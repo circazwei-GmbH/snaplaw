@@ -18,11 +18,11 @@ export enum PAYMENT_METHODS {
 }
 
 export enum PAYMENT_FIELDS {
-  COST = "COST",
-  CURRENCY = "CURRENCY",
-  PAYMENT_METHOD = "PAYMENT_METHOD",
-  CARD_NAME = "CARD_NAME",
-  CARD_NUMBER = "CARD_NUMBER",
+  COST = "price",
+  CURRENCY = "currency",
+  PAYMENT_METHOD = "paymentMethod",
+  CARD_NAME = "cardHolderName",
+  CARD_NUMBER = "cardNumber",
 }
 
 export interface PaymentScreenInterface extends BaseScreenDataInterface {
