@@ -9,7 +9,7 @@ export interface ValidatorFormInterface {
 }
 
 export interface ValidatorInterface {
-  (text: string, form: Record<string, unknown>): string | undefined
+  (text: string, form: Record<string, unknown>): string | undefined;
 }
 
 export interface ValidatorBuilderInterface {
@@ -17,11 +17,16 @@ export interface ValidatorBuilderInterface {
 }
 
 export interface ValidatiorWithCheckInterface {
-  (message: string, option: number, fieldChecking: string): ValidatorInterface
+  (message: string, option: number, fieldChecking: string): ValidatorInterface;
 }
 
 export interface ValidationWithCheckOnScecificValueInterface {
-  (message: string, option: number, fieldChecking: string, scpecificValue: unknown): ValidatorInterface
+  (
+    message: string,
+    option: number,
+    fieldChecking: string,
+    scpecificValue: unknown
+  ): ValidatorInterface;
 }
 
 export const length: ValidatorBuilderInterface =
@@ -49,20 +54,25 @@ export const match =
     return message;
   };
 
-export const lengthCheckIfAnotherFieldIsTrue: ValidatiorWithCheckInterface = (message, length, field) => (text: string | undefined, form: Record<string, unknown>) => {
-  if (form && !form[field]) {
-    return;
-  }
-  if (!text || text.length < length) {
-    return message
-  }
-}
+export const lengthCheckIfAnotherFieldIsTrue: ValidatiorWithCheckInterface =
+  (message, length, field) =>
+  (text: string | undefined, form: Record<string, unknown>) => {
+    if (form && !form[field]) {
+      return;
+    }
+    if (!text || text.length < length) {
+      return message;
+    }
+  };
 
-export const lengthCheckIfAnotherFieldHasSpecificValue: ValidationWithCheckOnScecificValueInterface = (message, length, field, specificValue) => (text: string | undefined, form: Record<string, unknown>) => {
-  if ((form && !form[field]) || form[field] !== specificValue) {
-    return;
-  }
-  if (!text || text.length < length) {
-    return message
-  }
-}
+export const lengthCheckIfAnotherFieldHasSpecificValue: ValidationWithCheckOnScecificValueInterface =
+
+    (message, length, field, specificValue) =>
+    (text: string | undefined, form: Record<string, unknown>) => {
+      if ((form && !form[field]) || form[field] !== specificValue) {
+        return;
+      }
+      if (!text || text.length < length) {
+        return message;
+      }
+    };

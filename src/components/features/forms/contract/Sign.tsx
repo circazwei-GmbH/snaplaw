@@ -15,18 +15,16 @@ import {
   SignScreenInterface,
 } from "../../../../store/modules/contract/purchase/sign";
 import { removeFromWaiter } from "../../../../store/modules/main/slice";
-import {contractValidator} from "../../../../store/modules/contract/validation";
-import {Contract} from "../../../../store/modules/contract/types";
-import {useNavigation} from "@react-navigation/native";
-import {contractScreensConfig} from "../../../../store/modules/contract/contract-screens-types";
-import {validateScreen} from "../../../../store/modules/contract/action-creators";
-import {clearErrors} from "../../../../store/modules/contract/slice";
+import { contractValidator } from "../../../../store/modules/contract/validation";
+import { Contract } from "../../../../store/modules/contract/types";
+import { useNavigation } from "@react-navigation/native";
+import { contractScreensConfig } from "../../../../store/modules/contract/contract-screens-types";
+import { validateScreen } from "../../../../store/modules/contract/action-creators";
+import { clearErrors } from "../../../../store/modules/contract/slice";
 
 export default function Sign() {
   const { t } = useI18n();
-  const contract = useAppSelector(
-    (state) => state.contract.currentContract
-  );
+  const contract = useAppSelector((state) => state.contract.currentContract);
   const screenData = useAppSelector(
     (state) =>
       state.contract.currentContract?.screens.find(
@@ -39,12 +37,22 @@ export default function Sign() {
   const navigator = useNavigation();
 
   const signModalHandler = (currentContract: Contract) => {
-    dispatch(clearErrors())
-    const emptyScreen = contractValidator(currentContract.type, currentContract.screens)
+    dispatch(clearErrors());
+    const emptyScreen = contractValidator(
+      currentContract.type,
+      currentContract.screens
+    );
     if (emptyScreen !== null) {
       // @ts-ignore
-      navigator.pop(contractScreensConfig[currentContract.type].length  - 1 - emptyScreen)
-      dispatch(validateScreen(currentContract.type, contractScreensConfig[currentContract.type][emptyScreen].type))
+      navigator.pop(
+        contractScreensConfig[currentContract.type].length - 1 - emptyScreen
+      );
+      dispatch(
+        validateScreen(
+          currentContract.type,
+          contractScreensConfig[currentContract.type][emptyScreen].type
+        )
+      );
       return;
     }
 
@@ -97,7 +105,10 @@ export default function Sign() {
           inviteHandler={() => {}}
         />
       </View>
-      <SignModal visible={signVisible} onClose={() => signModalHandler(contract)} />
+      <SignModal
+        visible={signVisible}
+        onClose={() => signModalHandler(contract)}
+      />
     </View>
   );
 }

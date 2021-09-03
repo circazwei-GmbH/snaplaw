@@ -1,5 +1,5 @@
 import { BaseAction } from "../auth/types";
-import {CONTRACT_SCREEN_TYPES, CONTRACT_TYPES} from "./constants";
+import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
 import {
   ProductDataScreenInterface,
   PRODUCT_DATA_FIELDS,
@@ -48,9 +48,9 @@ export interface RequestScreenDataAction extends BaseAction {
 
 export interface ScreenValidateAction extends BaseAction {
   payload: {
-    contractType: CONTRACT_TYPES,
-    screenType: CONTRACT_SCREEN_TYPES
-  }
+    contractType: CONTRACT_TYPES;
+    screenType: CONTRACT_SCREEN_TYPES;
+  };
 }
 
 export { ProductDataScreenInterface, PRODUCT_DATA_FIELDS };

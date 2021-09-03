@@ -273,8 +273,9 @@ export default {
         "Vergessen Sie bitte nicht, den Kunden einzuladen. Den Vertrag finden Sie im ^In Bearbeitung^ Ordner.",
     },
     validation: {
-      field_empty: "Das Feld kann nicht leer sein"
-    }
+      field_empty: "Das Feld kann nicht leer sein",
+      product_condition: "Klären Sie bitte den Produktzustand",
+    },
   },
   sign_form: {
     title: "Vertrag mit dem Finger unterschreiben",
@@ -289,5 +290,5 @@ export default {
         " klicke, stimme ich zu, dass die Unterschrift die elektronische Darstellung meiner Unterschrift für alle Zwecke ist, wenn ich sie auf Dokumenten verwende.",
     },
   },
-  ok: "OK"
+  ok: "OK",
 };

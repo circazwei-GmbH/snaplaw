@@ -1,6 +1,6 @@
 import React from "react";
 import { createStore } from "@reduxjs/toolkit";
-import {fireEvent, render} from "@testing-library/react-native";
+import { fireEvent, render } from "@testing-library/react-native";
 import { Provider } from "react-redux";
 import Sign from "../Sign";
 import {
@@ -51,15 +51,15 @@ describe("Sign", () => {
       )
     ).toBeTruthy();
   });
-  it('test', () => {
+  it("test", () => {
     const { queryByTestId } = render(
       <Provider store={store}>
         <Sign />
       </Provider>
     );
-    fireEvent.press(queryByTestId('SignInputPressID'))
-    expect(true).toBeTruthy()
-  })
+    fireEvent.press(queryByTestId("SignInputPressID"));
+    expect(true).toBeTruthy();
+  });
   it("Should not dispaly on empty contract", () => {
     // @ts-ignore
     initialState.contract.currentContract = undefined;
@@ -75,5 +75,4 @@ describe("Sign", () => {
       )
     ).not.toBeTruthy();
   });
-
 });

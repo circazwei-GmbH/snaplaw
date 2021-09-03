@@ -17,7 +17,7 @@ import {
   CURRENSIES,
   CURRENSY,
 } from "../../../../store/modules/contract/purchase/payment";
-import {validateScreen} from "../../../../store/modules/contract/action-creators";
+import { validateScreen } from "../../../../store/modules/contract/action-creators";
 
 export default function Payment() {
   const { t } = useI18n();
@@ -31,7 +31,11 @@ export default function Payment() {
         (screen) => screen.type === CONTRACT_SCREEN_TYPES.PAYMENT
       ) as PaymentScreenInterface
   );
-  const screenErrors = useAppSelector(state => state.contract.contractErrors ? state.contract.contractErrors[CONTRACT_SCREEN_TYPES.PAYMENT] : undefined)
+  const screenErrors = useAppSelector((state) =>
+    state.contract.contractErrors
+      ? state.contract.contractErrors[CONTRACT_SCREEN_TYPES.PAYMENT]
+      : undefined
+  );
 
   const dispatch = useAppDispatch();
   const updateDataHandler = (fieldName: PAYMENT_FIELDS, value: string) => {
@@ -43,7 +47,7 @@ export default function Payment() {
       })
     );
     if (screenErrors?.[fieldName] && contractType) {
-      dispatch(validateScreen(contractType, CONTRACT_SCREEN_TYPES.PAYMENT))
+      dispatch(validateScreen(contractType, CONTRACT_SCREEN_TYPES.PAYMENT));
     }
   };
 

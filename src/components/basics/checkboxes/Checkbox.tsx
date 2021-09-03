@@ -12,6 +12,7 @@ type CheckboxProps = {
   isChecked: boolean;
   onChange: () => void;
   text: string;
+  isError?: boolean;
   style?: StyleProp<TextStyle> | undefined;
 };
 
@@ -20,14 +21,15 @@ export default function Checkbox({
   onChange,
   text,
   style,
+  isError,
 }: CheckboxProps) {
   return (
     <Pressable style={[styles.container, style]} onPress={onChange}>
       <CheckBox
         isChecked={isChecked}
         onClick={onChange}
-        checkBoxColor="#1696E2"
-        checkedCheckBoxColor="#1696E2"
+        checkBoxColor={isError ? "#FA7171" : "#1696E2"}
+        checkedCheckBoxColor={isError ? "#FA7171" : "#1696E2"}
         rightTextStyle={styles.checkboxText}
       />
       <Text style={styles.checkboxText}>{text}</Text>

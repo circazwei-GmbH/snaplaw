@@ -11,7 +11,7 @@ import {
   UserDataScreenInterface,
 } from "../../../../store/modules/contract/types";
 import { birthDateFormat } from "../../../../utils/birthDateFormat";
-import {validateScreen} from "../../../../store/modules/contract/action-creators";
+import { validateScreen } from "../../../../store/modules/contract/action-creators";
 
 export default function UserDataForm(): JSX.Element {
   const { t } = useI18n();
@@ -23,8 +23,14 @@ export default function UserDataForm(): JSX.Element {
         (screen) => screen.type === CONTRACT_SCREEN_TYPES.USER_DATA
       ) as UserDataScreenInterface | undefined
   );
-  const contractType = useAppSelector(state => state.contract.currentContract?.type)
-  const screenErrors = useAppSelector(state => state.contract.contractErrors ? state.contract.contractErrors[CONTRACT_SCREEN_TYPES.USER_DATA] : undefined)
+  const contractType = useAppSelector(
+    (state) => state.contract.currentContract?.type
+  );
+  const screenErrors = useAppSelector((state) =>
+    state.contract.contractErrors
+      ? state.contract.contractErrors[CONTRACT_SCREEN_TYPES.USER_DATA]
+      : undefined
+  );
 
   const onChangeAction = (value: string, fieldName: USER_DATA_FIELDS) => {
     dispatch(
@@ -35,7 +41,7 @@ export default function UserDataForm(): JSX.Element {
       })
     );
     if (screenErrors?.[fieldName] && contractType) {
-      dispatch(validateScreen(contractType, CONTRACT_SCREEN_TYPES.USER_DATA))
+      dispatch(validateScreen(contractType, CONTRACT_SCREEN_TYPES.USER_DATA));
     }
   };
 

@@ -6,7 +6,7 @@ export const enum PRODUCT_DATA_FIELDS {
   producer = "producer",
   description = "description",
   serial = "serial",
-  isSerial = 'isSerial'
+  isSerial = "isSerial",
 }
 
 export interface ProductDataScreenInterface extends BaseScreenDataInterface {
@@ -16,6 +16,6 @@ export interface ProductDataScreenInterface extends BaseScreenDataInterface {
     [PRODUCT_DATA_FIELDS.producer]: string;
     [PRODUCT_DATA_FIELDS.description]: string;
     [PRODUCT_DATA_FIELDS.serial]: string;
-    [PRODUCT_DATA_FIELDS.isSerial]: boolean
+    [PRODUCT_DATA_FIELDS.isSerial]: boolean;
   };
 }
