@@ -1,5 +1,5 @@
 import React from "react";
-import { render, fireEvent } from "@testing-library/react-native";
+import {render, fireEvent} from "@testing-library/react-native";
 import Button from "../Button";
 
 describe("Button", () => {
@@ -14,4 +14,15 @@ describe("Button", () => {
     fireEvent(getByText("Test"), "press");
     expect(handler).toBeCalled();
   });
+  it('onPresssIn', () => {
+    const { getByText } = render(<Button text={'test'} onPress={jest.fn()} />)
+    fireEvent(getByText('test'), 'onPressIn')
+    expect(getByText('test').parent.props.style[3]).not.toBeNull()
+  })
+  it('onPresssOut', () => {
+    const { getByText } = render(<Button text={'test'} onPress={jest.fn()} />)
+    fireEvent(getByText('test'), 'onPressIn')
+    fireEvent(getByText('test'), 'onPressOut')
+    expect(getByText('test').parent.props.style[3]).toBeNull()
+  })
 });
