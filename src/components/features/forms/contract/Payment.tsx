@@ -33,9 +33,7 @@ export default function Payment() {
       ) as PaymentScreenInterface
   );
   const screenErrors = useAppSelector((state) =>
-    state.contract.contractErrors
-      ? state.contract.contractErrors[CONTRACT_SCREEN_TYPES.PAYMENT]
-      : undefined
+    state.contract.contractErrors?.[CONTRACT_SCREEN_TYPES.PAYMENT]
   );
 
   const dispatch = useAppDispatch();
