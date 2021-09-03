@@ -17,7 +17,7 @@ import { requestLanguage } from "../store/modules/profile/action-creators";
 import EditProfile from "../components/pages/settings/EditProfile";
 import Notifications from "../components/pages/settings/Notifications";
 import { requestToken } from "../store/modules/auth/action-creators";
-import { Text } from "react-native";
+import { Text, Platform, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { useI18n } from "../translator/i18n";
 import MyContracts from "../components/pages/MyContracts";
@@ -53,11 +53,7 @@ export default function Router() {
       tabBarOptions={{
         activeTintColor: "#1696E2",
         keyboardHidesTabBar: true,
-        style: {
-          height: 53,
-          paddingTop: 5,
-          paddingBottom: 5,
-        },
+        style: Platform.OS === "ios" ? styles.ios : styles.android,
       }}
       initialRouteName="Homepage"
     >
@@ -138,3 +134,16 @@ export default function Router() {
     </Stack.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  android: {
+    height: 53,
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
+  ios: {
+    height: 63,
+    paddingTop: 5,
+    paddingBottom: 15,
+  },
+});

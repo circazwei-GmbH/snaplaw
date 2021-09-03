@@ -117,18 +117,6 @@ export default function EditProfile() {
     setForm(localForm);
 
     if (
-      form.name.value === undefined ||
-      form.lastName.value === undefined ||
-      form.dateOfBirth.value === undefined ||
-      form.email.value === undefined ||
-      form.phone.value === undefined ||
-      form.address.value === undefined ||
-      form.postCode.value === undefined
-    ) {
-      return;
-    }
-
-    if (
       form.name.error ||
       form.lastName.error ||
       form.dateOfBirth.error ||
