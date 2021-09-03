@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Checkbox from "../../../basics/checkboxes/Checkbox";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import {
@@ -15,7 +15,7 @@ import {
 import { PRODUCT_CONDITION_FIELD_NAME } from "../../../../store/modules/contract/purchase/product-condition";
 import { useI18n } from "../../../../translator/i18n";
 import { validateScreen } from "../../../../store/modules/contract/action-creators";
-import DefaultText from "../../../basics/typography/DefaultText";
+import AbstractErrorMessage from "../../../basics/typography/AbstractErrorMessage";
 
 export default function ProductCondition() {
   const dispatch = useAppDispatch();
@@ -66,15 +66,7 @@ export default function ProductCondition() {
           onChange={() => setSelected(condition)}
         />
       ))}
-      {screenErrors?.[PRODUCT_CONDITION_FIELD_NAME] ? (
-        <View style={styles.errorContainer}>
-          <Text style={styles.dot}>*</Text>
-          <DefaultText
-            style={styles.errorText}
-            text={screenErrors?.[PRODUCT_CONDITION_FIELD_NAME]}
-          />
-        </View>
-      ) : null}
+      <AbstractErrorMessage message={screenErrors?.[PRODUCT_CONDITION_FIELD_NAME]} />
     </View>
   );
 }
