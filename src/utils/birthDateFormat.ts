@@ -1,6 +1,10 @@
 export const birthDateFormat = (date: string | undefined) => {
-  const regexp = /[.,-/\\]/;
-  const splitedDate = date?.split(regexp);
-  const resultDate = splitedDate?.join(".");
-  return resultDate;
+  date = date?.replace(/[-/\\\s]/, "");
+  if (date !== undefined && date.length < 3) {
+    date = date.replace(/[0-9]{2}/, "$&.");
+  }
+  if (date !== undefined && date.length < 6) {
+    date = date.replace(/[0-9]{2}.[0-9]{2}/, "$&.");
+  }
+  return date;
 };
