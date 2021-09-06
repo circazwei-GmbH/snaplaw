@@ -7,15 +7,12 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import ProductDescriptionModal from "../features/Modals/ProductDescriptionModal";
-import {
-  DescriptionPhotoInterface,
-  PRODUCT_DESCRIPTION_FIELDS,
-} from "../../store/modules/contract/types";
+import { PRODUCT_DESCRIPTION_FIELDS } from "../../store/modules/contract/types";
 import FastImage from "react-native-fast-image";
 import { buildMediaSource } from "../../utils/helpers";
 
 export interface DescriptionPhotosPropsInterface {
-  photos: DescriptionPhotoInterface[];
+  photos: string[];
   onPressDelete: Function;
   fieldName: PRODUCT_DESCRIPTION_FIELDS;
 }
@@ -44,14 +41,14 @@ export default function DescriptionPhotos({
       {photos.map((item) => {
         return (
           <TouchableOpacity
-            onPress={() => openModalSetUrl(item.url)}
+            onPress={() => openModalSetUrl(item)}
             style={styles.child}
-            key={item.id}
+            key={item}
           >
             <TouchableOpacity
               activeOpacity={0.9}
               style={styles.removeButton}
-              onPress={() => onPressDelete(item.id, fieldName)}
+              onPress={() => onPressDelete(item, fieldName)}
             >
               <View style={styles.removeButtonBackground}>
                 <AntDesign name="closecircle" size={18} color="#668395" />
@@ -67,7 +64,7 @@ export default function DescriptionPhotos({
               </View>
             ) : null}
             <FastImage
-              source={buildMediaSource(item.url)}
+              source={buildMediaSource(item)}
               style={styles.image}
               onLoadEnd={() => setIsLoading(false)}
               onLoadStart={() => setIsLoading(true)}

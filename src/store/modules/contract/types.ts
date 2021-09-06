@@ -25,7 +25,6 @@ import {
 } from "./purchase/payment";
 import {
   ProductDescriptionScreenInterface,
-  DescriptionPhotoInterface,
   PRODUCT_DESCRIPTION_FIELDS,
 } from "./purchase/product-description";
 import { BaseScreenDataInterface } from "./base-types";
@@ -58,8 +57,4 @@ export { UserDataScreenInterface, USER_DATA_FIELDS };
 export { ProductConditionScreenInterface, CONDITION_VALUE, CONDITIONS };
 export { ConfirmationScreenInterface, CONFIRMATION_FIELDS, CONFIRMATION };
 export { PaymentScreenInterface, PAYMENT_METHODS, PAYMENT_FIELDS };
-export {
-  ProductDescriptionScreenInterface,
-  DescriptionPhotoInterface,
-  PRODUCT_DESCRIPTION_FIELDS,
-};
+export { ProductDescriptionScreenInterface, PRODUCT_DESCRIPTION_FIELDS };
