@@ -187,8 +187,8 @@ export default {
   my_contracts: {
     tab_name: "Meine Verträge",
     lists: {
-      finalized: 'Finalized',
-      in_progress: 'In progress'
+      finalized: 'Abgeschlossen',
+      in_progress: 'In Bearbeitung'
     }
   },
   menu: {
