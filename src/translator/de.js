@@ -158,10 +158,10 @@ export default {
         no: "Nein",
       },
       sign_out: {
-        message: 'Sind Sie sicher, dass Sie die App verlassen wollen?',
-        yes: 'Ja',
-        no: "Nein"
-      }
+        message: "Sind Sie sicher, dass Sie die App verlassen wollen?",
+        yes: "Ja",
+        no: "Nein",
+      },
     },
     error: "Das Feld kann nicht leer sein",
   },
@@ -192,8 +192,7 @@ export default {
   },
   notifications: {
     title: "Benachrichtigungen",
-    title_second_black: "Sie haben die folgenden",
-    title_second_blue: " Benachrichtigungen",
+    title_second: "Sie haben die folgenden Benachrichtigungen",
   },
   contracts: {
     [CONTRACT_TYPES.PURCHASE]: {

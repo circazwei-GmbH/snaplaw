@@ -12,12 +12,8 @@ export default function Notifications(): JSX.Element {
       <View style={styles.container}>
         <View style={styles.titleBox}>
           <DefaultText
-            text={t("notifications.title_second_black")}
+            text={t("notifications.title_second")}
             style={styles.title}
-          />
-          <DefaultText
-            text={t("notifications.title_second_blue")}
-            style={[styles.title, styles.titleBlue]}
           />
         </View>
       </View>
@@ -30,17 +26,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   titleBox: {
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
+    justifyContent: "center",
     width: "100%",
     height: 80,
     paddingHorizontal: 16,
   },
   title: {
     fontSize: 14,
-  },
-  titleBlue: {
-    color: "lightblue",
   },
 });

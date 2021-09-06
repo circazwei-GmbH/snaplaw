@@ -155,10 +155,10 @@ export default {
         no: "No",
       },
       sign_out: {
-        message: 'Are you sure you want to leave the app?',
-        yes: 'Yes',
-        no: "No"
-      }
+        message: "Are you sure you want to leave the app?",
+        yes: "Yes",
+        no: "No",
+      },
     },
     error: "The field can't be empty",
   },
@@ -189,8 +189,7 @@ export default {
   },
   notifications: {
     title: "Notifications",
-    title_second_black: "You have the following",
-    title_second_blue: " notifications",
+    title_second: "You have the following notifications",
   },
   contracts: {
     [CONTRACT_TYPES.PURCHASE]: {
