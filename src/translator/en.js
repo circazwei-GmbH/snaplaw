@@ -183,6 +183,10 @@ export default {
   },
   my_contracts: {
     tab_name: "My contracts",
+    lists: {
+      finalized: 'Finalized',
+      in_progress: 'In progress'
+    }
   },
   menu: {
     cancel: "Cancel",

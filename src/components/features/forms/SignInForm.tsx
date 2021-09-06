@@ -8,7 +8,7 @@ import {
   RootStackParamList,
   AUTH_ROUTE,
 } from "../../../router/AuthRouterTypes";
-import { ValidatorInterface } from "../../../validations/default";
+import {ValidatorFormInterface} from "../../../validations/default";
 import { useI18n } from "../../../translator/i18n";
 
 // TODO move to abstract place because used in SignUp
@@ -16,7 +16,7 @@ export interface FieldInterface {
   value: string;
   error: string;
   displayError: boolean;
-  validators: Array<ValidatorInterface>;
+  validators: Array<ValidatorFormInterface>;
 }
 
 export interface SignInFormInterface {
