@@ -19,7 +19,12 @@ export default function NotificationListItem({
 
   return (
     <TouchableOpacity style={style} activeOpacity={0.7}>
-      <View style={styles.container}>
+      <View
+        style={[
+          styles.container,
+          isNew ? styles.containerBackgroundNew : styles.containerBackground,
+        ]}
+      >
         {isNew ? (
           <View style={styles.pinkDotBox}>
             <View style={styles.pinkDot} />
@@ -27,7 +32,10 @@ export default function NotificationListItem({
         ) : null}
         <View style={styles.notificationBox}>
           <View style={styles.notificationHeader}>
-            <DefaultText text={userIdFrom} />
+            <DefaultText
+              text={userIdFrom}
+              style={isNew ? null : styles.fontColorNotNew}
+            />
             <DefaultText
               text={dayjs(createdAt).format(
                 dayjs().isToday(createdAt) ? "HH:MM" : "DD MMM"
@@ -36,7 +44,13 @@ export default function NotificationListItem({
             />
           </View>
           <View style={styles.notificationBody}>
-            <DefaultText text={notification} style={styles.notificationText} />
+            <DefaultText
+              text={notification}
+              style={[
+                styles.notificationText,
+                isNew ? null : styles.fontColorNotNew,
+              ]}
+            />
           </View>
         </View>
       </View>
@@ -51,8 +65,13 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 70,
     paddingHorizontal: 16,
-    backgroundColor: "#EDF8FE",
     elevation: 1,
+  },
+  containerBackgroundNew: {
+    backgroundColor: "#EDF8FE",
+  },
+  containerBackground: {
+    backgroundColor: "#F8FCFF",
   },
   pinkDotBox: {
     justifyContent: "center",
@@ -85,5 +104,8 @@ const styles = StyleSheet.create({
   },
   notificationText: {
     fontSize: 14,
+  },
+  fontColorNotNew: {
+    color: "#909090",
   },
 });
