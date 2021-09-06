@@ -31,7 +31,10 @@ export default function EditProfileForm({
 
   return (
     <KeyboardAwareScrollView>
-      <View style={styles.inputBox}>
+      <View
+        style={styles.inputBox}
+        onStartShouldSetResponderCapture={(evt) => (edit ? false : true)}
+      >
         <EditProfileTextField
           placeholder={t("edit_profile.placeholders.name")}
           value={form.name.value}
