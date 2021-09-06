@@ -53,7 +53,7 @@ export default function Router() {
       tabBarOptions={{
         activeTintColor: "#1696E2",
         keyboardHidesTabBar: true,
-        style: Platform.OS === "ios" ? styles.ios : styles.android,
+        style: styles.tabNavigator,
       }}
       initialRouteName="Homepage"
     >
@@ -136,14 +136,17 @@ export default function Router() {
 }
 
 const styles = StyleSheet.create({
-  android: {
-    height: 53,
+  tabNavigator: {
     paddingTop: 5,
-    paddingBottom: 5,
-  },
-  ios: {
-    height: 63,
-    paddingTop: 5,
-    paddingBottom: 15,
+    ...Platform.select({
+      android: {
+        height: 53,
+        paddingBottom: 5,
+      },
+      ios: {
+        height: 63,
+        paddingBottom: 15,
+      },
+    }),
   },
 });
