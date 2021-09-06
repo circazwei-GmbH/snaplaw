@@ -12,6 +12,7 @@ import DefaultSwitch from "../../../basics/switches/DefaultSwitch";
 import { toggleBoolValue } from "../../../../utils/toggleBoolValue";
 import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/constants";
 import { setScreenData } from "../../../../store/modules/contract/slice";
+import { validateScreen } from "../../../../store/modules/contract/action-creators";
 
 export default function ProductDataForm(): JSX.Element {
   const productData = useAppSelector(
@@ -20,6 +21,12 @@ export default function ProductDataForm(): JSX.Element {
         (screen) => screen.type === CONTRACT_SCREEN_TYPES.PRODUCT_DATA
       ) as ProductDataScreenInterface | undefined
   );
+  const screenErrors = useAppSelector((state) =>
+    state.contract.contractErrors
+      ? state.contract.contractErrors[CONTRACT_SCREEN_TYPES.PRODUCT_DATA]
+      : undefined
+  );
+
   const { t } = useI18n();
   const contractType = useAppSelector(
     (state) => state.contract.currentContract?.type
@@ -27,7 +34,16 @@ export default function ProductDataForm(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const [haveSerial, setHaveSerial] = useState<boolean>(false);
-  const toggleHaveSerial = () => toggleBoolValue(haveSerial, setHaveSerial);
+  const toggleHaveSerial = () => {
+    toggleBoolValue(haveSerial, setHaveSerial);
+    dispatch(
+      setScreenData({
+        screenType: CONTRACT_SCREEN_TYPES.PRODUCT_DATA,
+        fieldName: PRODUCT_DATA_FIELDS.isSerial,
+        value: !haveSerial,
+      })
+    );
+  };
 
   const onChangeAction = (value: string, fieldName: PRODUCT_DATA_FIELDS) => {
     dispatch(
@@ -37,6 +53,11 @@ export default function ProductDataForm(): JSX.Element {
         value,
       })
     );
+    if (screenErrors?.[fieldName] && contractType) {
+      dispatch(
+        validateScreen(contractType, CONTRACT_SCREEN_TYPES.PRODUCT_DATA)
+      );
+    }
   };
 
   return (
@@ -44,6 +65,7 @@ export default function ProductDataForm(): JSX.Element {
       <View style={styles.inputBox}>
         <TextField
           value={productData?.data[PRODUCT_DATA_FIELDS.subject]}
+          errorMessage={screenErrors?.[PRODUCT_DATA_FIELDS.subject]}
           placeholder={t(
             `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.subject`
           )}
@@ -53,6 +75,7 @@ export default function ProductDataForm(): JSX.Element {
         />
         <TextField
           value={productData?.data[PRODUCT_DATA_FIELDS.producer]}
+          errorMessage={screenErrors?.[PRODUCT_DATA_FIELDS.producer]}
           placeholder={t(
             `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.producer`
           )}
@@ -62,6 +85,7 @@ export default function ProductDataForm(): JSX.Element {
         />
         <TextField
           value={productData?.data[PRODUCT_DATA_FIELDS.description]}
+          errorMessage={screenErrors?.[PRODUCT_DATA_FIELDS.description]}
           placeholder={t(
             `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.designation`
           )}
@@ -87,6 +111,7 @@ export default function ProductDataForm(): JSX.Element {
         <View style={styles.inputBox}>
           <TextField
             value={productData?.data[PRODUCT_DATA_FIELDS.serial]}
+            errorMessage={screenErrors?.[PRODUCT_DATA_FIELDS.serial]}
             placeholder={t(
               `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.serial`
             )}

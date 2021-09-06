@@ -2,10 +2,11 @@ import { CONTRACT_SCREEN_TYPES } from "../constants";
 import { BaseScreenDataInterface } from "../base-types";
 
 export const enum PRODUCT_DATA_FIELDS {
-  subject = "subject",
+  subject = "subjectOfSale",
   producer = "producer",
-  description = "description",
-  serial = "serial",
+  description = "typeDesignation",
+  serial = "serialNumber",
+  isSerial = "isSerial",
 }
 
 export interface ProductDataScreenInterface extends BaseScreenDataInterface {
@@ -15,5 +16,6 @@ export interface ProductDataScreenInterface extends BaseScreenDataInterface {
     [PRODUCT_DATA_FIELDS.producer]: string;
     [PRODUCT_DATA_FIELDS.description]: string;
     [PRODUCT_DATA_FIELDS.serial]: string;
+    [PRODUCT_DATA_FIELDS.isSerial]: boolean;
   };
 }

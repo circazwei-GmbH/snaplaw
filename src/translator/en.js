@@ -154,6 +154,11 @@ export default {
         yes: "Yes",
         no: "No",
       },
+      sign_out: {
+        message: 'Are you sure you want to leave the app?',
+        yes: 'Yes',
+        no: "No"
+      }
     },
     error: "The field can't be empty",
   },
@@ -270,6 +275,10 @@ export default {
     messages: {
       found_in_pregress_folder:
         "Don't forget to invite the buyer. The contract can be found in ^In progress^ folder.",
+    },
+    validation: {
+      field_empty: "The field can't be empty",
+      product_condition: "Please specify the product condition",
     },
   },
   sign_form: {

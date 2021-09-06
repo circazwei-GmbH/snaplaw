@@ -19,13 +19,7 @@ export default function TopBar({
 }: TopBarProps) {
   return (
     <>
-      <View
-        style={[
-          Platform.OS === "ios" ? styles.headerIOS : styles.headerANDROID,
-          styles.header,
-          style,
-        ]}
-      >
+      <View style={[styles.header, style]}>
         {leftButton === undefined ? <BackButton /> : leftButton}
         <Text style={styles.headerText}>{pageName}</Text>
         {rightButton === undefined ? (
@@ -44,12 +38,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-  },
-  headerIOS: {
-    paddingTop: 47,
-  },
-  headerANDROID: {
-    paddingTop: 35,
+    ...Platform.select({
+      ios: {
+        paddingTop: 47,
+      },
+      android: {
+        paddingTop: 35,
+      },
+    }),
   },
   headerText: {
     textAlign: "center",

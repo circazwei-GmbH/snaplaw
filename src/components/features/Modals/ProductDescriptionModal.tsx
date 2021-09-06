@@ -1,5 +1,7 @@
 import React from "react";
-import { Modal, TouchableOpacity, Image, StyleSheet } from "react-native";
+import { Modal, TouchableOpacity, StyleSheet } from "react-native";
+import FastImage from "react-native-fast-image";
+import {buildMediaSource} from "../../../utils/helpers";
 
 export interface ProductDescriptionModalPropsInterface {
   url: string;
@@ -19,7 +21,7 @@ export default function ProductDescriptionModal({
         activeOpacity={0.9}
         onPress={toggleModal}
       />
-      <Image source={{ uri: url }} style={styles.imageModal} />
+      <FastImage source={buildMediaSource(url)} style={styles.imageModal} />
     </Modal>
   );
 }

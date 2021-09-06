@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
-import { Text } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Feather } from "@expo/vector-icons";
 import * as ScreenOrientation from "expo-screen-orientation";
-import { useI18n } from "../translator/i18n";
 import SignIn from "../components/pages/auth/SignIn";
 import SignUp from "../components/pages/auth/SignUp";
 import Welcome from "../components/pages/Welcome";
@@ -16,6 +13,9 @@ import ChangePassword from "../components/pages/auth/ChangePassword";
 import ChangeLanguage from "../components/pages/settings/ChangeLanguage";
 import EditProfile from "../components/pages/settings/EditProfile";
 import Notifications from "../components/pages/settings/Notifications";
+import { Text, Platform, StyleSheet } from "react-native";
+import { Feather } from "@expo/vector-icons";
+import { useI18n } from "../translator/i18n";
 import MyContracts from "../components/pages/MyContracts";
 import Contract from "../components/pages/contracts/Contract";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
@@ -55,11 +55,7 @@ export default function Router() {
       tabBarOptions={{
         activeTintColor: "#1696E2",
         keyboardHidesTabBar: true,
-        style: {
-          height: 53,
-          paddingTop: 5,
-          paddingBottom: 5,
-        },
+        style: styles.tabNavigator,
       }}
       initialRouteName="Homepage"
     >
@@ -157,3 +153,19 @@ export default function Router() {
     </Stack.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  tabNavigator: {
+    paddingTop: 5,
+    ...Platform.select({
+      android: {
+        height: 53,
+        paddingBottom: 5,
+      },
+      ios: {
+        height: 63,
+        paddingBottom: 15,
+      },
+    }),
+  },
+});
