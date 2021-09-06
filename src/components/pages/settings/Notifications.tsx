@@ -24,7 +24,8 @@ const notification: NotificationListInterface = {
   type: "user_invited_to_contract",
   userIdTo: `${Date.now()}`,
   userIdFrom: `${Date.now()}`,
-  notification: "Kakaya to chepuha ot Alekseya",
+  notification:
+    "Ochen mnogo kakoy to vsyakoy raznoy chepuhi ot Alekseya s beckenda fdfsghsdfghsfghsdfgh)))",
   createdAt: `${Date.now()}`,
   locale: "en",
 };
