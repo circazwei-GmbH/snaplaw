@@ -1,22 +1,65 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import TopBar from "../../layouts/TopBar";
 import { useI18n } from "../../../translator/i18n";
-import DefaultText from "../../basics/typography/DefaultText";
+import { useAppSelector, useAppDispatch } from "../../../store/hooks";
+import NotificationListItem from "../../components/NotificationListItem";
+
+export interface NotificationListInterface {
+  isNew: boolean;
+  _id: string;
+  type: string;
+  userIdTo: string;
+  userIdFrom: string;
+  notification: string;
+  createdAt: string;
+  locale: string;
+}
+
+const LIST_ITEM_HEIGHT = 77;
+
+const notification: NotificationListInterface = {
+  isNew: true,
+  _id: `${Math.random() * 123456789}`,
+  type: "user_invited_to_contract",
+  userIdTo: `${Date.now()}`,
+  userIdFrom: `${Date.now()}`,
+  notification: "Kakaya to chepuha ot Alekseya",
+  createdAt: `${Date.now()}`,
+  locale: "en",
+};
+const notification2: NotificationListInterface = {
+  isNew: false,
+  _id: `${Math.random() * 987654321}`,
+  type: "user_invited_to_contract",
+  userIdTo: `${Date.now()}`,
+  userIdFrom: `${Date.now()}`,
+  notification: "Kakaya to chepuha ot Alekseya - 2",
+  createdAt: `${Date.now()}`,
+  locale: "en",
+};
 
 export default function Notifications(): JSX.Element {
   const { t } = useI18n();
+  const list = [notification, notification2];
 
   return (
     <TopBar pageName={t("notifications.title")}>
-      <View style={styles.container}>
-        <View style={styles.titleBox}>
-          <DefaultText
-            text={t("notifications.title_second")}
-            style={styles.title}
-          />
-        </View>
-      </View>
+      <FlatList
+        style={styles.container}
+        data={list}
+        keyExtractor={(item) => item._id}
+        renderItem={({ item }) => (
+          <NotificationListItem style={styles.itemHeight} item={item} />
+        )}
+        onEndReached={() => {}}
+        onEndReachedThreshold={0.0001}
+        getItemLayout={(data, index) => ({
+          length: LIST_ITEM_HEIGHT,
+          offset: LIST_ITEM_HEIGHT * index,
+          index,
+        })}
+      />
     </TopBar>
   );
 }
@@ -24,14 +67,12 @@ export default function Notifications(): JSX.Element {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingVertical: 25,
   },
-  titleBox: {
-    justifyContent: "center",
-    width: "100%",
-    height: 80,
-    paddingHorizontal: 16,
+  item: {
+    elevation: 2,
   },
-  title: {
-    fontSize: 14,
+  itemHeight: {
+    height: LIST_ITEM_HEIGHT,
   },
 });

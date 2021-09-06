@@ -28,6 +28,7 @@
     "@types/react-native-check-box": "^2.1.2",
     "axios": "^0.21.1",
     "babel-plugin-inline-import": "^3.0.0",
+    "dayjs": "^1.10.6",
     "expo": "~42.0.1",
     "expo-font": "^9.2.1",
     "expo-gl": "^10.4.2",
