@@ -55,8 +55,6 @@ export default function ProductDescriptionForm() {
   const photosAccessories =
     productDescription?.data[PRODUCT_DESCRIPTION_FIELDS.accessoriesPhotos];
 
-  console.log(photosProduct, photosAccessories);
-
   const removePhoto = (id: string, fieldName: PRODUCT_DESCRIPTION_FIELDS) => {
     const currentArray =
       fieldName === "productPhotos" ? photosProduct : photosAccessories;
