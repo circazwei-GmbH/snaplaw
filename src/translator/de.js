@@ -157,6 +157,11 @@ export default {
         yes: "Ja",
         no: "Nein",
       },
+      sign_out: {
+        message: 'Sind Sie sicher, dass Sie die App verlassen wollen?',
+        yes: 'Ja',
+        no: "Nein"
+      }
     },
     error: "Das Feld kann nicht leer sein",
   },

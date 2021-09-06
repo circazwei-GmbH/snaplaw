@@ -1,17 +1,13 @@
-import React, { useState } from "react";
-import {
-  GestureResponderEvent,
-  Pressable,
-  StyleSheet,
-  Text,
-} from "react-native";
+import React, {useState} from "react";
+import {GestureResponderEvent, Pressable, StyleSheet, Text,} from "react-native";
+import {BUTTON_COLORTYPE} from "../../../store/modules/main/types";
 
 interface ButtonPropsInterface {
   text: string;
   onPress: (event: GestureResponderEvent) => void;
   style?: object;
   type?: "primary" | "secondary";
-  textColorType?: "primary" | "red" | "error";
+  textColorType?: BUTTON_COLORTYPE;
 }
 
 export default function Button({
@@ -48,8 +44,8 @@ export default function Button({
         style={[
           styles.text,
           type !== "primary" ? styles.secondaryText : styles.primaryText,
-          textColorType === "primary" ? styles.secondaryText : null,
-          textColorType === "error" ? styles.errorText : null,
+          textColorType === BUTTON_COLORTYPE.PRIMARY ? styles.secondaryText : null,
+          textColorType === BUTTON_COLORTYPE.ERROR ? styles.errorText : null,
         ]}
       >
         {text}

@@ -154,6 +154,11 @@ export default {
         yes: "Yes",
         no: "No",
       },
+      sign_out: {
+        message: 'Are you sure you want to leave the app?',
+        yes: 'Yes',
+        no: "No"
+      }
     },
     error: "The field can't be empty",
   },
