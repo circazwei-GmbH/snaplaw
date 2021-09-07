@@ -27,7 +27,10 @@ export default function NotificationListItem({
     swipeable.current.close();
   };
 
-  const RightSwipeAction = (progress: any, dragX: any): JSX.Element => {
+  const RightSwipeAction = (
+    progress: Animated.AnimatedInterpolation,
+    dragX: Animated.AnimatedInterpolation
+  ): JSX.Element => {
     const transition = dragX.interpolate({
       inputRange: [0, 100],
       outputRange: [30, 60],
@@ -49,7 +52,7 @@ export default function NotificationListItem({
   return (
     <Swipeable
       renderRightActions={RightSwipeAction}
-      friction={2}
+      friction={1}
       overshootRight={false}
       ref={swipeable}
     >
