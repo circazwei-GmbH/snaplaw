@@ -1,5 +1,5 @@
 export type ListItemProps = {
-  item: Record<string, any>
-}
+  item: Record<string, any>;
+};
 
-export type ListItemConponent  = (props: ListItemProps) => JSX.Element
+export type ListItemConponent = (props: ListItemProps) => JSX.Element;

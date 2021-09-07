@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal, TouchableOpacity, StyleSheet } from "react-native";
 import FastImage from "react-native-fast-image";
-import {buildMediaSource} from "../../../utils/helpers";
+import { buildMediaSource } from "../../../utils/helpers";
 
 export interface ProductDescriptionModalPropsInterface {
   url: string;

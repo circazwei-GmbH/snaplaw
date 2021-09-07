@@ -23,7 +23,13 @@ export default function TopBar({
 }: TopBarProps) {
   return (
     <>
-      <View style={[styles.header, withBackbround ? styles.background : null, style]}>
+      <View
+        style={[
+          styles.header,
+          withBackbround ? styles.background : null,
+          style,
+        ]}
+      >
         {leftButton === undefined ? <BackButton /> : leftButton}
         <Text style={styles.headerText}>{pageName}</Text>
         <View style={styles.buttonPlaceholder}>
@@ -31,11 +37,19 @@ export default function TopBar({
         </View>
       </View>
       {bottomElement ? (
-        <View style={[styles.bottomElement, withBackbround ? styles.background : null, style]}>
+        <View
+          style={[
+            styles.bottomElement,
+            withBackbround ? styles.background : null,
+            style,
+          ]}
+        >
           {bottomElement}
         </View>
-      ): null}
-      {withBackbround ? (<View style={[styles.border, styles.background]} />) : null}
+      ) : null}
+      {withBackbround ? (
+        <View style={[styles.border, styles.background]} />
+      ) : null}
       {children}
     </>
   );
@@ -69,10 +83,10 @@ const styles = StyleSheet.create({
   bottomElement: {
     paddingBottom: 23,
     paddingTop: 10,
-    paddingHorizontal: 16
+    paddingHorizontal: 16,
   },
   background: {
-    backgroundColor: "#F8FCFF"
+    backgroundColor: "#F8FCFF",
   },
   border: {
     height: 3,
@@ -83,5 +97,5 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 1,
     shadowRadius: 1,
-  }
+  },
 });

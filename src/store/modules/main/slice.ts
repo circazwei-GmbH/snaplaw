@@ -6,7 +6,7 @@ import {
 } from "@reduxjs/toolkit";
 import { OrientationLock } from "expo-screen-orientation";
 import { AllowOrientationType } from "./action-creators";
-import {BUTTON_COLORTYPE} from "./types";
+import { BUTTON_COLORTYPE } from "./types";
 
 interface ModalActionInterface {
   action?: any | undefined;

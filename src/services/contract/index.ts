@@ -7,18 +7,18 @@ import { LANGUAGE_GERMANY } from "../../store/modules/profile/constants";
 
 const contracts = [
   {
-    id: 'lalalal',
-    title: 'some',
+    id: "lalalal",
+    title: "some",
     type: CONTRACT_TYPES.PURCHASE,
-    createdAt: '12/04/2021'
+    createdAt: "12/04/2021",
   },
   {
-    id: 'sdjfos',
-    title: 'some other',
+    id: "sdjfos",
+    title: "some other",
     type: CONTRACT_TYPES.PURCHASE,
-    createdAt: '14/04/2021'
-  }
-]
+    createdAt: "14/04/2021",
+  },
+];
 
 const createContract = (type: CONTRACT_TYPES) =>
   httpClient.post("api/contracts", { type });
@@ -29,9 +29,10 @@ const saveScreenData = (id: string, screen: BaseScreenDataInterface) =>
     screenType: screen.type,
   });
 
-const requestContractList = () => new Promise((resolve) => {
-  setTimeout(() => resolve(contracts), 1000)
-})
+const requestContractList = () =>
+  new Promise((resolve) => {
+    setTimeout(() => resolve(contracts), 1000);
+  });
 
 export const buildPDFSource = (
   id: string,
@@ -50,5 +51,5 @@ export const buildPDFSource = (
 export default {
   createContract,
   saveScreenData,
-  requestContractList
+  requestContractList,
 };

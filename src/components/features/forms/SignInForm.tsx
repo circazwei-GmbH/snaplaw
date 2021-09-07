@@ -8,7 +8,7 @@ import {
   RootStackParamList,
   AUTH_ROUTE,
 } from "../../../router/AuthRouterTypes";
-import {ValidatorFormInterface} from "../../../validations/default";
+import { ValidatorFormInterface } from "../../../validations/default";
 import { useI18n } from "../../../translator/i18n";
 
 // TODO move to abstract place because used in SignUp
