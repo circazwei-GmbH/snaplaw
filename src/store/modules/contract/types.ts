@@ -52,6 +52,10 @@ export interface ScreenValidateAction extends BaseAction {
   };
 }
 
+export type ContractDataType = Record<string, any>;
+
+export type ContractListType = Array<ContractDataType>;
+
 export { ProductDataScreenInterface, PRODUCT_DATA_FIELDS };
 export { UserDataScreenInterface, USER_DATA_FIELDS };
 export { ProductConditionScreenInterface, CONDITION_VALUE, CONDITIONS };

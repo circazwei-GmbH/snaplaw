@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import {TextInput, View, StyleSheet, TextInputProps, Text} from "react-native";
+import {
+  TextInput,
+  View,
+  StyleSheet,
+  TextInputProps,
+  Text,
+} from "react-native";
 
 interface OnChangeFunction {
   (text: string): void;
@@ -10,7 +16,7 @@ interface MultilineTextFieldPropsInterface extends TextInputProps {
   value?: string;
   checked?: boolean;
   onChangeFunction: OnChangeFunction;
-  errorMessage?: string
+  errorMessage?: string;
 }
 
 export default function MultilineTextField({
@@ -45,14 +51,16 @@ export default function MultilineTextField({
           focused ? null : styles.focuslessInput,
           localValue ? styles.inputWithText : null,
           checked ? styles.heightChecked : styles.heightNotChecked,
-          errorMessage ? styles.fieldOnError : null
+          errorMessage ? styles.fieldOnError : null,
         ]}
         value={localValue}
         onChangeText={textChangeHandler}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
       />
-      {errorMessage ? (<Text style={styles.errorMessage}>{errorMessage}</Text>) : null}
+      {errorMessage ? (
+        <Text style={styles.errorMessage}>{errorMessage}</Text>
+      ) : null}
     </View>
   );
 }
@@ -97,12 +105,12 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   fieldOnError: {
-    borderColor: '#FA7171',
-    borderWidth: 1
+    borderColor: "#FA7171",
+    borderWidth: 1,
   },
   errorMessage: {
-    color: '#FA7171',
-    fontFamily: 'OS-SB',
-    paddingTop: 8
-  }
+    color: "#FA7171",
+    fontFamily: "OS-SB",
+    paddingTop: 8,
+  },
 });

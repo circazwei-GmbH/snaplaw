@@ -1,4 +1,4 @@
 export enum BUTTON_COLORTYPE {
-  PRIMARY = 'primary',
-  ERROR = 'error'
+  PRIMARY = "primary",
+  ERROR = "error",
 }

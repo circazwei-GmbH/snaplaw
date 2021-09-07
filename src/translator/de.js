@@ -158,10 +158,10 @@ export default {
         no: "Nein",
       },
       sign_out: {
-        message: 'Sind Sie sicher, dass Sie die App verlassen wollen?',
-        yes: 'Ja',
-        no: "Nein"
-      }
+        message: "Sind Sie sicher, dass Sie die App verlassen wollen?",
+        yes: "Ja",
+        no: "Nein",
+      },
     },
     error: "Das Feld kann nicht leer sein",
   },
@@ -186,6 +186,11 @@ export default {
   },
   my_contracts: {
     tab_name: "Meine Verträge",
+    lists: {
+      finalized: "Abgeschlossen",
+      in_progress: "In Bearbeitung",
+    },
+    empty_list: "Sie haben noch keine Verträge",
   },
   menu: {
     cancel: "Abbrechen",

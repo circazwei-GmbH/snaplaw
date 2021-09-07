@@ -52,11 +52,13 @@ export default function TextField({
   };
 
   return (
-    <View style={[
-      containerStyle,
-      styles.inputContainer,
-      (value || focused) && !search ? null : styles.paddingForLabel
-    ]}>
+    <View
+      style={[
+        containerStyle,
+        styles.inputContainer,
+        (value || focused) && !search ? null : styles.paddingForLabel,
+      ]}
+    >
       {search ? null : (
         <Text
           style={[
@@ -121,7 +123,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   paddingForLabel: {
-    paddingTop: 22
+    paddingTop: 22,
   },
   emptyInput: {
     backgroundColor: "#EFF7FD",

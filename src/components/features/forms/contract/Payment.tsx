@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {StyleSheet, View} from "react-native";
+import { StyleSheet, View } from "react-native";
 import DefaultText from "../../../basics/typography/DefaultText";
 import { useI18n } from "../../../../translator/i18n";
 import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/constants";
@@ -32,8 +32,8 @@ export default function Payment() {
         (screen) => screen.type === CONTRACT_SCREEN_TYPES.PAYMENT
       ) as PaymentScreenInterface
   );
-  const screenErrors = useAppSelector((state) =>
-    state.contract.contractErrors?.[CONTRACT_SCREEN_TYPES.PAYMENT]
+  const screenErrors = useAppSelector(
+    (state) => state.contract.contractErrors?.[CONTRACT_SCREEN_TYPES.PAYMENT]
   );
 
   const dispatch = useAppDispatch();
@@ -85,7 +85,12 @@ export default function Payment() {
             `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.cost`
           )}
         />
-        <View style={[styles.select, screenErrors?.[PAYMENT_FIELDS.COST] ? styles.paddingForError : null]}>
+        <View
+          style={[
+            styles.select,
+            screenErrors?.[PAYMENT_FIELDS.COST] ? styles.paddingForError : null,
+          ]}
+        >
           <Select
             items={CURRENSIES}
             selectedValue={CURRENSIES.find(
@@ -157,7 +162,9 @@ export default function Payment() {
           )}
         />
       </View>
-      <AbstractErrorMessage message={screenErrors?.[PAYMENT_FIELDS.PAYMENT_METHOD]} />
+      <AbstractErrorMessage
+        message={screenErrors?.[PAYMENT_FIELDS.PAYMENT_METHOD]}
+      />
       {screenData?.data[PAYMENT_FIELDS.PAYMENT_METHOD] ===
       PAYMENT_METHODS.TRANSFER ? (
         <>
@@ -215,6 +222,6 @@ const styles = StyleSheet.create({
     width: "65%",
   },
   paddingForError: {
-    marginBottom: 22
+    marginBottom: 22,
   },
 });

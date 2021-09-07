@@ -139,7 +139,8 @@ export const contractValidator = (
     const currentScreen = screens.find(
       (screen) => screen.type === contractConfig[i].type
     );
-    const validationConfig = contractValidationConfig[contractType][contractConfig[i].type];
+    const validationConfig =
+      contractValidationConfig[contractType][contractConfig[i].type];
     if (!currentScreen && Object.keys(validationConfig).length) {
       return i;
     } else if (!currentScreen) {

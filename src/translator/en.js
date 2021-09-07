@@ -155,10 +155,10 @@ export default {
         no: "No",
       },
       sign_out: {
-        message: 'Are you sure you want to leave the app?',
-        yes: 'Yes',
-        no: "No"
-      }
+        message: "Are you sure you want to leave the app?",
+        yes: "Yes",
+        no: "No",
+      },
     },
     error: "The field can't be empty",
   },
@@ -183,6 +183,11 @@ export default {
   },
   my_contracts: {
     tab_name: "My contracts",
+    lists: {
+      finalized: "Finalized",
+      in_progress: "In progress",
+    },
+    empty_list: "You have no contracts yet",
   },
   menu: {
     cancel: "Cancel",

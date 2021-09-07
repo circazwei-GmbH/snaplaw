@@ -66,7 +66,9 @@ export default function ProductCondition() {
           onChange={() => setSelected(condition)}
         />
       ))}
-      <AbstractErrorMessage message={screenErrors?.[PRODUCT_CONDITION_FIELD_NAME]} />
+      <AbstractErrorMessage
+        message={screenErrors?.[PRODUCT_CONDITION_FIELD_NAME]}
+      />
     </View>
   );
 }

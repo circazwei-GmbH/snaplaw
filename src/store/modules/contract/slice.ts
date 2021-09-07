@@ -4,7 +4,7 @@ import {
   Draft,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { Contract } from "./types";
+import { Contract, ContractListType } from "./types";
 import { CONTRACT_SCREEN_TYPES } from "./constants";
 
 interface ContractState {
@@ -12,11 +12,15 @@ interface ContractState {
   contractErrors:
     | Record<CONTRACT_SCREEN_TYPES, Record<string, string> | undefined>
     | undefined;
+  contracts: ContractListType | [];
+  isListLoading: boolean;
 }
 
 const initialState: ContractState = {
   currentContract: undefined,
   contractErrors: undefined,
+  contracts: [],
+  isListLoading: false,
 };
 
 type ScreenData = {
@@ -41,6 +45,13 @@ const setFieldErrorAction = createAction<FieldErrorData, "setFieldError">(
   "setFieldError"
 );
 const clearErrorsAction = createAction<undefined, "clearErrors">("clearErrors");
+const setContractsListAction = createAction<
+  ContractListType,
+  "setContractsList"
+>("setContractsList");
+const setListLoadingAction = createAction<boolean, "setListLoading">(
+  "setListLoading"
+);
 
 const contractSlice = createSlice({
   name: "contract",
@@ -92,6 +103,7 @@ const contractSlice = createSlice({
       if (!state.currentContract) {
         return;
       }
+      // @ts-ignore
       state.contractErrors = {
         ...state.contractErrors,
         [action.payload.screenType]: {
@@ -113,10 +125,28 @@ const contractSlice = createSlice({
     [clearErrorsAction.type]: (state: Draft<ContractState>) => {
       state.contractErrors = undefined;
     },
+    [setContractsListAction.type]: (
+      state: Draft<ContractState>,
+      action: PayloadAction<ContractListType>
+    ) => {
+      state.contracts = action.payload;
+    },
+    [setListLoadingAction.type]: (
+      state: Draft<ContractState>,
+      actions: PayloadAction<boolean>
+    ) => {
+      state.isListLoading = actions.payload;
+    },
   },
 });
 
-export const { setInitedContract, setScreenData, setFieldError, clearErrors } =
-  contractSlice.actions;
+export const {
+  setInitedContract,
+  setScreenData,
+  setFieldError,
+  clearErrors,
+  setContractsList,
+  setListLoading,
+} = contractSlice.actions;
 
 export default contractSlice.reducer;

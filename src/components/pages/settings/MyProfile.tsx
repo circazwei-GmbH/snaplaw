@@ -9,26 +9,28 @@ import * as RootNavigation from "../../../router/RootNavigation";
 import { PROFILE_ROUTER } from "../../../router/ProfileRouterTypes";
 import { useI18n } from "../../../translator/i18n";
 import { clearToken } from "../../../store/modules/auth/action-creators";
-import {setModal} from "../../../store/modules/main/slice";
-import {BUTTON_COLORTYPE} from "../../../store/modules/main/types";
+import { setModal } from "../../../store/modules/main/slice";
+import { BUTTON_COLORTYPE } from "../../../store/modules/main/types";
 
 export default function MyProfile(): JSX.Element {
   const dispatch = useAppDispatch();
   const { t } = useI18n();
   const signOutHandler = () => {
-    dispatch(setModal({
-      message: t('edit_profile.modals.sign_out.message'),
-      actions: [
-        {
-          name: t('edit_profile.modals.sign_out.no'),
-          colortype: BUTTON_COLORTYPE.ERROR
-        },
-        {
-          name: t('edit_profile.modals.sign_out.yes'),
-          action: clearToken(),
-        }
-      ]
-    }));
+    dispatch(
+      setModal({
+        message: t("edit_profile.modals.sign_out.message"),
+        actions: [
+          {
+            name: t("edit_profile.modals.sign_out.no"),
+            colortype: BUTTON_COLORTYPE.ERROR,
+          },
+          {
+            name: t("edit_profile.modals.sign_out.yes"),
+            action: clearToken(),
+          },
+        ],
+      })
+    );
   };
 
   return (

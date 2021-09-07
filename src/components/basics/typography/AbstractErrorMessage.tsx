@@ -1,24 +1,23 @@
-import React from 'react'
-import {StyleSheet, Text, View} from "react-native";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 import DefaultText from "./DefaultText";
 
 type AbstractErrorMessageProps = {
-  message: string | undefined
-}
+  message: string | undefined;
+};
 
-export default function AbstractErrorMessage({ message }: AbstractErrorMessageProps) {
+export default function AbstractErrorMessage({
+  message,
+}: AbstractErrorMessageProps) {
   if (!message) {
-    return null
+    return null;
   }
   return (
     <View style={styles.errorContainer}>
       <Text style={styles.dot}>*</Text>
-      <DefaultText
-        style={styles.errorText}
-        text={message}
-      />
+      <DefaultText style={styles.errorText} text={message} />
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -34,4 +33,4 @@ const styles = StyleSheet.create({
   errorText: {
     fontFamily: "OS-SB",
   },
-})
+});

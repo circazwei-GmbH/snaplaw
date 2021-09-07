@@ -1,5 +1,6 @@
 import { call, put, takeLatest, select } from "redux-saga/effects";
 import {
+  REQEST_CONTRACTS_LIST,
   REQUEST_CREATE_CONTRACT,
   REQUEST_SCREEN_DATA,
   VALIDATE_SCREEN,
@@ -13,7 +14,13 @@ import API from "../../../services/contract/index";
 import { responseError } from "../auth/action-creators";
 import { addToWAiter, removeFromWaiter } from "../main/slice";
 import { CONTRACT_CREATION_WAIT } from "./constants";
-import { clearErrors, setFieldError, setInitedContract } from "./slice";
+import {
+  clearErrors,
+  setContractsList,
+  setFieldError,
+  setInitedContract,
+  setListLoading,
+} from "./slice";
 import * as RootHavigation from "../../../router/RootNavigation";
 import { HOME_ROUTER } from "../../../router/HomeRouterType";
 import { prefillUserData } from "../../../services/contract/user-data-prefiller";
@@ -47,13 +54,15 @@ function* createContract({ payload }: RequestCreateContractAction) {
 }
 
 function* requestScreenData({ payload }: RequestScreenDataAction) {
-  const screenData = yield select<SelectType>(
-    (state) => state.contract.currentContract?.screens.find(screen => screen.type === payload)
+  const screenData = yield select<SelectType>((state) =>
+    state.contract.currentContract?.screens.find(
+      (screen) => screen.type === payload
+    )
   );
   const contractId = yield select<SelectType>(
     (state) => state.contract.currentContract?.id
   );
-  console.log(screenData, payload)
+  console.log(screenData, payload);
   if (!screenData) {
     return;
   }
@@ -100,10 +109,23 @@ function* screenValidate({
   }
 }
 
+function* requestConreactsList() {
+  yield put(setListLoading(true));
+  try {
+    const contracts = yield call(API.requestContractList);
+    yield put(setContractsList(contracts));
+  } catch (error) {
+    yield put(responseError(error));
+  } finally {
+    yield put(setListLoading(false));
+  }
+}
+
 function* contractSaga() {
   yield takeLatest(REQUEST_CREATE_CONTRACT, createContract);
   yield takeLatest(REQUEST_SCREEN_DATA, requestScreenData);
   yield takeLatest(VALIDATE_SCREEN, screenValidate);
+  yield takeLatest(REQEST_CONTRACTS_LIST, requestConreactsList);
 }
 
 export default contractSaga;
