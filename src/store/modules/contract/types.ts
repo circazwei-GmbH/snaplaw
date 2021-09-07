@@ -52,7 +52,22 @@ export interface ScreenValidateAction extends BaseAction {
   };
 }
 
-export type ContractDataType = Record<string, any>;
+export interface RequestContractListAction extends BaseAction {
+  payload: CONTRACT_LIST_STATE
+}
+
+export enum CONTRACT_LIST_STATE {
+  FINALIZED = "finalized",
+  IN_PROGRESS = "in_progress",
+}
+
+export type ContractDataType = {
+  id: string,
+  type: string,
+  createdAt: string,
+  title: string | undefined,
+  contractor: string | undefined
+};
 
 export type ContractListType = Array<ContractDataType>;
 

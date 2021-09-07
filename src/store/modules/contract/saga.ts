@@ -6,6 +6,7 @@ import {
   VALIDATE_SCREEN,
 } from "./action-creators";
 import {
+  RequestContractListAction,
   RequestCreateContractAction,
   RequestScreenDataAction,
   ScreenValidateAction,
@@ -109,10 +110,10 @@ function* screenValidate({
   }
 }
 
-function* requestConreactsList() {
+function* requestConreactsList({ payload }: RequestContractListAction) {
   yield put(setListLoading(true));
   try {
-    const contracts = yield call(API.requestContractList);
+    const contracts = yield call(API.requestContractList, payload);
     yield put(setContractsList(contracts));
   } catch (error) {
     yield put(responseError(error));
