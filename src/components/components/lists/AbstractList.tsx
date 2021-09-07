@@ -42,9 +42,7 @@ export default function AbstractList({
   }
 
   return (
-    <View style={styles.container}>
-      <FlatList data={elements} renderItem={listItem} />
-    </View>
+    <FlatList style={styles.container} data={elements} renderItem={listItem} />
   );
 }
 
