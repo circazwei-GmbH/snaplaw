@@ -9,7 +9,7 @@ import { AntDesign } from "@expo/vector-icons";
 
 interface NotificationListItemPropsInterface {
   item: NotificationListInterface;
-  style: object;
+  style: { height: number };
   onPress: (type: string, isNew: boolean) => void;
 }
 
