@@ -191,6 +191,13 @@ export default {
       in_progress: "In Bearbeitung",
     },
     empty_list: "Sie haben noch keine Verträge",
+    actions: {
+      edit: 'Vertrag editieren',
+      delete: 'Vertrag löschen',
+      see_partner: 'Vertragspartner sehen',
+      delete_partner: 'Vertragspartner löschen',
+      invite_partner: 'Benutzer einladen'
+    }
   },
   menu: {
     cancel: "Abbrechen",

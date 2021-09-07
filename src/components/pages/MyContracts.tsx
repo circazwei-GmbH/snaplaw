@@ -67,7 +67,7 @@ export default function MyContracts() {
       <AbstractList
         messageOnEmpty={t("my_contracts.empty_list")}
         elements={contracts}
-        listItem={ContractListItem}
+        listItem={({item}) => <ContractListItem item={item} />}
         isLoading={isLoading}
       />
     </TopBar>

@@ -10,6 +10,7 @@ const contracts = [
     id: "lalalal",
     title: "some",
     type: CONTRACT_TYPES.PURCHASE,
+    contractor: true,
     createdAt: "12/04/2021",
   },
   {

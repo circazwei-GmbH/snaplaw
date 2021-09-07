@@ -188,6 +188,13 @@ export default {
       in_progress: "In progress",
     },
     empty_list: "You have no contracts yet",
+    actions: {
+      edit: 'Edit contracts',
+      delete: 'Delete contract',
+      see_partner: 'See contract partner',
+      delete_partner: 'Delete contract partner',
+      invite_partner: 'Invite user'
+    }
   },
   menu: {
     cancel: "Cancel",
