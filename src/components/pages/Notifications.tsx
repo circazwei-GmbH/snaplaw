@@ -1,9 +1,10 @@
 import React from "react";
 import { FlatList, StyleSheet } from "react-native";
-import TopBar from "../../layouts/TopBar";
-import { useI18n } from "../../../translator/i18n";
-import { useAppSelector, useAppDispatch } from "../../../store/hooks";
-import NotificationListItem from "../../components/NotificationListItem";
+import TopBar from "../layouts/TopBar";
+import { useI18n } from "../../translator/i18n";
+import { useAppSelector, useAppDispatch } from "../../store/hooks";
+import { setMessage, setModal } from "../../store/modules/main/slice";
+import NotificationListItem from "../components/NotificationListItem";
 
 export interface NotificationListInterface {
   isNew: boolean;
@@ -43,6 +44,51 @@ const notification2: NotificationListInterface = {
 export default function Notifications(): JSX.Element {
   const { t } = useI18n();
   const list = [notification, notification2];
+  const dispatch = useAppDispatch();
+
+  const modalHandler = (type: string, isNew: boolean) => {
+    switch (type) {
+      case "user_invited_to_contract":
+        if (isNew) {
+          return dispatch(
+            setModal({
+              message: t("edit_profile.modals.save.message"),
+              actions: [
+                {
+                  name: t("edit_profile.modals.save.cancel"),
+                  colortype: "error",
+                },
+                {
+                  name: t("edit_profile.modals.save.confirm"),
+                  colortype: "primary",
+                },
+              ],
+            })
+          );
+        } else {
+          return dispatch(setMessage(t("errors.abstract")));
+        }
+
+      case "contract_updated":
+      case "contract_signed":
+      case "invite_to_contract_accepted":
+      case "invite_to_contract_rejected":
+      case "user_has_left_contract":
+      case "user_has_been_removed_from_contract":
+      case "contract_deleted":
+      case "contract_point_created":
+      case "contract_point_updated":
+      case "contract_point_confirmed":
+      case "contract_point_declined":
+      case "contract_point_deleted":
+      case "file_added":
+      case "file_deleted":
+        return dispatch(setMessage(t("errors.abstract")));
+
+      default:
+        return;
+    }
+  };
 
   return (
     <TopBar pageName={t("notifications.title")}>
@@ -51,7 +97,11 @@ export default function Notifications(): JSX.Element {
         data={list}
         keyExtractor={(item) => item._id}
         renderItem={({ item }) => (
-          <NotificationListItem style={styles.itemHeight} item={item} />
+          <NotificationListItem
+            style={styles.itemHeight}
+            item={item}
+            onPress={modalHandler}
+          />
         )}
         onEndReached={() => {}}
         onEndReachedThreshold={0.0001}

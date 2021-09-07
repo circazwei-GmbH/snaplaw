@@ -12,7 +12,7 @@ import Verification from "../components/pages/auth/Verification";
 import ChangePassword from "../components/pages/auth/ChangePassword";
 import ChangeLanguage from "../components/pages/settings/ChangeLanguage";
 import EditProfile from "../components/pages/settings/EditProfile";
-import Notifications from "../components/pages/settings/Notifications";
+import Notifications from "../components/pages/Notifications";
 import { Text, Platform, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { useI18n } from "../translator/i18n";

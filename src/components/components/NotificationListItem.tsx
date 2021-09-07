@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { View, StyleSheet, Animated } from "react-native";
-import { NotificationListInterface } from "../pages/settings/Notifications";
+import { NotificationListInterface } from "../pages/Notifications";
 import DefaultText from "../basics/typography/DefaultText";
 import dayjs from "dayjs";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -10,14 +10,16 @@ import { AntDesign } from "@expo/vector-icons";
 interface NotificationListItemPropsInterface {
   item: NotificationListInterface;
   style: object;
+  onPress: (type: string, isNew: boolean) => void;
 }
 
 export default function NotificationListItem({
   item,
   style,
+  onPress,
 }: NotificationListItemPropsInterface): JSX.Element {
   const swipeable: any = useRef();
-  const { isNew, notification, createdAt, userIdFrom } = item;
+  const { isNew, notification, createdAt, userIdFrom, type } = item;
   const isToday = require("dayjs/plugin/isToday");
   dayjs.extend(isToday);
   const [isRead, setIsRead] = useState(isNew);
@@ -56,7 +58,11 @@ export default function NotificationListItem({
       overshootRight={false}
       ref={swipeable}
     >
-      <TouchableOpacity style={style} activeOpacity={1} onPress={() => {}}>
+      <TouchableOpacity
+        style={style}
+        activeOpacity={1}
+        onPress={() => onPress(type, isRead)}
+      >
         <View
           style={[
             styles.container,
