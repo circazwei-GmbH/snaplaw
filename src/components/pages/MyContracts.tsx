@@ -1,10 +1,14 @@
-import React, {useState} from "react";
-import {StyleSheet, Text, View} from "react-native";
+import React, {useEffect, useState} from "react";
+import {StyleSheet} from "react-native";
 import TopBar from "../layouts/TopBar";
 import NotificationBell from "../components/NotificationBell";
 import {useI18n} from "../../translator/i18n";
 import {Octicons} from '@expo/vector-icons';
 import TextSwitch, {TEXT_SWITCH_POSITION} from "../basics/switches/TextSwitch";
+import AbstractList from "../components/lists/AbstractList";
+import ContractListItem from "../components/lists/ListItems/ContactListItem";
+import {useAppDispatch, useAppSelector} from "../../store/hooks";
+import {requestContractsList} from "../../store/modules/contract/action-creators";
 
 enum LIST_STATE {
   FINALIZED = 'FINALIZED',
@@ -14,8 +18,17 @@ enum LIST_STATE {
 export default function MyContracts() {
   const { t } = useI18n()
   const [switchState, setSwitchState] = useState<LIST_STATE>(LIST_STATE.FINALIZED)
+  const contracts = useAppSelector(state => state.contract.contracts)
+  const isLoading = useAppSelector(state => state.contract.isListLoading)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(requestContractsList())
+  }, [dispatch, requestContractsList])
+
   const listTypeChangeHandler = (state: TEXT_SWITCH_POSITION) => {
     setSwitchState(state === TEXT_SWITCH_POSITION.LEFT ? LIST_STATE.FINALIZED : LIST_STATE.IN_PROGRESS)
+    dispatch(requestContractsList())
   }
   return (
     <TopBar
@@ -30,10 +43,7 @@ export default function MyContracts() {
       />}
       withBackbround
     >
-
-  <View>
-    <Text style={styles.test}>My Contracts</Text>
-  </View>
+      <AbstractList messageOnEmpty={t('my_contracts.empty_list')} elements={contracts} listItem={ContractListItem} isLoading={isLoading} />
     </TopBar>
   );
 }

@@ -189,7 +189,8 @@ export default {
     lists: {
       finalized: 'Abgeschlossen',
       in_progress: 'In Bearbeitung'
-    }
+    },
+    empty_list: 'Sie haben noch keine Verträge'
   },
   menu: {
     cancel: "Abbrechen",

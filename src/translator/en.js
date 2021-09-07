@@ -186,7 +186,8 @@ export default {
     lists: {
       finalized: 'Finalized',
       in_progress: 'In progress'
-    }
+    },
+    empty_list: 'You have no contracts yet'
   },
   menu: {
     cancel: "Cancel",
