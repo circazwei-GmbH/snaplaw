@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Animated } from "react-native";
 import { NotificationListInterface } from "../pages/settings/Notifications";
 import DefaultText from "../basics/typography/DefaultText";
 import dayjs from "dayjs";
@@ -11,13 +11,6 @@ interface NotificationListItemPropsInterface {
   item: NotificationListInterface;
   style: object;
 }
-
-const RightSwipeAction = () => (
-  <View style={styles.rightSwipe}>
-    <AntDesign name="checksquareo" size={24} color="#fff" />
-    <DefaultText text={"Read"} style={styles.rightSwipeText} />
-  </View>
-);
 
 export default function NotificationListItem({
   item,
@@ -31,21 +24,36 @@ export default function NotificationListItem({
 
   const onClose = () => {
     setIsRead(false);
+    swipeable.current.close();
+  };
+
+  const RightSwipeAction = (progress: any, dragX: any): JSX.Element => {
+    const transition = dragX.interpolate({
+      inputRange: [0, 100],
+      outputRange: [30, 60],
+    });
+    return (
+      <Animated.View style={{ transform: [{ translateX: transition }] }}>
+        <TouchableOpacity
+          onPress={onClose}
+          style={styles.rightSwipe}
+          activeOpacity={0.7}
+        >
+          <AntDesign name="checksquareo" size={24} color="#fff" />
+          <DefaultText text={"Read"} style={styles.rightSwipeText} />
+        </TouchableOpacity>
+      </Animated.View>
+    );
   };
 
   return (
     <Swipeable
       renderRightActions={RightSwipeAction}
-      onSwipeableClose={onClose}
       friction={2}
       overshootRight={false}
       ref={swipeable}
     >
-      <TouchableOpacity
-        style={style}
-        activeOpacity={0.9}
-        onPress={() => console.log("Button pressed")}
-      >
+      <TouchableOpacity style={style} activeOpacity={1} onPress={() => {}}>
         <View
           style={[
             styles.container,
