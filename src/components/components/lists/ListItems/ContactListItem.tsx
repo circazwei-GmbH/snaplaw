@@ -4,6 +4,7 @@ import { ListItemProps } from "./list-item-type";
 import { Entypo } from "@expo/vector-icons";
 import Menu, {ButtonType} from "../../../features/Modals/Menu";
 import {useI18n} from "../../../../translator/i18n";
+import dayjs from "dayjs";
 
 export default function ContractListItem({ item }: ListItemProps) {
   const [inProgressMenuVisible, setInProgressMenuVisible] = useState<boolean>(false)
@@ -39,8 +40,8 @@ export default function ContractListItem({ item }: ListItemProps) {
     <View style={styles.container}>
       <View>
         <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.type}>{item.type}</Text>
-        <Text style={styles.date}>{item.createdAt}</Text>
+        <Text style={styles.type}>{t(`contracts.${item.type}.title`)}</Text>
+        <Text style={styles.date}>{ dayjs(item.createdAt).format('DD/MM/YYYY') }</Text>
       </View>
       <TouchableOpacity onPress={() => setInProgressMenuVisible(true)}>
         <Entypo name="dots-three-vertical" size={16} color="#668395" />

@@ -1,7 +1,11 @@
-import { RequestCreateContractAction, RequestScreenDataAction } from "./types";
+import {
+  CONTRACT_LIST_STATE,
+  RequestContractListAction,
+  RequestCreateContractAction,
+  RequestScreenDataAction
+} from "./types";
 import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
 import { contractScreensConfig } from "./contract-screens-types";
-import { BaseAction } from "../auth/types";
 
 export const REQUEST_CREATE_CONTRACT = "REQUEST_CREATE_CONTRACT";
 export const REQUEST_SCREEN_DATA = "REQUEST_SCREEN_DATA";
@@ -34,7 +38,7 @@ export const validateScreen = (
   },
 });
 
-export const requestContractsList = (): BaseAction => ({
+export const requestContractsList = (type: CONTRACT_LIST_STATE): RequestContractListAction => ({
   type: REQEST_CONTRACTS_LIST,
-  payload: undefined,
+  payload: type,
 });

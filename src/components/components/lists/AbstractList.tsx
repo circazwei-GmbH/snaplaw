@@ -10,7 +10,7 @@ import { ListItemConponent } from "./ListItems/list-item-type";
 
 type AbstractListProps = {
   messageOnEmpty: string;
-  elements: Array<Record<string, string>>;
+  elements: Array<any>;
   listItem: ListItemConponent;
   isLoading?: boolean;
 };
@@ -42,7 +42,11 @@ export default function AbstractList({
   }
 
   return (
-    <FlatList style={styles.container} data={elements} renderItem={listItem} />
+    <FlatList
+      style={styles.container}
+      data={elements}
+      renderItem={listItem}
+    />
   );
 }
 

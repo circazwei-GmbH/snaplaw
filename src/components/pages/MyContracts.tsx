@@ -11,32 +11,27 @@ import AbstractList from "../components/lists/AbstractList";
 import ContractListItem from "../components/lists/ListItems/ContactListItem";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { requestContractsList } from "../../store/modules/contract/action-creators";
-
-enum LIST_STATE {
-  FINALIZED = "FINALIZED",
-  IN_PROGRESS = "IN_PROGRESS",
-}
+import {CONTRACT_LIST_STATE} from "../../store/modules/contract/types";
 
 export default function MyContracts() {
   const { t } = useI18n();
-  const [switchState, setSwitchState] = useState<LIST_STATE>(
-    LIST_STATE.FINALIZED
+  const [switchState, setSwitchState] = useState<CONTRACT_LIST_STATE>(
+    CONTRACT_LIST_STATE.FINALIZED
   );
   const contracts = useAppSelector((state) => state.contract.contracts);
   const isLoading = useAppSelector((state) => state.contract.isListLoading);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(requestContractsList());
+    dispatch(requestContractsList(switchState));
   }, [dispatch, requestContractsList]);
 
   const listTypeChangeHandler = (state: TEXT_SWITCH_POSITION) => {
-    setSwitchState(
-      state === TEXT_SWITCH_POSITION.LEFT
-        ? LIST_STATE.FINALIZED
-        : LIST_STATE.IN_PROGRESS
-    );
-    dispatch(requestContractsList());
+    const nextState = state === TEXT_SWITCH_POSITION.LEFT
+      ? CONTRACT_LIST_STATE.FINALIZED
+      : CONTRACT_LIST_STATE.IN_PROGRESS
+    setSwitchState(nextState);
+    dispatch(requestContractsList(nextState));
   };
   return (
     <TopBar
@@ -55,7 +50,7 @@ export default function MyContracts() {
           left={t("my_contracts.lists.finalized")}
           right={t("my_contracts.lists.in_progress")}
           currentPosition={
-            switchState === LIST_STATE.FINALIZED
+            switchState === CONTRACT_LIST_STATE.FINALIZED
               ? TEXT_SWITCH_POSITION.LEFT
               : TEXT_SWITCH_POSITION.RIGHT
           }
