@@ -18,7 +18,7 @@ export default function SplashLoader() {
         ]}
       >
         <View style={styles.activityContainer}>
-          <ActivityIndicator size="large" color="#1696E2" />
+          <ActivityIndicator size="large" color="black" />
         </View>
       </Modal>
     </View>

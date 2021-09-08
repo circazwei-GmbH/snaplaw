@@ -52,6 +52,7 @@ const setContractsListAction = createAction<
 const setListLoadingAction = createAction<boolean, "setListLoading">(
   "setListLoading"
 );
+const deleteContractAction = createAction<string, "deleteContract">("deleteContract")
 
 const contractSlice = createSlice({
   name: "contract",
@@ -133,10 +134,16 @@ const contractSlice = createSlice({
     },
     [setListLoadingAction.type]: (
       state: Draft<ContractState>,
-      actions: PayloadAction<boolean>
+      action: PayloadAction<boolean>
     ) => {
-      state.isListLoading = actions.payload;
+      state.isListLoading = action.payload;
     },
+    [deleteContractAction.type]: (
+      state: Draft<ContractState>,
+      action: PayloadAction<string>
+    ) => {
+      state.contracts.splice(state.contracts.findIndex(contract => contract.id === action.payload), 1)
+    }
   },
 });
 
@@ -147,6 +154,7 @@ export const {
   clearErrors,
   setContractsList,
   setListLoading,
+  deleteContract
 } = contractSlice.actions;
 
 export default contractSlice.reducer;

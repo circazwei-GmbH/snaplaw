@@ -9,6 +9,7 @@ import {useAppDispatch} from "../../../../store/hooks";
 import {navigate} from "../../../../store/modules/main/action-creators";
 import {ROUTER_TABS} from "../../../../router/TabRouterTypes";
 import {HOME_ROUTER} from "../../../../router/HomeRouterType";
+import {requestDeleteContract} from "../../../../store/modules/contract/action-creators";
 
 export default function ContractListItem({ item }: ListItemProps) {
   const [inProgressMenuVisible, setInProgressMenuVisible] = useState<boolean>(false)
@@ -28,7 +29,10 @@ export default function ContractListItem({ item }: ListItemProps) {
     },
     {
       title: t('my_contracts.actions.delete'),
-      handler: () => {}
+      handler: () => {
+        dispatch(requestDeleteContract(item.id))
+        setInProgressMenuVisible(false)
+      }
     }
   ]
   if (isContractorInclude()) {

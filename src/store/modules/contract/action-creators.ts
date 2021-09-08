@@ -12,6 +12,7 @@ export const REQUEST_SCREEN_DATA = "REQUEST_SCREEN_DATA";
 export const VALIDATE_SCREEN = "VALIDATE_SCREEN";
 export const REQEST_CONTRACTS_LIST = "REQEST_CONTRACTS_LIST";
 export const REQUEST_CONTRACT = "REQUEST_CONTRACT";
+export const REQUEST_CONTRACT_DELETE = "REQUEST_CONTRACT_DELETE";
 
 export const requestCreateContract = (
   type: CONTRACT_TYPES
@@ -46,5 +47,10 @@ export const requestContractsList = (type: CONTRACT_LIST_STATE): RequestContract
 
 export const requestContract = (id: string): RequestContractAction => ({
   type: REQUEST_CONTRACT,
+  payload: id
+})
+
+export const requestDeleteContract = (id: string): RequestContractAction => ({
+  type: REQUEST_CONTRACT_DELETE,
   payload: id
 })
