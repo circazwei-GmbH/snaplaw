@@ -5,15 +5,26 @@ import { Entypo } from "@expo/vector-icons";
 import Menu, {ButtonType} from "../../../features/Modals/Menu";
 import {useI18n} from "../../../../translator/i18n";
 import dayjs from "dayjs";
+import {useAppDispatch} from "../../../../store/hooks";
+import {navigate} from "../../../../store/modules/main/action-creators";
+import {ROUTER_TABS} from "../../../../router/TabRouterTypes";
+import {HOME_ROUTER} from "../../../../router/HomeRouterType";
 
 export default function ContractListItem({ item }: ListItemProps) {
   const [inProgressMenuVisible, setInProgressMenuVisible] = useState<boolean>(false)
   const { t } = useI18n()
+  const dispatch = useAppDispatch();
   const isContractorInclude = () => !!item.contractor
   const inProgressMenuButtons: Array<ButtonType> = [
     {
       title: t('my_contracts.actions.edit'),
-      handler: () => {}
+      handler: () => {
+        dispatch(navigate({
+          [ROUTER_TABS.HOMEPAGE]: {},
+          [HOME_ROUTER.CONTRACT]: { screenCount: 0, id: item.id }
+        }))
+        setInProgressMenuVisible(false)
+      }
     },
     {
       title: t('my_contracts.actions.delete'),

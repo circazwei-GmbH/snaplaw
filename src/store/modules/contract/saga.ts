@@ -1,11 +1,12 @@
 import { call, put, takeLatest, select } from "redux-saga/effects";
 import {
-  REQEST_CONTRACTS_LIST,
+  REQEST_CONTRACTS_LIST, REQUEST_CONTRACT,
   REQUEST_CREATE_CONTRACT,
   REQUEST_SCREEN_DATA,
   VALIDATE_SCREEN,
 } from "./action-creators";
 import {
+  RequestContractAction,
   RequestContractListAction,
   RequestCreateContractAction,
   RequestScreenDataAction,
@@ -122,11 +123,25 @@ function* requestConreactsList({ payload }: RequestContractListAction) {
   }
 }
 
+function* requestContract({payload}: RequestContractAction) {
+ try {
+    const contract = yield call(API.requestContract, payload)
+    yield put(setInitedContract({
+      id: contract.id,
+      type: contract.type,
+      screens: contract.screens
+    }))
+ } catch (error) {
+   yield put(responseError(error));
+ }
+}
+
 function* contractSaga() {
   yield takeLatest(REQUEST_CREATE_CONTRACT, createContract);
   yield takeLatest(REQUEST_SCREEN_DATA, requestScreenData);
   yield takeLatest(VALIDATE_SCREEN, screenValidate);
   yield takeLatest(REQEST_CONTRACTS_LIST, requestConreactsList);
+  yield takeLatest(REQUEST_CONTRACT, requestContract)
 }
 
 export default contractSaga;

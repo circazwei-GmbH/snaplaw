@@ -1,5 +1,5 @@
 import {
-  CONTRACT_LIST_STATE,
+  CONTRACT_LIST_STATE, RequestContractAction,
   RequestContractListAction,
   RequestCreateContractAction,
   RequestScreenDataAction
@@ -11,6 +11,7 @@ export const REQUEST_CREATE_CONTRACT = "REQUEST_CREATE_CONTRACT";
 export const REQUEST_SCREEN_DATA = "REQUEST_SCREEN_DATA";
 export const VALIDATE_SCREEN = "VALIDATE_SCREEN";
 export const REQEST_CONTRACTS_LIST = "REQEST_CONTRACTS_LIST";
+export const REQUEST_CONTRACT = "REQUEST_CONTRACT";
 
 export const requestCreateContract = (
   type: CONTRACT_TYPES
@@ -42,3 +43,8 @@ export const requestContractsList = (type: CONTRACT_LIST_STATE): RequestContract
   type: REQEST_CONTRACTS_LIST,
   payload: type,
 });
+
+export const requestContract = (id: string): RequestContractAction => ({
+  type: REQUEST_CONTRACT,
+  payload: id
+})

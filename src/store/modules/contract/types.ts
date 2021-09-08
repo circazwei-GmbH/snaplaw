@@ -64,13 +64,25 @@ export enum CONTRACT_LIST_STATE {
 
 export type ContractDataType = {
   id: string,
-  type: string,
+  type: CONTRACT_TYPES,
   createdAt: string,
-  title: string | undefined,
-  contractor: string | undefined
+  contractor: string | undefined,
+  screens: Array<BaseScreenDataInterface>
 };
 
-export type ContractListType = Array<ContractDataType>;
+export type ContractDataListType = {
+  id: string,
+  type: CONTRACT_TYPES,
+  createdAt: string,
+  title: string | undefined,
+  contractor: string | undefined,
+}
+
+export type ContractListType = Array<ContractDataListType>;
+
+export interface RequestContractAction extends BaseAction {
+  payload: string
+}
 
 export { ProductDataScreenInterface, PRODUCT_DATA_FIELDS };
 export { UserDataScreenInterface, USER_DATA_FIELDS };
