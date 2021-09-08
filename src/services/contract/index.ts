@@ -26,7 +26,10 @@ const requestContract = async (id: string): Promise<ContractDataType> => {
   return translateContract(response.data)
 }
 
-  export const buildPDFSource = (
+const requestDeleteContract = async (id: string) =>
+  httpClient.delete(`api/contracts/${id}`)
+
+export const buildPDFSource = (
   id: string,
   locale: LanguageType | undefined
 ) => {
@@ -44,5 +47,6 @@ export default {
   createContract,
   saveScreenData,
   requestContractList,
-  requestContract
+  requestContract,
+  requestDeleteContract
 };

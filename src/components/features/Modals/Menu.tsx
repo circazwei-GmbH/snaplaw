@@ -18,7 +18,7 @@ export default function Menu({ onClose, visible, buttons }: MenuProps) {
   const { t } = useI18n();
   return (
     <View>
-      <Modal visible={visible} transparent={true} animationType="fade">
+      <Modal visible={visible} transparent={true}>
         <View style={styles.container}>
           <View style={styles.listButtonContainer}>
             {buttons.map((button, index) => (
