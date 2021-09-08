@@ -3,7 +3,7 @@ import { FlatList, View, StyleSheet, Dimensions } from "react-native";
 import TopBar from "../layouts/TopBar";
 import { useI18n } from "../../translator/i18n";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
-import { setMessage, setModal } from "../../store/modules/main/slice";
+import { setModal } from "../../store/modules/main/slice";
 import NotificationListItem from "../components/NotificationListItem";
 import DefaultText from "../basics/typography/DefaultText";
 import { notificationConfig } from "../../services/notification/index";
@@ -12,11 +12,10 @@ export interface NotificationListInterface {
   isNew: boolean;
   _id: string;
   type: string;
-  userIdTo: string;
-  userIdFrom: string;
+  contractName: string;
+  userNameFrom: string;
   notification: string;
   createdAt: string;
-  locale: string;
 }
 
 const LIST_ITEM_HEIGHT = 77;
@@ -25,43 +24,42 @@ const notification: NotificationListInterface = {
   isNew: true,
   _id: `${Math.random() * 123456789}`,
   type: "user_invited_to_contract",
-  userIdTo: "610919f420584a9d1b635dc5",
-  userIdFrom: "610919f420584a9d1b635dc5",
+  contractName: "Prodam stariy IPhone",
+  userNameFrom: "Vasiliy",
   notification:
     "Ochen mnogo kakoy to vsyakoy raznoy chepuhi ot Alekseya s beckenda fdfsghsdfghsfghsdfgh)))",
   createdAt: `${Date.now()}`,
-  locale: "en",
 };
 const notification2: NotificationListInterface = {
   isNew: false,
   _id: `${Math.random() * 987654321}`,
-  type: "user_invited_to_contract",
-  userIdTo: "610919f420584a9d1b635dc5",
-  userIdFrom: "610919f420584a9d1b635dc5",
+  type: "invite_to_contract_rejected",
+  contractName: "Prodam kalidor",
+  userNameFrom: "Genadiy",
   notification: "Kakaya to chepuha ot Alekseya - 2",
   createdAt: `${Date.now()}`,
-  locale: "en",
 };
 
 export default function Notifications(): JSX.Element {
   const { t } = useI18n();
-  const list = [];
+  const list = [notification, notification2];
   const dispatch = useAppDispatch();
 
-  const modalHandler = (type: string, isNew: boolean) => {
+  const modalHandler = (
+    isNew: boolean,
+    type: string,
+    partner: string,
+    contract: string
+  ) => {
     dispatch(
       setModal({
-        message: t(notificationConfig[type]),
-        actions: [
-          {
-            name: t("edit_profile.modals.save.cancel"),
-            colortype: "error",
-          },
-          {
-            name: t("edit_profile.modals.save.confirm"),
-            colortype: "primary",
-          },
-        ],
+        message: t(notificationConfig[type]["message"]),
+        actions: notificationConfig[type]["actions"].map((item) => {
+          return {
+            name: t(item.name),
+            colortype: item.colortype,
+          };
+        }),
       })
     );
   };

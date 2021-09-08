@@ -195,10 +195,10 @@ export default {
     title_second: "Sie haben die folgenden Benachrichtigungen",
     empty_list: "Sie haben noch keine Benachrichtigungen.",
     messages: {
-      invited: "Sie wurden zum Vertrag eingeladen",
-      updated: "Vertrag '' wurde von '' aktualisiert",
-      change_payment:
-        "Your opponent has requested the change of payment method.",
+      invited:
+        "Sie wurden gerade zum Vertrag '{{contractName}}' von {{userBy}} eingeladen",
+      rejected:
+        "Einladung zum Vertrag '{{contractName}}' wurde von {{userBy}} abgelehnt",
     },
     modal_buttons: {
       accept: "Akzeptieren",

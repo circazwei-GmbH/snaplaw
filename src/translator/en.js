@@ -192,10 +192,10 @@ export default {
     title_second: "You have the following notifications",
     empty_list: "You have no notifications yet.",
     messages: {
-      invited: "You have been just invited to the contract",
-      updated: "Contract '' updated by ''",
-      change_payment:
-        "Your opponent has requested the change of payment method.",
+      invited:
+        "You have been just invited to contract {{contractName}} by {{userBy}}",
+      rejected:
+        "Invite to contract '{{contractName}}' has been rejected by {{userBy}}",
     },
     modal_buttons: {
       accept: "Accept",

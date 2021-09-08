@@ -10,7 +10,7 @@ import { AntDesign } from "@expo/vector-icons";
 interface NotificationListItemPropsInterface {
   item: NotificationListInterface;
   style: { height: number };
-  onPress: (type: string, isNew: boolean) => void;
+  onPress: Function;
 }
 
 export default function NotificationListItem({
@@ -18,8 +18,9 @@ export default function NotificationListItem({
   style,
   onPress,
 }: NotificationListItemPropsInterface): JSX.Element {
+  const { isNew, notification, createdAt, userNameFrom, type, contractName } =
+    item;
   const swipeable: any = useRef();
-  const { isNew, notification, createdAt, userIdFrom, type } = item;
   const isToday = require("dayjs/plugin/isToday");
   dayjs.extend(isToday);
   const [isRead, setIsRead] = useState(isNew);
@@ -61,7 +62,7 @@ export default function NotificationListItem({
       <TouchableOpacity
         style={style}
         activeOpacity={1}
-        onPress={() => onPress(type, isRead)}
+        onPress={() => onPress(isRead, type, userNameFrom, contractName)}
       >
         <View
           style={[
@@ -77,7 +78,7 @@ export default function NotificationListItem({
           <View style={styles.notificationBox}>
             <View style={styles.notificationHeader}>
               <DefaultText
-                text={userIdFrom}
+                text={userNameFrom}
                 style={isRead ? null : styles.fontColorNotNew}
               />
               <DefaultText

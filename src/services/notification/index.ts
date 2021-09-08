@@ -22,11 +22,11 @@ export const notificationConfig = {
     message: "notifications.messages.invited",
     actions: [
       {
-        name: "notifications.modal_buttons.ok",
+        name: "notifications.modal_buttons.cancel",
         colortype: BUTTON_COLORTYPE.ERROR,
       },
       {
-        name: "notifications.modal_buttons.ok",
+        name: "notifications.modal_buttons.accept",
         colortype: BUTTON_COLORTYPE.PRIMARY,
       },
     ],
@@ -35,7 +35,7 @@ export const notificationConfig = {
     },
   },
   invite_to_contract_rejected: {
-    message: "notifications.messages.invited",
+    message: "notifications.messages.rejected",
     actions: [
       {
         name: "notifications.modal_buttons.ok",
