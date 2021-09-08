@@ -6,6 +6,7 @@ import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { setMessage, setModal } from "../../store/modules/main/slice";
 import NotificationListItem from "../components/NotificationListItem";
 import DefaultText from "../basics/typography/DefaultText";
+import { notificationConfig } from "../../services/notification/index";
 
 export interface NotificationListInterface {
   isNew: boolean;
@@ -48,34 +49,21 @@ export default function Notifications(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const modalHandler = (type: string, isNew: boolean) => {
-    switch (type) {
-      case "user_invited_to_contract":
-        if (isNew) {
-          return dispatch(
-            setModal({
-              message: t("edit_profile.modals.save.message"),
-              actions: [
-                {
-                  name: t("edit_profile.modals.save.cancel"),
-                  colortype: "error",
-                },
-                {
-                  name: t("edit_profile.modals.save.confirm"),
-                  colortype: "primary",
-                },
-              ],
-            })
-          );
-        } else {
-          return dispatch(setMessage(t("errors.abstract")));
-        }
-
-      case "invite_to_contract_rejected":
-        return dispatch(setMessage(t("errors.abstract")));
-
-      default:
-        return;
-    }
+    dispatch(
+      setModal({
+        message: t(notificationConfig[type]),
+        actions: [
+          {
+            name: t("edit_profile.modals.save.cancel"),
+            colortype: "error",
+          },
+          {
+            name: t("edit_profile.modals.save.confirm"),
+            colortype: "primary",
+          },
+        ],
+      })
+    );
   };
 
   const EmptyListComponent = () => (

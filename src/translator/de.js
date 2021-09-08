@@ -200,6 +200,11 @@ export default {
       change_payment:
         "Your opponent has requested the change of payment method.",
     },
+    modal_buttons: {
+      accept: "Akzeptieren",
+      cancel: "Abbrechen",
+      ok: "Ok",
+    },
   },
   contracts: {
     [CONTRACT_TYPES.PURCHASE]: {
