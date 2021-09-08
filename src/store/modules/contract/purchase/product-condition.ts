@@ -8,7 +8,7 @@ export enum CONDITION_VALUE {
   DEFECTIVE = "DEFECTIVE",
 }
 
-export const PRODUCT_CONDITION_FIELD_NAME = "value";
+export const PRODUCT_CONDITION_FIELD_NAME = "condition";
 
 export interface ProductConditionScreenInterface
   extends BaseScreenDataInterface {

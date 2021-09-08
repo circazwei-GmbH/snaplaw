@@ -157,6 +157,11 @@ export default {
         yes: "Ja",
         no: "Nein",
       },
+      sign_out: {
+        message: "Sind Sie sicher, dass Sie die App verlassen wollen?",
+        yes: "Ja",
+        no: "Nein",
+      },
     },
     error: "Das Feld kann nicht leer sein",
   },
@@ -181,6 +186,18 @@ export default {
   },
   my_contracts: {
     tab_name: "Meine Verträge",
+    lists: {
+      finalized: "Abgeschlossen",
+      in_progress: "In Bearbeitung",
+    },
+    empty_list: "Sie haben noch keine Verträge",
+    actions: {
+      edit: 'Vertrag editieren',
+      delete: 'Vertrag löschen',
+      see_partner: 'Vertragspartner sehen',
+      delete_partner: 'Vertragspartner löschen',
+      invite_partner: 'Benutzer einladen'
+    }
   },
   menu: {
     cancel: "Abbrechen",
@@ -272,6 +289,10 @@ export default {
       found_in_pregress_folder:
         "Vergessen Sie bitte nicht, den Kunden einzuladen. Den Vertrag finden Sie im ^In Bearbeitung^ Ordner.",
     },
+    validation: {
+      field_empty: "Das Feld kann nicht leer sein",
+      product_condition: "Klären Sie bitte den Produktzustand",
+    },
   },
   sign_form: {
     title: "Vertrag mit dem Finger unterschreiben",
@@ -286,5 +307,5 @@ export default {
         " klicke, stimme ich zu, dass die Unterschrift die elektronische Darstellung meiner Unterschrift für alle Zwecke ist, wenn ich sie auf Dokumenten verwende.",
     },
   },
-  ok: "OK"
+  ok: "OK",
 };

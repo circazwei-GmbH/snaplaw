@@ -4,6 +4,8 @@ import { BaseScreenDataInterface } from "../../store/modules/contract/base-types
 import { API_HOST } from "../../env/env";
 import { LanguageType } from "../../store/modules/profile/slice";
 import { LANGUAGE_GERMANY } from "../../store/modules/profile/constants";
+import {CONTRACT_LIST_STATE} from "../../store/modules/contract/types";
+import {translateContractList} from "./translator";
 
 const createContract = (type: CONTRACT_TYPES) =>
   httpClient.post("api/contracts", { type });
@@ -13,6 +15,11 @@ const saveScreenData = (id: string, screen: BaseScreenDataInterface) =>
     ...screen.data,
     screenType: screen.type,
   });
+
+const requestContractList = async (type: CONTRACT_LIST_STATE) => {
+  const response = await httpClient.get(`api/contracts?type=${type}`)
+  return translateContractList(response.data)
+}
 
 export const buildPDFSource = (
   id: string,
@@ -31,4 +38,5 @@ export const buildPDFSource = (
 export default {
   createContract,
   saveScreenData,
+  requestContractList,
 };

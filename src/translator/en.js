@@ -154,6 +154,11 @@ export default {
         yes: "Yes",
         no: "No",
       },
+      sign_out: {
+        message: "Are you sure you want to leave the app?",
+        yes: "Yes",
+        no: "No",
+      },
     },
     error: "The field can't be empty",
   },
@@ -178,6 +183,18 @@ export default {
   },
   my_contracts: {
     tab_name: "My contracts",
+    lists: {
+      finalized: "Finalized",
+      in_progress: "In progress",
+    },
+    empty_list: "You have no contracts yet",
+    actions: {
+      edit: 'Edit contracts',
+      delete: 'Delete contract',
+      see_partner: 'See contract partner',
+      delete_partner: 'Delete contract partner',
+      invite_partner: 'Invite user'
+    }
   },
   menu: {
     cancel: "Cancel",
@@ -269,6 +286,10 @@ export default {
       found_in_pregress_folder:
         "Don't forget to invite the buyer. The contract can be found in ^In progress^ folder.",
     },
+    validation: {
+      field_empty: "The field can't be empty",
+      product_condition: "Please specify the product condition",
+    },
   },
   sign_form: {
     title: "Sign contract with your finger",
@@ -283,5 +304,5 @@ export default {
         ", I agree that the signature will be the electronic representation of my signature for all purposes when I use them on documents.",
     },
   },
-  ok: "OK"
+  ok: "OK",
 };

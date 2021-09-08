@@ -6,11 +6,12 @@ import {
 } from "@reduxjs/toolkit";
 import { OrientationLock } from "expo-screen-orientation";
 import { AllowOrientationType } from "./action-creators";
+import { BUTTON_COLORTYPE } from "./types";
 
 interface ModalActionInterface {
   action?: any | undefined;
   name: string;
-  colortype?: "primary" | "red" | undefined;
+  colortype?: BUTTON_COLORTYPE | undefined;
 }
 
 export interface ModalInterface {
@@ -57,7 +58,7 @@ export const mainSlice = createSlice({
         actions: [
           {
             name: "Ok",
-            colortype: "primary",
+            colortype: BUTTON_COLORTYPE.PRIMARY,
           },
         ],
       };

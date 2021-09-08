@@ -4,15 +4,23 @@ import {
   Draft,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { Contract } from "./types";
+import { Contract, ContractListType } from "./types";
 import { CONTRACT_SCREEN_TYPES } from "./constants";
 
 interface ContractState {
   currentContract: Contract | undefined;
+  contractErrors:
+    | Record<CONTRACT_SCREEN_TYPES, Record<string, string> | undefined>
+    | undefined;
+  contracts: ContractListType | [];
+  isListLoading: boolean;
 }
 
 const initialState: ContractState = {
   currentContract: undefined,
+  contractErrors: undefined,
+  contracts: [],
+  isListLoading: false,
 };
 
 type ScreenData = {
@@ -21,11 +29,28 @@ type ScreenData = {
   value: unknown;
 };
 
+type FieldErrorData = {
+  screenType: CONTRACT_SCREEN_TYPES;
+  field: string;
+  message: string | undefined;
+};
+
 const setInitedContractAction = createAction<string, "setInitedContract">(
   "setInitedContract"
 );
 const setScreenDataAction = createAction<ScreenData, "setScreenData">(
   "setScreenData"
+);
+const setFieldErrorAction = createAction<FieldErrorData, "setFieldError">(
+  "setFieldError"
+);
+const clearErrorsAction = createAction<undefined, "clearErrors">("clearErrors");
+const setContractsListAction = createAction<
+  ContractListType,
+  "setContractsList"
+>("setContractsList");
+const setListLoadingAction = createAction<boolean, "setListLoading">(
+  "setListLoading"
 );
 
 const contractSlice = createSlice({
@@ -71,9 +96,57 @@ const contractSlice = createSlice({
         state.currentContract.screens.push(updatedScreen);
       }
     },
+    [setFieldErrorAction.type]: (
+      state: Draft<ContractState>,
+      action: PayloadAction<FieldErrorData>
+    ) => {
+      if (!state.currentContract) {
+        return;
+      }
+      // @ts-ignore
+      state.contractErrors = {
+        ...state.contractErrors,
+        [action.payload.screenType]: {
+          ...(state.contractErrors &&
+          state.contractErrors[action.payload.screenType]
+            ? state.contractErrors[action.payload.screenType]
+            : {}),
+          ...(state.contractErrors &&
+          state.contractErrors[action.payload.screenType] &&
+          state.contractErrors[action.payload.screenType][action.payload.field]
+            ? state.contractErrors[action.payload.screenType][
+                action.payload.field
+              ]
+            : {}),
+          [action.payload.field]: action.payload.message,
+        },
+      };
+    },
+    [clearErrorsAction.type]: (state: Draft<ContractState>) => {
+      state.contractErrors = undefined;
+    },
+    [setContractsListAction.type]: (
+      state: Draft<ContractState>,
+      action: PayloadAction<ContractListType>
+    ) => {
+      state.contracts = action.payload;
+    },
+    [setListLoadingAction.type]: (
+      state: Draft<ContractState>,
+      actions: PayloadAction<boolean>
+    ) => {
+      state.isListLoading = actions.payload;
+    },
   },
 });
 
-export const { setInitedContract, setScreenData } = contractSlice.actions;
+export const {
+  setInitedContract,
+  setScreenData,
+  setFieldError,
+  clearErrors,
+  setContractsList,
+  setListLoading,
+} = contractSlice.actions;
 
 export default contractSlice.reducer;
