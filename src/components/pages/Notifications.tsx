@@ -1,10 +1,11 @@
 import React from "react";
-import { FlatList, StyleSheet } from "react-native";
+import { FlatList, View, StyleSheet, Dimensions } from "react-native";
 import TopBar from "../layouts/TopBar";
 import { useI18n } from "../../translator/i18n";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { setMessage, setModal } from "../../store/modules/main/slice";
 import NotificationListItem from "../components/NotificationListItem";
+import DefaultText from "../basics/typography/DefaultText";
 
 export interface NotificationListInterface {
   isNew: boolean;
@@ -43,7 +44,7 @@ const notification2: NotificationListInterface = {
 
 export default function Notifications(): JSX.Element {
   const { t } = useI18n();
-  const list = [notification, notification2];
+  const list = [];
   const dispatch = useAppDispatch();
 
   const modalHandler = (type: string, isNew: boolean) => {
@@ -69,26 +70,22 @@ export default function Notifications(): JSX.Element {
           return dispatch(setMessage(t("errors.abstract")));
         }
 
-      case "contract_updated":
-      case "contract_signed":
-      case "invite_to_contract_accepted":
       case "invite_to_contract_rejected":
-      case "user_has_left_contract":
-      case "user_has_been_removed_from_contract":
-      case "contract_deleted":
-      case "contract_point_created":
-      case "contract_point_updated":
-      case "contract_point_confirmed":
-      case "contract_point_declined":
-      case "contract_point_deleted":
-      case "file_added":
-      case "file_deleted":
         return dispatch(setMessage(t("errors.abstract")));
 
       default:
         return;
     }
   };
+
+  const EmptyListComponent = () => (
+    <View style={styles.emptyListBox}>
+      <DefaultText
+        text={t("notifications.empty_list")}
+        style={styles.emptyListText}
+      />
+    </View>
+  );
 
   return (
     <TopBar pageName={t("notifications.title")}>
@@ -103,8 +100,10 @@ export default function Notifications(): JSX.Element {
             onPress={modalHandler}
           />
         )}
+        ListEmptyComponent={EmptyListComponent}
         onEndReached={() => {}}
         onEndReachedThreshold={0.0001}
+        em
         getItemLayout={(data, index) => ({
           length: LIST_ITEM_HEIGHT,
           offset: LIST_ITEM_HEIGHT * index,
@@ -125,5 +124,13 @@ const styles = StyleSheet.create({
   },
   itemHeight: {
     height: LIST_ITEM_HEIGHT,
+  },
+  emptyListBox: {
+    justifyContent: "center",
+    height: Dimensions.get("window").height * 0.7,
+    paddingHorizontal: 16,
+  },
+  emptyListText: {
+    textAlign: "center",
   },
 });

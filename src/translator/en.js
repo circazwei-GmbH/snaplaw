@@ -190,6 +190,13 @@ export default {
   notifications: {
     title: "Notifications",
     title_second: "You have the following notifications",
+    empty_list: "You have no notifications yet.",
+    messages: {
+      invited: "You have been just invited to the contract",
+      updated: "Contract '' updated by ''",
+      change_payment:
+        "Your opponent has requested the change of payment method.",
+    },
   },
   contracts: {
     [CONTRACT_TYPES.PURCHASE]: {

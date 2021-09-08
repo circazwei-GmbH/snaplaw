@@ -193,6 +193,13 @@ export default {
   notifications: {
     title: "Benachrichtigungen",
     title_second: "Sie haben die folgenden Benachrichtigungen",
+    empty_list: "Sie haben noch keine Benachrichtigungen.",
+    messages: {
+      invited: "Sie wurden zum Vertrag eingeladen",
+      updated: "Vertrag '' wurde von '' aktualisiert",
+      change_payment:
+        "Your opponent has requested the change of payment method.",
+    },
   },
   contracts: {
     [CONTRACT_TYPES.PURCHASE]: {
