@@ -25,6 +25,7 @@ import { HOME_ROUTER } from "./HomeRouterType";
 import Contract from "../components/pages/contracts/Contract";
 import { orientationChange } from "../store/modules/main/action-creators";
 import * as ScreenOrientation from "expo-screen-orientation";
+import {ROUTER_TABS} from "./TabRouterTypes";
 
 const Stack = createStackNavigator();
 const ProfileStack = createStackNavigator();
@@ -58,7 +59,7 @@ export default function Router() {
       initialRouteName="Homepage"
     >
       <Tab.Screen
-        name="MyContracts"
+        name={ROUTER_TABS.MY_CONTRACTS}
         component={MyContracts}
         options={{
           tabBarIcon: ({ color, size }) => (
@@ -68,7 +69,7 @@ export default function Router() {
         }}
       />
       <Tab.Screen
-        name="Homepage"
+        name={ROUTER_TABS.HOMEPAGE}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Feather name="file-plus" size={size} color={color} />
@@ -90,7 +91,7 @@ export default function Router() {
         )}
       </Tab.Screen>
       <Tab.Screen
-        name="Settings"
+        name={ROUTER_TABS.SETTINGS}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Feather name="settings" size={size} color={color} />

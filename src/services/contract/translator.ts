@@ -1,12 +1,23 @@
-import {ContractDataType, ContractListType, PRODUCT_DATA_FIELDS} from "../../store/modules/contract/types";
-import {CONTRACT_SCREEN_TYPES} from "../../store/modules/contract/constants";
+import {
+  ContractDataListType,
+  ContractDataType,
+  ContractListType,
+} from "../../store/modules/contract/types";
 
-const translateContract = (contract: any): ContractDataType => ({
+export const translateContractForList = (contract: any): ContractDataListType => ({
   id: contract._id,
   type: contract.type,
   createdAt: contract.createdAt,
-  title: contract.screens.find((screen: { screenType: CONTRACT_SCREEN_TYPES; }) => screen.screenType === CONTRACT_SCREEN_TYPES.PRODUCT_DATA)?.[PRODUCT_DATA_FIELDS.subject],
-  contractor: undefined
+  title: contract.title,
+  contractor: undefined,
 })
 
-export const translateContractList = (list: Array<any>): ContractListType => list.map(contract => translateContract(contract))
+export const translateContract = (contract: any): ContractDataType => ({
+  id: contract._id,
+  type: contract.type,
+  createdAt: contract.createdAt,
+  contractor: undefined,
+  screens: contract.screens.map((screen: { screenType: any; }) => ({type: screen.screenType, data: screen}))
+})
+
+export const translateContractList = (list: Array<any>): ContractListType => list.map(contract => translateContractForList(contract))

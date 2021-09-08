@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import TopBar from "../../layouts/TopBar";
 import { View, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -13,7 +13,7 @@ import ContractNextButton from "../../basics/buttons/ContractNextButton";
 import ContractBackButton from "../../basics/buttons/ContractBackButton";
 import ContractScreenCounter from "../../basics/ContractScreenCounter";
 import ContractFormTitle from "../../basics/typography/ContractFormTitle";
-import { requestScreenData } from "../../../store/modules/contract/action-creators";
+import {requestContract, requestScreenData} from "../../../store/modules/contract/action-creators";
 import TextButton from "../../basics/buttons/TextButton";
 import { navigationPopToTop } from "../../../store/modules/main/action-creators";
 import { setModal } from "../../../store/modules/main/slice";
@@ -29,7 +29,7 @@ type ContractProps = {
 
 export default function Contract({
   route: {
-    params: { screenCount },
+    params: { screenCount, id },
   },
 }: ContractProps) {
   const navigation = useNavigation();
@@ -39,6 +39,12 @@ export default function Contract({
   const [contractViewVisible, setContractViewVisible] = useState(false);
   const { t } = useI18n();
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if(id) {
+      dispatch(requestContract(id))
+    }
+  }, [id])
 
   const nextHandler = () => {
     if (!contractType) {
