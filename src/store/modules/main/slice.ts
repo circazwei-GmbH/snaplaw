@@ -86,7 +86,6 @@ export const mainSlice = createSlice({
       action: PayloadAction<string>
     ) => {
       state.waiter.splice(state.waiter.indexOf(action.payload), 1);
-      console.log(state.waiter)
     },
     [setOrientationAction.type]: (
       state: Draft<MainStateInterface>,
