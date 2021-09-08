@@ -18,9 +18,9 @@ import { removeFromWaiter } from "../../../../store/modules/main/slice";
 import { contractValidator } from "../../../../store/modules/contract/validation";
 import { Contract } from "../../../../store/modules/contract/types";
 import { useNavigation } from "@react-navigation/native";
-import { contractScreensConfig } from "../../../../store/modules/contract/contract-screens-types";
 import { validateScreen } from "../../../../store/modules/contract/action-creators";
 import { clearErrors } from "../../../../store/modules/contract/slice";
+import {countToPopLength, getTypeByContractAndScreen} from "../../../../store/modules/contract/helper";
 
 export default function Sign() {
   const { t } = useI18n();
@@ -45,12 +45,12 @@ export default function Sign() {
     if (emptyScreen !== null) {
       // @ts-ignore
       navigator.pop(
-        contractScreensConfig[currentContract.type].length - 1 - emptyScreen
+        countToPopLength(currentContract.type, emptyScreen)
       );
       dispatch(
         validateScreen(
           currentContract.type,
-          contractScreensConfig[currentContract.type][emptyScreen].type
+          getTypeByContractAndScreen(currentContract.type, emptyScreen)
         )
       );
       return;
