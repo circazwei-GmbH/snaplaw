@@ -15,7 +15,7 @@ interface EditProfileTextFieldPropsInterface extends TextInputProps {
   placeholder?: string;
   validations?: Array<Function>;
   errorMessage?: string;
-  value: string;
+  value: string | undefined;
   edit: boolean;
   onChangeFunction: OnChangeFunction;
 }
@@ -43,12 +43,12 @@ export default function EditProfileTextField({
         focused ? styles.borderFocused : styles.borderNotFocused,
       ]}
     >
-      {value.length === 0 ? null : (
+      {value?.length === 0 ? null : (
         <Text style={[styles.label]}>{placeholder}</Text>
       )}
       <TextInput
         {...props}
-        placeholder={value.length === 0 ? placeholder : ""}
+        placeholder={!focused && !errorMessage ? placeholder : ""}
         placeholderTextColor="#909090"
         style={[
           styles.emptyInput,
