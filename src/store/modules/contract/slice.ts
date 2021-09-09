@@ -4,11 +4,11 @@ import {
   Draft,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { Contract, CONTRACT_LIST_STATE, ContractListType } from "./types";
+import { CONTRACT_LIST_STATE, ContractDataType, ContractListType} from "./types";
 import { CONTRACT_SCREEN_TYPES } from "./constants";
 
 interface ContractState {
-  currentContract: Contract | undefined;
+  currentContract: ContractDataType | undefined;
   contractErrors:
     | Record<CONTRACT_SCREEN_TYPES, Record<string, string> | undefined>
     | undefined;
@@ -65,6 +65,7 @@ const setListLoadingAction = createAction<boolean, "setListLoading">(
 const deleteContractAction = createAction<string, "deleteContract">(
   "deleteContract"
 );
+const updateContractSignAction = createAction<string, 'updateContractSign'>('updateContractSign')
 
 const contractSlice = createSlice({
   name: "contract",
@@ -72,7 +73,7 @@ const contractSlice = createSlice({
   reducers: {
     [setInitedContractAction.type]: (
       state: Draft<ContractState>,
-      action: PayloadAction<Contract>
+      action: PayloadAction<ContractDataType>
     ) => {
       state.currentContract = action.payload;
     },
@@ -171,6 +172,15 @@ const contractSlice = createSlice({
         1
       );
     },
+    [updateContractSignAction.type]: (
+      state: Draft<ContractState>,
+      action: PayloadAction<string>
+    ) => {
+      if (!state.currentContract) {
+        return;
+      }
+      state.currentContract.sign = action.payload
+    }
   },
 });
 
@@ -182,6 +192,7 @@ export const {
   setContractsList,
   setListLoading,
   deleteContract,
+  updateContractSign
 } = contractSlice.actions;
 
 export default contractSlice.reducer;
