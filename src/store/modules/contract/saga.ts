@@ -115,10 +115,32 @@ function* screenValidate({
 }
 
 function* requestConreactsList({ payload }: RequestContractListAction) {
-  yield put(setListLoading(true));
+  const listPagination = yield select((state) => state.contract.listPagination);
+  if (listPagination.listType === payload && !listPagination.isNextPage) {
+    return;
+  }
+  const currentContracts = yield select((state) => state.contract.contracts);
   try {
-    const contracts = yield call(API.requestContractList, payload);
-    yield put(setContractsList(contracts));
+    const requestedPage =
+      listPagination.listType === payload
+        ? listPagination.page + (currentContracts.length ? 1 : 0)
+        : 0;
+    if (!requestedPage) {
+      yield put(setListLoading(true));
+    }
+    console.log(payload, requestedPage);
+    const contracts = yield call(
+      API.requestContractList,
+      payload,
+      requestedPage
+    );
+    yield put(
+      setContractsList({
+        list: contracts,
+        page: requestedPage,
+        type: payload,
+      })
+    );
   } catch (error) {
     yield put(responseError(error));
   } finally {

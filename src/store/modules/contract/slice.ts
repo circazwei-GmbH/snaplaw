@@ -4,7 +4,7 @@ import {
   Draft,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { Contract, ContractListType } from "./types";
+import { Contract, CONTRACT_LIST_STATE, ContractListType } from "./types";
 import { CONTRACT_SCREEN_TYPES } from "./constants";
 
 interface ContractState {
@@ -14,6 +14,11 @@ interface ContractState {
     | undefined;
   contracts: ContractListType | [];
   isListLoading: boolean;
+  listPagination: {
+    listType: CONTRACT_LIST_STATE;
+    page: number;
+    isNextPage: boolean;
+  };
 }
 
 const initialState: ContractState = {
@@ -21,6 +26,11 @@ const initialState: ContractState = {
   contractErrors: undefined,
   contracts: [],
   isListLoading: false,
+  listPagination: {
+    listType: CONTRACT_LIST_STATE.FINALIZED,
+    page: 0,
+    isNextPage: true,
+  },
 };
 
 type ScreenData = {
@@ -46,7 +56,7 @@ const setFieldErrorAction = createAction<FieldErrorData, "setFieldError">(
 );
 const clearErrorsAction = createAction<undefined, "clearErrors">("clearErrors");
 const setContractsListAction = createAction<
-  ContractListType,
+  { list: ContractListType; page: number; type: CONTRACT_LIST_STATE },
   "setContractsList"
 >("setContractsList");
 const setListLoadingAction = createAction<boolean, "setListLoading">(
@@ -130,9 +140,21 @@ const contractSlice = createSlice({
     },
     [setContractsListAction.type]: (
       state: Draft<ContractState>,
-      action: PayloadAction<ContractListType>
+      action: PayloadAction<{
+        list: ContractListType;
+        page: number;
+        type: CONTRACT_LIST_STATE;
+      }>
     ) => {
-      state.contracts = action.payload;
+      if (state.listPagination.listType === action.payload.type) {
+        state.contracts = state.contracts.concat(action.payload.list);
+      } else {
+        state.contracts = action.payload.list;
+      }
+
+      state.listPagination.page = action.payload.page;
+      state.listPagination.listType = action.payload.type;
+      state.listPagination.isNextPage = !!action.payload.list.length;
     },
     [setListLoadingAction.type]: (
       state: Draft<ContractState>,

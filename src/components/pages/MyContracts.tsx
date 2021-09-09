@@ -65,6 +65,7 @@ export default function MyContracts() {
         elements={contracts}
         listItem={({ item }) => <ContractListItem item={item} />}
         isLoading={isLoading}
+        onEndReached={() => dispatch(requestContractsList(switchState))}
       />
     </TopBar>
   );
