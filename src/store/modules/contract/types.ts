@@ -87,6 +87,10 @@ export interface ValidateAllScreensAction extends BaseAction {
   payload: CONTRACT_TYPES;
 }
 
+export interface SignContractAction extends BaseAction {
+  payload: string;
+}
+
 export { ProductDataScreenInterface, PRODUCT_DATA_FIELDS };
 export { UserDataScreenInterface, USER_DATA_FIELDS };
 export { ProductConditionScreenInterface, CONDITION_VALUE, CONDITIONS };
