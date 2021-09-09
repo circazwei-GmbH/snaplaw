@@ -22,7 +22,7 @@ import {
 import API from "../../../services/contract/index";
 import { responseError } from "../auth/action-creators";
 import { addToWAiter, removeFromWaiter } from "../main/slice";
-import { CONTRACT_CREATION_WAIT, CONTRACT_SCREEN_TYPES } from "./constants";
+import { CONTRACT_CREATION_WAIT } from "./constants";
 import {
   clearErrors,
   deleteContract,
@@ -30,7 +30,7 @@ import {
   setFieldError,
   setInitedContract,
   setListLoading,
-  setScreenData,
+  updateContractSign,
 } from "./slice";
 import * as RootHavigation from "../../../router/RootNavigation";
 import { HOME_ROUTER } from "../../../router/HomeRouterType";
@@ -39,7 +39,6 @@ import { SelectType } from "../../hooks";
 import { contractValidationConfig, screenFieldValidator } from "./validation";
 import { BaseScreenDataInterface } from "./base-types";
 import { Translator } from "../../../translator/i18n";
-import { SIGN_FIELDS } from "./purchase/sign";
 
 function* createContract({ payload }: RequestCreateContractAction) {
   try {
@@ -49,6 +48,9 @@ function* createContract({ payload }: RequestCreateContractAction) {
       setInitedContract({
         id: response.data.id,
         type: payload,
+        contractor: undefined,
+        createdAt: "",
+        sign: undefined,
         screens: [
           prefillUserData(
             yield select<SelectType>((state) => state.profile.user)
@@ -169,6 +171,9 @@ function* requestContract({ payload }: RequestContractAction) {
         id: contract.id,
         type: contract.type,
         screens: contract.screens,
+        contractor: undefined,
+        sign: contract.sign,
+        createdAt: contract.createdAt,
       })
     );
   } catch (error) {
@@ -190,13 +195,7 @@ function* requestContractDelete({ payload }: RequestContractAction) {
 
 function* signContract({ payload }: SignContractAction) {
   try {
-    yield put(
-      setScreenData({
-        screenType: CONTRACT_SCREEN_TYPES.SIGN,
-        fieldName: SIGN_FIELDS.SIGN,
-        value: payload,
-      })
-    );
+    yield put(updateContractSign(payload));
     const contractId = yield select(
       (state) => state.contract.currentContract.id
     );

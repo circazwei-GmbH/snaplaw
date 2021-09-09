@@ -23,6 +23,7 @@ export const translateContract = (contract: any): ContractDataType => ({
     type: screen.screenType,
     data: screen,
   })),
+  sign: contract.sign,
 });
 
 export const translateContractList = (list: Array<any>): ContractListType =>
