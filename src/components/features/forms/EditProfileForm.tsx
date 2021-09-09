@@ -59,7 +59,11 @@ export default function EditProfileForm({
             maxLength={10}
             keyboardType="number-pad"
             placeholder={t("edit_profile.placeholders.dateOfBirth")}
-            value={dayjs(form.dateOfBirth.value).format("DD.MM.YYYY")}
+            value={
+              form.dateOfBirth.value === ""
+                ? form.dateOfBirth.value
+                : dayjs(form.dateOfBirth.value).format("DD.MM.YYYY")
+            }
             editable={false}
             edit={edit}
             errorMessage={form.dateOfBirth.error}
