@@ -10,7 +10,6 @@ import {
   USER_DATA_FIELDS,
   UserDataScreenInterface,
 } from "../../../../store/modules/contract/types";
-import { birthDateFormat } from "../../../../utils/birthDateFormat";
 import { validateScreen } from "../../../../store/modules/contract/action-creators";
 
 export default function UserDataForm(): JSX.Element {
@@ -67,7 +66,7 @@ export default function UserDataForm(): JSX.Element {
         maxLength={10}
         keyboardType="number-pad"
         placeholder={t("edit_profile.placeholders.dateOfBirth")}
-        value={birthDateFormat(userData?.data[USER_DATA_FIELDS.dateOfBirth])}
+        value={userData?.data[USER_DATA_FIELDS.dateOfBirth]}
         errorMessage={screenErrors?.[USER_DATA_FIELDS.dateOfBirth]}
         onChangeFunction={(newValue) =>
           onChangeAction(newValue, USER_DATA_FIELDS.dateOfBirth)

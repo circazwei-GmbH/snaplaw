@@ -139,7 +139,7 @@ export default {
     placeholders: {
       name: "Vorname",
       lastName: "Nachname",
-      dateOfBirth: "Geburtsdatum (DD-MM-YYYY)",
+      dateOfBirth: "Geburtsdatum",
       email: "E-Mail",
       phone: "Nummer",
       address: "Adresse (Straße, Stadt)",
@@ -192,12 +192,12 @@ export default {
     },
     empty_list: "Sie haben noch keine Verträge",
     actions: {
-      edit: 'Vertrag editieren',
-      delete: 'Vertrag löschen',
-      see_partner: 'Vertragspartner sehen',
-      delete_partner: 'Vertragspartner löschen',
-      invite_partner: 'Benutzer einladen'
-    }
+      edit: "Vertrag editieren",
+      delete: "Vertrag löschen",
+      see_partner: "Vertragspartner sehen",
+      delete_partner: "Vertragspartner löschen",
+      invite_partner: "Benutzer einladen",
+    },
   },
   menu: {
     cancel: "Abbrechen",

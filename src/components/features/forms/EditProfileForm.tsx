@@ -1,10 +1,11 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import EditProfileTextField from "../../components/EditProfileTextField";
 import { useI18n } from "../../../translator/i18n";
 import { FieldInterface } from "../../features/forms/SignInForm";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { birthDateFormat } from "../../../utils/birthDateFormat";
+import DatePickerModal from "../Modals/DatePickerModal";
+import dayjs from "dayjs";
 
 export interface EditProfileFormInterface {
   name: FieldInterface;
@@ -28,6 +29,7 @@ export default function EditProfileForm({
   onChangeHandler,
 }: EditProfileFormPropsInterface): JSX.Element {
   const { t } = useI18n();
+  const [datePickerOpened, setDatePickerOpened] = useState(false);
 
   return (
     <KeyboardAwareScrollView>
@@ -52,18 +54,20 @@ export default function EditProfileForm({
           errorMessage={form.lastName.error}
           onChangeFunction={(newValue) => onChangeHandler(newValue, "lastName")}
         />
-        <EditProfileTextField
-          maxLength={10}
-          keyboardType="number-pad"
-          placeholder={t("edit_profile.placeholders.dateOfBirth")}
-          value={birthDateFormat(form.dateOfBirth.value)}
-          editable={edit}
-          edit={edit}
-          errorMessage={form.dateOfBirth.error}
-          onChangeFunction={(newValue) =>
-            onChangeHandler(newValue, "dateOfBirth")
-          }
-        />
+        <TouchableOpacity onPress={() => setDatePickerOpened(true)}>
+          <EditProfileTextField
+            maxLength={10}
+            keyboardType="number-pad"
+            placeholder={t("edit_profile.placeholders.dateOfBirth")}
+            value={dayjs(form.dateOfBirth.value).format("DD.MM.YYYY")}
+            editable={false}
+            edit={edit}
+            errorMessage={form.dateOfBirth.error}
+            onChangeFunction={(newValue) =>
+              onChangeHandler(newValue, "dateOfBirth")
+            }
+          />
+        </TouchableOpacity>
         <EditProfileTextField
           placeholder={t("edit_profile.placeholders.email")}
           value={form.email.value}
@@ -99,6 +103,11 @@ export default function EditProfileForm({
           onChangeFunction={(newValue) => onChangeHandler(newValue, "postCode")}
         />
       </View>
+      <DatePickerModal
+        open={datePickerOpened}
+        modalHandler={setDatePickerOpened}
+        changeDate={onChangeHandler}
+      />
     </KeyboardAwareScrollView>
   );
 }
