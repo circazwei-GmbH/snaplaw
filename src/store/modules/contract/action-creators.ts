@@ -4,6 +4,7 @@ import {
   RequestContractListAction,
   RequestCreateContractAction,
   RequestScreenDataAction,
+  ValidateAllScreensAction,
 } from "./types";
 import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
 import { getTypeByContractAndScreen } from "./helper";
@@ -11,6 +12,7 @@ import { getTypeByContractAndScreen } from "./helper";
 export const REQUEST_CREATE_CONTRACT = "REQUEST_CREATE_CONTRACT";
 export const REQUEST_SCREEN_DATA = "REQUEST_SCREEN_DATA";
 export const VALIDATE_SCREEN = "VALIDATE_SCREEN";
+export const VALIDATE_ALL_SCREENS = "VALIDATE_ALL_SCREENS";
 export const REQEST_CONTRACTS_LIST = "REQEST_CONTRACTS_LIST";
 export const REQUEST_CONTRACT = "REQUEST_CONTRACT";
 export const REQUEST_CONTRACT_DELETE = "REQUEST_CONTRACT_DELETE";
@@ -39,6 +41,13 @@ export const validateScreen = (
     contractType,
     screenType,
   },
+});
+
+export const validateAllScreens = (
+  contractType: CONTRACT_TYPES
+): ValidateAllScreensAction => ({
+  type: VALIDATE_ALL_SCREENS,
+  payload: contractType,
 });
 
 export const requestContractsList = (
