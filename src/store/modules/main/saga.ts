@@ -23,9 +23,9 @@ function* changeOrientation({ payload }: OrientationAction) {
   }
 }
 
-function* navigate({payload}: NavigateAction) {
+function* navigate({ payload }: NavigateAction) {
   for (let route in payload) {
-    RootNavigation.navigate(route, payload[route])
+    RootNavigation.navigate(route, payload[route]);
   }
 }
 

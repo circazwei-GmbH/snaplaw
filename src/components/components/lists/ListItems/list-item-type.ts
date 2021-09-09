@@ -1,4 +1,4 @@
-import {ContractDataListType} from "../../../../store/modules/contract/types";
+import { ContractDataListType } from "../../../../store/modules/contract/types";
 
 export type ListItemProps = {
   item: ContractDataListType;

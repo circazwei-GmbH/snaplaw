@@ -66,6 +66,14 @@ const put = (url: string, body: any, options?: AxiosRequestConfig) =>
   _call("PUT", url, body, options);
 
 const del = (url: string, options?: AxiosRequestConfig) =>
-  _call("DELETE", url, undefined, options)
+  _call("DELETE", url, undefined, options);
 
-export default { getToken, setToken, get, post, put, delete: del, putWithoutHost };
+export default {
+  getToken,
+  setToken,
+  get,
+  post,
+  put,
+  delete: del,
+  putWithoutHost,
+};

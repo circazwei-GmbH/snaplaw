@@ -1,69 +1,94 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { ListItemProps } from "./list-item-type";
 import { Entypo } from "@expo/vector-icons";
-import Menu, {ButtonType} from "../../../features/Modals/Menu";
-import {useI18n} from "../../../../translator/i18n";
+import Menu, { ButtonType } from "../../../features/Modals/Menu";
+import { useI18n } from "../../../../translator/i18n";
 import dayjs from "dayjs";
-import {useAppDispatch} from "../../../../store/hooks";
-import {navigate} from "../../../../store/modules/main/action-creators";
-import {ROUTER_TABS} from "../../../../router/TabRouterTypes";
-import {HOME_ROUTER} from "../../../../router/HomeRouterType";
-import {requestDeleteContract} from "../../../../store/modules/contract/action-creators";
+import { useAppDispatch } from "../../../../store/hooks";
+import { navigate } from "../../../../store/modules/main/action-creators";
+import { ROUTER_TABS } from "../../../../router/TabRouterTypes";
+import { HOME_ROUTER } from "../../../../router/HomeRouterType";
+import { requestDeleteContract } from "../../../../store/modules/contract/action-creators";
+import { setModal } from "../../../../store/modules/main/slice";
+import { BUTTON_COLORTYPE } from "../../../../store/modules/main/types";
 
 export default function ContractListItem({ item }: ListItemProps) {
-  const [inProgressMenuVisible, setInProgressMenuVisible] = useState<boolean>(false)
-  const { t } = useI18n()
+  const [inProgressMenuVisible, setInProgressMenuVisible] =
+    useState<boolean>(false);
+  const { t } = useI18n();
   const dispatch = useAppDispatch();
-  const isContractorInclude = () => !!item.contractor
+  const isContractorInclude = () => !!item.contractor;
   const inProgressMenuButtons: Array<ButtonType> = [
     {
-      title: t('my_contracts.actions.edit'),
+      title: t("my_contracts.actions.edit"),
       handler: () => {
-        dispatch(navigate({
-          [ROUTER_TABS.HOMEPAGE]: {},
-          [HOME_ROUTER.CONTRACT]: { screenCount: 0, id: item.id }
-        }))
-        setInProgressMenuVisible(false)
-      }
+        dispatch(
+          navigate({
+            [ROUTER_TABS.HOMEPAGE]: {},
+            [HOME_ROUTER.CONTRACT]: { screenCount: 0, id: item.id },
+          })
+        );
+        setInProgressMenuVisible(false);
+      },
     },
     {
-      title: t('my_contracts.actions.delete'),
+      title: t("my_contracts.actions.delete"),
       handler: () => {
-        dispatch(requestDeleteContract(item.id))
-        setInProgressMenuVisible(false)
-      }
-    }
-  ]
+        setInProgressMenuVisible(false);
+        dispatch(
+          setModal({
+            message: t("my_contracts.delete_modal.message"),
+            actions: [
+              {
+                name: t("my_contracts.delete_modal.no"),
+                colortype: BUTTON_COLORTYPE.ERROR,
+              },
+              {
+                name: t("my_contracts.delete_modal.yes"),
+                action: requestDeleteContract(item.id),
+              },
+            ],
+          })
+        );
+      },
+    },
+  ];
   if (isContractorInclude()) {
     inProgressMenuButtons.push({
-      title: t('my_contracts.actions.see_partner'),
-      handler: () => {}
-    })
+      title: t("my_contracts.actions.see_partner"),
+      handler: () => {},
+    });
     inProgressMenuButtons.push({
-      title: t('my_contracts.actions.delete_partner'),
-      handler: () => {}
-    })
+      title: t("my_contracts.actions.delete_partner"),
+      handler: () => {},
+    });
   } else {
     inProgressMenuButtons.push({
-      title: t('my_contracts.actions.invite_partner'),
-      handler: () => {}
-    })
+      title: t("my_contracts.actions.invite_partner"),
+      handler: () => {},
+    });
   }
   return (
-  <>
-    <View style={styles.container}>
-      <View>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.type}>{t(`contracts.${item.type}.title`)}</Text>
-        <Text style={styles.date}>{ dayjs(item.createdAt).format('DD/MM/YYYY') }</Text>
+    <>
+      <View style={styles.container}>
+        <View>
+          <Text style={styles.title}>{item.title}</Text>
+          <Text style={styles.type}>{t(`contracts.${item.type}.title`)}</Text>
+          <Text style={styles.date}>
+            {dayjs(item.createdAt).format("DD/MM/YYYY")}
+          </Text>
+        </View>
+        <TouchableOpacity onPress={() => setInProgressMenuVisible(true)}>
+          <Entypo name="dots-three-vertical" size={16} color="#668395" />
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={() => setInProgressMenuVisible(true)}>
-        <Entypo name="dots-three-vertical" size={16} color="#668395" />
-      </TouchableOpacity>
-    </View>
-    <Menu visible={inProgressMenuVisible} onClose={() => setInProgressMenuVisible(false)} buttons={inProgressMenuButtons} />
-  </>
+      <Menu
+        visible={inProgressMenuVisible}
+        onClose={() => setInProgressMenuVisible(false)}
+        buttons={inProgressMenuButtons}
+      />
+    </>
   );
 }
 

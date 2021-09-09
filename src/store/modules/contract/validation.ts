@@ -163,5 +163,3 @@ export const contractValidator = (
   }
   return firstEmptyScreen;
 };
-
-

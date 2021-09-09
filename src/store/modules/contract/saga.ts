@@ -1,6 +1,8 @@
 import { call, put, takeLatest, select } from "redux-saga/effects";
 import {
-  REQEST_CONTRACTS_LIST, REQUEST_CONTRACT, REQUEST_CONTRACT_DELETE,
+  REQEST_CONTRACTS_LIST,
+  REQUEST_CONTRACT,
+  REQUEST_CONTRACT_DELETE,
   REQUEST_CREATE_CONTRACT,
   REQUEST_SCREEN_DATA,
   VALIDATE_SCREEN,
@@ -17,7 +19,8 @@ import { responseError } from "../auth/action-creators";
 import { addToWAiter, removeFromWaiter } from "../main/slice";
 import { CONTRACT_CREATION_WAIT } from "./constants";
 import {
-  clearErrors, deleteContract,
+  clearErrors,
+  deleteContract,
   setContractsList,
   setFieldError,
   setInitedContract,
@@ -123,28 +126,30 @@ function* requestConreactsList({ payload }: RequestContractListAction) {
   }
 }
 
-function* requestContract({payload}: RequestContractAction) {
- try {
-    const contract = yield call(API.requestContract, payload)
-    yield put(setInitedContract({
-      id: contract.id,
-      type: contract.type,
-      screens: contract.screens
-    }))
- } catch (error) {
-   yield put(responseError(error));
- }
+function* requestContract({ payload }: RequestContractAction) {
+  try {
+    const contract = yield call(API.requestContract, payload);
+    yield put(
+      setInitedContract({
+        id: contract.id,
+        type: contract.type,
+        screens: contract.screens,
+      })
+    );
+  } catch (error) {
+    yield put(responseError(error));
+  }
 }
 
-function* requestContractDelete({payload}: RequestContractAction) {
+function* requestContractDelete({ payload }: RequestContractAction) {
   try {
-    yield put(addToWAiter('requestDeleteContract'));
+    yield put(addToWAiter("requestDeleteContract"));
     yield call(API.requestDeleteContract, payload);
     yield put(deleteContract(payload));
   } catch (error) {
     yield put(responseError(error));
   } finally {
-    yield put(removeFromWaiter('requestDeleteContract'))
+    yield put(removeFromWaiter("requestDeleteContract"));
   }
 }
 
@@ -153,8 +158,8 @@ function* contractSaga() {
   yield takeLatest(REQUEST_SCREEN_DATA, requestScreenData);
   yield takeLatest(VALIDATE_SCREEN, screenValidate);
   yield takeLatest(REQEST_CONTRACTS_LIST, requestConreactsList);
-  yield takeLatest(REQUEST_CONTRACT, requestContract)
-  yield takeLatest(REQUEST_CONTRACT_DELETE, requestContractDelete)
+  yield takeLatest(REQUEST_CONTRACT, requestContract);
+  yield takeLatest(REQUEST_CONTRACT_DELETE, requestContractDelete);
 }
 
 export default contractSaga;
