@@ -20,7 +20,9 @@ const saveScreenData = (id: string, screen: BaseScreenDataInterface) =>
   });
 
 const requestContractList = async (type: CONTRACT_LIST_STATE, page: number) => {
-  const response = await httpClient.get(`api/contracts?type=${type}&page=${page}&limit=10`);
+  const response = await httpClient.get(
+    `api/contracts?type=${type}&page=${page}&limit=10`
+  );
   return translateContractList(response.data);
 };
 

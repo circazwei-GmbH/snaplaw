@@ -13,7 +13,7 @@ type AbstractListProps = {
   elements: Array<any>;
   listItem: ListItemConponent;
   isLoading?: boolean;
-  onEndReached?: () => void
+  onEndReached?: () => void;
 };
 
 export default function AbstractList({
@@ -21,7 +21,7 @@ export default function AbstractList({
   messageOnEmpty,
   listItem,
   isLoading,
-  onEndReached
+  onEndReached,
 }: AbstractListProps) {
   if (isLoading) {
     return (
