@@ -31,8 +31,11 @@ const requestContract = async (id: string): Promise<ContractDataType> => {
   return translateContract(response.data);
 };
 
-const requestDeleteContract = async (id: string) =>
+const requestDeleteContract = (id: string) =>
   httpClient.delete(`api/contracts/${id}`);
+
+const signContract = (id: string, path: string) =>
+  httpClient.patch(`api/contracts/${id}/sign`, {path})
 
 export const buildPDFSource = (
   id: string,
@@ -54,4 +57,5 @@ export default {
   requestContractList,
   requestContract,
   requestDeleteContract,
+  signContract
 };

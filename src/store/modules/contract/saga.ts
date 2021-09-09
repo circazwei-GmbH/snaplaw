@@ -4,7 +4,7 @@ import {
   REQUEST_CONTRACT,
   REQUEST_CONTRACT_DELETE,
   REQUEST_CREATE_CONTRACT,
-  REQUEST_SCREEN_DATA,
+  REQUEST_SCREEN_DATA, SIGN_CONTRACT,
   VALIDATE_ALL_SCREENS,
   VALIDATE_SCREEN,
   validateScreen,
@@ -14,20 +14,20 @@ import {
   RequestContractListAction,
   RequestCreateContractAction,
   RequestScreenDataAction,
-  ScreenValidateAction,
+  ScreenValidateAction, SignContractAction,
   ValidateAllScreensAction,
 } from "./types";
 import API from "../../../services/contract/index";
 import { responseError } from "../auth/action-creators";
 import { addToWAiter, removeFromWaiter } from "../main/slice";
-import { CONTRACT_CREATION_WAIT } from "./constants";
+import {CONTRACT_CREATION_WAIT, CONTRACT_SCREEN_TYPES} from "./constants";
 import {
   clearErrors,
   deleteContract,
   setContractsList,
   setFieldError,
   setInitedContract,
-  setListLoading,
+  setListLoading, setScreenData,
 } from "./slice";
 import * as RootHavigation from "../../../router/RootNavigation";
 import { HOME_ROUTER } from "../../../router/HomeRouterType";
@@ -36,6 +36,7 @@ import { SelectType } from "../../hooks";
 import { contractValidationConfig, screenFieldValidator } from "./validation";
 import { BaseScreenDataInterface } from "./base-types";
 import { Translator } from "../../../translator/i18n";
+import {SIGN_FIELDS} from "./purchase/sign";
 
 function* createContract({ payload }: RequestCreateContractAction) {
   try {
@@ -184,6 +185,20 @@ function* requestContractDelete({ payload }: RequestContractAction) {
   }
 }
 
+function* signContract({payload}: SignContractAction) {
+  try {
+    yield put(setScreenData({
+      screenType: CONTRACT_SCREEN_TYPES.SIGN,
+      fieldName: SIGN_FIELDS.SIGN,
+      value: payload
+    }));
+    const contractId = yield select(state => state.contract.currentContract.id)
+    yield call(API.signContract, contractId, payload)
+  } catch (error) {
+    yield put(responseError(error));
+  }
+}
+
 function* contractSaga() {
   yield takeLatest(REQUEST_CREATE_CONTRACT, createContract);
   yield takeLatest(REQUEST_SCREEN_DATA, requestScreenData);
@@ -192,6 +207,7 @@ function* contractSaga() {
   yield takeLatest(REQUEST_CONTRACT, requestContract);
   yield takeLatest(REQUEST_CONTRACT_DELETE, requestContractDelete);
   yield takeLatest(VALIDATE_ALL_SCREENS, validateAllScreens);
+  yield takeLatest(SIGN_CONTRACT, signContract);
 }
 
 export default contractSaga;

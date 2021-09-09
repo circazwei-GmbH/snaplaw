@@ -26,7 +26,7 @@ const attachTokenToConfig = (
 };
 
 const _call = async (
-  method: "GET" | "PUT" | "POST" | "DELETE",
+  method: "GET" | "PUT" | "POST" | "DELETE" | "PATCH",
   url: string,
   body: any,
   options?: AxiosRequestConfig,
@@ -67,6 +67,8 @@ const put = (url: string, body: any, options?: AxiosRequestConfig) =>
 
 const del = (url: string, options?: AxiosRequestConfig) =>
   _call("DELETE", url, undefined, options);
+const patch = (url: string, body: any, options?: AxiosRequestConfig) =>
+  _call("PATCH", url, body, options);
 
 export default {
   getToken,
@@ -74,6 +76,7 @@ export default {
   get,
   post,
   put,
+  patch,
   delete: del,
   putWithoutHost,
 };
