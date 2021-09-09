@@ -26,7 +26,7 @@ export default function AbstractModal() {
     <Modal
       visible={!!modal}
       transparent={true}
-      animationType="fade"
+      animationType="none"
       testID="modal"
     >
       <View style={styles.centeredView}>

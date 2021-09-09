@@ -10,6 +10,8 @@ import {navigate} from "../../../../store/modules/main/action-creators";
 import {ROUTER_TABS} from "../../../../router/TabRouterTypes";
 import {HOME_ROUTER} from "../../../../router/HomeRouterType";
 import {requestDeleteContract} from "../../../../store/modules/contract/action-creators";
+import {setModal} from "../../../../store/modules/main/slice";
+import {BUTTON_COLORTYPE} from "../../../../store/modules/main/types";
 
 export default function ContractListItem({ item }: ListItemProps) {
   const [inProgressMenuVisible, setInProgressMenuVisible] = useState<boolean>(false)
@@ -30,8 +32,20 @@ export default function ContractListItem({ item }: ListItemProps) {
     {
       title: t('my_contracts.actions.delete'),
       handler: () => {
-        dispatch(requestDeleteContract(item.id))
         setInProgressMenuVisible(false)
+        dispatch(setModal({
+          message: t('my_contracts.delete_modal.message'),
+          actions: [
+            {
+              name: t('my_contracts.delete_modal.no'),
+              colortype: BUTTON_COLORTYPE.ERROR
+            },
+            {
+              name: t('my_contracts.delete_modal.yes'),
+              action: requestDeleteContract(item.id)
+            }
+          ]
+        }))
       }
     }
   ]
