@@ -51,15 +51,16 @@ export default function Notifications(): JSX.Element {
     partner: string,
     contract: string
   ) => {
+    const isActionNew =
+      type === "user_invited_to_contract" && isNew ? "actionsNew" : "actions";
+
     dispatch(
       setModal({
-        message: t(notificationConfig[type]["message"]),
-        actions: notificationConfig[type]["actions"].map((item) => {
-          return {
-            name: t(item.name),
-            colortype: item.colortype,
-          };
-        }),
+        message: t(notificationConfig[type]["message"], { contract, partner }),
+        actions: notificationConfig[type][isActionNew].map((item) => ({
+          name: t(item.name),
+          colortype: item.colortype,
+        })),
       })
     );
   };

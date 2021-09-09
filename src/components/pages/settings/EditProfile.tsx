@@ -21,6 +21,7 @@ import {
   setUserProfile,
 } from "../../../store/modules/profile/slice";
 import { setModal } from "../../../store/modules/main/slice";
+import { BUTTON_COLORTYPE } from "../../../store/modules/main/types";
 
 export default function EditProfile() {
   const { t } = useI18n();
@@ -134,12 +135,12 @@ export default function EditProfile() {
         actions: [
           {
             name: t("edit_profile.modals.save.cancel"),
-            colortype: "error",
+            colortype: BUTTON_COLORTYPE.ERROR,
           },
           {
             action: requestEditProfile(formToSave),
             name: t("edit_profile.modals.save.confirm"),
-            colortype: "primary",
+            colortype: BUTTON_COLORTYPE.PRIMARY,
           },
         ],
       })
@@ -153,12 +154,12 @@ export default function EditProfile() {
         actions: [
           {
             name: t("edit_profile.modals.cancel.no"),
-            colortype: "error",
+            colortype: BUTTON_COLORTYPE.ERROR,
           },
           {
             action: setUserProfile(globalValue),
             name: t("edit_profile.modals.cancel.yes"),
-            colortype: "primary",
+            colortype: BUTTON_COLORTYPE.PRIMARY,
           },
         ],
       })

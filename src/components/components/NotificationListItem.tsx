@@ -62,7 +62,7 @@ export default function NotificationListItem({
       <TouchableOpacity
         style={style}
         activeOpacity={1}
-        onPress={() => onPress(isRead, type, userNameFrom, contractName)}
+        onPress={() => onPress(isRead, type, userNameFrom, `“${contractName}”`)}
       >
         <View
           style={[

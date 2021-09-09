@@ -193,9 +193,9 @@ export default {
     empty_list: "You have no notifications yet.",
     messages: {
       invited:
-        "You have been just invited to contract {{contractName}} by {{userBy}}",
+        "You have been just invited to contract %{contract} by %{partner}",
       rejected:
-        "Invite to contract '{{contractName}}' has been rejected by {{userBy}}",
+        "Invite to contract %{contract} has been rejected by %{partner}",
     },
     modal_buttons: {
       accept: "Accept",
