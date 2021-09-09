@@ -67,7 +67,7 @@ export type ContractDataType = {
   createdAt: string;
   contractor: string | undefined;
   screens: Array<BaseScreenDataInterface>;
-  sign: string | undefined
+  sign: string | undefined;
 };
 
 export type ContractDataListType = {

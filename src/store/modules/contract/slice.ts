@@ -4,7 +4,11 @@ import {
   Draft,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { CONTRACT_LIST_STATE, ContractDataType, ContractListType} from "./types";
+import {
+  CONTRACT_LIST_STATE,
+  ContractDataType,
+  ContractListType,
+} from "./types";
 import { CONTRACT_SCREEN_TYPES } from "./constants";
 
 interface ContractState {
@@ -65,7 +69,9 @@ const setListLoadingAction = createAction<boolean, "setListLoading">(
 const deleteContractAction = createAction<string, "deleteContract">(
   "deleteContract"
 );
-const updateContractSignAction = createAction<string, 'updateContractSign'>('updateContractSign')
+const updateContractSignAction = createAction<string, "updateContractSign">(
+  "updateContractSign"
+);
 
 const contractSlice = createSlice({
   name: "contract",
@@ -179,8 +185,8 @@ const contractSlice = createSlice({
       if (!state.currentContract) {
         return;
       }
-      state.currentContract.sign = action.payload
-    }
+      state.currentContract.sign = action.payload;
+    },
   },
 });
 
@@ -192,7 +198,7 @@ export const {
   setContractsList,
   setListLoading,
   deleteContract,
-  updateContractSign
+  updateContractSign,
 } = contractSlice.actions;
 
 export default contractSlice.reducer;

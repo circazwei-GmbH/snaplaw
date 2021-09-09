@@ -9,9 +9,7 @@ import InviteInput from "../../../basics/inputs/InviteInput";
 import SignModal from "../../Modals/SignModal";
 import { orientationChange } from "../../../../store/modules/main/action-creators";
 import { OrientationLock } from "expo-screen-orientation";
-import {
-  SIGN_LOADER
-} from "../../../../store/modules/contract/purchase/sign";
+import { SIGN_LOADER } from "../../../../store/modules/contract/purchase/sign";
 import { removeFromWaiter } from "../../../../store/modules/main/slice";
 import { contractValidator } from "../../../../store/modules/contract/validation";
 import { Contract } from "../../../../store/modules/contract/types";
@@ -29,10 +27,7 @@ import {
 export default function Sign() {
   const { t } = useI18n();
   const contract = useAppSelector((state) => state.contract.currentContract);
-  const sign = useAppSelector(
-    (state) =>
-      state.contract.currentContract?.sign
-  );
+  const sign = useAppSelector((state) => state.contract.currentContract?.sign);
   const [name] = useState("Jhon Doue");
   const [signVisible, setSignVisible] = useState(false);
   const dispatch = useAppDispatch();

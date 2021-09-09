@@ -1,8 +1,8 @@
 import React from "react";
-import {Modal, StyleSheet, View} from "react-native";
+import { Modal, StyleSheet, View } from "react-native";
 import Button from "../../basics/buttons/Button";
-import {useI18n} from "../../../translator/i18n";
-import {BUTTON_COLORTYPE} from "../../../store/modules/main/types";
+import { useI18n } from "../../../translator/i18n";
+import { BUTTON_COLORTYPE } from "../../../store/modules/main/types";
 
 export type ButtonType = {
   title: string;

@@ -49,7 +49,7 @@ function* createContract({ payload }: RequestCreateContractAction) {
         id: response.data.id,
         type: payload,
         contractor: undefined,
-        createdAt: '',
+        createdAt: "",
         sign: undefined,
         screens: [
           prefillUserData(
@@ -173,7 +173,7 @@ function* requestContract({ payload }: RequestContractAction) {
         screens: contract.screens,
         contractor: undefined,
         sign: contract.sign,
-        createdAt: contract.createdAt
+        createdAt: contract.createdAt,
       })
     );
   } catch (error) {
@@ -195,9 +195,7 @@ function* requestContractDelete({ payload }: RequestContractAction) {
 
 function* signContract({ payload }: SignContractAction) {
   try {
-    yield put(
-      updateContractSign(payload)
-    );
+    yield put(updateContractSign(payload));
     const contractId = yield select(
       (state) => state.contract.currentContract.id
     );

@@ -1,6 +1,11 @@
-import React, {useState} from "react";
-import {GestureResponderEvent, Pressable, StyleSheet, Text,} from "react-native";
-import {BUTTON_COLORTYPE} from "../../../store/modules/main/types";
+import React, { useState } from "react";
+import {
+  GestureResponderEvent,
+  Pressable,
+  StyleSheet,
+  Text,
+} from "react-native";
+import { BUTTON_COLORTYPE } from "../../../store/modules/main/types";
 
 interface ButtonPropsInterface {
   text: string;
@@ -83,7 +88,7 @@ const styles = StyleSheet.create({
   },
   blackText: {
     color: "#202020",
-    fontFamily: "P"
+    fontFamily: "P",
   },
   primaryText: {
     color: "#fff",
