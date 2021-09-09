@@ -11,7 +11,7 @@ import AbstractList from "../components/lists/AbstractList";
 import ContractListItem from "../components/lists/ListItems/ContactListItem";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { requestContractsList } from "../../store/modules/contract/action-creators";
-import {CONTRACT_LIST_STATE} from "../../store/modules/contract/types";
+import { CONTRACT_LIST_STATE } from "../../store/modules/contract/types";
 
 export default function MyContracts() {
   const { t } = useI18n();
@@ -27,9 +27,10 @@ export default function MyContracts() {
   }, [dispatch, requestContractsList]);
 
   const listTypeChangeHandler = (state: TEXT_SWITCH_POSITION) => {
-    const nextState = state === TEXT_SWITCH_POSITION.LEFT
-      ? CONTRACT_LIST_STATE.FINALIZED
-      : CONTRACT_LIST_STATE.IN_PROGRESS
+    const nextState =
+      state === TEXT_SWITCH_POSITION.LEFT
+        ? CONTRACT_LIST_STATE.FINALIZED
+        : CONTRACT_LIST_STATE.IN_PROGRESS;
     setSwitchState(nextState);
     dispatch(requestContractsList(nextState));
   };
@@ -62,7 +63,7 @@ export default function MyContracts() {
       <AbstractList
         messageOnEmpty={t("my_contracts.empty_list")}
         elements={contracts}
-        listItem={({item}) => <ContractListItem item={item} />}
+        listItem={({ item }) => <ContractListItem item={item} />}
         isLoading={isLoading}
       />
     </TopBar>

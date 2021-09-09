@@ -189,17 +189,17 @@ export default {
     },
     empty_list: "You have no contracts yet",
     actions: {
-      edit: 'Edit contracts',
-      delete: 'Delete contract',
-      see_partner: 'See contract partner',
-      delete_partner: 'Delete contract partner',
-      invite_partner: 'Invite user'
+      edit: "Edit contracts",
+      delete: "Delete contract",
+      see_partner: "See contract partner",
+      delete_partner: "Delete contract partner",
+      invite_partner: "Invite user",
     },
     delete_modal: {
-      message: 'Are you sure you want to delete the contract?',
-      yes: 'Yes',
-      no: 'No'
-    }
+      message: "Are you sure you want to delete the contract?",
+      yes: "Yes",
+      no: "No",
+    },
   },
   menu: {
     cancel: "Cancel",

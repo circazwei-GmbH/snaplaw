@@ -1,11 +1,12 @@
 import {
-  CONTRACT_LIST_STATE, RequestContractAction,
+  CONTRACT_LIST_STATE,
+  RequestContractAction,
   RequestContractListAction,
   RequestCreateContractAction,
-  RequestScreenDataAction
+  RequestScreenDataAction,
 } from "./types";
 import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
-import {getTypeByContractAndScreen} from "./helper";
+import { getTypeByContractAndScreen } from "./helper";
 
 export const REQUEST_CREATE_CONTRACT = "REQUEST_CREATE_CONTRACT";
 export const REQUEST_SCREEN_DATA = "REQUEST_SCREEN_DATA";
@@ -40,17 +41,19 @@ export const validateScreen = (
   },
 });
 
-export const requestContractsList = (type: CONTRACT_LIST_STATE): RequestContractListAction => ({
+export const requestContractsList = (
+  type: CONTRACT_LIST_STATE
+): RequestContractListAction => ({
   type: REQEST_CONTRACTS_LIST,
   payload: type,
 });
 
 export const requestContract = (id: string): RequestContractAction => ({
   type: REQUEST_CONTRACT,
-  payload: id
-})
+  payload: id,
+});
 
 export const requestDeleteContract = (id: string): RequestContractAction => ({
   type: REQUEST_CONTRACT_DELETE,
-  payload: id
-})
+  payload: id,
+});

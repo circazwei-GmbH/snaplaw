@@ -25,7 +25,7 @@ import { HOME_ROUTER } from "./HomeRouterType";
 import Contract from "../components/pages/contracts/Contract";
 import { orientationChange } from "../store/modules/main/action-creators";
 import * as ScreenOrientation from "expo-screen-orientation";
-import {ROUTER_TABS} from "./TabRouterTypes";
+import { ROUTER_TABS } from "./TabRouterTypes";
 
 const Stack = createStackNavigator();
 const ProfileStack = createStackNavigator();

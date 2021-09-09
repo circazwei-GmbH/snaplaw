@@ -4,8 +4,11 @@ import { BaseScreenDataInterface } from "../../store/modules/contract/base-types
 import { API_HOST } from "../../env/env";
 import { LanguageType } from "../../store/modules/profile/slice";
 import { LANGUAGE_GERMANY } from "../../store/modules/profile/constants";
-import {CONTRACT_LIST_STATE, ContractDataType} from "../../store/modules/contract/types";
-import {translateContract, translateContractList} from "./translator";
+import {
+  CONTRACT_LIST_STATE,
+  ContractDataType,
+} from "../../store/modules/contract/types";
+import { translateContract, translateContractList } from "./translator";
 
 const createContract = (type: CONTRACT_TYPES) =>
   httpClient.post("api/contracts", { type });
@@ -17,17 +20,17 @@ const saveScreenData = (id: string, screen: BaseScreenDataInterface) =>
   });
 
 const requestContractList = async (type: CONTRACT_LIST_STATE) => {
-  const response = await httpClient.get(`api/contracts?type=${type}`)
-  return translateContractList(response.data)
-}
+  const response = await httpClient.get(`api/contracts?type=${type}`);
+  return translateContractList(response.data);
+};
 
 const requestContract = async (id: string): Promise<ContractDataType> => {
-  const response = await httpClient.get(`api/contracts/${id}`)
-  return translateContract(response.data)
-}
+  const response = await httpClient.get(`api/contracts/${id}`);
+  return translateContract(response.data);
+};
 
 const requestDeleteContract = async (id: string) =>
-  httpClient.delete(`api/contracts/${id}`)
+  httpClient.delete(`api/contracts/${id}`);
 
 export const buildPDFSource = (
   id: string,
@@ -48,5 +51,5 @@ export default {
   saveScreenData,
   requestContractList,
   requestContract,
-  requestDeleteContract
+  requestDeleteContract,
 };

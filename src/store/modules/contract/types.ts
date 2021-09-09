@@ -54,7 +54,7 @@ export interface ScreenValidateAction extends BaseAction {
 }
 
 export interface RequestContractListAction extends BaseAction {
-  payload: CONTRACT_LIST_STATE
+  payload: CONTRACT_LIST_STATE;
 }
 
 export enum CONTRACT_LIST_STATE {
@@ -63,25 +63,25 @@ export enum CONTRACT_LIST_STATE {
 }
 
 export type ContractDataType = {
-  id: string,
-  type: CONTRACT_TYPES,
-  createdAt: string,
-  contractor: string | undefined,
-  screens: Array<BaseScreenDataInterface>
+  id: string;
+  type: CONTRACT_TYPES;
+  createdAt: string;
+  contractor: string | undefined;
+  screens: Array<BaseScreenDataInterface>;
 };
 
 export type ContractDataListType = {
-  id: string,
-  type: CONTRACT_TYPES,
-  createdAt: string,
-  title: string | undefined,
-  contractor: string | undefined,
-}
+  id: string;
+  type: CONTRACT_TYPES;
+  createdAt: string;
+  title: string | undefined;
+  contractor: string | undefined;
+};
 
 export type ContractListType = Array<ContractDataListType>;
 
 export interface RequestContractAction extends BaseAction {
-  payload: string
+  payload: string;
 }
 
 export { ProductDataScreenInterface, PRODUCT_DATA_FIELDS };

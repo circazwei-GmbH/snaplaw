@@ -14,7 +14,7 @@ export interface OrientationAction extends BaseAction {
 }
 
 export interface NavigateAction extends BaseAction {
-  payload: Record<string, Record<string, any>>
+  payload: Record<string, Record<string, any>>;
 }
 
 export const navigationPopToTop = (): NavigationPopToTopAction => ({
@@ -27,7 +27,9 @@ export const orientationChange = (target: AllowOrientationType) => ({
   payload: target,
 });
 
-export const navigate = (target: Record<string, Record<string, any>>): NavigateAction => ({
+export const navigate = (
+  target: Record<string, Record<string, any>>
+): NavigateAction => ({
   type: NAVIGATE,
-  payload: target
-})
+  payload: target,
+});

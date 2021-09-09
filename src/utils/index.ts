@@ -1,4 +1,4 @@
-import {Base64} from "./base64";
+import { Base64 } from "./base64";
 
 export const getUserFromToken = (
   token: string

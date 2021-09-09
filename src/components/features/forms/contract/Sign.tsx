@@ -20,7 +20,10 @@ import { Contract } from "../../../../store/modules/contract/types";
 import { useNavigation } from "@react-navigation/native";
 import { validateScreen } from "../../../../store/modules/contract/action-creators";
 import { clearErrors } from "../../../../store/modules/contract/slice";
-import {countToPopLength, getTypeByContractAndScreen} from "../../../../store/modules/contract/helper";
+import {
+  countToPopLength,
+  getTypeByContractAndScreen,
+} from "../../../../store/modules/contract/helper";
 
 export default function Sign() {
   const { t } = useI18n();
@@ -44,9 +47,7 @@ export default function Sign() {
     );
     if (emptyScreen !== null) {
       // @ts-ignore
-      navigator.pop(
-        countToPopLength(currentContract.type, emptyScreen)
-      );
+      navigator.pop(countToPopLength(currentContract.type, emptyScreen));
       dispatch(
         validateScreen(
           currentContract.type,
