@@ -3,7 +3,8 @@ import {
   RequestContractAction,
   RequestContractListAction,
   RequestCreateContractAction,
-  RequestScreenDataAction, SignContractAction,
+  RequestScreenDataAction,
+  SignContractAction,
   ValidateAllScreensAction,
 } from "./types";
 import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
@@ -70,5 +71,5 @@ export const requestDeleteContract = (id: string): RequestContractAction => ({
 
 export const signContract = (filePath: string): SignContractAction => ({
   type: SIGN_CONTRACT,
-  payload: filePath
-})
+  payload: filePath,
+});

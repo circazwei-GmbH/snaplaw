@@ -35,7 +35,7 @@ const requestDeleteContract = (id: string) =>
   httpClient.delete(`api/contracts/${id}`);
 
 const signContract = (id: string, path: string) =>
-  httpClient.patch(`api/contracts/${id}/sign`, {path})
+  httpClient.patch(`api/contracts/${id}/sign`, { path });
 
 export const buildPDFSource = (
   id: string,
@@ -57,5 +57,5 @@ export default {
   requestContractList,
   requestContract,
   requestDeleteContract,
-  signContract
+  signContract,
 };

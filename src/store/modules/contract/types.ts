@@ -88,7 +88,7 @@ export interface ValidateAllScreensAction extends BaseAction {
 }
 
 export interface SignContractAction extends BaseAction {
-  payload: string
+  payload: string;
 }
 
 export { ProductDataScreenInterface, PRODUCT_DATA_FIELDS };

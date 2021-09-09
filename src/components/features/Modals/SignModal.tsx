@@ -7,13 +7,11 @@ import { Signature } from "@scale-at/expo-pixi";
 import { useAppDispatch } from "../../../store/hooks";
 import { uploadMedia } from "../../../store/modules/media/action-creators";
 import { MEDIA_FOLDERS } from "../../../store/modules/media/constants";
-import {
-  SIGN_LOADER,
-} from "../../../store/modules/contract/purchase/sign";
+import { SIGN_LOADER } from "../../../store/modules/contract/purchase/sign";
 import { useI18n } from "../../../translator/i18n";
 import { addToWAiter } from "../../../store/modules/main/slice";
 import SplashLoader from "./SplashLoader";
-import {signContract} from "../../../store/modules/contract/action-creators";
+import { signContract } from "../../../store/modules/contract/action-creators";
 
 type SignModalProps = {
   visible: boolean;
@@ -43,13 +41,7 @@ export default function SignModal({ visible, onClose }: SignModalProps) {
       return;
     }
     const { uri } = signData;
-    dispatch(
-      uploadMedia(
-        uri,
-        MEDIA_FOLDERS.SIGNATURE,
-        signContract('')
-      )
-    );
+    dispatch(uploadMedia(uri, MEDIA_FOLDERS.SIGNATURE, signContract("")));
   };
 
   const onChange = () => {
