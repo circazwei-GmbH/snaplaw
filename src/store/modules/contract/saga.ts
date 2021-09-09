@@ -5,7 +5,9 @@ import {
   REQUEST_CONTRACT_DELETE,
   REQUEST_CREATE_CONTRACT,
   REQUEST_SCREEN_DATA,
+  VALIDATE_ALL_SCREENS,
   VALIDATE_SCREEN,
+  validateScreen,
 } from "./action-creators";
 import {
   RequestContractAction,
@@ -13,6 +15,7 @@ import {
   RequestCreateContractAction,
   RequestScreenDataAction,
   ScreenValidateAction,
+  ValidateAllScreensAction,
 } from "./types";
 import API from "../../../services/contract/index";
 import { responseError } from "../auth/action-creators";
@@ -67,7 +70,6 @@ function* requestScreenData({ payload }: RequestScreenDataAction) {
   const contractId = yield select<SelectType>(
     (state) => state.contract.currentContract?.id
   );
-  console.log(screenData, payload);
   if (!screenData) {
     return;
   }
@@ -114,6 +116,14 @@ function* screenValidate({
   }
 }
 
+function* validateAllScreens({ payload }: ValidateAllScreensAction) {
+  const screens = contractValidationConfig[payload];
+  for (const screenName in screens) {
+    // @ts-ignore
+    yield put(validateScreen(payload, screenName));
+  }
+}
+
 function* requestConreactsList({ payload }: RequestContractListAction) {
   const listPagination = yield select((state) => state.contract.listPagination);
   if (listPagination.listType === payload && !listPagination.isNextPage) {
@@ -128,7 +138,6 @@ function* requestConreactsList({ payload }: RequestContractListAction) {
     if (!requestedPage) {
       yield put(setListLoading(true));
     }
-    console.log(payload, requestedPage);
     const contracts = yield call(
       API.requestContractList,
       payload,
@@ -182,6 +191,7 @@ function* contractSaga() {
   yield takeLatest(REQEST_CONTRACTS_LIST, requestConreactsList);
   yield takeLatest(REQUEST_CONTRACT, requestContract);
   yield takeLatest(REQUEST_CONTRACT_DELETE, requestContractDelete);
+  yield takeLatest(VALIDATE_ALL_SCREENS, validateAllScreens);
 }
 
 export default contractSaga;

@@ -18,7 +18,10 @@ import { removeFromWaiter } from "../../../../store/modules/main/slice";
 import { contractValidator } from "../../../../store/modules/contract/validation";
 import { Contract } from "../../../../store/modules/contract/types";
 import { useNavigation } from "@react-navigation/native";
-import { validateScreen } from "../../../../store/modules/contract/action-creators";
+import {
+  validateAllScreens,
+  validateScreen,
+} from "../../../../store/modules/contract/action-creators";
 import { clearErrors } from "../../../../store/modules/contract/slice";
 import {
   countToPopLength,
@@ -41,6 +44,7 @@ export default function Sign() {
 
   const signModalHandler = (currentContract: Contract) => {
     dispatch(clearErrors());
+    dispatch(validateAllScreens(currentContract.type));
     const emptyScreen = contractValidator(
       currentContract.type,
       currentContract.screens
