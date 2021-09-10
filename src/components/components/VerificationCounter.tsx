@@ -6,7 +6,7 @@ import { LANGUAGE_ENGLISH } from "../../store/modules/profile/constants";
 
 interface VerificationCounterPropsInterface {
   sizeSmall: boolean;
-  doHaveUrl?: string;
+  doHaveUrl?: string | null;
 }
 
 export default function VerificationCounter({

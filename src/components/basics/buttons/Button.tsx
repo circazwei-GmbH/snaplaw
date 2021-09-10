@@ -1,6 +1,11 @@
-import React, {useState} from "react";
-import {GestureResponderEvent, Pressable, StyleSheet, Text,} from "react-native";
-import {BUTTON_COLORTYPE} from "../../../store/modules/main/types";
+import React, { useState } from "react";
+import {
+  GestureResponderEvent,
+  Pressable,
+  StyleSheet,
+  Text,
+} from "react-native";
+import { BUTTON_COLORTYPE } from "../../../store/modules/main/types";
 
 interface ButtonPropsInterface {
   text: string;
@@ -44,8 +49,11 @@ export default function Button({
         style={[
           styles.text,
           type !== "primary" ? styles.secondaryText : styles.primaryText,
-          textColorType === BUTTON_COLORTYPE.PRIMARY ? styles.secondaryText : null,
+          textColorType === BUTTON_COLORTYPE.PRIMARY
+            ? styles.secondaryText
+            : null,
           textColorType === BUTTON_COLORTYPE.ERROR ? styles.errorText : null,
+          textColorType === BUTTON_COLORTYPE.BLACK ? styles.blackText : null,
         ]}
       >
         {text}
@@ -59,7 +67,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    paddingVertical: 15,
+    paddingVertical: 12,
     borderRadius: 10,
     shadowColor: "rgb(22, 150, 226)",
     shadowOffset: {
@@ -70,7 +78,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 17,
-    lineHeight: 18,
     fontFamily: "OS-SB",
   },
   privaryButton: {
@@ -78,6 +85,10 @@ const styles = StyleSheet.create({
   },
   secondaryButton: {
     backgroundColor: "#fff",
+  },
+  blackText: {
+    color: "#202020",
+    fontFamily: "P",
   },
   primaryText: {
     color: "#fff",

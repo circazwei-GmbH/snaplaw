@@ -38,7 +38,7 @@ export default function App() {
         <View style={styles.container}>
           <Router data-testid="router" />
         </View>
-        <StatusBar style="auto" />
+        <StatusBar style="dark" />
       </NavigationContainer>
       <AbstractModal />
       <SplashLoader />

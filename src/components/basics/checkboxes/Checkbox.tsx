@@ -23,7 +23,7 @@ export default function Checkbox({
   text,
   style,
   isError,
-  errorMessage
+  errorMessage,
 }: CheckboxProps) {
   return (
     <>
@@ -37,7 +37,9 @@ export default function Checkbox({
         />
         <Text style={styles.checkboxText}>{text}</Text>
       </Pressable>
-      {errorMessage ? (<Text style={styles.errorMessage}>{errorMessage}</Text>) : null}
+      {errorMessage ? (
+        <Text style={styles.errorMessage}>{errorMessage}</Text>
+      ) : null}
     </>
   );
 }
@@ -54,8 +56,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   errorMessage: {
-    color: '#FA7171',
-    fontFamily: 'OS-SB',
-    paddingTop: 8
-  }
+    color: "#FA7171",
+    paddingTop: 8,
+  },
 });

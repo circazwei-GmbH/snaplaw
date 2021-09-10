@@ -22,10 +22,10 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { requestLanguage } from "../store/modules/profile/action-creators";
 import { requestToken } from "../store/modules/auth/action-creators";
 import { orientationChange } from "../store/modules/main/action-creators";
+import { ROUTER_TABS } from "./TabRouterTypes";
 import { AUTH_ROUTE } from "./AuthRouterTypes";
 import { PROFILE_ROUTER } from "./ProfileRouterTypes";
 import { HOME_ROUTER } from "./HomeRouterType";
-import { MYCONTRACT_ROUTER } from "./MyContractRouterTypes";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -60,7 +60,8 @@ export default function Router() {
       initialRouteName="Homepage"
     >
       <Tab.Screen
-        name="MyContracts"
+        name={ROUTER_TABS.MY_CONTRACTS}
+        component={MyContracts}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Feather name="file-text" size={size} color={color} />
@@ -83,7 +84,7 @@ export default function Router() {
         )}
       </Tab.Screen>
       <Tab.Screen
-        name="Homepage"
+        name={ROUTER_TABS.HOMEPAGE}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Feather name="file-plus" size={size} color={color} />
@@ -109,7 +110,7 @@ export default function Router() {
         )}
       </Tab.Screen>
       <Tab.Screen
-        name="Settings"
+        name={ROUTER_TABS.SETTINGS}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Feather name="settings" size={size} color={color} />

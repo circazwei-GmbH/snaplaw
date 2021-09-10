@@ -8,8 +8,8 @@ import { createStore } from "@reduxjs/toolkit";
 import { toggleBoolValue } from "../../../utils/toggleBoolValue";
 import { PROFILE_ROUTER } from "../../../router/ProfileRouterTypes";
 import { clearToken } from "../../../store/modules/auth/action-creators";
-import {setModal} from "../../../store/modules/main/slice";
-import {BUTTON_COLORTYPE} from "../../../store/modules/main/types";
+import { setModal } from "../../../store/modules/main/slice";
+import { BUTTON_COLORTYPE } from "../../../store/modules/main/types";
 
 jest.mock("../../../utils/toggleBoolValue.ts");
 
@@ -94,18 +94,20 @@ describe("MyProfile", () => {
     );
 
     fireEvent.press(getByText("my_profile.buttons_text.sign_out"));
-    expect(actions).toBeCalledWith(setModal({
-      message: ('edit_profile.modals.sign_out.message'),
-      actions: [
-        {
-          name: ('edit_profile.modals.sign_out.no'),
-          colortype: BUTTON_COLORTYPE.ERROR
-        },
-        {
-          name: ('edit_profile.modals.sign_out.yes'),
-          action: clearToken(),
-        }
-      ]
-    }));
+    expect(actions).toBeCalledWith(
+      setModal({
+        message: "edit_profile.modals.sign_out.message",
+        actions: [
+          {
+            name: "edit_profile.modals.sign_out.no",
+            colortype: BUTTON_COLORTYPE.ERROR,
+          },
+          {
+            name: "edit_profile.modals.sign_out.yes",
+            action: clearToken(),
+          },
+        ],
+      })
+    );
   });
 });

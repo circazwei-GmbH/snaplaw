@@ -183,6 +183,23 @@ export default {
   },
   my_contracts: {
     tab_name: "My contracts",
+    lists: {
+      finalized: "Finalized",
+      in_progress: "In progress",
+    },
+    empty_list: "You have no contracts yet",
+    actions: {
+      edit: "Edit contracts",
+      delete: "Delete contract",
+      see_partner: "See contract partner",
+      delete_partner: "Delete contract partner",
+      invite_partner: "Invite user",
+    },
+    delete_modal: {
+      message: "Are you sure you want to delete the contract?",
+      yes: "Yes",
+      no: "No",
+    },
   },
   menu: {
     cancel: "Cancel",

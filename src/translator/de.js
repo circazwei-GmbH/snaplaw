@@ -186,6 +186,23 @@ export default {
   },
   my_contracts: {
     tab_name: "Meine Verträge",
+    lists: {
+      finalized: "Abgeschlossen",
+      in_progress: "In Bearbeitung",
+    },
+    empty_list: "Sie haben noch keine Verträge",
+    actions: {
+      edit: "Vertrag editieren",
+      delete: "Vertrag löschen",
+      see_partner: "Vertragspartner sehen",
+      delete_partner: "Vertragspartner löschen",
+      invite_partner: "Benutzer einladen",
+    },
+    delete_modal: {
+      message: "Sind Sie sicher, dass Sie den Kontakt löschen möchten?",
+      yes: "Ja",
+      no: "Nein",
+    },
   },
   menu: {
     cancel: "Abbrechen",

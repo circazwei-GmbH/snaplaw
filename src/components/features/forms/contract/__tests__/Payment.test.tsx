@@ -1,13 +1,19 @@
 import React from "react";
-import {createStore} from "@reduxjs/toolkit";
-import {fireEvent, render} from "@testing-library/react-native";
-import {Provider} from "react-redux";
+import { createStore } from "@reduxjs/toolkit";
+import { fireEvent, render } from "@testing-library/react-native";
+import { Provider } from "react-redux";
 import Payment from "../Payment";
-import {CONTRACT_SCREEN_TYPES, CONTRACT_TYPES,} from "../../../../../store/modules/contract/constants";
-import {PAYMENT_FIELDS, PAYMENT_METHODS,} from "../../../../../store/modules/contract/types";
-import {CURRENSY} from "../../../../../store/modules/contract/purchase/payment";
-import {setScreenData} from "../../../../../store/modules/contract/slice";
-import {validateScreen} from "../../../../../store/modules/contract/action-creators";
+import {
+  CONTRACT_SCREEN_TYPES,
+  CONTRACT_TYPES,
+} from "../../../../../store/modules/contract/constants";
+import {
+  PAYMENT_FIELDS,
+  PAYMENT_METHODS,
+} from "../../../../../store/modules/contract/types";
+import { CURRENSY } from "../../../../../store/modules/contract/purchase/payment";
+import { setScreenData } from "../../../../../store/modules/contract/slice";
+import { validateScreen } from "../../../../../store/modules/contract/action-creators";
 
 const INITIAL_STATE = {
   contract: {
@@ -21,8 +27,8 @@ const INITIAL_STATE = {
             [PAYMENT_FIELDS.PAYMENT_METHOD]: PAYMENT_METHODS.CASH,
           },
         },
-      ], contractErrors: undefined
-
+      ],
+      contractErrors: undefined,
     },
   },
 };
@@ -204,14 +210,14 @@ describe("Payment", () => {
       })
     );
   });
-  it('Should dispatch validation', () => {
+  it("Should dispatch validation", () => {
     const initialState = INITIAL_STATE;
     // @ts-ignore
     initialState.contract.contractErrors = {
       [CONTRACT_SCREEN_TYPES.PAYMENT]: {
-        [PAYMENT_FIELDS.COST]: 'some error'
-      }
-    }
+        [PAYMENT_FIELDS.COST]: "some error",
+      },
+    };
     const store = initStore(initialState);
     const { getByPlaceholderText } = render(
       <Provider store={store}>
@@ -222,20 +228,26 @@ describe("Payment", () => {
       getByPlaceholderText(
         `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.cost`
       ),
-      'test'
+      "test"
     );
-    expect(actions).toBeCalledWith(validateScreen(CONTRACT_TYPES.PURCHASE, CONTRACT_SCREEN_TYPES.PAYMENT))
-  })
+    expect(actions).toBeCalledWith(
+      validateScreen(CONTRACT_TYPES.PURCHASE, CONTRACT_SCREEN_TYPES.PAYMENT)
+    );
+  });
   it("Should not render on undefined contract type", () => {
     const initialState = INITIAL_STATE;
     // @ts-ignore
-    initialState.contract.currentContract = undefined
+    initialState.contract.currentContract = undefined;
     const store = initStore(initialState);
     const { queryByPlaceholderText } = render(
       <Provider store={store}>
         <Payment />
       </Provider>
     );
-    expect(queryByPlaceholderText(`contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.cost`)).not.toBeTruthy()
-  })
+    expect(
+      queryByPlaceholderText(
+        `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.cost`
+      )
+    ).not.toBeTruthy();
+  });
 });
