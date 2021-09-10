@@ -11,13 +11,18 @@ import {
 } from "./types";
 import { CONTRACT_SCREEN_TYPES } from "./constants";
 
+export enum CONTRACT_LIST_LOADING_TYPE {
+  INITIAL = "INITIAL",
+  REFRESH = "REFRESH"
+}
+
 interface ContractState {
   currentContract: ContractDataType | undefined;
   contractErrors:
     | Record<CONTRACT_SCREEN_TYPES, Record<string, string> | undefined>
     | undefined;
   contracts: ContractListType | [];
-  isListLoading: boolean;
+  isListLoading: CONTRACT_LIST_LOADING_TYPE | undefined;
   listPagination: {
     listType: CONTRACT_LIST_STATE;
     page: number;
@@ -29,7 +34,7 @@ const initialState: ContractState = {
   currentContract: undefined,
   contractErrors: undefined,
   contracts: [],
-  isListLoading: false,
+  isListLoading: undefined,
   listPagination: {
     listType: CONTRACT_LIST_STATE.FINALIZED,
     page: 0,
@@ -151,9 +156,11 @@ const contractSlice = createSlice({
         list: ContractListType;
         page: number;
         type: CONTRACT_LIST_STATE;
+        isRefresh: boolean
       }>
     ) => {
-      if (state.listPagination.listType === action.payload.type) {
+      if (state.listPagination.listType === action.payload.type && !action.payload.isRefresh) {
+        // @ts-ignore
         state.contracts = state.contracts.concat(action.payload.list);
       } else {
         state.contracts = action.payload.list;
@@ -165,7 +172,7 @@ const contractSlice = createSlice({
     },
     [setListLoadingAction.type]: (
       state: Draft<ContractState>,
-      action: PayloadAction<boolean>
+      action: PayloadAction<CONTRACT_LIST_LOADING_TYPE | undefined>
     ) => {
       state.isListLoading = action.payload;
     },

@@ -80,7 +80,9 @@ export default function ContractListItem({ item }: ListItemProps) {
           </Text>
         </View>
         <TouchableOpacity onPress={() => setInProgressMenuVisible(true)}>
-          <Entypo name="dots-three-vertical" size={16} color="#668395" />
+          <View style={styles.action}>
+            <Entypo name="dots-three-vertical" size={16} color="#668395" />
+          </View>
         </TouchableOpacity>
       </View>
       <Menu
@@ -127,4 +129,10 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: "#909090",
   },
+  action: {
+    justifyContent: 'center',
+    alignItems: "flex-end",
+    height: 40,
+    width: 40
+  }
 });
