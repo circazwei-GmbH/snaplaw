@@ -53,10 +53,14 @@ export const validateAllScreens = (
 });
 
 export const requestContractsList = (
-  type: CONTRACT_LIST_STATE
+  type: CONTRACT_LIST_STATE,
+  isRefresh?: boolean
 ): RequestContractListAction => ({
   type: REQEST_CONTRACTS_LIST,
-  payload: type,
+  payload: {
+    type,
+    isRefresh: !!isRefresh
+  },
 });
 
 export const requestContract = (id: string): RequestContractAction => ({
