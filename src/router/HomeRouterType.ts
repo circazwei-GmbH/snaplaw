@@ -6,6 +6,7 @@ export enum HOME_ROUTER {
 
 export type ContractNavigationProps = {
   screenCount: number;
+  id: undefined | string;
 };
 
 export type HomeStackParamList = {

@@ -135,16 +135,6 @@ export default function InviteTextField({
 }
 
 const styles = StyleSheet.create({
-  listItem: {
-    height: LIST_ITEM_HEIGHT,
-    justifyContent: "center",
-    borderBottomColor: "#EFF7FD",
-    borderBottomWidth: 1,
-    marginHorizontal: 16,
-  },
-  listItemText: {
-    fontSize: 15,
-  },
   inputContainer: {
     width: "91%",
   },
@@ -211,5 +201,15 @@ const styles = StyleSheet.create({
   },
   listTopPositionError: {
     top: 75,
+  },
+  listItem: {
+    height: LIST_ITEM_HEIGHT,
+    justifyContent: "center",
+    borderBottomColor: "#EFF7FD",
+    borderBottomWidth: 1,
+    marginHorizontal: 16,
+  },
+  listItemText: {
+    fontSize: 15,
   },
 });

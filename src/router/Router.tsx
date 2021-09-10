@@ -17,7 +17,7 @@ import { requestLanguage } from "../store/modules/profile/action-creators";
 import EditProfile from "../components/pages/settings/EditProfile";
 import Notifications from "../components/pages/settings/Notifications";
 import { requestToken } from "../store/modules/auth/action-creators";
-import { Text } from "react-native";
+import { Text, Platform, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { useI18n } from "../translator/i18n";
 import MyContracts from "../components/pages/MyContracts";
@@ -26,6 +26,7 @@ import Contract from "../components/pages/contracts/Contract";
 import Invite from "../components/pages/contracts/Invite";
 import { orientationChange } from "../store/modules/main/action-creators";
 import * as ScreenOrientation from "expo-screen-orientation";
+import { ROUTER_TABS } from "./TabRouterTypes";
 
 const Stack = createStackNavigator();
 const ProfileStack = createStackNavigator();
@@ -54,16 +55,12 @@ export default function Router() {
       tabBarOptions={{
         activeTintColor: "#1696E2",
         keyboardHidesTabBar: true,
-        style: {
-          height: 53,
-          paddingTop: 5,
-          paddingBottom: 5,
-        },
+        style: styles.tabNavigator,
       }}
       initialRouteName="Homepage"
     >
       <Tab.Screen
-        name="MyContracts"
+        name={ROUTER_TABS.MY_CONTRACTS}
         component={MyContracts}
         options={{
           tabBarIcon: ({ color, size }) => (
@@ -73,7 +70,7 @@ export default function Router() {
         }}
       />
       <Tab.Screen
-        name="Homepage"
+        name={ROUTER_TABS.HOMEPAGE}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Feather name="file-plus" size={size} color={color} />
@@ -96,7 +93,7 @@ export default function Router() {
         )}
       </Tab.Screen>
       <Tab.Screen
-        name="Settings"
+        name={ROUTER_TABS.SETTINGS}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Feather name="settings" size={size} color={color} />
@@ -140,3 +137,19 @@ export default function Router() {
     </Stack.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  tabNavigator: {
+    paddingTop: 5,
+    ...Platform.select({
+      android: {
+        height: 53,
+        paddingBottom: 5,
+      },
+      ios: {
+        height: 63,
+        paddingBottom: 15,
+      },
+    }),
+  },
+});

@@ -13,6 +13,7 @@ import {
 } from "../../../../../store/modules/contract/types";
 import { CURRENSY } from "../../../../../store/modules/contract/purchase/payment";
 import { setScreenData } from "../../../../../store/modules/contract/slice";
+import { validateScreen } from "../../../../../store/modules/contract/action-creators";
 
 const INITIAL_STATE = {
   contract: {
@@ -27,6 +28,7 @@ const INITIAL_STATE = {
           },
         },
       ],
+      contractErrors: undefined,
     },
   },
 };
@@ -183,5 +185,69 @@ describe("Payment", () => {
         value: PAYMENT_METHODS.PAYPAL,
       })
     );
+    fireEvent.press(
+      getByText(
+        `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.PAYMENT}.checkboxes.cash`
+      )
+    );
+    expect(actions).toBeCalledWith(
+      setScreenData({
+        screenType: CONTRACT_SCREEN_TYPES.PAYMENT,
+        fieldName: PAYMENT_FIELDS.PAYMENT_METHOD,
+        value: PAYMENT_METHODS.CASH,
+      })
+    );
+    fireEvent.press(
+      getByText(
+        `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.PAYMENT}.checkboxes.transfer`
+      )
+    );
+    expect(actions).toBeCalledWith(
+      setScreenData({
+        screenType: CONTRACT_SCREEN_TYPES.PAYMENT,
+        fieldName: PAYMENT_FIELDS.PAYMENT_METHOD,
+        value: PAYMENT_METHODS.TRANSFER,
+      })
+    );
+  });
+  it("Should dispatch validation", () => {
+    const initialState = INITIAL_STATE;
+    // @ts-ignore
+    initialState.contract.contractErrors = {
+      [CONTRACT_SCREEN_TYPES.PAYMENT]: {
+        [PAYMENT_FIELDS.COST]: "some error",
+      },
+    };
+    const store = initStore(initialState);
+    const { getByPlaceholderText } = render(
+      <Provider store={store}>
+        <Payment />
+      </Provider>
+    );
+    fireEvent.changeText(
+      getByPlaceholderText(
+        `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.cost`
+      ),
+      "test"
+    );
+    expect(actions).toBeCalledWith(
+      validateScreen(CONTRACT_TYPES.PURCHASE, CONTRACT_SCREEN_TYPES.PAYMENT)
+    );
+  });
+  it("Should not render on undefined contract type", () => {
+    const initialState = INITIAL_STATE;
+    // @ts-ignore
+    initialState.contract.currentContract = undefined;
+    const store = initStore(initialState);
+    const { queryByPlaceholderText } = render(
+      <Provider store={store}>
+        <Payment />
+      </Provider>
+    );
+    expect(
+      queryByPlaceholderText(
+        `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.cost`
+      )
+    ).not.toBeTruthy();
   });
 });

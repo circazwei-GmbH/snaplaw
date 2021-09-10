@@ -9,31 +9,51 @@ import InviteInput from "../../../basics/inputs/InviteInput";
 import SignModal from "../../Modals/SignModal";
 import { orientationChange } from "../../../../store/modules/main/action-creators";
 import { OrientationLock } from "expo-screen-orientation";
-import {
-  SIGN_FIELDS,
-  SIGN_LOADER,
-  SignScreenInterface,
-} from "../../../../store/modules/contract/purchase/sign";
+import { SIGN_LOADER } from "../../../../store/modules/contract/purchase/sign";
 import { removeFromWaiter } from "../../../../store/modules/main/slice";
+import { contractValidator } from "../../../../store/modules/contract/validation";
+import { Contract } from "../../../../store/modules/contract/types";
+import { useNavigation } from "@react-navigation/native";
+import {
+  validateAllScreens,
+  validateScreen,
+} from "../../../../store/modules/contract/action-creators";
+import { clearErrors } from "../../../../store/modules/contract/slice";
+import {
+  countToPopLength,
+  getTypeByContractAndScreen,
+} from "../../../../store/modules/contract/helper";
 import * as RootNavigation from "../../../../router/RootNavigation";
 import { HOME_ROUTER } from "../../../../router/HomeRouterType";
 
 export default function Sign() {
   const { t } = useI18n();
-  const currentType = useAppSelector(
-    (state) => state.contract.currentContract?.type
-  );
-  const screenData = useAppSelector(
-    (state) =>
-      state.contract.currentContract?.screens.find(
-        (screen) => screen.type === CONTRACT_SCREEN_TYPES.SIGN
-      ) as SignScreenInterface
-  );
+  const contract = useAppSelector((state) => state.contract.currentContract);
+  const sign = useAppSelector((state) => state.contract.currentContract?.sign);
   const [name] = useState("Jhon Doue");
   const [signVisible, setSignVisible] = useState(false);
   const dispatch = useAppDispatch();
+  const navigator = useNavigation();
 
-  const signModalHandler = () => {
+  const signModalHandler = (currentContract: Contract) => {
+    dispatch(clearErrors());
+    dispatch(validateAllScreens(currentContract.type));
+    const emptyScreen = contractValidator(
+      currentContract.type,
+      currentContract.screens
+    );
+    if (emptyScreen !== null) {
+      // @ts-ignore
+      navigator.pop(countToPopLength(currentContract.type, emptyScreen));
+      dispatch(
+        validateScreen(
+          currentContract.type,
+          getTypeByContractAndScreen(currentContract.type, emptyScreen)
+        )
+      );
+      return;
+    }
+
     setSignVisible(!signVisible);
     dispatch(
       orientationChange(
@@ -55,9 +75,9 @@ export default function Sign() {
     setSignVisible(false);
     dispatch(orientationChange(OrientationLock.PORTRAIT_UP));
     dispatch(removeFromWaiter(SIGN_LOADER));
-  }, [screenData?.data[SIGN_FIELDS.SIGN]]);
+  }, [sign]);
 
-  if (!currentType) {
+  if (!contract) {
     return null;
   }
 
@@ -66,19 +86,19 @@ export default function Sign() {
       <View style={styles.block}>
         <DefaultText
           text={t(
-            `contracts.${currentType}.${CONTRACT_SCREEN_TYPES.SIGN}.signature`
+            `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.SIGN}.signature`
           )}
         />
         <SignInput
           style={styles.inputInBlock}
-          signUri={screenData?.data[SIGN_FIELDS.SIGN]}
-          signHandler={signModalHandler}
+          signUri={sign}
+          signHandler={() => signModalHandler(contract)}
         />
       </View>
       <View style={styles.block}>
         <DefaultText
           text={t(
-            `contracts.${currentType}.${CONTRACT_SCREEN_TYPES.SIGN}.invite`
+            `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.SIGN}.invite`
           )}
         />
         <InviteInput
@@ -87,7 +107,10 @@ export default function Sign() {
           inviteHandler={inviteHandler}
         />
       </View>
-      <SignModal visible={signVisible} onClose={signModalHandler} />
+      <SignModal
+        visible={signVisible}
+        onClose={() => signModalHandler(contract)}
+      />
     </View>
   );
 }

@@ -88,13 +88,13 @@ export default function EditProfile() {
   const [form, setForm] = useState<EditProfileFormInterface | any>(formInitial);
 
   const formToSave: UserTypeNoAvatar = {
-    name: form.name.value,
-    lastName: form.lastName.value,
-    dateOfBirth: form.dateOfBirth.value,
-    email: form.email.value,
-    phone: form.phone.value,
-    address: form.address.value,
-    postCode: form.postCode.value,
+    name: form.name.value ?? "",
+    lastName: form.lastName.value ?? "",
+    dateOfBirth: form.dateOfBirth.value ?? "",
+    email: form.email.value ?? "",
+    phone: form.phone.value ?? "",
+    address: form.address.value ?? "",
+    postCode: form.postCode.value ?? "",
   };
 
   const editHandler = () => setEdit(true);
@@ -108,7 +108,7 @@ export default function EditProfile() {
       name: validate(form.name),
       lastName: validate(form.lastName),
       dateOfBirth: validate(form.dateOfBirth),
-      email: validate(form.email),
+      email: form.email,
       phone: validate(form.phone),
       address: validate(form.address),
       postCode: validate(form.postCode),

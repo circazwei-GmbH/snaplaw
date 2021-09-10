@@ -8,6 +8,11 @@ import {
 import { API_HOST } from "../../env/env";
 import { LanguageType } from "../../store/modules/profile/slice";
 import { LANGUAGE_GERMANY } from "../../store/modules/profile/constants";
+import {
+  CONTRACT_LIST_STATE,
+  ContractDataType,
+} from "../../store/modules/contract/types";
+import { translateContract, translateContractList } from "./translator";
 
 const createContract = (type: CONTRACT_TYPES) =>
   httpClient.post("api/contracts", { type });
@@ -33,6 +38,24 @@ const getUserEmails = (searchData: RequestGetEmailsInterface) => {
   );
 };
 
+const requestContractList = async (type: CONTRACT_LIST_STATE, page: number) => {
+  const response = await httpClient.get(
+    `api/contracts?type=${type}&page=${page}&limit=10`
+  );
+  return translateContractList(response.data);
+};
+
+const requestContract = async (id: string): Promise<ContractDataType> => {
+  const response = await httpClient.get(`api/contracts/${id}`);
+  return translateContract(response.data);
+};
+
+const requestDeleteContract = (id: string) =>
+  httpClient.delete(`api/contracts/${id}`);
+
+const signContract = (id: string, path: string) =>
+  httpClient.patch(`api/contracts/${id}/sign`, { path });
+
 export const buildPDFSource = (
   id: string,
   locale: LanguageType | undefined
@@ -52,4 +75,8 @@ export default {
   saveScreenData,
   inviteUser,
   getUserEmails,
+  requestContractList,
+  requestContract,
+  requestDeleteContract,
+  signContract,
 };

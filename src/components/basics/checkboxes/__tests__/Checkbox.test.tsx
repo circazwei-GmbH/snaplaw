@@ -20,4 +20,15 @@ describe("Checkbox", () => {
     fireEvent.press(getByText(TITLE_TEXT));
     expect(handler).toBeCalled();
   });
+  it("Should display error message", () => {
+    const { getByText } = render(
+      <Checkbox
+        isChecked={false}
+        onChange={jest.fn()}
+        text={"test"}
+        errorMessage={"error"}
+      />
+    );
+    expect(getByText("error")).toBeTruthy();
+  });
 });

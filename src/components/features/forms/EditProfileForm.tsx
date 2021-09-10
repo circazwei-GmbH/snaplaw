@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import EditProfileTextField from "../../components/EditProfileTextField";
 import { useI18n } from "../../../translator/i18n";
-import { FieldInterface } from "../../features/forms/SignInForm";
+import { FieldInterface } from "./SignInForm";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { birthDateFormat } from "../../../utils/birthDateFormat";
 
@@ -31,7 +31,10 @@ export default function EditProfileForm({
 
   return (
     <KeyboardAwareScrollView>
-      <View style={styles.inputBox}>
+      <View
+        style={styles.inputBox}
+        onStartShouldSetResponderCapture={() => !edit}
+      >
         <EditProfileTextField
           placeholder={t("edit_profile.placeholders.name")}
           value={form.name.value}
