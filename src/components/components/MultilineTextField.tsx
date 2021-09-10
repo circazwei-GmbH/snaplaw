@@ -110,7 +110,6 @@ const styles = StyleSheet.create({
   },
   errorMessage: {
     color: "#FA7171",
-    fontFamily: "OS-SB",
     paddingTop: 8,
   },
 });
