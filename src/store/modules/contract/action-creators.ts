@@ -1,8 +1,16 @@
-import { RequestCreateContractAction, RequestScreenDataAction } from "./types";
+import {
+  RequestCreateContractAction,
+  RequestScreenDataAction,
+  InviteUserAction,
+  InviteUserInterface,
+  RequestGetEmailsAction,
+  RequestGetEmailsInterface,
+} from "./types";
 import { CONTRACT_TYPES } from "./constants";
 
 export const REQUEST_CREATE_CONTRACT = "REQUEST_CREATE_CONTRACT";
 export const REQUEST_SCREEN_DATA = "REQUEST_SCREEN_DATA";
+export const REQUEST_INVITE_USER = "REQUEST_INVITE_USER";
 export const REQUEST_USERS_EMAIL = "REQUEST_USERS_EMAIL";
 
 export const requestCreateContract = (
@@ -19,6 +27,16 @@ export const requestScreenData = (
   payload: screenPosition,
 });
 
-export const requestUsersEmail = () => ({
+export const requestInviteUser = (
+  inviteData: InviteUserInterface
+): InviteUserAction => ({
+  type: REQUEST_INVITE_USER,
+  payload: inviteData,
+});
+
+export const requestUsersEmail = (
+  getEmailData: RequestGetEmailsInterface
+): RequestGetEmailsAction => ({
   type: REQUEST_USERS_EMAIL,
+  payload: getEmailData,
 });

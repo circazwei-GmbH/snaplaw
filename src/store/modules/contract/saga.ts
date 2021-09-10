@@ -2,26 +2,27 @@ import { call, put, takeLatest, select } from "redux-saga/effects";
 import {
   REQUEST_CREATE_CONTRACT,
   REQUEST_SCREEN_DATA,
+  REQUEST_INVITE_USER,
   REQUEST_USERS_EMAIL,
 } from "./action-creators";
 import {
   RequestCreateContractAction,
   RequestScreenDataAction,
-  RequestUsersEmailAction,
+  InviteUserAction,
+  RequestGetEmailsAction,
 } from "./types";
 import API from "../../../services/contract/index";
 import { responseError } from "../auth/action-creators";
 import { addToWAiter, removeFromWaiter } from "../main/slice";
 import { CONTRACT_CREATION_WAIT } from "./constants";
 import { setInitedContract } from "./slice";
-import * as RootHavigation from "../../../router/RootNavigation";
+import * as RootNavigation from "../../../router/RootNavigation";
 import { HOME_ROUTER } from "../../../router/HomeRouterType";
 import { prefillUserData } from "../../../services/contract/user-data-prefiller";
 import { SelectType } from "../../hooks";
 import { Translator } from "../../../translator/i18n";
 import { setMessage } from "../main/slice";
 import { setInviteEmails } from "./slice";
-import axios from "axios";
 
 function* createContract({ payload }: RequestCreateContractAction) {
   try {
@@ -38,7 +39,7 @@ function* createContract({ payload }: RequestCreateContractAction) {
         ],
       })
     );
-    RootHavigation.navigate(HOME_ROUTER.CONTRACT, { screenCount: 0 });
+    RootNavigation.navigate(HOME_ROUTER.CONTRACT, { screenCount: 0 });
   } catch (error) {
     yield put(responseError(error));
   } finally {
@@ -63,20 +64,18 @@ function* requestScreenData({ payload }: RequestScreenDataAction) {
   }
 }
 
-function* requestUsersEmail() {
+function* requestInviteUser({ payload }: InviteUserAction) {
   try {
-    const result = yield axios
-      .get("https://jsonplaceholder.typicode.com/users")
-      .then((response) => {
-        let emails = [];
-        response?.data.forEach((item) => {
-          emails.push({
-            email: item.email,
-            id: Date.now() + item.id,
-          });
-        });
-        return emails;
-      });
+    yield call(API.inviteUser, payload);
+    RootNavigation.pop();
+  } catch (error) {
+    yield put(responseError(error));
+  }
+}
+
+function* requestUsersEmail({ payload }: RequestGetEmailsAction) {
+  try {
+    const result = yield call(API.getUserEmails, payload);
     yield put(setInviteEmails(result));
   } catch (error) {
     console.log(error);
@@ -87,6 +86,7 @@ function* requestUsersEmail() {
 function* contractSaga() {
   yield takeLatest(REQUEST_CREATE_CONTRACT, createContract);
   yield takeLatest(REQUEST_SCREEN_DATA, requestScreenData);
+  yield takeLatest(REQUEST_INVITE_USER, requestInviteUser);
   yield takeLatest(REQUEST_USERS_EMAIL, requestUsersEmail);
 }
 

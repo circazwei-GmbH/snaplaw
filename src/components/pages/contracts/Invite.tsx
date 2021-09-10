@@ -12,7 +12,10 @@ import InviteTextField from "../../components/InviteTextField";
 import Button from "../../basics/buttons/Button";
 import UserAvatar from "../../components/UserAvatar";
 import { useAppSelector, useAppDispatch } from "../../../store/hooks";
-import { requestUsersEmail } from "../../../store/modules/contract/action-creators";
+import {
+  requestUsersEmail,
+  requestInviteUser,
+} from "../../../store/modules/contract/action-creators";
 import { clearInviteEmails } from "../../../store/modules/contract/slice";
 import { FieldInterface } from "../../features/forms/SignInForm";
 import { email } from "../../../validations/default";
@@ -23,8 +26,11 @@ export default function Invite(): JSX.Element {
   const dispatch = useAppDispatch();
   const url = useAppSelector((state) => state.profile.user?.avatar);
   const emails = useAppSelector((state) => state.contract.inviteEmailsList);
-  const [fakeStoreEmailValue, setFakeEmailStoreValue] = useState("");
+  const [inviteEmail, setInviteEmail] = useState("");
   const [keyboardVisible, setKeyboardVisible] = useState(false);
+  const contractId = useAppSelector(
+    (state) => state.contract.currentContract?.id
+  );
 
   interface InviteEmailInterface {
     email: FieldInterface;
@@ -32,12 +38,13 @@ export default function Invite(): JSX.Element {
 
   const emailInitialValue: InviteEmailInterface = {
     email: {
-      value: fakeStoreEmailValue,
+      value: inviteEmail,
       error: "",
       displayError: false,
       validators: [email(t("invite_page.error"))],
     },
   };
+
   const [emailValue, setEmailValue] =
     useState<InviteEmailInterface>(emailInitialValue);
 
@@ -57,19 +64,18 @@ export default function Invite(): JSX.Element {
     const emailLocalValue: InviteEmailInterface = {
       email: validate(emailValue.email),
     };
-
     setEmailValue(emailLocalValue);
 
     if (emailValue.email.error) {
       return;
     }
 
-    alert("Yo, user is invited!");
+    dispatch(requestInviteUser({ contractId, inviteEmail }));
   };
 
   useEffect(() => {
-    setEmailValue(formFieldFill("email", fakeStoreEmailValue, emailValue));
-  }, [fakeStoreEmailValue]);
+    setEmailValue(formFieldFill("email", inviteEmail, emailValue));
+  }, [inviteEmail]);
 
   useEffect(() => {
     const showSubscription = Keyboard.addListener("keyboardDidShow", () =>
@@ -85,6 +91,8 @@ export default function Invite(): JSX.Element {
     };
   }, []);
 
+  console.log(keyboardVisible);
+
   return (
     <TopBar pageName={t("invite_page.title")}>
       <TouchableWithoutFeedback accessible={false} onPress={Keyboard.dismiss}>
@@ -92,13 +100,13 @@ export default function Invite(): JSX.Element {
           {keyboardVisible ? null : <UserAvatar sizeSmall url={url} />}
           <DefaultText text={t("invite_page.invitation")} style={styles.text} />
           <InviteTextField
-            value={fakeStoreEmailValue}
+            value={inviteEmail}
             placeholder={t("edit_profile.placeholders.email")}
             onChangeFunction={(newValue) => onChangeHandler(newValue)}
             list={emails}
             getEmails={getEmails}
             errorMessage={emailValue.email.error}
-            setValue={setFakeEmailStoreValue}
+            setValue={setInviteEmail}
           />
           <Button
             text={t("invite_page.title")}

@@ -1,5 +1,7 @@
 import { BaseAction } from "../auth/types";
 import { CONTRACT_TYPES } from "./constants";
+import { LanguageType } from "../../../store/modules/profile/slice";
+
 import {
   ProductDataScreenInterface,
   PRODUCT_DATA_FIELDS,
@@ -44,6 +46,24 @@ export interface Contract {
 
 export interface RequestScreenDataAction extends BaseAction {
   payload: number;
+}
+
+export interface InviteUserInterface {
+  contractId?: string;
+  inviteEmail: string;
+}
+
+export interface InviteUserAction extends BaseAction {
+  payload: InviteUserInterface;
+}
+
+export interface RequestGetEmailsInterface {
+  search: string;
+  page: string;
+}
+
+export interface RequestGetEmailsAction extends BaseAction {
+  payload: RequestGetEmailsInterface;
 }
 
 export { ProductDataScreenInterface, PRODUCT_DATA_FIELDS };
