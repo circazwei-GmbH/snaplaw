@@ -1,7 +1,10 @@
 import { CONTRACT_TYPES } from "../../store/modules/contract/constants";
 import httpClient from "../api";
 import { BaseScreenDataInterface } from "../../store/modules/contract/base-types";
-import { InviteUserInterface } from "../../store/modules/contract/types";
+import {
+  InviteUserInterface,
+  RequestGetEmailsInterface,
+} from "../../store/modules/contract/types";
 import { API_HOST } from "../../env/env";
 import { LanguageType } from "../../store/modules/profile/slice";
 import { LANGUAGE_GERMANY } from "../../store/modules/profile/constants";
@@ -17,13 +20,18 @@ const saveScreenData = (id: string, screen: BaseScreenDataInterface) =>
 
 const inviteUser = (contractData: InviteUserInterface) => {
   httpClient.post(`api/contracts/${contractData.contractId}/invite-user`, {
-    email: contractData.inviteEmail,
+    email: contractData.search,
     locale: LANGUAGE_GERMANY ? "de" : "en",
   });
 };
 
-const getUserEmails = (search: string) =>
-  httpClient.get(`/api/contracts/invited-emails?search=${search}`);
+const getUserEmails = (searchData: RequestGetEmailsInterface) => {
+  httpClient.get(
+    `api/contracts/invited-emails?search=${searchData.search ?? ""}&page=${
+      searchData.listPage ?? 0
+    }`
+  );
+};
 
 export const buildPDFSource = (
   id: string,

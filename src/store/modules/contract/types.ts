@@ -50,7 +50,7 @@ export interface RequestScreenDataAction extends BaseAction {
 
 export interface InviteUserInterface {
   contractId?: string;
-  inviteEmail: string;
+  search: string;
 }
 
 export interface InviteUserAction extends BaseAction {
@@ -59,7 +59,7 @@ export interface InviteUserAction extends BaseAction {
 
 export interface RequestGetEmailsInterface {
   search: string;
-  page: string;
+  listPage: string;
 }
 
 export interface RequestGetEmailsAction extends BaseAction {

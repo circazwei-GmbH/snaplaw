@@ -26,7 +26,7 @@ interface InviteTextFieldPropsInterface extends TextInputProps {
   value?: string;
   onChangeFunction: OnChangeFunction;
   containerStyle?: StyleProp<TextStyle>;
-  list: object[];
+  list: string[];
   getEmails: Function;
   setValue: Function;
 }
@@ -70,13 +70,13 @@ export default function InviteTextField({
     // input.current.blur();
   };
 
-  const renderItem = (item: object): JSX.Element => (
+  const renderItem = (item: string): JSX.Element => (
     <TouchableOpacity
       activeOpacity={1}
       style={styles.listItem}
-      onPress={() => onPressListItem(item.email)}
+      onPress={() => onPressListItem(item)}
     >
-      <Text style={styles.listItemText}>{item.email}</Text>
+      <Text style={styles.listItemText}>{item}</Text>
     </TouchableOpacity>
   );
 
@@ -118,7 +118,7 @@ export default function InviteTextField({
             errorMessage ? styles.listTopPositionError : styles.listTopPosition,
           ]}
           data={list}
-          keyExtractor={(item) => `${item.id}`}
+          keyExtractor={(item) => item}
           renderItem={({ item }) => renderItem(item)}
           onEndReached={() => getEmails()}
           onEndReachedThreshold={0.0001}

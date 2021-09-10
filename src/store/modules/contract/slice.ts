@@ -6,15 +6,18 @@ import {
 } from "@reduxjs/toolkit";
 import { Contract } from "./types";
 import { CONTRACT_SCREEN_TYPES } from "./constants";
+import {} from "../contract/types";
 
 interface ContractState {
   currentContract: Contract | undefined;
-  inviteEmailsList: object[];
+  inviteEmailsList: string[];
+  emailToInvite: string;
 }
 
 const initialState: ContractState = {
   currentContract: undefined,
   inviteEmailsList: [],
+  emailToInvite: "",
 };
 
 type ScreenData = {
@@ -29,10 +32,13 @@ const setInitedContractAction = createAction<string, "setInitedContract">(
 const setScreenDataAction = createAction<ScreenData, "setScreenData">(
   "setScreenData"
 );
-const setInviteEmailsListAction = createAction<object[], "setInviteEmails">(
+const setEmailToInviteAction = createAction<string, "setEmailToInvite">(
+  "setEmailToInvite"
+);
+const setInviteEmailsListAction = createAction<string[], "setInviteEmails">(
   "setInviteEmails"
 );
-const clearInviteEmailsListAction = createAction<object[], "clearInviteEmails">(
+const clearInviteEmailsListAction = createAction<string[], "clearInviteEmails">(
   "clearInviteEmails"
 );
 
@@ -79,11 +85,19 @@ const contractSlice = createSlice({
         state.currentContract.screens.push(updatedScreen);
       }
     },
+    [setEmailToInviteAction.type]: (
+      state: Draft<ContractState>,
+      action: PayloadAction<string>
+    ) => {
+      state.emailToInvite = action.payload;
+    },
     [setInviteEmailsListAction.type]: (
       state: Draft<ContractState>,
-      action: PayloadAction<object[]>
+      action: PayloadAction<string[]>
     ) => {
-      state.inviteEmailsList = [...state.inviteEmailsList, ...action.payload];
+      if (action.payload !== undefined) {
+        state.inviteEmailsList = [...state.inviteEmailsList, ...action.payload];
+      }
     },
     [clearInviteEmailsListAction.type]: (state: Draft<ContractState>) => {
       state.inviteEmailsList = [];
@@ -94,6 +108,7 @@ const contractSlice = createSlice({
 export const {
   setInitedContract,
   setScreenData,
+  setEmailToInvite,
   setInviteEmails,
   clearInviteEmails,
 } = contractSlice.actions;

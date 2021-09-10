@@ -16,7 +16,10 @@ import {
   requestUsersEmail,
   requestInviteUser,
 } from "../../../store/modules/contract/action-creators";
-import { clearInviteEmails } from "../../../store/modules/contract/slice";
+import {
+  clearInviteEmails,
+  setEmailToInvite,
+} from "../../../store/modules/contract/slice";
 import { FieldInterface } from "../../features/forms/SignInForm";
 import { email } from "../../../validations/default";
 import { formFieldFill, validate } from "../../../utils/forms";
@@ -26,11 +29,12 @@ export default function Invite(): JSX.Element {
   const dispatch = useAppDispatch();
   const url = useAppSelector((state) => state.profile.user?.avatar);
   const emails = useAppSelector((state) => state.contract.inviteEmailsList);
-  const [inviteEmail, setInviteEmail] = useState("");
   const [keyboardVisible, setKeyboardVisible] = useState(false);
   const contractId = useAppSelector(
     (state) => state.contract.currentContract?.id
   );
+  const search = useAppSelector((state) => state.contract.emailToInvite);
+  const [listPage, setListPage] = useState("0");
 
   interface InviteEmailInterface {
     email: FieldInterface;
@@ -38,7 +42,7 @@ export default function Invite(): JSX.Element {
 
   const emailInitialValue: InviteEmailInterface = {
     email: {
-      value: inviteEmail,
+      value: search,
       error: "",
       displayError: false,
       validators: [email(t("invite_page.error"))],
@@ -49,14 +53,16 @@ export default function Invite(): JSX.Element {
     useState<InviteEmailInterface>(emailInitialValue);
 
   const getEmails = () => {
-    dispatch(requestUsersEmail());
+    dispatch(requestUsersEmail({ search, listPage }));
   };
+
+  const setInviteEmail = (email: string) => dispatch(setEmailToInvite(email));
 
   const onChangeHandler = (newValue: string) => {
     setEmailValue(formFieldFill("email", newValue, emailValue));
     setTimeout(() => {
       dispatch(clearInviteEmails());
-      dispatch(requestUsersEmail());
+      dispatch(requestUsersEmail({ search, listPage }));
     }, 500);
   };
 
@@ -70,12 +76,12 @@ export default function Invite(): JSX.Element {
       return;
     }
 
-    dispatch(requestInviteUser({ contractId, inviteEmail }));
+    dispatch(requestInviteUser({ contractId, search }));
   };
 
   useEffect(() => {
-    setEmailValue(formFieldFill("email", inviteEmail, emailValue));
-  }, [inviteEmail]);
+    setEmailValue(formFieldFill("email", search, emailValue));
+  }, [search]);
 
   useEffect(() => {
     const showSubscription = Keyboard.addListener("keyboardDidShow", () =>
@@ -91,7 +97,9 @@ export default function Invite(): JSX.Element {
     };
   }, []);
 
-  console.log(keyboardVisible);
+  useEffect(() => {
+    setListPage(`${+emails / 20}`);
+  }, [emails]);
 
   return (
     <TopBar pageName={t("invite_page.title")}>
@@ -100,7 +108,7 @@ export default function Invite(): JSX.Element {
           {keyboardVisible ? null : <UserAvatar sizeSmall url={url} />}
           <DefaultText text={t("invite_page.invitation")} style={styles.text} />
           <InviteTextField
-            value={inviteEmail}
+            value={search}
             placeholder={t("edit_profile.placeholders.email")}
             onChangeFunction={(newValue) => onChangeHandler(newValue)}
             list={emails}
