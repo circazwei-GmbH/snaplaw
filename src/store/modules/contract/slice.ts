@@ -14,7 +14,7 @@ import {} from "../contract/types";
 
 export enum CONTRACT_LIST_LOADING_TYPE {
   INITIAL = "INITIAL",
-  REFRESH = "REFRESH"
+  REFRESH = "REFRESH",
 }
 
 interface ContractState {
@@ -33,7 +33,6 @@ interface ContractState {
   emailToInvite: string;
 }
 
-
 const initialState: ContractState = {
   currentContract: undefined,
   contractErrors: undefined,
@@ -47,7 +46,6 @@ const initialState: ContractState = {
   inviteEmailsList: [],
   emailToInvite: "",
 };
-
 
 type ScreenData = {
   screenType: CONTRACT_SCREEN_TYPES;
@@ -92,6 +90,7 @@ const setInviteEmailsListAction = createAction<string[], "setInviteEmails">(
 );
 const clearInviteEmailsListAction = createAction<string[], "clearInviteEmails">(
   "clearInviteEmails"
+);
 
 const contractSlice = createSlice({
   name: "contract",
@@ -171,10 +170,13 @@ const contractSlice = createSlice({
         list: ContractListType;
         page: number;
         type: CONTRACT_LIST_STATE;
-        isRefresh: boolean
+        isRefresh: boolean;
       }>
     ) => {
-      if (state.listPagination.listType === action.payload.type && !action.payload.isRefresh) {
+      if (
+        state.listPagination.listType === action.payload.type &&
+        !action.payload.isRefresh
+      ) {
         // @ts-ignore
         state.contracts = state.contracts.concat(action.payload.list);
       } else {
@@ -225,6 +227,7 @@ const contractSlice = createSlice({
     },
     [clearInviteEmailsListAction.type]: (state: Draft<ContractState>) => {
       state.inviteEmailsList = [];
+    },
   },
 });
 
