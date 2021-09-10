@@ -23,12 +23,12 @@ interface InviteTextFieldPropsInterface extends TextInputProps {
   placeholder?: string;
   validations?: Array<Function>;
   errorMessage?: string;
-  value?: string;
+  value: string;
   onChangeFunction: OnChangeFunction;
   containerStyle?: StyleProp<TextStyle>;
   list: string[];
-  getEmails: Function;
-  setValue: Function;
+  getEmails: () => void;
+  setValue: (email: string) => any;
 }
 
 export default function InviteTextField({
