@@ -41,7 +41,7 @@ export default function InviteTextField({
   getEmails,
   setValue,
   ...props
-}: InviteTextFieldPropsInterface) {
+}: InviteTextFieldPropsInterface): JSX.Element {
   const [localValue, setLocalValue] = useState(value);
   const [focused, setFocused] = useState(false);
   const input: any = useRef();

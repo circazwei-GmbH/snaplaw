@@ -24,6 +24,7 @@ export default function Invite(): JSX.Element {
   const url = useAppSelector((state) => state.profile.user?.avatar);
   const emails = useAppSelector((state) => state.contract.inviteEmailsList);
   const [fakeStoreEmailValue, setFakeEmailStoreValue] = useState("");
+  const [keyboardVisible, setKeyboardVisible] = useState(false);
 
   interface InviteEmailInterface {
     email: FieldInterface;
@@ -70,11 +71,25 @@ export default function Invite(): JSX.Element {
     setEmailValue(formFieldFill("email", fakeStoreEmailValue, emailValue));
   }, [fakeStoreEmailValue]);
 
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener("keyboardDidShow", () =>
+      setKeyboardVisible(true)
+    );
+    const hideSubscription = Keyboard.addListener("keyboardDidHide", () =>
+      setKeyboardVisible(false)
+    );
+
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, []);
+
   return (
     <TopBar pageName={t("invite_page.title")}>
       <TouchableWithoutFeedback accessible={false} onPress={Keyboard.dismiss}>
         <View style={styles.container}>
-          <UserAvatar sizeSmall url={url} />
+          {keyboardVisible ? null : <UserAvatar sizeSmall url={url} />}
           <DefaultText text={t("invite_page.invitation")} style={styles.text} />
           <InviteTextField
             value={fakeStoreEmailValue}
