@@ -8,7 +8,7 @@ import {
 import { useI18n } from "../../../translator/i18n";
 import TopBar from "../../layouts/TopBar";
 import DefaultText from "../../basics/typography/DefaultText";
-import InviteTextField from "../../components/InviteTextField";
+import TextFieldWithDropdown from "../../components/TextFieldWithDropdown";
 import Button from "../../basics/buttons/Button";
 import UserAvatar from "../../components/UserAvatar";
 import { useAppSelector, useAppDispatch } from "../../../store/hooks";
@@ -107,12 +107,12 @@ export default function Invite(): JSX.Element {
         <View style={styles.container}>
           {keyboardVisible ? null : <UserAvatar sizeSmall url={url} />}
           <DefaultText text={t("invite_page.invitation")} style={styles.text} />
-          <InviteTextField
+          <TextFieldWithDropdown
             value={search}
             placeholder={t("edit_profile.placeholders.email")}
             onChangeFunction={(newValue) => onChangeHandler(newValue)}
             list={emails}
-            getEmails={getEmails}
+            getList={getEmails}
             errorMessage={emailValue.email.error}
             setValue={setInviteEmail}
           />

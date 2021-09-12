@@ -1,24 +1,19 @@
 import React from "react";
 import { fireEvent, render } from "@testing-library/react-native";
-import InviteTextField from "../InviteTextField";
+import TextFieldWithDropdown from "../TextFieldWithDropdown";
 
 const testText = "TEXT";
-const testList: object[] = [
-  {
-    email: "testMail",
-    id: 123,
-  },
-];
+const testList: string[] = ["testMail"];
 
-const getEmails = describe("InviteTextField", () => {
+describe("InviteTextField", () => {
   it("Should be visible", () => {
     const { getByPlaceholderText } = render(
-      <InviteTextField
+      <TextFieldWithDropdown
         value="test"
         placeholder="TestPlaceholder"
         onChangeFunction={jest.fn}
         list={testList}
-        getEmails={jest.fn}
+        getList={jest.fn}
         setValue={jest.fn}
       />
     );
@@ -27,12 +22,12 @@ const getEmails = describe("InviteTextField", () => {
   it("Should call prop-function onPress", () => {
     const handler = jest.fn();
     const { getByPlaceholderText } = render(
-      <InviteTextField
+      <TextFieldWithDropdown
         value="test"
         placeholder="TestPlaceholder"
         onChangeFunction={handler}
         list={testList}
-        getEmails={jest.fn}
+        getList={jest.fn}
         setValue={jest.fn}
       />
     );

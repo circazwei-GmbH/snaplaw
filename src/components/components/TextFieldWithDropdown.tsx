@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   TextInput,
   View,
@@ -27,7 +27,7 @@ interface InviteTextFieldPropsInterface extends TextInputProps {
   onChangeFunction: OnChangeFunction;
   containerStyle?: StyleProp<TextStyle>;
   list: string[];
-  getEmails: () => void;
+  getList: () => void;
   setValue: (email: string) => any;
 }
 
@@ -38,13 +38,12 @@ export default function InviteTextField({
   value,
   containerStyle,
   list,
-  getEmails,
+  getList,
   setValue,
   ...props
 }: InviteTextFieldPropsInterface): JSX.Element {
   const [localValue, setLocalValue] = useState(value);
   const [focused, setFocused] = useState(false);
-  const input: any = useRef();
 
   const textChangeHandler = (text: string) => {
     setLocalValue(text);
@@ -59,7 +58,7 @@ export default function InviteTextField({
 
   useEffect(() => {
     if (list.length === 0 && focused) {
-      getEmails();
+      getList();
     }
   }, [focused]);
 
@@ -90,7 +89,6 @@ export default function InviteTextField({
       </TouchableOpacity>
       <TextInput
         {...props}
-        ref={input}
         placeholder={!focused ? placeholder : ""}
         placeholderTextColor="#909090"
         style={[
