@@ -16,10 +16,7 @@ import {
   requestUsersEmail,
   requestInviteUser,
 } from "../../../store/modules/contract/action-creators";
-import {
-  clearInviteEmails,
-  setEmailToInvite,
-} from "../../../store/modules/contract/slice";
+import { clearInviteEmails } from "../../../store/modules/contract/slice";
 import { FieldInterface } from "../../features/forms/SignInForm";
 import { email } from "../../../validations/default";
 import { formFieldFill, validate } from "../../../utils/forms";
@@ -33,7 +30,7 @@ export default function Invite(): JSX.Element {
   const contractId = useAppSelector(
     (state) => state.contract.currentContract?.id
   );
-  const search = useAppSelector((state) => state.contract.emailToInvite);
+  const [search, setSearch] = useState("");
   const [listPage, setListPage] = useState("0");
 
   interface InviteEmailInterface {
@@ -56,7 +53,7 @@ export default function Invite(): JSX.Element {
     dispatch(requestUsersEmail({ search, listPage }));
   };
 
-  const setInviteEmail = (email: string) => dispatch(setEmailToInvite(email));
+  const setInviteEmail = (email: string) => setSearch(email);
 
   const onChangeHandler = (newValue: string) => {
     setEmailValue(formFieldFill("email", newValue, emailValue));

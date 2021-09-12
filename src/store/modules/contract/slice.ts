@@ -10,7 +10,6 @@ import {
   ContractListType,
 } from "./types";
 import { CONTRACT_SCREEN_TYPES } from "./constants";
-import {} from "../contract/types";
 
 export enum CONTRACT_LIST_LOADING_TYPE {
   INITIAL = "INITIAL",
@@ -30,7 +29,6 @@ interface ContractState {
     isNextPage: boolean;
   };
   inviteEmailsList: string[];
-  emailToInvite: string;
 }
 
 const initialState: ContractState = {
@@ -44,7 +42,6 @@ const initialState: ContractState = {
     isNextPage: true,
   },
   inviteEmailsList: [],
-  emailToInvite: "",
 };
 
 type ScreenData = {
@@ -81,9 +78,6 @@ const deleteContractAction = createAction<string, "deleteContract">(
 );
 const updateContractSignAction = createAction<string, "updateContractSign">(
   "updateContractSign"
-);
-const setEmailToInviteAction = createAction<string, "setEmailToInvite">(
-  "setEmailToInvite"
 );
 const setInviteEmailsListAction = createAction<string[], "setInviteEmails">(
   "setInviteEmails"
@@ -211,12 +205,6 @@ const contractSlice = createSlice({
       }
       state.currentContract.sign = action.payload;
     },
-    [setEmailToInviteAction.type]: (
-      state: Draft<ContractState>,
-      action: PayloadAction<string>
-    ) => {
-      state.emailToInvite = action.payload;
-    },
     [setInviteEmailsListAction.type]: (
       state: Draft<ContractState>,
       action: PayloadAction<string[]>
@@ -240,7 +228,6 @@ export const {
   setListLoading,
   deleteContract,
   updateContractSign,
-  setEmailToInvite,
   setInviteEmails,
   clearInviteEmails,
 } = contractSlice.actions;
