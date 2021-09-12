@@ -30,12 +30,13 @@ const inviteUser = (contractData: InviteUserInterface) => {
   });
 };
 
-const getUserEmails = (searchData: RequestGetEmailsInterface) => {
-  httpClient.get(
+const getUserEmails = async (searchData: RequestGetEmailsInterface) => {
+  const response = await httpClient.get(
     `api/contracts/invited-emails?search=${searchData.search ?? ""}&page=${
       searchData.listPage ?? 0
     }`
   );
+  return response.data;
 };
 
 const requestContractList = async (type: CONTRACT_LIST_STATE, page: number) => {

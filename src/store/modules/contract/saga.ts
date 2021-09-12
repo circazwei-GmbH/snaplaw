@@ -232,7 +232,7 @@ function* requestUsersEmail({ payload }: RequestGetEmailsAction) {
     const result = yield call(API.getUserEmails, payload);
     yield put(setInviteEmails(result));
   } catch (error) {
-    yield put(setMessage(Translator.getInstance().trans("errors.abstract")));
+    yield put(responseError(error));
   }
 }
 
