@@ -117,7 +117,7 @@ export default function InviteTextField({
           data={list}
           keyExtractor={(item) => item}
           renderItem={({ item }) => renderItem(item)}
-          onEndReached={() => getEmails()}
+          onEndReached={() => getList()}
           onEndReachedThreshold={0.0001}
           keyboardShouldPersistTaps="handled"
           getItemLayout={(data, index) => ({
