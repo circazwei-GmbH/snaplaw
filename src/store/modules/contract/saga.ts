@@ -66,7 +66,7 @@ function* createContract({ payload }: RequestCreateContractAction) {
       })
     );
     yield put(clearErrors());
-    RootHavigation.navigate(HOME_ROUTER.CONTRACT, { screenCount: 0 });
+    RootNavigation.navigate(HOME_ROUTER.CONTRACT, { screenCount: 0 });
   } catch (error) {
     yield put(responseError(error));
   } finally {

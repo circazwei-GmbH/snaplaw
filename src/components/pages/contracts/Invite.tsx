@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+    paddingHorizontal: 16,
   },
   text: {
     marginVertical: 10,
@@ -139,7 +140,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   button: {
-    width: "80%",
+    width: 300,
     marginTop: 40,
   },
 });

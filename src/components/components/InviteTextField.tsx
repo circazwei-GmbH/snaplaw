@@ -67,7 +67,6 @@ export default function InviteTextField({
 
   const inputButtonHandler = () => {
     setFocused(!focused);
-    // input.current.blur();
   };
 
   const renderItem = (item: string): JSX.Element => (
@@ -136,7 +135,7 @@ export default function InviteTextField({
 
 const styles = StyleSheet.create({
   inputContainer: {
-    width: "91%",
+    width: "100%",
   },
   emptyInput: {
     backgroundColor: "#EFF7FD",
