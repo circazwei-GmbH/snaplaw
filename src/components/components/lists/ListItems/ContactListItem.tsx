@@ -130,9 +130,9 @@ const styles = StyleSheet.create({
     color: "#909090",
   },
   action: {
-    justifyContent: 'center',
+    justifyContent: "center",
     alignItems: "flex-end",
     height: 40,
-    width: 40
-  }
+    width: 40,
+  },
 });

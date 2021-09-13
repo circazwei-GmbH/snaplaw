@@ -13,7 +13,7 @@ import { buildMediaSource } from "../../utils/helpers";
 
 export interface DescriptionPhotosPropsInterface {
   photos: string[];
-  onPressDelete: Function;
+  onPressDelete?: Function;
   fieldName: PRODUCT_DESCRIPTION_FIELDS;
 }
 
@@ -45,15 +45,17 @@ export default function DescriptionPhotos({
             style={styles.child}
             key={item}
           >
-            <TouchableOpacity
-              activeOpacity={0.9}
-              style={styles.removeButton}
-              onPress={() => onPressDelete(item, fieldName)}
-            >
-              <View style={styles.removeButtonBackground}>
-                <AntDesign name="closecircle" size={18} color="#668395" />
-              </View>
-            </TouchableOpacity>
+            {onPressDelete ? (
+              <TouchableOpacity
+                activeOpacity={0.9}
+                style={styles.removeButton}
+                onPress={() => onPressDelete(item, fieldName)}
+              >
+                <View style={styles.removeButtonBackground}>
+                  <AntDesign name="closecircle" size={18} color="#668395" />
+                </View>
+              </TouchableOpacity>
+            ) : null}
             {isLoading ? (
               <View style={styles.activityIndicatorContainer}>
                 <ActivityIndicator
