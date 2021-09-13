@@ -228,6 +228,7 @@ const contractSlice = createSlice({
         ];
       }
       state.emailsListPagination.page = +action.payload.page;
+      state.listPagination.isNextPage = !!action.payload.list.length;
     },
     [clearInviteEmailsListAction.type]: (state: Draft<ContractState>) => {
       state.inviteEmailsList = [];

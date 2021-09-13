@@ -233,7 +233,6 @@ function* requestUsersEmail({ payload }: RequestGetEmailsAction) {
   );
   const currentList = yield select((state) => state.contract.inviteEmailsList);
   try {
-    console.log(payload);
     const page = listPagination.page + (currentList.length ? 1 : 0);
     const list = yield call(API.getUserEmails, { payload, page });
     yield put(setInviteEmails({ list, page }));
