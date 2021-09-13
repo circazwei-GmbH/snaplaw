@@ -26,6 +26,7 @@ import { ROUTER_TABS } from "./TabRouterTypes";
 import { AUTH_ROUTE } from "./AuthRouterTypes";
 import { PROFILE_ROUTER } from "./ProfileRouterTypes";
 import { HOME_ROUTER } from "./HomeRouterType";
+import { MYCONTRACT_ROUTER } from "./MyContractRouterTypes";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -61,7 +62,6 @@ export default function Router() {
     >
       <Tab.Screen
         name={ROUTER_TABS.MY_CONTRACTS}
-        component={MyContracts}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Feather name="file-text" size={size} color={color} />
