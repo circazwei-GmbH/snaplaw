@@ -33,7 +33,9 @@ const getUserEmails = async (
   searchData: RequestGetEmailsInterface
 ): Promise<any> => {
   const response = await httpClient.get(
-    `api/contracts/invited-emails?search=${searchData.search}&page=${searchData.listPage}`
+    `api/contracts/invited-emails?search=${searchData.payload ?? ""}&page=${
+      searchData.page ?? 0
+    }`
   );
   return response.data;
 };

@@ -85,15 +85,17 @@ export const signContract = (filePath: string): SignContractAction => ({
 });
 
 export const requestInviteUser = (
-  inviteData: InviteUserInterface
+  search: string,
+  contractId?: string
 ): InviteUserAction => ({
   type: REQUEST_INVITE_USER,
-  payload: inviteData,
+  payload: {
+    contractId,
+    search,
+  },
 });
 
-export const requestUsersEmail = (
-  getEmailData: RequestGetEmailsInterface
-): RequestGetEmailsAction => ({
+export const requestUsersEmail = (search: string): RequestGetEmailsAction => ({
   type: REQUEST_USERS_EMAIL,
-  payload: getEmailData,
+  payload: search,
 });

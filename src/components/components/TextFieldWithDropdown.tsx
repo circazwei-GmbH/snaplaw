@@ -19,7 +19,7 @@ interface OnChangeFunction {
   (text: string): void;
 }
 
-interface InviteTextFieldPropsInterface extends TextInputProps {
+interface TextFieldWithDropdownPropsInterface extends TextInputProps {
   placeholder?: string;
   validations?: Array<Function>;
   errorMessage?: string;
@@ -41,7 +41,7 @@ export default function InviteTextField({
   getList,
   setValue,
   ...props
-}: InviteTextFieldPropsInterface): JSX.Element {
+}: TextFieldWithDropdownPropsInterface): JSX.Element {
   const [localValue, setLocalValue] = useState(value);
   const [focused, setFocused] = useState(false);
 

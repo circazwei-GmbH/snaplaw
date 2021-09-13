@@ -29,6 +29,10 @@ interface ContractState {
     isNextPage: boolean;
   };
   inviteEmailsList: string[];
+  emailsListPagination: {
+    page: number;
+    isNextPage: boolean;
+  };
 }
 
 const initialState: ContractState = {
@@ -42,6 +46,10 @@ const initialState: ContractState = {
     isNextPage: true,
   },
   inviteEmailsList: [],
+  emailsListPagination: {
+    page: 0,
+    isNextPage: true,
+  },
 };
 
 type ScreenData = {
@@ -79,9 +87,10 @@ const deleteContractAction = createAction<string, "deleteContract">(
 const updateContractSignAction = createAction<string, "updateContractSign">(
   "updateContractSign"
 );
-const setInviteEmailsListAction = createAction<string[], "setInviteEmails">(
+const setInviteEmailsListAction = createAction<
+  { list: string[]; page: string },
   "setInviteEmails"
-);
+>("setInviteEmails");
 const clearInviteEmailsListAction = createAction<string[], "clearInviteEmails">(
   "clearInviteEmails"
 );
@@ -207,11 +216,18 @@ const contractSlice = createSlice({
     },
     [setInviteEmailsListAction.type]: (
       state: Draft<ContractState>,
-      action: PayloadAction<string[]>
+      action: PayloadAction<{
+        list: string[];
+        page: string;
+      }>
     ) => {
-      if (action.payload !== undefined) {
-        state.inviteEmailsList = [...state.inviteEmailsList, ...action.payload];
+      if (action.payload.list !== undefined) {
+        state.inviteEmailsList = [
+          ...state.inviteEmailsList,
+          ...action.payload.list,
+        ];
       }
+      state.emailsListPagination.page = +action.payload.page;
     },
     [clearInviteEmailsListAction.type]: (state: Draft<ContractState>) => {
       state.inviteEmailsList = [];

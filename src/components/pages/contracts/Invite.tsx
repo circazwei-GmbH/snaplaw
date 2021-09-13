@@ -44,19 +44,20 @@ export default function Invite(): JSX.Element {
     },
   };
 
-  const search = emailInitialValue.email.value;
-
   const [emailValue, setEmailValue] =
     useState<InviteEmailInterface>(emailInitialValue);
 
   const getEmails = () => {
-    dispatch(requestUsersEmail(search));
+    return dispatch(requestUsersEmail(emailInitialValue.email.value));
   };
 
   const searchHandler = (email: string) => {
     return (emailInitialValue = {
       ...emailInitialValue,
-      [emailInitialValue.email.value]: email,
+      email: {
+        ...emailInitialValue.email,
+        value: email,
+      },
     });
   };
 
@@ -64,7 +65,7 @@ export default function Invite(): JSX.Element {
     setEmailValue(formFieldFill("email", newValue, emailValue));
     setTimeout(() => {
       dispatch(clearInviteEmails());
-      dispatch(requestUsersEmail(search));
+      dispatch(requestUsersEmail(emailInitialValue.email.value));
     }, 500);
   };
 
@@ -78,7 +79,7 @@ export default function Invite(): JSX.Element {
       return;
     }
 
-    dispatch(requestInviteUser({ contractId, search }));
+    dispatch(requestInviteUser(emailInitialValue.email.value, contractId));
   };
 
   useEffect(() => {
@@ -102,7 +103,7 @@ export default function Invite(): JSX.Element {
           {keyboardVisible ? null : <UserAvatar sizeSmall url={url} />}
           <DefaultText text={t("invite_page.invitation")} style={styles.text} />
           <TextFieldWithDropdown
-            value={search}
+            value={emailInitialValue.email.value}
             placeholder={t("edit_profile.placeholders.email")}
             onChangeFunction={(newValue) => onChangeHandler(newValue)}
             list={emails}

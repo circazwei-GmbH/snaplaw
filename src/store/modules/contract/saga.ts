@@ -228,10 +228,17 @@ function* requestInviteUser({ payload }: InviteUserAction) {
 }
 
 function* requestUsersEmail({ payload }: RequestGetEmailsAction) {
+  const listPagination = yield select(
+    (state) => state.contract.emailsListPagination
+  );
+  const currentList = yield select((state) => state.contract.inviteEmailsList);
   try {
-    const result = yield call(API.getUserEmails, payload);
-    yield put(setInviteEmails(result));
+    console.log(payload);
+    const page = listPagination.page + (currentList.length ? 1 : 0);
+    const list = yield call(API.getUserEmails, { payload, page });
+    yield put(setInviteEmails({ list, page }));
   } catch (error) {
+    console.log(error);
     yield put(responseError(error));
   }
 }

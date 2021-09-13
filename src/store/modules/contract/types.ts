@@ -105,12 +105,12 @@ export interface InviteUserAction extends BaseAction {
 }
 
 export interface RequestGetEmailsInterface {
-  search: string;
-  listPage: string;
+  payload: string;
+  page: string;
 }
 
 export interface RequestGetEmailsAction extends BaseAction {
-  payload: RequestGetEmailsInterface;
+  payload: string;
 }
 
 export { ProductDataScreenInterface, PRODUCT_DATA_FIELDS };
