@@ -198,6 +198,11 @@ export default {
       delete_partner: "Vertragspartner löschen",
       invite_partner: "Benutzer einladen",
     },
+    delete_modal: {
+      message: "Sind Sie sicher, dass Sie den Kontakt löschen möchten?",
+      yes: "Ja",
+      no: "Nein",
+    },
   },
   menu: {
     cancel: "Abbrechen",

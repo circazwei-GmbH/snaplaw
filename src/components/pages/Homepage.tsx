@@ -5,7 +5,6 @@ import { useI18n } from "../../translator/i18n";
 import TopBar from "../layouts/TopBar";
 import NotificationBell from "../components/NotificationBell";
 import TextField from "../components/TextField";
-import DefaultText from "../basics/typography/DefaultText";
 import { useAppDispatch } from "../../store/hooks";
 import { requestCreateContract } from "../../store/modules/contract/action-creators";
 import { CONTRACT_TYPES } from "../../store/modules/contract/constants";

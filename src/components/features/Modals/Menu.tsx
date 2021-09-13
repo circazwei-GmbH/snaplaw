@@ -1,7 +1,8 @@
 import React from "react";
-import { View, StyleSheet, Modal } from "react-native";
+import { Modal, StyleSheet, View } from "react-native";
 import Button from "../../basics/buttons/Button";
 import { useI18n } from "../../../translator/i18n";
+import { BUTTON_COLORTYPE } from "../../../store/modules/main/types";
 
 export type ButtonType = {
   title: string;
@@ -18,7 +19,7 @@ export default function Menu({ onClose, visible, buttons }: MenuProps) {
   const { t } = useI18n();
   return (
     <View>
-      <Modal visible={visible} transparent={true} animationType="fade">
+      <Modal visible={visible} transparent={true}>
         <View style={styles.container}>
           <View style={styles.listButtonContainer}>
             {buttons.map((button, index) => (
@@ -29,6 +30,7 @@ export default function Menu({ onClose, visible, buttons }: MenuProps) {
                   0 === index ? styles.firstButton : null,
                   buttons.length - 1 === index ? styles.lastButton : null,
                 ]}
+                textColorType={BUTTON_COLORTYPE.BLACK}
                 text={button.title}
                 onPress={button.handler}
               />

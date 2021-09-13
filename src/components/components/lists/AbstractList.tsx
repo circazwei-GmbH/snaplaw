@@ -13,6 +13,9 @@ type AbstractListProps = {
   elements: Array<any>;
   listItem: ListItemConponent;
   isLoading?: boolean;
+  onEndReached?: () => void;
+  onRefresh?: () => void;
+  isRefreshing?: boolean
 };
 
 export default function AbstractList({
@@ -20,6 +23,9 @@ export default function AbstractList({
   messageOnEmpty,
   listItem,
   isLoading,
+  onEndReached,
+  onRefresh,
+  isRefreshing
 }: AbstractListProps) {
   if (isLoading) {
     return (
@@ -46,6 +52,10 @@ export default function AbstractList({
       style={styles.container}
       data={elements}
       renderItem={listItem}
+      onEndReached={onEndReached}
+      onEndReachedThreshold={0.5}
+      refreshing={isRefreshing}
+      onRefresh={onRefresh}
     />
   );
 }
@@ -60,9 +70,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   emptyText: {
-    fontFamily: "OS",
+    fontFamily: "P-L",
     fontSize: 36,
     color: "#E6EBEF",
     textAlign: "center",
+    paddingHorizontal: 50
   },
 });

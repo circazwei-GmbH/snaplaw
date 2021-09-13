@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import EditProfileTextField from "../../components/EditProfileTextField";
 import { useI18n } from "../../../translator/i18n";
-import { FieldInterface } from "../../features/forms/SignInForm";
+import { FieldInterface } from "./SignInForm";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import DatePickerModal from "../Modals/DatePickerModal";
 import dayjs from "dayjs";
@@ -35,7 +35,7 @@ export default function EditProfileForm({
     <KeyboardAwareScrollView>
       <View
         style={styles.inputBox}
-        onStartShouldSetResponderCapture={(evt) => (edit ? false : true)}
+        onStartShouldSetResponderCapture={() => !edit}
       >
         <EditProfileTextField
           placeholder={t("edit_profile.placeholders.name")}

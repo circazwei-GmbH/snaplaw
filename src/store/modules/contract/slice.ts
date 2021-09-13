@@ -4,23 +4,42 @@ import {
   Draft,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { Contract, ContractListType } from "./types";
+import {
+  CONTRACT_LIST_STATE,
+  ContractDataType,
+  ContractListType,
+} from "./types";
 import { CONTRACT_SCREEN_TYPES } from "./constants";
 
+export enum CONTRACT_LIST_LOADING_TYPE {
+  INITIAL = "INITIAL",
+  REFRESH = "REFRESH"
+}
+
 interface ContractState {
-  currentContract: Contract | undefined;
+  currentContract: ContractDataType | undefined;
   contractErrors:
     | Record<CONTRACT_SCREEN_TYPES, Record<string, string> | undefined>
     | undefined;
   contracts: ContractListType | [];
-  isListLoading: boolean;
+  isListLoading: CONTRACT_LIST_LOADING_TYPE | undefined;
+  listPagination: {
+    listType: CONTRACT_LIST_STATE;
+    page: number;
+    isNextPage: boolean;
+  };
 }
 
 const initialState: ContractState = {
   currentContract: undefined,
   contractErrors: undefined,
   contracts: [],
-  isListLoading: false,
+  isListLoading: undefined,
+  listPagination: {
+    listType: CONTRACT_LIST_STATE.FINALIZED,
+    page: 0,
+    isNextPage: true,
+  },
 };
 
 type ScreenData = {
@@ -46,11 +65,17 @@ const setFieldErrorAction = createAction<FieldErrorData, "setFieldError">(
 );
 const clearErrorsAction = createAction<undefined, "clearErrors">("clearErrors");
 const setContractsListAction = createAction<
-  ContractListType,
+  { list: ContractListType; page: number; type: CONTRACT_LIST_STATE },
   "setContractsList"
 >("setContractsList");
 const setListLoadingAction = createAction<boolean, "setListLoading">(
   "setListLoading"
+);
+const deleteContractAction = createAction<string, "deleteContract">(
+  "deleteContract"
+);
+const updateContractSignAction = createAction<string, "updateContractSign">(
+  "updateContractSign"
 );
 
 const contractSlice = createSlice({
@@ -59,7 +84,7 @@ const contractSlice = createSlice({
   reducers: {
     [setInitedContractAction.type]: (
       state: Draft<ContractState>,
-      action: PayloadAction<Contract>
+      action: PayloadAction<ContractDataType>
     ) => {
       state.currentContract = action.payload;
     },
@@ -127,15 +152,47 @@ const contractSlice = createSlice({
     },
     [setContractsListAction.type]: (
       state: Draft<ContractState>,
-      action: PayloadAction<ContractListType>
+      action: PayloadAction<{
+        list: ContractListType;
+        page: number;
+        type: CONTRACT_LIST_STATE;
+        isRefresh: boolean
+      }>
     ) => {
-      state.contracts = action.payload;
+      if (state.listPagination.listType === action.payload.type && !action.payload.isRefresh) {
+        // @ts-ignore
+        state.contracts = state.contracts.concat(action.payload.list);
+      } else {
+        state.contracts = action.payload.list;
+      }
+
+      state.listPagination.page = action.payload.page;
+      state.listPagination.listType = action.payload.type;
+      state.listPagination.isNextPage = !!action.payload.list.length;
     },
     [setListLoadingAction.type]: (
       state: Draft<ContractState>,
-      actions: PayloadAction<boolean>
+      action: PayloadAction<CONTRACT_LIST_LOADING_TYPE | undefined>
     ) => {
-      state.isListLoading = actions.payload;
+      state.isListLoading = action.payload;
+    },
+    [deleteContractAction.type]: (
+      state: Draft<ContractState>,
+      action: PayloadAction<string>
+    ) => {
+      state.contracts.splice(
+        state.contracts.findIndex((contract) => contract.id === action.payload),
+        1
+      );
+    },
+    [updateContractSignAction.type]: (
+      state: Draft<ContractState>,
+      action: PayloadAction<string>
+    ) => {
+      if (!state.currentContract) {
+        return;
+      }
+      state.currentContract.sign = action.payload;
     },
   },
 });
@@ -147,6 +204,8 @@ export const {
   clearErrors,
   setContractsList,
   setListLoading,
+  deleteContract,
+  updateContractSign,
 } = contractSlice.actions;
 
 export default contractSlice.reducer;

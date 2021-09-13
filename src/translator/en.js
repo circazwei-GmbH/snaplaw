@@ -195,6 +195,11 @@ export default {
       delete_partner: "Delete contract partner",
       invite_partner: "Invite user",
     },
+    delete_modal: {
+      message: "Are you sure you want to delete the contract?",
+      yes: "Yes",
+      no: "No",
+    },
   },
   menu: {
     cancel: "Cancel",
