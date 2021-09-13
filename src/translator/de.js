@@ -289,8 +289,8 @@ export default {
     pdf_view: {
       edit: "Editieren",
       save: "Speichern",
-      additional_media: 'Additionale Information',
-      accessories_media: 'Zubehör'
+      additional_media: "Additionale Information",
+      accessories_media: "Zubehör",
     },
     messages: {
       found_in_pregress_folder:

@@ -59,7 +59,7 @@ export const requestContractsList = (
   type: REQEST_CONTRACTS_LIST,
   payload: {
     type,
-    isRefresh: !!isRefresh
+    isRefresh: !!isRefresh,
   },
 });
 

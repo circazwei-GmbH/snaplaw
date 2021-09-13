@@ -15,7 +15,7 @@ type AbstractListProps = {
   isLoading?: boolean;
   onEndReached?: () => void;
   onRefresh?: () => void;
-  isRefreshing?: boolean
+  isRefreshing?: boolean;
 };
 
 export default function AbstractList({
@@ -25,7 +25,7 @@ export default function AbstractList({
   isLoading,
   onEndReached,
   onRefresh,
-  isRefreshing
+  isRefreshing,
 }: AbstractListProps) {
   if (isLoading) {
     return (
@@ -74,6 +74,6 @@ const styles = StyleSheet.create({
     fontSize: 36,
     color: "#E6EBEF",
     textAlign: "center",
-    paddingHorizontal: 50
+    paddingHorizontal: 50,
   },
 });

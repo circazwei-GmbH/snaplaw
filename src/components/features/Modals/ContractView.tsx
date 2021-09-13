@@ -1,5 +1,5 @@
 import React from "react";
-import {Dimensions, Modal, ScrollView, StyleSheet, View} from "react-native";
+import { Dimensions, Modal, ScrollView, StyleSheet, View } from "react-native";
 import Pdf from "react-native-pdf";
 import TextButton from "../../basics/buttons/TextButton";
 import { useI18n } from "../../../translator/i18n";
@@ -7,10 +7,10 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { buildPDFSource } from "../../../services/contract";
 import { setMessage, setModal } from "../../../store/modules/main/slice";
 import { navigationPopToTop } from "../../../store/modules/main/action-creators";
-import {CONTRACT_SCREEN_TYPES} from "../../../store/modules/contract/constants";
+import { CONTRACT_SCREEN_TYPES } from "../../../store/modules/contract/constants";
 import {
   PRODUCT_DESCRIPTION_FIELDS,
-  ProductDescriptionScreenInterface
+  ProductDescriptionScreenInterface,
 } from "../../../store/modules/contract/purchase/product-description";
 import DescriptionPhotos from "../../components/DescriptionPhotos";
 import DefaultText from "../../basics/typography/DefaultText";
@@ -27,7 +27,12 @@ export default function ContractView({ visible, onClose }: ContractViewProps) {
   const contractId = useAppSelector(
     (state) => state.contract.currentContract?.id
   );
-  const descriptionScreen = useAppSelector((state) => state.contract.currentContract?.screens.find((screen) => screen.type === CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION) as ProductDescriptionScreenInterface)
+  const descriptionScreen = useAppSelector(
+    (state) =>
+      state.contract.currentContract?.screens.find(
+        (screen) => screen.type === CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION
+      ) as ProductDescriptionScreenInterface
+  );
 
   const onSaveHandler = () => {
     onClose();
@@ -76,16 +81,42 @@ export default function ContractView({ visible, onClose }: ContractViewProps) {
               />
             ) : null}
             <View style={styles.mediaContainer}>
-              {descriptionScreen && descriptionScreen.data[PRODUCT_DESCRIPTION_FIELDS.productPhotos] ? (
+              {descriptionScreen &&
+              descriptionScreen.data[
+                PRODUCT_DESCRIPTION_FIELDS.productPhotos
+              ] ? (
                 <>
-                  <DefaultText text={t('contracts.pdf_view.additional_media')} style={[styles.buttonText, styles.padding]} />
-                  <DescriptionPhotos photos={descriptionScreen.data[PRODUCT_DESCRIPTION_FIELDS.productPhotos]} fieldName={PRODUCT_DESCRIPTION_FIELDS.productPhotos} />
+                  <DefaultText
+                    text={t("contracts.pdf_view.additional_media")}
+                    style={[styles.buttonText, styles.padding]}
+                  />
+                  <DescriptionPhotos
+                    photos={
+                      descriptionScreen.data[
+                        PRODUCT_DESCRIPTION_FIELDS.productPhotos
+                      ]
+                    }
+                    fieldName={PRODUCT_DESCRIPTION_FIELDS.productPhotos}
+                  />
                 </>
               ) : null}
-              {descriptionScreen && descriptionScreen.data[PRODUCT_DESCRIPTION_FIELDS.accessoriesPhotos] ? (
+              {descriptionScreen &&
+              descriptionScreen.data[
+                PRODUCT_DESCRIPTION_FIELDS.accessoriesPhotos
+              ] ? (
                 <>
-                  <DefaultText text={t('contracts.pdf_view.accessories_media')} style={[styles.buttonText, styles.padding]} />
-                  <DescriptionPhotos photos={descriptionScreen.data[PRODUCT_DESCRIPTION_FIELDS.accessoriesPhotos]} fieldName={PRODUCT_DESCRIPTION_FIELDS.productPhotos} />
+                  <DefaultText
+                    text={t("contracts.pdf_view.accessories_media")}
+                    style={[styles.buttonText, styles.padding]}
+                  />
+                  <DescriptionPhotos
+                    photos={
+                      descriptionScreen.data[
+                        PRODUCT_DESCRIPTION_FIELDS.accessoriesPhotos
+                      ]
+                    }
+                    fieldName={PRODUCT_DESCRIPTION_FIELDS.productPhotos}
+                  />
                 </>
               ) : null}
             </View>
@@ -105,7 +136,7 @@ const styles = StyleSheet.create({
   },
   pdf: {
     width: "100%",
-    height: Dimensions.get('screen').height * 7 /10,
+    height: (Dimensions.get("screen").height * 7) / 10,
     backgroundColor: "#C2C2C2",
   },
   buttonContainer: {
@@ -116,9 +147,9 @@ const styles = StyleSheet.create({
     color: "#FFF",
   },
   padding: {
-    paddingHorizontal: 16
+    paddingHorizontal: 16,
   },
   mediaContainer: {
     marginVertical: 10,
-  }
+  },
 });

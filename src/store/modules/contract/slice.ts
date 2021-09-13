@@ -13,7 +13,7 @@ import { CONTRACT_SCREEN_TYPES } from "./constants";
 
 export enum CONTRACT_LIST_LOADING_TYPE {
   INITIAL = "INITIAL",
-  REFRESH = "REFRESH"
+  REFRESH = "REFRESH",
 }
 
 interface ContractState {
@@ -156,10 +156,13 @@ const contractSlice = createSlice({
         list: ContractListType;
         page: number;
         type: CONTRACT_LIST_STATE;
-        isRefresh: boolean
+        isRefresh: boolean;
       }>
     ) => {
-      if (state.listPagination.listType === action.payload.type && !action.payload.isRefresh) {
+      if (
+        state.listPagination.listType === action.payload.type &&
+        !action.payload.isRefresh
+      ) {
         // @ts-ignore
         state.contracts = state.contracts.concat(action.payload.list);
       } else {

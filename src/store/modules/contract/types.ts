@@ -54,8 +54,8 @@ export interface ScreenValidateAction extends BaseAction {
 
 export interface RequestContractListAction extends BaseAction {
   payload: {
-    type: CONTRACT_LIST_STATE,
-    isRefresh: boolean
+    type: CONTRACT_LIST_STATE;
+    isRefresh: boolean;
   };
 }
 
