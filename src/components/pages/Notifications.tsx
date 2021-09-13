@@ -7,6 +7,7 @@ import { setModal } from "../../store/modules/main/slice";
 import NotificationListItem from "../components/NotificationListItem";
 import DefaultText from "../basics/typography/DefaultText";
 import { notificationConfig } from "../../services/notification/index";
+import AbstractList from "../components/lists/AbstractList";
 
 export interface NotificationListInterface {
   isNew: boolean;
@@ -20,29 +21,9 @@ export interface NotificationListInterface {
 
 const LIST_ITEM_HEIGHT = 77;
 
-const notification: NotificationListInterface = {
-  isNew: true,
-  _id: `${Math.random() * 123456789}`,
-  type: "user_invited_to_contract",
-  contractName: "Prodam stariy IPhone",
-  userNameFrom: "Vasiliy",
-  notification:
-    "Ochen mnogo kakoy to vsyakoy raznoy chepuhi ot Alekseya s beckenda fdfsghsdfghsfghsdfgh)))",
-  createdAt: `${Date.now()}`,
-};
-const notification2: NotificationListInterface = {
-  isNew: false,
-  _id: `${Math.random() * 987654321}`,
-  type: "invite_to_contract_rejected",
-  contractName: "Prodam kalidor",
-  userNameFrom: "Genadiy",
-  notification: "Kakaya to chepuha ot Alekseya - 2",
-  createdAt: `${Date.now()}`,
-};
-
 export default function Notifications(): JSX.Element {
   const { t } = useI18n();
-  const list = [notification, notification2];
+  const list = [];
   const dispatch = useAppDispatch();
 
   const modalHandler = (
@@ -65,37 +46,19 @@ export default function Notifications(): JSX.Element {
     );
   };
 
-  const EmptyListComponent = () => (
-    <View style={styles.emptyListBox}>
-      <DefaultText
-        text={t("notifications.empty_list")}
-        style={styles.emptyListText}
-      />
-    </View>
-  );
-
   return (
     <TopBar pageName={t("notifications.title")}>
-      <FlatList
-        style={styles.container}
-        data={list}
-        keyExtractor={(item) => item._id}
-        renderItem={({ item }) => (
+      <AbstractList
+        messageOnEmpty={t("notifications.empty_list")}
+        elements={list}
+        listItem={({ item }) => (
           <NotificationListItem
             style={styles.itemHeight}
             item={item}
             onPress={modalHandler}
+            onEndReached={() => {}}
           />
         )}
-        ListEmptyComponent={EmptyListComponent}
-        onEndReached={() => {}}
-        onEndReachedThreshold={0.0001}
-        em
-        getItemLayout={(data, index) => ({
-          length: LIST_ITEM_HEIGHT,
-          offset: LIST_ITEM_HEIGHT * index,
-          index,
-        })}
       />
     </TopBar>
   );
@@ -121,3 +84,25 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
+
+//<FlatList
+//  style={styles.container}
+//  data={list}
+//  keyExtractor={(item) => item._id}
+//  renderItem={({ item }) => (
+//    <NotificationListItem
+//      style={styles.itemHeight}
+//      item={item}
+//      onPress={modalHandler}
+//    />
+//  )}
+//  ListEmptyComponent={EmptyListComponent}
+//  onEndReached={() => {}}
+//  onEndReachedThreshold={0.0001}
+//  em
+//  getItemLayout={(data, index) => ({
+//    length: LIST_ITEM_HEIGHT,
+//    offset: LIST_ITEM_HEIGHT * index,
+//    index,
+//  })}
+///>
