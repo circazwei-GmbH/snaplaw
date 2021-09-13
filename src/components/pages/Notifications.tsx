@@ -6,7 +6,7 @@ import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { setModal } from "../../store/modules/main/slice";
 import NotificationListItem from "../components/NotificationListItem";
 import DefaultText from "../basics/typography/DefaultText";
-import { notificationConfig } from "../../services/notification/index";
+import { notificationConfig } from "../../services/notification/notificationsConfig";
 import AbstractList from "../components/lists/AbstractList";
 
 export interface NotificationListInterface {

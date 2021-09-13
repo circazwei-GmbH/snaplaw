@@ -1,51 +1,11 @@
-import { BUTTON_COLORTYPE } from "../../store/modules/main/types";
+import httpClient from "../api";
+import { API_HOST } from "../../env/env";
 
-interface configActionsInterface {
-  name: string;
-  colortype: BUTTON_COLORTYPE;
-  actionHandler: () => void;
-}
+const requestNotifications = async (page: string): Promise<any> => {
+  const response = await httpClient.get(`api/notifications?page=${page ?? 0}`);
+  return response.data;
+};
 
-interface notificationInterface {
-  message: string;
-  actions: configActionsInterface;
-}
-
-export interface notificationConfigInterface {
-  user_invited_to_contract: notificationInterface;
-  invite_to_contract_rejected: notificationInterface;
-}
-
-export const notificationConfig = {
-  user_invited_to_contract: {
-    message: "notifications.messages.invited",
-    actionsNew: [
-      {
-        name: "notifications.modal_buttons.cancel",
-        colortype: BUTTON_COLORTYPE.ERROR,
-        actionHandler(): void {
-          return;
-        },
-      },
-      {
-        name: "notifications.modal_buttons.accept",
-        colortype: BUTTON_COLORTYPE.PRIMARY,
-      },
-    ],
-    actions: [
-      {
-        name: "notifications.modal_buttons.ok",
-        colortype: BUTTON_COLORTYPE.PRIMARY,
-      },
-    ],
-  },
-  invite_to_contract_rejected: {
-    message: "notifications.messages.rejected",
-    actions: [
-      {
-        name: "notifications.modal_buttons.ok",
-        colortype: BUTTON_COLORTYPE.PRIMARY,
-      },
-    ],
-  },
+export default {
+  requestNotifications,
 };
