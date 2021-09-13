@@ -53,7 +53,7 @@ export default function Invite(): JSX.Element {
     dispatch(requestUsersEmail({ search, listPage }));
   };
 
-  const setInviteEmail = (email: string) => setSearch(email);
+  const searchHandler = (email: string) => setSearch(email);
 
   const onChangeHandler = (newValue: string) => {
     setEmailValue(formFieldFill("email", newValue, emailValue));
@@ -111,7 +111,7 @@ export default function Invite(): JSX.Element {
             list={emails}
             getList={getEmails}
             errorMessage={emailValue.email.error}
-            setValue={setInviteEmail}
+            setValue={searchHandler}
           />
           <Button
             text={t("invite_page.title")}
