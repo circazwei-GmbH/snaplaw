@@ -50,6 +50,7 @@ const PROPS = {
   route: {
     params: {
       screenCount: 0,
+      id: undefined
     },
   },
 };
