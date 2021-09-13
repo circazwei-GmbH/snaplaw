@@ -12,7 +12,7 @@ import ContractListItem from "../components/lists/ListItems/ContactListItem";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { requestContractsList } from "../../store/modules/contract/action-creators";
 import { CONTRACT_LIST_STATE } from "../../store/modules/contract/types";
-import {CONTRACT_LIST_LOADING_TYPE} from "../../store/modules/contract/slice";
+import { CONTRACT_LIST_LOADING_TYPE } from "../../store/modules/contract/slice";
 
 export default function MyContracts() {
   const { t } = useI18n();
@@ -20,7 +20,9 @@ export default function MyContracts() {
     CONTRACT_LIST_STATE.FINALIZED
   );
   const contracts = useAppSelector((state) => state.contract.contracts);
-  const isLoadingAndLoadingType = useAppSelector((state) => state.contract.isListLoading);
+  const isLoadingAndLoadingType = useAppSelector(
+    (state) => state.contract.isListLoading
+  );
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -65,8 +67,12 @@ export default function MyContracts() {
         messageOnEmpty={t("my_contracts.empty_list")}
         elements={contracts}
         listItem={({ item }) => <ContractListItem item={item} />}
-        isLoading={isLoadingAndLoadingType === CONTRACT_LIST_LOADING_TYPE.INITIAL}
-        isRefreshing={isLoadingAndLoadingType === CONTRACT_LIST_LOADING_TYPE.REFRESH}
+        isLoading={
+          isLoadingAndLoadingType === CONTRACT_LIST_LOADING_TYPE.INITIAL
+        }
+        isRefreshing={
+          isLoadingAndLoadingType === CONTRACT_LIST_LOADING_TYPE.REFRESH
+        }
         onEndReached={() => dispatch(requestContractsList(switchState))}
         onRefresh={() => dispatch(requestContractsList(switchState, true))}
       />

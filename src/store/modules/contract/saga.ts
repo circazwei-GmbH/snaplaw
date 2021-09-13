@@ -45,7 +45,6 @@ import { SelectType } from "../../hooks";
 import { contractValidationConfig, screenFieldValidator } from "./validation";
 import { BaseScreenDataInterface } from "./base-types";
 import { Translator } from "../../../translator/i18n";
-import { setMessage } from "../main/slice";
 
 function* createContract({ payload }: RequestCreateContractAction) {
   try {
