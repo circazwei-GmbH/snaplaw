@@ -30,6 +30,7 @@ export default function Invite(): JSX.Element {
   );
   const url = useAppSelector((state) => state.profile.user?.avatar);
   const emails = useAppSelector((state) => state.contract.inviteEmailsList);
+  const [timer, setTimer] = useState<NodeJS.Timeout | number>(0);
 
   interface InviteEmailInterface {
     email: FieldInterface;
@@ -63,11 +64,18 @@ export default function Invite(): JSX.Element {
 
   const onChangeHandler = (newValue: string) => {
     setEmailValue(formFieldFill("email", newValue, emailValue));
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       dispatch(clearInviteEmails());
       dispatch(requestUsersEmail(emailInitialValue.email.value));
     }, 500);
+    setTimer(timeout);
   };
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [timer]);
 
   const inviteHandler = () => {
     const emailLocalValue: InviteEmailInterface = {

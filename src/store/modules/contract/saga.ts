@@ -237,7 +237,6 @@ function* requestUsersEmail({ payload }: RequestGetEmailsAction) {
     const list = yield call(API.getUserEmails, { payload, page });
     yield put(setInviteEmails({ list, page }));
   } catch (error) {
-    console.log(error);
     yield put(responseError(error));
   }
 }
