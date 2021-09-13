@@ -104,7 +104,7 @@ export default function TextField({
           focused ? styles.fullInput : null,
           focused ? null : styles.focuslessInput,
           localValue ? styles.inputWithText : null,
-          placeholder === "E-mail" ? styles.inputNotEditable : null,
+          props.editable === undefined ? null : styles.inputNotEditable,
           errorMessage ? styles.errorBorder : null,
           search && !focused ? styles.search : null,
         ]}
