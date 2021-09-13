@@ -23,18 +23,17 @@ const saveScreenData = (id: string, screen: BaseScreenDataInterface) =>
     screenType: screen.type,
   });
 
-const inviteUser = (contractData: InviteUserInterface) => {
+const inviteUser = (contractData: InviteUserInterface): Promise<any> =>
   httpClient.post(`api/contracts/${contractData.contractId}/invite-user`, {
     email: contractData.search,
     locale: LANGUAGE_GERMANY ? "de" : "en",
   });
-};
 
-const getUserEmails = async (searchData: RequestGetEmailsInterface) => {
+const getUserEmails = async (
+  searchData: RequestGetEmailsInterface
+): Promise<any> => {
   const response = await httpClient.get(
-    `api/contracts/invited-emails?search=${searchData.search ?? ""}&page=${
-      searchData.listPage ?? 0
-    }`
+    `api/contracts/invited-emails?search=${searchData.search}&page=${searchData.listPage}`
   );
   return response.data;
 };

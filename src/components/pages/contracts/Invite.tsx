@@ -24,42 +24,47 @@ import { formFieldFill, validate } from "../../../utils/forms";
 export default function Invite(): JSX.Element {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
-  const url = useAppSelector((state) => state.profile.user?.avatar);
-  const emails = useAppSelector((state) => state.contract.inviteEmailsList);
   const [keyboardVisible, setKeyboardVisible] = useState(false);
   const contractId = useAppSelector(
     (state) => state.contract.currentContract?.id
   );
-  const [search, setSearch] = useState("");
-  const [listPage, setListPage] = useState("0");
+  const url = useAppSelector((state) => state.profile.user?.avatar);
+  const emails = useAppSelector((state) => state.contract.inviteEmailsList);
 
   interface InviteEmailInterface {
     email: FieldInterface;
   }
 
-  const emailInitialValue: InviteEmailInterface = {
+  let emailInitialValue: InviteEmailInterface = {
     email: {
-      value: search,
+      value: "",
       error: "",
       displayError: false,
       validators: [email(t("invite_page.error"))],
     },
   };
 
+  const search = emailInitialValue.email.value;
+
   const [emailValue, setEmailValue] =
     useState<InviteEmailInterface>(emailInitialValue);
 
   const getEmails = () => {
-    dispatch(requestUsersEmail({ search, listPage }));
+    dispatch(requestUsersEmail(search));
   };
 
-  const searchHandler = (email: string) => setSearch(email);
+  const searchHandler = (email: string) => {
+    return (emailInitialValue = {
+      ...emailInitialValue,
+      [emailInitialValue.email.value]: email,
+    });
+  };
 
   const onChangeHandler = (newValue: string) => {
     setEmailValue(formFieldFill("email", newValue, emailValue));
     setTimeout(() => {
       dispatch(clearInviteEmails());
-      dispatch(requestUsersEmail({ search, listPage }));
+      dispatch(requestUsersEmail(search));
     }, 500);
   };
 
@@ -77,10 +82,6 @@ export default function Invite(): JSX.Element {
   };
 
   useEffect(() => {
-    setEmailValue(formFieldFill("email", search, emailValue));
-  }, [search]);
-
-  useEffect(() => {
     const showSubscription = Keyboard.addListener("keyboardDidShow", () =>
       setKeyboardVisible(true)
     );
@@ -93,10 +94,6 @@ export default function Invite(): JSX.Element {
       hideSubscription.remove();
     };
   }, []);
-
-  useEffect(() => {
-    setListPage(`${+emails / 20}`);
-  }, [emails]);
 
   return (
     <TopBar pageName={t("invite_page.title")}>

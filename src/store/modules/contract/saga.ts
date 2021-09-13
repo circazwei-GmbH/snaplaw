@@ -36,6 +36,7 @@ import {
   setInitedContract,
   setListLoading,
   updateContractSign,
+  setInviteEmails,
 } from "./slice";
 import * as RootNavigation from "../../../router/RootNavigation";
 import { HOME_ROUTER } from "../../../router/HomeRouterType";
@@ -45,7 +46,6 @@ import { contractValidationConfig, screenFieldValidator } from "./validation";
 import { BaseScreenDataInterface } from "./base-types";
 import { Translator } from "../../../translator/i18n";
 import { setMessage } from "../main/slice";
-import { setInviteEmails } from "./slice";
 
 function* createContract({ payload }: RequestCreateContractAction) {
   try {
