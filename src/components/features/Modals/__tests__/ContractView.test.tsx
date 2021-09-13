@@ -7,11 +7,20 @@ import { LANGUAGE_ENGLISH } from "../../../../store/modules/profile/constants";
 import { setMessage, setModal } from "../../../../store/modules/main/slice";
 import { navigationPopToTop } from "../../../../store/modules/main/action-creators";
 import { buildPDFSource } from "../../../../services/contract";
+import {CONTRACT_SCREEN_TYPES} from "../../../../store/modules/contract/constants";
+import {PRODUCT_DESCRIPTION_FIELDS} from "../../../../store/modules/contract/types";
 
 const initialState = {
   contract: {
     currentContract: {
       id: "testId",
+      screens: [{
+        type: CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION,
+        data: {
+          [PRODUCT_DESCRIPTION_FIELDS.productPhotos]: ['test/additional'],
+          [PRODUCT_DESCRIPTION_FIELDS.accessoriesPhotos]: ['test/accessories']
+        }
+      }]
     },
   },
   profile: {
@@ -81,4 +90,14 @@ describe("ContractView", () => {
     expect(actions).toBeCalledWith(setMessage("errors.abstract"));
     expect(handler).toBeCalled();
   });
+  it("Should dispaly additional media", () => {
+    const handler = jest.fn();
+    const { getByText } = render(
+      <Provider store={store}>
+        <ContractView visible={true} onClose={handler} />
+      </Provider>
+    );
+    expect(getByText('contracts.pdf_view.additional_media')).toBeTruthy()
+    expect(getByText('contracts.pdf_view.accessories_media')).toBeTruthy()
+  })
 });

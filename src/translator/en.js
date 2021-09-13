@@ -286,6 +286,8 @@ export default {
     pdf_view: {
       edit: "Edit",
       save: "Save",
+      additional_media: 'Additional information',
+      accessories_media: 'Accessories'
     },
     messages: {
       found_in_pregress_folder:
