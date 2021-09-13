@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import TextField from "../../../components/TextField";
 import { useI18n } from "../../../../translator/i18n";
 import { useDispatch } from "react-redux";
@@ -11,10 +11,13 @@ import {
   UserDataScreenInterface,
 } from "../../../../store/modules/contract/types";
 import { validateScreen } from "../../../../store/modules/contract/action-creators";
+import DatePickerModal from "../../Modals/DatePickerModal";
+import dayjs from "dayjs";
 
 export default function UserDataForm(): JSX.Element {
   const { t } = useI18n();
   const dispatch = useDispatch();
+  const [datePickerOpened, setDatePickerOpened] = useState(false);
 
   const userData = useAppSelector(
     (state) =>
@@ -62,16 +65,28 @@ export default function UserDataForm(): JSX.Element {
           onChangeAction(newValue, USER_DATA_FIELDS.lastName)
         }
       />
-      <TextField
-        maxLength={10}
-        keyboardType="number-pad"
-        placeholder={t("edit_profile.placeholders.dateOfBirth")}
-        value={userData?.data[USER_DATA_FIELDS.dateOfBirth]}
-        errorMessage={screenErrors?.[USER_DATA_FIELDS.dateOfBirth]}
-        onChangeFunction={(newValue) =>
-          onChangeAction(newValue, USER_DATA_FIELDS.dateOfBirth)
-        }
-      />
+      <TouchableOpacity
+        onPress={() => setDatePickerOpened(true)}
+        activeOpacity={0.9}
+      >
+        <TextField
+          editable={false}
+          maxLength={10}
+          keyboardType="number-pad"
+          placeholder={t("edit_profile.placeholders.dateOfBirth")}
+          value={
+            userData?.data[USER_DATA_FIELDS.dateOfBirth] === ""
+              ? userData?.data[USER_DATA_FIELDS.dateOfBirth]
+              : dayjs(userData?.data[USER_DATA_FIELDS.dateOfBirth]).format(
+                  "DD.MM.YYYY"
+                )
+          }
+          errorMessage={screenErrors?.[USER_DATA_FIELDS.dateOfBirth]}
+          onChangeFunction={(newValue) =>
+            onChangeAction(newValue, USER_DATA_FIELDS.dateOfBirth)
+          }
+        />
+      </TouchableOpacity>
       <TextField
         editable={false}
         placeholder={t("edit_profile.placeholders.email")}
@@ -106,6 +121,11 @@ export default function UserDataForm(): JSX.Element {
         onChangeFunction={(newValue) =>
           onChangeAction(newValue, USER_DATA_FIELDS.postCode)
         }
+      />
+      <DatePickerModal
+        open={datePickerOpened}
+        modalHandler={setDatePickerOpened}
+        changeDate={onChangeAction}
       />
     </View>
   );

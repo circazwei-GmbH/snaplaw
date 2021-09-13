@@ -63,7 +63,6 @@ function* requestScreenData({ payload }: RequestScreenDataAction) {
   const contractId = yield select<SelectType>(
     (state) => state.contract.currentContract?.id
   );
-  console.log(screenData, payload);
   if (!screenData) {
     return;
   }

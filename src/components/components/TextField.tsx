@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   TextInput,
   View,
@@ -35,7 +35,7 @@ export default function TextField({
   search,
   containerStyle,
   ...props
-}: TextFieldPropsInterface) {
+}: TextFieldPropsInterface): JSX.Element {
   const [localValue, setLocalValue] = useState(value);
   const [focused, setFocused] = useState(false);
   const input: any = useRef();
@@ -50,6 +50,10 @@ export default function TextField({
     setLocalValue("");
     input.current.blur();
   };
+
+  useEffect(() => {
+    setLocalValue(value);
+  }, [value]);
 
   return (
     <View
@@ -100,7 +104,7 @@ export default function TextField({
           focused ? styles.fullInput : null,
           focused ? null : styles.focuslessInput,
           localValue ? styles.inputWithText : null,
-          props.editable === undefined ? null : styles.inputNotEditable,
+          placeholder === "E-mail" ? styles.inputNotEditable : null,
           errorMessage ? styles.errorBorder : null,
           search && !focused ? styles.search : null,
         ]}

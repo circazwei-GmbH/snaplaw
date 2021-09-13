@@ -54,7 +54,10 @@ export default function EditProfileForm({
           errorMessage={form.lastName.error}
           onChangeFunction={(newValue) => onChangeHandler(newValue, "lastName")}
         />
-        <TouchableOpacity onPress={() => setDatePickerOpened(true)}>
+        <TouchableOpacity
+          onPress={() => setDatePickerOpened(true)}
+          activeOpacity={0.9}
+        >
           <EditProfileTextField
             maxLength={10}
             keyboardType="number-pad"
