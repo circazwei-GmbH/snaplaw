@@ -51,10 +51,6 @@ export default function TextField({
     input.current.blur();
   };
 
-  useEffect(() => {
-    setLocalValue(value);
-  }, [value]);
-
   return (
     <View
       style={[
@@ -67,11 +63,7 @@ export default function TextField({
         <Text
           style={[
             styles.label,
-            focused || localValue
-              ? null
-              : fixed
-              ? styles.labelWithEmptyInputFixed
-              : styles.labelWithEmptyInputDance,
+            focused || localValue ? null : styles.labelWithEmptyInputDance,
           ]}
         >
           {placeholder}
@@ -177,9 +169,6 @@ const styles = StyleSheet.create({
     color: "#1696E2",
     fontSize: 14,
     lineHeight: 22,
-  },
-  labelWithEmptyInputFixed: {
-    opacity: 0,
   },
   labelWithEmptyInputDance: {
     display: "none",

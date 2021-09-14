@@ -5,6 +5,7 @@ import { useI18n } from "../../../translator/i18n";
 import { FieldInterface } from "./SignInForm";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import DatePickerModal from "../Modals/DatePickerModal";
+import TextFieldImitation from "../../components/TextFieldImitation";
 import dayjs from "dayjs";
 
 export interface EditProfileFormInterface {
@@ -58,30 +59,16 @@ export default function EditProfileForm({
           onPress={() => setDatePickerOpened(true)}
           activeOpacity={0.9}
         >
-          <EditProfileTextField
-            maxLength={10}
-            keyboardType="number-pad"
+          <TextFieldImitation
             placeholder={t("edit_profile.placeholders.dateOfBirth")}
-            value={
-              form.dateOfBirth.value === ""
-                ? form.dateOfBirth.value
-                : dayjs(form.dateOfBirth.value).format("DD.MM.YYYY")
-            }
-            editable={false}
-            edit={edit}
-            errorMessage={form.dateOfBirth.error}
-            onChangeFunction={(newValue) =>
-              onChangeHandler(newValue, "dateOfBirth")
-            }
+            value={dayjs(form.dateOfBirth.value).format("DD.MM.YYYY")}
+            settings
           />
         </TouchableOpacity>
-        <EditProfileTextField
+        <TextFieldImitation
           placeholder={t("edit_profile.placeholders.email")}
           value={form.email.value}
-          editable={false}
-          edit={edit}
-          errorMessage={form.email.error}
-          onChangeFunction={(newValue) => onChangeHandler(newValue, "email")}
+          settings
         />
         <EditProfileTextField
           keyboardType="phone-pad"

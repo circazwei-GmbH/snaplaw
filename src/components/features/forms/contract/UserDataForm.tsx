@@ -12,6 +12,7 @@ import {
 } from "../../../../store/modules/contract/types";
 import { validateScreen } from "../../../../store/modules/contract/action-creators";
 import DatePickerModal from "../../Modals/DatePickerModal";
+import TextFieldImitation from "../../../components/TextFieldImitation";
 import dayjs from "dayjs";
 
 export default function UserDataForm(): JSX.Element {
@@ -75,11 +76,9 @@ export default function UserDataForm(): JSX.Element {
           keyboardType="number-pad"
           placeholder={t("edit_profile.placeholders.dateOfBirth")}
           value={
-            userData?.data[USER_DATA_FIELDS.dateOfBirth] === ""
-              ? userData?.data[USER_DATA_FIELDS.dateOfBirth]
-              : dayjs(userData?.data[USER_DATA_FIELDS.dateOfBirth]).format(
-                  "DD.MM.YYYY"
-                )
+            dayjs(userData?.data[USER_DATA_FIELDS.dateOfBirth]).format(
+              "DD.MM.YYYY"
+            ) ?? ""
           }
           errorMessage={screenErrors?.[USER_DATA_FIELDS.dateOfBirth]}
           onChangeFunction={(newValue) =>
@@ -87,6 +86,14 @@ export default function UserDataForm(): JSX.Element {
           }
         />
       </TouchableOpacity>
+      <TextFieldImitation
+        placeholder={t("edit_profile.placeholders.dateOfBirth")}
+        value={
+          dayjs(userData?.data[USER_DATA_FIELDS.dateOfBirth]).format(
+            "DD.MM.YYYY"
+          ) ?? ""
+        }
+      />
       <TextField
         editable={false}
         placeholder={t("edit_profile.placeholders.email")}
@@ -95,6 +102,11 @@ export default function UserDataForm(): JSX.Element {
         onChangeFunction={(newValue) =>
           onChangeAction(newValue, USER_DATA_FIELDS.email)
         }
+      />
+      <TextFieldImitation
+        placeholder={t("edit_profile.placeholders.email")}
+        value={userData?.data[USER_DATA_FIELDS.email]}
+        gray
       />
       <TextField
         keyboardType="phone-pad"
