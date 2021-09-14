@@ -12,16 +12,14 @@ import { useI18n } from "../../translator/i18n";
 
 interface NotificationListItemPropsInterface {
   item: NotificationListItemInterface;
-  style: { height: number };
   onPress: Function;
 }
 
 export default function NotificationListItem({
   item,
-  style,
   onPress,
 }: NotificationListItemPropsInterface): JSX.Element {
-  const { id, type, contractId, usernameFrom, createdAt, isNew, userId } = item;
+  const { type, contractId, usernameFrom, createdAt, isNew, userId } = item;
   const { t } = useI18n();
   const swipeable: any = useRef();
   const isToday = require("dayjs/plugin/isToday");
@@ -66,13 +64,13 @@ export default function NotificationListItem({
       ref={swipeable}
     >
       <TouchableOpacity
-        style={style}
+        style={styles.container}
         activeOpacity={1}
         onPress={() => onPress(isRead, type, usernameFrom, `“${contractId}”`)}
       >
         <View
           style={[
-            styles.container,
+            styles.notification,
             isRead ? styles.containerBackgroundNew : styles.containerBackground,
           ]}
         >
@@ -112,6 +110,9 @@ export default function NotificationListItem({
 
 const styles = StyleSheet.create({
   container: {
+    paddingVertical: 4,
+  },
+  notification: {
     flexDirection: "row",
     justifyContent: "flex-start",
     width: "100%",

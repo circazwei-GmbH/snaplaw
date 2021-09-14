@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { FlatList, View, StyleSheet, Dimensions } from "react-native";
+import React, { useEffect } from "react";
+import { StyleSheet } from "react-native";
 import TopBar from "../layouts/TopBar";
 import { useI18n } from "../../translator/i18n";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { setModal } from "../../store/modules/main/slice";
 import NotificationListItem from "../components/NotificationListItem";
-import DefaultText from "../basics/typography/DefaultText";
 import { notificationConfig } from "../../services/notification/notificationsConfig";
 import AbstractList from "../components/lists/AbstractList";
 import { requestNotifications } from "../../store/modules/notifications/action-creators";
-
-const LIST_ITEM_HEIGHT = 77;
 
 export default function Notifications(): JSX.Element {
   const { t } = useI18n();
@@ -50,7 +47,6 @@ export default function Notifications(): JSX.Element {
         elements={list}
         listItem={({ item }) => (
           <NotificationListItem
-            style={styles.itemHeight}
             item={item}
             onPress={modalHandler}
             onEndReached={getNotifications}
@@ -69,8 +65,5 @@ const styles = StyleSheet.create({
   },
   item: {
     elevation: 2,
-  },
-  itemHeight: {
-    height: LIST_ITEM_HEIGHT,
   },
 });
