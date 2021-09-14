@@ -6,9 +6,12 @@ import dayjs from "dayjs";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { AntDesign } from "@expo/vector-icons";
+import { NotificationListItemInterface } from "../../store/modules/notifications/types";
+import { notificationConfig } from "../../services/notification/notificationsConfig";
+import { useI18n } from "../../translator/i18n";
 
 interface NotificationListItemPropsInterface {
-  item: NotificationListInterface;
+  item: NotificationListItemInterface;
   style: { height: number };
   onPress: Function;
 }
@@ -18,8 +21,8 @@ export default function NotificationListItem({
   style,
   onPress,
 }: NotificationListItemPropsInterface): JSX.Element {
-  const { isNew, notification, createdAt, userNameFrom, type, contractName } =
-    item;
+  const { id, type, contractId, usernameFrom, createdAt, isNew, userId } = item;
+  const { t } = useI18n();
   const swipeable: any = useRef();
   const isToday = require("dayjs/plugin/isToday");
   dayjs.extend(isToday);
@@ -62,7 +65,7 @@ export default function NotificationListItem({
       <TouchableOpacity
         style={style}
         activeOpacity={1}
-        onPress={() => onPress(isRead, type, userNameFrom, `“${contractName}”`)}
+        onPress={() => onPress(isRead, type, usernameFrom, `“${contractId}”`)}
       >
         <View
           style={[
@@ -78,7 +81,7 @@ export default function NotificationListItem({
           <View style={styles.notificationBox}>
             <View style={styles.notificationHeader}>
               <DefaultText
-                text={userNameFrom}
+                text={usernameFrom}
                 style={isRead ? null : styles.fontColorNotNew}
               />
               <DefaultText
@@ -90,7 +93,7 @@ export default function NotificationListItem({
             </View>
             <View style={styles.notificationBody}>
               <DefaultText
-                text={notification}
+                text={type}
                 style={[
                   styles.notificationText,
                   isRead ? null : styles.fontColorNotNew,

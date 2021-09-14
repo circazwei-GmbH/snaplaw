@@ -4,19 +4,10 @@ import {
   Draft,
   PayloadAction,
 } from "@reduxjs/toolkit";
-
-interface notificationInterface {
-  _id: string;
-  type: string;
-  contractorId: string;
-  usernameFrom: string;
-  createdAt: string;
-  isNew: boolean;
-  userId: string;
-}
+import { NotificationInterface } from "./types";
 
 interface NotificationsState {
-  notifications: notificationInterface[];
+  notifications: NotificationInterface[];
   notificationsPagination: {
     page: number;
     isNextPage: boolean;
@@ -32,7 +23,7 @@ const initialState: NotificationsState = {
 };
 
 const setNotificationsListAction = createAction<
-  { list: notificationInterface[]; page: string },
+  { list: NotificationInterface[]; page: string },
   "setNotifications"
 >("setNotifications");
 
@@ -43,7 +34,7 @@ const notificationsSlice = createSlice({
     [setNotificationsListAction.type]: (
       state: Draft<NotificationsState>,
       action: PayloadAction<{
-        list: notificationInterface[];
+        list: NotificationInterface[];
         page: string;
       }>
     ) => {

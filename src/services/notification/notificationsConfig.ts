@@ -6,14 +6,14 @@ interface configActionsInterface {
   actionHandler: () => void;
 }
 
-interface notificationInterface {
+interface NotificationInterface {
   message: string;
   actions: configActionsInterface;
 }
 
 export interface notificationConfigInterface {
-  user_invited_to_contract: notificationInterface;
-  invite_to_contract_rejected: notificationInterface;
+  user_invited_to_contract: NotificationInterface;
+  invite_to_contract_rejected: NotificationInterface;
 }
 
 export const notificationConfig = {

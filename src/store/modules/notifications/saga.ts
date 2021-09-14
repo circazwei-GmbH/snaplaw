@@ -15,10 +15,8 @@ function* requestNotificationsList() {
     (state) => state.notifications.notifications
   );
   try {
-    console.log(currentList);
-
     const page = listPagination.page + (currentList.length ? 1 : 0);
-    const list = yield call(API.requestNotifications, { page });
+    const list = yield call(API.requestNotifications, page);
     yield put(setNotifications({ list, page }));
   } catch (error) {
     console.log(error);

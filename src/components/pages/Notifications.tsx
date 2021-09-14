@@ -8,16 +8,7 @@ import NotificationListItem from "../components/NotificationListItem";
 import DefaultText from "../basics/typography/DefaultText";
 import { notificationConfig } from "../../services/notification/notificationsConfig";
 import AbstractList from "../components/lists/AbstractList";
-
-export interface NotificationListInterface {
-  isNew: boolean;
-  _id: string;
-  type: string;
-  contractName: string;
-  userNameFrom: string;
-  notification: string;
-  createdAt: string;
-}
+import { requestNotifications } from "../../store/modules/notifications/action-creators";
 
 const LIST_ITEM_HEIGHT = 77;
 
@@ -45,6 +36,10 @@ export default function Notifications(): JSX.Element {
       })
     );
   };
+
+  useEffect(() => {
+    dispatch(requestNotifications());
+  }, []);
 
   return (
     <TopBar pageName={t("notifications.title")}>
