@@ -6,9 +6,6 @@ export interface RequestNotificationsAction extends BaseAction {
   payload: string;
 }
 
-export const requestNotifications = (
-  page: string
-): RequestNotificationsAction => ({
+export const requestNotifications = () => ({
   type: REQUEST_NOTIFICATIONS,
-  payload: page,
 });
