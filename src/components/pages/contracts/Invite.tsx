@@ -63,19 +63,14 @@ export default function Invite(): JSX.Element {
   };
 
   const onChangeHandler = (newValue: string) => {
+    clearTimeout(timer);
     setEmailValue(formFieldFill("email", newValue, emailValue));
     const timeout = setTimeout(() => {
       dispatch(clearInviteEmails());
       dispatch(requestUsersEmail(emailInitialValue.email.value));
-    }, 500);
+    }, 1500);
     setTimer(timeout);
   };
-
-  useEffect(() => {
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [timer]);
 
   const inviteHandler = () => {
     const emailLocalValue: InviteEmailInterface = {
