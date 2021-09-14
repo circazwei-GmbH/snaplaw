@@ -17,6 +17,8 @@ export default function Notifications(): JSX.Element {
   const dispatch = useAppDispatch();
   const list = useAppSelector((state) => state.notifications.notifications);
 
+  const getNotifications = () => dispatch(requestNotifications());
+
   const modalHandler = (
     isNew: boolean,
     type: string,
@@ -38,7 +40,7 @@ export default function Notifications(): JSX.Element {
   };
 
   useEffect(() => {
-    dispatch(requestNotifications());
+    getNotifications();
   }, []);
 
   return (
@@ -51,9 +53,10 @@ export default function Notifications(): JSX.Element {
             style={styles.itemHeight}
             item={item}
             onPress={modalHandler}
-            onEndReached={() => {}}
+            onEndReached={getNotifications}
           />
         )}
+        style={styles.container}
       />
     </TopBar>
   );
@@ -70,34 +73,4 @@ const styles = StyleSheet.create({
   itemHeight: {
     height: LIST_ITEM_HEIGHT,
   },
-  emptyListBox: {
-    justifyContent: "center",
-    height: Dimensions.get("window").height * 0.7,
-    paddingHorizontal: 16,
-  },
-  emptyListText: {
-    textAlign: "center",
-  },
 });
-
-//<FlatList
-//  style={styles.container}
-//  data={list}
-//  keyExtractor={(item) => item._id}
-//  renderItem={({ item }) => (
-//    <NotificationListItem
-//      style={styles.itemHeight}
-//      item={item}
-//      onPress={modalHandler}
-//    />
-//  )}
-//  ListEmptyComponent={EmptyListComponent}
-//  onEndReached={() => {}}
-//  onEndReachedThreshold={0.0001}
-//  em
-//  getItemLayout={(data, index) => ({
-//    length: LIST_ITEM_HEIGHT,
-//    offset: LIST_ITEM_HEIGHT * index,
-//    index,
-//  })}
-///>

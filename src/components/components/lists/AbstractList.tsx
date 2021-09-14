@@ -16,6 +16,7 @@ type AbstractListProps = {
   onEndReached?: () => void;
   onRefresh?: () => void;
   isRefreshing?: boolean;
+  style?: Record<string, unknown>;
 };
 
 export default function AbstractList({
@@ -26,6 +27,7 @@ export default function AbstractList({
   onEndReached,
   onRefresh,
   isRefreshing,
+  style,
 }: AbstractListProps) {
   if (isLoading) {
     return (
@@ -49,7 +51,7 @@ export default function AbstractList({
 
   return (
     <FlatList
-      style={styles.container}
+      style={[styles.container, style]}
       data={elements}
       renderItem={listItem}
       onEndReached={onEndReached}

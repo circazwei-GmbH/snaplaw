@@ -19,7 +19,6 @@ function* requestNotificationsList() {
     const list = yield call(API.requestNotifications, page);
     yield put(setNotifications({ list, page }));
   } catch (error) {
-    console.log(error);
     yield put(responseError(error));
   }
 }

@@ -33,6 +33,9 @@ export default function NotificationListItem({
     swipeable.current.close();
   };
 
+  const showNotification = (partner: string, contract: string) =>
+    t(notificationConfig[type]["message"], { contract, partner });
+
   const RightSwipeAction = (
     progress: Animated.AnimatedInterpolation,
     dragX: Animated.AnimatedInterpolation
@@ -93,7 +96,7 @@ export default function NotificationListItem({
             </View>
             <View style={styles.notificationBody}>
               <DefaultText
-                text={type}
+                text={showNotification(usernameFrom, type)}
                 style={[
                   styles.notificationText,
                   isRead ? null : styles.fontColorNotNew,
