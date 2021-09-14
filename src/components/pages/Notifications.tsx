@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FlatList, View, StyleSheet, Dimensions } from "react-native";
 import TopBar from "../layouts/TopBar";
 import { useI18n } from "../../translator/i18n";
@@ -23,8 +23,8 @@ const LIST_ITEM_HEIGHT = 77;
 
 export default function Notifications(): JSX.Element {
   const { t } = useI18n();
-  const list = [];
   const dispatch = useAppDispatch();
+  const list = useAppSelector((state) => state.notifications.notifications);
 
   const modalHandler = (
     isNew: boolean,
