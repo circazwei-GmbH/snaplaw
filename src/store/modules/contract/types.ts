@@ -95,6 +95,24 @@ export interface SignContractAction extends BaseAction {
   payload: string;
 }
 
+export interface InviteUserInterface {
+  contractId?: string;
+  search: string;
+}
+
+export interface InviteUserAction extends BaseAction {
+  payload: InviteUserInterface;
+}
+
+export interface RequestGetEmailsInterface {
+  payload: string;
+  page: string;
+}
+
+export interface RequestGetEmailsAction extends BaseAction {
+  payload: string;
+}
+
 export { ProductDataScreenInterface, PRODUCT_DATA_FIELDS };
 export { UserDataScreenInterface, USER_DATA_FIELDS };
 export { ProductConditionScreenInterface, CONDITION_VALUE, CONDITIONS };

@@ -9,6 +9,8 @@ import {
   VALIDATE_ALL_SCREENS,
   VALIDATE_SCREEN,
   validateScreen,
+  REQUEST_INVITE_USER,
+  REQUEST_USERS_EMAIL,
 } from "./action-creators";
 import {
   RequestContractAction,
@@ -18,6 +20,8 @@ import {
   ScreenValidateAction,
   SignContractAction,
   ValidateAllScreensAction,
+  InviteUserAction,
+  RequestGetEmailsAction,
 } from "./types";
 import API from "../../../services/contract/index";
 import { responseError } from "../auth/action-creators";
@@ -32,8 +36,9 @@ import {
   setInitedContract,
   setListLoading,
   updateContractSign,
+  setInviteEmails,
 } from "./slice";
-import * as RootHavigation from "../../../router/RootNavigation";
+import * as RootNavigation from "../../../router/RootNavigation";
 import { HOME_ROUTER } from "../../../router/HomeRouterType";
 import { prefillUserData } from "../../../services/contract/user-data-prefiller";
 import { SelectType } from "../../hooks";
@@ -60,7 +65,7 @@ function* createContract({ payload }: RequestCreateContractAction) {
       })
     );
     yield put(clearErrors());
-    RootHavigation.navigate(HOME_ROUTER.CONTRACT, { screenCount: 0 });
+    RootNavigation.navigate(HOME_ROUTER.CONTRACT, { screenCount: 0 });
   } catch (error) {
     yield put(responseError(error));
   } finally {
@@ -212,6 +217,29 @@ function* signContract({ payload }: SignContractAction) {
   }
 }
 
+function* requestInviteUser({ payload }: InviteUserAction) {
+  try {
+    yield call(API.inviteUser, payload);
+    RootNavigation.pop();
+  } catch (error) {
+    yield put(responseError(error));
+  }
+}
+
+function* requestUsersEmail({ payload }: RequestGetEmailsAction) {
+  const listPagination = yield select(
+    (state) => state.contract.emailsListPagination
+  );
+  const currentList = yield select((state) => state.contract.inviteEmailsList);
+  try {
+    const page = listPagination.page + (currentList.length ? 1 : 0);
+    const list = yield call(API.getUserEmails, { payload, page });
+    yield put(setInviteEmails({ list, page }));
+  } catch (error) {
+    yield put(responseError(error));
+  }
+}
+
 function* contractSaga() {
   yield takeLatest(REQUEST_CREATE_CONTRACT, createContract);
   yield takeLatest(REQUEST_SCREEN_DATA, requestScreenData);
@@ -221,6 +249,8 @@ function* contractSaga() {
   yield takeLatest(REQUEST_CONTRACT_DELETE, requestContractDelete);
   yield takeLatest(VALIDATE_ALL_SCREENS, validateAllScreens);
   yield takeLatest(SIGN_CONTRACT, signContract);
+  yield takeLatest(REQUEST_INVITE_USER, requestInviteUser);
+  yield takeLatest(REQUEST_USERS_EMAIL, requestUsersEmail);
 }
 
 export default contractSaga;

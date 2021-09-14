@@ -23,6 +23,7 @@ import { useI18n } from "../translator/i18n";
 import MyContracts from "../components/pages/MyContracts";
 import { HOME_ROUTER } from "./HomeRouterType";
 import Contract from "../components/pages/contracts/Contract";
+import Invite from "../components/pages/contracts/Invite";
 import { orientationChange } from "../store/modules/main/action-creators";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { ROUTER_TABS } from "./TabRouterTypes";
@@ -87,6 +88,7 @@ export default function Router() {
               name={HOME_ROUTER.CONTRACT}
               component={Contract}
             />
+            <HomeStack.Screen name={HOME_ROUTER.INVITE} component={Invite} />
           </HomeStack.Navigator>
         )}
       </Tab.Screen>

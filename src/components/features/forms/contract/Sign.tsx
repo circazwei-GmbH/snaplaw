@@ -23,6 +23,8 @@ import {
   countToPopLength,
   getTypeByContractAndScreen,
 } from "../../../../store/modules/contract/helper";
+import * as RootNavigation from "../../../../router/RootNavigation";
+import { HOME_ROUTER } from "../../../../router/HomeRouterType";
 
 export default function Sign() {
   const { t } = useI18n();
@@ -62,6 +64,10 @@ export default function Sign() {
     );
   };
 
+  const inviteHandler = () => {
+    RootNavigation.navigate(HOME_ROUTER.INVITE);
+  };
+
   useEffect(() => {
     if (!signVisible) {
       return () => {};
@@ -98,7 +104,7 @@ export default function Sign() {
         <InviteInput
           style={styles.inputInBlock}
           invitedName={name}
-          inviteHandler={() => {}}
+          inviteHandler={inviteHandler}
         />
       </View>
       <SignModal
