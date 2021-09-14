@@ -1,8 +1,9 @@
 import { call, put, select, takeLatest } from "redux-saga/effects";
 import {
   REQUEST_NOTIFICATIONS,
-  RequestNotificationsAction,
+  CHANGE_NOTIFICATION_STATUS,
 } from "./action-creators";
+import { ChangeNotificationStatusAction } from "./types";
 import { setNotifications } from "./slice";
 import API from "../../../services/notification/index";
 import { responseError } from "../auth/action-creators";
@@ -23,8 +24,17 @@ function* requestNotificationsList() {
   }
 }
 
+function* changeStatus({ payload }: ChangeNotificationStatusAction) {
+  try {
+    console.log("change status");
+  } catch (error) {
+    yield put(responseError(error));
+  }
+}
+
 function* notificationsSaga() {
   yield takeLatest(REQUEST_NOTIFICATIONS, requestNotificationsList);
+  yield takeLatest(CHANGE_NOTIFICATION_STATUS, changeStatus);
 }
 
 export default notificationsSaga;

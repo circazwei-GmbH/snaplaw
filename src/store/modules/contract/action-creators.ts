@@ -7,9 +7,7 @@ import {
   SignContractAction,
   ValidateAllScreensAction,
   InviteUserAction,
-  InviteUserInterface,
   RequestGetEmailsAction,
-  RequestGetEmailsInterface,
 } from "./types";
 import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
 import { getTypeByContractAndScreen } from "./helper";

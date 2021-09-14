@@ -66,7 +66,9 @@ export default function NotificationListItem({
       <TouchableOpacity
         style={styles.container}
         activeOpacity={1}
-        onPress={() => onPress(isRead, type, usernameFrom, `“${contractId}”`)}
+        onPress={() =>
+          onPress(isRead, type, usernameFrom, `“${contractId}”` ?? "")
+        }
       >
         <View
           style={[
@@ -94,7 +96,7 @@ export default function NotificationListItem({
             </View>
             <View style={styles.notificationBody}>
               <DefaultText
-                text={showNotification(usernameFrom, type)}
+                text={showNotification(usernameFrom, contractId)}
                 style={[
                   styles.notificationText,
                   isRead ? null : styles.fontColorNotNew,
@@ -164,6 +166,7 @@ const styles = StyleSheet.create({
   rightSwipe: {
     justifyContent: "center",
     alignItems: "center",
+    marginVertical: 4,
     width: 100,
     height: 70,
     paddingTop: 10,

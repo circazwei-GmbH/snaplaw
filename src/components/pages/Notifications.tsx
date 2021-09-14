@@ -7,7 +7,10 @@ import { setModal } from "../../store/modules/main/slice";
 import NotificationListItem from "../components/NotificationListItem";
 import { notificationConfig } from "../../services/notification/notificationsConfig";
 import AbstractList from "../components/lists/AbstractList";
-import { requestNotifications } from "../../store/modules/notifications/action-creators";
+import {
+  requestNotifications,
+  changeNotificationStatus,
+} from "../../store/modules/notifications/action-creators";
 
 export default function Notifications(): JSX.Element {
   const { t } = useI18n();
@@ -45,11 +48,12 @@ export default function Notifications(): JSX.Element {
       <AbstractList
         messageOnEmpty={t("notifications.empty_list")}
         elements={list}
+        onEndReached={getNotifications}
         listItem={({ item }) => (
           <NotificationListItem
             item={item}
             onPress={modalHandler}
-            onEndReached={getNotifications}
+            getNotifications={getNotifications}
           />
         )}
         style={styles.container}

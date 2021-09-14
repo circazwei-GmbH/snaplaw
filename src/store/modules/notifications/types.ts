@@ -1,3 +1,5 @@
+import { BaseAction } from "../auth/types";
+
 export interface NotificationInterface {
   _id: string;
   type: string;
@@ -16,4 +18,13 @@ export interface NotificationListItemInterface {
   createdAt: string;
   isNew: boolean;
   userId: string;
+}
+
+export interface ChangeNotificationStatusInterface {
+  id: string;
+  isNew: boolean;
+}
+
+export interface ChangeNotificationStatusAction extends BaseAction {
+  payload: ChangeNotificationStatusInterface;
 }
