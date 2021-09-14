@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { View, StyleSheet, Text, Platform } from "react-native";
+import { View, StyleSheet, Text, Platform, Dimensions } from "react-native";
 import BackButton from "../basics/buttons/BackButton";
 
 interface TopBarProps {
@@ -8,7 +8,7 @@ interface TopBarProps {
   leftButton?: JSX.Element;
   rightButton?: JSX.Element;
   bottomElement?: JSX.Element;
-  withBackbround?: boolean;
+  withBackground?: boolean;
   style?: object;
 }
 
@@ -18,7 +18,7 @@ export default function TopBar({
   leftButton,
   rightButton,
   bottomElement,
-  withBackbround = false,
+  withBackground = false,
   style,
 }: TopBarProps) {
   return (
@@ -26,7 +26,7 @@ export default function TopBar({
       <View
         style={[
           styles.header,
-          withBackbround ? styles.background : null,
+          withBackground ? styles.background : null,
           style,
         ]}
       >
@@ -40,14 +40,14 @@ export default function TopBar({
         <View
           style={[
             styles.bottomElement,
-            withBackbround ? styles.background : null,
+            withBackground ? styles.background : null,
             style,
           ]}
         >
           {bottomElement}
         </View>
       ) : null}
-      {withBackbround ? (
+      {withBackground ? (
         <View style={[styles.border, styles.background]} />
       ) : null}
       {children}
@@ -70,13 +70,14 @@ const styles = StyleSheet.create({
     }),
   },
   headerText: {
-    width: "44%",
+    width: Dimensions.get("window").width * 0.44,
+    justifyContent: "center",
     textAlign: "center",
     fontFamily: "OS-SB",
     fontSize: 17,
   },
   buttonPlaceholder: {
-    width: "28%",
+    width: Dimensions.get("window").width * 0.28,
     height: 45,
     justifyContent: "center",
     alignItems: "flex-end",

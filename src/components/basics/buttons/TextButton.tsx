@@ -5,6 +5,7 @@ import {
   Text,
   StyleProp,
   TextStyle,
+  Dimensions,
 } from "react-native";
 
 interface ButtonPropsInterface {
@@ -45,7 +46,7 @@ export default function TextButton({
 const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
-    width: "28%",
+    width: Dimensions.get("window").width * 0.28,
     height: 45,
   },
   text: {
