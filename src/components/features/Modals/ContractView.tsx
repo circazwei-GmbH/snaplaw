@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, StyleSheet, View } from "react-native";
+import { Dimensions, Modal, ScrollView, StyleSheet, View } from "react-native";
 import Pdf from "react-native-pdf";
 import TextButton from "../../basics/buttons/TextButton";
 import { useI18n } from "../../../translator/i18n";
@@ -7,6 +7,13 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { buildPDFSource } from "../../../services/contract";
 import { setMessage, setModal } from "../../../store/modules/main/slice";
 import { navigationPopToTop } from "../../../store/modules/main/action-creators";
+import { CONTRACT_SCREEN_TYPES } from "../../../store/modules/contract/constants";
+import {
+  PRODUCT_DESCRIPTION_FIELDS,
+  ProductDescriptionScreenInterface,
+} from "../../../store/modules/contract/purchase/product-description";
+import DescriptionPhotos from "../../components/DescriptionPhotos";
+import DefaultText from "../../basics/typography/DefaultText";
 
 type ContractViewProps = {
   visible: boolean;
@@ -19,6 +26,12 @@ export default function ContractView({ visible, onClose }: ContractViewProps) {
   const locale = useAppSelector((state) => state.profile.language);
   const contractId = useAppSelector(
     (state) => state.contract.currentContract?.id
+  );
+  const descriptionScreen = useAppSelector(
+    (state) =>
+      state.contract.currentContract?.screens.find(
+        (screen) => screen.type === CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION
+      ) as ProductDescriptionScreenInterface
   );
 
   const onSaveHandler = () => {
@@ -59,13 +72,55 @@ export default function ContractView({ visible, onClose }: ContractViewProps) {
               type="right"
             />
           </View>
-          {visible && contractId ? (
-            <Pdf
-              style={styles.pdf}
-              onError={onError}
-              source={buildPDFSource(contractId, locale)}
-            />
-          ) : null}
+          <ScrollView>
+            {visible && contractId ? (
+              <Pdf
+                style={styles.pdf}
+                onError={onError}
+                source={buildPDFSource(contractId, locale)}
+              />
+            ) : null}
+            <View style={styles.mediaContainer}>
+              {descriptionScreen &&
+              descriptionScreen.data[
+                PRODUCT_DESCRIPTION_FIELDS.productPhotos
+              ] ? (
+                <>
+                  <DefaultText
+                    text={t("contracts.pdf_view.additional_media")}
+                    style={[styles.buttonText, styles.padding]}
+                  />
+                  <DescriptionPhotos
+                    photos={
+                      descriptionScreen.data[
+                        PRODUCT_DESCRIPTION_FIELDS.productPhotos
+                      ]
+                    }
+                    fieldName={PRODUCT_DESCRIPTION_FIELDS.productPhotos}
+                  />
+                </>
+              ) : null}
+              {descriptionScreen &&
+              descriptionScreen.data[
+                PRODUCT_DESCRIPTION_FIELDS.accessoriesPhotos
+              ] ? (
+                <>
+                  <DefaultText
+                    text={t("contracts.pdf_view.accessories_media")}
+                    style={[styles.buttonText, styles.padding]}
+                  />
+                  <DescriptionPhotos
+                    photos={
+                      descriptionScreen.data[
+                        PRODUCT_DESCRIPTION_FIELDS.accessoriesPhotos
+                      ]
+                    }
+                    fieldName={PRODUCT_DESCRIPTION_FIELDS.productPhotos}
+                  />
+                </>
+              ) : null}
+            </View>
+          </ScrollView>
         </View>
       </Modal>
     </View>
@@ -80,9 +135,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#C2C2C2",
   },
   pdf: {
-    flex: 1,
     width: "100%",
-    height: "100%",
+    height: (Dimensions.get("screen").height * 7) / 10,
     backgroundColor: "#C2C2C2",
   },
   buttonContainer: {
@@ -91,5 +145,11 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#FFF",
+  },
+  padding: {
+    paddingHorizontal: 16,
+  },
+  mediaContainer: {
+    marginVertical: 10,
   },
 });

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Dimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { PROFILE_ROUTER } from "../../router/ProfileRouterTypes";
 import * as RootNavigation from "../../router/RootNavigation";
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "flex-start",
     paddingLeft: 16,
-    width: 120,
+    width: Dimensions.get("window").width * 0.28,
     height: 45,
   },
   pinkDot: {

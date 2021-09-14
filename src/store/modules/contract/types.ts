@@ -54,8 +54,8 @@ export interface ScreenValidateAction extends BaseAction {
 
 export interface RequestContractListAction extends BaseAction {
   payload: {
-    type: CONTRACT_LIST_STATE,
-    isRefresh: boolean
+    type: CONTRACT_LIST_STATE;
+    isRefresh: boolean;
   };
 }
 
@@ -92,6 +92,24 @@ export interface ValidateAllScreensAction extends BaseAction {
 }
 
 export interface SignContractAction extends BaseAction {
+  payload: string;
+}
+
+export interface InviteUserInterface {
+  contractId?: string;
+  search: string;
+}
+
+export interface InviteUserAction extends BaseAction {
+  payload: InviteUserInterface;
+}
+
+export interface RequestGetEmailsInterface {
+  payload: string;
+  page: string;
+}
+
+export interface RequestGetEmailsAction extends BaseAction {
   payload: string;
 }
 

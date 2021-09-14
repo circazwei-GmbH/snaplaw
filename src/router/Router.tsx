@@ -18,6 +18,7 @@ import { Feather } from "@expo/vector-icons";
 import { useI18n } from "../translator/i18n";
 import MyContracts from "../components/pages/MyContracts";
 import Contract from "../components/pages/contracts/Contract";
+import Invite from "../components/pages/contracts/Invite";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { requestLanguage } from "../store/modules/profile/action-creators";
 import { requestToken } from "../store/modules/auth/action-creators";
@@ -71,12 +72,12 @@ export default function Router() {
       >
         {() => (
           <MyContractsStack.Navigator headerMode="none">
-            <ProfileStack.Screen
+            <MyContractsStack.Screen
               name={MYCONTRACT_ROUTER.MY_CONTRACTS}
               component={MyContracts}
             />
 
-            <ProfileStack.Screen
+            <MyContractsStack.Screen
               name={PROFILE_ROUTER.NOTIFICATIONS}
               component={Notifications}
             />
@@ -102,7 +103,8 @@ export default function Router() {
               name={HOME_ROUTER.CONTRACT}
               component={Contract}
             />
-            <ProfileStack.Screen
+            <HomeStack.Screen name={HOME_ROUTER.INVITE} component={Invite} />
+            <HomeStack.Screen
               name={PROFILE_ROUTER.NOTIFICATIONS}
               component={Notifications}
             />

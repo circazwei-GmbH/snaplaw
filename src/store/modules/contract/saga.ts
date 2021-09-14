@@ -1,4 +1,4 @@
-import {call, put, select, takeLatest} from "redux-saga/effects";
+import { call, put, select, takeLatest } from "redux-saga/effects";
 import {
   REQEST_CONTRACTS_LIST,
   REQUEST_CONTRACT,
@@ -9,6 +9,8 @@ import {
   VALIDATE_ALL_SCREENS,
   VALIDATE_SCREEN,
   validateScreen,
+  REQUEST_INVITE_USER,
+  REQUEST_USERS_EMAIL,
 } from "./action-creators";
 import {
   RequestContractAction,
@@ -18,11 +20,13 @@ import {
   ScreenValidateAction,
   SignContractAction,
   ValidateAllScreensAction,
+  InviteUserAction,
+  RequestGetEmailsAction,
 } from "./types";
 import API from "../../../services/contract/index";
-import {responseError} from "../auth/action-creators";
-import {addToWAiter, removeFromWaiter} from "../main/slice";
-import {CONTRACT_CREATION_WAIT} from "./constants";
+import { responseError } from "../auth/action-creators";
+import { addToWAiter, removeFromWaiter } from "../main/slice";
+import { CONTRACT_CREATION_WAIT } from "./constants";
 import {
   clearErrors,
   CONTRACT_LIST_LOADING_TYPE,
@@ -32,14 +36,15 @@ import {
   setInitedContract,
   setListLoading,
   updateContractSign,
+  setInviteEmails,
 } from "./slice";
-import * as RootHavigation from "../../../router/RootNavigation";
-import {HOME_ROUTER} from "../../../router/HomeRouterType";
-import {prefillUserData} from "../../../services/contract/user-data-prefiller";
-import {SelectType} from "../../hooks";
-import {contractValidationConfig, screenFieldValidator} from "./validation";
-import {BaseScreenDataInterface} from "./base-types";
-import {Translator} from "../../../translator/i18n";
+import * as RootNavigation from "../../../router/RootNavigation";
+import { HOME_ROUTER } from "../../../router/HomeRouterType";
+import { prefillUserData } from "../../../services/contract/user-data-prefiller";
+import { SelectType } from "../../hooks";
+import { contractValidationConfig, screenFieldValidator } from "./validation";
+import { BaseScreenDataInterface } from "./base-types";
+import { Translator } from "../../../translator/i18n";
 
 function* createContract({ payload }: RequestCreateContractAction) {
   try {
@@ -60,7 +65,7 @@ function* createContract({ payload }: RequestCreateContractAction) {
       })
     );
     yield put(clearErrors());
-    RootHavigation.navigate(HOME_ROUTER.CONTRACT, { screenCount: 0 });
+    RootNavigation.navigate(HOME_ROUTER.CONTRACT, { screenCount: 0 });
   } catch (error) {
     yield put(responseError(error));
   } finally {
@@ -131,7 +136,9 @@ function* validateAllScreens({ payload }: ValidateAllScreensAction) {
   }
 }
 
-function* requestConreactsList({ payload: { type, isRefresh } }: RequestContractListAction) {
+function* requestConreactsList({
+  payload: { type, isRefresh },
+}: RequestContractListAction) {
   const listPagination = yield select((state) => state.contract.listPagination);
   if (listPagination.listType === type && !listPagination.isNextPage) {
     return;
@@ -143,25 +150,27 @@ function* requestConreactsList({ payload: { type, isRefresh } }: RequestContract
         ? listPagination.page + (currentContracts.length ? 1 : 0)
         : 0;
     if (!requestedPage) {
-      yield put(setListLoading(isRefresh ? CONTRACT_LIST_LOADING_TYPE.REFRESH : CONTRACT_LIST_LOADING_TYPE.INITIAL));
+      yield put(
+        setListLoading(
+          isRefresh
+            ? CONTRACT_LIST_LOADING_TYPE.REFRESH
+            : CONTRACT_LIST_LOADING_TYPE.INITIAL
+        )
+      );
     }
-    const contracts = yield call(
-      API.requestContractList,
-      type,
-      requestedPage
-    );
+    const contracts = yield call(API.requestContractList, type, requestedPage);
     yield put(
       setContractsList({
         list: contracts,
         page: requestedPage,
         type: type,
-        isRefresh
+        isRefresh,
       })
     );
   } catch (error) {
     yield put(responseError(error));
   } finally {
-    yield call(() => new Promise(r => setTimeout(() => r(), 2000)))
+    yield call(() => new Promise((r) => setTimeout(() => r(), 2000)));
     yield put(setListLoading(undefined));
   }
 }
@@ -208,6 +217,29 @@ function* signContract({ payload }: SignContractAction) {
   }
 }
 
+function* requestInviteUser({ payload }: InviteUserAction) {
+  try {
+    yield call(API.inviteUser, payload);
+    RootNavigation.pop();
+  } catch (error) {
+    yield put(responseError(error));
+  }
+}
+
+function* requestUsersEmail({ payload }: RequestGetEmailsAction) {
+  const listPagination = yield select(
+    (state) => state.contract.emailsListPagination
+  );
+  const currentList = yield select((state) => state.contract.inviteEmailsList);
+  try {
+    const page = listPagination.page + (currentList.length ? 1 : 0);
+    const list = yield call(API.getUserEmails, { payload, page });
+    yield put(setInviteEmails({ list, page }));
+  } catch (error) {
+    yield put(responseError(error));
+  }
+}
+
 function* contractSaga() {
   yield takeLatest(REQUEST_CREATE_CONTRACT, createContract);
   yield takeLatest(REQUEST_SCREEN_DATA, requestScreenData);
@@ -217,6 +249,8 @@ function* contractSaga() {
   yield takeLatest(REQUEST_CONTRACT_DELETE, requestContractDelete);
   yield takeLatest(VALIDATE_ALL_SCREENS, validateAllScreens);
   yield takeLatest(SIGN_CONTRACT, signContract);
+  yield takeLatest(REQUEST_INVITE_USER, requestInviteUser);
+  yield takeLatest(REQUEST_USERS_EMAIL, requestUsersEmail);
 }
 
 export default contractSaga;

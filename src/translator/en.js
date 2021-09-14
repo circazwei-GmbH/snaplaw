@@ -138,7 +138,7 @@ export default {
       name: "First name",
       lastName: "Last name",
       dateOfBirth: "Date of birth (DD-MM-YYYY)",
-      email: "E-mail",
+      email: "Email",
       phone: "Phone",
       address: "Address (Street, City)",
       postCode: "Postal code",
@@ -299,6 +299,8 @@ export default {
     pdf_view: {
       edit: "Edit",
       save: "Save",
+      additional_media: "Additional information",
+      accessories_media: "Accessories",
     },
     messages: {
       found_in_pregress_folder:
@@ -323,4 +325,10 @@ export default {
     },
   },
   ok: "OK",
+  invite_page: {
+    title: "Invite",
+    invitation:
+      "Enter the email address of the partner and invite him to the contract",
+    error: "Please enter a valid email",
+  },
 };

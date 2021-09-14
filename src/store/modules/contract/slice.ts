@@ -13,7 +13,7 @@ import { CONTRACT_SCREEN_TYPES } from "./constants";
 
 export enum CONTRACT_LIST_LOADING_TYPE {
   INITIAL = "INITIAL",
-  REFRESH = "REFRESH"
+  REFRESH = "REFRESH",
 }
 
 interface ContractState {
@@ -28,6 +28,11 @@ interface ContractState {
     page: number;
     isNextPage: boolean;
   };
+  inviteEmailsList: string[];
+  emailsListPagination: {
+    page: number;
+    isNextPage: boolean;
+  };
 }
 
 const initialState: ContractState = {
@@ -37,6 +42,11 @@ const initialState: ContractState = {
   isListLoading: undefined,
   listPagination: {
     listType: CONTRACT_LIST_STATE.FINALIZED,
+    page: 0,
+    isNextPage: true,
+  },
+  inviteEmailsList: [],
+  emailsListPagination: {
     page: 0,
     isNextPage: true,
   },
@@ -76,6 +86,13 @@ const deleteContractAction = createAction<string, "deleteContract">(
 );
 const updateContractSignAction = createAction<string, "updateContractSign">(
   "updateContractSign"
+);
+const setInviteEmailsListAction = createAction<
+  { list: string[]; page: string },
+  "setInviteEmails"
+>("setInviteEmails");
+const clearInviteEmailsListAction = createAction<string[], "clearInviteEmails">(
+  "clearInviteEmails"
 );
 
 const contractSlice = createSlice({
@@ -156,10 +173,13 @@ const contractSlice = createSlice({
         list: ContractListType;
         page: number;
         type: CONTRACT_LIST_STATE;
-        isRefresh: boolean
+        isRefresh: boolean;
       }>
     ) => {
-      if (state.listPagination.listType === action.payload.type && !action.payload.isRefresh) {
+      if (
+        state.listPagination.listType === action.payload.type &&
+        !action.payload.isRefresh
+      ) {
         // @ts-ignore
         state.contracts = state.contracts.concat(action.payload.list);
       } else {
@@ -194,6 +214,25 @@ const contractSlice = createSlice({
       }
       state.currentContract.sign = action.payload;
     },
+    [setInviteEmailsListAction.type]: (
+      state: Draft<ContractState>,
+      action: PayloadAction<{
+        list: string[];
+        page: string;
+      }>
+    ) => {
+      if (action.payload.list !== undefined) {
+        state.inviteEmailsList = [
+          ...state.inviteEmailsList,
+          ...action.payload.list,
+        ];
+      }
+      state.emailsListPagination.page = +action.payload.page;
+      state.listPagination.isNextPage = !!action.payload.list.length;
+    },
+    [clearInviteEmailsListAction.type]: (state: Draft<ContractState>) => {
+      state.inviteEmailsList = [];
+    },
   },
 });
 
@@ -206,6 +245,8 @@ export const {
   setListLoading,
   deleteContract,
   updateContractSign,
+  setInviteEmails,
+  clearInviteEmails,
 } = contractSlice.actions;
 
 export default contractSlice.reducer;

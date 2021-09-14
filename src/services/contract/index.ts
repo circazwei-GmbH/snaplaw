@@ -1,6 +1,10 @@
 import { CONTRACT_TYPES } from "../../store/modules/contract/constants";
 import httpClient from "../api";
 import { BaseScreenDataInterface } from "../../store/modules/contract/base-types";
+import {
+  InviteUserInterface,
+  RequestGetEmailsInterface,
+} from "../../store/modules/contract/types";
 import { API_HOST } from "../../env/env";
 import { LanguageType } from "../../store/modules/profile/slice";
 import { LANGUAGE_GERMANY } from "../../store/modules/profile/constants";
@@ -18,6 +22,23 @@ const saveScreenData = (id: string, screen: BaseScreenDataInterface) =>
     ...screen.data,
     screenType: screen.type,
   });
+
+const inviteUser = (contractData: InviteUserInterface): Promise<any> =>
+  httpClient.post(`api/contracts/${contractData.contractId}/invite-user`, {
+    email: contractData.search,
+    locale: LANGUAGE_GERMANY ? "de" : "en",
+  });
+
+const getUserEmails = async (
+  searchData: RequestGetEmailsInterface
+): Promise<any> => {
+  const response = await httpClient.get(
+    `api/contracts/invited-emails?search=${searchData.payload ?? ""}&page=${
+      searchData.page ?? 0
+    }`
+  );
+  return response.data;
+};
 
 const requestContractList = async (type: CONTRACT_LIST_STATE, page: number) => {
   const response = await httpClient.get(
@@ -54,6 +75,8 @@ export const buildPDFSource = (
 export default {
   createContract,
   saveScreenData,
+  inviteUser,
+  getUserEmails,
   requestContractList,
   requestContract,
   requestDeleteContract,

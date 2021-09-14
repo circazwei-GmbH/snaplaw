@@ -41,10 +41,16 @@ jest.mock("@react-navigation/native", () => {
   };
 });
 
+jest.mock("../../../features/Modals/ContractView", () => {
+  const React = require("react");
+  return () => React.createElement("View");
+});
+
 const PROPS = {
   route: {
     params: {
       screenCount: 0,
+      id: undefined
     },
   },
 };
