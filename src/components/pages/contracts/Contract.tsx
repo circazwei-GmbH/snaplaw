@@ -18,6 +18,7 @@ import {
   requestScreenData,
 } from "../../../store/modules/contract/action-creators";
 import TextButton from "../../basics/buttons/TextButton";
+import InviteButton from "../../basics/buttons/InviteButton";
 import { navigationPopToTop } from "../../../store/modules/main/action-creators";
 import { setModal } from "../../../store/modules/main/slice";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -101,6 +102,7 @@ export default function Contract({
           type="left"
         />
       }
+      rightButton={<InviteButton />}
       pageName={t(`contracts.${contractType}.title`)}
     >
       <View style={styles.container}>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, StyleSheet } from "react-native";
+import { Pressable, StyleSheet, Dimensions } from "react-native";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import * as RootNavigation from "../../../router/RootNavigation";
 
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "flex-start",
     paddingLeft: 16,
-    width: 120,
+    width: Dimensions.get("window").width * 0.28,
     height: 45,
   },
 });

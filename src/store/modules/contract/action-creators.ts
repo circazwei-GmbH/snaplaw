@@ -6,6 +6,10 @@ import {
   RequestScreenDataAction,
   SignContractAction,
   ValidateAllScreensAction,
+  InviteUserAction,
+  InviteUserInterface,
+  RequestGetEmailsAction,
+  RequestGetEmailsInterface,
 } from "./types";
 import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
 import { getTypeByContractAndScreen } from "./helper";
@@ -18,6 +22,8 @@ export const REQEST_CONTRACTS_LIST = "REQEST_CONTRACTS_LIST";
 export const REQUEST_CONTRACT = "REQUEST_CONTRACT";
 export const REQUEST_CONTRACT_DELETE = "REQUEST_CONTRACT_DELETE";
 export const SIGN_CONTRACT = "SIGN_CONTRACT";
+export const REQUEST_INVITE_USER = "REQUEST_INVITE_USER";
+export const REQUEST_USERS_EMAIL = "REQUEST_USERS_EMAIL";
 
 export const requestCreateContract = (
   type: CONTRACT_TYPES
@@ -59,7 +65,7 @@ export const requestContractsList = (
   type: REQEST_CONTRACTS_LIST,
   payload: {
     type,
-    isRefresh: !!isRefresh
+    isRefresh: !!isRefresh,
   },
 });
 
@@ -76,4 +82,20 @@ export const requestDeleteContract = (id: string): RequestContractAction => ({
 export const signContract = (filePath: string): SignContractAction => ({
   type: SIGN_CONTRACT,
   payload: filePath,
+});
+
+export const requestInviteUser = (
+  search: string,
+  contractId?: string
+): InviteUserAction => ({
+  type: REQUEST_INVITE_USER,
+  payload: {
+    contractId,
+    search,
+  },
+});
+
+export const requestUsersEmail = (search: string): RequestGetEmailsAction => ({
+  type: REQUEST_USERS_EMAIL,
+  payload: search,
 });

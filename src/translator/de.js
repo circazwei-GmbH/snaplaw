@@ -289,6 +289,8 @@ export default {
     pdf_view: {
       edit: "Editieren",
       save: "Speichern",
+      additional_media: "Additionale Information",
+      accessories_media: "Zubehör",
     },
     messages: {
       found_in_pregress_folder:
@@ -313,4 +315,10 @@ export default {
     },
   },
   ok: "OK",
+  invite_page: {
+    title: "Einladen",
+    invitation:
+      "Geben Sie die E-Mail-Adresse des Partners ein und laden Sie ihn zum Vertrag ein",
+    error: "Bitte geben Sie eine gültige Email-Adresse ein",
+  },
 };
