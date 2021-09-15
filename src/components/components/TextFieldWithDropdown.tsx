@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   TextInput,
   View,
@@ -45,6 +45,7 @@ export default function InviteTextField({
 }: TextFieldWithDropdownPropsInterface): JSX.Element {
   const [localValue, setLocalValue] = useState(value);
   const [focused, setFocused] = useState(false);
+  const input = useRef();
 
   const textChangeHandler = (text: string) => {
     setLocalValue(text);
@@ -67,6 +68,9 @@ export default function InviteTextField({
 
   const inputButtonHandler = () => {
     setFocused(!focused);
+    if (focused) {
+      input.current.blur();
+    }
   };
 
   const renderItem = (item: EmailsListItemInterface): JSX.Element => (
@@ -90,6 +94,7 @@ export default function InviteTextField({
       </TouchableOpacity>
       <TextInput
         {...props}
+        ref={input}
         placeholder={!focused ? placeholder : ""}
         placeholderTextColor="#909090"
         style={[
@@ -109,7 +114,7 @@ export default function InviteTextField({
       >
         {errorMessage}
       </Text>
-      {focused && list?.length > 0 ? (
+      {list?.length > 0 && focused ? (
         <FlatList
           style={[
             styles.list,

@@ -75,7 +75,7 @@ export default function Invite({ route: { params: { contractId } } }: InviteProp
     const timeout = setTimeout(() => {
       dispatch(clearInviteEmails());
       dispatch(requestUsersEmail(emailInitialValue.email.value));
-    }, 1500);
+    }, 500);
     setTimer(timeout);
   };
 
