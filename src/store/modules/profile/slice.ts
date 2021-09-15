@@ -9,6 +9,7 @@ import { LANGUAGE_ENGLISH, LANGUAGE_GERMANY } from "./constants";
 export type LanguageType = "LANGUAGE_ENGLISH" | "LANGUAGE_GERMANY";
 
 export type UserType = {
+  id: string;
   avatar: string | null;
   name?: string;
   lastName?: string;
@@ -64,6 +65,7 @@ export const profileSlice = createSlice({
       state: Draft<ProfileStateInterface>,
       action: PayloadAction<string | null>
     ) => {
+      // @ts-ignore
       state.user = {
         ...state.user,
         avatar: action.payload,

@@ -1,29 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import TopBar from "../../layouts/TopBar";
-import { View, StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import {StyleSheet, View} from "react-native";
+import {useNavigation} from "@react-navigation/native";
+import {ContractNavigationProps, HOME_ROUTER,} from "../../../router/HomeRouterType";
 import {
-  ContractNavigationProps,
-  HOME_ROUTER,
-} from "../../../router/HomeRouterType";
-import { contractScreensConfig } from "../../../store/modules/contract/contract-screens-types";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { useI18n } from "../../../translator/i18n";
+  getContractScreensConfig
+} from "../../../store/modules/contract/contract-screens-types";
+import {useAppDispatch, useAppSelector} from "../../../store/hooks";
+import {useI18n} from "../../../translator/i18n";
 import ContractNextButton from "../../basics/buttons/ContractNextButton";
 import ContractBackButton from "../../basics/buttons/ContractBackButton";
 import ContractScreenCounter from "../../basics/ContractScreenCounter";
 import ContractFormTitle from "../../basics/typography/ContractFormTitle";
-import {
-  requestContract,
-  requestScreenData,
-} from "../../../store/modules/contract/action-creators";
+import {requestContract, requestScreenData,} from "../../../store/modules/contract/action-creators";
 import TextButton from "../../basics/buttons/TextButton";
 import InviteButton from "../../basics/buttons/InviteButton";
-import { navigationPopToTop } from "../../../store/modules/main/action-creators";
-import { setModal } from "../../../store/modules/main/slice";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import {navigationPopToTop} from "../../../store/modules/main/action-creators";
+import {setModal} from "../../../store/modules/main/slice";
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 import ContractViewButton from "../../basics/buttons/ContractViewButton";
 import ContractView from "../../features/Modals/ContractView";
+import {detectContractRole} from "../../../services/contract/service";
 
 type ContractProps = {
   route: {
@@ -37,9 +34,10 @@ export default function Contract({
   },
 }: ContractProps) {
   const navigation = useNavigation();
-  const contractType = useAppSelector(
-    (state) => state.contract.currentContract?.type
+  const contract = useAppSelector(
+    (state) => state.contract.currentContract
   );
+  const me = useAppSelector(state => state.profile.user)
   const [contractViewVisible, setContractViewVisible] = useState(false);
   const { t } = useI18n();
   const dispatch = useAppDispatch();
@@ -50,11 +48,17 @@ export default function Contract({
     }
   }, [id]);
 
+  if (!contract || !me) {
+    return null;
+  }
+
+  const currentContractConfig = getContractScreensConfig(contract.type, detectContractRole(contract, me.id))
+
   const nextHandler = () => {
-    if (!contractType) {
+    if (!contract) {
       return;
     }
-    dispatch(requestScreenData(contractType, screenCount));
+    dispatch(requestScreenData(contract.type, currentContractConfig[screenCount].type));
     // @ts-ignore
     navigation.push(HOME_ROUTER.CONTRACT, { screenCount: screenCount + 1 });
   };
@@ -89,10 +93,6 @@ export default function Contract({
     setContractViewVisible(false);
   };
 
-  if (!contractType) {
-    return null;
-  }
-
   return (
     <TopBar
       leftButton={
@@ -102,25 +102,25 @@ export default function Contract({
           type="left"
         />
       }
-      rightButton={<InviteButton />}
-      pageName={t(`contracts.${contractType}.title`)}
+      rightButton={<InviteButton contractId={contract.id} />}
+      pageName={t(`contracts.${contract.type}.title`)}
     >
       <View style={styles.container}>
         <KeyboardAwareScrollView>
           <View>
             <ContractScreenCounter
-              total={contractScreensConfig[contractType].length}
+              total={currentContractConfig.length}
               current={screenCount + 1}
             />
           </View>
           <View style={styles.titleContainer}>
             <ContractFormTitle
-              title={t(contractScreensConfig[contractType][screenCount].title)}
+              title={t(currentContractConfig[screenCount].title)}
             />
           </View>
           <View style={styles.dynamicComponentContainer}>
             {React.createElement(
-              contractScreensConfig[contractType][screenCount].component
+              currentContractConfig[screenCount].component
             )}
           </View>
         </KeyboardAwareScrollView>
@@ -131,10 +131,10 @@ export default function Contract({
           ]}
         >
           {screenCount > 0 ? <ContractBackButton onPress={backButton} /> : null}
-          {screenCount < contractScreensConfig[contractType].length - 1 ? (
+          {screenCount < currentContractConfig.length - 1 ? (
             <ContractNextButton onPress={nextHandler} />
           ) : null}
-          {screenCount === contractScreensConfig[contractType].length - 1 ? (
+          {screenCount === currentContractConfig.length - 1 ? (
             <ContractViewButton onPress={viewHandler} />
           ) : null}
         </View>

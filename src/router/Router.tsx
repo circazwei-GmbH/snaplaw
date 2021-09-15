@@ -27,11 +27,13 @@ import Invite from "../components/pages/contracts/Invite";
 import { orientationChange } from "../store/modules/main/action-creators";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { ROUTER_TABS } from "./TabRouterTypes";
+import {MY_CONTRACT_ROUTE} from "./MyContractRouterTypes";
 
 const Stack = createStackNavigator();
 const ProfileStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
+const MyPorfileStack = createStackNavigator();
 
 export default function Router() {
   const token = useAppSelector((state) => state.auth.token);
@@ -61,14 +63,20 @@ export default function Router() {
     >
       <Tab.Screen
         name={ROUTER_TABS.MY_CONTRACTS}
-        component={MyContracts}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Feather name="file-text" size={size} color={color} />
           ),
           tabBarLabel: t("my_contracts.tab_name"),
         }}
-      />
+      >
+        {() => (
+          <MyPorfileStack.Navigator headerMode="none">
+            <MyPorfileStack.Screen name={MY_CONTRACT_ROUTE.LIST} component={MyContracts} />
+            <MyPorfileStack.Screen name={MY_CONTRACT_ROUTE.INVITE} component={Invite} />
+          </MyPorfileStack.Navigator>
+        )}
+      </Tab.Screen>
       <Tab.Screen
         name={ROUTER_TABS.HOMEPAGE}
         options={{

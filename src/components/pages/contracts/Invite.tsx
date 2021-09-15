@@ -21,16 +21,21 @@ import { FieldInterface } from "../../features/forms/SignInForm";
 import { email } from "../../../validations/default";
 import { formFieldFill, validate } from "../../../utils/forms";
 
-export default function Invite(): JSX.Element {
+type InviteProps = {
+  route: {
+    params: {
+      contractId: string
+    }
+  }
+}
+
+export default function Invite({ route: { params: { contractId } } }: InviteProps): JSX.Element {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
   const [keyboardVisible, setKeyboardVisible] = useState(false);
-  const contractId = useAppSelector(
-    (state) => state.contract.currentContract?.id
-  );
   const url = useAppSelector((state) => state.profile.user?.avatar);
   const emails = useAppSelector((state) => state.contract.inviteEmailsList);
-  const [timer, setTimer] = useState<NodeJS.Timeout | number>(0);
+  const [timer, setTimer] = useState<NodeJS.Timeout | undefined>(undefined);
 
   interface InviteEmailInterface {
     email: FieldInterface;
@@ -63,7 +68,9 @@ export default function Invite(): JSX.Element {
   };
 
   const onChangeHandler = (newValue: string) => {
-    clearTimeout(timer);
+    if (timer) {
+      clearTimeout(timer);
+    }
     setEmailValue(formFieldFill("email", newValue, emailValue));
     const timeout = setTimeout(() => {
       dispatch(clearInviteEmails());

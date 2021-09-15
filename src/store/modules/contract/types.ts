@@ -1,33 +1,12 @@
-import { BaseAction } from "../auth/types";
-import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
-import {
-  ProductDataScreenInterface,
-  PRODUCT_DATA_FIELDS,
-} from "./purchase/product-data";
-import {
-  UserDataScreenInterface,
-  USER_DATA_FIELDS,
-} from "./purchase/user-data";
-import {
-  ProductConditionScreenInterface,
-  CONDITION_VALUE,
-  CONDITIONS,
-} from "./purchase/product-condition";
-import {
-  ConfirmationScreenInterface,
-  CONFIRMATION_FIELDS,
-  CONFIRMATION,
-} from "./purchase/confirmation";
-import {
-  PaymentScreenInterface,
-  PAYMENT_METHODS,
-  PAYMENT_FIELDS,
-} from "./purchase/payment";
-import {
-  ProductDescriptionScreenInterface,
-  PRODUCT_DESCRIPTION_FIELDS,
-} from "./purchase/product-description";
-import { BaseScreenDataInterface } from "./base-types";
+import {BaseAction} from "../auth/types";
+import {CONTRACT_SCREEN_TYPES, CONTRACT_TYPES} from "./constants";
+import {PRODUCT_DATA_FIELDS, ProductDataScreenInterface,} from "./purchase/product-data";
+import {USER_DATA_FIELDS, UserDataScreenInterface,} from "./purchase/user-data";
+import {CONDITION_VALUE, CONDITIONS, ProductConditionScreenInterface,} from "./purchase/product-condition";
+import {CONFIRMATION, CONFIRMATION_FIELDS, ConfirmationScreenInterface,} from "./purchase/confirmation";
+import {PAYMENT_FIELDS, PAYMENT_METHODS, PaymentScreenInterface,} from "./purchase/payment";
+import {PRODUCT_DESCRIPTION_FIELDS, ProductDescriptionScreenInterface,} from "./purchase/product-description";
+import {BaseScreenDataInterface} from "./base-types";
 
 export type ContractType = CONTRACT_TYPES.PURCHASE;
 
@@ -42,7 +21,7 @@ export interface Contract {
 }
 
 export interface RequestScreenDataAction extends BaseAction {
-  payoad: CONTRACT_SCREEN_TYPES;
+  payload: CONTRACT_SCREEN_TYPES;
 }
 
 export interface ScreenValidateAction extends BaseAction {
@@ -68,9 +47,10 @@ export type ContractDataType = {
   id: string;
   type: CONTRACT_TYPES;
   createdAt: string;
-  contractor: string | undefined;
   screens: Array<BaseScreenDataInterface>;
   sign: string | undefined;
+  partnerId: string | undefined;
+  ownerId: string | undefined;
 };
 
 export type ContractDataListType = {
@@ -78,7 +58,8 @@ export type ContractDataListType = {
   type: CONTRACT_TYPES;
   createdAt: string;
   title: string | undefined;
-  contractor: string | undefined;
+  partnerId: string | undefined;
+  ownerId: string | undefined;
 };
 
 export type ContractListType = Array<ContractDataListType>;
@@ -123,3 +104,8 @@ export { ProductConditionScreenInterface, CONDITION_VALUE, CONDITIONS };
 export { ConfirmationScreenInterface, CONFIRMATION_FIELDS, CONFIRMATION };
 export { PaymentScreenInterface, PAYMENT_METHODS, PAYMENT_FIELDS };
 export { ProductDescriptionScreenInterface, PRODUCT_DESCRIPTION_FIELDS };
+
+export enum CONTRACT_ROLE {
+  OWNER = "OWNER",
+  PARTNER = "PARTNER"
+}

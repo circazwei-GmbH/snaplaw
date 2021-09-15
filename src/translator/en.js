@@ -189,7 +189,7 @@ export default {
     },
     empty_list: "You have no contracts yet",
     actions: {
-      edit: "Edit contracts",
+      edit: "Edit contract",
       delete: "Delete contract",
       see_partner: "See contract partner",
       delete_partner: "Delete contract partner",

@@ -4,9 +4,16 @@ import { Feather } from "@expo/vector-icons";
 import * as RootNavigation from "../../../router/RootNavigation";
 import { HOME_ROUTER } from "../../../router/HomeRouterType";
 
-export default function IconButton(): JSX.Element {
+type InviteButtonProps = {
+  contractId: string
+}
+
+export default function InviteButton({ contractId }: InviteButtonProps): JSX.Element {
   const inviteHandler = () => {
-    RootNavigation.navigate(HOME_ROUTER.INVITE);
+    if (!contractId) {
+      return;
+    }
+    RootNavigation.navigate(HOME_ROUTER.INVITE, {contractId});
   };
 
   return (

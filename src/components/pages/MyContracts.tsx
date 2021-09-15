@@ -61,7 +61,7 @@ export default function MyContracts() {
           onChange={listTypeChangeHandler}
         />
       }
-      withBackbround
+      withBackground
     >
       <AbstractList
         messageOnEmpty={t("my_contracts.empty_list")}

@@ -6,12 +6,19 @@ import { createStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { CONTRACT_TYPES } from "../../../../../store/modules/contract/constants";
 
+jest.mock("@react-navigation/native", () => ({
+  useNavigation: () => ({
+    navigate: jest.fn()
+  })
+}));
+
 const ITEM = {
   title: "title",
   type: CONTRACT_TYPES.PURCHASE,
   createdAt: "12/21",
   id: "t",
-  contractor: undefined,
+  partnerId: "partnerId",
+  ownerId: "ownerId"
 };
 
 const actions = jest.fn();
