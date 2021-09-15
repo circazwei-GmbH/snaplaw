@@ -7,12 +7,9 @@ import {
   SignContractAction,
   ValidateAllScreensAction,
   InviteUserAction,
-  InviteUserInterface,
-  RequestGetEmailsAction,
-  RequestGetEmailsInterface,
+  RequestGetEmailsAction
 } from "./types";
 import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
-import { getTypeByContractAndScreen } from "./helper";
 
 export const REQUEST_CREATE_CONTRACT = "REQUEST_CREATE_CONTRACT";
 export const REQUEST_SCREEN_DATA = "REQUEST_SCREEN_DATA";
@@ -34,10 +31,10 @@ export const requestCreateContract = (
 
 export const requestScreenData = (
   contractType: CONTRACT_TYPES,
-  screenPosition: number
+  screenType: CONTRACT_SCREEN_TYPES
 ): RequestScreenDataAction => ({
   type: REQUEST_SCREEN_DATA,
-  payload: getTypeByContractAndScreen(contractType, screenPosition),
+  payload: screenType,
 });
 
 export const validateScreen = (

@@ -42,7 +42,7 @@ export interface Contract {
 }
 
 export interface RequestScreenDataAction extends BaseAction {
-  payoad: CONTRACT_SCREEN_TYPES;
+  payload: CONTRACT_SCREEN_TYPES;
 }
 
 export interface ScreenValidateAction extends BaseAction {
@@ -68,9 +68,10 @@ export type ContractDataType = {
   id: string;
   type: CONTRACT_TYPES;
   createdAt: string;
-  contractor: string | undefined;
   screens: Array<BaseScreenDataInterface>;
   sign: string | undefined;
+  partnerId: string | undefined;
+  ownerId: string | undefined;
 };
 
 export type ContractDataListType = {
@@ -78,7 +79,8 @@ export type ContractDataListType = {
   type: CONTRACT_TYPES;
   createdAt: string;
   title: string | undefined;
-  contractor: string | undefined;
+  partnerId: string | undefined;
+  ownerId: string | undefined;
 };
 
 export type ContractListType = Array<ContractDataListType>;

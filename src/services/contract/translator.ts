@@ -11,14 +11,16 @@ export const translateContractForList = (
   type: contract.type,
   createdAt: contract.createdAt,
   title: contract.title,
-  contractor: undefined,
+  partnerId: contract.partnerId,
+  ownerId: contract.ownerId
 });
 
 export const translateContract = (contract: any): ContractDataType => ({
   id: contract._id,
   type: contract.type,
   createdAt: contract.createdAt,
-  contractor: undefined,
+  partnerId: contract.partnerId,
+  ownerId: contract.ownerId,
   screens: contract.screens.map((screen: { screenType: any }) => ({
     type: screen.screenType,
     data: screen,

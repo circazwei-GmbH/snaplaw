@@ -180,14 +180,7 @@ function* requestContract({ payload }: RequestContractAction) {
   try {
     const contract = yield call(API.requestContract, payload);
     yield put(
-      setInitedContract({
-        id: contract.id,
-        type: contract.type,
-        screens: contract.screens,
-        contractor: undefined,
-        sign: contract.sign,
-        createdAt: contract.createdAt,
-      })
+      setInitedContract(contract)
     );
   } catch (error) {
     yield put(responseError(error));
