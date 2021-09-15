@@ -8,6 +8,7 @@ import {
   CONTRACT_LIST_STATE,
   ContractDataType,
   ContractListType,
+  EmailsListItemInterface,
 } from "./types";
 import { CONTRACT_SCREEN_TYPES } from "./constants";
 
@@ -28,7 +29,7 @@ interface ContractState {
     page: number;
     isNextPage: boolean;
   };
-  inviteEmailsList: string[];
+  inviteEmailsList: EmailsListItemInterface[];
   emailsListPagination: {
     page: number;
     isNextPage: boolean;
@@ -91,9 +92,10 @@ const setInviteEmailsListAction = createAction<
   { list: string[]; page: string },
   "setInviteEmails"
 >("setInviteEmails");
-const clearInviteEmailsListAction = createAction<string[], "clearInviteEmails">(
+const clearInviteEmailsListAction = createAction<
+  EmailsListItemInterface[],
   "clearInviteEmails"
-);
+>("clearInviteEmails");
 
 const contractSlice = createSlice({
   name: "contract",
@@ -217,7 +219,7 @@ const contractSlice = createSlice({
     [setInviteEmailsListAction.type]: (
       state: Draft<ContractState>,
       action: PayloadAction<{
-        list: string[];
+        list: EmailsListItemInterface[];
         page: string;
       }>
     ) => {

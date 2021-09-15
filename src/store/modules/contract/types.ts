@@ -42,7 +42,7 @@ export interface Contract {
 }
 
 export interface RequestScreenDataAction extends BaseAction {
-  payload: CONTRACT_SCREEN_TYPES;
+  payoad: CONTRACT_SCREEN_TYPES;
 }
 
 export interface ScreenValidateAction extends BaseAction {
@@ -98,6 +98,10 @@ export interface SignContractAction extends BaseAction {
 export interface InviteUserInterface {
   contractId?: string;
   search: string;
+}
+
+export interface EmailsListItemInterface {
+  email: string;
 }
 
 export interface InviteUserAction extends BaseAction {
