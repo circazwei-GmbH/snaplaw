@@ -24,7 +24,12 @@ export default function TextFieldImitation({
   gray,
 }: TextFieldImitationPropsInterface): JSX.Element {
   return (
-    <View style={styles.inputContainer}>
+    <View
+      style={[
+        styles.inputContainer,
+        settings ? styles.borderSettings : styles.border,
+      ]}
+    >
       <View style={styles.labelBox}>
         <Text style={[settings ? styles.labelMargin : null, styles.label]}>
           {placeholder}
@@ -34,7 +39,7 @@ export default function TextFieldImitation({
       <View
         style={[
           settings ? styles.input : styles.emptyInput,
-          gray ? styles.inputNotEditable : styles.inputEditable,
+          gray ? styles.inputNotEditable : null,
         ]}
       >
         <Text
@@ -55,8 +60,13 @@ const styles = StyleSheet.create({
   inputContainer: {
     paddingTop: 6,
     borderBottomWidth: 1,
-    borderBottomColor: "#EFF7FD",
     minHeight: 68,
+  },
+  border: {
+    borderBottomColor: "transparent",
+  },
+  borderSettings: {
+    borderBottomColor: "#EFF7FD",
   },
   labelBox: {
     flexDirection: "row",
@@ -68,15 +78,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     fontSize: 15,
     paddingHorizontal: 16,
+    backgroundColor: "#EFF7FD",
   },
   fullInput: {
     backgroundColor: "transparent",
     borderWidth: 1,
     borderColor: "#BBD1DE",
     fontSize: 17,
-  },
-  inputEditable: {
-    backgroundColor: "#EFF7FD",
   },
   inputNotEditable: {
     backgroundColor: "#F2F2F2",
