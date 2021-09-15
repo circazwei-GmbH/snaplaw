@@ -22,7 +22,7 @@ import {
   ValidateAllScreensAction,
   InviteUserAction,
   RequestGetEmailsAction,
-  EmailsListItemInterface,
+  EmailsListItemInterface, CONTRACT_ROLE,
 } from "./types";
 import API from "../../../services/contract/index";
 import { responseError } from "../auth/action-creators";
@@ -50,14 +50,13 @@ import { Translator } from "../../../translator/i18n";
 function* createContract({ payload }: RequestCreateContractAction) {
   try {
     yield put(addToWAiter(CONTRACT_CREATION_WAIT));
-    const me = yield select(state => state.profile.user)
     const response = yield call(API.createContract, payload);
     yield put(
       setInitedContract({
         id: response.data.id,
         type: payload,
         partnerId: undefined,
-        ownerId: me.id,
+        meRole: CONTRACT_ROLE.OWNER,
         createdAt: "",
         sign: undefined,
         screens: [

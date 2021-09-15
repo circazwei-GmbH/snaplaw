@@ -50,7 +50,7 @@ export type ContractDataType = {
   screens: Array<BaseScreenDataInterface>;
   sign: string | undefined;
   partnerId: string | undefined;
-  ownerId: string | undefined;
+  meRole: CONTRACT_ROLE
 };
 
 export type ContractDataListType = {
@@ -59,7 +59,7 @@ export type ContractDataListType = {
   createdAt: string;
   title: string | undefined;
   partnerId: string | undefined;
-  ownerId: string | undefined;
+  meRole: CONTRACT_ROLE
 };
 
 export type ContractListType = Array<ContractDataListType>;

@@ -1,7 +1,7 @@
-import {CONTRACT_ROLE, ContractDataListType, ContractDataType} from "../../store/modules/contract/types";
+import {CONTRACT_ROLE} from "../../store/modules/contract/types";
 
-export const detectContractRole = (contract: ContractDataType | ContractDataListType, myId: string | undefined): CONTRACT_ROLE => {
-  if (contract.ownerId === myId) {
+export const detectContractRole = (partnerId: string, ownerId: string, myId: string | undefined): CONTRACT_ROLE => {
+  if (ownerId === myId) {
     return CONTRACT_ROLE.OWNER
   }
   return CONTRACT_ROLE.PARTNER

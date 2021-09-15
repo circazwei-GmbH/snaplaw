@@ -20,7 +20,6 @@ import {setModal} from "../../../store/modules/main/slice";
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 import ContractViewButton from "../../basics/buttons/ContractViewButton";
 import ContractView from "../../features/Modals/ContractView";
-import {detectContractRole} from "../../../services/contract/service";
 
 type ContractProps = {
   route: {
@@ -37,7 +36,6 @@ export default function Contract({
   const contract = useAppSelector(
     (state) => state.contract.currentContract
   );
-  const me = useAppSelector(state => state.profile.user)
   const [contractViewVisible, setContractViewVisible] = useState(false);
   const { t } = useI18n();
   const dispatch = useAppDispatch();
@@ -48,11 +46,11 @@ export default function Contract({
     }
   }, [id]);
 
-  if (!contract || !me) {
+  if (!contract) {
     return null;
   }
 
-  const currentContractConfig = getContractScreensConfig(contract.type, detectContractRole(contract, me.id))
+  const currentContractConfig = getContractScreensConfig(contract.type, contract.meRole)
 
   const nextHandler = () => {
     if (!contract) {
