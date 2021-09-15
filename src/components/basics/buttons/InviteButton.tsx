@@ -3,10 +3,12 @@ import { TouchableOpacity, StyleSheet, Dimensions } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import * as RootNavigation from "../../../router/RootNavigation";
 import { HOME_ROUTER } from "../../../router/HomeRouterType";
-import {useAppSelector} from "../../../store/hooks";
 
-export default function IconButton(): JSX.Element {
-  const contractId = useAppSelector(state => state.contract.currentContract?.id);
+type InviteButtonProps = {
+  contractId: string
+}
+
+export default function InviteButton({ contractId }: InviteButtonProps): JSX.Element {
   const inviteHandler = () => {
     if (!contractId) {
       return;

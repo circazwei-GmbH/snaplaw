@@ -102,7 +102,7 @@ export default function Contract({
           type="left"
         />
       }
-      rightButton={<InviteButton  />}
+      rightButton={<InviteButton contractId={contract.id} />}
       pageName={t(`contracts.${contract.type}.title`)}
     >
       <View style={styles.container}>

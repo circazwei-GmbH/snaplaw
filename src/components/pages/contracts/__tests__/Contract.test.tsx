@@ -28,6 +28,16 @@ jest.mock("../../../../store/modules/contract/contract-screens-types", () => {
         },
       ],
     },
+    getContractScreensConfig: () => [
+      {
+        component: Component,
+        title: "test-title",
+      },
+      {
+        component: Component,
+        title: "test-title-second",
+      },
+    ],
   };
 });
 
@@ -57,10 +67,16 @@ const PROPS = {
 
 type InitialStateType = {
   contract: {
-    currentContract: Record<"type", CONTRACT_TYPES> | undefined;
+    currentContract: {
+      type: CONTRACT_TYPES,
+      ownerId: string
+    } | undefined
   };
   profile: {
     language: LanguageType;
+    user: {
+      id: string
+    }
   };
 };
 
@@ -68,10 +84,14 @@ const initialState: InitialStateType = {
   contract: {
     currentContract: {
       type: CONTRACT_TYPES.PURCHASE,
+      ownerId: 'testUserId'
     },
   },
   profile: {
     language: LANGUAGE_ENGLISH,
+    user: {
+      id: 'testUserId'
+    }
   },
 };
 

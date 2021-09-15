@@ -21,7 +21,7 @@ export default function ContractListItem({ item }: ListItemProps) {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
   const navigator = useNavigation();
-  const isContractorInclude = () => !!item.contractor;
+  const isContractorInclude = () => !!item.partnerId;
   const inProgressMenuButtons: Array<ButtonType> = [
     {
       title: t("my_contracts.actions.edit"),

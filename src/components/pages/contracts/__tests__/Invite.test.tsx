@@ -8,7 +8,7 @@ describe("Invite", () => {
   it("Should display avatar and title component", () => {
     const { getByText, getByTestId } = render(
       <Provider store={store}>
-        <Invite />
+        <Invite route={{params: { contractId: 'testContract' }}} />
       </Provider>
     );
 

@@ -1,4 +1,4 @@
-import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
+import {CONTRACT_SCREEN_TYPES, CONTRACT_TYPES} from "./constants";
 import React from "react";
 import UserDataForm from "../../../components/features/forms/contract/UserDataForm";
 import ProductDataForm from "../../../components/features/forms/contract/ProductDataForm";
@@ -7,17 +7,13 @@ import ProductDescriptionForm from "../../../components/features/forms/contract/
 import Confirmation from "../../../components/features/forms/contract/Confirmation";
 import Payment from "../../../components/features/forms/contract/Payment";
 import Sign from "../../../components/features/forms/contract/Sign";
+import {CONTRACT_ROLE} from "./types";
 
 export interface ContractScreenConfigType {
   component: React.ElementType;
   title: string;
   type: CONTRACT_SCREEN_TYPES;
   granted: Array<CONTRACT_ROLE>
-}
-
-export enum CONTRACT_ROLE {
-  OWNER = "OWNER",
-  PARTNER = "PARTNER"
 }
 
 export const getContractScreensConfig = (contractType: CONTRACT_TYPES, contractRole: CONTRACT_ROLE): Array<ContractScreenConfigType> => contractScreensConfig[contractType].filter(screen => screen.granted.includes(contractRole))
