@@ -1,12 +1,33 @@
-import {BaseAction} from "../auth/types";
-import {CONTRACT_SCREEN_TYPES, CONTRACT_TYPES} from "./constants";
-import {PRODUCT_DATA_FIELDS, ProductDataScreenInterface,} from "./purchase/product-data";
-import {USER_DATA_FIELDS, UserDataScreenInterface,} from "./purchase/user-data";
-import {CONDITION_VALUE, CONDITIONS, ProductConditionScreenInterface,} from "./purchase/product-condition";
-import {CONFIRMATION, CONFIRMATION_FIELDS, ConfirmationScreenInterface,} from "./purchase/confirmation";
-import {PAYMENT_FIELDS, PAYMENT_METHODS, PaymentScreenInterface,} from "./purchase/payment";
-import {PRODUCT_DESCRIPTION_FIELDS, ProductDescriptionScreenInterface,} from "./purchase/product-description";
-import {BaseScreenDataInterface} from "./base-types";
+import { BaseAction } from "../auth/types";
+import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
+import {
+  PRODUCT_DATA_FIELDS,
+  ProductDataScreenInterface,
+} from "./purchase/product-data";
+import {
+  USER_DATA_FIELDS,
+  UserDataScreenInterface,
+} from "./purchase/user-data";
+import {
+  CONDITION_VALUE,
+  CONDITIONS,
+  ProductConditionScreenInterface,
+} from "./purchase/product-condition";
+import {
+  CONFIRMATION,
+  CONFIRMATION_FIELDS,
+  ConfirmationScreenInterface,
+} from "./purchase/confirmation";
+import {
+  PAYMENT_FIELDS,
+  PAYMENT_METHODS,
+  PaymentScreenInterface,
+} from "./purchase/payment";
+import {
+  PRODUCT_DESCRIPTION_FIELDS,
+  ProductDescriptionScreenInterface,
+} from "./purchase/product-description";
+import { BaseScreenDataInterface } from "./base-types";
 
 export type ContractType = CONTRACT_TYPES.PURCHASE;
 
@@ -50,7 +71,7 @@ export type ContractDataType = {
   screens: Array<BaseScreenDataInterface>;
   sign: string | undefined;
   partnerId: string | undefined;
-  ownerId: string | undefined;
+  meRole: CONTRACT_ROLE;
 };
 
 export type ContractDataListType = {
@@ -59,7 +80,7 @@ export type ContractDataListType = {
   createdAt: string;
   title: string | undefined;
   partnerId: string | undefined;
-  ownerId: string | undefined;
+  meRole: CONTRACT_ROLE;
 };
 
 export type ContractListType = Array<ContractDataListType>;
@@ -107,5 +128,5 @@ export { ProductDescriptionScreenInterface, PRODUCT_DESCRIPTION_FIELDS };
 
 export enum CONTRACT_ROLE {
   OWNER = "OWNER",
-  PARTNER = "PARTNER"
+  PARTNER = "PARTNER",
 }

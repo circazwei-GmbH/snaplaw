@@ -68,7 +68,7 @@ export default function Sign() {
     if (!contract) {
       return;
     }
-    RootNavigation.navigate(HOME_ROUTER.INVITE, {contractId: contract.id});
+    RootNavigation.navigate(HOME_ROUTER.INVITE, { contractId: contract.id });
   };
 
   useEffect(() => {

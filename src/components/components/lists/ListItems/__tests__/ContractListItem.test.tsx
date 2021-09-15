@@ -8,8 +8,8 @@ import { CONTRACT_TYPES } from "../../../../../store/modules/contract/constants"
 
 jest.mock("@react-navigation/native", () => ({
   useNavigation: () => ({
-    navigate: jest.fn()
-  })
+    navigate: jest.fn(),
+  }),
 }));
 
 const ITEM = {
@@ -18,7 +18,7 @@ const ITEM = {
   createdAt: "12/21",
   id: "t",
   partnerId: "partnerId",
-  ownerId: "ownerId"
+  ownerId: "ownerId",
 };
 
 const actions = jest.fn();

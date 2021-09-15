@@ -60,23 +60,25 @@ const PROPS = {
   route: {
     params: {
       screenCount: 0,
-      id: undefined
+      id: undefined,
     },
   },
 };
 
 type InitialStateType = {
   contract: {
-    currentContract: {
-      type: CONTRACT_TYPES,
-      ownerId: string
-    } | undefined
+    currentContract:
+      | {
+          type: CONTRACT_TYPES;
+          ownerId: string;
+        }
+      | undefined;
   };
   profile: {
     language: LanguageType;
     user: {
-      id: string
-    }
+      id: string;
+    };
   };
 };
 
@@ -84,14 +86,14 @@ const initialState: InitialStateType = {
   contract: {
     currentContract: {
       type: CONTRACT_TYPES.PURCHASE,
-      ownerId: 'testUserId'
+      ownerId: "testUserId",
     },
   },
   profile: {
     language: LANGUAGE_ENGLISH,
     user: {
-      id: 'testUserId'
-    }
+      id: "testUserId",
+    },
   },
 };
 

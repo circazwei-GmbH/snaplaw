@@ -23,6 +23,7 @@ import {
   InviteUserAction,
   RequestGetEmailsAction,
   EmailsListItemInterface,
+  CONTRACT_ROLE,
 } from "./types";
 import API from "../../../services/contract/index";
 import { responseError } from "../auth/action-creators";
@@ -55,7 +56,8 @@ function* createContract({ payload }: RequestCreateContractAction) {
       setInitedContract({
         id: response.data.id,
         type: payload,
-        contractor: undefined,
+        partnerId: undefined,
+        meRole: CONTRACT_ROLE.OWNER,
         createdAt: "",
         sign: undefined,
         screens: [
@@ -179,9 +181,7 @@ function* requestConreactsList({
 function* requestContract({ payload }: RequestContractAction) {
   try {
     const contract = yield call(API.requestContract, payload);
-    yield put(
-      setInitedContract(contract)
-    );
+    yield put(setInitedContract(contract));
   } catch (error) {
     yield put(responseError(error));
   }

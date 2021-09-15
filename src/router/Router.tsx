@@ -27,7 +27,7 @@ import Invite from "../components/pages/contracts/Invite";
 import { orientationChange } from "../store/modules/main/action-creators";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { ROUTER_TABS } from "./TabRouterTypes";
-import {MY_CONTRACT_ROUTE} from "./MyContractRouterTypes";
+import { MY_CONTRACT_ROUTE } from "./MyContractRouterTypes";
 
 const Stack = createStackNavigator();
 const ProfileStack = createStackNavigator();
@@ -72,8 +72,14 @@ export default function Router() {
       >
         {() => (
           <MyPorfileStack.Navigator headerMode="none">
-            <MyPorfileStack.Screen name={MY_CONTRACT_ROUTE.LIST} component={MyContracts} />
-            <MyPorfileStack.Screen name={MY_CONTRACT_ROUTE.INVITE} component={Invite} />
+            <MyPorfileStack.Screen
+              name={MY_CONTRACT_ROUTE.LIST}
+              component={MyContracts}
+            />
+            <MyPorfileStack.Screen
+              name={MY_CONTRACT_ROUTE.INVITE}
+              component={Invite}
+            />
           </MyPorfileStack.Navigator>
         )}
       </Tab.Screen>

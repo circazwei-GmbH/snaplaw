@@ -13,6 +13,7 @@ import {
   ContractDataType,
 } from "../../store/modules/contract/types";
 import { translateContract, translateContractList } from "./translator";
+import { getUserFromToken } from "../../utils";
 
 const createContract = (type: CONTRACT_TYPES) =>
   httpClient.post("api/contracts", { type });
@@ -44,12 +45,17 @@ const requestContractList = async (type: CONTRACT_LIST_STATE, page: number) => {
   const response = await httpClient.get(
     `api/contracts?type=${type}&page=${page}&limit=10`
   );
-  return translateContractList(response.data);
+  const token = httpClient.getToken();
+  return translateContractList(
+    response.data,
+    getUserFromToken(token || "")?.id
+  );
 };
 
 const requestContract = async (id: string): Promise<ContractDataType> => {
   const response = await httpClient.get(`api/contracts/${id}`);
-  return translateContract(response.data);
+  const token = httpClient.getToken();
+  return translateContract(response.data, getUserFromToken(token || "")?.id);
 };
 
 const requestDeleteContract = (id: string) =>
