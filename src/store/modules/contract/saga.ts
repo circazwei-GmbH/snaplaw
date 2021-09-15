@@ -50,12 +50,14 @@ import { Translator } from "../../../translator/i18n";
 function* createContract({ payload }: RequestCreateContractAction) {
   try {
     yield put(addToWAiter(CONTRACT_CREATION_WAIT));
+    const me = yield select(state => state.profile.user)
     const response = yield call(API.createContract, payload);
     yield put(
       setInitedContract({
         id: response.data.id,
         type: payload,
-        contractor: undefined,
+        partnerId: undefined,
+        ownerId: me.id,
         createdAt: "",
         sign: undefined,
         screens: [
