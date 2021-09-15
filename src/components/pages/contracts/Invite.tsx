@@ -68,7 +68,7 @@ export default function Invite(): JSX.Element {
     const timeout = setTimeout(() => {
       dispatch(clearInviteEmails());
       dispatch(requestUsersEmail(emailInitialValue.email.value));
-    }, 1500);
+    }, 500);
     setTimer(timeout);
   };
 
