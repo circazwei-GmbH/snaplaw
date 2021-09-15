@@ -1,14 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {
-  TextInput,
-  View,
-  StyleSheet,
-  Text,
-  TextInputProps,
-  TouchableOpacity,
-  StyleProp,
-  TextStyle,
-} from "react-native";
+import React from "react";
+import { View, StyleSheet, Text } from "react-native";
 
 interface TextFieldImitationPropsInterface {
   placeholder?: string;
@@ -80,12 +71,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     backgroundColor: "#EFF7FD",
   },
-  fullInput: {
-    backgroundColor: "transparent",
-    borderWidth: 1,
-    borderColor: "#BBD1DE",
-    fontSize: 17,
-  },
   inputNotEditable: {
     backgroundColor: "#F2F2F2",
   },
@@ -102,11 +87,6 @@ const styles = StyleSheet.create({
   },
   redText: {
     color: "#FA7171",
-  },
-  focuslessInput: {
-    backgroundColor: "#EFF7FD",
-    borderWidth: 1,
-    borderColor: "transparent",
   },
   label: {
     color: "#1696E2",
