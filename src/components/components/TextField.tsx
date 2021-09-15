@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   TextInput,
   View,
@@ -35,7 +35,7 @@ export default function TextField({
   search,
   containerStyle,
   ...props
-}: TextFieldPropsInterface) {
+}: TextFieldPropsInterface): JSX.Element {
   const [localValue, setLocalValue] = useState(value);
   const [focused, setFocused] = useState(false);
   const input: any = useRef();
@@ -63,11 +63,7 @@ export default function TextField({
         <Text
           style={[
             styles.label,
-            focused || localValue
-              ? null
-              : fixed
-              ? styles.labelWithEmptyInputFixed
-              : styles.labelWithEmptyInputDance,
+            focused || localValue ? null : styles.labelWithEmptyInputDance,
           ]}
         >
           {placeholder}
@@ -173,9 +169,6 @@ const styles = StyleSheet.create({
     color: "#1696E2",
     fontSize: 14,
     lineHeight: 22,
-  },
-  labelWithEmptyInputFixed: {
-    opacity: 0,
   },
   labelWithEmptyInputDance: {
     display: "none",
