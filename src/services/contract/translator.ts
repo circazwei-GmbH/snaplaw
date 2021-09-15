@@ -3,7 +3,7 @@ import {
   ContractDataType,
   ContractListType,
 } from "../../store/modules/contract/types";
-import {detectContractRole} from "./service";
+import { detectContractRole } from "./service";
 
 export const translateContractForList = (
   contract: any,
@@ -14,10 +14,13 @@ export const translateContractForList = (
   createdAt: contract.createdAt,
   title: contract.title,
   partnerId: contract.partnerId,
-  meRole: detectContractRole(contract.partnerId, contract.ownerId, meId)
+  meRole: detectContractRole(contract.partnerId, contract.ownerId, meId),
 });
 
-export const translateContract = (contract: any, meId: string | undefined): ContractDataType => ({
+export const translateContract = (
+  contract: any,
+  meId: string | undefined
+): ContractDataType => ({
   id: contract._id,
   type: contract.type,
   createdAt: contract.createdAt,
@@ -30,5 +33,8 @@ export const translateContract = (contract: any, meId: string | undefined): Cont
   sign: contract.sign,
 });
 
-export const translateContractList = (list: Array<any>, meId: string | undefined): ContractListType =>
+export const translateContractList = (
+  list: Array<any>,
+  meId: string | undefined
+): ContractListType =>
   list.map((contract) => translateContractForList(contract, meId));

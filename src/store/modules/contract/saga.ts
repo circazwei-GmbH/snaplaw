@@ -22,7 +22,8 @@ import {
   ValidateAllScreensAction,
   InviteUserAction,
   RequestGetEmailsAction,
-  EmailsListItemInterface, CONTRACT_ROLE,
+  EmailsListItemInterface,
+  CONTRACT_ROLE,
 } from "./types";
 import API from "../../../services/contract/index";
 import { responseError } from "../auth/action-creators";
@@ -180,9 +181,7 @@ function* requestConreactsList({
 function* requestContract({ payload }: RequestContractAction) {
   try {
     const contract = yield call(API.requestContract, payload);
-    yield put(
-      setInitedContract(contract)
-    );
+    yield put(setInitedContract(contract));
   } catch (error) {
     yield put(responseError(error));
   }

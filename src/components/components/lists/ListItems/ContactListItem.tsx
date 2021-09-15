@@ -1,20 +1,20 @@
-import React, {useState} from "react";
-import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import {ListItemProps} from "./list-item-type";
-import {Entypo} from "@expo/vector-icons";
-import Menu, {ButtonType} from "../../../features/Modals/Menu";
-import {useI18n} from "../../../../translator/i18n";
+import React, { useState } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ListItemProps } from "./list-item-type";
+import { Entypo } from "@expo/vector-icons";
+import Menu, { ButtonType } from "../../../features/Modals/Menu";
+import { useI18n } from "../../../../translator/i18n";
 import dayjs from "dayjs";
-import {useAppDispatch} from "../../../../store/hooks";
-import {navigate} from "../../../../store/modules/main/action-creators";
-import {ROUTER_TABS} from "../../../../router/TabRouterTypes";
-import {HOME_ROUTER} from "../../../../router/HomeRouterType";
-import {requestDeleteContract} from "../../../../store/modules/contract/action-creators";
-import {setModal} from "../../../../store/modules/main/slice";
-import {BUTTON_COLORTYPE} from "../../../../store/modules/main/types";
-import {useNavigation} from "@react-navigation/native";
-import {MY_CONTRACT_ROUTE} from "../../../../router/MyContractRouterTypes";
-import {CONTRACT_ROLE} from "../../../../store/modules/contract/types";
+import { useAppDispatch } from "../../../../store/hooks";
+import { navigate } from "../../../../store/modules/main/action-creators";
+import { ROUTER_TABS } from "../../../../router/TabRouterTypes";
+import { HOME_ROUTER } from "../../../../router/HomeRouterType";
+import { requestDeleteContract } from "../../../../store/modules/contract/action-creators";
+import { setModal } from "../../../../store/modules/main/slice";
+import { BUTTON_COLORTYPE } from "../../../../store/modules/main/types";
+import { useNavigation } from "@react-navigation/native";
+import { MY_CONTRACT_ROUTE } from "../../../../router/MyContractRouterTypes";
+import { CONTRACT_ROLE } from "../../../../store/modules/contract/types";
 
 export default function ContractListItem({ item }: ListItemProps) {
   const [inProgressMenuVisible, setInProgressMenuVisible] =
@@ -22,7 +22,8 @@ export default function ContractListItem({ item }: ListItemProps) {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
   const navigator = useNavigation();
-  const isContractorIncludeAndIOwner = () => !!item.partnerId && item.meRole === CONTRACT_ROLE.OWNER;
+  const isContractorIncludeAndIOwner = () =>
+    !!item.partnerId && item.meRole === CONTRACT_ROLE.OWNER;
   const inProgressMenuButtons: Array<ButtonType> = [
     {
       title: t("my_contracts.actions.edit"),
@@ -72,7 +73,7 @@ export default function ContractListItem({ item }: ListItemProps) {
       title: t("my_contracts.actions.invite_partner"),
       handler: () => {
         setInProgressMenuVisible(false);
-        navigator.navigate(MY_CONTRACT_ROUTE.INVITE, {contractId: item.id})
+        navigator.navigate(MY_CONTRACT_ROUTE.INVITE, { contractId: item.id });
       },
     });
   }

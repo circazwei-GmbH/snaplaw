@@ -1,13 +1,16 @@
 # Snaplaw App (react-native)
 
 ## Requirment
+
 expo (>= 42.0.0) or XCode (12.5) or Android Studio
 
 ## Start with expo
+
 ```
 yarn install
 expo start
 ```
+
 ## Start with XCode
 
 Open /ios directory in XCode and run the app with simulator

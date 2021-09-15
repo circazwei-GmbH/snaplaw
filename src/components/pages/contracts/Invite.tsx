@@ -24,12 +24,16 @@ import { formFieldFill, validate } from "../../../utils/forms";
 type InviteProps = {
   route: {
     params: {
-      contractId: string
-    }
-  }
-}
+      contractId: string;
+    };
+  };
+};
 
-export default function Invite({ route: { params: { contractId } } }: InviteProps): JSX.Element {
+export default function Invite({
+  route: {
+    params: { contractId },
+  },
+}: InviteProps): JSX.Element {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
   const [keyboardVisible, setKeyboardVisible] = useState(false);

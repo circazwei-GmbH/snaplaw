@@ -1,23 +1,27 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import TopBar from "../../layouts/TopBar";
-import {StyleSheet, View} from "react-native";
-import {useNavigation} from "@react-navigation/native";
-import {ContractNavigationProps, HOME_ROUTER,} from "../../../router/HomeRouterType";
+import { StyleSheet, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import {
-  getContractScreensConfig
-} from "../../../store/modules/contract/contract-screens-types";
-import {useAppDispatch, useAppSelector} from "../../../store/hooks";
-import {useI18n} from "../../../translator/i18n";
+  ContractNavigationProps,
+  HOME_ROUTER,
+} from "../../../router/HomeRouterType";
+import { getContractScreensConfig } from "../../../store/modules/contract/contract-screens-types";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { useI18n } from "../../../translator/i18n";
 import ContractNextButton from "../../basics/buttons/ContractNextButton";
 import ContractBackButton from "../../basics/buttons/ContractBackButton";
 import ContractScreenCounter from "../../basics/ContractScreenCounter";
 import ContractFormTitle from "../../basics/typography/ContractFormTitle";
-import {requestContract, requestScreenData,} from "../../../store/modules/contract/action-creators";
+import {
+  requestContract,
+  requestScreenData,
+} from "../../../store/modules/contract/action-creators";
 import TextButton from "../../basics/buttons/TextButton";
 import InviteButton from "../../basics/buttons/InviteButton";
-import {navigationPopToTop} from "../../../store/modules/main/action-creators";
-import {setModal} from "../../../store/modules/main/slice";
-import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
+import { navigationPopToTop } from "../../../store/modules/main/action-creators";
+import { setModal } from "../../../store/modules/main/slice";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import ContractViewButton from "../../basics/buttons/ContractViewButton";
 import ContractView from "../../features/Modals/ContractView";
 
@@ -33,9 +37,7 @@ export default function Contract({
   },
 }: ContractProps) {
   const navigation = useNavigation();
-  const contract = useAppSelector(
-    (state) => state.contract.currentContract
-  );
+  const contract = useAppSelector((state) => state.contract.currentContract);
   const [contractViewVisible, setContractViewVisible] = useState(false);
   const { t } = useI18n();
   const dispatch = useAppDispatch();
@@ -50,13 +52,18 @@ export default function Contract({
     return null;
   }
 
-  const currentContractConfig = getContractScreensConfig(contract.type, contract.meRole)
+  const currentContractConfig = getContractScreensConfig(
+    contract.type,
+    contract.meRole
+  );
 
   const nextHandler = () => {
     if (!contract) {
       return;
     }
-    dispatch(requestScreenData(contract.type, currentContractConfig[screenCount].type));
+    dispatch(
+      requestScreenData(contract.type, currentContractConfig[screenCount].type)
+    );
     // @ts-ignore
     navigation.push(HOME_ROUTER.CONTRACT, { screenCount: screenCount + 1 });
   };
@@ -117,9 +124,7 @@ export default function Contract({
             />
           </View>
           <View style={styles.dynamicComponentContainer}>
-            {React.createElement(
-              currentContractConfig[screenCount].component
-            )}
+            {React.createElement(currentContractConfig[screenCount].component)}
           </View>
         </KeyboardAwareScrollView>
         <View

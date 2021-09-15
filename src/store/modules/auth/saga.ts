@@ -1,4 +1,4 @@
-import {call, put, takeLatest} from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 import {
   CHANGE_PASSWORD_REQUESTED,
   CLEAR_TOKEN,
@@ -36,8 +36,8 @@ import {
   signUpFailed,
   verificationFailed,
 } from "./slice";
-import {setMessage, setModal} from "../main/slice";
-import {AUTH_ROUTE} from "../../../router/AuthRouterTypes";
+import { setMessage, setModal } from "../main/slice";
+import { AUTH_ROUTE } from "../../../router/AuthRouterTypes";
 import * as RootNavigation from "../../../router/RootNavigation";
 import {
   EMAIL_NOT_CONFIRMED,
@@ -48,11 +48,15 @@ import {
   USER_NOT_UNIQUE,
   VERIFICATION_CODE_IS_INCORRECT,
 } from "../../../services/error-codes";
-import {Translator} from "../../../translator/i18n";
+import { Translator } from "../../../translator/i18n";
 import BaseApi from "../../../services/api";
-import {requestMe} from "../profile/action-creators";
-import {clearAuthTokens, getAuthTokens, setAuthTokens,} from "../../../services/auth/tokens";
-import {BUTTON_COLORTYPE} from "../main/types";
+import { requestMe } from "../profile/action-creators";
+import {
+  clearAuthTokens,
+  getAuthTokens,
+  setAuthTokens,
+} from "../../../services/auth/tokens";
+import { BUTTON_COLORTYPE } from "../main/types";
 
 function* fetchSignUp(action: RequestSignUpAction) {
   try {

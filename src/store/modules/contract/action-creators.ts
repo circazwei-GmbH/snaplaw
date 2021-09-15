@@ -7,7 +7,7 @@ import {
   SignContractAction,
   ValidateAllScreensAction,
   InviteUserAction,
-  RequestGetEmailsAction
+  RequestGetEmailsAction,
 } from "./types";
 import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
 

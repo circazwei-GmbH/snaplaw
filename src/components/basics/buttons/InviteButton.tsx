@@ -5,15 +5,17 @@ import * as RootNavigation from "../../../router/RootNavigation";
 import { HOME_ROUTER } from "../../../router/HomeRouterType";
 
 type InviteButtonProps = {
-  contractId: string
-}
+  contractId: string;
+};
 
-export default function InviteButton({ contractId }: InviteButtonProps): JSX.Element {
+export default function InviteButton({
+  contractId,
+}: InviteButtonProps): JSX.Element {
   const inviteHandler = () => {
     if (!contractId) {
       return;
     }
-    RootNavigation.navigate(HOME_ROUTER.INVITE, {contractId});
+    RootNavigation.navigate(HOME_ROUTER.INVITE, { contractId });
   };
 
   return (
