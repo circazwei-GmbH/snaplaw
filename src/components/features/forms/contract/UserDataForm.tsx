@@ -70,39 +70,15 @@ export default function UserDataForm(): JSX.Element {
         onPress={() => setDatePickerOpened(true)}
         activeOpacity={0.9}
       >
-        <TextField
-          editable={false}
-          maxLength={10}
-          keyboardType="number-pad"
+        <TextFieldImitation
           placeholder={t("edit_profile.placeholders.dateOfBirth")}
           value={
             dayjs(userData?.data[USER_DATA_FIELDS.dateOfBirth]).format(
               "DD.MM.YYYY"
             ) ?? ""
           }
-          errorMessage={screenErrors?.[USER_DATA_FIELDS.dateOfBirth]}
-          onChangeFunction={(newValue) =>
-            onChangeAction(newValue, USER_DATA_FIELDS.dateOfBirth)
-          }
         />
       </TouchableOpacity>
-      <TextFieldImitation
-        placeholder={t("edit_profile.placeholders.dateOfBirth")}
-        value={
-          dayjs(userData?.data[USER_DATA_FIELDS.dateOfBirth]).format(
-            "DD.MM.YYYY"
-          ) ?? ""
-        }
-      />
-      <TextField
-        editable={false}
-        placeholder={t("edit_profile.placeholders.email")}
-        errorMessage={screenErrors?.[USER_DATA_FIELDS.email]}
-        value={userData?.data[USER_DATA_FIELDS.email]}
-        onChangeFunction={(newValue) =>
-          onChangeAction(newValue, USER_DATA_FIELDS.email)
-        }
-      />
       <TextFieldImitation
         placeholder={t("edit_profile.placeholders.email")}
         value={userData?.data[USER_DATA_FIELDS.email]}
