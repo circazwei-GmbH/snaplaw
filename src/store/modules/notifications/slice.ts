@@ -4,10 +4,10 @@ import {
   Draft,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { NotificationInterface } from "./types";
+import { NotificationListItemInterface, NotificationInterface } from "./types";
 
 interface NotificationsState {
-  notifications: NotificationInterface[];
+  notifications: NotificationListItemInterface[];
   notificationsPagination: {
     page: number;
     isNextPage: boolean;
@@ -27,6 +27,11 @@ const setNotificationsListAction = createAction<
   "setNotifications"
 >("setNotifications");
 
+const changeNotificationStatusAction = createAction<
+  { id: string },
+  "changeNotificationStatus"
+>("changeNotificationStatus");
+
 const notificationsSlice = createSlice({
   name: "notifications",
   initialState,
@@ -34,7 +39,7 @@ const notificationsSlice = createSlice({
     [setNotificationsListAction.type]: (
       state: Draft<NotificationsState>,
       action: PayloadAction<{
-        list: NotificationInterface[];
+        list: NotificationListItemInterface[];
         page: string;
       }>
     ) => {
@@ -44,9 +49,22 @@ const notificationsSlice = createSlice({
       state.notificationsPagination.page = +action.payload.page;
       state.notificationsPagination.isNextPage = !!action.payload.list.length;
     },
+    [changeNotificationStatusAction.type]: (
+      state: Draft<NotificationsState>,
+      action: PayloadAction<{
+        id: string;
+      }>
+    ) => {
+      for (let i = 0; i < state.notifications?.length - 1; i++) {
+        if (state.notifications[i].id === action.payload.id) {
+          state.notifications[i].isNew = false;
+        }
+      }
+    },
   },
 });
 
-export const { setNotifications } = notificationsSlice.actions;
+export const { setNotifications, changeNotificationStatus } =
+  notificationsSlice.actions;
 
 export default notificationsSlice.reducer;

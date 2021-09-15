@@ -20,11 +20,14 @@ export interface NotificationListItemInterface {
   userId: string;
 }
 
-export interface ChangeNotificationStatusInterface {
+export interface RequestChangeNotificationStatusInterface {
   id: string;
-  isNew: boolean;
 }
 
 export interface ChangeNotificationStatusAction extends BaseAction {
-  payload: ChangeNotificationStatusInterface;
+  payload: RequestChangeNotificationStatusInterface;
+}
+
+export interface RequestChangeNotificationStatusAction extends BaseAction {
+  payload: RequestChangeNotificationStatusInterface;
 }

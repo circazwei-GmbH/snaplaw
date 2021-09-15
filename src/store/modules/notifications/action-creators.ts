@@ -1,16 +1,16 @@
-import { BaseAction } from "../auth/types";
 import {
-  ChangeNotificationStatusInterface,
-  ChangeNotificationStatusAction,
+  RequestChangeNotificationStatusInterface,
+  RequestChangeNotificationStatusAction,
 } from "./types";
 
 export const REQUEST_NOTIFICATIONS = "REQUEST_NOTIFICATIONS";
-export const CHANGE_NOTIFICATION_STATUS = "CHANGE_NOTIFICATION_STATUS";
+export const REQUEST_CHANGE_NOTIFICATION_STATUS =
+  "REQUEST_CHANGE_NOTIFICATION_STATUS";
 
-export const changeNotificationStatus = (
-  changeData: ChangeNotificationStatusInterface
-): ChangeNotificationStatusAction => ({
-  type: CHANGE_NOTIFICATION_STATUS,
+export const requestChangeNotificationStatus = (
+  changeData: RequestChangeNotificationStatusInterface
+): RequestChangeNotificationStatusAction => ({
+  type: REQUEST_CHANGE_NOTIFICATION_STATUS,
   payload: changeData,
 });
 

@@ -213,9 +213,9 @@ export default {
     empty_list: "Sie haben noch keine Benachrichtigungen.",
     messages: {
       invited:
-        "Sie wurden gerade zum Vertrag '{{contractName}}' von {{userBy}} eingeladen",
+        "Sie wurden gerade zum Vertrag %{contract} von %{partner} eingeladen",
       rejected:
-        "Einladung zum Vertrag '{{contractName}}' wurde von {{userBy}} abgelehnt",
+        "Einladung zum Vertrag %{contract} wurde von %{partner} abgelehnt",
     },
     modal_buttons: {
       accept: "Akzeptieren",

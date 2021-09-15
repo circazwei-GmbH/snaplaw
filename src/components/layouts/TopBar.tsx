@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     textAlign: "center",
     fontFamily: "OS-SB",
-    fontSize: 17,
+    fontSize: 16,
   },
   buttonPlaceholder: {
     width: Dimensions.get("window").width * 0.28,

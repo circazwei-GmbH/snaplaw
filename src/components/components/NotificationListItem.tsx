@@ -1,6 +1,5 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import { View, StyleSheet, Animated } from "react-native";
-import { NotificationListInterface } from "../pages/Notifications";
 import DefaultText from "../basics/typography/DefaultText";
 import dayjs from "dayjs";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -13,21 +12,22 @@ import { useI18n } from "../../translator/i18n";
 interface NotificationListItemPropsInterface {
   item: NotificationListItemInterface;
   onPress: Function;
+  changeStatus: Function;
 }
 
 export default function NotificationListItem({
   item,
   onPress,
+  changeStatus,
 }: NotificationListItemPropsInterface): JSX.Element {
-  const { type, contractId, usernameFrom, createdAt, isNew, userId } = item;
+  const { id, type, contractId, usernameFrom, createdAt, isNew, userId } = item;
   const { t } = useI18n();
   const swipeable: any = useRef();
   const isToday = require("dayjs/plugin/isToday");
   dayjs.extend(isToday);
-  const [isRead, setIsRead] = useState(isNew);
 
   const onClose = () => {
-    setIsRead(false);
+    changeStatus(id);
     swipeable.current.close();
   };
 
@@ -67,16 +67,16 @@ export default function NotificationListItem({
         style={styles.container}
         activeOpacity={1}
         onPress={() =>
-          onPress(isRead, type, usernameFrom, `“${contractId}”` ?? "")
+          onPress(isNew, type, usernameFrom, `“${contractId}”` ?? "")
         }
       >
         <View
           style={[
             styles.notification,
-            isRead ? styles.containerBackgroundNew : styles.containerBackground,
+            isNew ? styles.containerBackgroundNew : styles.containerBackground,
           ]}
         >
-          {isRead ? (
+          {isNew ? (
             <View style={styles.pinkDotBox}>
               <View style={styles.pinkDot} />
             </View>
@@ -85,11 +85,11 @@ export default function NotificationListItem({
             <View style={styles.notificationHeader}>
               <DefaultText
                 text={usernameFrom}
-                style={isRead ? null : styles.fontColorNotNew}
+                style={isNew ? null : styles.fontColorNotNew}
               />
               <DefaultText
                 text={dayjs(createdAt).format(
-                  dayjs().isToday(createdAt) ? "HH:MM" : "DD MMM"
+                  dayjs(createdAt).isToday() ? "HH:MM" : "DD MMM"
                 )}
                 style={styles.notificationDate}
               />
@@ -99,7 +99,7 @@ export default function NotificationListItem({
                 text={showNotification(usernameFrom, contractId)}
                 style={[
                   styles.notificationText,
-                  isRead ? null : styles.fontColorNotNew,
+                  isNew ? null : styles.fontColorNotNew,
                 ]}
               />
             </View>

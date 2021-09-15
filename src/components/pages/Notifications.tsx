@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import TopBar from "../layouts/TopBar";
 import { useI18n } from "../../translator/i18n";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
@@ -9,7 +9,7 @@ import { notificationConfig } from "../../services/notification/notificationsCon
 import AbstractList from "../components/lists/AbstractList";
 import {
   requestNotifications,
-  changeNotificationStatus,
+  requestChangeNotificationStatus,
 } from "../../store/modules/notifications/action-creators";
 
 export default function Notifications(): JSX.Element {
@@ -18,6 +18,8 @@ export default function Notifications(): JSX.Element {
   const list = useAppSelector((state) => state.notifications.notifications);
 
   const getNotifications = () => dispatch(requestNotifications());
+  const changeStatus = (id: string) =>
+    dispatch(requestChangeNotificationStatus({ id }));
 
   const modalHandler = (
     isNew: boolean,
@@ -53,10 +55,11 @@ export default function Notifications(): JSX.Element {
           <NotificationListItem
             item={item}
             onPress={modalHandler}
-            getNotifications={getNotifications}
+            changeStatus={changeStatus}
           />
         )}
         style={styles.container}
+        inverted={true}
       />
     </TopBar>
   );
@@ -65,7 +68,7 @@ export default function Notifications(): JSX.Element {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 25,
+    marginTop: 15,
   },
   item: {
     elevation: 2,
