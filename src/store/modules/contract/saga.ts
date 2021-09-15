@@ -22,6 +22,7 @@ import {
   ValidateAllScreensAction,
   InviteUserAction,
   RequestGetEmailsAction,
+  EmailsListItemInterface,
 } from "./types";
 import API from "../../../services/contract/index";
 import { responseError } from "../auth/action-creators";
@@ -233,7 +234,10 @@ function* requestUsersEmail({ payload }: RequestGetEmailsAction) {
   const currentList = yield select((state) => state.contract.inviteEmailsList);
   try {
     const page = listPagination.page + (currentList.length ? 1 : 0);
-    const list = yield call(API.getUserEmails, { payload, page });
+    const list: EmailsListItemInterface[] = yield call(API.getUserEmails, {
+      payload,
+      page,
+    });
     yield put(setInviteEmails({ list, page }));
   } catch (error) {
     yield put(responseError(error));
