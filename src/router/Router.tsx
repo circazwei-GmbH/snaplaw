@@ -25,6 +25,9 @@ import { requestToken } from "../store/modules/auth/action-creators";
 import { orientationChange } from "../store/modules/main/action-creators";
 import { ROUTER_TABS } from "./TabRouterTypes";
 import { MY_CONTRACT_ROUTE } from "./MyContractRouterTypes";
+import { AUTH_ROUTE } from "../router/AuthRouterTypes";
+import { HOME_ROUTER } from "../router/HomeRouterType";
+import { PROFILE_ROUTER } from "../router/ProfileRouterTypes";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
