@@ -4,7 +4,7 @@ import TopBar from "../layouts/TopBar";
 import { useI18n } from "../../translator/i18n";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { setModal } from "../../store/modules/main/slice";
-import NotificationListItem from "../components/NotificationListItem";
+import NotificationListItem from "../components/lists/ListItems/NotificationListItem";
 import { notificationConfig } from "../../services/notification/notificationsConfig";
 import AbstractList from "../components/lists/AbstractList";
 import {
@@ -59,7 +59,6 @@ export default function Notifications(): JSX.Element {
           />
         )}
         style={styles.container}
-        inverted={true}
       />
     </TopBar>
   );

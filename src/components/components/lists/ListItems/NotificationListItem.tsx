@@ -1,13 +1,13 @@
 import React, { useRef } from "react";
 import { View, StyleSheet, Animated } from "react-native";
-import DefaultText from "../basics/typography/DefaultText";
+import DefaultText from "../../../basics/typography/DefaultText";
 import dayjs from "dayjs";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { AntDesign } from "@expo/vector-icons";
-import { NotificationListItemInterface } from "../../store/modules/notifications/types";
-import { notificationConfig } from "../../services/notification/notificationsConfig";
-import { useI18n } from "../../translator/i18n";
+import { NotificationListItemInterface } from "../../../../store/modules/notifications/types";
+import { notificationConfig } from "../../../../services/notification/notificationsConfig";
+import { useI18n } from "../../../../translator/i18n";
 
 interface NotificationListItemPropsInterface {
   item: NotificationListItemInterface;
