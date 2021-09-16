@@ -58,9 +58,7 @@ export default function MyProfile(): JSX.Element {
           />
           <ProfileButton
             text={t("my_profile.buttons_text.notifications")}
-            onPress={() =>
-              RootNavigation.navigate(PROFILE_ROUTER.NOTIFICATIONS)
-            }
+            onPress={() => {}}
             type="link"
           />
           <ProfileButton

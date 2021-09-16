@@ -209,6 +209,20 @@ export default {
   },
   notifications: {
     title: "Benachrichtigungen",
+    title_second: "Sie haben die folgenden Benachrichtigungen",
+    empty_list: "Sie haben noch keine Benachrichtigungen.",
+    read_button: "Lesen",
+    messages: {
+      invited:
+        "Sie wurden gerade zum Vertrag%{contract} von %{partner} eingeladen",
+      rejected:
+        "Einladung zum Vertrag%{contract} wurde von %{partner} abgelehnt",
+    },
+    modal_buttons: {
+      accept: "Akzeptieren",
+      cancel: "Abbrechen",
+      ok: "Ok",
+    },
   },
   contracts: {
     [CONTRACT_TYPES.PURCHASE]: {

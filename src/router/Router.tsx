@@ -1,4 +1,7 @@
 import React, { useEffect } from "react";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import * as ScreenOrientation from "expo-screen-orientation";
 import SignIn from "../components/pages/auth/SignIn";
 import SignUp from "../components/pages/auth/SignUp";
 import Welcome from "../components/pages/Welcome";
@@ -7,31 +10,28 @@ import Homepage from "../components/pages/Homepage";
 import MyProfile from "../components/pages/settings/MyProfile";
 import Verification from "../components/pages/auth/Verification";
 import ChangePassword from "../components/pages/auth/ChangePassword";
-import { createStackNavigator } from "@react-navigation/stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { AUTH_ROUTE } from "./AuthRouterTypes";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { PROFILE_ROUTER } from "./ProfileRouterTypes";
 import ChangeLanguage from "../components/pages/settings/ChangeLanguage";
-import { requestLanguage } from "../store/modules/profile/action-creators";
 import EditProfile from "../components/pages/settings/EditProfile";
-import Notifications from "../components/pages/settings/Notifications";
-import { requestToken } from "../store/modules/auth/action-creators";
+import Notifications from "../components/pages/Notifications";
 import { Text, Platform, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { useI18n } from "../translator/i18n";
 import MyContracts from "../components/pages/MyContracts";
-import { HOME_ROUTER } from "./HomeRouterType";
 import Contract from "../components/pages/contracts/Contract";
 import Invite from "../components/pages/contracts/Invite";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { requestLanguage } from "../store/modules/profile/action-creators";
+import { requestToken } from "../store/modules/auth/action-creators";
 import { orientationChange } from "../store/modules/main/action-creators";
-import * as ScreenOrientation from "expo-screen-orientation";
 import { ROUTER_TABS } from "./TabRouterTypes";
 import { MY_CONTRACT_ROUTE } from "./MyContractRouterTypes";
+import { AUTH_ROUTE } from "../router/AuthRouterTypes";
+import { HOME_ROUTER } from "../router/HomeRouterType";
+import { PROFILE_ROUTER } from "../router/ProfileRouterTypes";
 
 const Stack = createStackNavigator();
-const ProfileStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+const ProfileStack = createStackNavigator();
 const HomeStack = createStackNavigator();
 const MyPorfileStack = createStackNavigator();
 
@@ -103,6 +103,10 @@ export default function Router() {
               component={Contract}
             />
             <HomeStack.Screen name={HOME_ROUTER.INVITE} component={Invite} />
+            <HomeStack.Screen
+              name={PROFILE_ROUTER.NOTIFICATIONS}
+              component={Notifications}
+            />
           </HomeStack.Navigator>
         )}
       </Tab.Screen>

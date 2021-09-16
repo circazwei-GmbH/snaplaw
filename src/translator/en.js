@@ -206,6 +206,19 @@ export default {
   },
   notifications: {
     title: "Notifications",
+    title_second: "You have the following notifications",
+    empty_list: "You have no notifications yet.",
+    read_button: "Read",
+    messages: {
+      invited:
+        "You have been just invited to contract%{contract} by %{partner}",
+      rejected: "Invite to contract%{contract} has been rejected by %{partner}",
+    },
+    modal_buttons: {
+      accept: "Accept",
+      cancel: "Cancel",
+      ok: "Ok",
+    },
   },
   contracts: {
     [CONTRACT_TYPES.PURCHASE]: {
