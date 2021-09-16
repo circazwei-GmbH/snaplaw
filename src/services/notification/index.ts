@@ -6,10 +6,8 @@ const requestNotifications = async (page: string): Promise<unknown> => {
   return translateNotificationList(response.data);
 };
 
-const requestChangeStatus = async (id: string): Promise<unknown> => {
-  const response = await httpClient.patch(`api/notifications/${id}/read`, {});
-  return response.status;
-};
+const requestChangeStatus = async (id: string): Promise<unknown> =>
+  httpClient.patch(`api/notifications/${id}/read`, {});
 
 export default {
   requestNotifications,
