@@ -56,11 +56,13 @@ export default function UserDataForm(): JSX.Element {
 
     // @ts-ignore
     for (let fieldName in USER_DATA_FIELDS) {
+      // @ts-ignore
       if (me[fieldName]) {
         dispatch(
           setScreenData({
             screenType: CONTRACT_SCREEN_TYPES.USER_DATA,
             fieldName,
+            // @ts-ignore
             value: me[fieldName],
           })
         );
