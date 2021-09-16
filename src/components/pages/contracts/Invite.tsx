@@ -114,7 +114,7 @@ export default function Invite({
     <TopBar pageName={t("invite_page.title")}>
       <TouchableWithoutFeedback accessible={false} onPress={Keyboard.dismiss}>
         <View style={styles.container}>
-          {keyboardVisible ? null : <UserAvatar sizeSmall url={url} />}
+          {keyboardVisible ? null : null}
           <DefaultText text={t("invite_page.invitation")} style={styles.text} />
           <TextFieldWithDropdown
             value={emailInitialValue.email.value}
@@ -136,6 +136,8 @@ export default function Invite({
     </TopBar>
   );
 }
+
+//<UserAvatar sizeSmall url={url} />
 
 const styles = StyleSheet.create({
   container: {

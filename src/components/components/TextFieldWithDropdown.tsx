@@ -140,6 +140,7 @@ export default function InviteTextField({
 const styles = StyleSheet.create({
   inputContainer: {
     width: "100%",
+    zIndex: 1,
   },
   emptyInput: {
     backgroundColor: "#EFF7FD",
@@ -197,7 +198,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 10,
     elevation: 3,
-    zIndex: 2,
+    zIndex: 5,
   },
   listTopPosition: {
     top: 55,
