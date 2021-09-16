@@ -50,7 +50,10 @@ export default function NotificationListItem({
           activeOpacity={0.7}
         >
           <AntDesign name="checksquareo" size={24} color="#fff" />
-          <DefaultText text={"Read"} style={styles.rightSwipeText} />
+          <DefaultText
+            text={t("notifications.read_button")}
+            style={styles.rightSwipeText}
+          />
         </TouchableOpacity>
       </Animated.View>
     );

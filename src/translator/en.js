@@ -208,6 +208,7 @@ export default {
     title: "Notifications",
     title_second: "You have the following notifications",
     empty_list: "You have no notifications yet.",
+    read_button: "Read",
     messages: {
       invited:
         "You have been just invited to contract%{contract} by %{partner}",
