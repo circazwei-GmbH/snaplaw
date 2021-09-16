@@ -28,7 +28,6 @@ export default function AbstractList({
   onRefresh,
   isRefreshing,
   style,
-  ...props
 }: AbstractListProps) {
   if (isLoading) {
     return (
@@ -52,7 +51,6 @@ export default function AbstractList({
 
   return (
     <FlatList
-      {...props}
       style={[styles.container, style]}
       data={elements}
       renderItem={listItem}
