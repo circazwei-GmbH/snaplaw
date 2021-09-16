@@ -173,7 +173,6 @@ function* requestConreactsList({
   } catch (error) {
     yield put(responseError(error));
   } finally {
-    yield call(() => new Promise((r) => setTimeout(() => r(), 2000)));
     yield put(setListLoading(undefined));
   }
 }

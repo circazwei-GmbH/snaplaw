@@ -48,14 +48,14 @@ const requestContractList = async (type: CONTRACT_LIST_STATE, page: number) => {
   const token = httpClient.getToken();
   return translateContractList(
     response.data,
-    getUserFromToken(token || "")?.id
+    getUserFromToken(token || "")?._id
   );
 };
 
 const requestContract = async (id: string): Promise<ContractDataType> => {
   const response = await httpClient.get(`api/contracts/${id}`);
   const token = httpClient.getToken();
-  return translateContract(response.data, getUserFromToken(token || "")?.id);
+  return translateContract(response.data, getUserFromToken(token || "")?._id);
 };
 
 const requestDeleteContract = (id: string) =>

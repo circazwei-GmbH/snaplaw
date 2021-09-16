@@ -26,6 +26,7 @@ export default function UserDataForm(): JSX.Element {
         (screen) => screen.type === CONTRACT_SCREEN_TYPES.USER_DATA
       ) as UserDataScreenInterface | undefined
   );
+  const me = useAppSelector((state) => state.profile.user);
   const contractType = useAppSelector(
     (state) => state.contract.currentContract?.type
   );
@@ -47,6 +48,27 @@ export default function UserDataForm(): JSX.Element {
       dispatch(validateScreen(contractType, CONTRACT_SCREEN_TYPES.USER_DATA));
     }
   };
+
+  useEffect(() => {
+    if (userData || !me) {
+      return () => {};
+    }
+
+    // @ts-ignore
+    for (let fieldName in USER_DATA_FIELDS) {
+      // @ts-ignore
+      if (me[fieldName]) {
+        dispatch(
+          setScreenData({
+            screenType: CONTRACT_SCREEN_TYPES.USER_DATA,
+            fieldName,
+            // @ts-ignore
+            value: me[fieldName],
+          })
+        );
+      }
+    }
+  }, [userData]);
 
   return (
     <View style={styles.inputBox}>

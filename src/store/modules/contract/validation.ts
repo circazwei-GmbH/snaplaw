@@ -1,5 +1,5 @@
 import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
-import { contractScreensConfig } from "./contract-screens-types";
+import { getContractScreensConfig } from "./contract-screens-types";
 import { BaseScreenDataInterface } from "./base-types";
 import {
   USER_DATA_FIELDS,
@@ -8,6 +8,7 @@ import {
   CONFIRMATION_FIELDS,
   PAYMENT_FIELDS,
   PAYMENT_METHODS,
+  CONTRACT_ROLE,
 } from "./types";
 import {
   length,
@@ -130,9 +131,10 @@ export const screenFieldValidator = (
 
 export const contractValidator = (
   contractType: CONTRACT_TYPES,
-  screens: Array<BaseScreenDataInterface>
+  screens: Array<BaseScreenDataInterface>,
+  myRole: CONTRACT_ROLE
 ) => {
-  const contractConfig = contractScreensConfig[contractType];
+  const contractConfig = getContractScreensConfig(contractType, myRole);
 
   let firstEmptyScreen = null;
   for (let i = 0; contractConfig.length > i; i++) {
