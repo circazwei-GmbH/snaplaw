@@ -20,7 +20,7 @@ export default function NotificationListItem({
   onPress,
   changeStatus,
 }: NotificationListItemPropsInterface): JSX.Element {
-  const { id, type, contractId, usernameFrom, createdAt, isNew, userId } = item;
+  const { id, type, contractName, usernameFrom, createdAt, isNew } = item;
   const { t } = useI18n();
   const swipeable: any = useRef();
   const isToday = require("dayjs/plugin/isToday");
@@ -64,11 +64,10 @@ export default function NotificationListItem({
       ref={swipeable}
     >
       <TouchableOpacity
+        testID="notificationItem.openModal"
         style={styles.container}
         activeOpacity={1}
-        onPress={() =>
-          onPress(isNew, type, usernameFrom, `“${contractId}”` ?? "")
-        }
+        onPress={() => onPress(isNew, type, usernameFrom, contractName)}
       >
         <View
           style={[
@@ -96,7 +95,7 @@ export default function NotificationListItem({
             </View>
             <View style={styles.notificationBody}>
               <DefaultText
-                text={showNotification(usernameFrom, contractId)}
+                text={showNotification(usernameFrom, contractName)}
                 style={[
                   styles.notificationText,
                   isNew ? null : styles.fontColorNotNew,

@@ -4,6 +4,7 @@ export interface NotificationInterface {
   _id: string;
   type: string;
   contractId: string;
+  contractName: string;
   usernameFrom: string;
   createdAt: string;
   isNew: boolean;
@@ -14,6 +15,7 @@ export interface NotificationListItemInterface {
   id: string;
   type: string;
   contractId: string;
+  contractName: string;
   usernameFrom: string;
   createdAt: string;
   isNew: boolean;

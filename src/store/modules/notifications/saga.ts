@@ -28,10 +28,8 @@ function* changeStatus({
   payload: { id },
 }: RequestChangeNotificationStatusAction) {
   try {
-    const response = yield call(API.requestChangeStatus, id);
-    if (response === 200) {
-      yield put(changeNotificationStatus({ id }));
-    }
+    yield call(API.requestChangeStatus, id);
+    yield put(changeNotificationStatus({ id }));
   } catch (error) {
     yield put(responseError(error));
   }

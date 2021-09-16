@@ -9,6 +9,9 @@ export const translateNotification = (
   id: notification._id,
   type: notification.type,
   contractId: notification.contractId,
+  contractName: notification.contractName
+    ? ` “${notification.contractName}”`
+    : "",
   usernameFrom: notification.usernameFrom,
   createdAt: notification.createdAt,
   isNew: notification.isNew,
