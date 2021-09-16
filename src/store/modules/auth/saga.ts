@@ -57,6 +57,7 @@ import {
   setAuthTokens,
 } from "../../../services/auth/tokens";
 import { BUTTON_COLORTYPE } from "../main/types";
+import {clearUser} from "../profile/slice";
 
 function* fetchSignUp(action: RequestSignUpAction) {
   try {
@@ -250,6 +251,7 @@ function* clearToken() {
   try {
     yield call(clearAuthTokens);
     yield put(killToken());
+    yield put(clearUser());
     yield call(BaseApi.setToken, undefined, undefined);
   } catch (error) {
     yield put(setMessage(Translator.getInstance().trans("errors.abstract")));
