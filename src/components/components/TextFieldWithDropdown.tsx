@@ -8,9 +8,10 @@ import {
   TouchableOpacity,
   StyleProp,
   TextStyle,
-  FlatList,
   Dimensions,
+  Platform,
 } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { EmailsListItemInterface } from "../../store/modules/contract/types";
 
@@ -115,23 +116,38 @@ export default function InviteTextField({
         {errorMessage}
       </Text>
       {list?.length > 0 && focused ? (
-        <FlatList
-          style={[
-            styles.list,
-            errorMessage ? styles.listTopPositionError : styles.listTopPosition,
-          ]}
-          data={list}
-          keyExtractor={(item) => item.email}
-          renderItem={({ item }) => renderItem(item)}
-          onEndReached={getList}
-          onEndReachedThreshold={0.5}
-          keyboardShouldPersistTaps="handled"
-          getItemLayout={(data, index) => ({
-            length: LIST_ITEM_HEIGHT,
-            offset: LIST_ITEM_HEIGHT * index,
-            index,
-          })}
-        />
+        <>
+          <FlatList
+            style={[
+              styles.list,
+              errorMessage
+                ? styles.listTopPositionError
+                : styles.listTopPosition,
+            ]}
+            data={list}
+            keyExtractor={(item) => item.email}
+            renderItem={({ item }) => renderItem(item)}
+            onEndReached={getList}
+            onEndReachedThreshold={0.5}
+            keyboardShouldPersistTaps="handled"
+            getItemLayout={(data, index) => ({
+              length: LIST_ITEM_HEIGHT,
+              offset: LIST_ITEM_HEIGHT * index,
+              index,
+            })}
+          />
+          {Platform.OS === "ios" ? (
+            <View
+              style={[
+                styles.list,
+                styles.shadowIos,
+                errorMessage
+                  ? styles.listTopPositionError
+                  : styles.listTopPosition,
+              ]}
+            />
+          ) : null}
+        </>
       ) : null}
     </View>
   );
@@ -140,7 +156,7 @@ export default function InviteTextField({
 const styles = StyleSheet.create({
   inputContainer: {
     width: "100%",
-    zIndex: 1,
+    ...Platform.select({ ios: { zIndex: 1 } }),
   },
   emptyInput: {
     backgroundColor: "#EFF7FD",
@@ -197,8 +213,18 @@ const styles = StyleSheet.create({
     position: "absolute",
     backgroundColor: "#fff",
     borderRadius: 10,
-    elevation: 3,
-    zIndex: 5,
+    elevation: 2,
+    zIndex: 2,
+  },
+  shadowIos: {
+    zIndex: 0,
+    shadowColor: "rgba(196, 211, 220, 0.6)",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 2,
   },
   listTopPosition: {
     top: 55,

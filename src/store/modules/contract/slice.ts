@@ -46,14 +46,7 @@ const initialState: ContractState = {
     page: 0,
     isNextPage: true,
   },
-  inviteEmailsList: [
-    { email: "test@test.com" },
-    { email: "test1@test.com" },
-    { email: "test2@test.com" },
-    { email: "test3@test.com" },
-    { email: "test4@test.com" },
-    { email: "test5@test.com" },
-  ],
+  inviteEmailsList: [],
   emailsListPagination: {
     page: 0,
     isNextPage: true,
