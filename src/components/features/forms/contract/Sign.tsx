@@ -12,7 +12,7 @@ import { OrientationLock } from "expo-screen-orientation";
 import { SIGN_LOADER } from "../../../../store/modules/contract/purchase/sign";
 import { removeFromWaiter } from "../../../../store/modules/main/slice";
 import { contractValidator } from "../../../../store/modules/contract/validation";
-import { Contract } from "../../../../store/modules/contract/types";
+import { ContractDataType } from "../../../../store/modules/contract/types";
 import { useNavigation } from "@react-navigation/native";
 import {
   validateAllScreens,
@@ -35,20 +35,31 @@ export default function Sign() {
   const dispatch = useAppDispatch();
   const navigator = useNavigation();
 
-  const signModalHandler = (currentContract: Contract) => {
+  const signModalHandler = (currentContract: ContractDataType) => {
     dispatch(clearErrors());
     dispatch(validateAllScreens(currentContract.type));
     const emptyScreen = contractValidator(
       currentContract.type,
-      currentContract.screens
+      currentContract.screens,
+      currentContract.meRole
     );
     if (emptyScreen !== null) {
       // @ts-ignore
-      navigator.pop(countToPopLength(currentContract.type, emptyScreen));
+      navigator.pop(
+        countToPopLength(
+          currentContract.type,
+          currentContract.meRole,
+          emptyScreen
+        )
+      );
       dispatch(
         validateScreen(
           currentContract.type,
-          getTypeByContractAndScreen(currentContract.type, emptyScreen)
+          getTypeByContractAndScreen(
+            currentContract.type,
+            currentContract.meRole,
+            emptyScreen
+          )
         )
       );
       return;

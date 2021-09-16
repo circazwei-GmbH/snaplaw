@@ -106,6 +106,7 @@ const contractSlice = createSlice({
       action: PayloadAction<ContractDataType>
     ) => {
       state.currentContract = action.payload;
+      state.contractErrors = undefined;
     },
     [setScreenDataAction.type]: (
       state: Draft<ContractState>,
