@@ -24,16 +24,13 @@ import { requestLanguage } from "../store/modules/profile/action-creators";
 import { requestToken } from "../store/modules/auth/action-creators";
 import { orientationChange } from "../store/modules/main/action-creators";
 import { ROUTER_TABS } from "./TabRouterTypes";
-import { AUTH_ROUTE } from "./AuthRouterTypes";
-import { PROFILE_ROUTER } from "./ProfileRouterTypes";
-import { HOME_ROUTER } from "./HomeRouterType";
-import { MYCONTRACT_ROUTER } from "./MyContractRouterTypes";
+import { MY_CONTRACT_ROUTE } from "./MyContractRouterTypes";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const ProfileStack = createStackNavigator();
 const HomeStack = createStackNavigator();
-const MyContractsStack = createStackNavigator();
+const MyPorfileStack = createStackNavigator();
 
 export default function Router() {
   const token = useAppSelector((state) => state.auth.token);
@@ -71,17 +68,16 @@ export default function Router() {
         }}
       >
         {() => (
-          <MyContractsStack.Navigator headerMode="none">
-            <MyContractsStack.Screen
-              name={MYCONTRACT_ROUTER.MY_CONTRACTS}
+          <MyPorfileStack.Navigator headerMode="none">
+            <MyPorfileStack.Screen
+              name={MY_CONTRACT_ROUTE.LIST}
               component={MyContracts}
             />
-
-            <MyContractsStack.Screen
-              name={PROFILE_ROUTER.NOTIFICATIONS}
-              component={Notifications}
+            <MyPorfileStack.Screen
+              name={MY_CONTRACT_ROUTE.INVITE}
+              component={Invite}
             />
-          </MyContractsStack.Navigator>
+          </MyPorfileStack.Navigator>
         )}
       </Tab.Screen>
       <Tab.Screen

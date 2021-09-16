@@ -22,6 +22,8 @@ import {
   ValidateAllScreensAction,
   InviteUserAction,
   RequestGetEmailsAction,
+  EmailsListItemInterface,
+  CONTRACT_ROLE,
 } from "./types";
 import API from "../../../services/contract/index";
 import { responseError } from "../auth/action-creators";
@@ -54,7 +56,8 @@ function* createContract({ payload }: RequestCreateContractAction) {
       setInitedContract({
         id: response.data.id,
         type: payload,
-        contractor: undefined,
+        partnerId: undefined,
+        meRole: CONTRACT_ROLE.OWNER,
         createdAt: "",
         sign: undefined,
         screens: [
@@ -178,16 +181,7 @@ function* requestConreactsList({
 function* requestContract({ payload }: RequestContractAction) {
   try {
     const contract = yield call(API.requestContract, payload);
-    yield put(
-      setInitedContract({
-        id: contract.id,
-        type: contract.type,
-        screens: contract.screens,
-        contractor: undefined,
-        sign: contract.sign,
-        createdAt: contract.createdAt,
-      })
-    );
+    yield put(setInitedContract(contract));
   } catch (error) {
     yield put(responseError(error));
   }
@@ -233,7 +227,10 @@ function* requestUsersEmail({ payload }: RequestGetEmailsAction) {
   const currentList = yield select((state) => state.contract.inviteEmailsList);
   try {
     const page = listPagination.page + (currentList.length ? 1 : 0);
-    const list = yield call(API.getUserEmails, { payload, page });
+    const list: EmailsListItemInterface[] = yield call(API.getUserEmails, {
+      payload,
+      page,
+    });
     yield put(setInviteEmails({ list, page }));
   } catch (error) {
     yield put(responseError(error));

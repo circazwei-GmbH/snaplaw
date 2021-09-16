@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   TextInput,
   View,
@@ -12,6 +12,7 @@ import {
   Dimensions,
 } from "react-native";
 import { SimpleLineIcons } from "@expo/vector-icons";
+import { EmailsListItemInterface } from "../../store/modules/contract/types";
 
 const LIST_ITEM_HEIGHT = 50;
 
@@ -26,7 +27,7 @@ interface TextFieldWithDropdownPropsInterface extends TextInputProps {
   value: string;
   onChangeFunction: OnChangeFunction;
   containerStyle?: StyleProp<TextStyle>;
-  list: string[];
+  list: EmailsListItemInterface[];
   getList: () => void;
   setValue: (email: string) => any;
 }
@@ -44,6 +45,7 @@ export default function InviteTextField({
 }: TextFieldWithDropdownPropsInterface): JSX.Element {
   const [localValue, setLocalValue] = useState(value);
   const [focused, setFocused] = useState(false);
+  const input = useRef();
 
   const textChangeHandler = (text: string) => {
     setLocalValue(text);
@@ -66,15 +68,18 @@ export default function InviteTextField({
 
   const inputButtonHandler = () => {
     setFocused(!focused);
+    if (focused) {
+      input.current.blur();
+    }
   };
 
-  const renderItem = (item: string): JSX.Element => (
+  const renderItem = (item: EmailsListItemInterface): JSX.Element => (
     <TouchableOpacity
       activeOpacity={1}
       style={styles.listItem}
-      onPress={() => onPressListItem(item)}
+      onPress={() => onPressListItem(item.email)}
     >
-      <Text style={styles.listItemText}>{item}</Text>
+      <Text style={styles.listItemText}>{item.email}</Text>
     </TouchableOpacity>
   );
 
@@ -89,6 +94,7 @@ export default function InviteTextField({
       </TouchableOpacity>
       <TextInput
         {...props}
+        ref={input}
         placeholder={!focused ? placeholder : ""}
         placeholderTextColor="#909090"
         style={[
@@ -108,14 +114,14 @@ export default function InviteTextField({
       >
         {errorMessage}
       </Text>
-      {focused && list?.length > 0 ? (
+      {list?.length > 0 && focused ? (
         <FlatList
           style={[
             styles.list,
             errorMessage ? styles.listTopPositionError : styles.listTopPosition,
           ]}
           data={list}
-          keyExtractor={(item) => item}
+          keyExtractor={(item) => item.email}
           renderItem={({ item }) => renderItem(item)}
           onEndReached={getList}
           onEndReachedThreshold={0.5}

@@ -2,18 +2,18 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import {
   CHANGE_PASSWORD_REQUESTED,
   CLEAR_TOKEN,
+  clearToken as clearTokenAction,
   FORGOT_PASSWORD_REQUESTED,
   REQUEST_TOKEN,
   requestVerificationResend,
   RESPONSE_ERROR,
+  responseError,
   SAVE_TOKEN,
   saveToken,
   SIGNIN_REQUESTED,
   SIGNUP_REQUESTED,
   VERIFICATION_REQUESTED,
   VERIFICATION_RESEND_REQUESTED,
-  clearToken as clearTokenAction,
-  responseError,
 } from "./action-creators";
 import {
   ChangePasswordAction,
@@ -27,14 +27,14 @@ import {
 } from "./types";
 import API from "../../../services/auth/index";
 import {
-  signUpFailed,
-  signInFailed,
-  setToken,
-  clearSignInErrors,
-  verificationFailed,
-  forgotPasswordFailed,
   changePasswordFailed,
+  clearSignInErrors,
+  forgotPasswordFailed,
   killToken,
+  setToken,
+  signInFailed,
+  signUpFailed,
+  verificationFailed,
 } from "./slice";
 import { setMessage, setModal } from "../main/slice";
 import { AUTH_ROUTE } from "../../../router/AuthRouterTypes";
@@ -56,6 +56,7 @@ import {
   getAuthTokens,
   setAuthTokens,
 } from "../../../services/auth/tokens";
+import { BUTTON_COLORTYPE } from "../main/types";
 
 function* fetchSignUp(action: RequestSignUpAction) {
   try {
@@ -148,13 +149,13 @@ function* fetchVerification(action: VerificationAction) {
               name: Translator.getInstance().trans(
                 "verification.modals.confirm.buttons.no"
               ),
-              colortype: "error",
+              colortype: BUTTON_COLORTYPE.ERROR,
             },
             {
               name: Translator.getInstance().trans(
                 "verification.modals.confirm.buttons.yes"
               ),
-              colortype: "primary",
+              colortype: BUTTON_COLORTYPE.PRIMARY,
               action: requestVerificationResend(action.payload.email),
             },
           ],

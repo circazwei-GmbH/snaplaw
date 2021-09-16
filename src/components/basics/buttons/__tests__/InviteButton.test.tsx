@@ -7,7 +7,9 @@ jest.mock("../../../../router/RootNavigation");
 
 describe("InviteButton", () => {
   it("Should call navigation", () => {
-    const { getByTestId } = render(<InviteButton />);
+    const { getByTestId } = render(
+      <InviteButton contractId="testContractId" />
+    );
 
     fireEvent.press(getByTestId("InviteButton"));
     expect(RootNavigation.navigate).toBeCalled();

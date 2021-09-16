@@ -27,7 +27,7 @@ export default function EditProfileTextField({
   value,
   edit,
   ...props
-}: EditProfileTextFieldPropsInterface) {
+}: EditProfileTextFieldPropsInterface): JSX.Element {
   const [focused, setFocused] = useState(false);
 
   const textChangeHandler = (text: string) => {
@@ -43,7 +43,9 @@ export default function EditProfileTextField({
         focused ? styles.borderFocused : styles.borderNotFocused,
       ]}
     >
-      <Text style={[styles.label]}>{placeholder}</Text>
+      {value?.length === 0 ? null : (
+        <Text style={[styles.label]}>{placeholder}</Text>
+      )}
       <TextInput
         {...props}
         placeholder={!focused && !errorMessage ? placeholder : ""}

@@ -137,8 +137,8 @@ export default {
     placeholders: {
       name: "First name",
       lastName: "Last name",
-      dateOfBirth: "Date of birth (DD-MM-YYYY)",
-      email: "Email",
+      dateOfBirth: "Date of birth",
+      email: "E-mail",
       phone: "Phone",
       address: "Address (Street, City)",
       postCode: "Postal code",
@@ -189,7 +189,7 @@ export default {
     },
     empty_list: "You have no contracts yet",
     actions: {
-      edit: "Edit contracts",
+      edit: "Edit contract",
       delete: "Delete contract",
       see_partner: "See contract partner",
       delete_partner: "Delete contract partner",
