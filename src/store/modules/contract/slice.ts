@@ -34,6 +34,9 @@ interface ContractState {
     page: number;
     isNextPage: boolean;
   };
+  email: {
+    error: string;
+  };
 }
 
 const initialState: ContractState = {
@@ -50,6 +53,9 @@ const initialState: ContractState = {
   emailsListPagination: {
     page: 0,
     isNextPage: true,
+  },
+  email: {
+    error: "",
   },
 };
 
@@ -96,6 +102,12 @@ const clearInviteEmailsListAction = createAction<
   EmailsListItemInterface[],
   "clearInviteEmails"
 >("clearInviteEmails");
+const inviteSelfAction = createAction<{ message: string }, "inviteSelf">(
+  "inviteSelf"
+);
+const clearEmailErrorsAction = createAction<undefined, "clearEmailErrors">(
+  "clearEmailErrors"
+);
 
 const contractSlice = createSlice({
   name: "contract",
@@ -236,6 +248,17 @@ const contractSlice = createSlice({
     [clearInviteEmailsListAction.type]: (state: Draft<ContractState>) => {
       state.inviteEmailsList = [];
     },
+    [inviteSelfAction.type]: (
+      state: Draft<ContractState>,
+      action: PayloadAction<{
+        message: string;
+      }>
+    ) => {
+      state.email.error = action.payload.message;
+    },
+    [clearEmailErrorsAction.type]: (state: Draft<ContractState>) => {
+      state.email.error = "";
+    },
   },
 });
 
@@ -250,6 +273,8 @@ export const {
   updateContractSign,
   setInviteEmails,
   clearInviteEmails,
+  inviteSelf,
+  clearEmailErrors,
 } = contractSlice.actions;
 
 export default contractSlice.reducer;

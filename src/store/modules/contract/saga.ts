@@ -39,6 +39,8 @@ import {
   setListLoading,
   updateContractSign,
   setInviteEmails,
+  clearEmailErrors,
+  inviteSelf,
 } from "./slice";
 import * as RootNavigation from "../../../router/RootNavigation";
 import { HOME_ROUTER } from "../../../router/HomeRouterType";
@@ -47,6 +49,7 @@ import { SelectType } from "../../hooks";
 import { contractValidationConfig, screenFieldValidator } from "./validation";
 import { BaseScreenDataInterface } from "./base-types";
 import { Translator } from "../../../translator/i18n";
+import { USER_SELF_INVITE } from "../../../services/error-codes";
 
 function* createContract({ payload }: RequestCreateContractAction) {
   try {
@@ -212,9 +215,16 @@ function* signContract({ payload }: SignContractAction) {
 
 function* requestInviteUser({ payload }: InviteUserAction) {
   try {
-    yield call(API.inviteUser, payload);
+    const response = yield call(API.inviteUser, payload);
     RootNavigation.pop();
   } catch (error) {
+    if (error.response?.data.code === USER_SELF_INVITE) {
+      return yield put(
+        inviteSelf(
+          Translator.getInstance().trans("invite_page.self_invite_error")
+        )
+      );
+    }
     yield put(responseError(error));
   }
 }
