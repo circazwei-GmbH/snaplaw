@@ -68,46 +68,53 @@ export default function Payment() {
 
   return (
     <View style={styles.container}>
-      {contract.meRole === CONTRACT_ROLE.PARTNER ? (
-        <ErrorBoldMessage style={styles.partnerMessage} text={'The seller'} />
+      {contract.meRole === CONTRACT_ROLE.PARTNER && screenData?.data[PAYMENT_FIELDS.PAYMENT_METHOD] ? (
+        <ErrorBoldMessage style={styles.partnerMessage} text={t(`contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.partner_text`, {
+          method: t(`contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.payment_methods.${screenData?.data[PAYMENT_FIELDS.PAYMENT_METHOD]}`)
+        })} />
       ) : null}
-      <DefaultText
-        style={styles.text}
-        text={t(
-          `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.product_price`
-        )}
-      />
-      <View style={styles.priceBlock}>
-        <TextField
-          keyboardType="numeric"
-          errorMessage={screenErrors?.[PAYMENT_FIELDS.COST]}
-          containerStyle={styles.costField}
-          value={screenData?.data[PAYMENT_FIELDS.COST]}
-          onChangeFunction={(test) =>
-            updateDataHandler(PAYMENT_FIELDS.COST, test)
-          }
-          placeholder={t(
-            `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.cost`
-          )}
-        />
-        <View
-          style={[
-            styles.select,
-            screenErrors?.[PAYMENT_FIELDS.COST] ? styles.paddingForError : null,
-          ]}
-        >
-          <Select
-            items={CURRENSIES}
-            selectedValue={CURRENSIES.find(
-              (currency) =>
-                screenData?.data[PAYMENT_FIELDS.CURRENCY] === currency.value
-            )}
-            onValueChange={(item) =>
-              updateDataHandler(PAYMENT_FIELDS.CURRENCY, item.value)
-            }
-          />
-        </View>
-      </View>
+
+      {contract.meRole === CONTRACT_ROLE.OWNER ? (
+          <>
+            <DefaultText
+              style={styles.text}
+              text={t(
+                `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.product_price`
+              )}
+            />
+            <View style={styles.priceBlock}>
+              <TextField
+                keyboardType="numeric"
+                errorMessage={screenErrors?.[PAYMENT_FIELDS.COST]}
+                containerStyle={styles.costField}
+                value={screenData?.data[PAYMENT_FIELDS.COST]}
+                onChangeFunction={(test) =>
+                  updateDataHandler(PAYMENT_FIELDS.COST, test)
+                }
+                placeholder={t(
+                  `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.cost`
+                )}
+              />
+              <View
+                style={[
+                  styles.select,
+                  screenErrors?.[PAYMENT_FIELDS.COST] ? styles.paddingForError : null,
+                ]}
+              >
+                <Select
+                  items={CURRENSIES}
+                  selectedValue={CURRENSIES.find(
+                    (currency) =>
+                      screenData?.data[PAYMENT_FIELDS.CURRENCY] === currency.value
+                  )}
+                  onValueChange={(item) =>
+                    updateDataHandler(PAYMENT_FIELDS.CURRENCY, item.value)
+                  }
+                />
+              </View>
+            </View>
+          </>
+      ) : null}
       <DefaultText
         style={[styles.text, styles.secondText]}
         text={t(
