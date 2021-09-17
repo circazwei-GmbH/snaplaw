@@ -45,7 +45,7 @@ export default function Invite({
     email: FieldInterface;
   }
 
-  let emailInitialValue: InviteEmailInterface = {
+  const emailInitialValue: InviteEmailInterface = {
     email: {
       value: "",
       error: "",
@@ -62,20 +62,14 @@ export default function Invite({
   };
 
   const searchHandler = (email: string) => {
-    return (emailInitialValue = {
-      ...emailInitialValue,
-      email: {
-        ...emailInitialValue.email,
-        value: email,
-      },
-    });
+    setEmailValue(formFieldFill("email", email, emailValue));
   };
 
   const onChangeHandler = (newValue: string) => {
     if (timer) {
       clearTimeout(timer);
     }
-    setEmailValue(formFieldFill("email", newValue, emailValue));
+    searchHandler(newValue);
     const timeout = setTimeout(() => {
       dispatch(clearInviteEmails());
       dispatch(requestUsersEmail(emailInitialValue.email.value));
