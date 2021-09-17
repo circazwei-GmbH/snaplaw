@@ -265,6 +265,7 @@ export default {
           [CONFIRMATION_FIELDS.SECOND]:
             "Die Käuferdaten wurden überprüft und stimmen überein.",
         },
+        partner_text: 'Bitte überprüfen Sie seine Identität mit einem Pass.'
       },
       [CONTRACT_SCREEN_TYPES.PAYMENT]: {
         title: "Bezahlung",

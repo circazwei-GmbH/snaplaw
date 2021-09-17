@@ -261,6 +261,7 @@ export default {
           [CONFIRMATION_FIELDS.SECOND]:
             "Buyer details have been verified and match.",
         },
+        partner_text: 'Please recheck his identity with a passport.'
       },
       [CONTRACT_SCREEN_TYPES.PAYMENT]: {
         title: "Payment",
