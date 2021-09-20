@@ -29,7 +29,7 @@ import {
 } from "./types";
 import API from "../../../services/contract/index";
 import { responseError } from "../auth/action-creators";
-import { addToWAiter, removeFromWaiter } from "../main/slice";
+import {addToWAiter, removeFromWaiter, setMessage} from "../main/slice";
 import { CONTRACT_CREATION_WAIT } from "./constants";
 import {
   clearErrors,
@@ -258,10 +258,10 @@ function* requestUsersEmail({ payload }: RequestGetEmailsAction) {
 }
 
 function* requestAcceptInvite({ payload }: RequestAcceptInviteAction) {
-  console.log('yay', payload)
   yield put(addToWAiter(REQUEST_ACCEPT_INVITE));
   try {
     yield call(API.acceptInvite, payload);
+    yield put(setMessage(Translator.getInstance().trans("notifications.messages.accepted_invite_success")));
   } catch (error) {
     yield put(responseError(error));
   } finally {

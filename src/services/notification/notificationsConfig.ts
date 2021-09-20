@@ -32,9 +32,7 @@ export const notificationConfig: notificationConfigInterface = {
       {
         name: "notifications.modal_buttons.accept",
         colortype: BUTTON_COLORTYPE.PRIMARY,
-        actionHandler(id: string) {
-          return requestAcceptInvite(id);
-        },
+        actionHandler: requestAcceptInvite,
       },
     ],
   },

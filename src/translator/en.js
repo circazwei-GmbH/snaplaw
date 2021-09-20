@@ -216,6 +216,7 @@ export default {
       rejected: "Invite to contract%{contract} has been rejected by %{partner}",
       accepted_invite:
         "Invite to contract %{contract} has been accepted by %{partner}",
+      accepted_invite_success: "Contract is added to My Contracts list, ^In progress^ tab"
     },
     modal_buttons: {
       accept: "Accept",
