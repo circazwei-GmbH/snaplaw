@@ -8,6 +8,7 @@ import {
   ValidateAllScreensAction,
   InviteUserAction,
   RequestGetEmailsAction,
+  RequestAcceptInviteAction,
 } from "./types";
 import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
 
@@ -21,6 +22,7 @@ export const REQUEST_CONTRACT_DELETE = "REQUEST_CONTRACT_DELETE";
 export const SIGN_CONTRACT = "SIGN_CONTRACT";
 export const REQUEST_INVITE_USER = "REQUEST_INVITE_USER";
 export const REQUEST_USERS_EMAIL = "REQUEST_USERS_EMAIL";
+export const REQUEST_ACCEPT_INVITE = "REQUEST_ACCEPT_INVITE";
 
 export const requestCreateContract = (
   type: CONTRACT_TYPES
@@ -95,4 +97,9 @@ export const requestInviteUser = (
 export const requestUsersEmail = (search: string): RequestGetEmailsAction => ({
   type: REQUEST_USERS_EMAIL,
   payload: search,
+});
+
+export const requestAcceptInvite = (id: string): RequestAcceptInviteAction => ({
+  type: REQUEST_ACCEPT_INVITE,
+  payload: id,
 });

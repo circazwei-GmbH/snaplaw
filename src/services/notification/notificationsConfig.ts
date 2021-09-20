@@ -1,9 +1,10 @@
 import { BUTTON_COLORTYPE } from "../../store/modules/main/types";
+import { requestAcceptInvite } from "../../store/modules/contract/action-creators";
 
 interface configActionsInterface {
   name: string;
   colortype: BUTTON_COLORTYPE;
-  actionHandler?: () => void;
+  actionHandler?: (id: string) => void;
 }
 
 interface NotificationInterface {
@@ -27,13 +28,11 @@ export const notificationConfig: notificationConfigInterface = {
       {
         name: "notifications.modal_buttons.cancel",
         colortype: BUTTON_COLORTYPE.ERROR,
-        actionHandler() {
-          return "";
-        },
       },
       {
         name: "notifications.modal_buttons.accept",
         colortype: BUTTON_COLORTYPE.PRIMARY,
+        actionHandler: requestAcceptInvite,
       },
     ],
   },
