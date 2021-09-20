@@ -1,4 +1,4 @@
-import { CONTRACT_ROLE } from "../../store/modules/contract/types";
+import {CONTRACT_ROLE} from "../../store/modules/contract/contract-roles";
 
 export const detectContractRole = (
   partnerId: string,

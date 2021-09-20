@@ -23,6 +23,7 @@ export enum PAYMENT_FIELDS {
   PAYMENT_METHOD = "paymentMethod",
   CARD_NAME = "cardHolderName",
   CARD_NUMBER = "cardNumber",
+  SELLER_PAYMENT_METHOD = "sellerPaymentPethod"
 }
 
 export interface PaymentScreenInterface extends BaseScreenDataInterface {
@@ -33,6 +34,7 @@ export interface PaymentScreenInterface extends BaseScreenDataInterface {
     [PAYMENT_FIELDS.PAYMENT_METHOD]: PAYMENT_METHODS;
     [PAYMENT_FIELDS.CARD_NAME]: string | undefined;
     [PAYMENT_FIELDS.CARD_NUMBER]: string | undefined;
+    [PAYMENT_FIELDS.SELLER_PAYMENT_METHOD]: PAYMENT_METHODS;
   };
 }
 

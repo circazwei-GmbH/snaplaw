@@ -14,7 +14,7 @@ import { setModal } from "../../../../store/modules/main/slice";
 import { BUTTON_COLORTYPE } from "../../../../store/modules/main/types";
 import { useNavigation } from "@react-navigation/native";
 import { MY_CONTRACT_ROUTE } from "../../../../router/MyContractRouterTypes";
-import { CONTRACT_ROLE } from "../../../../store/modules/contract/types";
+import {CONTRACT_ROLE} from "../../../../store/modules/contract/contract-roles";
 
 export default function ContractListItem({ item }: ListItemProps) {
   const [inProgressMenuVisible, setInProgressMenuVisible] =

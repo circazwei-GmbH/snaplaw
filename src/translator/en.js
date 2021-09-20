@@ -4,7 +4,7 @@ import {
 } from "../store/modules/contract/constants";
 import {
   CONDITION_VALUE,
-  CONFIRMATION_FIELDS,
+  CONFIRMATION_FIELDS, PAYMENT_METHODS,
 } from "../store/modules/contract/types";
 
 export default {
@@ -260,7 +260,9 @@ export default {
             "The seller assures that the goods described above are his exclusive property, have not been stolen and are free from the rights of third parties.",
           [CONFIRMATION_FIELDS.SECOND]:
             "Buyer details have been verified and match.",
+          [CONFIRMATION_FIELDS.SELLER_DETAIL]: "Seller details have been verified and match"
         },
+        partner_text: 'Please recheck his identity with a passport.'
       },
       [CONTRACT_SCREEN_TYPES.PAYMENT]: {
         title: "Payment",
@@ -276,6 +278,12 @@ export default {
           paypal: "PayPal",
           transfer: "Money transfer",
         },
+        payment_methods: {
+          [PAYMENT_METHODS.CASH]: "cash",
+          [PAYMENT_METHODS.PAYPAL]: "PayPal",
+          [PAYMENT_METHODS.TRANSFER]: "money transfer"
+        },
+        partner_text: "The seller chose to pay in %{method}."
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "sign contract",
