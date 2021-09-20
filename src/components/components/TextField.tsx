@@ -51,6 +51,10 @@ export default function TextField({
     input.current.blur();
   };
 
+  useEffect(() => {
+    setLocalValue(value)
+  }, [value])
+
   return (
     <View
       style={[
