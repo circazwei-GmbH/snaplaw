@@ -83,14 +83,14 @@ function* requestScreenData({ payload }: RequestScreenDataAction) {
       (screen) => screen.type === payload
     )
   );
-  const contractId = yield select<SelectType>(
-    (state) => state.contract.currentContract?.id
+  const contract = yield select<SelectType>(
+    (state) => state.contract.currentContract
   );
   if (!screenData) {
     return;
   }
   try {
-    yield call(API.saveScreenData, contractId, screenData);
+    yield call(API.saveScreenData, contract.id, screenData, contract.meRole);
   } catch (error) {
     yield put(responseError(error));
   }

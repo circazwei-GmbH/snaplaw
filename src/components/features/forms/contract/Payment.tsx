@@ -65,12 +65,12 @@ export default function Payment() {
   if (!contract) {
     return null;
   }
-
+  console.log(screenData.data)
   return (
     <View style={styles.container}>
       {contract.meRole === CONTRACT_ROLE.PARTNER && screenData?.data[PAYMENT_FIELDS.PAYMENT_METHOD] ? (
-        <ErrorBoldMessage style={styles.partnerMessage} text={t(`contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.partner_text`, {
-          method: t(`contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.payment_methods.${screenData?.data[PAYMENT_FIELDS.PAYMENT_METHOD]}`)
+        <ErrorBoldMessage text={t(`contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.partner_text`, {
+          method: t(`contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.payment_methods.${screenData?.data[PAYMENT_FIELDS.SELLER_PAYMENT_METHOD]}`)
         })} />
       ) : null}
 
@@ -236,7 +236,4 @@ const styles = StyleSheet.create({
   paddingForError: {
     marginBottom: 22,
   },
-  partnerMessage: {
-    marginBottom: 16
-  }
 });
