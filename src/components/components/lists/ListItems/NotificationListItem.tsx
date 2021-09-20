@@ -6,10 +6,13 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { AntDesign } from "@expo/vector-icons";
 import { NotificationListItemInterface } from "../../../../store/modules/notifications/types";
-import {NOTIFICATION_TYPE, notificationConfig} from "../../../../services/notification/notificationsConfig";
+import {
+  NOTIFICATION_TYPE,
+  notificationConfig,
+} from "../../../../services/notification/notificationsConfig";
 import { useI18n } from "../../../../translator/i18n";
-import {setModal} from "../../../../store/modules/main/slice";
-import {useAppDispatch} from "../../../../store/hooks";
+import { setModal } from "../../../../store/modules/main/slice";
+import { useAppDispatch } from "../../../../store/hooks";
 
 interface NotificationListItemPropsInterface {
   item: NotificationListItemInterface;

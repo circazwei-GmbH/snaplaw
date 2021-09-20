@@ -57,7 +57,7 @@ import {
   setAuthTokens,
 } from "../../../services/auth/tokens";
 import { BUTTON_COLORTYPE } from "../main/types";
-import {clearUser} from "../profile/slice";
+import { clearUser } from "../profile/slice";
 
 function* fetchSignUp(action: RequestSignUpAction) {
   try {

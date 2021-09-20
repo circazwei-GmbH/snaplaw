@@ -7,7 +7,7 @@ import ProductDescriptionForm from "../../../components/features/forms/contract/
 import Confirmation from "../../../components/features/forms/contract/Confirmation";
 import Payment from "../../../components/features/forms/contract/Payment";
 import Sign from "../../../components/features/forms/contract/Sign";
-import {CONTRACT_ROLE} from "./contract-roles";
+import { CONTRACT_ROLE } from "./contract-roles";
 
 export interface ContractScreenConfigType {
   component: React.ElementType;

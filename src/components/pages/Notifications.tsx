@@ -9,7 +9,7 @@ import {
   requestNotifications,
   requestChangeNotificationStatus,
 } from "../../store/modules/notifications/action-creators";
-import {NotificationListItemInterface} from "../../store/modules/notifications/types";
+import { NotificationListItemInterface } from "../../store/modules/notifications/types";
 
 export default function Notifications(): JSX.Element {
   const { t } = useI18n();
@@ -31,11 +31,8 @@ export default function Notifications(): JSX.Element {
         messageOnEmpty={t("notifications.empty_list")}
         elements={list}
         onEndReached={getNotifications}
-        listItem={({ item }: {item: NotificationListItemInterface}) => (
-          <NotificationListItem
-            item={item}
-            changeStatus={changeStatus}
-          />
+        listItem={({ item }: { item: NotificationListItemInterface }) => (
+          <NotificationListItem item={item} changeStatus={changeStatus} />
         )}
         style={styles.container}
       />

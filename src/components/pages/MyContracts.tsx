@@ -11,7 +11,10 @@ import AbstractList from "../components/lists/AbstractList";
 import ContractListItem from "../components/lists/ListItems/ContactListItem";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { requestContractsList } from "../../store/modules/contract/action-creators";
-import {CONTRACT_LIST_STATE, ContractDataType} from "../../store/modules/contract/types";
+import {
+  CONTRACT_LIST_STATE,
+  ContractDataType,
+} from "../../store/modules/contract/types";
 import { CONTRACT_LIST_LOADING_TYPE } from "../../store/modules/contract/slice";
 
 export default function MyContracts() {
@@ -66,7 +69,9 @@ export default function MyContracts() {
       <AbstractList
         messageOnEmpty={t("my_contracts.empty_list")}
         elements={contracts}
-        listItem={({ item }: {item: ContractDataType}) => <ContractListItem item={item} />}
+        listItem={({ item }: { item: ContractDataType }) => (
+          <ContractListItem item={item} />
+        )}
         isLoading={
           isLoadingAndLoadingType === CONTRACT_LIST_LOADING_TYPE.INITIAL
         }

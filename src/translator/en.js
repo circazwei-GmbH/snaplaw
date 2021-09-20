@@ -4,7 +4,8 @@ import {
 } from "../store/modules/contract/constants";
 import {
   CONDITION_VALUE,
-  CONFIRMATION_FIELDS, PAYMENT_METHODS,
+  CONFIRMATION_FIELDS,
+  PAYMENT_METHODS,
 } from "../store/modules/contract/types";
 
 export default {
@@ -213,7 +214,8 @@ export default {
       invited:
         "You have been just invited to contract%{contract} by %{partner}",
       rejected: "Invite to contract%{contract} has been rejected by %{partner}",
-      accepted_invite: "Invite to contract %{contract} has been accepted by %{partner}"
+      accepted_invite:
+        "Invite to contract %{contract} has been accepted by %{partner}",
     },
     modal_buttons: {
       accept: "Accept",
@@ -261,9 +263,10 @@ export default {
             "The seller assures that the goods described above are his exclusive property, have not been stolen and are free from the rights of third parties.",
           [CONFIRMATION_FIELDS.SECOND]:
             "Buyer details have been verified and match.",
-          [CONFIRMATION_FIELDS.SELLER_DETAIL]: "Seller details have been verified and match"
+          [CONFIRMATION_FIELDS.SELLER_DETAIL]:
+            "Seller details have been verified and match",
         },
-        partner_text: 'Please recheck his identity with a passport.'
+        partner_text: "Please recheck his identity with a passport.",
       },
       [CONTRACT_SCREEN_TYPES.PAYMENT]: {
         title: "Payment",
@@ -282,9 +285,9 @@ export default {
         payment_methods: {
           [PAYMENT_METHODS.CASH]: "cash",
           [PAYMENT_METHODS.PAYPAL]: "PayPal",
-          [PAYMENT_METHODS.TRANSFER]: "money transfer"
+          [PAYMENT_METHODS.TRANSFER]: "money transfer",
         },
-        partner_text: "The seller chose to pay in %{method}."
+        partner_text: "The seller chose to pay in %{method}.",
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "sign contract",

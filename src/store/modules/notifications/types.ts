@@ -1,5 +1,5 @@
 import { BaseAction } from "../auth/types";
-import {NOTIFICATION_TYPE} from "../../../services/notification/notificationsConfig";
+import { NOTIFICATION_TYPE } from "../../../services/notification/notificationsConfig";
 
 export interface NotificationInterface {
   _id: string;

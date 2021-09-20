@@ -1,22 +1,27 @@
-import React from 'react';
-import {StyleProp, StyleSheet, Text, View, TextStyle} from "react-native";
+import React from "react";
+import { StyleProp, StyleSheet, Text, View, TextStyle } from "react-native";
 
 type ErrorBoldMessageProps = {
-  text: string,
-  style?: StyleProp<TextStyle>
-}
+  text: string;
+  style?: StyleProp<TextStyle>;
+};
 
-export default function ErrorBoldMessage({ text, style }: ErrorBoldMessageProps) {
-  return <View style={[styles.container, style]}>
-    <Text style={styles.star}>*</Text>
-    <Text style={styles.text}>{text}</Text>
-  </View>
+export default function ErrorBoldMessage({
+  text,
+  style,
+}: ErrorBoldMessageProps) {
+  return (
+    <View style={[styles.container, style]}>
+      <Text style={styles.star}>*</Text>
+      <Text style={styles.text}>{text}</Text>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: "center"
+    flexDirection: "row",
+    alignItems: "center",
   },
   star: {
     paddingRight: 10,
@@ -26,6 +31,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: "OS-SB",
-    fontSize: 17
-  }
-})
+    fontSize: 17,
+  },
+});

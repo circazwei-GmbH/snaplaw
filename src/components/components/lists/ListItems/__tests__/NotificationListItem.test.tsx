@@ -1,10 +1,13 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react-native";
 import NotificationListItem from "../NotificationListItem";
-import {NOTIFICATION_TYPE, notificationConfig} from "../../../../../services/notification/notificationsConfig";
-import {Provider} from "react-redux";
-import {createStore} from "@reduxjs/toolkit";
-import {setModal} from "../../../../../store/modules/main/slice";
+import {
+  NOTIFICATION_TYPE,
+  notificationConfig,
+} from "../../../../../services/notification/notificationsConfig";
+import { Provider } from "react-redux";
+import { createStore } from "@reduxjs/toolkit";
+import { setModal } from "../../../../../store/modules/main/slice";
 
 jest.mock("react-native-gesture-handler/Swipeable", () => {
   const React = require("react");
@@ -28,9 +31,9 @@ const item = {
 const actions = jest.fn();
 
 const reduser = (state = {}, action: any) => {
-  actions(action)
+  actions(action);
   return state;
-}
+};
 
 const store = createStore(reduser);
 
@@ -38,10 +41,7 @@ describe("NotificationListItem", () => {
   it("Should be visible", () => {
     const { getByTestId, getByText } = render(
       <Provider store={store}>
-        <NotificationListItem
-          item={item}
-          changeStatus={jest.fn}
-        />
+        <NotificationListItem item={item} changeStatus={jest.fn} />
       </Provider>
     );
     expect(getByTestId("swipable")).toBeTruthy();
@@ -50,20 +50,19 @@ describe("NotificationListItem", () => {
   it("Click on notification should fire event", () => {
     const { getByTestId } = render(
       <Provider store={store}>
-        <NotificationListItem
-          item={item}
-          changeStatus={jest.fn}
-        />
+        <NotificationListItem item={item} changeStatus={jest.fn} />
       </Provider>
     );
     fireEvent.press(getByTestId("notificationItem.openModal"));
-    const config = notificationConfig[item.type]
-    expect(actions).toBeCalledWith(setModal({
-      message: config.message,
-      actions: config.actions.map(action => ({
-        name: action.name,
-        colortype: action.colortype,
-      }))
-    }));
+    const config = notificationConfig[item.type];
+    expect(actions).toBeCalledWith(
+      setModal({
+        message: config.message,
+        actions: config.actions.map((action) => ({
+          name: action.name,
+          colortype: action.colortype,
+        })),
+      })
+    );
   });
 });
