@@ -14,11 +14,13 @@ import {
 import { CURRENSY } from "../../../../../store/modules/contract/purchase/payment";
 import { setScreenData } from "../../../../../store/modules/contract/slice";
 import { validateScreen } from "../../../../../store/modules/contract/action-creators";
+import {CONTRACT_ROLE} from "../../../../../store/modules/contract/contract-roles";
 
 const INITIAL_STATE = {
   contract: {
     currentContract: {
       type: CONTRACT_TYPES.PURCHASE,
+      meRole: CONTRACT_ROLE.OWNER,
       screens: [
         {
           type: CONTRACT_SCREEN_TYPES.PAYMENT,

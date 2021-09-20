@@ -65,7 +65,7 @@ export default function Payment() {
   if (!contract) {
     return null;
   }
-  console.log(screenData.data)
+
   return (
     <View style={styles.container}>
       {contract.meRole === CONTRACT_ROLE.PARTNER && screenData?.data[PAYMENT_FIELDS.PAYMENT_METHOD] ? (
