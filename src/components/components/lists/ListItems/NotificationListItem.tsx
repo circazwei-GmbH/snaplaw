@@ -6,29 +6,47 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { AntDesign } from "@expo/vector-icons";
 import { NotificationListItemInterface } from "../../../../store/modules/notifications/types";
-import { notificationConfig } from "../../../../services/notification/notificationsConfig";
+import {NOTIFICATION_TYPE, notificationConfig} from "../../../../services/notification/notificationsConfig";
 import { useI18n } from "../../../../translator/i18n";
+import {setModal} from "../../../../store/modules/main/slice";
+import {useAppDispatch} from "../../../../store/hooks";
 
 interface NotificationListItemPropsInterface {
   item: NotificationListItemInterface;
-  onPress: Function;
   changeStatus: Function;
 }
 
 export default function NotificationListItem({
   item,
-  onPress,
   changeStatus,
 }: NotificationListItemPropsInterface): JSX.Element {
   const { id, type, contractName, usernameFrom, createdAt, isNew } = item;
   const { t } = useI18n();
   const swipeable: any = useRef();
+  const dispatch = useAppDispatch();
   const isToday = require("dayjs/plugin/isToday");
   dayjs.extend(isToday);
 
   const onClose = () => {
     changeStatus(id);
     swipeable.current.close();
+  };
+
+  const modalHandler = (
+    isNew: boolean,
+    type: NOTIFICATION_TYPE,
+    partner: string,
+    contract: string
+  ) => {
+    dispatch(
+      setModal({
+        message: t(notificationConfig[type]["message"], { contract, partner }),
+        actions: notificationConfig[type]["actions"].map((item) => ({
+          name: t(item.name),
+          colortype: item.colortype,
+        })),
+      })
+    );
   };
 
   const showNotification = (partner: string, contract: string) =>
@@ -70,7 +88,7 @@ export default function NotificationListItem({
         testID="notificationItem.openModal"
         style={styles.container}
         activeOpacity={1}
-        onPress={() => onPress(isNew, type, usernameFrom, contractName)}
+        onPress={() => modalHandler(isNew, type, usernameFrom, contractName)}
       >
         <View
           style={[
@@ -91,6 +109,7 @@ export default function NotificationListItem({
               />
               <DefaultText
                 text={dayjs(createdAt).format(
+                  // @ts-ignore
                   dayjs(createdAt).isToday() ? "HH:MM" : "DD MMM"
                 )}
                 style={styles.notificationDate}

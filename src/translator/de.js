@@ -217,6 +217,7 @@ export default {
         "Sie wurden gerade zum Vertrag%{contract} von %{partner} eingeladen",
       rejected:
         "Einladung zum Vertrag%{contract} wurde von %{partner} abgelehnt",
+      accepted_invite: "Einladung zum Vertrag %{contract} wurde von %{partner} angenommen"
     },
     modal_buttons: {
       accept: "Akzeptieren",

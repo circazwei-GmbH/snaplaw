@@ -1,7 +1,5 @@
-import { ContractDataListType } from "../../../../store/modules/contract/types";
-
-export type ListItemProps = {
-  item: ContractDataListType;
+export type ListItemProps<T> = {
+  item: T;
 };
 
-export type ListItemConponent = (props: ListItemProps) => JSX.Element;
+export type ListItemConponent<T> = (props: ListItemProps<T>) => JSX.Element;

@@ -213,6 +213,7 @@ export default {
       invited:
         "You have been just invited to contract%{contract} by %{partner}",
       rejected: "Invite to contract%{contract} has been rejected by %{partner}",
+      accepted_invite: "Invite to contract %{contract} has been accepted by %{partner}"
     },
     modal_buttons: {
       accept: "Accept",
