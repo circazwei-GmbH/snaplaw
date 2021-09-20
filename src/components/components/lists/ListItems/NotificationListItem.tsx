@@ -23,7 +23,8 @@ export default function NotificationListItem({
   item,
   changeStatus,
 }: NotificationListItemPropsInterface): JSX.Element {
-  const { id, type, contractName, usernameFrom, createdAt, isNew } = item;
+  const { id, type, contractName, usernameFrom, createdAt, isNew, contractId } =
+    item;
   const { t } = useI18n();
   const swipeable: any = useRef();
   const dispatch = useAppDispatch();
@@ -47,6 +48,9 @@ export default function NotificationListItem({
         actions: notificationConfig[type]["actions"].map((item) => ({
           name: t(item.name),
           colortype: item.colortype,
+          action: item.actionHandler
+            ? item.actionHandler(contractId)
+            : undefined,
         })),
       })
     );

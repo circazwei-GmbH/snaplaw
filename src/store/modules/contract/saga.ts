@@ -11,6 +11,7 @@ import {
   validateScreen,
   REQUEST_INVITE_USER,
   REQUEST_USERS_EMAIL,
+  REQUEST_ACCEPT_INVITE,
 } from "./action-creators";
 import {
   RequestContractAction,
@@ -24,6 +25,7 @@ import {
   RequestGetEmailsAction,
   EmailsListItemInterface,
   ContractDataType,
+  RequestAcceptInviteAction,
 } from "./types";
 import API from "../../../services/contract/index";
 import { responseError } from "../auth/action-creators";
@@ -255,6 +257,18 @@ function* requestUsersEmail({ payload }: RequestGetEmailsAction) {
   }
 }
 
+function* requestAcceptInvite({ payload }: RequestAcceptInviteAction) {
+  console.log('yay', payload)
+  yield put(addToWAiter(REQUEST_ACCEPT_INVITE));
+  try {
+    yield call(API.acceptInvite, payload);
+  } catch (error) {
+    yield put(responseError(error));
+  } finally {
+    yield put(removeFromWaiter(REQUEST_ACCEPT_INVITE));
+  }
+}
+
 function* contractSaga() {
   yield takeLatest(REQUEST_CREATE_CONTRACT, createContract);
   yield takeLatest(REQUEST_SCREEN_DATA, requestScreenData);
@@ -266,6 +280,7 @@ function* contractSaga() {
   yield takeLatest(SIGN_CONTRACT, signContract);
   yield takeLatest(REQUEST_INVITE_USER, requestInviteUser);
   yield takeLatest(REQUEST_USERS_EMAIL, requestUsersEmail);
+  yield takeLatest(REQUEST_ACCEPT_INVITE, requestAcceptInvite);
 }
 
 export default contractSaga;
