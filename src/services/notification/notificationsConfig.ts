@@ -16,7 +16,7 @@ export interface notificationConfigInterface {
   invite_to_contract_rejected: NotificationInterface;
 }
 
-export const notificationConfig = {
+export const notificationConfig: notificationConfigInterface = {
   user_invited_to_contract: {
     message: "notifications.messages.invited",
     actionsNew: [

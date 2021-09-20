@@ -250,11 +250,9 @@ const contractSlice = createSlice({
     },
     [inviteSelfAction.type]: (
       state: Draft<ContractState>,
-      action: PayloadAction<{
-        message: string;
-      }>
+      action: PayloadAction<string>
     ) => {
-      state.email.error = action.payload.message;
+      state.email.error = action.payload;
     },
     [clearEmailErrorsAction.type]: (state: Draft<ContractState>) => {
       state.email.error = "";
