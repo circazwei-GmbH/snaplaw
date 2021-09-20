@@ -61,6 +61,7 @@ describe("NotificationListItem", () => {
         actions: config.actions.map((action) => ({
           name: action.name,
           colortype: action.colortype,
+          action: action.actionHandler ? action.actionHandler(item.id) : undefined
         })),
       })
     );
