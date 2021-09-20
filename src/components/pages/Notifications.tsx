@@ -1,16 +1,15 @@
 import React, { useEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import TopBar from "../layouts/TopBar";
 import { useI18n } from "../../translator/i18n";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
-import { setModal } from "../../store/modules/main/slice";
 import NotificationListItem from "../components/lists/ListItems/NotificationListItem";
-import { notificationConfig } from "../../services/notification/notificationsConfig";
 import AbstractList from "../components/lists/AbstractList";
 import {
   requestNotifications,
   requestChangeNotificationStatus,
 } from "../../store/modules/notifications/action-creators";
+import { NotificationListItemInterface } from "../../store/modules/notifications/types";
 
 export default function Notifications(): JSX.Element {
   const { t } = useI18n();
@@ -21,27 +20,8 @@ export default function Notifications(): JSX.Element {
   const changeStatus = (id: string) =>
     dispatch(requestChangeNotificationStatus({ id }));
 
-  const modalHandler = (
-    isNew: boolean,
-    type: string,
-    partner: string,
-    contract: string
-  ) => {
-    const isActionNew =
-      type === "user_invited_to_contract" && isNew ? "actionsNew" : "actions";
-
-    dispatch(
-      setModal({
-        message: t(notificationConfig[type]["message"], { contract, partner }),
-        actions: notificationConfig[type][isActionNew].map((item) => ({
-          name: t(item.name),
-          colortype: item.colortype,
-        })),
-      })
-    );
-  };
-
   useEffect(() => {
+    // TODO: remove on soket functionality created
     getNotifications();
   }, []);
 
@@ -51,12 +31,8 @@ export default function Notifications(): JSX.Element {
         messageOnEmpty={t("notifications.empty_list")}
         elements={list}
         onEndReached={getNotifications}
-        listItem={({ item }) => (
-          <NotificationListItem
-            item={item}
-            onPress={modalHandler}
-            changeStatus={changeStatus}
-          />
+        listItem={({ item }: { item: NotificationListItemInterface }) => (
+          <NotificationListItem item={item} changeStatus={changeStatus} />
         )}
         style={styles.container}
       />

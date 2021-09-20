@@ -8,7 +8,6 @@ import {
   CONFIRMATION_FIELDS,
   PAYMENT_FIELDS,
   PAYMENT_METHODS,
-
 } from "./types";
 import {
   length,
@@ -16,28 +15,34 @@ import {
   lengthCheckIfAnotherFieldIsTrue,
 } from "../../../validations/default";
 import { PRODUCT_CONDITION_FIELD_NAME } from "./purchase/product-condition";
-import {CONTRACT_ROLE} from "./contract-roles";
+import { CONTRACT_ROLE } from "./contract-roles";
 
 export const contractValidationConfig = {
   [CONTRACT_TYPES.PURCHASE]: {
     [CONTRACT_SCREEN_TYPES.USER_DATA]: {
       [CONTRACT_ROLE.OWNER]: {
-        [USER_DATA_FIELDS.name]: [length("contracts.validation.field_empty", 1)],
+        [USER_DATA_FIELDS.name]: [
+          length("contracts.validation.field_empty", 1),
+        ],
         [USER_DATA_FIELDS.lastName]: [
           length("contracts.validation.field_empty", 1),
         ],
         [USER_DATA_FIELDS.dateOfBirth]: [
           length("contracts.validation.field_empty", 1),
         ],
-        [USER_DATA_FIELDS.email]: [length("contracts.validation.field_empty", 1)],
-        [USER_DATA_FIELDS.phone]: [length("contracts.validation.field_empty", 1)],
+        [USER_DATA_FIELDS.email]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.phone]: [
+          length("contracts.validation.field_empty", 1),
+        ],
         [USER_DATA_FIELDS.address]: [
           length("contracts.validation.field_empty", 1),
         ],
         [USER_DATA_FIELDS.postCode]: [
           length("contracts.validation.field_empty", 1),
         ],
-      }
+      },
     },
     [CONTRACT_SCREEN_TYPES.PRODUCT_DATA]: {
       [CONTRACT_ROLE.OWNER]: {
@@ -57,14 +62,14 @@ export const contractValidationConfig = {
             PRODUCT_DATA_FIELDS.isSerial
           ),
         ],
-      }
+      },
     },
     [CONTRACT_SCREEN_TYPES.PRODUCT_CONDITION]: {
       [CONTRACT_ROLE.OWNER]: {
         [PRODUCT_CONDITION_FIELD_NAME]: [
           length("contracts.validation.field_empty", 1),
         ],
-      }
+      },
     },
     [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
       [CONTRACT_ROLE.OWNER]: {
@@ -91,9 +96,9 @@ export const contractValidationConfig = {
       },
       [CONTRACT_ROLE.PARTNER]: {
         [CONFIRMATION_FIELDS.SELLER_DETAIL]: [
-          length("contracts.validation.field_empty", 1)
-        ]
-      }
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
     },
     [CONTRACT_SCREEN_TYPES.PAYMENT]: {
       [CONTRACT_ROLE.OWNER]: {
@@ -122,7 +127,7 @@ export const contractValidationConfig = {
         [PAYMENT_FIELDS.PAYMENT_METHOD]: [
           length("contracts.validation.field_empty", 1),
         ],
-      }
+      },
     },
     [CONTRACT_SCREEN_TYPES.SIGN]: {},
   },
@@ -136,7 +141,8 @@ export const screenFieldValidator = (
   myRole: CONTRACT_ROLE
 ): string | undefined => {
   // @ts-ignore
-  const validationConfig = contractValidationConfig[contractType][screenType][myRole];
+  const validationConfig =
+    contractValidationConfig[contractType][screenType][myRole];
   // @ts-ignore
   if (!validationConfig[field]) {
     return;
@@ -173,7 +179,11 @@ export const contractValidator = (
     if (!validationConfig) {
       continue;
     }
-    if (!currentScreen && validationConfig && Object.keys(validationConfig).length) {
+    if (
+      !currentScreen &&
+      validationConfig &&
+      Object.keys(validationConfig).length
+    ) {
       return i;
     } else if (!currentScreen) {
       // just continue

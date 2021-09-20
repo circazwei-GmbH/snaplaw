@@ -22,7 +22,8 @@ import {
   ValidateAllScreensAction,
   InviteUserAction,
   RequestGetEmailsAction,
-  EmailsListItemInterface, ContractDataType,
+  EmailsListItemInterface,
+  ContractDataType,
 } from "./types";
 import API from "../../../services/contract/index";
 import { responseError } from "../auth/action-creators";
@@ -38,7 +39,6 @@ import {
   setListLoading,
   updateContractSign,
   setInviteEmails,
-  clearEmailErrors,
   inviteSelf,
 } from "./slice";
 import * as RootNavigation from "../../../router/RootNavigation";
@@ -49,7 +49,7 @@ import { contractValidationConfig, screenFieldValidator } from "./validation";
 import { BaseScreenDataInterface } from "./base-types";
 import { Translator } from "../../../translator/i18n";
 import { USER_SELF_INVITE } from "../../../services/error-codes";
-import {CONTRACT_ROLE} from "./contract-roles";
+import { CONTRACT_ROLE } from "./contract-roles";
 
 function* createContract({ payload }: RequestCreateContractAction) {
   try {
@@ -106,9 +106,12 @@ function* screenValidate({
       (screen: BaseScreenDataInterface) => screen.type === screenType
     )
   );
-  const myRole: CONTRACT_ROLE = yield select((state) => (state.contract.currentContract as ContractDataType).meRole);
+  const myRole: CONTRACT_ROLE = yield select(
+    (state) => (state.contract.currentContract as ContractDataType).meRole
+  );
   // @ts-ignore
-  const validationConfig = contractValidationConfig[contractType][screenType][myRole];
+  const validationConfig =
+    contractValidationConfig[contractType][screenType][myRole];
   if (!validationConfig) {
     return;
   }

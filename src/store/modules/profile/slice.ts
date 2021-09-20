@@ -93,11 +93,9 @@ export const profileSlice = createSlice({
         ...action.payload,
       };
     },
-    [clearUserAction.type]: (
-      state: Draft<ProfileStateInterface>
-    ) => {
-      state.user = undefined
-    }
+    [clearUserAction.type]: (state: Draft<ProfileStateInterface>) => {
+      state.user = undefined;
+    },
   },
 });
 
@@ -107,7 +105,7 @@ export const {
   setUser,
   setAvatarLoading,
   setUserProfile,
-  clearUser
+  clearUser,
 } = profileSlice.actions;
 
 export default profileSlice.reducer;

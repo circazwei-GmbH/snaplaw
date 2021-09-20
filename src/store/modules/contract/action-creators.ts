@@ -39,7 +39,7 @@ export const requestScreenData = (
 
 export const validateScreen = (
   contractType: CONTRACT_TYPES,
-  screenType: CONTRACT_SCREEN_TYPES,
+  screenType: CONTRACT_SCREEN_TYPES
 ) => ({
   type: VALIDATE_SCREEN,
   payload: {

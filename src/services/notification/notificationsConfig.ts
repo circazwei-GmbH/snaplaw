@@ -3,28 +3,32 @@ import { BUTTON_COLORTYPE } from "../../store/modules/main/types";
 interface configActionsInterface {
   name: string;
   colortype: BUTTON_COLORTYPE;
-  actionHandler: () => void;
+  actionHandler?: () => void;
 }
 
 interface NotificationInterface {
   message: string;
-  actions: configActionsInterface;
+  actions: configActionsInterface[];
+}
+export enum NOTIFICATION_TYPE {
+  INVITE_USER_TO_CONTRACT = "user_invited_to_contract",
+  ACCEPT_INVITE = "accept_invite",
 }
 
-export interface notificationConfigInterface {
-  user_invited_to_contract: NotificationInterface;
-  invite_to_contract_rejected: NotificationInterface;
-}
+export type notificationConfigInterface = Record<
+  NOTIFICATION_TYPE,
+  NotificationInterface
+>;
 
 export const notificationConfig: notificationConfigInterface = {
   user_invited_to_contract: {
     message: "notifications.messages.invited",
-    actionsNew: [
+    actions: [
       {
         name: "notifications.modal_buttons.cancel",
         colortype: BUTTON_COLORTYPE.ERROR,
-        actionHandler(): void {
-          return;
+        actionHandler() {
+          return "";
         },
       },
       {
@@ -32,15 +36,9 @@ export const notificationConfig: notificationConfigInterface = {
         colortype: BUTTON_COLORTYPE.PRIMARY,
       },
     ],
-    actions: [
-      {
-        name: "notifications.modal_buttons.ok",
-        colortype: BUTTON_COLORTYPE.PRIMARY,
-      },
-    ],
   },
-  invite_to_contract_rejected: {
-    message: "notifications.messages.rejected",
+  accept_invite: {
+    message: "notifications.messages.accepted_invite",
     actions: [
       {
         name: "notifications.modal_buttons.ok",

@@ -1,6 +1,6 @@
 import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
 import { getContractScreensConfig } from "./contract-screens-types";
-import {CONTRACT_ROLE} from "./contract-roles";
+import { CONTRACT_ROLE } from "./contract-roles";
 
 export const getTypeByContractAndScreen = (
   contractType: CONTRACT_TYPES,

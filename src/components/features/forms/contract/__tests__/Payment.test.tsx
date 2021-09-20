@@ -14,7 +14,7 @@ import {
 import { CURRENSY } from "../../../../../store/modules/contract/purchase/payment";
 import { setScreenData } from "../../../../../store/modules/contract/slice";
 import { validateScreen } from "../../../../../store/modules/contract/action-creators";
-import {CONTRACT_ROLE} from "../../../../../store/modules/contract/contract-roles";
+import { CONTRACT_ROLE } from "../../../../../store/modules/contract/contract-roles";
 
 const INITIAL_STATE = {
   contract: {
