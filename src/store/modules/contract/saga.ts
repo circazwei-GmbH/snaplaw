@@ -22,8 +22,7 @@ import {
   ValidateAllScreensAction,
   InviteUserAction,
   RequestGetEmailsAction,
-  EmailsListItemInterface,
-  CONTRACT_ROLE,
+  EmailsListItemInterface, ContractDataType,
 } from "./types";
 import API from "../../../services/contract/index";
 import { responseError } from "../auth/action-creators";
@@ -50,6 +49,7 @@ import { contractValidationConfig, screenFieldValidator } from "./validation";
 import { BaseScreenDataInterface } from "./base-types";
 import { Translator } from "../../../translator/i18n";
 import { USER_SELF_INVITE } from "../../../services/error-codes";
+import {CONTRACT_ROLE} from "./contract-roles";
 
 function* createContract({ payload }: RequestCreateContractAction) {
   try {
@@ -85,14 +85,14 @@ function* requestScreenData({ payload }: RequestScreenDataAction) {
       (screen) => screen.type === payload
     )
   );
-  const contractId = yield select<SelectType>(
-    (state) => state.contract.currentContract?.id
+  const contract = yield select<SelectType>(
+    (state) => state.contract.currentContract
   );
   if (!screenData) {
     return;
   }
   try {
-    yield call(API.saveScreenData, contractId, screenData);
+    yield call(API.saveScreenData, contract.id, screenData, contract.meRole);
   } catch (error) {
     yield put(responseError(error));
   }
@@ -106,13 +106,19 @@ function* screenValidate({
       (screen: BaseScreenDataInterface) => screen.type === screenType
     )
   );
-  const validationConfig = contractValidationConfig[contractType][screenType];
+  const myRole: CONTRACT_ROLE = yield select((state) => (state.contract.currentContract as ContractDataType).meRole);
+  // @ts-ignore
+  const validationConfig = contractValidationConfig[contractType][screenType][myRole];
+  if (!validationConfig) {
+    return;
+  }
   for (let field in validationConfig) {
     const validated = screenFieldValidator(
       field,
       screenType,
       screen,
-      contractType
+      contractType,
+      myRole
     );
     if (validated) {
       yield put(
@@ -215,7 +221,7 @@ function* signContract({ payload }: SignContractAction) {
 
 function* requestInviteUser({ payload }: InviteUserAction) {
   try {
-    const response = yield call(API.inviteUser, payload);
+    yield call(API.inviteUser, payload);
     RootNavigation.pop();
   } catch (error) {
     if (error.response?.data.code === USER_SELF_INVITE) {

@@ -19,12 +19,14 @@ import {
 } from "../../../../store/modules/contract/purchase/payment";
 import { validateScreen } from "../../../../store/modules/contract/action-creators";
 import AbstractErrorMessage from "../../../basics/typography/AbstractErrorMessage";
+import {CONTRACT_ROLE} from "../../../../store/modules/contract/contract-roles";
+import ErrorBoldMessage from "../../../basics/typography/ErrorBoldMessage";
 
 export default function Payment() {
   const { t } = useI18n();
 
-  const contractType = useAppSelector(
-    (state) => state.contract.currentContract?.type
+  const contract = useAppSelector(
+    (state) => state.contract.currentContract
   );
   const screenData = useAppSelector(
     (state) =>
@@ -45,8 +47,8 @@ export default function Payment() {
         value,
       })
     );
-    if (screenErrors?.[fieldName] && contractType) {
-      dispatch(validateScreen(contractType, CONTRACT_SCREEN_TYPES.PAYMENT));
+    if (screenErrors?.[fieldName] && contract) {
+      dispatch(validateScreen(contract.type, CONTRACT_SCREEN_TYPES.PAYMENT));
     }
   };
 
@@ -60,53 +62,63 @@ export default function Payment() {
     );
   }, []);
 
-  if (!contractType) {
+  if (!contract) {
     return null;
   }
 
   return (
     <View style={styles.container}>
-      <DefaultText
-        style={styles.text}
-        text={t(
-          `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PAYMENT}.product_price`
-        )}
-      />
-      <View style={styles.priceBlock}>
-        <TextField
-          keyboardType="numeric"
-          errorMessage={screenErrors?.[PAYMENT_FIELDS.COST]}
-          containerStyle={styles.costField}
-          value={screenData?.data[PAYMENT_FIELDS.COST]}
-          onChangeFunction={(test) =>
-            updateDataHandler(PAYMENT_FIELDS.COST, test)
-          }
-          placeholder={t(
-            `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.cost`
-          )}
-        />
-        <View
-          style={[
-            styles.select,
-            screenErrors?.[PAYMENT_FIELDS.COST] ? styles.paddingForError : null,
-          ]}
-        >
-          <Select
-            items={CURRENSIES}
-            selectedValue={CURRENSIES.find(
-              (currency) =>
-                screenData?.data[PAYMENT_FIELDS.CURRENCY] === currency.value
-            )}
-            onValueChange={(item) =>
-              updateDataHandler(PAYMENT_FIELDS.CURRENCY, item.value)
-            }
-          />
-        </View>
-      </View>
+      {contract.meRole === CONTRACT_ROLE.PARTNER && screenData?.data[PAYMENT_FIELDS.PAYMENT_METHOD] ? (
+        <ErrorBoldMessage text={t(`contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.partner_text`, {
+          method: t(`contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.payment_methods.${screenData?.data[PAYMENT_FIELDS.SELLER_PAYMENT_METHOD]}`)
+        })} />
+      ) : null}
+
+      {contract.meRole === CONTRACT_ROLE.OWNER ? (
+          <>
+            <DefaultText
+              style={styles.text}
+              text={t(
+                `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.product_price`
+              )}
+            />
+            <View style={styles.priceBlock}>
+              <TextField
+                keyboardType="numeric"
+                errorMessage={screenErrors?.[PAYMENT_FIELDS.COST]}
+                containerStyle={styles.costField}
+                value={screenData?.data[PAYMENT_FIELDS.COST]}
+                onChangeFunction={(test) =>
+                  updateDataHandler(PAYMENT_FIELDS.COST, test)
+                }
+                placeholder={t(
+                  `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.cost`
+                )}
+              />
+              <View
+                style={[
+                  styles.select,
+                  screenErrors?.[PAYMENT_FIELDS.COST] ? styles.paddingForError : null,
+                ]}
+              >
+                <Select
+                  items={CURRENSIES}
+                  selectedValue={CURRENSIES.find(
+                    (currency) =>
+                      screenData?.data[PAYMENT_FIELDS.CURRENCY] === currency.value
+                  )}
+                  onValueChange={(item) =>
+                    updateDataHandler(PAYMENT_FIELDS.CURRENCY, item.value)
+                  }
+                />
+              </View>
+            </View>
+          </>
+      ) : null}
       <DefaultText
         style={[styles.text, styles.secondText]}
         text={t(
-          `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PAYMENT}.payment_method`
+          `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.payment_method`
         )}
       />
       <View style={styles.checkboxContainer}>
@@ -124,7 +136,7 @@ export default function Payment() {
             )
           }
           text={t(
-            `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PAYMENT}.checkboxes.cash`
+            `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.checkboxes.cash`
           )}
         />
         <Checkbox
@@ -141,7 +153,7 @@ export default function Payment() {
             )
           }
           text={t(
-            `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PAYMENT}.checkboxes.paypal`
+            `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.checkboxes.paypal`
           )}
         />
         <Checkbox
@@ -158,7 +170,7 @@ export default function Payment() {
             )
           }
           text={t(
-            `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PAYMENT}.checkboxes.transfer`
+            `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.checkboxes.transfer`
           )}
         />
       </View>
@@ -175,7 +187,7 @@ export default function Payment() {
             errorMessage={screenErrors?.[PAYMENT_FIELDS.CARD_NAME]}
             value={screenData?.data[PAYMENT_FIELDS.CARD_NAME]}
             placeholder={t(
-              `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.name`
+              `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.name`
             )}
           />
           <TextField
@@ -185,7 +197,7 @@ export default function Payment() {
             errorMessage={screenErrors?.[PAYMENT_FIELDS.CARD_NUMBER]}
             value={screenData?.data[PAYMENT_FIELDS.CARD_NUMBER]}
             placeholder={t(
-              `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.card`
+              `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.card`
             )}
           />
         </>

@@ -12,17 +12,16 @@ import {
   CONTRACT_LIST_STATE,
   ContractDataType,
 } from "../../store/modules/contract/types";
-import { translateContract, translateContractList } from "./translator";
+import { translateContract, translateContractList } from "./prepare-translator";
 import { getUserFromToken } from "../../utils";
+import {screenDataTranslator} from "./post-translator";
+import {CONTRACT_ROLE} from "../../store/modules/contract/contract-roles";
 
 const createContract = (type: CONTRACT_TYPES) =>
   httpClient.post("api/contracts", { type });
 
-const saveScreenData = (id: string, screen: BaseScreenDataInterface) =>
-  httpClient.put(`api/contracts/${id}`, {
-    ...screen.data,
-    screenType: screen.type,
-  });
+const saveScreenData = (id: string, screen: BaseScreenDataInterface, meRole: CONTRACT_ROLE) =>
+  httpClient.put(`api/contracts/${id}`, screenDataTranslator(screen, meRole));
 
 const inviteUser = (contractData: InviteUserInterface): Promise<any> => {
   return httpClient.post(

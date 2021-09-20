@@ -43,6 +43,7 @@ const setAvatarLoadingAction = createAction<boolean, "setAvatarLoading">(
 const setUserProfileAction = createAction<UserType, "setUserProfile">(
   "setUserProfile"
 );
+const clearUserAction = createAction<undefined, "clearUser">("clearUser");
 
 export const profileSlice = createSlice({
   name: "profile",
@@ -92,6 +93,11 @@ export const profileSlice = createSlice({
         ...action.payload,
       };
     },
+    [clearUserAction.type]: (
+      state: Draft<ProfileStateInterface>
+    ) => {
+      state.user = undefined
+    }
   },
 });
 
@@ -101,6 +107,7 @@ export const {
   setUser,
   setAvatarLoading,
   setUserProfile,
+  clearUser
 } = profileSlice.actions;
 
 export default profileSlice.reducer;

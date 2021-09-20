@@ -264,7 +264,9 @@ export default {
             "Der Verkäufer versichert, dass der oben beschriebene Artikel in seinem alleinigen Eigentum steht, nicht gestohlen ist und frei von Rechten Dritter ist.",
           [CONFIRMATION_FIELDS.SECOND]:
             "Die Käuferdaten wurden überprüft und stimmen überein.",
+          [CONFIRMATION_FIELDS.SELLER_DETAIL]: "Die Verkäuferdaten wurden überprüft und stimmen überein."
         },
+        partner_text: 'Bitte überprüfen Sie seine Identität mit einem Pass.'
       },
       [CONTRACT_SCREEN_TYPES.PAYMENT]: {
         title: "Bezahlung",
@@ -280,6 +282,7 @@ export default {
           paypal: "Paypal",
           transfer: "Überweisung",
         },
+        partner_text: "Der Verkäufer hat sich für Barzahlung entschieden."
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "Vertrag unterzeichnen",
