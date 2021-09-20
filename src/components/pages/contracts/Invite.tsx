@@ -16,7 +16,10 @@ import {
   requestUsersEmail,
   requestInviteUser,
 } from "../../../store/modules/contract/action-creators";
-import { clearInviteEmails } from "../../../store/modules/contract/slice";
+import {
+  clearInviteEmails,
+  clearEmailErrors,
+} from "../../../store/modules/contract/slice";
 import { FieldInterface } from "../../features/forms/SignInForm";
 import { email } from "../../../validations/default";
 import { formFieldFill, validate } from "../../../utils/forms";
@@ -39,13 +42,14 @@ export default function Invite({
   const [keyboardVisible, setKeyboardVisible] = useState(false);
   const url = useAppSelector((state) => state.profile.user?.avatar);
   const emails = useAppSelector((state) => state.contract.inviteEmailsList);
+  const emailError = useAppSelector((state) => state.contract.email.error);
   const [timer, setTimer] = useState<NodeJS.Timeout | undefined>(undefined);
 
   interface InviteEmailInterface {
     email: FieldInterface;
   }
 
-  let emailInitialValue: InviteEmailInterface = {
+  const emailInitialValue: InviteEmailInterface = {
     email: {
       value: "",
       error: "",
@@ -62,20 +66,14 @@ export default function Invite({
   };
 
   const searchHandler = (email: string) => {
-    return (emailInitialValue = {
-      ...emailInitialValue,
-      email: {
-        ...emailInitialValue.email,
-        value: email,
-      },
-    });
+    setEmailValue(formFieldFill("email", email, emailValue));
   };
 
   const onChangeHandler = (newValue: string) => {
     if (timer) {
       clearTimeout(timer);
     }
-    setEmailValue(formFieldFill("email", newValue, emailValue));
+    searchHandler(newValue);
     const timeout = setTimeout(() => {
       dispatch(clearInviteEmails());
       dispatch(requestUsersEmail(emailInitialValue.email.value));
@@ -93,7 +91,7 @@ export default function Invite({
       return;
     }
 
-    dispatch(requestInviteUser(emailInitialValue.email.value, contractId));
+    dispatch(requestInviteUser(emailValue.email.value, contractId));
   };
 
   useEffect(() => {
@@ -109,6 +107,20 @@ export default function Invite({
       hideSubscription.remove();
     };
   }, []);
+
+  useEffect(() => {
+    dispatch(clearEmailErrors());
+  }, []);
+
+  useEffect(() => {
+    setEmailValue({
+      ...emailValue,
+      email: {
+        ...emailValue.email,
+        error: emailError,
+      },
+    });
+  }, [emailError]);
 
   return (
     <TopBar pageName={t("invite_page.title")}>

@@ -115,7 +115,7 @@ export default function InviteTextField({
       >
         {errorMessage}
       </Text>
-      {list?.length > 0 && focused ? (
+      {focused ? (
         <>
           <FlatList
             style={[
@@ -125,7 +125,7 @@ export default function InviteTextField({
                 : styles.listTopPosition,
             ]}
             data={list}
-            keyExtractor={(item) => item.email}
+            keyExtractor={(item, i) => item.email + i}
             renderItem={({ item }) => renderItem(item)}
             onEndReached={getList}
             onEndReachedThreshold={0.5}
@@ -139,6 +139,9 @@ export default function InviteTextField({
           {Platform.OS === "ios" ? (
             <View
               style={[
+                {
+                  height: LIST_ITEM_HEIGHT * list?.length,
+                },
                 styles.list,
                 styles.shadowIos,
                 errorMessage
@@ -209,7 +212,7 @@ const styles = StyleSheet.create({
   },
   list: {
     width: "100%",
-    height: Dimensions.get("window").height / 4,
+    maxHeight: LIST_ITEM_HEIGHT * 5,
     position: "absolute",
     backgroundColor: "#fff",
     borderRadius: 10,

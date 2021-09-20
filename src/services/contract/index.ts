@@ -23,11 +23,15 @@ const createContract = (type: CONTRACT_TYPES) =>
 const saveScreenData = (id: string, screen: BaseScreenDataInterface, meRole: CONTRACT_ROLE) =>
   httpClient.put(`api/contracts/${id}`, screenDataTranslator(screen, meRole));
 
-const inviteUser = (contractData: InviteUserInterface): Promise<any> =>
-  httpClient.post(`api/contracts/${contractData.contractId}/invite-user`, {
-    email: contractData.search,
-    locale: LANGUAGE_GERMANY ? "de" : "en",
-  });
+const inviteUser = (contractData: InviteUserInterface): Promise<any> => {
+  return httpClient.post(
+    `api/contracts/${contractData.contractId}/invite-user`,
+    {
+      email: contractData.search,
+      locale: LANGUAGE_GERMANY ? "de" : "en",
+    }
+  );
+};
 
 const getUserEmails = async (
   searchData: RequestGetEmailsInterface

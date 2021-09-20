@@ -117,6 +117,7 @@ export default function TextField({
 const styles = StyleSheet.create({
   inputContainer: {
     justifyContent: "flex-end",
+    minHeight: 68,
   },
   paddingForLabel: {
     paddingTop: 22,
