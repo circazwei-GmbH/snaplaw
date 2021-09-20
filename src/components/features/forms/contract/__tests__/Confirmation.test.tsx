@@ -84,9 +84,9 @@ describe("Confirmation", () => {
     });
   });
   it("Should dispatch validator", () => {
-    // @ts-ignore
     initialState.contract = {
       ...initialState.contract,
+      // @ts-ignore
       contractErrors: {
         [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
           [CONFIRMATION_FIELDS.FIRST]: "some error",
