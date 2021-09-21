@@ -30,7 +30,6 @@ export default function Sign() {
   const { t } = useI18n();
   const contract = useAppSelector((state) => state.contract.currentContract);
   const sign = useAppSelector((state) => state.contract.currentContract?.sign);
-  const [name] = useState("Jhon Doue");
   const [signVisible, setSignVisible] = useState(false);
   const dispatch = useAppDispatch();
   const navigator = useNavigation();
@@ -117,7 +116,7 @@ export default function Sign() {
         />
         <InviteInput
           style={styles.inputInBlock}
-          invitedName={name}
+          invitedName={contract.partnerName || ""}
           inviteHandler={inviteHandler}
         />
       </View>
