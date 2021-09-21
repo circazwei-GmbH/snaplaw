@@ -104,7 +104,7 @@ export interface InviteUserInterface {
 }
 
 export interface EmailsListItemInterface {
-  email: string;
+  _id: string;
 }
 
 export interface InviteUserAction extends BaseAction {
