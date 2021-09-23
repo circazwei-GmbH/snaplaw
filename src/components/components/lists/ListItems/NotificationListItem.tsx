@@ -30,7 +30,6 @@ export default function NotificationListItem({
   const dispatch = useAppDispatch();
   const isToday = require("dayjs/plugin/isToday");
   dayjs.extend(isToday);
-
   const onClose = () => {
     changeStatus(id);
     swipeable.current.close();

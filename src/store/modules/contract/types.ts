@@ -72,6 +72,7 @@ export type ContractDataType = {
   screens: Array<BaseScreenDataInterface>;
   sign: string | undefined;
   partnerId: string | undefined;
+  partnerName: string | null;
   meRole: CONTRACT_ROLE;
 };
 
@@ -104,7 +105,7 @@ export interface InviteUserInterface {
 }
 
 export interface EmailsListItemInterface {
-  email: string;
+  _id: string;
 }
 
 export interface InviteUserAction extends BaseAction {

@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   StyleProp,
   TextStyle,
-  Dimensions,
   Platform,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
@@ -78,9 +77,9 @@ export default function InviteTextField({
     <TouchableOpacity
       activeOpacity={1}
       style={styles.listItem}
-      onPress={() => onPressListItem(item.email)}
+      onPress={() => onPressListItem(item._id)}
     >
-      <Text style={styles.listItemText}>{item.email}</Text>
+      <Text style={styles.listItemText}>{item._id}</Text>
     </TouchableOpacity>
   );
 
@@ -125,7 +124,7 @@ export default function InviteTextField({
                 : styles.listTopPosition,
             ]}
             data={list}
-            keyExtractor={(item, i) => item.email + i}
+            keyExtractor={(item, i) => item._id + i}
             renderItem={({ item }) => renderItem(item)}
             onEndReached={getList}
             onEndReachedThreshold={0.5}

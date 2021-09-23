@@ -30,6 +30,7 @@ export const translateContract = (
     type: screen.screenType,
     data: screen,
   })),
+  partnerName: contract.partnerName,
   sign: contract.sign,
 });
 

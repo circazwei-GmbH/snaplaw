@@ -25,12 +25,12 @@ import {
 } from "../../../../store/modules/contract/helper";
 import * as RootNavigation from "../../../../router/RootNavigation";
 import { HOME_ROUTER } from "../../../../router/HomeRouterType";
+import {CONTRACT_ROLE} from "../../../../store/modules/contract/contract-roles";
 
 export default function Sign() {
   const { t } = useI18n();
   const contract = useAppSelector((state) => state.contract.currentContract);
   const sign = useAppSelector((state) => state.contract.currentContract?.sign);
-  const [name] = useState("Jhon Doue");
   const [signVisible, setSignVisible] = useState(false);
   const dispatch = useAppDispatch();
   const navigator = useNavigation();
@@ -109,18 +109,20 @@ export default function Sign() {
           signHandler={() => signModalHandler(contract)}
         />
       </View>
-      <View style={styles.block}>
-        <DefaultText
-          text={t(
-            `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.SIGN}.invite`
-          )}
-        />
-        <InviteInput
-          style={styles.inputInBlock}
-          invitedName={name}
-          inviteHandler={inviteHandler}
-        />
-      </View>
+      {contract.meRole === CONTRACT_ROLE.OWNER ? (
+        <View style={styles.block}>
+          <DefaultText
+            text={t(
+              `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.SIGN}.invite`
+            )}
+          />
+          <InviteInput
+            style={styles.inputInBlock}
+            invitedName={contract.partnerName || ""}
+            inviteHandler={inviteHandler}
+          />
+        </View>
+      ) : null}
       <SignModal
         visible={signVisible}
         onClose={() => signModalHandler(contract)}

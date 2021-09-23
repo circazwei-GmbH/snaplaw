@@ -157,7 +157,7 @@ function* requestConreactsList({
   payload: { type, isRefresh },
 }: RequestContractListAction) {
   const listPagination = yield select((state) => state.contract.listPagination);
-  if (listPagination.listType === type && !listPagination.isNextPage) {
+  if (listPagination.listType === type && !listPagination.isNextPage && !isRefresh) {
     return;
   }
   const currentContracts = yield select((state) => state.contract.contracts);
