@@ -25,6 +25,7 @@ import {
 } from "../../../../store/modules/contract/helper";
 import * as RootNavigation from "../../../../router/RootNavigation";
 import { HOME_ROUTER } from "../../../../router/HomeRouterType";
+import {CONTRACT_ROLE} from "../../../../store/modules/contract/contract-roles";
 
 export default function Sign() {
   const { t } = useI18n();
@@ -108,18 +109,20 @@ export default function Sign() {
           signHandler={() => signModalHandler(contract)}
         />
       </View>
-      <View style={styles.block}>
-        <DefaultText
-          text={t(
-            `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.SIGN}.invite`
-          )}
-        />
-        <InviteInput
-          style={styles.inputInBlock}
-          invitedName={contract.partnerName || ""}
-          inviteHandler={inviteHandler}
-        />
-      </View>
+      {contract.meRole === CONTRACT_ROLE.OWNER ? (
+        <View style={styles.block}>
+          <DefaultText
+            text={t(
+              `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.SIGN}.invite`
+            )}
+          />
+          <InviteInput
+            style={styles.inputInBlock}
+            invitedName={contract.partnerName || ""}
+            inviteHandler={inviteHandler}
+          />
+        </View>
+      ) : null}
       <SignModal
         visible={signVisible}
         onClose={() => signModalHandler(contract)}

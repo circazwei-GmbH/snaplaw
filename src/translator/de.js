@@ -221,6 +221,8 @@ export default {
         "Einladung zum Vertrag %{contract} wurde von %{partner} angenommen",
       accepted_invite_success:
         "Der Vertrag ist zu Meinen Kontakten hinzugefügt, ^in Progress-Tab^.",
+      removed_from_contract:
+        "Sie wurden gerade aus dem Vertrag %{contract} von %{partner} gelösch"
     },
     modal_buttons: {
       accept: "Akzeptieren",

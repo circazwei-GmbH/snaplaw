@@ -1,5 +1,5 @@
-import { BUTTON_COLORTYPE } from "../../store/modules/main/types";
-import { requestAcceptInvite } from "../../store/modules/contract/action-creators";
+import {BUTTON_COLORTYPE} from "../../store/modules/main/types";
+import {requestAcceptInvite} from "../../store/modules/contract/action-creators";
 
 interface configActionsInterface {
   name: string;
@@ -14,6 +14,7 @@ interface NotificationInterface {
 export enum NOTIFICATION_TYPE {
   INVITE_USER_TO_CONTRACT = "user_invited_to_contract",
   ACCEPT_INVITE = "accept_invite",
+  INVITE_REJECTED = "invite_to_contract_rejected"
 }
 
 export type notificationConfigInterface = Record<
@@ -45,4 +46,13 @@ export const notificationConfig: notificationConfigInterface = {
       },
     ],
   },
+  invite_to_contract_rejected: {
+    message: "notifications.messages.removed_from_contract",
+    actions: [
+      {
+        name: "notifications.modal_buttons.ok",
+        colortype: BUTTON_COLORTYPE.PRIMARY
+      }
+    ]
+  }
 };

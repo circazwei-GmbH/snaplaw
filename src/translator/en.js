@@ -218,6 +218,8 @@ export default {
         "Invite to contract %{contract} has been accepted by %{partner}",
       accepted_invite_success:
         "Contract is added to My Contracts list, ^In progress^ tab",
+      removed_from_contract:
+        "You've been just removed from the contract %{contract} by %{partner}"
     },
     modal_buttons: {
       accept: "Accept",

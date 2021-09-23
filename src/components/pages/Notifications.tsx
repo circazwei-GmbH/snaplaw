@@ -15,8 +15,9 @@ export default function Notifications(): JSX.Element {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
   const list = useAppSelector((state) => state.notifications.notifications);
+  const isRefreshing = useAppSelector((state) => state.notifications.notificationsPagination.isLoading);
 
-  const getNotifications = () => dispatch(requestNotifications());
+  const getNotifications = (isRefresh: boolean = false) => dispatch(requestNotifications(isRefresh));
   const changeStatus = (id: string) =>
     dispatch(requestChangeNotificationStatus({ id }));
 
@@ -31,6 +32,8 @@ export default function Notifications(): JSX.Element {
         messageOnEmpty={t("notifications.empty_list")}
         elements={list}
         onEndReached={getNotifications}
+        onRefresh={() => getNotifications(true)}
+        isRefreshing={isRefreshing}
         listItem={({ item }: { item: NotificationListItemInterface }) => (
           <NotificationListItem item={item} changeStatus={changeStatus} />
         )}
