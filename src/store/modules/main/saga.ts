@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import {
-  NAVIGATE,
+  NAVIGATE, NAVIGATE_POP,
   NavigateAction,
   NAVIGATION_POP_TO_TOP,
   ORIENTATION,
@@ -29,10 +29,15 @@ function* navigate({ payload }: NavigateAction) {
   }
 }
 
+function* navigatePop() {
+  RootNavigation.pop();
+}
+
 function* mainSaga() {
   yield takeLatest(NAVIGATION_POP_TO_TOP, navigateToTop);
   yield takeLatest(ORIENTATION, changeOrientation);
   yield takeLatest(NAVIGATE, navigate);
+  yield takeLatest(NAVIGATE_POP, navigatePop);
 }
 
 export default mainSaga;

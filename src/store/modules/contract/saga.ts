@@ -29,7 +29,7 @@ import {
 } from "./types";
 import API from "../../../services/contract/index";
 import { responseError } from "../auth/action-creators";
-import { addToWAiter, removeFromWaiter, setMessage } from "../main/slice";
+import {addToWAiter, removeFromWaiter, setMessage, setModal} from "../main/slice";
 import { CONTRACT_CREATION_WAIT } from "./constants";
 import {
   clearErrors,
@@ -52,6 +52,7 @@ import { BaseScreenDataInterface } from "./base-types";
 import { Translator } from "../../../translator/i18n";
 import { USER_SELF_INVITE } from "../../../services/error-codes";
 import { CONTRACT_ROLE } from "./contract-roles";
+import {navigatePop} from "../main/action-creators";
 
 function* createContract({ payload }: RequestCreateContractAction) {
   try {
@@ -227,7 +228,15 @@ function* signContract({ payload }: SignContractAction) {
 function* requestInviteUser({ payload }: InviteUserAction) {
   try {
     yield call(API.inviteUser, payload);
-    RootNavigation.pop();
+    yield put(setModal({
+      message: Translator.getInstance().trans("invite_page.successed"),
+      actions: [
+        {
+          name: Translator.getInstance().trans("ok"),
+          action: navigatePop()
+        }
+      ]
+    }));
   } catch (error) {
     if (error.response?.data.code === USER_SELF_INVITE) {
       return yield put(
