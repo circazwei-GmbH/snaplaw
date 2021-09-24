@@ -4,13 +4,14 @@ import Button from "../basics/buttons/Button";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList, AUTH_ROUTE } from "../../router/AuthRouterTypes";
 import { useI18n } from "../../translator/i18n";
+import {LANGUAGE_GERMANY} from "../../store/modules/profile/constants";
 
 type WelcomeProp = {
   navigation: StackNavigationProp<RootStackParamList, "Welcome">;
 };
 
 export default function Welcome({ navigation }: WelcomeProp) {
-  const { t } = useI18n();
+  const { t, currentLanguage } = useI18n();
   return (
     <View style={styles.container}>
       <Text accessibilityLabel="welcome-to-snaplaw" style={styles.headline}>
@@ -18,7 +19,7 @@ export default function Welcome({ navigation }: WelcomeProp) {
       </Text>
       <Image
         accessibilityLabel="welcome-image"
-        source={require("../../../assets/welcome.png")}
+        source={currentLanguage === LANGUAGE_GERMANY ? require("../../../assets/welcome-de.png") : require("../../../assets/welcome-en.png")}
       />
       <View style={styles.actions} accessibilityLabel="actions">
         <Button
