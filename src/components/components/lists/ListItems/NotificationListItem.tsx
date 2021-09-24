@@ -13,6 +13,7 @@ import {
 import { useI18n } from "../../../../translator/i18n";
 import { setModal } from "../../../../store/modules/main/slice";
 import { useAppDispatch } from "../../../../store/hooks";
+import {requestChangeNotificationStatus} from "../../../../store/modules/notifications/action-creators";
 
 interface NotificationListItemPropsInterface {
   item: NotificationListItemInterface;
@@ -41,6 +42,7 @@ export default function NotificationListItem({
     partner: string,
     contract: string
   ) => {
+    dispatch(requestChangeNotificationStatus({id}));
     dispatch(
       setModal({
         message: t(notificationConfig[type]["message"], { contract, partner }),
