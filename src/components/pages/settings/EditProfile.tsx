@@ -13,23 +13,41 @@ import EditProfileForm, {
   EditProfileFormInterface,
 } from "../../features/forms/EditProfileForm";
 import { useAppSelector, useAppDispatch } from "../../../store/hooks";
-import { requestEditProfile } from "../../../store/modules/profile/action-creators";
+import {requestEditProfile, requestUserProfile} from "../../../store/modules/profile/action-creators";
 import { email, length } from "../../../validations/default";
 import { formFieldFill, validate } from "../../../utils/forms";
 import {
   UserTypeNoAvatar,
-  setUserProfile,
+  setUserProfile, setCurretnPartner,
 } from "../../../store/modules/profile/slice";
 import { setModal } from "../../../store/modules/main/slice";
 import { BUTTON_COLORTYPE } from "../../../store/modules/main/types";
 
-export default function EditProfile() {
+type EditProfileProps = {
+  route: {
+    params: {
+      id: string | undefined
+    } | undefined
+  }
+}
+
+export default function EditProfile({ route }: EditProfileProps) {
+  const userId = route.params?.id;
   const { t } = useI18n();
   const dispatch = useAppDispatch();
   const [edit, setEdit] = useState(false);
   const userData: UserTypeNoAvatar | undefined = useAppSelector(
-    (state) => state.profile.user
+    (state) => userId ? state.profile.currentPartner : state.profile.user
   );
+
+  useEffect(() => {
+    if (userId) {
+      dispatch(requestUserProfile(userId))
+      return () => {
+        dispatch(setCurretnPartner(undefined));
+      }
+    }
+  }, [userId])
 
   const globalValue: UserTypeNoAvatar = {
     name: userData?.name,
@@ -174,38 +192,45 @@ export default function EditProfile() {
     cancelHandler();
   }, [userData]);
 
+  const headerLeftElement = () => {
+    return edit && !userId ? (
+      <TextButton
+        text={t("edit_profile.buttons_text.cancel")}
+        onPress={pressCancel}
+        type="left"
+      />
+    ) : undefined
+  }
+
+  const headerRightElement = () => {
+    if (userId) {
+      return undefined;
+    }
+    return edit ? (
+      <TextButton
+        text={t("edit_profile.buttons_text.save")}
+        onPress={pressSave}
+        type="right"
+      />
+    ) : (
+      <TextButton
+        text={t("edit_profile.buttons_text.edit")}
+        onPress={editHandler}
+        type="right"
+      />
+    )
+  }
+
   return (
     <TopBar
       pageName={t("edit_profile.title")}
-      leftButton={
-        edit ? (
-          <TextButton
-            text={t("edit_profile.buttons_text.cancel")}
-            onPress={pressCancel}
-            type="left"
-          />
-        ) : undefined
-      }
-      rightButton={
-        edit ? (
-          <TextButton
-            text={t("edit_profile.buttons_text.save")}
-            onPress={pressSave}
-            type="right"
-          />
-        ) : (
-          <TextButton
-            text={t("edit_profile.buttons_text.edit")}
-            onPress={editHandler}
-            type="right"
-          />
-        )
-      }
+      leftButton={headerLeftElement()}
+      rightButton={headerRightElement()}
     >
       <TouchableWithoutFeedback accessible={false} onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <View style={styles.uploadAvatarBox}>
-            <UploadAvatar />
+            <UploadAvatar isChangable={!userId} />
           </View>
           <EditProfileForm edit={edit} form={form} onChangeHandler={onChange} />
         </View>

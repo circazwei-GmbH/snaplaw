@@ -25,15 +25,15 @@ import { requestToken } from "../store/modules/auth/action-creators";
 import { orientationChange } from "../store/modules/main/action-creators";
 import { ROUTER_TABS } from "./TabRouterTypes";
 import { MY_CONTRACT_ROUTE } from "./MyContractRouterTypes";
-import { AUTH_ROUTE } from "../router/AuthRouterTypes";
-import { HOME_ROUTER } from "../router/HomeRouterType";
-import { PROFILE_ROUTER } from "../router/ProfileRouterTypes";
+import { AUTH_ROUTE } from "./AuthRouterTypes";
+import { HOME_ROUTER } from "./HomeRouterType";
+import { PROFILE_ROUTER } from "./ProfileRouterTypes";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const ProfileStack = createStackNavigator();
 const HomeStack = createStackNavigator();
-const MyPorfileStack = createStackNavigator();
+const ContractsStack = createStackNavigator();
 
 export default function Router() {
   const token = useAppSelector((state) => state.auth.token);
@@ -71,16 +71,17 @@ export default function Router() {
         }}
       >
         {() => (
-          <MyPorfileStack.Navigator headerMode="none">
-            <MyPorfileStack.Screen
+          <ContractsStack.Navigator headerMode="none">
+            <ContractsStack.Screen
               name={MY_CONTRACT_ROUTE.LIST}
               component={MyContracts}
             />
-            <MyPorfileStack.Screen
+            <ContractsStack.Screen
               name={MY_CONTRACT_ROUTE.INVITE}
               component={Invite}
             />
-          </MyPorfileStack.Navigator>
+            <ContractsStack.Screen name={MY_CONTRACT_ROUTE.PROFILE} component={EditProfile} />
+          </ContractsStack.Navigator>
         )}
       </Tab.Screen>
       <Tab.Screen

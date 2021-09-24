@@ -34,6 +34,7 @@ const changeNotificationStatusAction = createAction<
   "changeNotificationStatus"
 >("changeNotificationStatus");
 const setNotificationsLoadingAction = createAction<boolean, "setNotificationsLoading">("setNotificationsLoading");
+const clearNotificationModuleAction = createAction<undefined, "clearNotificationModule">("clearNotificationModule");
 
 const notificationsSlice = createSlice({
   name: "notifications",
@@ -72,11 +73,14 @@ const notificationsSlice = createSlice({
       action: PayloadAction<boolean>
     ) => {
       state.notificationsPagination.isLoading = action.payload
+    },
+    [clearNotificationModuleAction.type]: () => {
+      return initialState
     }
   },
 });
 
-export const { setNotifications, changeNotificationStatus, setNotificationsLoading } =
+export const { setNotifications, changeNotificationStatus, setNotificationsLoading, clearNotificationModule } =
   notificationsSlice.actions;
 
 export default notificationsSlice.reducer;

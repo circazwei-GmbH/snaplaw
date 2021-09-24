@@ -28,8 +28,12 @@ const editProfileSaveChange = (userData: UserType) => {
 
 const requestMe = () => httpClient.get("me");
 
+const requestUserProfile = (id: string) =>
+  httpClient.get(`api/users/${id}`)
+
 export default {
   updateUserAvatar,
   editProfileSaveChange,
   requestMe,
+  requestUserProfile
 };

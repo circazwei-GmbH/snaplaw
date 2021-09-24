@@ -125,6 +125,10 @@ export interface RequestAcceptInviteAction extends BaseAction {
   payload: string;
 }
 
+export interface RequestDeleteContractPartnerAction extends BaseAction {
+  payload: string;
+}
+
 export { ProductDataScreenInterface, PRODUCT_DATA_FIELDS };
 export { UserDataScreenInterface, USER_DATA_FIELDS };
 export { ProductConditionScreenInterface, CONDITION_VALUE, CONDITIONS };

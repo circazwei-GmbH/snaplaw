@@ -8,13 +8,13 @@ import {
   UPDATE_AVATAR,
   UpdateAvatarAction,
   REQUEST_EDIT_PROFILE,
-  RequestEditProfileAction,
+  RequestEditProfileAction, RequestUserProfileAction, REQUEST_USER_PROFILE,
 } from "./action-creators";
-import { setMessage } from "../main/slice";
+import {addToWAiter, removeFromWaiter, setMessage} from "../main/slice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Reduser from "./slice";
 import { Translator } from "../../../translator/i18n";
-import { setAvatar, setAvatarLoading, setUser, setUserProfile } from "./slice";
+import {setAvatar, setAvatarLoading, setCurretnPartner, setUser, setUserProfile} from "./slice";
 import API from "../../../services/profile/index";
 import { LANGUAGE_ENGLISH } from "./constants";
 import { responseError } from "../auth/action-creators";
@@ -74,6 +74,18 @@ function* requestEditProfile({ payload }: RequestEditProfileAction) {
   }
 }
 
+function* requestUserProfile({ payload }: RequestUserProfileAction) {
+  yield put(addToWAiter(REQUEST_USER_PROFILE));
+  try {
+    const user = yield call(API.requestUserProfile, payload);
+    yield put(setCurretnPartner(user.data.user));
+  } catch (error) {
+    yield put(responseError(error));
+  } finally {
+    yield put(removeFromWaiter(REQUEST_USER_PROFILE));
+  }
+}
+
 function* profileSaga() {
   yield takeLatest(SET_LANGUAGE, setLanguage);
   yield takeLatest(REQUEST_LANGUAGE, requestLanguage);
@@ -81,6 +93,7 @@ function* profileSaga() {
   yield takeLatest(DELETE_AVATAR, deleteAvatar);
   yield takeLatest(REQUEST_ME, requestMe);
   yield takeLatest(REQUEST_EDIT_PROFILE, requestEditProfile);
+  yield takeLatest(REQUEST_USER_PROFILE, requestUserProfile);
 }
 
 export default profileSaga;

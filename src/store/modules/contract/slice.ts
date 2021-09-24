@@ -5,7 +5,7 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 import {
-  CONTRACT_LIST_STATE,
+  CONTRACT_LIST_STATE, ContractDataListType,
   ContractDataType,
   ContractListType,
   EmailsListItemInterface,
@@ -108,6 +108,7 @@ const inviteSelfAction = createAction<{ message: string }, "inviteSelf">(
 const clearEmailErrorsAction = createAction<undefined, "clearEmailErrors">(
   "clearEmailErrors"
 );
+const removeContractPartnerFromListAction = createAction<string, "removeContractPartnerFromList">("removeContractPartnerFromList");
 
 const contractSlice = createSlice({
   name: "contract",
@@ -257,6 +258,21 @@ const contractSlice = createSlice({
     [clearEmailErrorsAction.type]: (state: Draft<ContractState>) => {
       state.email.error = "";
     },
+    [removeContractPartnerFromListAction.type]: (
+      state: Draft<ContractState>,
+      action: PayloadAction<string>
+    ) => {
+      // @ts-ignore
+      state.contracts = state.contracts.map((contract: ContractDataListType) => {
+        if (contract.id !== action.payload) {
+          return contract;
+        }
+        return {
+          ...contract,
+          partnerId: undefined
+        }
+      })
+    }
   },
 });
 
@@ -273,6 +289,7 @@ export const {
   clearInviteEmails,
   inviteSelf,
   clearEmailErrors,
+  removeContractPartnerFromList
 } = contractSlice.actions;
 
 export default contractSlice.reducer;

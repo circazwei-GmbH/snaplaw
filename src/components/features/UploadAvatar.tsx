@@ -16,7 +16,11 @@ import {
 } from "../../store/modules/profile/action-creators";
 import { setAvatarLoading } from "../../store/modules/profile/slice";
 
-export default function UploadAvatar() {
+type UploadAvatarProps = {
+  isChangable: boolean
+}
+
+export default function UploadAvatar({isChangable = true}: UploadAvatarProps) {
   const [menuVisible, setMenuVisible] = useState(false);
   const dispatch = useAppDispatch();
   const { t } = useI18n();
@@ -70,16 +74,18 @@ export default function UploadAvatar() {
     <View style={styles.container}>
       <UserAvatar url={avatar} sizeSmall />
       <View style={styles.uploadIcon}>
-        <TouchableOpacity
-          onPress={uploadAvatarIconPressHandler}
-          testID="openMenuIcon"
-        >
-          <MaterialCommunityIcons
-            name="camera-plus-outline"
-            size={24}
-            color="#668395"
-          />
-        </TouchableOpacity>
+        {isChangable ? (
+          <TouchableOpacity
+            onPress={uploadAvatarIconPressHandler}
+            testID="openMenuIcon"
+          >
+            <MaterialCommunityIcons
+              name="camera-plus-outline"
+              size={24}
+              color="#668395"
+            />
+          </TouchableOpacity>
+        ): null}
       </View>
       <Menu
         visible={menuVisible}

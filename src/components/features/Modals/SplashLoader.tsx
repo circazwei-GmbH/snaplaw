@@ -11,6 +11,7 @@ export default function SplashLoader() {
       <Modal
         visible={isWaiter}
         transparent={true}
+        animationType="none"
         supportedOrientations={[
           orientation === OrientationLock.PORTRAIT_UP
             ? "portrait"
