@@ -278,7 +278,11 @@ function* requestAcceptInvite({ payload }: RequestAcceptInviteAction) {
       )
     );
   } catch (error) {
-    yield put(responseError(error));
+    if (error?.response?.status === 403) {
+      yield put(setMessage(Translator.getInstance().trans("notifications.messages.accept_invite_error")))
+    } else {
+      yield put(responseError(error));
+    }
   } finally {
     yield put(removeFromWaiter(REQUEST_ACCEPT_INVITE));
   }
