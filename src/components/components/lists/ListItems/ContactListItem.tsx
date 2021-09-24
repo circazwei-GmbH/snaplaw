@@ -15,8 +15,9 @@ import { BUTTON_COLORTYPE } from "../../../../store/modules/main/types";
 import { useNavigation } from "@react-navigation/native";
 import { MY_CONTRACT_ROUTE } from "../../../../router/MyContractRouterTypes";
 import { CONTRACT_ROLE } from "../../../../store/modules/contract/contract-roles";
+import {ContractDataListType} from "../../../../store/modules/contract/types";
 
-export default function ContractListItem({ item }: ListItemProps) {
+export default function ContractListItem({ item }: ListItemProps<ContractDataListType>) {
   const [inProgressMenuVisible, setInProgressMenuVisible] =
     useState<boolean>(false);
   const { t } = useI18n();
@@ -62,7 +63,10 @@ export default function ContractListItem({ item }: ListItemProps) {
   if (isContractorIncludeAndIOwner()) {
     inProgressMenuButtons.push({
       title: t("my_contracts.actions.see_partner"),
-      handler: () => {},
+      handler: () => {
+        setInProgressMenuVisible(false);
+        navigator.navigate(MY_CONTRACT_ROUTE.PROFILE, {id: item.partnerId})
+      },
     });
     inProgressMenuButtons.push({
       title: t("my_contracts.actions.delete_partner"),
