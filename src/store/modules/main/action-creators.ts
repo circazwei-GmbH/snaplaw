@@ -2,6 +2,7 @@ import { BaseAction } from "../auth/types";
 import * as ScreenOrientation from "expo-screen-orientation";
 
 export const NAVIGATION_POP_TO_TOP = "NAVIGATION_POP_TO_TOP";
+export const NAVIGATE_POP = "NAVIGATE_POP";
 export const ORIENTATION = "ORIENTATION";
 export const NAVIGATE = "NAVIGATE";
 
@@ -21,6 +22,11 @@ export const navigationPopToTop = (): NavigationPopToTopAction => ({
   type: NAVIGATION_POP_TO_TOP,
   payload: undefined,
 });
+
+export const navigatePop = (): BaseAction => ({
+  type: NAVIGATE_POP,
+  payload: undefined
+})
 
 export const orientationChange = (target: AllowOrientationType) => ({
   type: ORIENTATION,

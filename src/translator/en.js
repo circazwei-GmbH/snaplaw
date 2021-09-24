@@ -347,5 +347,6 @@ export default {
       "Enter the email address of the partner and invite him to the contract",
     error: "Please enter a valid email",
     self_invite_error: "You can't invite yourself.",
+    successed: "User has been successfully invited"
   },
 };

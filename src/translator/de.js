@@ -345,5 +345,6 @@ export default {
       "Geben Sie die E-Mail-Adresse des Partners ein und laden Sie ihn zum Vertrag ein",
     error: "Bitte geben Sie eine gültige Email-Adresse ein",
     self_invite_error: "Sie können sich selbst nicht einladen.",
+    successed: "Der Nutzer ist erfolgreich eingeladen"
   },
 };
