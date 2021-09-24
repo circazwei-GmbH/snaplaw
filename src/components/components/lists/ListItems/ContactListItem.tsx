@@ -9,7 +9,7 @@ import { useAppDispatch } from "../../../../store/hooks";
 import { navigate } from "../../../../store/modules/main/action-creators";
 import { ROUTER_TABS } from "../../../../router/TabRouterTypes";
 import { HOME_ROUTER } from "../../../../router/HomeRouterType";
-import { requestDeleteContract } from "../../../../store/modules/contract/action-creators";
+import {requestDeleteContract, requestDeleteContractPartner} from "../../../../store/modules/contract/action-creators";
 import { setModal } from "../../../../store/modules/main/slice";
 import { BUTTON_COLORTYPE } from "../../../../store/modules/main/types";
 import { useNavigation } from "@react-navigation/native";
@@ -70,7 +70,22 @@ export default function ContractListItem({ item }: ListItemProps<ContractDataLis
     });
     inProgressMenuButtons.push({
       title: t("my_contracts.actions.delete_partner"),
-      handler: () => {},
+      handler: () => {
+        setInProgressMenuVisible(false);
+        dispatch(setModal({
+          message: t("my_contracts.delete_partner.message"),
+          actions: [
+            {
+              name: t("my_contracts.delete_partner.no"),
+              colortype: BUTTON_COLORTYPE.ERROR
+            },
+            {
+              name: t("my_contracts.delete_partner.yes"),
+              action: requestDeleteContractPartner(item.id)
+            }
+          ]
+        }));
+      },
     });
   } else {
     inProgressMenuButtons.push({

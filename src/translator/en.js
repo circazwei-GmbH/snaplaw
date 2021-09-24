@@ -201,6 +201,11 @@ export default {
       yes: "Yes",
       no: "No",
     },
+    delete_partner: {
+      message: "Are you sure you want to delete the contractor?",
+      yes: "Yes",
+      no: "No"
+    }
   },
   menu: {
     cancel: "Cancel",
@@ -218,9 +223,10 @@ export default {
         "Invite to contract %{contract} has been accepted by %{partner}",
       accepted_invite_success:
         "Contract is added to My Contracts list, ^In progress^ tab",
-      removed_from_contract:
+      invite_to_contract_rejected:
         "You've been just removed from the contract %{contract} by %{partner}",
-      accept_invite_error: "You already accepted or not valid"
+      accept_invite_error: "Your action is not required anymore. Either the contract is already accepted or you are deleted from the contract by owner.",
+      removed_from_contract: "You've been just removed from the contract %{contract} by %{partner}"
     },
     modal_buttons: {
       accept: "Accept",

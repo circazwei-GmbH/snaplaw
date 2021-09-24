@@ -203,6 +203,11 @@ export default {
       yes: "Ja",
       no: "Nein",
     },
+    delete_partner: {
+      message: "Sind Sie sicher, dass Sie den Kontakt löschen möchten?",
+      yes: "Ja",
+      no: "Nein"
+    }
   },
   menu: {
     cancel: "Abbrechen",
@@ -221,9 +226,10 @@ export default {
         "Einladung zum Vertrag %{contract} wurde von %{partner} angenommen",
       accepted_invite_success:
         "Der Vertrag ist zu Meinen Kontakten hinzugefügt, ^in Progress-Tab^.",
-      removed_from_contract:
+      invite_to_contract_rejected:
         "Sie wurden gerade aus dem Vertrag %{contract} von %{partner} gelösch",
-      accept_invite_error: "You already accepted or not valid"
+      accept_invite_error: "Ihre Aktion ist nicht mehr nötig. Entweder ist der Vertrag schon akzeptiert oder Sie sind vom Besitzer aus dem Vertrag gelöscht.",
+      removed_from_contract: "Sie wurden gerade aus dem Vertrag %{contract} von %{partner} gelösch"
     },
     modal_buttons: {
       accept: "Akzeptieren",

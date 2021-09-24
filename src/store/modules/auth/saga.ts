@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from "redux-saga/effects";
+import { select,call, put, takeLatest } from "redux-saga/effects";
 import {
   CHANGE_PASSWORD_REQUESTED,
   CLEAR_TOKEN,
@@ -58,6 +58,7 @@ import {
 } from "../../../services/auth/tokens";
 import { BUTTON_COLORTYPE } from "../main/types";
 import { clearUser } from "../profile/slice";
+import {clearNotificationModule} from "../notifications/slice";
 
 function* fetchSignUp(action: RequestSignUpAction) {
   try {
@@ -252,6 +253,8 @@ function* clearToken() {
     yield call(clearAuthTokens);
     yield put(killToken());
     yield put(clearUser());
+    yield put(clearNotificationModule());
+    console.log(yield select(state => state.notifications.notifications))
     yield call(BaseApi.setToken, undefined, undefined);
   } catch (error) {
     yield put(setMessage(Translator.getInstance().trans("errors.abstract")));

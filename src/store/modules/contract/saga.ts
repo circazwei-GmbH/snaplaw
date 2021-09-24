@@ -11,7 +11,7 @@ import {
   validateScreen,
   REQUEST_INVITE_USER,
   REQUEST_USERS_EMAIL,
-  REQUEST_ACCEPT_INVITE,
+  REQUEST_ACCEPT_INVITE, REQUEST_DELETE_CONTRACT_PARTNER,
 } from "./action-creators";
 import {
   RequestContractAction,
@@ -25,7 +25,7 @@ import {
   RequestGetEmailsAction,
   EmailsListItemInterface,
   ContractDataType,
-  RequestAcceptInviteAction,
+  RequestAcceptInviteAction, RequestDeleteContractPartnerAction,
 } from "./types";
 import API from "../../../services/contract/index";
 import { responseError } from "../auth/action-creators";
@@ -41,7 +41,7 @@ import {
   setListLoading,
   updateContractSign,
   setInviteEmails,
-  inviteSelf,
+  inviteSelf, removeContractPartnerFromList,
 } from "./slice";
 import * as RootNavigation from "../../../router/RootNavigation";
 import { HOME_ROUTER } from "../../../router/HomeRouterType";
@@ -288,6 +288,18 @@ function* requestAcceptInvite({ payload }: RequestAcceptInviteAction) {
   }
 }
 
+function* requestDeleteContractPartner({payload}: RequestDeleteContractPartnerAction) {
+  yield put(addToWAiter(REQUEST_DELETE_CONTRACT_PARTNER));
+  try {
+    yield call(API.deleteContractPartner, payload);
+    yield put(removeContractPartnerFromList(payload))
+  } catch (error) {
+    yield put(responseError(error));
+  } finally {
+    yield put(removeFromWaiter(REQUEST_DELETE_CONTRACT_PARTNER));
+  }
+}
+
 function* contractSaga() {
   yield takeLatest(REQUEST_CREATE_CONTRACT, createContract);
   yield takeLatest(REQUEST_SCREEN_DATA, requestScreenData);
@@ -300,6 +312,7 @@ function* contractSaga() {
   yield takeLatest(REQUEST_INVITE_USER, requestInviteUser);
   yield takeLatest(REQUEST_USERS_EMAIL, requestUsersEmail);
   yield takeLatest(REQUEST_ACCEPT_INVITE, requestAcceptInvite);
+  yield takeLatest(REQUEST_DELETE_CONTRACT_PARTNER, requestDeleteContractPartner);
 }
 
 export default contractSaga;
