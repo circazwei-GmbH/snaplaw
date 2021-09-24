@@ -42,5 +42,5 @@ export function useI18n() {
   const t: TType = (key: string, args?: any) =>
     translate(key, args, currentLanguage === LANGUAGE_ENGLISH ? en : de);
   singleton.setTranslator(t);
-  return { t };
+  return { t, currentLanguage };
 }
