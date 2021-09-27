@@ -41,7 +41,7 @@ import {
   setListLoading,
   updateContractSign,
   setInviteEmails,
-  inviteSelf, removeContractPartnerFromList, setPdfViewOnListContractId,
+  inviteSelf, removeContractPartnerFromList, setPdfViewOnListContract,
 } from "./slice";
 import * as RootNavigation from "../../../router/RootNavigation";
 import { HOME_ROUTER } from "../../../router/HomeRouterType";
@@ -304,7 +304,7 @@ function* requestContractDetailPdf({ payload }: RequestContractAction) {
   yield put(addToWAiter(REQUEST_CONTRACT_DETAIL_FOR_PDF));
   try {
     const contract = yield call(API.requestContract, payload);
-    yield put(setPdfViewOnListContractId(contract))
+    yield put(setPdfViewOnListContract(contract))
   } catch (error) {
     yield put(responseError(error));
   } finally {

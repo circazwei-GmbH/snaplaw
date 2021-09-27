@@ -37,7 +37,7 @@ interface ContractState {
   email: {
     error: string;
   };
-  pdfViewOnListContractId: ContractDataType | undefined
+  pdfViewOnListContract: ContractDataType | undefined
 }
 
 const initialState: ContractState = {
@@ -58,7 +58,7 @@ const initialState: ContractState = {
   email: {
     error: "",
   },
-  pdfViewOnListContractId: undefined
+  pdfViewOnListContract: undefined
 };
 
 type ScreenData = {
@@ -111,7 +111,7 @@ const clearEmailErrorsAction = createAction<undefined, "clearEmailErrors">(
   "clearEmailErrors"
 );
 const removeContractPartnerFromListAction = createAction<string, "removeContractPartnerFromList">("removeContractPartnerFromList");
-const setPdfViewOnListContractIdAction = createAction<ContractDataType | undefined, "setPdfViewOnListContractId">("setPdfViewOnListContractId");
+const setPdfViewOnListContractAction = createAction<ContractDataType | undefined, "setPdfViewOnListContract">("setPdfViewOnListContract");
 
 const contractSlice = createSlice({
   name: "contract",
@@ -276,11 +276,11 @@ const contractSlice = createSlice({
         }
       })
     },
-    [setPdfViewOnListContractIdAction.type]: (
+    [setPdfViewOnListContractAction.type]: (
       state: Draft<ContractState>,
       action: PayloadAction<ContractDataType | undefined>
     ) => {
-      state.pdfViewOnListContractId = action.payload
+      state.pdfViewOnListContract = action.payload
     }
   },
 });
@@ -299,7 +299,7 @@ export const {
   inviteSelf,
   clearEmailErrors,
   removeContractPartnerFromList,
-  setPdfViewOnListContractId
+  setPdfViewOnListContract
 } = contractSlice.actions;
 
 export default contractSlice.reducer;

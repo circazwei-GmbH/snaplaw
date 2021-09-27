@@ -9,13 +9,13 @@ import {useAppDispatch, useAppSelector} from "../../../../store/hooks";
 import {ContractDataListType} from "../../../../store/modules/contract/types";
 import {getListItemAction} from "../../../../services/contract/actions-config";
 import ContractView from "../../../features/Modals/ContractView";
-import {setPdfViewOnListContractId} from "../../../../store/modules/contract/slice";
+import {setPdfViewOnListContract} from "../../../../store/modules/contract/slice";
 
 export default function ContractListItem({ item }: ListItemProps<ContractDataListType>) {
   const [inProgressMenuVisible, setInProgressMenuVisible] =
     useState<boolean>(false);
   const { t } = useI18n();
-  const currentContractForPdf = useAppSelector(state => state.contract.pdfViewOnListContractId)
+  const currentContractForPdf = useAppSelector(state => state.contract.pdfViewOnListContract)
   const dispatch = useAppDispatch();
   const inProgressMenuButtons: Array<ButtonType> = getListItemAction(item).map(({action}) => ({
     title: t(action.title),
@@ -43,7 +43,7 @@ export default function ContractListItem({ item }: ListItemProps<ContractDataLis
       </View>
       <ContractView
         visible={currentContractForPdf?.id === item.id}
-        onClose={() => dispatch(setPdfViewOnListContractId(undefined))}
+        onClose={() => dispatch(setPdfViewOnListContract(undefined))}
         contractId={item.id}
         screens={currentContractForPdf?.screens}
       />

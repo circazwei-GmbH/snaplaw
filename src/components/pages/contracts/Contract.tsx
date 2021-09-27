@@ -147,6 +147,7 @@ export default function Contract({
           onClose={closeViewerHandler}
           contractId={contract.id}
           screens={contract.screens}
+          fromStepper
         />
       </View>
     </TopBar>
