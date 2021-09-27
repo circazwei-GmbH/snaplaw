@@ -37,6 +37,7 @@ interface ContractState {
   email: {
     error: string;
   };
+  pdfViewOnListContractId: ContractDataType | undefined
 }
 
 const initialState: ContractState = {
@@ -57,6 +58,7 @@ const initialState: ContractState = {
   email: {
     error: "",
   },
+  pdfViewOnListContractId: undefined
 };
 
 type ScreenData = {
@@ -109,6 +111,7 @@ const clearEmailErrorsAction = createAction<undefined, "clearEmailErrors">(
   "clearEmailErrors"
 );
 const removeContractPartnerFromListAction = createAction<string, "removeContractPartnerFromList">("removeContractPartnerFromList");
+const setPdfViewOnListContractIdAction = createAction<ContractDataType | undefined, "setPdfViewOnListContractId">("setPdfViewOnListContractId");
 
 const contractSlice = createSlice({
   name: "contract",
@@ -272,6 +275,12 @@ const contractSlice = createSlice({
           partnerId: undefined
         }
       })
+    },
+    [setPdfViewOnListContractIdAction.type]: (
+      state: Draft<ContractState>,
+      action: PayloadAction<ContractDataType | undefined>
+    ) => {
+      state.pdfViewOnListContractId = action.payload
     }
   },
 });
@@ -289,7 +298,8 @@ export const {
   clearInviteEmails,
   inviteSelf,
   clearEmailErrors,
-  removeContractPartnerFromList
+  removeContractPartnerFromList,
+  setPdfViewOnListContractId
 } = contractSlice.actions;
 
 export default contractSlice.reducer;

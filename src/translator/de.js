@@ -320,6 +320,7 @@ export default {
     pdf_view: {
       edit: "Editieren",
       save: "Speichern",
+      cancel: "Abbrechen",
       additional_media: "Additionale Information",
       accessories_media: "Zubehör",
     },

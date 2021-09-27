@@ -5,100 +5,26 @@ import {Entypo} from "@expo/vector-icons";
 import Menu, {ButtonType} from "../../../features/Modals/Menu";
 import {useI18n} from "../../../../translator/i18n";
 import dayjs from "dayjs";
-import {useAppDispatch} from "../../../../store/hooks";
-import {navigate} from "../../../../store/modules/main/action-creators";
-import {ROUTER_TABS} from "../../../../router/TabRouterTypes";
-import {HOME_ROUTER} from "../../../../router/HomeRouterType";
-import {requestDeleteContract, requestDeleteContractPartner} from "../../../../store/modules/contract/action-creators";
-import {setModal} from "../../../../store/modules/main/slice";
-import {BUTTON_COLORTYPE} from "../../../../store/modules/main/types";
-import {useNavigation} from "@react-navigation/native";
-import {MY_CONTRACT_ROUTE} from "../../../../router/MyContractRouterTypes";
-import {CONTRACT_ROLE} from "../../../../store/modules/contract/contract-roles";
+import {useAppDispatch, useAppSelector} from "../../../../store/hooks";
 import {ContractDataListType} from "../../../../store/modules/contract/types";
+import {getListItemAction} from "../../../../services/contract/actions-config";
+import ContractView from "../../../features/Modals/ContractView";
+import {setPdfViewOnListContractId} from "../../../../store/modules/contract/slice";
 
 export default function ContractListItem({ item }: ListItemProps<ContractDataListType>) {
   const [inProgressMenuVisible, setInProgressMenuVisible] =
     useState<boolean>(false);
   const { t } = useI18n();
+  const currentContractForPdf = useAppSelector(state => state.contract.pdfViewOnListContractId)
   const dispatch = useAppDispatch();
-  const navigator = useNavigation();
-  const isContractorIncludeAndIOwner = () =>
-    !!item.partnerId && item.meRole === CONTRACT_ROLE.OWNER;
-  // TODO refactor this builder
-  const inProgressMenuButtons: Array<ButtonType> = [
-    {
-      title: t("my_contracts.actions.edit"),
-      handler: () => {
-        dispatch(
-          navigate({
-            [ROUTER_TABS.HOMEPAGE]: {},
-            [HOME_ROUTER.CONTRACT]: { screenCount: 0, id: item.id },
-          })
-        );
-        setInProgressMenuVisible(false);
-      },
-    },
-  ];
-  if (item.meRole === CONTRACT_ROLE.OWNER) {
-    inProgressMenuButtons.push({
-      title: t("my_contracts.actions.delete"),
-      handler: () => {
-        setInProgressMenuVisible(false);
-        dispatch(
-          setModal({
-            message: t("my_contracts.delete_modal.message"),
-            actions: [
-              {
-                name: t("my_contracts.delete_modal.no"),
-                colortype: BUTTON_COLORTYPE.ERROR,
-              },
-              {
-                name: t("my_contracts.delete_modal.yes"),
-                action: requestDeleteContract(item.id),
-              },
-            ],
-          })
-        );
-      },
-    });
-  }
-  if (isContractorIncludeAndIOwner()) {
-    inProgressMenuButtons.push({
-      title: t("my_contracts.actions.see_partner"),
-      handler: () => {
-        setInProgressMenuVisible(false);
-        navigator.navigate(MY_CONTRACT_ROUTE.PROFILE, {id: item.partnerId})
-      },
-    });
-    inProgressMenuButtons.push({
-      title: t("my_contracts.actions.delete_partner"),
-      handler: () => {
-        setInProgressMenuVisible(false);
-        dispatch(setModal({
-          message: t("my_contracts.delete_partner.message"),
-          actions: [
-            {
-              name: t("my_contracts.delete_partner.no"),
-              colortype: BUTTON_COLORTYPE.ERROR
-            },
-            {
-              name: t("my_contracts.delete_partner.yes"),
-              action: requestDeleteContractPartner(item.id)
-            }
-          ]
-        }));
-      },
-    });
-  } else if (item.meRole === CONTRACT_ROLE.OWNER) {
-    inProgressMenuButtons.push({
-      title: t("my_contracts.actions.invite_partner"),
-      handler: () => {
-        setInProgressMenuVisible(false);
-        navigator.navigate(MY_CONTRACT_ROUTE.INVITE, { contractId: item.id });
-      },
-    });
-  }
+  const inProgressMenuButtons: Array<ButtonType> = getListItemAction(item).map(({action}) => ({
+    title: t(action.title),
+    handler: () => {
+      setInProgressMenuVisible(false);
+      dispatch(action.handler(item, t))
+    }
+  }))
+
   return (
     <>
       <View style={styles.container}>
@@ -115,6 +41,12 @@ export default function ContractListItem({ item }: ListItemProps<ContractDataLis
           </View>
         </TouchableOpacity>
       </View>
+      <ContractView
+        visible={currentContractForPdf?.id === item.id}
+        onClose={() => dispatch(setPdfViewOnListContractId(undefined))}
+        contractId={item.id}
+        screens={currentContractForPdf?.screens}
+      />
       <Menu
         visible={inProgressMenuVisible}
         onClose={() => setInProgressMenuVisible(false)}

@@ -145,6 +145,8 @@ export default function Contract({
         <ContractView
           visible={contractViewVisible}
           onClose={closeViewerHandler}
+          contractId={contract.id}
+          screens={contract.screens}
         />
       </View>
     </TopBar>

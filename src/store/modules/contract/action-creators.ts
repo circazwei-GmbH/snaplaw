@@ -24,6 +24,7 @@ export const REQUEST_INVITE_USER = "REQUEST_INVITE_USER";
 export const REQUEST_USERS_EMAIL = "REQUEST_USERS_EMAIL";
 export const REQUEST_ACCEPT_INVITE = "REQUEST_ACCEPT_INVITE";
 export const REQUEST_DELETE_CONTRACT_PARTNER = "REQUEST_DELETE_CONTRACT_PARTNER";
+export const REQUEST_CONTRACT_DETAIL_FOR_PDF = "REQUEST_CONTRACT_DETAIL_FOR_PDF";
 
 export const requestCreateContract = (
   type: CONTRACT_TYPES
@@ -107,5 +108,10 @@ export const requestAcceptInvite = (id: string): RequestAcceptInviteAction => ({
 
 export const requestDeleteContractPartner = (contractId: string): RequestDeleteContractPartnerAction => ({
   type: REQUEST_DELETE_CONTRACT_PARTNER,
+  payload: contractId
+})
+
+export const requestContractDetailForPdfView = (contractId: string): RequestContractAction => ({
+  type: REQUEST_CONTRACT_DETAIL_FOR_PDF,
   payload: contractId
 })

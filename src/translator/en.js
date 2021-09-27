@@ -322,6 +322,7 @@ export default {
     pdf_view: {
       edit: "Edit",
       save: "Save",
+      cancel: "Cancel",
       additional_media: "Additional information",
       accessories_media: "Accessories",
     },

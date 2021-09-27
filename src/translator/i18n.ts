@@ -4,7 +4,7 @@ import { useAppSelector } from "../store/hooks";
 import { LANGUAGE_ENGLISH } from "../store/modules/profile/constants";
 import { translate } from "./Translator";
 
-type TType = (key: string, args?: any) => string;
+export type TType = (key: string, args?: any) => string;
 
 export class Translator {
   protected static instance: Translator | undefined;
