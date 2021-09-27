@@ -195,6 +195,8 @@ export default {
       see_partner: "See contract partner",
       delete_partner: "Delete contract partner",
       invite_partner: "Invite user",
+      view_pdf: "View",
+      decline: "Decline"
     },
     delete_modal: {
       message: "Are you sure you want to delete the contract?",
@@ -226,7 +228,8 @@ export default {
       invite_to_contract_rejected:
         "You've been just removed from the contract %{contract} by %{partner}",
       accept_invite_error: "Your action is not required anymore. Either the contract is already accepted or you are deleted from the contract by owner.",
-      removed_from_contract: "You've been just removed from the contract %{contract} by %{partner}"
+      removed_from_contract: "You've been just removed from the contract %{contract} by %{partner}",
+      contractor_left: "%{partner} has left the contract %{contract}"
     },
     modal_buttons: {
       accept: "Accept",
@@ -322,6 +325,7 @@ export default {
     pdf_view: {
       edit: "Edit",
       save: "Save",
+      cancel: "Cancel",
       additional_media: "Additional information",
       accessories_media: "Accessories",
     },

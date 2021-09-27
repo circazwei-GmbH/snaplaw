@@ -175,7 +175,6 @@ export const contractValidator = (
     const validationConfig =
       // @ts-ignore
       contractValidationConfig[contractType][contractConfig[i].type][myRole];
-    // console.log(contractConfig[i].type, validationConfig)
     if (!validationConfig) {
       continue;
     }

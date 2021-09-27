@@ -11,7 +11,7 @@ import {
   validateScreen,
   REQUEST_INVITE_USER,
   REQUEST_USERS_EMAIL,
-  REQUEST_ACCEPT_INVITE, REQUEST_DELETE_CONTRACT_PARTNER,
+  REQUEST_ACCEPT_INVITE, REQUEST_DELETE_CONTRACT_PARTNER, REQUEST_CONTRACT_DETAIL_FOR_PDF, REQUEST_LEAVE_CONTRACT,
 } from "./action-creators";
 import {
   RequestContractAction,
@@ -41,7 +41,7 @@ import {
   setListLoading,
   updateContractSign,
   setInviteEmails,
-  inviteSelf, removeContractPartnerFromList,
+  inviteSelf, removeContractPartnerFromList, setPdfViewOnListContract,
 } from "./slice";
 import * as RootNavigation from "../../../router/RootNavigation";
 import { HOME_ROUTER } from "../../../router/HomeRouterType";
@@ -292,11 +292,35 @@ function* requestDeleteContractPartner({payload}: RequestDeleteContractPartnerAc
   yield put(addToWAiter(REQUEST_DELETE_CONTRACT_PARTNER));
   try {
     yield call(API.deleteContractPartner, payload);
-    yield put(removeContractPartnerFromList(payload))
+    yield put(removeContractPartnerFromList(payload));
   } catch (error) {
     yield put(responseError(error));
   } finally {
     yield put(removeFromWaiter(REQUEST_DELETE_CONTRACT_PARTNER));
+  }
+}
+
+function* requestContractDetailPdf({ payload }: RequestContractAction) {
+  yield put(addToWAiter(REQUEST_CONTRACT_DETAIL_FOR_PDF));
+  try {
+    const contract = yield call(API.requestContract, payload);
+    yield put(setPdfViewOnListContract(contract))
+  } catch (error) {
+    yield put(responseError(error));
+  } finally {
+    yield put(removeFromWaiter(REQUEST_CONTRACT_DETAIL_FOR_PDF))
+  }
+}
+
+function* requestLeaveContract({ payload }: RequestContractAction) {
+  yield put(addToWAiter(REQUEST_LEAVE_CONTRACT));
+  try {
+    yield call(API.requestLeaveContract, payload);
+    yield put(deleteContract(payload));
+  } catch (error) {
+    yield put(responseError(error));
+  } finally {
+    yield put(removeFromWaiter(REQUEST_LEAVE_CONTRACT));
   }
 }
 
@@ -313,6 +337,8 @@ function* contractSaga() {
   yield takeLatest(REQUEST_USERS_EMAIL, requestUsersEmail);
   yield takeLatest(REQUEST_ACCEPT_INVITE, requestAcceptInvite);
   yield takeLatest(REQUEST_DELETE_CONTRACT_PARTNER, requestDeleteContractPartner);
+  yield takeLatest(REQUEST_CONTRACT_DETAIL_FOR_PDF, requestContractDetailPdf);
+  yield takeLatest(REQUEST_LEAVE_CONTRACT, requestLeaveContract);
 }
 
 export default contractSaga;

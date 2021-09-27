@@ -85,6 +85,12 @@ export type ContractDataListType = {
   meRole: CONTRACT_ROLE;
 };
 
+export enum CONTRACT_STATUS {
+  WITHOUT_PARTNER = "WITHOUT_PARTNER",
+  WITH_PARTNER = "WITH_PARTNER",
+  FINNALIZED = "FINNALIZED"
+}
+
 export type ContractListType = Array<ContractDataListType>;
 
 export interface RequestContractAction extends BaseAction {

@@ -15,7 +15,8 @@ export enum NOTIFICATION_TYPE {
   INVITE_USER_TO_CONTRACT = "user_invited_to_contract",
   ACCEPT_INVITE = "accept_invite",
   INVITE_REJECTED = "invite_to_contract_rejected",
-  DELETED_FROM_CONTRACT = "deleted_from_contract"
+  DELETED_FROM_CONTRACT = "deleted_from_contract",
+  CONTRACTOR_LAFT = "contractor_left",
 }
 
 export type notificationConfigInterface = Record<
@@ -58,6 +59,15 @@ export const notificationConfig: notificationConfigInterface = {
   },
   deleted_from_contract: {
     message: "notifications.messages.removed_from_contract",
+    actions: [
+      {
+        name: "notifications.modal_buttons.ok",
+        colortype: BUTTON_COLORTYPE.PRIMARY
+      }
+    ]
+  },
+  contractor_left: {
+    message: "notifications.messages.contractor_left",
     actions: [
       {
         name: "notifications.modal_buttons.ok",
