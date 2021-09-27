@@ -1,4 +1,4 @@
-import { select,call, put, takeLatest } from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 import {
   CHANGE_PASSWORD_REQUESTED,
   CLEAR_TOKEN,
@@ -254,7 +254,6 @@ function* clearToken() {
     yield put(killToken());
     yield put(clearUser());
     yield put(clearNotificationModule());
-    console.log(yield select(state => state.notifications.notifications))
     yield call(BaseApi.setToken, undefined, undefined);
   } catch (error) {
     yield put(setMessage(Translator.getInstance().trans("errors.abstract")));

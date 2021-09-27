@@ -77,6 +77,9 @@ const acceptInvite = (id: string) =>
 const deleteContractPartner = (id: string) =>
   httpClient.patch(`api/contracts/${id}/delete-partner`, {});
 
+const requestLeaveContract = (id: string) =>
+  httpClient.patch(`api/contracts/${id}/leave`, {});
+
 export const buildPDFSource = (
   id: string,
   locale: LanguageType | undefined
@@ -101,5 +104,6 @@ export default {
   requestDeleteContract,
   signContract,
   acceptInvite,
-  deleteContractPartner
+  deleteContractPartner,
+  requestLeaveContract
 };

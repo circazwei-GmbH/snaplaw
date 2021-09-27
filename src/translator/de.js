@@ -197,6 +197,8 @@ export default {
       see_partner: "Vertragspartner sehen",
       delete_partner: "Vertragspartner löschen",
       invite_partner: "Benutzer einladen",
+      view_pdf: "Ansehen",
+      decline: "Ablehnen"
     },
     delete_modal: {
       message: "Sind Sie sicher, dass Sie den Kontakt löschen möchten?",
@@ -229,7 +231,8 @@ export default {
       invite_to_contract_rejected:
         "Sie wurden gerade aus dem Vertrag %{contract} von %{partner} gelösch",
       accept_invite_error: "Ihre Aktion ist nicht mehr nötig. Entweder ist der Vertrag schon akzeptiert oder Sie sind vom Besitzer aus dem Vertrag gelöscht.",
-      removed_from_contract: "Sie wurden gerade aus dem Vertrag %{contract} von %{partner} gelösch"
+      removed_from_contract: "Sie wurden gerade aus dem Vertrag %{contract} von %{partner} gelösch",
+      contractor_left: "%{partner} hat den Vertrag %{contract} verlassen"
     },
     modal_buttons: {
       accept: "Akzeptieren",

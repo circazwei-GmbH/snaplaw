@@ -11,7 +11,7 @@ import {
   validateScreen,
   REQUEST_INVITE_USER,
   REQUEST_USERS_EMAIL,
-  REQUEST_ACCEPT_INVITE, REQUEST_DELETE_CONTRACT_PARTNER, REQUEST_CONTRACT_DETAIL_FOR_PDF,
+  REQUEST_ACCEPT_INVITE, REQUEST_DELETE_CONTRACT_PARTNER, REQUEST_CONTRACT_DETAIL_FOR_PDF, REQUEST_LEAVE_CONTRACT,
 } from "./action-creators";
 import {
   RequestContractAction,
@@ -312,6 +312,18 @@ function* requestContractDetailPdf({ payload }: RequestContractAction) {
   }
 }
 
+function* requestLeaveContract({ payload }: RequestContractAction) {
+  yield put(addToWAiter(REQUEST_LEAVE_CONTRACT));
+  try {
+    yield call(API.requestLeaveContract, payload);
+    yield put(deleteContract(payload));
+  } catch (error) {
+    yield put(responseError(error));
+  } finally {
+    yield put(removeFromWaiter(REQUEST_LEAVE_CONTRACT));
+  }
+}
+
 function* contractSaga() {
   yield takeLatest(REQUEST_CREATE_CONTRACT, createContract);
   yield takeLatest(REQUEST_SCREEN_DATA, requestScreenData);
@@ -326,6 +338,7 @@ function* contractSaga() {
   yield takeLatest(REQUEST_ACCEPT_INVITE, requestAcceptInvite);
   yield takeLatest(REQUEST_DELETE_CONTRACT_PARTNER, requestDeleteContractPartner);
   yield takeLatest(REQUEST_CONTRACT_DETAIL_FOR_PDF, requestContractDetailPdf);
+  yield takeLatest(REQUEST_LEAVE_CONTRACT, requestLeaveContract);
 }
 
 export default contractSaga;

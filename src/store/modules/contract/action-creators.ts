@@ -25,6 +25,7 @@ export const REQUEST_USERS_EMAIL = "REQUEST_USERS_EMAIL";
 export const REQUEST_ACCEPT_INVITE = "REQUEST_ACCEPT_INVITE";
 export const REQUEST_DELETE_CONTRACT_PARTNER = "REQUEST_DELETE_CONTRACT_PARTNER";
 export const REQUEST_CONTRACT_DETAIL_FOR_PDF = "REQUEST_CONTRACT_DETAIL_FOR_PDF";
+export const REQUEST_LEAVE_CONTRACT = "REQUEST_LEAVE_CONTRACT";
 
 export const requestCreateContract = (
   type: CONTRACT_TYPES
@@ -113,5 +114,10 @@ export const requestDeleteContractPartner = (contractId: string): RequestDeleteC
 
 export const requestContractDetailForPdfView = (contractId: string): RequestContractAction => ({
   type: REQUEST_CONTRACT_DETAIL_FOR_PDF,
+  payload: contractId
+})
+
+export const requestLeaveContract = (contractId: string): RequestContractAction => ({
+  type: REQUEST_LEAVE_CONTRACT,
   payload: contractId
 })

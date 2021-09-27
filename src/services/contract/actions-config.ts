@@ -8,7 +8,7 @@ import {BUTTON_COLORTYPE} from "../../store/modules/main/types";
 import {
   requestContractDetailForPdfView,
   requestDeleteContract,
-  requestDeleteContractPartner
+  requestDeleteContractPartner, requestLeaveContract
 } from "../../store/modules/contract/action-creators";
 import {TType} from "../../translator/i18n";
 import {MY_CONTRACT_ROUTE} from "../../router/MyContractRouterTypes";
@@ -45,13 +45,21 @@ const listActionConfig: ListActionType[] = [
   },
   {
     contractRole: CONTRACT_ROLE.PARTNER,
-    contractStatus: [CONTRACT_STATUS.WITH_PARTNER, CONTRACT_STATUS.WITHOUT_PARTNER],
+    contractStatus: [CONTRACT_STATUS.WITH_PARTNER],
     action: {
       title: 'my_contracts.actions.edit',
       handler: (item) => navigate({
         [ROUTER_TABS.HOMEPAGE]: {},
         [HOME_ROUTER.CONTRACT]: { screenCount: 0, id: item.id },
       })
+    }
+  },
+  {
+    contractRole: CONTRACT_ROLE.PARTNER,
+    contractStatus: [CONTRACT_STATUS.WITH_PARTNER],
+    action: {
+      title: 'my_contracts.actions.decline',
+      handler: (item) => requestLeaveContract(item.id)
     }
   },
   {
