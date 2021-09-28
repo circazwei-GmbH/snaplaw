@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   TextInput,
   View,
@@ -50,6 +50,7 @@ export default function EditProfileTextField({
         {...props}
         placeholder={!focused && !errorMessage ? placeholder : ""}
         placeholderTextColor="#909090"
+        testID="Input"
         style={[
           styles.emptyInput,
           focused ? styles.fullInput : null,

@@ -14,4 +14,13 @@ describe("InviteButton", () => {
     fireEvent.press(getByTestId("InviteButton"));
     expect(RootNavigation.navigate).toBeCalled();
   });
+  it("Should not render on empty contract id", () => {
+    const { getByTestId } = render(
+      <InviteButton contractId={""} />
+    );
+    //@ts-ignore
+    RootNavigation.navigate.mockClear();
+    fireEvent.press(getByTestId("InviteButton"));
+    expect(RootNavigation.navigate).not.toBeCalled();
+  });
 });

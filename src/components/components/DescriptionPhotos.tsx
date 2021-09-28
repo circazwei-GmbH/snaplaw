@@ -44,12 +44,14 @@ export default function DescriptionPhotos({
             onPress={() => openModalSetUrl(item)}
             style={styles.child}
             key={item}
+            testID="ImageTouchableWrapper"
           >
             {onPressDelete ? (
               <TouchableOpacity
                 activeOpacity={0.9}
                 style={styles.removeButton}
                 onPress={() => onPressDelete(item, fieldName)}
+                testID="IamgeDeleteIcon"
               >
                 <View style={styles.removeButtonBackground}>
                   <AntDesign name="closecircle" size={18} color="#668395" />
@@ -59,6 +61,7 @@ export default function DescriptionPhotos({
             {isLoading ? (
               <View style={styles.activityIndicatorContainer}>
                 <ActivityIndicator
+                  testID="ImageLoadingIndicator"
                   size="large"
                   color="#1696E2"
                   style={styles.activityIndicator}
@@ -67,6 +70,7 @@ export default function DescriptionPhotos({
             ) : null}
             <FastImage
               source={buildMediaSource(item)}
+              testID="Image"
               style={styles.image}
               onLoadEnd={() => setIsLoading(false)}
               onLoadStart={() => setIsLoading(true)}
