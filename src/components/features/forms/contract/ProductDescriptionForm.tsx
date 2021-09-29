@@ -1,25 +1,24 @@
-import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import React, {useState} from "react";
+import {StyleSheet, View} from "react-native";
 import DefaultText from "../../../basics/typography/DefaultText";
 import MultilineTextField from "../../../components/MultilineTextField";
-import { useI18n } from "../../../../translator/i18n";
-import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/constants";
+import {useI18n} from "../../../../translator/i18n";
+import {CONTRACT_SCREEN_TYPES} from "../../../../store/modules/contract/constants";
 import IconButton from "../../../basics/buttons/IconButton";
 import Checkbox from "../../../basics/checkboxes/Checkbox";
-import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import {useAppDispatch, useAppSelector} from "../../../../store/hooks";
 import DescriptionPhotos from "../../../components/DescriptionPhotos";
-import { setScreenData } from "../../../../store/modules/contract/slice";
-import Menu, { ButtonType } from "../../Modals/Menu";
-import { uploadMedia } from "../../../../store/modules/media/action-creators";
-import { cameraWay, libraryWay } from "../../../../services/media/media-picker";
-import { PermissionNotGranted } from "../../../../services/media/errors";
-import { setMessage } from "../../../../store/modules/main/slice";
-import { MEDIA_FOLDERS } from "../../../../store/modules/media/constants";
-import {
-  PRODUCT_DESCRIPTION_FIELDS,
-  ProductDescriptionScreenInterface,
-} from "../../../../store/modules/contract/types";
-import { validateScreen } from "../../../../store/modules/contract/action-creators";
+import {setScreenData} from "../../../../store/modules/contract/slice";
+import Menu, {ButtonType} from "../../Modals/Menu";
+import {uploadMedia} from "../../../../store/modules/media/action-creators";
+import {cameraWay, libraryWay} from "../../../../services/media/media-picker";
+import {PermissionNotGranted} from "../../../../services/media/errors";
+import {setMessage} from "../../../../store/modules/main/slice";
+import {MEDIA_FOLDERS} from "../../../../store/modules/media/constants";
+import {PRODUCT_DESCRIPTION_FIELDS, ProductDescriptionScreenInterface,} from "../../../../store/modules/contract/types";
+import {validateScreen} from "../../../../store/modules/contract/action-creators";
+import {MediaTypeOptions} from "expo-image-picker";
+import {MEDIA_TYPE} from "../../../../services/media";
 
 export default function ProductDescriptionForm() {
   const { t } = useI18n();
@@ -58,7 +57,7 @@ export default function ProductDescriptionForm() {
   const removePhoto = (id: string, fieldName: PRODUCT_DESCRIPTION_FIELDS) => {
     const currentArray =
       fieldName === "productPhotos" ? photosProduct : photosAccessories;
-    const newValue = currentArray?.filter((item) => item !== id);
+    const newValue = currentArray?.filter((item) => item.uri !== id);
     dispatch(
       setScreenData({
         screenType: CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION,
@@ -93,7 +92,7 @@ export default function ProductDescriptionForm() {
         : photosAccessories;
     let descriptionPhotos = [...(currentArray ?? [])];
     setMenuVisible(false);
-    descriptionPhotos.push("");
+    descriptionPhotos.push({uri: "", type: MEDIA_TYPE.IMAGE});
     dispatch(
       uploadMedia(
         uri,
@@ -110,7 +109,7 @@ export default function ProductDescriptionForm() {
 
   const buttonPickerHandler = (way: Function) => async () => {
     try {
-      const uri = await way();
+      const uri = await way(MediaTypeOptions.All);
       if (uri) {
         postChooseFileHandler(uri);
       }

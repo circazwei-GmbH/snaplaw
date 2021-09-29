@@ -1,18 +1,15 @@
-import React, { useState } from "react";
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  ActivityIndicator,
-} from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import React, {useState} from "react";
+import {StyleSheet, TouchableOpacity, View} from "react-native";
+import {AntDesign} from "@expo/vector-icons";
 import ProductDescriptionModal from "../features/Modals/ProductDescriptionModal";
-import { PRODUCT_DESCRIPTION_FIELDS } from "../../store/modules/contract/types";
-import FastImage from "react-native-fast-image";
-import { buildMediaSource } from "../../utils/helpers";
+import {PRODUCT_DESCRIPTION_FIELDS} from "../../store/modules/contract/types";
+import ImageOrVideoPreview from "./ImageOrVideoPreview";
+import {MEDIA_TYPE, MediaProcessType} from "../../services/media";
+import {buildMediaSource} from "../../utils/helpers";
+import {Video} from "expo-av";
 
 export interface DescriptionPhotosPropsInterface {
-  photos: string[];
+  photos: MediaProcessType[];
   onPressDelete?: Function;
   fieldName: PRODUCT_DESCRIPTION_FIELDS;
 }
@@ -22,11 +19,10 @@ export default function DescriptionPhotos({
   onPressDelete,
   fieldName,
 }: DescriptionPhotosPropsInterface) {
-  const [url, setUrl] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+  const [url, setUrl] = useState<MediaProcessType>();
   const [modalVisible, setModalVisible] = useState(false);
   const toggleModal = () => setModalVisible(!modalVisible);
-  const openModalSetUrl = (url: string) => {
+  const openModalSetUrl = (url: MediaProcessType) => {
     toggleModal();
     setUrl(url);
   };
@@ -43,14 +39,14 @@ export default function DescriptionPhotos({
           <TouchableOpacity
             onPress={() => openModalSetUrl(item)}
             style={styles.child}
-            key={item}
+            key={item.uri}
             testID="ImageTouchableWrapper"
           >
             {onPressDelete ? (
               <TouchableOpacity
                 activeOpacity={0.9}
                 style={styles.removeButton}
-                onPress={() => onPressDelete(item, fieldName)}
+                onPress={() => onPressDelete(item.uri, fieldName)}
                 testID="IamgeDeleteIcon"
               >
                 <View style={styles.removeButtonBackground}>
@@ -58,23 +54,7 @@ export default function DescriptionPhotos({
                 </View>
               </TouchableOpacity>
             ) : null}
-            {isLoading ? (
-              <View style={styles.activityIndicatorContainer}>
-                <ActivityIndicator
-                  testID="ImageLoadingIndicator"
-                  size="large"
-                  color="#1696E2"
-                  style={styles.activityIndicator}
-                />
-              </View>
-            ) : null}
-            <FastImage
-              source={buildMediaSource(item)}
-              testID="Image"
-              style={styles.image}
-              onLoadEnd={() => setIsLoading(false)}
-              onLoadStart={() => setIsLoading(true)}
-            />
+            <ImageOrVideoPreview url={item} />
           </TouchableOpacity>
         );
       })}
@@ -141,4 +121,8 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
+  video: {
+    width: 320,
+    height: 200
+  }
 });
