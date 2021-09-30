@@ -1,10 +1,11 @@
 import React from "react";
-import { fireEvent, render } from "@testing-library/react-native";
+import {fireEvent, render} from "@testing-library/react-native";
 import DescriptionPhotos from "../DescriptionPhotos";
-import { PRODUCT_DESCRIPTION_FIELDS } from "../../../store/modules/contract/purchase/product-description";
-import { buildMediaSource } from "../../../utils/helpers";
+import {PRODUCT_DESCRIPTION_FIELDS} from "../../../store/modules/contract/purchase/product-description";
+import {buildMediaSource} from "../../../utils/helpers";
+import {MEDIA_TYPE, MediaType} from "../../../services/media";
 
-const PHOTOS_PROP = ["test/file"];
+const PHOTOS_PROP: MediaType[] = [{type: MEDIA_TYPE.IMAGE, uri: "test/file"}];
 
 jest.mock("../../features/Modals/ProductDescriptionModal", () => {
   const React = require("react");
@@ -23,7 +24,7 @@ describe("DescriptionPhotos", () => {
     expect(getByTestId("ImageTouchableWrapper")).toBeTruthy();
     expect(getByTestId("Image")).toBeTruthy();
     expect(getByTestId("Image").props.source).toEqual(
-      buildMediaSource(PHOTOS_PROP[0])
+      buildMediaSource(PHOTOS_PROP[0].uri)
     );
   });
   it("Should loading", () => {
@@ -48,7 +49,7 @@ describe("DescriptionPhotos", () => {
     expect(getByTestId("ModalMock").props.modalVisible).not.toBeTruthy();
     fireEvent.press(getByTestId("ImageTouchableWrapper"));
     expect(getByTestId("ModalMock").props.modalVisible).toBeTruthy();
-    expect(getByTestId("ModalMock").props.url).toEqual(PHOTOS_PROP[0]);
+    expect(getByTestId("ModalMock").props.media).toEqual(PHOTOS_PROP[0]);
   });
   it("Should call handler on delete", () => {
     const handler = jest.fn();
@@ -62,7 +63,7 @@ describe("DescriptionPhotos", () => {
     expect(getByTestId("IamgeDeleteIcon")).toBeTruthy();
     fireEvent.press(getByTestId("IamgeDeleteIcon"));
     expect(handler).toBeCalledWith(
-      PHOTOS_PROP[0],
+      PHOTOS_PROP[0].uri,
       PRODUCT_DESCRIPTION_FIELDS.accessoriesPhotos
     );
   });
