@@ -15,9 +15,12 @@ export default function Notifications(): JSX.Element {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
   const list = useAppSelector((state) => state.notifications.notifications);
-  const isRefreshing = useAppSelector((state) => state.notifications.notificationsPagination.isLoading);
+  const isRefreshing = useAppSelector(
+    (state) => state.notifications.notificationsPagination.isLoading
+  );
 
-  const getNotifications = (isRefresh: boolean = false) => dispatch(requestNotifications(isRefresh));
+  const getNotifications = (isRefresh: boolean = false) =>
+    dispatch(requestNotifications(isRefresh));
   const changeStatus = (id: string) =>
     dispatch(requestChangeNotificationStatus({ id }));
 

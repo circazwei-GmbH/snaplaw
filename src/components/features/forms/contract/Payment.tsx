@@ -67,7 +67,8 @@ export default function Payment() {
   return (
     <View style={styles.container}>
       {contract.meRole === CONTRACT_ROLE.PARTNER &&
-      screenData?.data[PAYMENT_FIELDS.PAYMENT_METHOD] ? (
+      screenData?.data[PAYMENT_FIELDS.PAYMENT_METHOD] &&
+      screenData?.data[PAYMENT_FIELDS.SELLER_PAYMENT_METHOD] ? (
         <ErrorBoldMessage
           text={t(
             `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.partner_text`,

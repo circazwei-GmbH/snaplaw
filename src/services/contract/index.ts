@@ -105,5 +105,5 @@ export default {
   signContract,
   acceptInvite,
   deleteContractPartner,
-  requestLeaveContract
+  requestLeaveContract,
 };

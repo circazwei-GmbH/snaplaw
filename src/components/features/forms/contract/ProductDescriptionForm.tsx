@@ -20,6 +20,8 @@ import {
   ProductDescriptionScreenInterface,
 } from "../../../../store/modules/contract/types";
 import { validateScreen } from "../../../../store/modules/contract/action-creators";
+import { MediaTypeOptions } from "expo-image-picker";
+import { MEDIA_TYPE } from "../../../../services/media";
 
 export default function ProductDescriptionForm() {
   const { t } = useI18n();
@@ -58,7 +60,7 @@ export default function ProductDescriptionForm() {
   const removePhoto = (id: string, fieldName: PRODUCT_DESCRIPTION_FIELDS) => {
     const currentArray =
       fieldName === "productPhotos" ? photosProduct : photosAccessories;
-    const newValue = currentArray?.filter((item) => item !== id);
+    const newValue = currentArray?.filter((item) => item.uri !== id);
     dispatch(
       setScreenData({
         screenType: CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION,
@@ -93,7 +95,7 @@ export default function ProductDescriptionForm() {
         : photosAccessories;
     let descriptionPhotos = [...(currentArray ?? [])];
     setMenuVisible(false);
-    descriptionPhotos.push("");
+    descriptionPhotos.push({ uri: "", type: MEDIA_TYPE.IMAGE });
     dispatch(
       uploadMedia(
         uri,
@@ -110,7 +112,7 @@ export default function ProductDescriptionForm() {
 
   const buttonPickerHandler = (way: Function) => async () => {
     try {
-      const uri = await way();
+      const uri = await way(MediaTypeOptions.All);
       if (uri) {
         postChooseFileHandler(uri);
       }

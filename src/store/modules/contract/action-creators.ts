@@ -8,7 +8,8 @@ import {
   ValidateAllScreensAction,
   InviteUserAction,
   RequestGetEmailsAction,
-  RequestAcceptInviteAction, RequestDeleteContractPartnerAction,
+  RequestAcceptInviteAction,
+  RequestDeleteContractPartnerAction,
 } from "./types";
 import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
 
@@ -23,8 +24,10 @@ export const SIGN_CONTRACT = "SIGN_CONTRACT";
 export const REQUEST_INVITE_USER = "REQUEST_INVITE_USER";
 export const REQUEST_USERS_EMAIL = "REQUEST_USERS_EMAIL";
 export const REQUEST_ACCEPT_INVITE = "REQUEST_ACCEPT_INVITE";
-export const REQUEST_DELETE_CONTRACT_PARTNER = "REQUEST_DELETE_CONTRACT_PARTNER";
-export const REQUEST_CONTRACT_DETAIL_FOR_PDF = "REQUEST_CONTRACT_DETAIL_FOR_PDF";
+export const REQUEST_DELETE_CONTRACT_PARTNER =
+  "REQUEST_DELETE_CONTRACT_PARTNER";
+export const REQUEST_CONTRACT_DETAIL_FOR_PDF =
+  "REQUEST_CONTRACT_DETAIL_FOR_PDF";
 export const REQUEST_LEAVE_CONTRACT = "REQUEST_LEAVE_CONTRACT";
 
 export const requestCreateContract = (
@@ -107,17 +110,23 @@ export const requestAcceptInvite = (id: string): RequestAcceptInviteAction => ({
   payload: id,
 });
 
-export const requestDeleteContractPartner = (contractId: string): RequestDeleteContractPartnerAction => ({
+export const requestDeleteContractPartner = (
+  contractId: string
+): RequestDeleteContractPartnerAction => ({
   type: REQUEST_DELETE_CONTRACT_PARTNER,
-  payload: contractId
-})
+  payload: contractId,
+});
 
-export const requestContractDetailForPdfView = (contractId: string): RequestContractAction => ({
+export const requestContractDetailForPdfView = (
+  contractId: string
+): RequestContractAction => ({
   type: REQUEST_CONTRACT_DETAIL_FOR_PDF,
-  payload: contractId
-})
+  payload: contractId,
+});
 
-export const requestLeaveContract = (contractId: string): RequestContractAction => ({
+export const requestLeaveContract = (
+  contractId: string
+): RequestContractAction => ({
   type: REQUEST_LEAVE_CONTRACT,
-  payload: contractId
-})
+  payload: contractId,
+});

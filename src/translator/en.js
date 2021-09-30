@@ -196,7 +196,7 @@ export default {
       delete_partner: "Delete contract partner",
       invite_partner: "Invite user",
       view_pdf: "View",
-      decline: "Decline"
+      decline: "Decline",
     },
     delete_modal: {
       message: "Are you sure you want to delete the contract?",
@@ -206,8 +206,8 @@ export default {
     delete_partner: {
       message: "Are you sure you want to delete the contractor?",
       yes: "Yes",
-      no: "No"
-    }
+      no: "No",
+    },
   },
   menu: {
     cancel: "Cancel",
@@ -227,9 +227,11 @@ export default {
         "Contract is added to My Contracts list, ^In progress^ tab",
       invite_to_contract_rejected:
         "You've been just removed from the contract %{contract} by %{partner}",
-      accept_invite_error: "Your action is not required anymore. Either the contract is already accepted or you are deleted from the contract by owner.",
-      removed_from_contract: "You've been just removed from the contract %{contract} by %{partner}",
-      contractor_left: "%{partner} has left the contract %{contract}"
+      accept_invite_error:
+        "Your action is not required anymore. Either the contract is already accepted or you are deleted from the contract by owner.",
+      removed_from_contract:
+        "You've been just removed from the contract %{contract} by %{partner}",
+      contractor_left: "%{partner} has left the contract %{contract}",
     },
     modal_buttons: {
       accept: "Accept",
@@ -358,6 +360,6 @@ export default {
       "Enter the email address of the partner and invite him to the contract",
     error: "Please enter a valid email",
     self_invite_error: "You can't invite yourself.",
-    successed: "User has been successfully invited"
+    successed: "User has been successfully invited",
   },
 };

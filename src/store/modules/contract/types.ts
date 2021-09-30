@@ -88,7 +88,7 @@ export type ContractDataListType = {
 export enum CONTRACT_STATUS {
   WITHOUT_PARTNER = "WITHOUT_PARTNER",
   WITH_PARTNER = "WITH_PARTNER",
-  FINNALIZED = "FINNALIZED"
+  FINNALIZED = "FINNALIZED",
 }
 
 export type ContractListType = Array<ContractDataListType>;

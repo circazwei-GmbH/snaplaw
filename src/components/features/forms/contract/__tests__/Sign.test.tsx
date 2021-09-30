@@ -7,7 +7,7 @@ import {
   CONTRACT_SCREEN_TYPES,
   CONTRACT_TYPES,
 } from "../../../../../store/modules/contract/constants";
-import {CONTRACT_ROLE} from "../../../../../store/modules/contract/contract-roles";
+import { CONTRACT_ROLE } from "../../../../../store/modules/contract/contract-roles";
 
 jest.mock("@react-navigation/native", () => {
   const navigation = {
@@ -24,7 +24,7 @@ const initialState = {
     currentContract: {
       type: CONTRACT_TYPES.PURCHASE,
       screens: [],
-      meRole: CONTRACT_ROLE.OWNER
+      meRole: CONTRACT_ROLE.OWNER,
     },
   },
   main: {

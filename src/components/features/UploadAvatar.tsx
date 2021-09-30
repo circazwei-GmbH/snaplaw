@@ -17,10 +17,12 @@ import {
 import { setAvatarLoading } from "../../store/modules/profile/slice";
 
 type UploadAvatarProps = {
-  isChangable: boolean
-}
+  isChangable: boolean;
+};
 
-export default function UploadAvatar({isChangable = true}: UploadAvatarProps) {
+export default function UploadAvatar({
+  isChangable = true,
+}: UploadAvatarProps) {
   const [menuVisible, setMenuVisible] = useState(false);
   const dispatch = useAppDispatch();
   const { t } = useI18n();
@@ -85,7 +87,7 @@ export default function UploadAvatar({isChangable = true}: UploadAvatarProps) {
               color="#668395"
             />
           </TouchableOpacity>
-        ): null}
+        ) : null}
       </View>
       <Menu
         visible={menuVisible}

@@ -24,7 +24,7 @@ import { setModal } from "../../../store/modules/main/slice";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import ContractViewButton from "../../basics/buttons/ContractViewButton";
 import ContractView from "../../features/Modals/ContractView";
-import {CONTRACT_ROLE} from "../../../store/modules/contract/contract-roles";
+import { CONTRACT_ROLE } from "../../../store/modules/contract/contract-roles";
 
 type ContractProps = {
   route: {
@@ -108,7 +108,11 @@ export default function Contract({
           type="left"
         />
       }
-      rightButton={contract.meRole === CONTRACT_ROLE.OWNER ? <InviteButton contractId={contract.id} /> : undefined}
+      rightButton={
+        contract.meRole === CONTRACT_ROLE.OWNER ? (
+          <InviteButton contractId={contract.id} />
+        ) : undefined
+      }
       pageName={t(`contracts.${contract.type}.title`)}
     >
       <View style={styles.container}>

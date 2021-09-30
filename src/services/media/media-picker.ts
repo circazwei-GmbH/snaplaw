@@ -5,14 +5,16 @@ import {
   LibrarryPermissionNotGranted,
 } from "./errors";
 
-export const libraryWay = async () => {
+export const libraryWay = async (
+  mediaTypes: MediaTypeOptions = MediaTypeOptions.Images
+) => {
   const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
   if (status !== ImagePicker.PermissionStatus.GRANTED) {
     throw new LibrarryPermissionNotGranted("errors.galary_permission");
   }
 
   const result = await ImagePicker.launchImageLibraryAsync({
-    mediaTypes: MediaTypeOptions.Images,
+    mediaTypes,
     quality: 0.5,
   });
 
@@ -23,7 +25,9 @@ export const libraryWay = async () => {
   return undefined;
 };
 
-export const cameraWay = async () => {
+export const cameraWay = async (
+  mediaTypes: MediaTypeOptions = MediaTypeOptions.Images
+) => {
   const { status } = await ImagePicker.requestCameraPermissionsAsync();
 
   if (status !== ImagePicker.PermissionStatus.GRANTED) {
@@ -31,7 +35,7 @@ export const cameraWay = async () => {
   }
 
   const result = await ImagePicker.launchCameraAsync({
-    mediaTypes: MediaTypeOptions.Images,
+    mediaTypes,
     quality: 0.5,
   });
 

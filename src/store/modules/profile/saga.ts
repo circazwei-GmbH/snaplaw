@@ -8,13 +8,21 @@ import {
   UPDATE_AVATAR,
   UpdateAvatarAction,
   REQUEST_EDIT_PROFILE,
-  RequestEditProfileAction, RequestUserProfileAction, REQUEST_USER_PROFILE,
+  RequestEditProfileAction,
+  RequestUserProfileAction,
+  REQUEST_USER_PROFILE,
 } from "./action-creators";
-import {addToWAiter, removeFromWaiter, setMessage} from "../main/slice";
+import { addToWAiter, removeFromWaiter, setMessage } from "../main/slice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Reduser from "./slice";
 import { Translator } from "../../../translator/i18n";
-import {setAvatar, setAvatarLoading, setCurretnPartner, setUser, setUserProfile} from "./slice";
+import {
+  setAvatar,
+  setAvatarLoading,
+  setCurretnPartner,
+  setUser,
+  setUserProfile,
+} from "./slice";
 import API from "../../../services/profile/index";
 import { LANGUAGE_ENGLISH } from "./constants";
 import { responseError } from "../auth/action-creators";

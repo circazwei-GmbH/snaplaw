@@ -11,7 +11,7 @@ interface NotificationsState {
   notificationsPagination: {
     page: number;
     isNextPage: boolean;
-    isLoading: boolean
+    isLoading: boolean;
   };
 }
 
@@ -20,12 +20,12 @@ const initialState: NotificationsState = {
   notificationsPagination: {
     page: 0,
     isNextPage: true,
-    isLoading: false
+    isLoading: false,
   },
 };
 
 const setNotificationsListAction = createAction<
-  { list: NotificationInterface[]; page: string, isRefresh: boolean },
+  { list: NotificationInterface[]; page: string; isRefresh: boolean },
   "setNotifications"
 >("setNotifications");
 
@@ -33,8 +33,14 @@ const changeNotificationStatusAction = createAction<
   { id: string },
   "changeNotificationStatus"
 >("changeNotificationStatus");
-const setNotificationsLoadingAction = createAction<boolean, "setNotificationsLoading">("setNotificationsLoading");
-const clearNotificationModuleAction = createAction<undefined, "clearNotificationModule">("clearNotificationModule");
+const setNotificationsLoadingAction = createAction<
+  boolean,
+  "setNotificationsLoading"
+>("setNotificationsLoading");
+const clearNotificationModuleAction = createAction<
+  undefined,
+  "clearNotificationModule"
+>("clearNotificationModule");
 
 const notificationsSlice = createSlice({
   name: "notifications",
@@ -45,7 +51,7 @@ const notificationsSlice = createSlice({
       action: PayloadAction<{
         list: NotificationListItemInterface[];
         page: string;
-        isRefresh: boolean
+        isRefresh: boolean;
       }>
     ) => {
       if (!action.payload.isRefresh) {
@@ -72,15 +78,19 @@ const notificationsSlice = createSlice({
       state: Draft<NotificationsState>,
       action: PayloadAction<boolean>
     ) => {
-      state.notificationsPagination.isLoading = action.payload
+      state.notificationsPagination.isLoading = action.payload;
     },
     [clearNotificationModuleAction.type]: () => {
-      return initialState
-    }
+      return initialState;
+    },
   },
 });
 
-export const { setNotifications, changeNotificationStatus, setNotificationsLoading, clearNotificationModule } =
-  notificationsSlice.actions;
+export const {
+  setNotifications,
+  changeNotificationStatus,
+  setNotificationsLoading,
+  clearNotificationModule,
+} = notificationsSlice.actions;
 
 export default notificationsSlice.reducer;
