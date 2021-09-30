@@ -11,7 +11,10 @@ import {
   validateScreen,
   REQUEST_INVITE_USER,
   REQUEST_USERS_EMAIL,
-  REQUEST_ACCEPT_INVITE, REQUEST_DELETE_CONTRACT_PARTNER, REQUEST_CONTRACT_DETAIL_FOR_PDF, REQUEST_LEAVE_CONTRACT,
+  REQUEST_ACCEPT_INVITE,
+  REQUEST_DELETE_CONTRACT_PARTNER,
+  REQUEST_CONTRACT_DETAIL_FOR_PDF,
+  REQUEST_LEAVE_CONTRACT,
 } from "./action-creators";
 import {
   RequestContractAction,
@@ -25,11 +28,17 @@ import {
   RequestGetEmailsAction,
   EmailsListItemInterface,
   ContractDataType,
-  RequestAcceptInviteAction, RequestDeleteContractPartnerAction,
+  RequestAcceptInviteAction,
+  RequestDeleteContractPartnerAction,
 } from "./types";
 import API from "../../../services/contract/index";
 import { responseError } from "../auth/action-creators";
-import {addToWAiter, removeFromWaiter, setMessage, setModal} from "../main/slice";
+import {
+  addToWAiter,
+  removeFromWaiter,
+  setMessage,
+  setModal,
+} from "../main/slice";
 import { CONTRACT_CREATION_WAIT } from "./constants";
 import {
   clearErrors,
@@ -41,7 +50,9 @@ import {
   setListLoading,
   updateContractSign,
   setInviteEmails,
-  inviteSelf, removeContractPartnerFromList, setPdfViewOnListContract,
+  inviteSelf,
+  removeContractPartnerFromList,
+  setPdfViewOnListContract,
 } from "./slice";
 import * as RootNavigation from "../../../router/RootNavigation";
 import { HOME_ROUTER } from "../../../router/HomeRouterType";
@@ -52,7 +63,7 @@ import { BaseScreenDataInterface } from "./base-types";
 import { Translator } from "../../../translator/i18n";
 import { USER_SELF_INVITE } from "../../../services/error-codes";
 import { CONTRACT_ROLE } from "./contract-roles";
-import {navigatePop} from "../main/action-creators";
+import { navigatePop } from "../main/action-creators";
 
 function* createContract({ payload }: RequestCreateContractAction) {
   try {
@@ -158,7 +169,11 @@ function* requestConreactsList({
   payload: { type, isRefresh },
 }: RequestContractListAction) {
   const listPagination = yield select((state) => state.contract.listPagination);
-  if (listPagination.listType === type && !listPagination.isNextPage && !isRefresh) {
+  if (
+    listPagination.listType === type &&
+    !listPagination.isNextPage &&
+    !isRefresh
+  ) {
     return;
   }
   const currentContracts = yield select((state) => state.contract.contracts);
@@ -228,15 +243,17 @@ function* signContract({ payload }: SignContractAction) {
 function* requestInviteUser({ payload }: InviteUserAction) {
   try {
     yield call(API.inviteUser, payload);
-    yield put(setModal({
-      message: Translator.getInstance().trans("invite_page.successed"),
-      actions: [
-        {
-          name: Translator.getInstance().trans("ok"),
-          action: navigatePop()
-        }
-      ]
-    }));
+    yield put(
+      setModal({
+        message: Translator.getInstance().trans("invite_page.successed"),
+        actions: [
+          {
+            name: Translator.getInstance().trans("ok"),
+            action: navigatePop(),
+          },
+        ],
+      })
+    );
   } catch (error) {
     if (error.response?.data.code === USER_SELF_INVITE) {
       return yield put(
@@ -279,7 +296,13 @@ function* requestAcceptInvite({ payload }: RequestAcceptInviteAction) {
     );
   } catch (error) {
     if (error?.response?.status === 403) {
-      yield put(setMessage(Translator.getInstance().trans("notifications.messages.accept_invite_error")))
+      yield put(
+        setMessage(
+          Translator.getInstance().trans(
+            "notifications.messages.accept_invite_error"
+          )
+        )
+      );
     } else {
       yield put(responseError(error));
     }
@@ -288,7 +311,9 @@ function* requestAcceptInvite({ payload }: RequestAcceptInviteAction) {
   }
 }
 
-function* requestDeleteContractPartner({payload}: RequestDeleteContractPartnerAction) {
+function* requestDeleteContractPartner({
+  payload,
+}: RequestDeleteContractPartnerAction) {
   yield put(addToWAiter(REQUEST_DELETE_CONTRACT_PARTNER));
   try {
     yield call(API.deleteContractPartner, payload);
@@ -304,11 +329,11 @@ function* requestContractDetailPdf({ payload }: RequestContractAction) {
   yield put(addToWAiter(REQUEST_CONTRACT_DETAIL_FOR_PDF));
   try {
     const contract = yield call(API.requestContract, payload);
-    yield put(setPdfViewOnListContract(contract))
+    yield put(setPdfViewOnListContract(contract));
   } catch (error) {
     yield put(responseError(error));
   } finally {
-    yield put(removeFromWaiter(REQUEST_CONTRACT_DETAIL_FOR_PDF))
+    yield put(removeFromWaiter(REQUEST_CONTRACT_DETAIL_FOR_PDF));
   }
 }
 
@@ -336,7 +361,10 @@ function* contractSaga() {
   yield takeLatest(REQUEST_INVITE_USER, requestInviteUser);
   yield takeLatest(REQUEST_USERS_EMAIL, requestUsersEmail);
   yield takeLatest(REQUEST_ACCEPT_INVITE, requestAcceptInvite);
-  yield takeLatest(REQUEST_DELETE_CONTRACT_PARTNER, requestDeleteContractPartner);
+  yield takeLatest(
+    REQUEST_DELETE_CONTRACT_PARTNER,
+    requestDeleteContractPartner
+  );
   yield takeLatest(REQUEST_CONTRACT_DETAIL_FOR_PDF, requestContractDetailPdf);
   yield takeLatest(REQUEST_LEAVE_CONTRACT, requestLeaveContract);
 }

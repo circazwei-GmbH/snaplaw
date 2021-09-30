@@ -1,29 +1,35 @@
-import React, {useState} from "react";
-import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import {ListItemProps} from "./list-item-type";
-import {Entypo} from "@expo/vector-icons";
-import Menu, {ButtonType} from "../../../features/Modals/Menu";
-import {useI18n} from "../../../../translator/i18n";
+import React, { useState } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ListItemProps } from "./list-item-type";
+import { Entypo } from "@expo/vector-icons";
+import Menu, { ButtonType } from "../../../features/Modals/Menu";
+import { useI18n } from "../../../../translator/i18n";
 import dayjs from "dayjs";
-import {useAppDispatch, useAppSelector} from "../../../../store/hooks";
-import {ContractDataListType} from "../../../../store/modules/contract/types";
-import {getListItemAction} from "../../../../services/contract/actions-config";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import { ContractDataListType } from "../../../../store/modules/contract/types";
+import { getListItemAction } from "../../../../services/contract/actions-config";
 import ContractView from "../../../features/Modals/ContractView";
-import {setPdfViewOnListContract} from "../../../../store/modules/contract/slice";
+import { setPdfViewOnListContract } from "../../../../store/modules/contract/slice";
 
-export default function ContractListItem({ item }: ListItemProps<ContractDataListType>) {
+export default function ContractListItem({
+  item,
+}: ListItemProps<ContractDataListType>) {
   const [inProgressMenuVisible, setInProgressMenuVisible] =
     useState<boolean>(false);
   const { t } = useI18n();
-  const currentContractForPdf = useAppSelector(state => state.contract.pdfViewOnListContract)
+  const currentContractForPdf = useAppSelector(
+    (state) => state.contract.pdfViewOnListContract
+  );
   const dispatch = useAppDispatch();
-  const inProgressMenuButtons: Array<ButtonType> = getListItemAction(item).map(({action}) => ({
-    title: t(action.title),
-    handler: () => {
-      setInProgressMenuVisible(false);
-      dispatch(action.handler(item, t))
-    }
-  }))
+  const inProgressMenuButtons: Array<ButtonType> = getListItemAction(item).map(
+    ({ action }) => ({
+      title: t(action.title),
+      handler: () => {
+        setInProgressMenuVisible(false);
+        dispatch(action.handler(item, t));
+      },
+    })
+  );
 
   return (
     <>

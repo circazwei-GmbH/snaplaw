@@ -57,13 +57,13 @@ describe("TextField", () => {
         edit={false}
       />
     );
-    fireEvent(getByTestId("Input"), "onFocus")
-    expect(getByTestId("Input").props.style[1]).not.toBeNull()
-    expect(getByTestId("Input").props.style[2]).toBeNull()
-    fireEvent(getByTestId("Input"), "onBlur")
-    expect(getByTestId("Input").props.style[1]).toBeNull()
-    expect(getByTestId("Input").props.style[2]).not.toBeNull()
-  })
+    fireEvent(getByTestId("Input"), "onFocus");
+    expect(getByTestId("Input").props.style[1]).not.toBeNull();
+    expect(getByTestId("Input").props.style[2]).toBeNull();
+    fireEvent(getByTestId("Input"), "onBlur");
+    expect(getByTestId("Input").props.style[1]).toBeNull();
+    expect(getByTestId("Input").props.style[2]).not.toBeNull();
+  });
   it("With empty value", () => {
     const { getByPlaceholderText } = render(
       <EditProfileTextField
@@ -74,8 +74,8 @@ describe("TextField", () => {
         edit={false}
       />
     );
-    expect(getByPlaceholderText("TestField")).toBeTruthy()
-  })
+    expect(getByPlaceholderText("TestField")).toBeTruthy();
+  });
   it("Should display error message", () => {
     const { getByText } = render(
       <EditProfileTextField
@@ -87,6 +87,6 @@ describe("TextField", () => {
         edit={false}
       />
     );
-    expect(getByText("Empty")).toBeTruthy()
-  })
+    expect(getByText("Empty")).toBeTruthy();
+  });
 });

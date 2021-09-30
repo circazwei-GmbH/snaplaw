@@ -5,7 +5,8 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 import {
-  CONTRACT_LIST_STATE, ContractDataListType,
+  CONTRACT_LIST_STATE,
+  ContractDataListType,
   ContractDataType,
   ContractListType,
   EmailsListItemInterface,
@@ -37,7 +38,7 @@ interface ContractState {
   email: {
     error: string;
   };
-  pdfViewOnListContract: ContractDataType | undefined
+  pdfViewOnListContract: ContractDataType | undefined;
 }
 
 const initialState: ContractState = {
@@ -58,7 +59,7 @@ const initialState: ContractState = {
   email: {
     error: "",
   },
-  pdfViewOnListContract: undefined
+  pdfViewOnListContract: undefined,
 };
 
 type ScreenData = {
@@ -110,8 +111,14 @@ const inviteSelfAction = createAction<{ message: string }, "inviteSelf">(
 const clearEmailErrorsAction = createAction<undefined, "clearEmailErrors">(
   "clearEmailErrors"
 );
-const removeContractPartnerFromListAction = createAction<string, "removeContractPartnerFromList">("removeContractPartnerFromList");
-const setPdfViewOnListContractAction = createAction<ContractDataType | undefined, "setPdfViewOnListContract">("setPdfViewOnListContract");
+const removeContractPartnerFromListAction = createAction<
+  string,
+  "removeContractPartnerFromList"
+>("removeContractPartnerFromList");
+const setPdfViewOnListContractAction = createAction<
+  ContractDataType | undefined,
+  "setPdfViewOnListContract"
+>("setPdfViewOnListContract");
 
 const contractSlice = createSlice({
   name: "contract",
@@ -266,22 +273,24 @@ const contractSlice = createSlice({
       action: PayloadAction<string>
     ) => {
       // @ts-ignore
-      state.contracts = state.contracts.map((contract: ContractDataListType) => {
-        if (contract.id !== action.payload) {
-          return contract;
+      state.contracts = state.contracts.map(
+        (contract: ContractDataListType) => {
+          if (contract.id !== action.payload) {
+            return contract;
+          }
+          return {
+            ...contract,
+            partnerId: undefined,
+          };
         }
-        return {
-          ...contract,
-          partnerId: undefined
-        }
-      })
+      );
     },
     [setPdfViewOnListContractAction.type]: (
       state: Draft<ContractState>,
       action: PayloadAction<ContractDataType | undefined>
     ) => {
-      state.pdfViewOnListContract = action.payload
-    }
+      state.pdfViewOnListContract = action.payload;
+    },
   },
 });
 
@@ -299,7 +308,7 @@ export const {
   inviteSelf,
   clearEmailErrors,
   removeContractPartnerFromList,
-  setPdfViewOnListContract
+  setPdfViewOnListContract,
 } = contractSlice.actions;
 
 export default contractSlice.reducer;

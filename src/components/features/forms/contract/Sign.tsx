@@ -25,7 +25,7 @@ import {
 } from "../../../../store/modules/contract/helper";
 import * as RootNavigation from "../../../../router/RootNavigation";
 import { HOME_ROUTER } from "../../../../router/HomeRouterType";
-import {CONTRACT_ROLE} from "../../../../store/modules/contract/contract-roles";
+import { CONTRACT_ROLE } from "../../../../store/modules/contract/contract-roles";
 
 export default function Sign() {
   const { t } = useI18n();

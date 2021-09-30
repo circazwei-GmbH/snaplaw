@@ -80,7 +80,10 @@ export default function Router() {
               name={MY_CONTRACT_ROUTE.INVITE}
               component={Invite}
             />
-            <ContractsStack.Screen name={MY_CONTRACT_ROUTE.PROFILE} component={EditProfile} />
+            <ContractsStack.Screen
+              name={MY_CONTRACT_ROUTE.PROFILE}
+              component={EditProfile}
+            />
           </ContractsStack.Navigator>
         )}
       </Tab.Screen>

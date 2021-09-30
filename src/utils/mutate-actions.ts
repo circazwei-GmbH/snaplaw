@@ -1,8 +1,12 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import {MediaProcessType} from "../services/media";
+import { MediaType } from "../services/media";
 
 // @ts-ignore
-const recursionWalk = (payload: any, key: string, targetUrl: MediaProcessType) => {
+const recursionWalk = (
+  payload: any,
+  key: string,
+  targetUrl: MediaType
+) => {
   const splitedPath = key.split(".");
   const [currentKey] = splitedPath.splice(0, 1);
   if (String(Number(currentKey)) !== "NaN") {
@@ -36,9 +40,9 @@ const recursionWalk = (payload: any, key: string, targetUrl: MediaProcessType) =
 
 export const mutateFileUploadsAction = (
   action: PayloadAction<any>,
-  uri: MediaProcessType,
+  uri: MediaType,
   mutationPath?: string
-): PayloadAction<MediaProcessType> => {
+): PayloadAction<MediaType> => {
   if (!mutationPath) {
     return {
       ...action,

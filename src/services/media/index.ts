@@ -1,19 +1,21 @@
 import httpClient from "../api";
 import { MediaPayload } from "../../store/modules/media/action-creators";
 // @ts-ignore
-import {lookup} from "react-native-mime-types"
+import { lookup } from "react-native-mime-types";
 
 export enum MEDIA_TYPE {
   IMAGE = "IMAGE",
-  VIDEO = "VIDEO"
+  VIDEO = "VIDEO",
 }
 
-export type MediaProcessType = {
-  uri: string,
-  type: MEDIA_TYPE | undefined
-}
+export type MediaType = {
+  uri: string;
+  type: MEDIA_TYPE | undefined;
+};
 
-export type MediaProcessFunction = (option: MediaPayload) => Promise<MediaProcessType>
+export type MediaProcessFunction = (
+  option: MediaPayload
+) => Promise<MediaType>;
 
 const defineType = (type: string): MEDIA_TYPE | undefined => {
   switch (type) {
@@ -22,9 +24,9 @@ const defineType = (type: string): MEDIA_TYPE | undefined => {
     case "video":
       return MEDIA_TYPE.VIDEO;
     default:
-      return undefined
+      return undefined;
   }
-}
+};
 
 const presigned = (folder: string) =>
   httpClient.get(`api/media?folder=${folder}`);
@@ -39,13 +41,19 @@ const uploadMedia = async (mediaUri: string, pathToUpload: string) => {
   });
 };
 
-const mediaProcess: MediaProcessFunction = async ({ uri, folder }: MediaPayload): Promise<MediaProcessType> => {
+const mediaProcess: MediaProcessFunction = async ({
+  uri,
+  folder,
+}: MediaPayload): Promise<MediaType> => {
   const response = await presigned(folder);
   await uploadMedia(uri, response.data);
   const fullUri = response.data.split("?")[0];
-  const fileType = lookup(uri)
-  const type = fileType.split("/").shift()
-  return {uri: fullUri.split("/").slice(-2).join("/"), type: defineType(type)};
+  const fileType = lookup(uri);
+  const type = fileType.split("/").shift();
+  return {
+    uri: fullUri.split("/").slice(-2).join("/"),
+    type: defineType(type),
+  };
 };
 
 export default {

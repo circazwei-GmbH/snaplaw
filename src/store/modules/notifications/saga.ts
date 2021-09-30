@@ -1,14 +1,21 @@
 import { call, put, select, takeLatest } from "redux-saga/effects";
 import {
   REQUEST_NOTIFICATIONS,
-  REQUEST_CHANGE_NOTIFICATION_STATUS, RequestNotificationListAction,
+  REQUEST_CHANGE_NOTIFICATION_STATUS,
+  RequestNotificationListAction,
 } from "./action-creators";
 import { RequestChangeNotificationStatusAction } from "./types";
-import {setNotifications, changeNotificationStatus, setNotificationsLoading} from "./slice";
+import {
+  setNotifications,
+  changeNotificationStatus,
+  setNotificationsLoading,
+} from "./slice";
 import API from "../../../services/notification/index";
 import { responseError } from "../auth/action-creators";
 
-function* requestNotificationsList({ payload: { isRefresh } }: RequestNotificationListAction) {
+function* requestNotificationsList({
+  payload: { isRefresh },
+}: RequestNotificationListAction) {
   const listPagination = yield select(
     (state) => state.notifications.notificationsPagination
   );
@@ -19,8 +26,10 @@ function* requestNotificationsList({ payload: { isRefresh } }: RequestNotificati
     (state) => state.notifications.notifications
   );
   try {
-    yield put(setNotificationsLoading(true))
-    const page = !isRefresh ? listPagination.page + (currentList.length ? 1 : 0) : 0;
+    yield put(setNotificationsLoading(true));
+    const page = !isRefresh
+      ? listPagination.page + (currentList.length ? 1 : 0)
+      : 0;
     const list = yield call(API.requestNotifications, page);
     yield put(setNotifications({ list, page, isRefresh }));
   } catch (error) {

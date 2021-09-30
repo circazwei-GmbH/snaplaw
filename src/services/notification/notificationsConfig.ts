@@ -1,5 +1,5 @@
-import {BUTTON_COLORTYPE} from "../../store/modules/main/types";
-import {requestAcceptInvite} from "../../store/modules/contract/action-creators";
+import { BUTTON_COLORTYPE } from "../../store/modules/main/types";
+import { requestAcceptInvite } from "../../store/modules/contract/action-creators";
 
 interface configActionsInterface {
   name: string;
@@ -53,26 +53,26 @@ export const notificationConfig: notificationConfigInterface = {
     actions: [
       {
         name: "notifications.modal_buttons.ok",
-        colortype: BUTTON_COLORTYPE.PRIMARY
-      }
-    ]
+        colortype: BUTTON_COLORTYPE.PRIMARY,
+      },
+    ],
   },
   deleted_from_contract: {
     message: "notifications.messages.removed_from_contract",
     actions: [
       {
         name: "notifications.modal_buttons.ok",
-        colortype: BUTTON_COLORTYPE.PRIMARY
-      }
-    ]
+        colortype: BUTTON_COLORTYPE.PRIMARY,
+      },
+    ],
   },
   contractor_left: {
     message: "notifications.messages.contractor_left",
     actions: [
       {
         name: "notifications.modal_buttons.ok",
-        colortype: BUTTON_COLORTYPE.PRIMARY
-      }
-    ]
-  }
+        colortype: BUTTON_COLORTYPE.PRIMARY,
+      },
+    ],
+  },
 };

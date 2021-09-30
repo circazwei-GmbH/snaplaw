@@ -1,15 +1,13 @@
-import React, {useState} from "react";
-import {StyleSheet, TouchableOpacity, View} from "react-native";
-import {AntDesign} from "@expo/vector-icons";
+import React, { useState } from "react";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 import ProductDescriptionModal from "../features/Modals/ProductDescriptionModal";
-import {PRODUCT_DESCRIPTION_FIELDS} from "../../store/modules/contract/types";
+import { PRODUCT_DESCRIPTION_FIELDS } from "../../store/modules/contract/types";
 import ImageOrVideoPreview from "./ImageOrVideoPreview";
-import {MEDIA_TYPE, MediaProcessType} from "../../services/media";
-import {buildMediaSource} from "../../utils/helpers";
-import {Video} from "expo-av";
+import { MediaType } from "../../services/media";
 
 export interface DescriptionPhotosPropsInterface {
-  photos: MediaProcessType[];
+  photos: MediaType[];
   onPressDelete?: Function;
   fieldName: PRODUCT_DESCRIPTION_FIELDS;
 }
@@ -19,18 +17,18 @@ export default function DescriptionPhotos({
   onPressDelete,
   fieldName,
 }: DescriptionPhotosPropsInterface) {
-  const [url, setUrl] = useState<MediaProcessType>();
+  const [media, setMedia] = useState<MediaType>();
   const [modalVisible, setModalVisible] = useState(false);
   const toggleModal = () => setModalVisible(!modalVisible);
-  const openModalSetUrl = (url: MediaProcessType) => {
+  const openModalSetUrl = (url: MediaType) => {
     toggleModal();
-    setUrl(url);
+    setMedia(url);
   };
 
   return (
     <View style={styles.container}>
       <ProductDescriptionModal
-        url={url}
+        media={media}
         modalVisible={modalVisible}
         toggleModal={toggleModal}
       />
@@ -123,6 +121,6 @@ const styles = StyleSheet.create({
   },
   video: {
     width: 320,
-    height: 200
-  }
+    height: 200,
+  },
 });

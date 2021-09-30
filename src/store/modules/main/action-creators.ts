@@ -25,8 +25,8 @@ export const navigationPopToTop = (): NavigationPopToTopAction => ({
 
 export const navigatePop = (): BaseAction => ({
   type: NAVIGATE_POP,
-  payload: undefined
-})
+  payload: undefined,
+});
 
 export const orientationChange = (target: AllowOrientationType) => ({
   type: ORIENTATION,

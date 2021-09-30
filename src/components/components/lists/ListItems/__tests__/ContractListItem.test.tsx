@@ -5,8 +5,8 @@ import dayjs from "dayjs";
 import { createStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { CONTRACT_TYPES } from "../../../../../store/modules/contract/constants";
-import {CONTRACT_ROLE} from "../../../../../store/modules/contract/contract-roles";
-import {LANGUAGE_ENGLISH} from "../../../../../store/modules/profile/constants";
+import { CONTRACT_ROLE } from "../../../../../store/modules/contract/contract-roles";
+import { LANGUAGE_ENGLISH } from "../../../../../store/modules/profile/constants";
 
 jest.mock("@react-navigation/native", () => ({
   useNavigation: () => ({
@@ -21,20 +21,20 @@ const ITEM = {
   id: "t",
   partnerId: "partnerId",
   ownerId: "ownerId",
-  meRole: CONTRACT_ROLE.OWNER
+  meRole: CONTRACT_ROLE.OWNER,
 };
 
 const initialState = {
   contract: {
     pdfViewOnListContract: {
-      id: 'test',
-      screens: []
-    }
+      id: "test",
+      screens: [],
+    },
   },
   profile: {
-    language: LANGUAGE_ENGLISH
-  }
-}
+    language: LANGUAGE_ENGLISH,
+  },
+};
 
 const actions = jest.fn();
 const reduser = (state = initialState, action: unknown) => {

@@ -34,7 +34,7 @@ export interface RequestEditProfileAction extends BaseAction {
 }
 
 export interface RequestUserProfileAction extends BaseAction {
-  payload: string
+  payload: string;
 }
 
 export const setLanguage = (language: LanguageType): SetLanguageAction => ({
@@ -71,5 +71,5 @@ export const requestEditProfile = (
 
 export const requestUserProfile = (id: string): RequestUserProfileAction => ({
   type: REQUEST_USER_PROFILE,
-  payload: id
-})
+  payload: id,
+});

@@ -1,8 +1,13 @@
 import * as ImagePicker from "expo-image-picker";
-import {MediaTypeOptions} from "expo-image-picker";
-import {CameraPermissionNotGranted, LibrarryPermissionNotGranted,} from "./errors";
+import { MediaTypeOptions } from "expo-image-picker";
+import {
+  CameraPermissionNotGranted,
+  LibrarryPermissionNotGranted,
+} from "./errors";
 
-export const libraryWay = async (mediaTypes: MediaTypeOptions = MediaTypeOptions.Images) => {
+export const libraryWay = async (
+  mediaTypes: MediaTypeOptions = MediaTypeOptions.Images
+) => {
   const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
   if (status !== ImagePicker.PermissionStatus.GRANTED) {
     throw new LibrarryPermissionNotGranted("errors.galary_permission");
@@ -20,7 +25,9 @@ export const libraryWay = async (mediaTypes: MediaTypeOptions = MediaTypeOptions
   return undefined;
 };
 
-export const cameraWay = async (mediaTypes: MediaTypeOptions = MediaTypeOptions.Images) => {
+export const cameraWay = async (
+  mediaTypes: MediaTypeOptions = MediaTypeOptions.Images
+) => {
   const { status } = await ImagePicker.requestCameraPermissionsAsync();
 
   if (status !== ImagePicker.PermissionStatus.GRANTED) {

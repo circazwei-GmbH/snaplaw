@@ -1,6 +1,7 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import {
-  NAVIGATE, NAVIGATE_POP,
+  NAVIGATE,
+  NAVIGATE_POP,
   NavigateAction,
   NAVIGATION_POP_TO_TOP,
   ORIENTATION,

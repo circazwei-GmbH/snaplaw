@@ -43,7 +43,13 @@ describe("ContractView", () => {
   it("Should dispaly button", () => {
     const { getByText, getByTestId } = render(
       <Provider store={store}>
-        <ContractView visible={true} onClose={jest.fn()} contractId="testId" screens={initialState.contract.currentContract.screens} fromStepper />
+        <ContractView
+          visible={true}
+          onClose={jest.fn()}
+          contractId="testId"
+          screens={initialState.contract.currentContract.screens}
+          fromStepper
+        />
       </Provider>
     );
     expect(getByText("contracts.pdf_view.edit")).toBeTruthy();
@@ -56,7 +62,13 @@ describe("ContractView", () => {
     const handler = jest.fn();
     const { getByText } = render(
       <Provider store={store}>
-        <ContractView visible={true} onClose={handler} contractId="testId" screens={initialState.contract.currentContract.screens} fromStepper />
+        <ContractView
+          visible={true}
+          onClose={handler}
+          contractId="testId"
+          screens={initialState.contract.currentContract.screens}
+          fromStepper
+        />
       </Provider>
     );
     fireEvent.press(getByText("contracts.pdf_view.edit"));
@@ -66,7 +78,13 @@ describe("ContractView", () => {
     const handler = jest.fn();
     const { getByText } = render(
       <Provider store={store}>
-        <ContractView visible={true} onClose={handler} contractId="testId" screens={initialState.contract.currentContract.screens} fromStepper />
+        <ContractView
+          visible={true}
+          onClose={handler}
+          contractId="testId"
+          screens={initialState.contract.currentContract.screens}
+          fromStepper
+        />
       </Provider>
     );
     fireEvent.press(getByText("contracts.pdf_view.save"));
@@ -87,7 +105,13 @@ describe("ContractView", () => {
     const handler = jest.fn();
     const { getByTestId } = render(
       <Provider store={store}>
-        <ContractView visible={true} onClose={handler} contractId="testId" screens={initialState.contract.currentContract.screens} fromStepper />
+        <ContractView
+          visible={true}
+          onClose={handler}
+          contractId="testId"
+          screens={initialState.contract.currentContract.screens}
+          fromStepper
+        />
       </Provider>
     );
     fireEvent(getByTestId("react-native-pdf"), "onError");
@@ -98,7 +122,13 @@ describe("ContractView", () => {
     const handler = jest.fn();
     const { getByText } = render(
       <Provider store={store}>
-        <ContractView visible={true} onClose={handler} contractId="testId" screens={initialState.contract.currentContract.screens} fromStepper />
+        <ContractView
+          visible={true}
+          onClose={handler}
+          contractId="testId"
+          screens={initialState.contract.currentContract.screens}
+          fromStepper
+        />
       </Provider>
     );
     expect(getByText("contracts.pdf_view.additional_media")).toBeTruthy();

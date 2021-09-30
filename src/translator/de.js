@@ -198,7 +198,7 @@ export default {
       delete_partner: "Vertragspartner löschen",
       invite_partner: "Benutzer einladen",
       view_pdf: "Ansehen",
-      decline: "Ablehnen"
+      decline: "Ablehnen",
     },
     delete_modal: {
       message: "Sind Sie sicher, dass Sie den Kontakt löschen möchten?",
@@ -208,8 +208,8 @@ export default {
     delete_partner: {
       message: "Sind Sie sicher, dass Sie den Kontakt löschen möchten?",
       yes: "Ja",
-      no: "Nein"
-    }
+      no: "Nein",
+    },
   },
   menu: {
     cancel: "Abbrechen",
@@ -230,9 +230,11 @@ export default {
         "Der Vertrag ist zu Meinen Kontakten hinzugefügt, ^in Progress-Tab^.",
       invite_to_contract_rejected:
         "Sie wurden gerade aus dem Vertrag %{contract} von %{partner} gelösch",
-      accept_invite_error: "Ihre Aktion ist nicht mehr nötig. Entweder ist der Vertrag schon akzeptiert oder Sie sind vom Besitzer aus dem Vertrag gelöscht.",
-      removed_from_contract: "Sie wurden gerade aus dem Vertrag %{contract} von %{partner} gelösch",
-      contractor_left: "%{partner} hat den Vertrag %{contract} verlassen"
+      accept_invite_error:
+        "Ihre Aktion ist nicht mehr nötig. Entweder ist der Vertrag schon akzeptiert oder Sie sind vom Besitzer aus dem Vertrag gelöscht.",
+      removed_from_contract:
+        "Sie wurden gerade aus dem Vertrag %{contract} von %{partner} gelösch",
+      contractor_left: "%{partner} hat den Vertrag %{contract} verlassen",
     },
     modal_buttons: {
       accept: "Akzeptieren",
@@ -356,6 +358,6 @@ export default {
       "Geben Sie die E-Mail-Adresse des Partners ein und laden Sie ihn zum Vertrag ein",
     error: "Bitte geben Sie eine gültige Email-Adresse ein",
     self_invite_error: "Sie können sich selbst nicht einladen.",
-    successed: "Der Nutzer ist erfolgreich eingeladen"
+    successed: "Der Nutzer ist erfolgreich eingeladen",
   },
 };

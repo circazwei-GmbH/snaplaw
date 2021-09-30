@@ -52,8 +52,8 @@ export default function TextField({
   };
 
   useEffect(() => {
-    setLocalValue(value)
-  }, [value])
+    setLocalValue(value);
+  }, [value]);
 
   return (
     <View

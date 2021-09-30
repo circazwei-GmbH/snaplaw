@@ -26,14 +26,14 @@ type ProfileStateInterface = {
   language: LanguageType | undefined;
   user: UserType | undefined;
   avatarLoading: boolean;
-  currentPartner: UserType | undefined
+  currentPartner: UserType | undefined;
 };
 
 export const initialState: ProfileStateInterface = {
   language: undefined,
   user: undefined,
   avatarLoading: false,
-  currentPartner: undefined
+  currentPartner: undefined,
 };
 
 const setLanguageAction = createAction<string, "setLanguage">("setLanguage");
@@ -46,7 +46,10 @@ const setUserProfileAction = createAction<UserType, "setUserProfile">(
   "setUserProfile"
 );
 const clearUserAction = createAction<undefined, "clearUser">("clearUser");
-const setCurretnPartnerAction = createAction<UserType | undefined, "setCurretnPartner">("setCurretnPartner");
+const setCurretnPartnerAction = createAction<
+  UserType | undefined,
+  "setCurretnPartner"
+>("setCurretnPartner");
 
 export const profileSlice = createSlice({
   name: "profile",
@@ -103,8 +106,8 @@ export const profileSlice = createSlice({
       state: Draft<ProfileStateInterface>,
       action: PayloadAction<UserType | undefined>
     ) => {
-      state.currentPartner = action.payload
-    }
+      state.currentPartner = action.payload;
+    },
   },
 });
 
@@ -115,7 +118,7 @@ export const {
   setAvatarLoading,
   setUserProfile,
   clearUser,
-  setCurretnPartner
+  setCurretnPartner,
 } = profileSlice.actions;
 
 export default profileSlice.reducer;

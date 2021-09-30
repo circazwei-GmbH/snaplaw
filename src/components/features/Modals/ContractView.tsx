@@ -14,25 +14,30 @@ import {
 } from "../../../store/modules/contract/purchase/product-description";
 import DescriptionPhotos from "../../components/DescriptionPhotos";
 import DefaultText from "../../basics/typography/DefaultText";
-import {BaseScreenDataInterface} from "../../../store/modules/contract/base-types";
+import { BaseScreenDataInterface } from "../../../store/modules/contract/base-types";
 
 type ContractViewProps = {
   visible: boolean;
   onClose: () => void;
-  contractId: string,
-  screens: BaseScreenDataInterface[] | undefined,
-  fromStepper?: boolean
+  contractId: string;
+  screens: BaseScreenDataInterface[] | undefined;
+  fromStepper?: boolean;
 };
 
-export default function ContractView({ visible, onClose, contractId, screens, fromStepper }: ContractViewProps) {
+export default function ContractView({
+  visible,
+  onClose,
+  contractId,
+  screens,
+  fromStepper,
+}: ContractViewProps) {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
   const locale = useAppSelector((state) => state.profile.language);
 
-  const descriptionScreen = (screens?.find(
-        (screen) => screen.type === CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION
-      ) as ProductDescriptionScreenInterface)
-
+  const descriptionScreen = screens?.find(
+    (screen) => screen.type === CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION
+  ) as ProductDescriptionScreenInterface;
 
   const onSaveHandler = () => {
     onClose();
@@ -61,16 +66,22 @@ export default function ContractView({ visible, onClose, contractId, screens, fr
           <View style={styles.buttonContainer}>
             <TextButton
               styleText={styles.buttonText}
-              text={t(fromStepper ? "contracts.pdf_view.edit" : "contracts.pdf_view.cancel")}
+              text={t(
+                fromStepper
+                  ? "contracts.pdf_view.edit"
+                  : "contracts.pdf_view.cancel"
+              )}
               onPress={onClose}
               type="left"
             />
-            {fromStepper ? <TextButton
-              styleText={styles.buttonText}
-              text={t("contracts.pdf_view.save")}
-              onPress={onSaveHandler}
-              type="right"
-            /> : null}
+            {fromStepper ? (
+              <TextButton
+                styleText={styles.buttonText}
+                text={t("contracts.pdf_view.save")}
+                onPress={onSaveHandler}
+                type="right"
+              />
+            ) : null}
           </View>
           <ScrollView>
             {visible && contractId ? (
