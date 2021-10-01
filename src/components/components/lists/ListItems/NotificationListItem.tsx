@@ -118,7 +118,7 @@ export default function NotificationListItem({
               <DefaultText
                 text={dayjs(createdAt).format(
                   // @ts-ignore
-                  dayjs(createdAt).isToday() ? "HH:MM" : "DD MMM"
+                  dayjs(createdAt).isToday() ? "HH:mm" : "DD MMM"
                 )}
                 style={styles.notificationDate}
               />
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
     width: "100%",
-    height: 70,
+    height: 75,
     paddingHorizontal: 16,
     elevation: 1,
   },
@@ -174,12 +174,10 @@ const styles = StyleSheet.create({
   notificationHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    height: "30%",
     marginTop: 6,
   },
   notificationBody: {
-    height: "55%",
-    marginBottom: 5,
+    paddingBottom: 5,
     overflow: "hidden",
   },
   notificationDate: {
