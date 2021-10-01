@@ -34,6 +34,7 @@ interface ContractState {
   emailsListPagination: {
     page: number;
     isNextPage: boolean;
+    query: string | undefined
   };
   email: {
     error: string;
@@ -55,6 +56,7 @@ const initialState: ContractState = {
   emailsListPagination: {
     page: 0,
     isNextPage: true,
+    query: undefined
   },
   email: {
     error: "",
@@ -245,14 +247,11 @@ const contractSlice = createSlice({
       action: PayloadAction<{
         list: EmailsListItemInterface[];
         page: string;
+        query: string
       }>
     ) => {
-      if (action.payload.list !== undefined) {
-        state.inviteEmailsList = [
-          ...state.inviteEmailsList,
-          ...action.payload.list,
-        ];
-      }
+      state.inviteEmailsList = action.payload.list;
+      state.emailsListPagination.query = action.payload.query;
       state.emailsListPagination.page = +action.payload.page;
       state.listPagination.isNextPage = !!action.payload.list.length;
     },
