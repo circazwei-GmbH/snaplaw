@@ -5,12 +5,13 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 import { LANGUAGE_ENGLISH, LANGUAGE_GERMANY } from "./constants";
+import {MediaType} from "../../../services/media";
 
 export type LanguageType = "LANGUAGE_ENGLISH" | "LANGUAGE_GERMANY";
 
 export type UserType = {
   id: string;
-  avatar: string | null;
+  avatar: MediaType | null;
   name?: string;
   lastName?: string;
   dateOfBirth?: string;
@@ -70,7 +71,7 @@ export const profileSlice = createSlice({
     },
     [setAvatarAction.type]: (
       state: Draft<ProfileStateInterface>,
-      action: PayloadAction<string | null>
+      action: PayloadAction<MediaType | null>
     ) => {
       // @ts-ignore
       state.user = {

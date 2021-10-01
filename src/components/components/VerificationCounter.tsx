@@ -3,10 +3,11 @@ import { Text, View, StyleSheet } from "react-native";
 import { useI18n } from "../../translator/i18n";
 import { useAppSelector } from "../../store/hooks";
 import { LANGUAGE_ENGLISH } from "../../store/modules/profile/constants";
+import {MediaType} from "../../services/media";
 
 interface VerificationCounterPropsInterface {
   sizeSmall: boolean;
-  doHaveUrl?: string | null;
+  doHaveUrl?: MediaType | null;
 }
 
 export default function VerificationCounter({

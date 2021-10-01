@@ -12,6 +12,7 @@ import {
   RequestDeleteContractPartnerAction,
 } from "./types";
 import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
+import {MediaType} from "../../../services/media";
 
 export const REQUEST_CREATE_CONTRACT = "REQUEST_CREATE_CONTRACT";
 export const REQUEST_SCREEN_DATA = "REQUEST_SCREEN_DATA";
@@ -84,7 +85,7 @@ export const requestDeleteContract = (id: string): RequestContractAction => ({
   payload: id,
 });
 
-export const signContract = (filePath: string): SignContractAction => ({
+export const signContract = (filePath: MediaType): SignContractAction => ({
   type: SIGN_CONTRACT,
   payload: filePath,
 });

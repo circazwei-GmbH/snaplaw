@@ -12,6 +12,7 @@ import {
   EmailsListItemInterface,
 } from "./types";
 import { CONTRACT_SCREEN_TYPES } from "./constants";
+import {MediaType} from "../../../services/media";
 
 export enum CONTRACT_LIST_LOADING_TYPE {
   INITIAL = "INITIAL",
@@ -235,7 +236,7 @@ const contractSlice = createSlice({
     },
     [updateContractSignAction.type]: (
       state: Draft<ContractState>,
-      action: PayloadAction<string>
+      action: PayloadAction<MediaType>
     ) => {
       if (!state.currentContract) {
         return;

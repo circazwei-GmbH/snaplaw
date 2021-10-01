@@ -277,18 +277,18 @@ export default {
         title: "Confirmation",
         confirmation: {
           [CONFIRMATION_FIELDS.FIRST]:
-            "The seller assures that the goods described above are his exclusive property, have not been stolen and are free from the rights of third parties.",
+            "The seller assures that the goods described above are their exclusive property, have not been stolen and are free from the rights of third parties.",
           [CONFIRMATION_FIELDS.SECOND]:
             "Buyer details have been verified and match.",
           [CONFIRMATION_FIELDS.SELLER_DETAIL]:
             "Seller details have been verified and match",
         },
-        partner_text: "Please recheck his identity with a passport.",
+        partner_text: "Please recheck their identity with a passport.",
       },
       [CONTRACT_SCREEN_TYPES.PAYMENT]: {
         title: "Payment",
-        product_price: "1. Please enter the product price",
-        payment_method: "2. Please select a payment method",
+        product_price: "Please enter the product price",
+        payment_method: "Please select a payment method",
         fields: {
           cost: "Cost",
           name: "Cardholder name",
@@ -308,8 +308,8 @@ export default {
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "sign contract",
-        signature: "1. Please enter your signature",
-        invite: "2. Please invite user",
+        signature: "Please enter your signature",
+        invite: "Please invite user",
       },
     },
     confirmation_modal: {

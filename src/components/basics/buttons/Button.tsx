@@ -13,6 +13,7 @@ interface ButtonPropsInterface {
   style?: object;
   type?: "primary" | "secondary";
   textColorType?: BUTTON_COLORTYPE;
+  shadowNone?: boolean
 }
 
 export default function Button({
@@ -21,6 +22,7 @@ export default function Button({
   style,
   type,
   textColorType,
+  shadowNone = false
 }: ButtonPropsInterface) {
   const [touched, setTouched] = useState(false);
 
@@ -40,6 +42,7 @@ export default function Button({
           ? styles.secondaryButton
           : styles.privaryButton,
         touched ? styles.touch : null,
+        shadowNone ? null : styles.shadow,
       ]}
       onPress={onPress}
       onPressIn={onPressInHandler}
@@ -69,6 +72,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingVertical: 12,
     borderRadius: 10,
+  },
+  shadow: {
     shadowColor: "rgb(22, 150, 226)",
     shadowOffset: {
       width: 2,

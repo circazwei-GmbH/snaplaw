@@ -8,7 +8,7 @@ import { useAppSelector } from "../../store/hooks";
 export default function MyProfileAvatarBox() {
   const [sizeSmall, setSizeSmall] = useState(true);
   const url = useAppSelector((state) => state.profile.user?.avatar);
-
+  console.log(useAppSelector((state) => state.profile.user))
   return (
     <View style={styles.container}>
       <TouchableOpacity

@@ -1,5 +1,6 @@
 import { LanguageType, UserType } from "./slice";
 import { BaseAction } from "../auth/types";
+import {MediaType} from "../../../services/media";
 
 export const SET_LANGUAGE = "SET_LANGUAGE";
 export const REQUEST_LANGUAGE = "REQUEST_LANGUAGE";
@@ -18,7 +19,7 @@ export interface RequestLanguageAction extends BaseAction {
 }
 
 export interface UpdateAvatarAction extends BaseAction {
-  payload: null | string;
+  payload: null | MediaType;
 }
 
 export interface DeleteAvatarAction extends BaseAction {
@@ -47,7 +48,7 @@ export const requestLanguage = (): RequestLanguageAction => ({
   payload: undefined,
 });
 
-export const updateAvatar = (uri: string): UpdateAvatarAction => ({
+export const updateAvatar = (uri: MediaType): UpdateAvatarAction => ({
   type: UPDATE_AVATAR,
   payload: uri,
 });

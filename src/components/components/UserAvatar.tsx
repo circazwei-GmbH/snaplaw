@@ -3,10 +3,11 @@ import { View, StyleSheet, ActivityIndicator } from "react-native";
 import { useAppSelector } from "../../store/hooks";
 import { buildMediaSource } from "../../utils/helpers";
 import FastImage from "react-native-fast-image";
+import {MediaType} from "../../services/media";
 
 interface UserAvatarPropsInterface {
   sizeSmall: boolean;
-  url?: string | null;
+  url?: MediaType | null;
 }
 
 export default function UserAvatar({
@@ -17,7 +18,7 @@ export default function UserAvatar({
   const avatarLoading = useAppSelector((state) => state.profile.avatarLoading);
   const getAvatar = () => {
     return url
-      ? buildMediaSource(url)
+      ? buildMediaSource(url.uri)
       : require("../../../assets/user_profile.png");
   };
 

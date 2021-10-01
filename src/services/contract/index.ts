@@ -16,6 +16,7 @@ import { translateContract, translateContractList } from "./prepare-translator";
 import { getUserFromToken } from "../../utils";
 import { screenDataTranslator } from "./post-translator";
 import { CONTRACT_ROLE } from "../../store/modules/contract/contract-roles";
+import {MediaType} from "../media";
 
 const createContract = (type: CONTRACT_TYPES) =>
   httpClient.post("api/contracts", { type });
@@ -68,7 +69,7 @@ const requestContract = async (id: string): Promise<ContractDataType> => {
 const requestDeleteContract = (id: string) =>
   httpClient.delete(`api/contracts/${id}`);
 
-const signContract = (id: string, path: string) =>
+const signContract = (id: string, path: MediaType) =>
   httpClient.patch(`api/contracts/${id}/sign`, { path });
 
 const acceptInvite = (id: string) =>

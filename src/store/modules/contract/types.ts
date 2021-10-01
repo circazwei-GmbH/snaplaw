@@ -29,6 +29,7 @@ import {
 } from "./purchase/product-description";
 import { BaseScreenDataInterface } from "./base-types";
 import { CONTRACT_ROLE } from "./contract-roles";
+import {MediaType} from "../../../services/media";
 
 export type ContractType = CONTRACT_TYPES.PURCHASE;
 
@@ -70,7 +71,7 @@ export type ContractDataType = {
   type: CONTRACT_TYPES;
   createdAt: string;
   screens: Array<BaseScreenDataInterface>;
-  sign: string | undefined;
+  sign: MediaType | undefined;
   partnerId: string | undefined;
   partnerName: string | null;
   meRole: CONTRACT_ROLE;
@@ -102,7 +103,7 @@ export interface ValidateAllScreensAction extends BaseAction {
 }
 
 export interface SignContractAction extends BaseAction {
-  payload: string;
+  payload: MediaType;
 }
 
 export interface InviteUserInterface {

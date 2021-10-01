@@ -30,6 +30,7 @@ export default function Menu({ onClose, visible, buttons }: MenuProps) {
                   0 === index ? styles.firstButton : null,
                   buttons.length - 1 === index ? styles.lastButton : null,
                 ]}
+                shadowNone
                 textColorType={BUTTON_COLORTYPE.BLACK}
                 text={button.title}
                 onPress={button.handler}
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 0,
-    borderBottomColor: "rgb(204, 204, 204)",
-    borderBottomWidth: 1,
+    borderBottomColor: "#CCCCCC",
+    borderBottomWidth: 0.5,
   },
 });
