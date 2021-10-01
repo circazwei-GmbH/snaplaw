@@ -38,7 +38,7 @@ export default function Menu({ onClose, visible, buttons }: MenuProps) {
             ))}
           </View>
           <View style={styles.cancelButtonContainer}>
-            <Button text={t("menu.cancel")} type="primary" onPress={onClose} />
+            <Button text={t("menu.cancel")} type="primary" shadowNone onPress={onClose} />
           </View>
         </View>
       </Modal>
@@ -73,6 +73,6 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 0,
     borderBottomColor: "#CCCCCC",
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 1,
   },
 });
