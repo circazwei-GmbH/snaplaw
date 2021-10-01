@@ -208,6 +208,7 @@ function* fetchChangePassword({ payload }: ChangePasswordAction) {
     yield call(API.changePassword, payload);
     yield put(setToken(payload));
     yield call(BaseApi.setToken, payload.token, payload.refresh);
+    yield put(requestMe());
   } catch (error) {
     if (error.response?.data.code === NEW_PASSWORD_SAME_AS_OLD) {
       return yield put(
