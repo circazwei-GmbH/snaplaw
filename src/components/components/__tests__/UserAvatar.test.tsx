@@ -1,9 +1,10 @@
 import React from "react";
-import { fireEvent, render } from "@testing-library/react-native";
-import { Provider } from "react-redux";
+import {fireEvent, render} from "@testing-library/react-native";
+import {Provider} from "react-redux";
 import UserAvatar from "../UserAvatar";
-import { createStore } from "@reduxjs/toolkit";
-import { buildMediaSource } from "../../../utils/helpers";
+import {createStore} from "@reduxjs/toolkit";
+import {buildMediaSource} from "../../../utils/helpers";
+import {MEDIA_TYPE} from "../../../services/media";
 
 const initialState = {
   profile: {
@@ -61,7 +62,7 @@ describe("UserAvatar", () => {
     const TEST_URI = "test_url";
     const { queryByTestId } = render(
       <Provider store={customStore}>
-        <UserAvatar sizeSmall url={TEST_URI} />
+        <UserAvatar sizeSmall url={{uri:TEST_URI, type: MEDIA_TYPE.IMAGE}} />
       </Provider>
     );
 
