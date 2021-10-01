@@ -5,6 +5,7 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 import { NotificationListItemInterface, NotificationInterface } from "./types";
+import dayjs from "dayjs";
 
 interface NotificationsState {
   notifications: NotificationListItemInterface[];
@@ -73,6 +74,19 @@ const notificationsSlice = createSlice({
           state.notifications[i].isNew = false;
         }
       }
+      state.notifications = state.notifications.sort((a, b) => {
+        if (!a.isNew && b.isNew) {
+          return 1;
+        } else if (!b.isNew && a.isNew) {
+          return -1;
+        } else {
+          if (dayjs(a.createdAt) > dayjs(b.createdAt)) {
+            return -1;
+          } else {
+            return 1;
+          }
+        }
+      })
     },
     [setNotificationsLoadingAction.type]: (
       state: Draft<NotificationsState>,

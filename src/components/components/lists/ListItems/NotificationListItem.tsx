@@ -118,7 +118,7 @@ export default function NotificationListItem({
               <DefaultText
                 text={dayjs(createdAt).format(
                   // @ts-ignore
-                  dayjs(createdAt).isToday() ? "HH:MM" : "DD MMM"
+                  dayjs(createdAt).isToday() ? "HH:mm" : "DD MMM"
                 )}
                 style={styles.notificationDate}
               />

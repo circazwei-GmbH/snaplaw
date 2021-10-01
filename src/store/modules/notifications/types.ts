@@ -3,7 +3,7 @@ import { NOTIFICATION_TYPE } from "../../../services/notification/notificationsC
 
 export interface NotificationInterface {
   _id: string;
-  type: string;
+  type: NOTIFICATION_TYPE;
   contractId: string;
   contractName: string;
   usernameFrom: string;
