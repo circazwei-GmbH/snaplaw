@@ -272,12 +272,13 @@ function* requestUsersEmail({ payload }: RequestGetEmailsAction) {
   );
   const currentList = yield select((state) => state.contract.inviteEmailsList);
   try {
-    const page = listPagination.page + (currentList.length ? 1 : 0);
+    const page = listPagination.page + (currentList.length ? listPagination === payload ? 1 : 0 : 0);
     const list: EmailsListItemInterface[] = yield call(API.getUserEmails, {
       payload,
       page,
     });
-    yield put(setInviteEmails({ list, page }));
+    const resultList = page > 0 ? currentList.concat(list) : list
+    yield put(setInviteEmails({ list: resultList, page, query: payload }));
   } catch (error) {
     yield put(responseError(error));
   }

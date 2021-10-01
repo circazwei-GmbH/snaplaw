@@ -62,7 +62,7 @@ export default function Invite({
     useState<InviteEmailInterface>(emailInitialValue);
 
   const getEmails = () => {
-    return dispatch(requestUsersEmail(emailInitialValue.email.value));
+    return dispatch(requestUsersEmail(emailValue.email.value));
   };
 
   const searchHandler = (email: string) => {
@@ -76,7 +76,7 @@ export default function Invite({
     searchHandler(newValue);
     const timeout = setTimeout(() => {
       dispatch(clearInviteEmails());
-      dispatch(requestUsersEmail(emailInitialValue.email.value));
+      dispatch(requestUsersEmail(emailValue.email.value));
     }, 500);
     setTimer(timeout);
   };
@@ -131,7 +131,7 @@ export default function Invite({
           <TextFieldWithDropdown
             value={emailInitialValue.email.value}
             placeholder={t("edit_profile.placeholders.email")}
-            onChangeFunction={(newValue) => onChangeHandler(newValue)}
+            onChangeFunction={onChangeHandler}
             list={emails}
             getList={getEmails}
             errorMessage={emailValue.email.error}
