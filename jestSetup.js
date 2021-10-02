@@ -1,9 +1,12 @@
+import { Translator } from "./src/translator/i18n";
+
 jest.mock("./src/translator/Translator", () => ({
   translator: (text) => text,
 }));
 
 jest.mock("./src/translator/i18n", () => ({
   useI18n: () => ({ t: (t) => t }),
+  Translator: jest.requireActual("./src/translator/i18n").Translator,
 }));
 
 import "react-native-gesture-handler/jestSetup";

@@ -2,11 +2,7 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { MediaType } from "../services/media";
 
 // @ts-ignore
-const recursionWalk = (
-  payload: any,
-  key: string,
-  targetUrl: MediaType
-) => {
+const recursionWalk = (payload: any, key: string, targetUrl: MediaType) => {
   const splitedPath = key.split(".");
   const [currentKey] = splitedPath.splice(0, 1);
   if (String(Number(currentKey)) !== "NaN") {

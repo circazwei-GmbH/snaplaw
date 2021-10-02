@@ -12,7 +12,7 @@ import {
   EmailsListItemInterface,
 } from "./types";
 import { CONTRACT_SCREEN_TYPES } from "./constants";
-import {MediaType} from "../../../services/media";
+import { MediaType } from "../../../services/media";
 
 export enum CONTRACT_LIST_LOADING_TYPE {
   INITIAL = "INITIAL",
@@ -35,7 +35,7 @@ interface ContractState {
   emailsListPagination: {
     page: number;
     isNextPage: boolean;
-    query: string | undefined
+    query: string | undefined;
   };
   email: {
     error: string;
@@ -57,7 +57,7 @@ const initialState: ContractState = {
   emailsListPagination: {
     page: 0,
     isNextPage: true,
-    query: undefined
+    query: undefined,
   },
   email: {
     error: "",
@@ -248,7 +248,7 @@ const contractSlice = createSlice({
       action: PayloadAction<{
         list: EmailsListItemInterface[];
         page: string;
-        query: string
+        query: string;
       }>
     ) => {
       state.inviteEmailsList = action.payload.list;

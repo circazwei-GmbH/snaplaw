@@ -1,16 +1,19 @@
 import React from "react";
-import {act, fireEvent, render} from "@testing-library/react-native";
-import {Provider} from "react-redux";
+import { act, fireEvent, render } from "@testing-library/react-native";
+import { Provider } from "react-redux";
 import UploadAvatar from "../UploadAvatar";
-import {createStore} from "@reduxjs/toolkit";
-import {cameraWay, libraryWay} from "../../../services/media/media-picker";
-import {DELETE_AVATAR, updateAvatar,} from "../../../store/modules/profile/action-creators";
-import {uploadMedia} from "../../../store/modules/media/action-creators";
-import {MEDIA_FOLDERS} from "../../../store/modules/media/constants";
-import {PermissionNotGranted} from "../../../services/media/errors";
-import {setAvatarLoading} from "../../../store/modules/profile/slice";
-import {setMessage} from "../../../store/modules/main/slice";
-import {MEDIA_TYPE} from "../../../services/media";
+import { createStore } from "@reduxjs/toolkit";
+import { cameraWay, libraryWay } from "../../../services/media/media-picker";
+import {
+  DELETE_AVATAR,
+  updateAvatar,
+} from "../../../store/modules/profile/action-creators";
+import { uploadMedia } from "../../../store/modules/media/action-creators";
+import { MEDIA_FOLDERS } from "../../../store/modules/media/constants";
+import { PermissionNotGranted } from "../../../services/media/errors";
+import { setAvatarLoading } from "../../../store/modules/profile/slice";
+import { setMessage } from "../../../store/modules/main/slice";
+import { MEDIA_TYPE } from "../../../services/media";
 
 const initialState = {
   profile: {
@@ -122,7 +125,11 @@ describe("UploadAvatar", () => {
     });
     expect(cameraWay).toBeCalled();
     expect(actions.mock.calls[0][0]).toEqual(
-      uploadMedia("cameraurl", MEDIA_FOLDERS.AVATAR, updateAvatar({uri: "", type: MEDIA_TYPE.IMAGE}))
+      uploadMedia(
+        "cameraurl",
+        MEDIA_FOLDERS.AVATAR,
+        updateAvatar({ uri: "", type: MEDIA_TYPE.IMAGE })
+      )
     );
     expect(actions).toBeCalledWith(setAvatarLoading(true));
   });
@@ -139,7 +146,11 @@ describe("UploadAvatar", () => {
     });
     expect(libraryWay).toBeCalled();
     expect(actions.mock.calls[0][0]).toEqual(
-      uploadMedia("libraryurl", MEDIA_FOLDERS.AVATAR, updateAvatar({uri: "", type: MEDIA_TYPE.IMAGE}))
+      uploadMedia(
+        "libraryurl",
+        MEDIA_FOLDERS.AVATAR,
+        updateAvatar({ uri: "", type: MEDIA_TYPE.IMAGE })
+      )
     );
     expect(actions).toBeCalledWith(setAvatarLoading(true));
   });

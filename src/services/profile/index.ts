@@ -1,7 +1,7 @@
 import httpClient from "../api";
 import { getUserFromToken } from "../../utils";
 import { UserType } from "../../store/modules/profile/slice";
-import {MediaType} from "../media";
+import { MediaType } from "../media";
 
 const updateUserAvatar = (avatarPath: MediaType | null) => {
   const token = httpClient.getToken();

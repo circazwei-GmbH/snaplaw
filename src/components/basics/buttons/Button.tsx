@@ -13,7 +13,7 @@ interface ButtonPropsInterface {
   style?: object;
   type?: "primary" | "secondary";
   textColorType?: BUTTON_COLORTYPE;
-  shadowNone?: boolean
+  shadowNone?: boolean;
 }
 
 export default function Button({
@@ -22,7 +22,7 @@ export default function Button({
   style,
   type,
   textColorType,
-  shadowNone = false
+  shadowNone = false,
 }: ButtonPropsInterface) {
   const [touched, setTouched] = useState(false);
 

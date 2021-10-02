@@ -86,7 +86,7 @@ const notificationsSlice = createSlice({
             return 1;
           }
         }
-      })
+      });
     },
     [setNotificationsLoadingAction.type]: (
       state: Draft<NotificationsState>,

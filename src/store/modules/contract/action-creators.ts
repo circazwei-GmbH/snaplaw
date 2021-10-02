@@ -12,7 +12,7 @@ import {
   RequestDeleteContractPartnerAction,
 } from "./types";
 import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
-import {MediaType} from "../../../services/media";
+import { MediaType } from "../../../services/media";
 
 export const REQUEST_CREATE_CONTRACT = "REQUEST_CREATE_CONTRACT";
 export const REQUEST_SCREEN_DATA = "REQUEST_SCREEN_DATA";

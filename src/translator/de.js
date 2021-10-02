@@ -235,7 +235,8 @@ export default {
       removed_from_contract:
         "Sie wurden gerade aus dem Vertrag %{contract} von %{partner} gelösch",
       contractor_left: "%{partner} hat den Vertrag %{contract} verlassen",
-      contract_deleted: "Vertrag %{contract} wurde gerade von %{partner} gelöscht"
+      contract_deleted:
+        "Vertrag %{contract} wurde gerade von %{partner} gelöscht",
     },
     modal_buttons: {
       accept: "Akzeptieren",

@@ -29,7 +29,7 @@ import {
 } from "./purchase/product-description";
 import { BaseScreenDataInterface } from "./base-types";
 import { CONTRACT_ROLE } from "./contract-roles";
-import {MediaType} from "../../../services/media";
+import { MediaType } from "../../../services/media";
 
 export type ContractType = CONTRACT_TYPES.PURCHASE;
 

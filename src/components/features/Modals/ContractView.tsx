@@ -99,7 +99,11 @@ export default function ContractView({
                 <>
                   <DefaultText
                     text={t("contracts.pdf_view.additional_media")}
-                    style={[styles.buttonText, styles.padding, styles.titleMargin]}
+                    style={[
+                      styles.buttonText,
+                      styles.padding,
+                      styles.titleMargin,
+                    ]}
                   />
                   <DescriptionPhotos
                     photos={
@@ -118,7 +122,11 @@ export default function ContractView({
                 <>
                   <DefaultText
                     text={t("contracts.pdf_view.accessories_media")}
-                    style={[styles.buttonText, styles.padding, styles.titleMargin]}
+                    style={[
+                      styles.buttonText,
+                      styles.padding,
+                      styles.titleMargin,
+                    ]}
                   />
                   <DescriptionPhotos
                     photos={
@@ -158,7 +166,7 @@ const styles = StyleSheet.create({
     color: "#FFF",
   },
   titleMargin: {
-    marginTop: 30
+    marginTop: 30,
   },
   padding: {
     paddingHorizontal: 16,

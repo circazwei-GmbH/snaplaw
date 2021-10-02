@@ -3,7 +3,7 @@ import { View, StyleSheet, ActivityIndicator } from "react-native";
 import { useAppSelector } from "../../store/hooks";
 import { buildMediaSource } from "../../utils/helpers";
 import FastImage from "react-native-fast-image";
-import {MediaType} from "../../services/media";
+import { MediaType } from "../../services/media";
 
 interface UserAvatarPropsInterface {
   sizeSmall: boolean;

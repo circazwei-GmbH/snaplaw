@@ -13,9 +13,7 @@ export type MediaType = {
   type: MEDIA_TYPE | undefined;
 };
 
-export type MediaProcessFunction = (
-  option: MediaPayload
-) => Promise<MediaType>;
+export type MediaProcessFunction = (option: MediaPayload) => Promise<MediaType>;
 
 const defineType = (type: string): MEDIA_TYPE | undefined => {
   switch (type) {

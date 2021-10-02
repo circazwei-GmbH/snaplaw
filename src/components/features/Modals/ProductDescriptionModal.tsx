@@ -3,8 +3,8 @@ import {
   ActivityIndicator,
   Modal,
   StyleSheet,
-  TouchableOpacity
-  } from "react-native";
+  TouchableOpacity,
+} from "react-native";
 import { MEDIA_TYPE, MediaType } from "../../../services/media";
 import { buildMediaSource } from "../../../utils/helpers";
 import FastImage from "react-native-fast-image";

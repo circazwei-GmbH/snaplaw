@@ -38,7 +38,12 @@ export default function Menu({ onClose, visible, buttons }: MenuProps) {
             ))}
           </View>
           <View style={styles.cancelButtonContainer}>
-            <Button text={t("menu.cancel")} type="primary" shadowNone onPress={onClose} />
+            <Button
+              text={t("menu.cancel")}
+              type="primary"
+              shadowNone
+              onPress={onClose}
+            />
           </View>
         </View>
       </Modal>

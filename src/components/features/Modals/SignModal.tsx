@@ -1,18 +1,18 @@
-import React, {useEffect, useState} from "react";
-import {Modal, SafeAreaView, StyleSheet, Text, View} from "react-native";
+import React, { useEffect, useState } from "react";
+import { Modal, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import SignArea from "../SignArea";
 import TopBar from "../../layouts/TopBar";
 import TextButton from "../../basics/buttons/TextButton";
-import {Signature} from "@scale-at/expo-pixi";
-import {useAppDispatch} from "../../../store/hooks";
-import {uploadMedia} from "../../../store/modules/media/action-creators";
-import {MEDIA_FOLDERS} from "../../../store/modules/media/constants";
-import {SIGN_LOADER} from "../../../store/modules/contract/purchase/sign";
-import {useI18n} from "../../../translator/i18n";
-import {addToWAiter} from "../../../store/modules/main/slice";
+import { Signature } from "@scale-at/expo-pixi";
+import { useAppDispatch } from "../../../store/hooks";
+import { uploadMedia } from "../../../store/modules/media/action-creators";
+import { MEDIA_FOLDERS } from "../../../store/modules/media/constants";
+import { SIGN_LOADER } from "../../../store/modules/contract/purchase/sign";
+import { useI18n } from "../../../translator/i18n";
+import { addToWAiter } from "../../../store/modules/main/slice";
 import SplashLoader from "./SplashLoader";
-import {signContract} from "../../../store/modules/contract/action-creators";
-import {MEDIA_TYPE} from "../../../services/media";
+import { signContract } from "../../../store/modules/contract/action-creators";
+import { MEDIA_TYPE } from "../../../services/media";
 
 type SignModalProps = {
   visible: boolean;
@@ -42,7 +42,13 @@ export default function SignModal({ visible, onClose }: SignModalProps) {
       return;
     }
     const { uri } = signData;
-    dispatch(uploadMedia(uri, MEDIA_FOLDERS.SIGNATURE, signContract({uri: "", type: MEDIA_TYPE.IMAGE})));
+    dispatch(
+      uploadMedia(
+        uri,
+        MEDIA_FOLDERS.SIGNATURE,
+        signContract({ uri: "", type: MEDIA_TYPE.IMAGE })
+      )
+    );
   };
 
   const onChange = () => {

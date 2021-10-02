@@ -1,18 +1,21 @@
-import React, {useState} from "react";
-import {StyleSheet, TouchableOpacity, View} from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import UserAvatar from "../components/UserAvatar";
-import {MaterialCommunityIcons} from "@expo/vector-icons";
-import {useAppDispatch, useAppSelector} from "../../store/hooks";
-import Menu, {ButtonType} from "./Modals/Menu";
-import {useI18n} from "../../translator/i18n";
-import {uploadMedia} from "../../store/modules/media/action-creators";
-import {cameraWay, libraryWay} from "../../services/media/media-picker";
-import {PermissionNotGranted} from "../../services/media/errors";
-import {setMessage} from "../../store/modules/main/slice";
-import {MEDIA_FOLDERS} from "../../store/modules/media/constants";
-import {deleteAvatar, updateAvatar,} from "../../store/modules/profile/action-creators";
-import {setAvatarLoading} from "../../store/modules/profile/slice";
-import {MEDIA_TYPE} from "../../services/media";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import Menu, { ButtonType } from "./Modals/Menu";
+import { useI18n } from "../../translator/i18n";
+import { uploadMedia } from "../../store/modules/media/action-creators";
+import { cameraWay, libraryWay } from "../../services/media/media-picker";
+import { PermissionNotGranted } from "../../services/media/errors";
+import { setMessage } from "../../store/modules/main/slice";
+import { MEDIA_FOLDERS } from "../../store/modules/media/constants";
+import {
+  deleteAvatar,
+  updateAvatar,
+} from "../../store/modules/profile/action-creators";
+import { setAvatarLoading } from "../../store/modules/profile/slice";
+import { MEDIA_TYPE } from "../../services/media";
 
 type UploadAvatarProps = {
   isChangable: boolean;
@@ -28,7 +31,13 @@ export default function UploadAvatar({
 
   const postChooseFileHandler = (uri: string) => {
     setMenuVisible(false);
-    dispatch(uploadMedia(uri, MEDIA_FOLDERS.AVATAR, updateAvatar({uri: "", type: MEDIA_TYPE.IMAGE})));
+    dispatch(
+      uploadMedia(
+        uri,
+        MEDIA_FOLDERS.AVATAR,
+        updateAvatar({ uri: "", type: MEDIA_TYPE.IMAGE })
+      )
+    );
     dispatch(setAvatarLoading(true));
   };
 

@@ -11,7 +11,7 @@ import { Feather } from "@expo/vector-icons";
 import VerticalDivider from "../dividers/VerticalDivieder";
 import FastImage from "react-native-fast-image";
 import { buildMediaSource } from "../../../utils/helpers";
-import {MediaType} from "../../../services/media";
+import { MediaType } from "../../../services/media";
 
 type SignInputProps = {
   style?: StyleProp<TextStyle>;

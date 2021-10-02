@@ -1,6 +1,6 @@
 import { LanguageType, UserType } from "./slice";
 import { BaseAction } from "../auth/types";
-import {MediaType} from "../../../services/media";
+import { MediaType } from "../../../services/media";
 
 export const SET_LANGUAGE = "SET_LANGUAGE";
 export const REQUEST_LANGUAGE = "REQUEST_LANGUAGE";

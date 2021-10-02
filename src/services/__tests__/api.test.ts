@@ -53,6 +53,27 @@ describe("API", () => {
       },
     });
   });
+  it("Call delete", async () => {
+    await API.delete(url, body);
+    expect(axios.request).toBeCalledWith({
+      method: "DELETE",
+      url: `test_host/${url}`,
+      headers: {
+        authorization: `Bearer ${API.getToken()}`,
+      },
+    });
+  });
+  it("Call patch", async () => {
+    await API.patch(url, body);
+    expect(axios.request).toBeCalledWith({
+      method: "PATCH",
+      url: `test_host/${url}`,
+      data: body,
+      headers: {
+        authorization: `Bearer ${API.getToken()}`,
+      },
+    });
+  });
   it("Refresh functionality test", async () => {
     // @ts-ignore
     axios.request

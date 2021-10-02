@@ -16,7 +16,7 @@ import { translateContract, translateContractList } from "./prepare-translator";
 import { getUserFromToken } from "../../utils";
 import { screenDataTranslator } from "./post-translator";
 import { CONTRACT_ROLE } from "../../store/modules/contract/contract-roles";
-import {MediaType} from "../media";
+import { MediaType } from "../media";
 
 const createContract = (type: CONTRACT_TYPES) =>
   httpClient.post("api/contracts", { type });

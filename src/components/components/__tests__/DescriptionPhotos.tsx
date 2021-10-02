@@ -1,11 +1,11 @@
 import React from "react";
-import {fireEvent, render} from "@testing-library/react-native";
+import { fireEvent, render } from "@testing-library/react-native";
 import DescriptionPhotos from "../DescriptionPhotos";
-import {PRODUCT_DESCRIPTION_FIELDS} from "../../../store/modules/contract/purchase/product-description";
-import {buildMediaSource} from "../../../utils/helpers";
-import {MEDIA_TYPE, MediaType} from "../../../services/media";
+import { PRODUCT_DESCRIPTION_FIELDS } from "../../../store/modules/contract/purchase/product-description";
+import { buildMediaSource } from "../../../utils/helpers";
+import { MEDIA_TYPE, MediaType } from "../../../services/media";
 
-const PHOTOS_PROP: MediaType[] = [{type: MEDIA_TYPE.IMAGE, uri: "test/file"}];
+const PHOTOS_PROP: MediaType[] = [{ type: MEDIA_TYPE.IMAGE, uri: "test/file" }];
 
 jest.mock("../../features/Modals/ProductDescriptionModal", () => {
   const React = require("react");

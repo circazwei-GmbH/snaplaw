@@ -5,7 +5,7 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 import { LANGUAGE_ENGLISH, LANGUAGE_GERMANY } from "./constants";
-import {MediaType} from "../../../services/media";
+import { MediaType } from "../../../services/media";
 
 export type LanguageType = "LANGUAGE_ENGLISH" | "LANGUAGE_GERMANY";
 
