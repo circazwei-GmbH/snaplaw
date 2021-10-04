@@ -52,7 +52,7 @@ import {
   setInviteEmails,
   inviteSelf,
   removeContractPartnerFromList,
-  setPdfViewOnListContract,
+  setPdfViewOnListContract, setPartnerNameAfterInvite,
 } from "./slice";
 import * as RootNavigation from "../../../router/RootNavigation";
 import { HOME_ROUTER } from "../../../router/HomeRouterType";
@@ -254,6 +254,10 @@ function* requestInviteUser({ payload }: InviteUserAction) {
         ],
       })
     );
+    yield put(setPartnerNameAfterInvite({
+      contractId: payload.contractId || "",
+      partnerName: payload.search
+    }));
   } catch (error) {
     if (error.response?.data.code === USER_SELF_INVITE) {
       return yield put(

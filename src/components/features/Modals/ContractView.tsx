@@ -22,6 +22,7 @@ type ContractViewProps = {
   contractId: string;
   screens: BaseScreenDataInterface[] | undefined;
   fromStepper?: boolean;
+  isPartnerInvited?: boolean
 };
 
 export default function ContractView({
@@ -30,6 +31,7 @@ export default function ContractView({
   contractId,
   screens,
   fromStepper,
+  isPartnerInvited = false
 }: ContractViewProps) {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
@@ -43,7 +45,7 @@ export default function ContractView({
     onClose();
     dispatch(
       setModal({
-        message: t("contracts.messages.found_in_pregress_folder"),
+        message: t(isPartnerInvited ? "contracts.messages.found_in_pregress_folder" : "contracts.messages.found_in_pregress_folder_with_invite"),
         actions: [
           {
             name: t("ok"),

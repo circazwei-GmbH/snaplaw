@@ -18,9 +18,9 @@ const initialState = {
         {
           type: CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION,
           data: {
-            [PRODUCT_DESCRIPTION_FIELDS.productPhotos]: ["test/additional"],
+            [PRODUCT_DESCRIPTION_FIELDS.productPhotos]: [{uri: "test/additional"}],
             [PRODUCT_DESCRIPTION_FIELDS.accessoriesPhotos]: [
-              "test/accessories",
+              {uri: "test/accessories"},
             ],
           },
         },
@@ -84,6 +84,35 @@ describe("ContractView", () => {
           contractId="testId"
           screens={initialState.contract.currentContract.screens}
           fromStepper
+        />
+      </Provider>
+    );
+    fireEvent.press(getByText("contracts.pdf_view.save"));
+    expect(actions).toBeCalledWith(
+      setModal({
+        message: "contracts.messages.found_in_pregress_folder_with_invite",
+        actions: [
+          {
+            name: "ok",
+            action: navigationPopToTop(),
+          },
+        ],
+      })
+    );
+    expect(handler).toBeCalled();
+  });
+  it("Should dispatch event on click save button with invited user", () => {
+    actions.mockClear();
+    const handler = jest.fn();
+    const { getByText } = render(
+      <Provider store={store}>
+        <ContractView
+          visible={true}
+          onClose={handler}
+          contractId="testId"
+          screens={initialState.contract.currentContract.screens}
+          fromStepper
+          isPartnerInvited
         />
       </Provider>
     );

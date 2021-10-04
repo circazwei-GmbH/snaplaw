@@ -332,7 +332,7 @@ export default {
       accessories_media: "Zubehör",
     },
     messages: {
-      found_in_pregress_folder:
+      found_in_pregress_folder_with_invite:
         "Vergessen Sie bitte nicht, den Kunden einzuladen. Den Vertrag finden Sie im ^In Bearbeitung^ Ordner.",
     },
     validation: {

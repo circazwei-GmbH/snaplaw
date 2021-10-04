@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
     width: "100%",
-    height: 75,
+    height: 80,
     paddingHorizontal: 16,
     elevation: 1,
   },
@@ -177,7 +177,6 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
   notificationBody: {
-    paddingBottom: 5,
     overflow: "hidden",
   },
   notificationDate: {
