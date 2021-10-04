@@ -26,7 +26,7 @@ export default function Notifications(): JSX.Element {
 
   useEffect(() => {
     // TODO: remove on soket functionality created
-    getNotifications();
+    getNotifications(true);
   }, []);
 
   return (
