@@ -122,6 +122,7 @@ const setPdfViewOnListContractAction = createAction<
   ContractDataType | undefined,
   "setPdfViewOnListContract"
 >("setPdfViewOnListContract");
+const setPartnerNameAfterInviteAction = createAction<{partnerName: string, contractId: string}, "setPartnerNameAfterInvite">("setPartnerNameAfterInvite");
 
 const contractSlice = createSlice({
   name: "contract",
@@ -291,6 +292,14 @@ const contractSlice = createSlice({
     ) => {
       state.pdfViewOnListContract = action.payload;
     },
+    [setPartnerNameAfterInviteAction.type]: (
+      state: Draft<ContractState>,
+      action: PayloadAction<{partnerName: string, contractId: string}>
+    ) => {
+      if (state.currentContract?.id === action.payload.contractId) {
+        state.currentContract.partnerName = action.payload.partnerName;
+      }
+    }
   },
 });
 
@@ -309,6 +318,7 @@ export const {
   clearEmailErrors,
   removeContractPartnerFromList,
   setPdfViewOnListContract,
+  setPartnerNameAfterInvite
 } = contractSlice.actions;
 
 export default contractSlice.reducer;

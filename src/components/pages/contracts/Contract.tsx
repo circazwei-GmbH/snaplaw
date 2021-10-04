@@ -152,6 +152,7 @@ export default function Contract({
           contractId={contract.id}
           screens={contract.screens}
           fromStepper
+          isPartnerInvited={!!contract.partnerName}
         />
       </View>
     </TopBar>

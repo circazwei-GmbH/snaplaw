@@ -334,8 +334,9 @@ export default {
       accessories_media: "Accessories",
     },
     messages: {
-      found_in_pregress_folder:
+      found_in_pregress_folder_with_invite:
         "Don't forget to invite the buyer. The contract can be found in ^In progress^ folder.",
+      found_in_pregress_folder: "The contract saved and can be found in In progress folder."
     },
     validation: {
       field_empty: "The field can't be empty",
