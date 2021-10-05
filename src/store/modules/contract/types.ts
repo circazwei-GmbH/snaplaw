@@ -45,6 +45,9 @@ export interface Contract {
 
 export interface RequestScreenDataAction extends BaseAction {
   payload: CONTRACT_SCREEN_TYPES;
+  additionalPayload: {
+    isDropSign: boolean;
+  };
 }
 
 export interface ScreenValidateAction extends BaseAction {
@@ -75,6 +78,7 @@ export type ContractDataType = {
   partnerId: string | undefined;
   partnerName: string | null;
   meRole: CONTRACT_ROLE;
+  oponentSign: string | null;
 };
 
 export type ContractDataListType = {

@@ -8,6 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 import { HOME_ROUTER } from "../../../../router/HomeRouterType";
 import { LANGUAGE_ENGLISH } from "../../../../store/modules/profile/constants";
 import { LanguageType } from "../../../../store/modules/profile/slice";
+import { BaseScreenDataInterface } from "../../../../store/modules/contract/base-types";
 
 jest.mock("../../../../store/modules/contract/contract-screens-types", () => {
   const {
@@ -71,6 +72,7 @@ type InitialStateType = {
       | {
           type: CONTRACT_TYPES;
           ownerId: string;
+          screens: Array<BaseScreenDataInterface>;
         }
       | undefined;
   };
@@ -87,6 +89,7 @@ const initialState: InitialStateType = {
     currentContract: {
       type: CONTRACT_TYPES.PURCHASE,
       ownerId: "testUserId",
+      screens: [],
     },
   },
   profile: {

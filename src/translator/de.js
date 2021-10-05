@@ -237,6 +237,8 @@ export default {
       contractor_left: "%{partner} hat den Vertrag %{contract} verlassen",
       contract_deleted:
         "Vertrag %{contract} wurde gerade von %{partner} gelöscht",
+      contract_change_request:
+        "Vertrag %{contract} wurde von %{partner} aktualisiert",
     },
     modal_buttons: {
       accept: "Akzeptieren",
@@ -334,10 +336,18 @@ export default {
     messages: {
       found_in_pregress_folder_with_invite:
         "Vergessen Sie bitte nicht, den Kunden einzuladen. Den Vertrag finden Sie im ^In Bearbeitung^ Ordner.",
+      found_in_pregress_folder:
+        "Der Vertrag ist gespeichert und befindet sich in dem ^Bearbeitungsordner^.",
     },
     validation: {
       field_empty: "Das Feld kann nicht leer sein",
       product_condition: "Klären Sie bitte den Produktzustand",
+    },
+    change_prequest_modal: {
+      message:
+        "Sind Sie sicher, dass Sie die Änderungen anfordern möchten? Der Opponent sollte den Vertrag aufs Neue unterschreiben.",
+      yes: "Ja",
+      no: "Nein",
     },
   },
   sign_form: {

@@ -234,6 +234,7 @@ export default {
       contractor_left: "%{partner} has left the contract %{contract}",
       contract_deleted:
         "Contract %{contract} has just been deleted by %{partner}",
+      contract_change_request: "Contract %{contract} updated by %{partner}",
     },
     modal_buttons: {
       accept: "Accept",
@@ -336,11 +337,18 @@ export default {
     messages: {
       found_in_pregress_folder_with_invite:
         "Don't forget to invite the buyer. The contract can be found in ^In progress^ folder.",
-      found_in_pregress_folder: "The contract saved and can be found in In progress folder."
+      found_in_pregress_folder:
+        "The contract saved and can be found in ^In progress^ folder.",
     },
     validation: {
       field_empty: "The field can't be empty",
       product_condition: "Please specify the product condition",
+    },
+    change_prequest_modal: {
+      message:
+        "Are you sure you want to request the change? The opponent will be required to re-sign the contract.",
+      yes: "Yes",
+      no: "No",
     },
   },
   sign_form: {
