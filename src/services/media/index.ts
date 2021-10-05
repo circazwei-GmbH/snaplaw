@@ -29,11 +29,11 @@ const defineType = (type: string): MEDIA_TYPE | undefined => {
 const presigned = (folder: string) =>
   httpClient.get(`api/media?folder=${folder}`);
 
-const uploadMedia = async (mediaUri: string, pathToUpload: string) => {
+const uploadMedia = async (mediaUri: string, pathToUpload: string, fileType: string) => {
   return fetch(pathToUpload, {
     method: "PUT",
     headers: {
-      "Content-Type": lookup(mediaUri),
+      "Content-Type": fileType,
     },
     body: await (await fetch(mediaUri)).blob(),
   });
@@ -44,9 +44,9 @@ const mediaProcess: MediaProcessFunction = async ({
   folder,
 }: MediaPayload): Promise<MediaType> => {
   const response = await presigned(folder);
-  await uploadMedia(uri, response.data);
-  const fullUri = response.data.split("?")[0];
   const fileType = lookup(uri);
+  await uploadMedia(uri, response.data, fileType);
+  const fullUri = response.data.split("?")[0];
   const type = fileType.split("/").shift();
   return {
     uri: fullUri.split("/").slice(-2).join("/"),
