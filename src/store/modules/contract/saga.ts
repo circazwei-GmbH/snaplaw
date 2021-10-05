@@ -52,7 +52,9 @@ import {
   setInviteEmails,
   inviteSelf,
   removeContractPartnerFromList,
-  setPdfViewOnListContract, setPartnerNameAfterInvite,
+  setPdfViewOnListContract,
+  setPartnerNameAfterInvite,
+  clearAllSign,
 } from "./slice";
 import * as RootNavigation from "../../../router/RootNavigation";
 import { HOME_ROUTER } from "../../../router/HomeRouterType";
@@ -77,6 +79,8 @@ function* createContract({ payload }: RequestCreateContractAction) {
         meRole: CONTRACT_ROLE.OWNER,
         createdAt: "",
         sign: undefined,
+        oponentSign: null,
+        partnerName: null,
         screens: [
           prefillUserData(
             yield select<SelectType>((state) => state.profile.user)
@@ -93,7 +97,10 @@ function* createContract({ payload }: RequestCreateContractAction) {
   }
 }
 
-function* requestScreenData({ payload }: RequestScreenDataAction) {
+function* requestScreenData({
+  payload,
+  additionalPayload,
+}: RequestScreenDataAction) {
   const screenData = yield select<SelectType>((state) =>
     state.contract.currentContract?.screens.find(
       (screen) => screen.type === payload
@@ -106,7 +113,16 @@ function* requestScreenData({ payload }: RequestScreenDataAction) {
     return;
   }
   try {
-    yield call(API.saveScreenData, contract.id, screenData, contract.meRole);
+    yield call(
+      API.saveScreenData,
+      contract.id,
+      screenData,
+      contract.meRole,
+      additionalPayload.isDropSign
+    );
+    if (additionalPayload.isDropSign) {
+      yield put(clearAllSign());
+    }
   } catch (error) {
     yield put(responseError(error));
   }
@@ -254,10 +270,12 @@ function* requestInviteUser({ payload }: InviteUserAction) {
         ],
       })
     );
-    yield put(setPartnerNameAfterInvite({
-      contractId: payload.contractId || "",
-      partnerName: payload.search
-    }));
+    yield put(
+      setPartnerNameAfterInvite({
+        contractId: payload.contractId || "",
+        partnerName: payload.search,
+      })
+    );
   } catch (error) {
     if (error.response?.data.code === USER_SELF_INVITE) {
       return yield put(

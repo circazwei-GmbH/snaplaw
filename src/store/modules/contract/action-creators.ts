@@ -31,6 +31,9 @@ export const REQUEST_CONTRACT_DETAIL_FOR_PDF =
   "REQUEST_CONTRACT_DETAIL_FOR_PDF";
 export const REQUEST_LEAVE_CONTRACT = "REQUEST_LEAVE_CONTRACT";
 
+export const SET_SCREEN_DATA_WITH_CHECK_REQUEST =
+  "SET_SCREEN_DATA_WITH_CHECK_REQUEST";
+
 export const requestCreateContract = (
   type: CONTRACT_TYPES
 ): RequestCreateContractAction => ({
@@ -40,10 +43,14 @@ export const requestCreateContract = (
 
 export const requestScreenData = (
   contractType: CONTRACT_TYPES,
-  screenType: CONTRACT_SCREEN_TYPES
+  screenType: CONTRACT_SCREEN_TYPES,
+  isDropSign: boolean = false
 ): RequestScreenDataAction => ({
   type: REQUEST_SCREEN_DATA,
   payload: screenType,
+  additionalPayload: {
+    isDropSign,
+  },
 });
 
 export const validateScreen = (

@@ -24,9 +24,13 @@ const createContract = (type: CONTRACT_TYPES) =>
 const saveScreenData = (
   id: string,
   screen: BaseScreenDataInterface,
-  meRole: CONTRACT_ROLE
+  meRole: CONTRACT_ROLE,
+  isDropSign: boolean = false
 ) =>
-  httpClient.put(`api/contracts/${id}`, screenDataTranslator(screen, meRole));
+  httpClient.put(`api/contracts/${id}`, {
+    ...screenDataTranslator(screen, meRole),
+    isDropSign,
+  });
 
 const inviteUser = (contractData: InviteUserInterface): Promise<any> => {
   return httpClient.post(
