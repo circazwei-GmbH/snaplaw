@@ -29,7 +29,11 @@ const defineType = (type: string): MEDIA_TYPE | undefined => {
 const presigned = (folder: string) =>
   httpClient.get(`api/media?folder=${folder}`);
 
-const uploadMedia = async (mediaUri: string, pathToUpload: string, fileType: string) => {
+const uploadMedia = async (
+  mediaUri: string,
+  pathToUpload: string,
+  fileType: string
+) => {
   return fetch(pathToUpload, {
     method: "PUT",
     headers: {
