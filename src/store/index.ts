@@ -11,6 +11,7 @@ import mediaSaga from "./modules/media/saga";
 import contractSaga from "./modules/contract/saga";
 import mainSaga from "./modules/main/saga";
 import notificationsSaga from "./modules/notifications/saga";
+import socketSaga from "./modules/socket/saga";
 
 const sagaAuthMiddleware = createSagaMiddleware();
 
@@ -34,6 +35,7 @@ sagaAuthMiddleware.run(mediaSaga);
 sagaAuthMiddleware.run(contractSaga);
 sagaAuthMiddleware.run(mainSaga);
 sagaAuthMiddleware.run(notificationsSaga);
+sagaAuthMiddleware.run(socketSaga);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

@@ -241,7 +241,7 @@ function* requestTokenHandler() {
     if (!token || !refresh) {
       return;
     }
-    yield put(setToken(token));
+    yield put(setToken({ token, refresh }));
     yield call(BaseApi.setToken, token, refresh);
     yield put(requestMe());
   } catch (error) {

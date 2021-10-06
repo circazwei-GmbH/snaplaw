@@ -28,6 +28,10 @@ import { MY_CONTRACT_ROUTE } from "./MyContractRouterTypes";
 import { AUTH_ROUTE } from "./AuthRouterTypes";
 import { HOME_ROUTER } from "./HomeRouterType";
 import { PROFILE_ROUTER } from "./ProfileRouterTypes";
+import io from "socket.io-client";
+import {connectToSocket, disconnectFromSocket} from "../store/modules/socket/action-creators";
+import {connect, disconnect} from "../services/socket";
+import {logArtifactUrl} from "expo-cli/build/commands/url/logArtifactUrl";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -48,9 +52,24 @@ export default function Router() {
     dispatch(orientationChange(ScreenOrientation.OrientationLock.PORTRAIT_UP));
   }, [dispatch]);
 
+  useEffect(() => {
+    if (token) {
+      connect(dispatch, token).then(() => {
+        console.log('connected')
+      });
+    } else {
+      console.log('disconnect')
+      disconnect().then(() => {
+        console.log('disconnected')
+      });
+    }
+  }, [token]);
+
   if (!language) {
     return <Text>Loading Lang</Text>;
   }
+
+
 
   return token ? (
     <Tab.Navigator

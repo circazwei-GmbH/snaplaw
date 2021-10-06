@@ -43,6 +43,29 @@ export const contractValidationConfig = {
           length("contracts.validation.field_empty", 1),
         ],
       },
+      [CONTRACT_ROLE.PARTNER]: {
+        [USER_DATA_FIELDS.name]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.lastName]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.dateOfBirth]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.email]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.phone]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.address]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.postCode]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
     },
     [CONTRACT_SCREEN_TYPES.PRODUCT_DATA]: {
       [CONTRACT_ROLE.OWNER]: {
