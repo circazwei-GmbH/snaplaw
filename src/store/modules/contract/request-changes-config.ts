@@ -8,17 +8,16 @@ export const checkIsItChangeRequest = (
   screenType: CONTRACT_SCREEN_TYPES,
   screenPreviousVersion: BaseScreenDataInterface | undefined
 ): boolean => {
-  if (!contract.oponentSign) {
+  if (!contract.oponentSign && !contract.sign) {
     return false;
-  }
-  if (!screenPreviousVersion) {
-    return true;
   }
   const currentScreenData = findScreentByType(contract.screens, screenType);
   if (!currentScreenData) {
     return false;
   }
-
+  if (!screenPreviousVersion) {
+    return true;
+  }
   for (let fieldName in currentScreenData.data) {
     if (
       screenPreviousVersion.data[fieldName] !==
