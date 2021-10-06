@@ -11,14 +11,13 @@ export const checkIsItChangeRequest = (
   if (!contract.oponentSign) {
     return false;
   }
-  if (!screenPreviousVersion) {
-    return true;
-  }
   const currentScreenData = findScreentByType(contract.screens, screenType);
   if (!currentScreenData) {
     return false;
   }
-
+  if (!screenPreviousVersion) {
+    return true;
+  }
   for (let fieldName in currentScreenData.data) {
     if (
       screenPreviousVersion.data[fieldName] !==
