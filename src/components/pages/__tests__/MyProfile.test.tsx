@@ -14,6 +14,10 @@ import { BUTTON_COLORTYPE } from "../../../store/modules/main/types";
 jest.mock("../../../utils/toggleBoolValue.ts");
 
 jest.mock("../../../router/RootNavigation");
+jest.mock("../../components/NotificationBell", () => {
+  const React =require("react");
+  return () => React.createElement("View");
+});
 
 afterEach(() => {
   jest.resetAllMocks();

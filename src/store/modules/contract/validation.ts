@@ -163,8 +163,8 @@ export const screenFieldValidator = (
   contractType: CONTRACT_TYPES,
   myRole: CONTRACT_ROLE
 ): string | undefined => {
-  // @ts-ignore
   const validationConfig =
+    // @ts-ignore
     contractValidationConfig[contractType][screenType][myRole];
   // @ts-ignore
   if (!validationConfig[field]) {

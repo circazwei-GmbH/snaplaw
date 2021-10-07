@@ -1,7 +1,9 @@
 import API from "../api";
 import axios from "axios";
+import {connect} from "../socket";
 
 jest.mock("axios");
+jest.mock("../socket/index");
 const url = "testurl";
 const body = { data: "test" };
 const options = { headers: { test: "test" } };
@@ -103,6 +105,7 @@ describe("API", () => {
     API.setToken(undefined, undefined);
     await API.get(url);
     expect(API.getToken()).toEqual("new-token");
+    expect(connect).toBeCalled()
   });
   it("Should to be thrown", async () => {
     // @ts-ignore
