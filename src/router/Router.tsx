@@ -28,7 +28,7 @@ import { MY_CONTRACT_ROUTE } from "./MyContractRouterTypes";
 import { AUTH_ROUTE } from "./AuthRouterTypes";
 import { HOME_ROUTER } from "./HomeRouterType";
 import { PROFILE_ROUTER } from "./ProfileRouterTypes";
-import {connect, disconnect} from "../services/socket";
+import { connect, disconnect } from "../services/socket";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -60,8 +60,6 @@ export default function Router() {
   if (!language) {
     return <Text>Loading Lang</Text>;
   }
-
-
 
   return token ? (
     <Tab.Navigator

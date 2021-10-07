@@ -15,7 +15,7 @@ jest.mock("../../../utils/toggleBoolValue.ts");
 
 jest.mock("../../../router/RootNavigation");
 jest.mock("../../components/NotificationBell", () => {
-  const React =require("react");
+  const React = require("react");
   return () => React.createElement("View");
 });
 

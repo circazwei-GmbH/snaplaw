@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { setAuthTokens } from "./auth/tokens";
 import { API_HOST } from "../env/env";
-import {connect} from "./socket";
+import { connect } from "./socket";
 
 let token: undefined | string;
 let refresh: undefined | string;

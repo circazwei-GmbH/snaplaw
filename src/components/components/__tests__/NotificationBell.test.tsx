@@ -2,21 +2,21 @@ import React from "react";
 import { render, fireEvent } from "@testing-library/react-native";
 import NotificationBell from "../NotificationBell";
 import * as RootNavigation from "../../../router/RootNavigation";
-import {createStore} from "@reduxjs/toolkit";
-import {Provider} from "react-redux";
+import { createStore } from "@reduxjs/toolkit";
+import { Provider } from "react-redux";
 
 jest.mock("../../../router/RootNavigation");
 
 const initialState = {
   notifications: {
-    notifications: [{isNew: true}]
-  }
-}
+    notifications: [{ isNew: true }],
+  },
+};
 const actions = jest.fn();
 const reduser = (state = initialState, action: any) => {
-  actions(action)
-  return initialState
-}
+  actions(action);
+  return initialState;
+};
 
 const store = createStore(reduser);
 
@@ -47,5 +47,5 @@ describe("NotificationBell", () => {
       </Provider>
     );
     expect(queryByTestId("bell.pinkDot")).not.toBeTruthy();
-  })
+  });
 });
