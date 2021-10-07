@@ -29,11 +29,11 @@ export default function FiltersModal({ visible, onClose, switchState }: FiltersM
   const [datePickerOpened, setDatePickerOpened] = useState(false);
   
   const contractTypes = {
-    CAR: t("homepage.contract_types.car"),
-    PURCHASE: t("homepage.contract_types.purchase"),
-    WORK: t("homepage.contract_types.work"),
-    FREE: t("homepage.contract_types.free"),
-    RENTAL: t("homepage.contract_types.rental"),
+    [CONTRACT_TYPES.CAR]: t("homepage.contract_types.car"),
+    [CONTRACT_TYPES.PURCHASE]: t("homepage.contract_types.purchase"),
+    [CONTRACT_TYPES.WORK]: t("homepage.contract_types.work"),
+    [CONTRACT_TYPES.FREE]: t("homepage.contract_types.free"),
+    [CONTRACT_TYPES.RENTAL]: t("homepage.contract_types.rental"),
   };
   
   const onChangeSelectionCategory = (category: CONTRACT_TYPES) => {
