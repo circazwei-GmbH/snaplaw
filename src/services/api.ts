@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { setAuthTokens } from "./auth/tokens";
 import { API_HOST } from "../env/env";
+import {connect} from "./socket";
 
 let token: undefined | string;
 let refresh: undefined | string;
@@ -48,6 +49,7 @@ const _call = async (
       });
       setToken(tokens.data.token, tokens.data.refreshToken);
       await setAuthTokens(tokens.data.token, tokens.data.refreshToken);
+      await connect();
       return _call(method, url, body, options, true);
     }
     throw error;

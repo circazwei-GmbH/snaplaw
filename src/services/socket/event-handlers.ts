@@ -1,4 +1,6 @@
 import {Dispatch} from "@reduxjs/toolkit";
+import {addNotificationToList} from "../../store/modules/notifications/slice";
+import {translateNotification} from "../notification/translator";
 
 export enum SOKET_EVENT {
   NOTIFY = "notify"
@@ -6,8 +8,8 @@ export enum SOKET_EVENT {
 
 type SocketEventHandlerType = (dispatch: Dispatch, event: any) => void;
 
-const notifyEventHandler: SocketEventHandlerType = (dispatch: Dispatch, event: any) => {
-  console.log(event)
+const notifyEventHandler: SocketEventHandlerType = (dispatch: Dispatch, notification: any) => {
+  dispatch(addNotificationToList(translateNotification(notification)));
 }
 
 const config: Record<SOKET_EVENT, SocketEventHandlerType> = {

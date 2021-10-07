@@ -28,10 +28,7 @@ import { MY_CONTRACT_ROUTE } from "./MyContractRouterTypes";
 import { AUTH_ROUTE } from "./AuthRouterTypes";
 import { HOME_ROUTER } from "./HomeRouterType";
 import { PROFILE_ROUTER } from "./ProfileRouterTypes";
-import io from "socket.io-client";
-import {connectToSocket, disconnectFromSocket} from "../store/modules/socket/action-creators";
 import {connect, disconnect} from "../services/socket";
-import {logArtifactUrl} from "expo-cli/build/commands/url/logArtifactUrl";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -40,7 +37,7 @@ const HomeStack = createStackNavigator();
 const ContractsStack = createStackNavigator();
 
 export default function Router() {
-  const token = useAppSelector((state) => state.auth.token);
+  const token = useAppSelector((state) => state.auth.token?.token);
   const language = useAppSelector((state) => state.profile.language);
   const { t } = useI18n();
 
@@ -54,14 +51,9 @@ export default function Router() {
 
   useEffect(() => {
     if (token) {
-      connect(dispatch, token).then(() => {
-        console.log('connected')
-      });
+      connect(dispatch).then(() => {});
     } else {
-      console.log('disconnect')
-      disconnect().then(() => {
-        console.log('disconnected')
-      });
+      disconnect().then(() => {});
     }
   }, [token]);
 
