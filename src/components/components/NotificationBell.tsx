@@ -3,10 +3,12 @@ import { View, StyleSheet, TouchableOpacity, Dimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { PROFILE_ROUTER } from "../../router/ProfileRouterTypes";
 import * as RootNavigation from "../../router/RootNavigation";
-import {useAppSelector} from "../../store/hooks";
+import { useAppSelector } from "../../store/hooks";
 
 export default function NotificationBell(): JSX.Element {
-  const haveNew = useAppSelector(state => state.notifications.notifications.find(notification => notification.isNew));
+  const haveNew = useAppSelector((state) =>
+    state.notifications.notifications.find((notification) => notification.isNew)
+  );
   const onPressHandler = () =>
     RootNavigation.navigate(PROFILE_ROUTER.NOTIFICATIONS);
 
