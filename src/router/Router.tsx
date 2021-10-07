@@ -29,6 +29,7 @@ import { AUTH_ROUTE } from "./AuthRouterTypes";
 import { HOME_ROUTER } from "./HomeRouterType";
 import { PROFILE_ROUTER } from "./ProfileRouterTypes";
 import { connect, disconnect } from "../services/socket";
+import {requestNotifications} from "../store/modules/notifications/action-creators";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -51,6 +52,7 @@ export default function Router() {
 
   useEffect(() => {
     if (token) {
+      dispatch(requestNotifications());
       connect(dispatch).then(() => {});
     } else {
       disconnect().then(() => {});
