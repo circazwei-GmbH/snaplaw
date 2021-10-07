@@ -4,6 +4,7 @@ import { BaseScreenDataInterface } from "../../store/modules/contract/base-types
 import {
   InviteUserInterface,
   RequestGetEmailsInterface,
+  SmartFiltersType,
 } from "../../store/modules/contract/types";
 import { API_HOST } from "../../env/env";
 import { LanguageType } from "../../store/modules/profile/slice";
@@ -49,10 +50,19 @@ const getUserEmails = async (
   return response.data;
 };
 
-const requestContractList = async (type: CONTRACT_LIST_STATE, page: number) => {
-  const response = await httpClient.get(
-    `api/contracts?type=${type}&page=${page}&limit=10`
-  );
+const requestContractList = async (type: CONTRACT_LIST_STATE, page: number, filters: SmartFiltersType) => {
+  let url = `api/contracts?type=${type}&page=${page}&limit=10&contracts_types=${JSON.stringify(filters.types)}`
+  
+  if (filters.date) {
+    const convertDate = new Date(filters.date);
+    convertDate.setHours(0);
+    convertDate.setMinutes(0);
+    convertDate.setSeconds(0);
+    url += `&date=${convertDate.getTime()}`
+  }
+  
+  const response = await httpClient.get(url);
+  
   const token = httpClient.getToken();
   return translateContractList(
     response.data,

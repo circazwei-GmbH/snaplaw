@@ -34,7 +34,7 @@ import {
 import API from "../../../services/contract/index";
 import { responseError } from "../auth/action-creators";
 import {
-  addToWAiter,
+  addToWaiter,
   removeFromWaiter,
   setMessage,
   setModal,
@@ -67,7 +67,7 @@ import { navigatePop } from "../main/action-creators";
 
 function* createContract({ payload }: RequestCreateContractAction) {
   try {
-    yield put(addToWAiter(CONTRACT_CREATION_WAIT));
+    yield put(addToWaiter(CONTRACT_CREATION_WAIT));
     const response = yield call(API.createContract, payload);
     yield put(
       setInitedContract({
@@ -189,9 +189,10 @@ function* requestConreactsList({
             ? CONTRACT_LIST_LOADING_TYPE.REFRESH
             : CONTRACT_LIST_LOADING_TYPE.INITIAL
         )
-      );
+      );      
     }
-    const contracts = yield call(API.requestContractList, type, requestedPage);
+    const filters = yield select((state) => state.contract.smartFilters);
+    const contracts = yield call(API.requestContractList, type, requestedPage, filters);
     yield put(
       setContractsList({
         list: contracts,
@@ -218,7 +219,7 @@ function* requestContract({ payload }: RequestContractAction) {
 
 function* requestContractDelete({ payload }: RequestContractAction) {
   try {
-    yield put(addToWAiter("requestDeleteContract"));
+    yield put(addToWaiter("requestDeleteContract"));
     yield call(API.requestDeleteContract, payload);
     yield put(deleteContract(payload));
   } catch (error) {
@@ -291,7 +292,7 @@ function* requestUsersEmail({ payload }: RequestGetEmailsAction) {
 }
 
 function* requestAcceptInvite({ payload }: RequestAcceptInviteAction) {
-  yield put(addToWAiter(REQUEST_ACCEPT_INVITE));
+  yield put(addToWaiter(REQUEST_ACCEPT_INVITE));
   try {
     yield call(API.acceptInvite, payload);
     yield put(
@@ -321,7 +322,7 @@ function* requestAcceptInvite({ payload }: RequestAcceptInviteAction) {
 function* requestDeleteContractPartner({
   payload,
 }: RequestDeleteContractPartnerAction) {
-  yield put(addToWAiter(REQUEST_DELETE_CONTRACT_PARTNER));
+  yield put(addToWaiter(REQUEST_DELETE_CONTRACT_PARTNER));
   try {
     yield call(API.deleteContractPartner, payload);
     yield put(removeContractPartnerFromList(payload));
@@ -333,7 +334,7 @@ function* requestDeleteContractPartner({
 }
 
 function* requestContractDetailPdf({ payload }: RequestContractAction) {
-  yield put(addToWAiter(REQUEST_CONTRACT_DETAIL_FOR_PDF));
+  yield put(addToWaiter(REQUEST_CONTRACT_DETAIL_FOR_PDF));
   try {
     const contract = yield call(API.requestContract, payload);
     yield put(setPdfViewOnListContract(contract));
@@ -345,7 +346,7 @@ function* requestContractDetailPdf({ payload }: RequestContractAction) {
 }
 
 function* requestLeaveContract({ payload }: RequestContractAction) {
-  yield put(addToWAiter(REQUEST_LEAVE_CONTRACT));
+  yield put(addToWaiter(REQUEST_LEAVE_CONTRACT));
   try {
     yield call(API.requestLeaveContract, payload);
     yield put(deleteContract(payload));

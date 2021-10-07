@@ -75,6 +75,8 @@ export default function Contract({
   };
 
   const cancelHandler = () => {
+    console.log(contract);
+    
     dispatch(
       setModal({
         message: t("contracts.confirmation_modal.message"),

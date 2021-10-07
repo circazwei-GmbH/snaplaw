@@ -15,6 +15,7 @@ type CheckboxProps = {
   isError?: boolean;
   errorMessage?: string;
   style?: StyleProp<TextStyle> | undefined;
+  testID?: string
 };
 
 export default function Checkbox({
@@ -24,10 +25,11 @@ export default function Checkbox({
   style,
   isError,
   errorMessage,
+  testID
 }: CheckboxProps) {
   return (
     <>
-      <Pressable style={[styles.container, style]} onPress={onChange}>
+      <Pressable style={[styles.container, style]} onPress={onChange} testID={testID}>
         <CheckBox
           isChecked={isChecked}
           onClick={onChange}

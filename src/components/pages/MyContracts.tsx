@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import TopBar from "../layouts/TopBar";
 import NotificationBell from "../components/NotificationBell";
+import FiltersModal from "../features/Modals/FiltersModal";
 import { useI18n } from "../../translator/i18n";
-import { Octicons } from "@expo/vector-icons";
+import FiltersButton from "../basics/buttons/FiltersButton";
 import TextSwitch, {
   TEXT_SWITCH_POSITION,
 } from "../basics/switches/TextSwitch";
@@ -15,19 +16,20 @@ import {
   CONTRACT_LIST_STATE,
   ContractDataType,
 } from "../../store/modules/contract/types";
-import { CONTRACT_LIST_LOADING_TYPE } from "../../store/modules/contract/slice";
+import { CONTRACT_LIST_LOADING_TYPE, setContractsListFilters } from "../../store/modules/contract/slice";
 
 export default function MyContracts() {
   const { t } = useI18n();
   const [switchState, setSwitchState] = useState<CONTRACT_LIST_STATE>(
     CONTRACT_LIST_STATE.FINALIZED
   );
+  const [isFiltersModalVisible, setFiltersModalVisibility] = useState(false);
   const contracts = useAppSelector((state) => state.contract.contracts);
   const isLoadingAndLoadingType = useAppSelector(
     (state) => state.contract.isListLoading
   );
   const dispatch = useAppDispatch();
-
+    
   useEffect(() => {
     dispatch(requestContractsList(switchState));
   }, [dispatch, requestContractsList]);
@@ -39,18 +41,18 @@ export default function MyContracts() {
         : CONTRACT_LIST_STATE.IN_PROGRESS;
     setSwitchState(nextState);
     dispatch(requestContractsList(nextState));
+    dispatch(setContractsListFilters({
+      types: [],
+      date: "",
+    }));
   };
   return (
+    <>
     <TopBar
       leftButton={<NotificationBell />}
       pageName={t("my_contracts.tab_name")}
       rightButton={
-        <Octicons
-          style={styles.settings}
-          name="settings"
-          size={24}
-          color="#668395"
-        />
+        <FiltersButton onPress={() => setFiltersModalVisibility(true)}/>
       }
       bottomElement={
         <TextSwitch
@@ -82,6 +84,12 @@ export default function MyContracts() {
         onRefresh={() => dispatch(requestContractsList(switchState, true))}
       />
     </TopBar>
+    <FiltersModal 
+      visible={isFiltersModalVisible} 
+      onClose={() => setFiltersModalVisibility(false)}
+      switchState={switchState}
+    />
+    </>
   );
 }
 
@@ -90,8 +98,5 @@ const styles = StyleSheet.create({
     marginTop: 50,
     textAlign: "center",
     fontSize: 30,
-  },
-  settings: {
-    marginRight: 16,
   },
 });

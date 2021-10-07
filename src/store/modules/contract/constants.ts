@@ -1,5 +1,9 @@
 export const enum CONTRACT_TYPES {
   PURCHASE = "PURCHASE",
+  WORK = "WORK",
+  CAR = "CAR",
+  FREE = "FREE",
+  RENTAL = "RENTAL",
 }
 
 export const enum CONTRACT_SCREEN_TYPES {

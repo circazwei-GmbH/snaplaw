@@ -12,7 +12,7 @@ import {
   RequestUserProfileAction,
   REQUEST_USER_PROFILE,
 } from "./action-creators";
-import { addToWAiter, removeFromWaiter, setMessage } from "../main/slice";
+import { addToWaiter, removeFromWaiter, setMessage } from "../main/slice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Reduser from "./slice";
 import { Translator } from "../../../translator/i18n";
@@ -83,7 +83,7 @@ function* requestEditProfile({ payload }: RequestEditProfileAction) {
 }
 
 function* requestUserProfile({ payload }: RequestUserProfileAction) {
-  yield put(addToWAiter(REQUEST_USER_PROFILE));
+  yield put(addToWaiter(REQUEST_USER_PROFILE));
   try {
     const user = yield call(API.requestUserProfile, payload);
     yield put(setCurretnPartner(user.data.user));
