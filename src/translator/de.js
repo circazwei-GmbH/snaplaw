@@ -210,6 +210,21 @@ export default {
       yes: "Ja",
       no: "Nein",
     },
+    smart_filters: {
+      modal_name: "Smart-Filter",
+      modal_subtitle: "Präzisieren Sie Ihre Vertragsliste",
+      categories: "Typen:",
+      clear_all: "Alles löschen",
+      by_date: "nach Datum:",
+      contract_types: {
+        purchase: "Kaufvertrag",
+        work: "Werkvertrag",
+        rental: "Mietvertrag",
+        free: "Freiformvertrag",
+        car: "Autokaufvertrag",
+      },
+      apply: "Anwenden",
+    },
   },
   menu: {
     cancel: "Abbrechen",

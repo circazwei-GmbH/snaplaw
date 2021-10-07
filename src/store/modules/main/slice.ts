@@ -37,7 +37,7 @@ const setModalAction = createAction<
   "setModal"
 >("setModal");
 const closeModalAction = createAction<undefined, "closeModal">("closeModal");
-const addToWaiterAction = createAction<string, "addToWAiter">("addToWAiter");
+const addToWaiterAction = createAction<string, "addToWaiter">("addToWaiter");
 const removeFromWaiterAction = createAction<string, "removeFromWaiter">(
   "removeFromWaiter"
 );
@@ -100,7 +100,7 @@ export const {
   setMessage,
   closeModal,
   setModal,
-  addToWAiter,
+  addToWaiter,
   removeFromWaiter,
   setOrientation,
 } = mainSlice.actions;

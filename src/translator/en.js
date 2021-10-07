@@ -208,6 +208,21 @@ export default {
       yes: "Yes",
       no: "No",
     },
+    smart_filters: {
+      modal_name: "Smart Filters",
+      modal_subtitle: "Refine your contracts list",
+      categories: "Types:",
+      clear_all: "Clear all",
+      by_date: "By date:",
+      contract_types: {
+        purchase: "Purchase contract",
+        work: "Work contract",
+        rental: "Rental contract",
+        free: "Free-form contract",
+        car: "Car sales contract",
+      },
+      apply: "Apply",
+    },
   },
   menu: {
     cancel: "Cancel",

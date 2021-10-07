@@ -10,8 +10,9 @@ import {
   ContractDataType,
   ContractListType,
   EmailsListItemInterface,
+  SmartFiltersType,
 } from "./types";
-import { CONTRACT_SCREEN_TYPES } from "./constants";
+import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
 import { MediaType } from "../../../services/media";
 import { BaseScreenDataInterface } from "./base-types";
 
@@ -32,6 +33,7 @@ interface ContractState {
     page: number;
     isNextPage: boolean;
   };
+  smartFilters: SmartFiltersType;
   inviteEmailsList: EmailsListItemInterface[];
   emailsListPagination: {
     page: number;
@@ -53,6 +55,10 @@ const initialState: ContractState = {
     listType: CONTRACT_LIST_STATE.FINALIZED,
     page: 0,
     isNextPage: true,
+  },
+  smartFilters: {
+    types: [],
+    date: "",
   },
   inviteEmailsList: [],
   emailsListPagination: {
@@ -97,6 +103,9 @@ const setContractsListAction = createAction<
   { list: ContractListType; page: number; type: CONTRACT_LIST_STATE },
   "setContractsList"
 >("setContractsList");
+const setContractsListFiltersAction = createAction<SmartFiltersType,
+  "setContractsListFilters"
+>("setContractsListFilters");
 const setListLoadingAction = createAction<boolean, "setListLoading">(
   "setListLoading"
 );
@@ -236,6 +245,13 @@ const contractSlice = createSlice({
       state.listPagination.listType = action.payload.type;
       state.listPagination.isNextPage = !!action.payload.list.length;
     },
+    [setContractsListFiltersAction.type]: (
+      state: Draft<ContractState>,
+      action: PayloadAction<SmartFiltersType>
+    ) => {
+      state.smartFilters.types = action.payload.types;
+      state.smartFilters.date = action.payload.date;
+    },
     [setListLoadingAction.type]: (
       state: Draft<ContractState>,
       action: PayloadAction<CONTRACT_LIST_LOADING_TYPE | undefined>
@@ -359,6 +375,7 @@ export const {
   setFieldError,
   clearErrors,
   setContractsList,
+  setContractsListFilters,
   setListLoading,
   deleteContract,
   updateContractSign,

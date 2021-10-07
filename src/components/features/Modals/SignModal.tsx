@@ -9,7 +9,7 @@ import { uploadMedia } from "../../../store/modules/media/action-creators";
 import { MEDIA_FOLDERS } from "../../../store/modules/media/constants";
 import { SIGN_LOADER } from "../../../store/modules/contract/purchase/sign";
 import { useI18n } from "../../../translator/i18n";
-import { addToWAiter } from "../../../store/modules/main/slice";
+import { addToWaiter } from "../../../store/modules/main/slice";
 import SplashLoader from "./SplashLoader";
 import { signContract } from "../../../store/modules/contract/action-creators";
 import { MEDIA_TYPE } from "../../../services/media";
@@ -34,7 +34,7 @@ export default function SignModal({ visible, onClose }: SignModalProps) {
   }, [visible]);
 
   const takeSignature = async () => {
-    dispatch(addToWAiter(SIGN_LOADER));
+    dispatch(addToWaiter(SIGN_LOADER));
     const signData = await signatureRef?.takeSnapshotAsync({
       format: "png",
     });

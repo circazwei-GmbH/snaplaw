@@ -132,8 +132,7 @@ export default function Contract({
     navigation.pop();
   };
 
-  const cancelHandler = () => {
-    dispatch(
+  const cancelHandler = () => {dispatch(
       setModal({
         message: t("contracts.confirmation_modal.message"),
         actions: [

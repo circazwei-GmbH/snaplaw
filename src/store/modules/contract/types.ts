@@ -102,6 +102,11 @@ export interface RequestContractAction extends BaseAction {
   payload: string;
 }
 
+export type SmartFiltersType = {
+  types: CONTRACT_TYPES[];
+  date: string;
+}
+
 export interface ValidateAllScreensAction extends BaseAction {
   payload: CONTRACT_TYPES;
 }
