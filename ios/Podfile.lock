@@ -34,6 +34,9 @@ PODS:
     - UMCore
   - EXLocalization (10.2.0):
     - UMCore
+  - EXNotifications (0.12.3):
+    - ExpoModulesCore
+    - UMCore
   - ExpoModulesCore (0.2.0):
     - ExpoModulesCore/Core (= 0.2.0)
     - ExpoModulesCore/Interfaces (= 0.2.0)
@@ -398,6 +401,7 @@ DEPENDENCIES:
   - EXImagePicker (from `../node_modules/expo-image-picker/ios`)
   - EXKeepAwake (from `../node_modules/expo-keep-awake/ios`)
   - EXLocalization (from `../node_modules/expo-localization/ios`)
+  - EXNotifications (from `../node_modules/expo-notifications/ios`)
   - ExpoModulesCore (from `../node_modules/expo-modules-core/ios`)
   - EXScreenOrientation (from `../node_modules/expo-screen-orientation/ios`)
   - EXSplashScreen (from `../node_modules/expo-splash-screen/ios`)
@@ -484,6 +488,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-keep-awake/ios"
   EXLocalization:
     :path: "../node_modules/expo-localization/ios"
+  EXNotifications:
+    :path: "../node_modules/expo-notifications/ios"
   ExpoModulesCore:
     :path: "../node_modules/expo-modules-core/ios"
   EXScreenOrientation:
@@ -598,6 +604,7 @@ SPEC CHECKSUMS:
   EXImagePicker: 414a3663910fd6604248e84c9c77a0501ae0d18b
   EXKeepAwake: f4105ef469be7b283f66ce2d7234bb71ac80cd26
   EXLocalization: 356f4e16a606cec21a77d6250528fde526152b45
+  EXNotifications: 171ccaf17643811673c78f4c4830560d6e5a92aa
   ExpoModulesCore: 2734852616127a6c1fc23012197890a6f3763dc7
   EXScreenOrientation: d94f791c7ade3639352f34fcf5353f7c554b7d69
   EXSplashScreen: 6208ca88470ff5979fd49a08ef3feb01143a2b79

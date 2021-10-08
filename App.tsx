@@ -32,6 +32,7 @@ export default function App() {
     return <Text>Loading Fonts</Text>;
   }
 
+
   return (
     <Provider store={store}>
       <NavigationContainer theme={theme} ref={navigationRef}>

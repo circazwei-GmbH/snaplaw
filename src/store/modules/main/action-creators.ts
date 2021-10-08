@@ -5,6 +5,7 @@ export const NAVIGATION_POP_TO_TOP = "NAVIGATION_POP_TO_TOP";
 export const NAVIGATE_POP = "NAVIGATE_POP";
 export const ORIENTATION = "ORIENTATION";
 export const NAVIGATE = "NAVIGATE";
+export const INIT_PUSH_NOTIFICATIONS = "INIT_PUSH_NOTIFICATIONS";
 
 type NavigationPopToTopAction = BaseAction;
 export type AllowOrientationType =
@@ -17,6 +18,8 @@ export interface OrientationAction extends BaseAction {
 export interface NavigateAction extends BaseAction {
   payload: Record<string, Record<string, any>>;
 }
+
+export interface InitPushNotificationsAction extends BaseAction {}
 
 export const navigationPopToTop = (): NavigationPopToTopAction => ({
   type: NAVIGATION_POP_TO_TOP,
@@ -39,3 +42,8 @@ export const navigate = (
   type: NAVIGATE,
   payload: target,
 });
+
+export const initPushNotifications = (): InitPushNotificationsAction => ({
+  type: INIT_PUSH_NOTIFICATIONS,
+  payload: undefined
+})
