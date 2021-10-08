@@ -25,6 +25,11 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import ContractViewButton from "../../basics/buttons/ContractViewButton";
 import ContractView from "../../features/Modals/ContractView";
 import { CONTRACT_ROLE } from "../../../store/modules/contract/contract-roles";
+import { updateScreenData } from "../../../store/modules/contract/slice";
+import { checkIsItChangeRequest } from "../../../store/modules/contract/request-changes-config";
+import { BaseScreenDataInterface } from "../../../store/modules/contract/base-types";
+import { findScreentByType } from "../../../utils/helpers";
+import { BUTTON_COLORTYPE } from "../../../store/modules/main/types";
 
 type ContractProps = {
   route: {
@@ -39,6 +44,8 @@ export default function Contract({
 }: ContractProps) {
   const navigation = useNavigation();
   const contract = useAppSelector((state) => state.contract.currentContract);
+  const [previousVersionOfCurrentScreen, setPreviousVersionOfCurrentScreen] =
+    useState<BaseScreenDataInterface | undefined>(undefined);
   const [contractViewVisible, setContractViewVisible] = useState(false);
   const { t } = useI18n();
   const dispatch = useAppDispatch();
@@ -48,6 +55,17 @@ export default function Contract({
       dispatch(requestContract(id));
     }
   }, [id]);
+
+  useEffect(() => {
+    if (!contract) {
+      return;
+    }
+    const currentContractScreen = findScreentByType(
+      contract.screens,
+      currentContractConfig[screenCount].type
+    );
+    setPreviousVersionOfCurrentScreen(currentContractScreen);
+  }, []);
 
   if (!contract) {
     return null;
@@ -62,9 +80,49 @@ export default function Contract({
     if (!contract) {
       return;
     }
-    dispatch(
-      requestScreenData(contract.type, currentContractConfig[screenCount].type)
+    const isNeedRequestModal = checkIsItChangeRequest(
+      contract,
+      currentContractConfig[screenCount].type,
+      previousVersionOfCurrentScreen
     );
+
+    if (isNeedRequestModal) {
+      dispatch(
+        setModal({
+          message: t("contracts.change_prequest_modal.message"),
+          actions: [
+            {
+              name: t("contracts.change_prequest_modal.no"),
+              action: updateScreenData({
+                screen: previousVersionOfCurrentScreen,
+                type: currentContractConfig[screenCount].type,
+              }),
+              colortype: BUTTON_COLORTYPE.ERROR,
+            },
+            {
+              name: t("contracts.change_prequest_modal.yes"),
+              action: requestScreenData(
+                contract.type,
+                currentContractConfig[screenCount].type,
+                true
+              ),
+            },
+          ],
+        })
+      );
+    } else {
+      dispatch(
+        requestScreenData(
+          contract.type,
+          currentContractConfig[screenCount].type
+        )
+      );
+      const currentContractScreen = findScreentByType(
+        contract.screens,
+        currentContractConfig[screenCount].type
+      );
+      setPreviousVersionOfCurrentScreen(currentContractScreen);
+    }
     // @ts-ignore
     navigation.push(HOME_ROUTER.CONTRACT, { screenCount: screenCount + 1 });
   };

@@ -51,7 +51,11 @@ export default function ContractView({
     onClose();
     dispatch(
       setModal({
-        message: t(isPartnerInvited ? "contracts.messages.found_in_pregress_folder" : "contracts.messages.found_in_pregress_folder_with_invite"),
+        message: t(
+          isPartnerInvited
+            ? "contracts.messages.found_in_pregress_folder"
+            : "contracts.messages.found_in_pregress_folder_with_invite"
+        ),
         actions: [
           {
             name: t("ok"),

@@ -5,7 +5,7 @@ export interface NotificationInterface {
   _id: string;
   type: NOTIFICATION_TYPE;
   contractId: string;
-  contractName: string;
+  contractName: string | null;
   usernameFrom: string;
   createdAt: string;
   isNew: boolean;

@@ -32,6 +32,7 @@ export const translateContract = (
   })),
   partnerName: contract.partnerName,
   sign: contract.sign,
+  oponentSign: contract.oponentSign,
 });
 
 export const translateContractList = (

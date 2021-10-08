@@ -28,6 +28,8 @@ import { MY_CONTRACT_ROUTE } from "./MyContractRouterTypes";
 import { AUTH_ROUTE } from "./AuthRouterTypes";
 import { HOME_ROUTER } from "./HomeRouterType";
 import { PROFILE_ROUTER } from "./ProfileRouterTypes";
+import { connect, disconnect } from "../services/socket";
+import {requestNotifications} from "../store/modules/notifications/action-creators";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -36,7 +38,7 @@ const HomeStack = createStackNavigator();
 const ContractsStack = createStackNavigator();
 
 export default function Router() {
-  const token = useAppSelector((state) => state.auth.token);
+  const token = useAppSelector((state) => state.auth.token?.token);
   const language = useAppSelector((state) => state.profile.language);
   const { t } = useI18n();
 
@@ -47,6 +49,15 @@ export default function Router() {
     dispatch(requestToken());
     dispatch(orientationChange(ScreenOrientation.OrientationLock.PORTRAIT_UP));
   }, [dispatch]);
+
+  useEffect(() => {
+    if (token) {
+      dispatch(requestNotifications());
+      connect(dispatch).then(() => {});
+    } else {
+      disconnect().then(() => {});
+    }
+  }, [token]);
 
   if (!language) {
     return <Text>Loading Lang</Text>;

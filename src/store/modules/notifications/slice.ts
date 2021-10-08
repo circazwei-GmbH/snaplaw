@@ -42,6 +42,10 @@ const clearNotificationModuleAction = createAction<
   undefined,
   "clearNotificationModule"
 >("clearNotificationModule");
+const addNotificationToListAction = createAction<
+  NotificationListItemInterface,
+  "addNotificationToList"
+>("addNotificationToList");
 
 const notificationsSlice = createSlice({
   name: "notifications",
@@ -97,6 +101,12 @@ const notificationsSlice = createSlice({
     [clearNotificationModuleAction.type]: () => {
       return initialState;
     },
+    [addNotificationToListAction.type]: (
+      state: Draft<NotificationsState>,
+      actions: PayloadAction<NotificationListItemInterface>
+    ) => {
+      state.notifications.unshift(actions.payload);
+    },
   },
 });
 
@@ -105,6 +115,7 @@ export const {
   changeNotificationStatus,
   setNotificationsLoading,
   clearNotificationModule,
+  addNotificationToList,
 } = notificationsSlice.actions;
 
 export default notificationsSlice.reducer;

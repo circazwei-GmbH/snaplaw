@@ -14,6 +14,7 @@ import {
 } from "./types";
 import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
 import { MediaType } from "../../../services/media";
+import { BaseScreenDataInterface } from "./base-types";
 
 export enum CONTRACT_LIST_LOADING_TYPE {
   INITIAL = "INITIAL",
@@ -71,7 +72,7 @@ const initialState: ContractState = {
   pdfViewOnListContract: undefined,
 };
 
-type ScreenData = {
+export type ScreenData = {
   screenType: CONTRACT_SCREEN_TYPES;
   fieldName: string;
   value: unknown;
@@ -81,6 +82,11 @@ type FieldErrorData = {
   screenType: CONTRACT_SCREEN_TYPES;
   field: string;
   message: string | undefined;
+};
+
+type UpdateScreenDataPayload = {
+  screen: BaseScreenDataInterface | undefined;
+  type: CONTRACT_SCREEN_TYPES;
 };
 
 const setInitedContractAction = createAction<string, "setInitedContract">(
@@ -131,7 +137,17 @@ const setPdfViewOnListContractAction = createAction<
   ContractDataType | undefined,
   "setPdfViewOnListContract"
 >("setPdfViewOnListContract");
-const setPartnerNameAfterInviteAction = createAction<{partnerName: string, contractId: string}, "setPartnerNameAfterInvite">("setPartnerNameAfterInvite");
+const setPartnerNameAfterInviteAction = createAction<
+  { partnerName: string; contractId: string },
+  "setPartnerNameAfterInvite"
+>("setPartnerNameAfterInvite");
+const updateScreenDataAction = createAction<
+  UpdateScreenDataPayload,
+  "updateScreenData"
+>("updateScreenData");
+const clearAllSignAction = createAction<undefined, "clearAllSign">(
+  "clearAllSign"
+);
 
 const contractSlice = createSlice({
   name: "contract",
@@ -310,12 +326,46 @@ const contractSlice = createSlice({
     },
     [setPartnerNameAfterInviteAction.type]: (
       state: Draft<ContractState>,
-      action: PayloadAction<{partnerName: string, contractId: string}>
+      action: PayloadAction<{ partnerName: string; contractId: string }>
     ) => {
       if (state.currentContract?.id === action.payload.contractId) {
         state.currentContract.partnerName = action.payload.partnerName;
       }
-    }
+    },
+    [updateScreenDataAction.type]: (
+      state: Draft<ContractState>,
+      action: PayloadAction<UpdateScreenDataPayload>
+    ) => {
+      if (!state.currentContract) {
+        return;
+      }
+      if (action.payload.screen) {
+        state.currentContract.screens =
+          state.currentContract.screens.map<BaseScreenDataInterface>(
+            (screen) => {
+              if (screen.type !== action.payload.screen?.type) {
+                return screen;
+              } else {
+                return action.payload.screen;
+              }
+            }
+          );
+      } else {
+        const index = state.currentContract.screens.findIndex(
+          (screen) => screen.type === action.payload.type
+        );
+        if (index >= 0) {
+          state.currentContract.screens.splice(index, 1);
+        }
+      }
+    },
+    [clearAllSignAction.type]: (state: Draft<ContractState>) => {
+      if (!state.currentContract) {
+        return;
+      }
+      state.currentContract.oponentSign = null;
+      state.currentContract.sign = undefined;
+    },
   },
 });
 
@@ -335,7 +385,9 @@ export const {
   clearEmailErrors,
   removeContractPartnerFromList,
   setPdfViewOnListContract,
-  setPartnerNameAfterInvite
+  setPartnerNameAfterInvite,
+  updateScreenData,
+  clearAllSign,
 } = contractSlice.actions;
 
 export default contractSlice.reducer;

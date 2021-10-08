@@ -3,7 +3,6 @@ import { Text, View } from "react-native";
 import { fireEvent, render } from "@testing-library/react-native";
 import TopBar from "../TopBar";
 import BackButton from "../../basics/buttons/BackButton";
-import NotificationBell from "../../components/NotificationBell";
 import * as RootNavigation from "../../../router/RootNavigation";
 
 jest.mock("../../../router/RootNavigation");
@@ -58,7 +57,7 @@ describe("HeaderNavigation", () => {
     const { getByTestId } = render(
       <TopBar
         pageName="TestName"
-        leftButton={<NotificationBell />}
+        leftButton={<Child />}
         rightButton={<BackButton />}
       >
         <Child />

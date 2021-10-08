@@ -23,9 +23,11 @@ const initialState = {
         {
           type: CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION,
           data: {
-            [PRODUCT_DESCRIPTION_FIELDS.productPhotos]: [{uri: "test/additional"}],
+            [PRODUCT_DESCRIPTION_FIELDS.productPhotos]: [
+              { uri: "test/additional" },
+            ],
             [PRODUCT_DESCRIPTION_FIELDS.accessoriesPhotos]: [
-              {uri: "test/accessories"},
+              { uri: "test/accessories" },
             ],
           },
         },
