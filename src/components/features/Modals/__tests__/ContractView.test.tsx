@@ -1,14 +1,19 @@
 import React from "react";
+import { Provider } from "react-redux";
 import { createStore } from "@reduxjs/toolkit";
 import { fireEvent, render } from "@testing-library/react-native";
+import * as RootNavigation from "../../../../router/RootNavigation";
 import ContractView from "../ContractView";
-import { Provider } from "react-redux";
 import { LANGUAGE_ENGLISH } from "../../../../store/modules/profile/constants";
 import { setMessage, setModal } from "../../../../store/modules/main/slice";
 import { navigationPopToTop } from "../../../../store/modules/main/action-creators";
 import { buildPDFSource } from "../../../../services/contract";
 import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/constants";
 import { PRODUCT_DESCRIPTION_FIELDS } from "../../../../store/modules/contract/types";
+import { CONTRACT_ROLE } from "../../../../store/modules/contract/contract-roles";
+import { HOME_ROUTER } from "../../../../router/HomeRouterType";
+
+jest.mock("../../../../router/RootNavigation");
 
 const initialState = {
   contract: {
@@ -49,6 +54,7 @@ describe("ContractView", () => {
           contractId="testId"
           screens={initialState.contract.currentContract.screens}
           fromStepper
+          viewerRole={CONTRACT_ROLE.OWNER}
         />
       </Provider>
     );
@@ -68,6 +74,7 @@ describe("ContractView", () => {
           contractId="testId"
           screens={initialState.contract.currentContract.screens}
           fromStepper
+          viewerRole={CONTRACT_ROLE.OWNER}
         />
       </Provider>
     );
@@ -84,6 +91,7 @@ describe("ContractView", () => {
           contractId="testId"
           screens={initialState.contract.currentContract.screens}
           fromStepper
+          viewerRole={CONTRACT_ROLE.OWNER}
         />
       </Provider>
     );
@@ -113,6 +121,7 @@ describe("ContractView", () => {
           screens={initialState.contract.currentContract.screens}
           fromStepper
           isPartnerInvited
+          viewerRole={CONTRACT_ROLE.OWNER}
         />
       </Provider>
     );
@@ -140,6 +149,7 @@ describe("ContractView", () => {
           contractId="testId"
           screens={initialState.contract.currentContract.screens}
           fromStepper
+          viewerRole={CONTRACT_ROLE.OWNER}
         />
       </Provider>
     );
@@ -157,10 +167,27 @@ describe("ContractView", () => {
           contractId="testId"
           screens={initialState.contract.currentContract.screens}
           fromStepper
+          viewerRole={CONTRACT_ROLE.OWNER}
         />
       </Provider>
     );
     expect(getByText("contracts.pdf_view.additional_media")).toBeTruthy();
     expect(getByText("contracts.pdf_view.accessories_media")).toBeTruthy();
+  });
+  it("Should dispaly enter contract details button", () => {
+    const handler = jest.fn();
+    const { getByText } = render(
+      <Provider store={store}>
+        <ContractView
+          visible={true}
+          onClose={handler}
+          contractId="testId"
+          screens={initialState.contract.currentContract.screens}
+          viewerRole={CONTRACT_ROLE.PARTNER}
+        />
+      </Provider>
+    );
+    fireEvent.press(getByText("contracts.pdf_view.enter_contract_details"));
+    expect(RootNavigation.navigate).toBeCalledWith(HOME_ROUTER.CONTRACT, { screenCount: 0, id: "testId" });
   });
 });

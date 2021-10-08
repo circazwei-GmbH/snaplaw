@@ -149,6 +149,7 @@ export default function Contract({
           visible={contractViewVisible}
           onClose={closeViewerHandler}
           contractId={contract.id}
+          viewerRole={contract.meRole}
           screens={contract.screens}
           fromStepper
           isPartnerInvited={!!contract.partnerName}

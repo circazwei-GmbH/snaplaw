@@ -345,6 +345,7 @@ export default {
       cancel: "Abbrechen",
       additional_media: "Additionale Information",
       accessories_media: "Zubehör",
+      enter_contract_details: "Vertragsdetails eingeben",
     },
     messages: {
       found_in_pregress_folder_with_invite:
