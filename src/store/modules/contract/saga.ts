@@ -181,7 +181,7 @@ function* validateAllScreens({ payload }: ValidateAllScreensAction) {
   }
 }
 
-function* requestConreactsList({
+function* requestContractsList({
   payload: { type, isRefresh },
 }: RequestContractListAction) {
   const listPagination = yield select((state) => state.contract.listPagination);
@@ -356,6 +356,7 @@ function* requestContractDetailPdf({ payload }: RequestContractAction) {
   try {
     const contract = yield call(API.requestContract, payload);
     yield put(setPdfViewOnListContract(contract));
+    
   } catch (error) {
     yield put(responseError(error));
   } finally {
@@ -379,7 +380,7 @@ function* contractSaga() {
   yield takeLatest(REQUEST_CREATE_CONTRACT, createContract);
   yield takeLatest(REQUEST_SCREEN_DATA, requestScreenData);
   yield takeLatest(VALIDATE_SCREEN, screenValidate);
-  yield takeLatest(REQEST_CONTRACTS_LIST, requestConreactsList);
+  yield takeLatest(REQEST_CONTRACTS_LIST, requestContractsList);
   yield takeLatest(REQUEST_CONTRACT, requestContract);
   yield takeLatest(REQUEST_CONTRACT_DELETE, requestContractDelete);
   yield takeLatest(VALIDATE_ALL_SCREENS, validateAllScreens);

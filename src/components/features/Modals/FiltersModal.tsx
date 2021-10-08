@@ -77,44 +77,44 @@ export default function FiltersModal({ visible, onClose, switchState }: FiltersM
       <Modal visible={visible} transparent={true} animationType="none">
         <Pressable onPress={onEmptyPlaceTouch} style={styles.container} testID="ModalBackScreen">
           <Pressable style={styles.filtersModalContainer}>
-              <View>
-                <Text style={styles.title}>{t("my_contracts.smart_filters.modal_name")}</Text>
-                <Text style={styles.subtitle}>{t("my_contracts.smart_filters.modal_subtitle")}</Text>
+            <View>
+              <Text style={styles.title}>{t("my_contracts.smart_filters.modal_name")}</Text>
+              <Text style={styles.subtitle}>{t("my_contracts.smart_filters.modal_subtitle")}</Text>
                 
-                <View style={styles.filtersformContainer}>
-                  <View style={styles.filtersformTopBar}>
-                      <Text style={styles.containersTitle}>{t("my_contracts.smart_filters.categories")}</Text>
-                      <TextButton
-                        text={t("my_contracts.smart_filters.clear_all")}
-                        onPress={clearFilters}
-                        type="right"
+              <View style={styles.filtersformContainer}>
+                <View style={styles.filtersformTopBar}>
+                    <Text style={styles.containersTitle}>{t("my_contracts.smart_filters.categories")}</Text>
+                    <TextButton
+                      text={t("my_contracts.smart_filters.clear_all")}
+                      onPress={clearFilters}
+                      type="right"
+                    />
+                </View>
+
+                <View>
+                   {Object.entries(contractTypes).map(([key, value]) => (
+                      <Checkbox 
+                        isChecked={selectedCategories.indexOf(key) !== -1}
+                        onChange={() => onChangeSelectionCategory(key)}
+                        text={value}
+                        style={styles.checkbox}
+                        key={key}
+                        testID={"TypeCheckbox" + key}
                       />
-                  </View>
+                   ))}
+                </View>
 
-                  <View>
-                     {Object.entries(contractTypes).map(([key, value]) => (
-                        <Checkbox 
-                          isChecked={selectedCategories.indexOf(key) !== -1}
-                          onChange={() => onChangeSelectionCategory(key)}
-                          text={value}
-                          style={styles.checkbox}
-                          key={key}
-                          testID={"TypeCheckbox" + key}
-                        />
-                     ))}
-                  </View>
-
-                  <View style={styles.dateContainer}>
-                      <Text style={styles.containersTitle}>{t("my_contracts.smart_filters.by_date")}</Text>
-
-                      <CalendarInput
-                        style={styles.dateInput}
-                        date={dayjs(selectedDate).isValid() ? dayjs(selectedDate).format("DD.MM.YYYY") : selectedDate}
-                        dateHandler={() => setDatePickerOpened(true)}
-                      />
-                  </View>
+                <View style={styles.dateContainer}>
+                    <Text style={styles.containersTitle}>{t("my_contracts.smart_filters.by_date")}</Text>
+                    <CalendarInput
+                      style={styles.dateInput}
+                      date={dayjs(selectedDate).isValid() ? dayjs(selectedDate).format("DD.MM.YYYY") : selectedDate}
+                      dateHandler={() => setDatePickerOpened(true)}
+                    />
                 </View>
               </View>
+            </View>
+            
             <View style={styles.applyButtonContainer}>
               <Button
                 text={t("my_contracts.smart_filters.apply")}
