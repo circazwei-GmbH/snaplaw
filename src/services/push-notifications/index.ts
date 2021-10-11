@@ -13,9 +13,10 @@ const registerReciver = () => {
       shouldSetBadge: true,
     }),
   });
-  Notifications.addNotificationReceivedListener(_n => {
-    console.log('NOTIFICATION: ', _n)
-  })
+  // This way to recive push like app notification, may be need
+  // Notifications.addNotificationReceivedListener(_n => {
+  //   console.log('NOTIFICATION: ', _n)
+  // })
 }
 
 export const init = async () => {
