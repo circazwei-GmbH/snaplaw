@@ -69,7 +69,7 @@ import { navigatePop } from "../main/action-creators";
 
 function* createContract({ payload }: RequestCreateContractAction) {
   try {
-    yield put(addToWaiter(CONTRACT_CREATION_WAIT));
+    yield put(addToWaiter({event: CONTRACT_CREATION_WAIT}));
     const response = yield call(API.createContract, payload);
     yield put(
       setInitedContract({
@@ -93,7 +93,7 @@ function* createContract({ payload }: RequestCreateContractAction) {
   } catch (error) {
     yield put(responseError(error));
   } finally {
-    yield put(removeFromWaiter(CONTRACT_CREATION_WAIT));
+    yield put(removeFromWaiter({event: CONTRACT_CREATION_WAIT}));
   }
 }
 
@@ -181,7 +181,7 @@ function* validateAllScreens({ payload }: ValidateAllScreensAction) {
   }
 }
 
-function* requestConreactsList({
+function* requestContractsList({
   payload: { type, isRefresh },
 }: RequestContractListAction) {
   const listPagination = yield select((state) => state.contract.listPagination);
@@ -240,13 +240,13 @@ function* requestContract({ payload }: RequestContractAction) {
 
 function* requestContractDelete({ payload }: RequestContractAction) {
   try {
-    yield put(addToWaiter("requestDeleteContract"));
+    yield put(addToWaiter({event: "requestDeleteContract"}));
     yield call(API.requestDeleteContract, payload);
     yield put(deleteContract(payload));
   } catch (error) {
     yield put(responseError(error));
   } finally {
-    yield put(removeFromWaiter("requestDeleteContract"));
+    yield put(removeFromWaiter({event: "requestDeleteContract"}));
   }
 }
 
@@ -315,7 +315,7 @@ function* requestUsersEmail({ payload }: RequestGetEmailsAction) {
 }
 
 function* requestAcceptInvite({ payload }: RequestAcceptInviteAction) {
-  yield put(addToWaiter(REQUEST_ACCEPT_INVITE));
+  yield put(addToWaiter({event: REQUEST_ACCEPT_INVITE}));
   try {
     yield call(API.acceptInvite, payload);
     yield put(
@@ -338,45 +338,46 @@ function* requestAcceptInvite({ payload }: RequestAcceptInviteAction) {
       yield put(responseError(error));
     }
   } finally {
-    yield put(removeFromWaiter(REQUEST_ACCEPT_INVITE));
+    yield put(removeFromWaiter({event: REQUEST_ACCEPT_INVITE}));
   }
 }
 
 function* requestDeleteContractPartner({
   payload,
 }: RequestDeleteContractPartnerAction) {
-  yield put(addToWaiter(REQUEST_DELETE_CONTRACT_PARTNER));
+  yield put(addToWaiter({event: REQUEST_DELETE_CONTRACT_PARTNER}));
   try {
     yield call(API.deleteContractPartner, payload);
     yield put(removeContractPartnerFromList(payload));
   } catch (error) {
     yield put(responseError(error));
   } finally {
-    yield put(removeFromWaiter(REQUEST_DELETE_CONTRACT_PARTNER));
+    yield put(removeFromWaiter({event: REQUEST_DELETE_CONTRACT_PARTNER}));
   }
 }
 
 function* requestContractDetailPdf({ payload }: RequestContractAction) {
-  yield put(addToWaiter(REQUEST_CONTRACT_DETAIL_FOR_PDF));
+  yield put(addToWaiter({event: REQUEST_CONTRACT_DETAIL_FOR_PDF}));
   try {
     const contract = yield call(API.requestContract, payload);
     yield put(setPdfViewOnListContract(contract));
+    
   } catch (error) {
     yield put(responseError(error));
   } finally {
-    yield put(removeFromWaiter(REQUEST_CONTRACT_DETAIL_FOR_PDF));
+    yield put(removeFromWaiter({event: REQUEST_CONTRACT_DETAIL_FOR_PDF}));
   }
 }
 
 function* requestLeaveContract({ payload }: RequestContractAction) {
-  yield put(addToWaiter(REQUEST_LEAVE_CONTRACT));
+  yield put(addToWaiter({event: REQUEST_LEAVE_CONTRACT}));
   try {
     yield call(API.requestLeaveContract, payload);
     yield put(deleteContract(payload));
   } catch (error) {
     yield put(responseError(error));
   } finally {
-    yield put(removeFromWaiter(REQUEST_LEAVE_CONTRACT));
+    yield put(removeFromWaiter({event: REQUEST_LEAVE_CONTRACT}));
   }
 }
 
@@ -384,7 +385,7 @@ function* contractSaga() {
   yield takeLatest(REQUEST_CREATE_CONTRACT, createContract);
   yield takeLatest(REQUEST_SCREEN_DATA, requestScreenData);
   yield takeLatest(VALIDATE_SCREEN, screenValidate);
-  yield takeLatest(REQEST_CONTRACTS_LIST, requestConreactsList);
+  yield takeLatest(REQEST_CONTRACTS_LIST, requestContractsList);
   yield takeLatest(REQUEST_CONTRACT, requestContract);
   yield takeLatest(REQUEST_CONTRACT_DELETE, requestContractDelete);
   yield takeLatest(VALIDATE_ALL_SCREENS, validateAllScreens);

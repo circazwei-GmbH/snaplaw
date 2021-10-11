@@ -1,8 +1,9 @@
 import React from "react";
 import { Dimensions, Modal, ScrollView, StyleSheet, View } from "react-native";
 import Pdf from "react-native-pdf";
-import TextButton from "../../basics/buttons/TextButton";
+import * as RootNavigation from "../../../router/RootNavigation";
 import { useI18n } from "../../../translator/i18n";
+import TextButton from "../../basics/buttons/TextButton";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { buildPDFSource } from "../../../services/contract";
 import { setMessage, setModal } from "../../../store/modules/main/slice";
@@ -15,6 +16,9 @@ import {
 import DescriptionPhotos from "../../components/DescriptionPhotos";
 import DefaultText from "../../basics/typography/DefaultText";
 import { BaseScreenDataInterface } from "../../../store/modules/contract/base-types";
+import Button from "../../basics/buttons/Button";
+import { CONTRACT_ROLE } from "../../../store/modules/contract/contract-roles";
+import { HOME_ROUTER } from "../../../router/HomeRouterType";
 
 type ContractViewProps = {
   visible: boolean;
@@ -23,6 +27,7 @@ type ContractViewProps = {
   screens: BaseScreenDataInterface[] | undefined;
   fromStepper?: boolean;
   isPartnerInvited?: boolean;
+  viewerRole: CONTRACT_ROLE;
 };
 
 export default function ContractView({
@@ -32,6 +37,7 @@ export default function ContractView({
   screens,
   fromStepper,
   isPartnerInvited = false,
+  viewerRole,
 }: ContractViewProps) {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
@@ -64,6 +70,11 @@ export default function ContractView({
     onClose();
     dispatch(setMessage(t("errors.abstract")));
   };
+
+  const onEnterDetailsButtonPress = () => {
+    onClose();
+    RootNavigation.navigate(HOME_ROUTER.CONTRACT, { screenCount: 0, id: contractId })
+  }
 
   return (
     <View>
@@ -144,6 +155,19 @@ export default function ContractView({
                   />
                 </>
               ) : null}
+              {
+                !fromStepper && 
+                viewerRole === CONTRACT_ROLE.PARTNER ? (
+                  <View style={styles.enterDetailsButtonContainer}>
+                    <Button
+                      text={t("contracts.pdf_view.enter_contract_details")}
+                      type="primary"
+                      shadowNone
+                      onPress={onEnterDetailsButtonPress}
+                    />
+                  </View>
+                ) : null
+              }
             </View>
           </ScrollView>
         </View>
@@ -180,4 +204,8 @@ const styles = StyleSheet.create({
   mediaContainer: {
     marginVertical: 10,
   },
+  enterDetailsButtonContainer: {
+    paddingHorizontal: 43,
+    paddingTop: 5,
+  }
 });

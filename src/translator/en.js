@@ -348,6 +348,7 @@ export default {
       cancel: "Cancel",
       additional_media: "Additional information",
       accessories_media: "Accessories",
+      enter_contract_details: "Enter contract details",
     },
     messages: {
       found_in_pregress_folder_with_invite:
