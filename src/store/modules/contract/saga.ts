@@ -205,10 +205,15 @@ function* requestContractsList({
             ? CONTRACT_LIST_LOADING_TYPE.REFRESH
             : CONTRACT_LIST_LOADING_TYPE.INITIAL
         )
-      );      
+      );
     }
     const filters = yield select((state) => state.contract.smartFilters);
-    const contracts = yield call(API.requestContractList, type, requestedPage, filters);
+    const contracts = yield call(
+      API.requestContractList,
+      type,
+      requestedPage,
+      filters
+    );
     yield put(
       setContractsList({
         list: contracts,
