@@ -18,6 +18,7 @@ import { getUserFromToken } from "../../utils";
 import { screenDataTranslator } from "./post-translator";
 import { CONTRACT_ROLE } from "../../store/modules/contract/contract-roles";
 import { MediaType } from "../media";
+import { Translator } from "../../translator/i18n";
 
 const createContract = (type: CONTRACT_TYPES) =>
   httpClient.post("api/contracts", { type });
@@ -38,7 +39,7 @@ const inviteUser = (contractData: InviteUserInterface): Promise<any> => {
     `api/contracts/${contractData.contractId}/invite-user`,
     {
       email: contractData.search,
-      locale: LANGUAGE_GERMANY ? "de" : "en",
+      locale: LANGUAGE_GERMANY === Translator.getInstance().getLanguage() ? "de" : "en",
     }
   );
 };
