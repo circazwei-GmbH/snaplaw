@@ -38,4 +38,7 @@ export const init = async () => {
 };
 
 export const storeTokenToApi = (hash: string) =>
-  httpClient.patch("api/users/set-push-notification-token", { hash });
+  httpClient.patch("api/users/push-notification-token", { hash });
+
+export const removePushTokenFromApi = () =>
+  httpClient.delete("api/users/push-notification-token");

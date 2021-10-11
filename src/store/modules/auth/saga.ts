@@ -59,6 +59,7 @@ import {
 import { BUTTON_COLORTYPE } from "../main/types";
 import { clearUser } from "../profile/slice";
 import { clearNotificationModule } from "../notifications/slice";
+import {removePushTokenFromApi} from "../../../services/push-notifications";
 
 function* fetchSignUp(action: RequestSignUpAction) {
   try {
@@ -251,6 +252,7 @@ function* requestTokenHandler() {
 
 function* clearToken() {
   try {
+    yield call(removePushTokenFromApi);
     yield call(clearAuthTokens);
     yield put(killToken());
     yield put(clearUser());
