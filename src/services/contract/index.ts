@@ -37,8 +37,7 @@ const inviteUser = (contractData: InviteUserInterface): Promise<any> => {
   return httpClient.post(
     `api/contracts/${contractData.contractId}/invite-user`,
     {
-      email: contractData.search,
-      locale: LANGUAGE_GERMANY ? "de" : "en",
+      email: contractData.search
     }
   );
 };

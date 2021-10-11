@@ -2,6 +2,8 @@ import axios, { AxiosRequestConfig } from "axios";
 import { setAuthTokens } from "./auth/tokens";
 import { API_HOST } from "../env/env";
 import { connect } from "./socket";
+import {Translator} from "../translator/i18n";
+import {LANGUAGE_GERMANY} from "../store/modules/profile/constants";
 
 let token: undefined | string;
 let refresh: undefined | string;
@@ -33,13 +35,17 @@ const _call = async (
   options?: AxiosRequestConfig,
   secondCall = false
 ): Promise<any> => {
+  const locale = Translator.getInstance().getLanguage() === LANGUAGE_GERMANY ? "de" : "en";
   try {
     return await axios.request(
       attachTokenToConfig({
         ...options,
         method,
+        params: {
+          locale
+        },
         url: `${API_HOST}/${url}`,
-        data: body,
+        data: body
       })
     );
   } catch (error) {
