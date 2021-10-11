@@ -12,7 +12,7 @@ import * as RootNavigation from "../../../router/RootNavigation";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { setOrientation } from "./slice";
 import * as NotificationService from "../../../services/push-notifications";
-import {responseError} from "../auth/action-creators";
+import { responseError } from "../auth/action-creators";
 
 function* navigateToTop() {
   RootNavigation.popToTop();

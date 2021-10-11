@@ -7,16 +7,20 @@ type FiltersButtonProps = {
 };
 
 export default function FiltersButton({
-    onPress
+  onPress,
 }: FiltersButtonProps): JSX.Element {
-
   return (
     <TouchableOpacity
       testID={"FiltersButton"}
       onPress={onPress}
       style={styles.container}
     >
-      <Octicons name="settings" size={24} color="#668395" style={styles.settings}/>
+      <Octicons
+        name="settings"
+        size={24}
+        color="#668395"
+        style={styles.settings}
+      />
     </TouchableOpacity>
   );
 }

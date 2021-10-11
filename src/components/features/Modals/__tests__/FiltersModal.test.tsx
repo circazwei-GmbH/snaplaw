@@ -10,13 +10,13 @@ import dayjs from "dayjs";
 import { CONTRACT_TYPES } from "../../../../store/modules/contract/constants";
 
 const initialState = {
-    contract: {
-        smartFilters: {
-            types: [],
-            date: `${new Date("12.11.2010")}`,
-        }
-    }
-}
+  contract: {
+    smartFilters: {
+      types: [],
+      date: `${new Date("12.11.2010")}`,
+    },
+  },
+};
 
 const actions = jest.fn();
 
@@ -24,32 +24,34 @@ const reduser = (state = initialState, action: unknown) => {
   actions(action);
   return initialState;
 };
-  
+
 const store = createStore(reduser);
 
 describe("FiltersModal", () => {
   it("Should display apply button", () => {
     const { getByText, getByTestId } = render(
       <Provider store={store}>
-        <FiltersModal 
-          visible 
-          onClose={() => {}} 
-          switchState={CONTRACT_LIST_STATE.FINALIZED} 
+        <FiltersModal
+          visible
+          onClose={() => {}}
+          switchState={CONTRACT_LIST_STATE.FINALIZED}
         />
       </Provider>
     );
 
-    expect(getByTestId("CalendarInputDate").props.children).toContain(dayjs(initialState.contract.smartFilters.date).format("DD.MM.YYYY"));
+    expect(getByTestId("CalendarInputDate").props.children).toContain(
+      dayjs(initialState.contract.smartFilters.date).format("DD.MM.YYYY")
+    );
     expect(getByText("my_contracts.smart_filters.apply")).toBeTruthy();
   });
   it("Should call onCLose handler on close", () => {
     const handler = jest.fn();
     const { getByTestId } = render(
       <Provider store={store}>
-        <FiltersModal 
-          visible 
-          onClose={handler} 
-          switchState={CONTRACT_LIST_STATE.FINALIZED} 
+        <FiltersModal
+          visible
+          onClose={handler}
+          switchState={CONTRACT_LIST_STATE.FINALIZED}
         />
       </Provider>
     );
@@ -61,10 +63,10 @@ describe("FiltersModal", () => {
     actions.mockClear();
     const { getByTestId, getByText } = render(
       <Provider store={store}>
-        <FiltersModal 
-          visible 
-          onClose={() => {}} 
-          switchState={CONTRACT_LIST_STATE.FINALIZED} 
+        <FiltersModal
+          visible
+          onClose={() => {}}
+          switchState={CONTRACT_LIST_STATE.FINALIZED}
         />
       </Provider>
     );
@@ -75,7 +77,7 @@ describe("FiltersModal", () => {
       setContractsListFilters({
         types: [CONTRACT_TYPES.CAR],
         date: initialState.contract.smartFilters.date,
-    })
+      })
     );
     expect(actions.mock.calls[1][0]).toEqual(
       requestContractsList(CONTRACT_LIST_STATE.FINALIZED, true)
@@ -86,7 +88,7 @@ describe("FiltersModal", () => {
       setContractsListFilters({
         types: [],
         date: initialState.contract.smartFilters.date,
-    })
+      })
     );
     expect(actions.mock.calls[3][0]).toEqual(
       requestContractsList(CONTRACT_LIST_STATE.FINALIZED, true)
@@ -97,10 +99,10 @@ describe("FiltersModal", () => {
     const handler = jest.fn();
     const { getByText } = render(
       <Provider store={store}>
-        <FiltersModal 
-          visible 
-          onClose={handler} 
-          switchState={CONTRACT_LIST_STATE.FINALIZED} 
+        <FiltersModal
+          visible
+          onClose={handler}
+          switchState={CONTRACT_LIST_STATE.FINALIZED}
         />
       </Provider>
     );
@@ -110,7 +112,7 @@ describe("FiltersModal", () => {
       setContractsListFilters({
         types: [],
         date: initialState.contract.smartFilters.date,
-    })
+      })
     );
     expect(actions.mock.calls[1][0]).toEqual(
       requestContractsList(CONTRACT_LIST_STATE.FINALIZED, true)
@@ -118,15 +120,17 @@ describe("FiltersModal", () => {
   });
   it("Should call clean all button handler", () => {
     const { getByText, getByTestId } = render(
-        <Provider store={store}>
-          <FiltersModal 
-            visible 
-            onClose={() => {}} 
-            switchState={CONTRACT_LIST_STATE.FINALIZED} 
-          />
-        </Provider>
-      );
-    expect(getByTestId("CalendarInputDate").props.children).toContain("11.12.2010");
+      <Provider store={store}>
+        <FiltersModal
+          visible
+          onClose={() => {}}
+          switchState={CONTRACT_LIST_STATE.FINALIZED}
+        />
+      </Provider>
+    );
+    expect(getByTestId("CalendarInputDate").props.children).toContain(
+      "11.12.2010"
+    );
     fireEvent.press(getByText("my_contracts.smart_filters.clear_all"));
     expect(getByTestId("CalendarInputDate").props.children).toContain("");
   });

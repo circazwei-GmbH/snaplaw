@@ -8,7 +8,11 @@ type DefaultTextProps = {
 };
 
 export default function DefaultText({ text, style, testID }: DefaultTextProps) {
-  return <Text style={[styles.text, style]} testID={testID}>{text}</Text>;
+  return (
+    <Text style={[styles.text, style]} testID={testID}>
+      {text}
+    </Text>
+  );
 }
 
 const styles = StyleSheet.create({

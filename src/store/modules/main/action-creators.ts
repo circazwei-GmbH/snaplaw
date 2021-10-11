@@ -45,5 +45,5 @@ export const navigate = (
 
 export const initPushNotifications = (): InitPushNotificationsAction => ({
   type: INIT_PUSH_NOTIFICATIONS,
-  payload: undefined
-})
+  payload: undefined,
+});

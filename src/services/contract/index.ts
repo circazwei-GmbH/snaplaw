@@ -37,7 +37,7 @@ const inviteUser = (contractData: InviteUserInterface): Promise<any> => {
   return httpClient.post(
     `api/contracts/${contractData.contractId}/invite-user`,
     {
-      email: contractData.search
+      email: contractData.search,
     }
   );
 };
@@ -53,19 +53,25 @@ const getUserEmails = async (
   return response.data;
 };
 
-const requestContractList = async (type: CONTRACT_LIST_STATE, page: number, filters: SmartFiltersType) => {
-  let url = `api/contracts?type=${type}&page=${page}&limit=10&contracts_types=${JSON.stringify(filters.types)}`
-  
+const requestContractList = async (
+  type: CONTRACT_LIST_STATE,
+  page: number,
+  filters: SmartFiltersType
+) => {
+  let url = `api/contracts?type=${type}&page=${page}&limit=10&contracts_types=${JSON.stringify(
+    filters.types
+  )}`;
+
   if (filters.date) {
     const convertDate = new Date(filters.date);
     convertDate.setHours(0);
     convertDate.setMinutes(0);
     convertDate.setSeconds(0);
-    url += `&date=${convertDate.getTime()}`
+    url += `&date=${convertDate.getTime()}`;
   }
-  
+
   const response = await httpClient.get(url);
-  
+
   const token = httpClient.getToken();
   return translateContractList(
     response.data,

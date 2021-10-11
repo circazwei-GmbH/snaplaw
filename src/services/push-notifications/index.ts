@@ -1,6 +1,6 @@
-import {Constants} from "react-native-unimodules";
+import { Constants } from "react-native-unimodules";
 import * as Notifications from "expo-notifications";
-import {PermissionStatus} from "expo-image-picker";
+import { PermissionStatus } from "expo-image-picker";
 import httpClient from "../api";
 
 export class PermissionNotGranted extends Error {}
@@ -17,16 +17,17 @@ const registerReciver = () => {
   // Notifications.addNotificationReceivedListener(_n => {
   //   console.log('NOTIFICATION: ', _n)
   // })
-}
+};
 
 export const init = async () => {
   if (!Constants.isDevice) {
     throw new PermissionNotGranted();
   }
-  const {status} = await Notifications.getPermissionsAsync();
+  const { status } = await Notifications.getPermissionsAsync();
 
   if (status !== PermissionStatus.GRANTED) {
-    const {status: statusAfterRequest} = await Notifications.requestPermissionsAsync();
+    const { status: statusAfterRequest } =
+      await Notifications.requestPermissionsAsync();
     if (statusAfterRequest !== PermissionStatus.GRANTED) {
       throw new PermissionNotGranted();
     }
@@ -34,6 +35,7 @@ export const init = async () => {
   const token = (await Notifications.getExpoPushTokenAsync()).data;
   registerReciver();
   return token;
-}
+};
 
-export const storeTokenToApi = (hash: string) => httpClient.patch('api/users/set-push-notification-token', {hash});
+export const storeTokenToApi = (hash: string) =>
+  httpClient.patch("api/users/set-push-notification-token", { hash });

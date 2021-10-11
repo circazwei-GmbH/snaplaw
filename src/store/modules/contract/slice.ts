@@ -12,7 +12,7 @@ import {
   EmailsListItemInterface,
   SmartFiltersType,
 } from "./types";
-import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
+import { CONTRACT_SCREEN_TYPES } from "./constants";
 import { MediaType } from "../../../services/media";
 import { BaseScreenDataInterface } from "./base-types";
 
@@ -103,7 +103,8 @@ const setContractsListAction = createAction<
   { list: ContractListType; page: number; type: CONTRACT_LIST_STATE },
   "setContractsList"
 >("setContractsList");
-const setContractsListFiltersAction = createAction<SmartFiltersType,
+const setContractsListFiltersAction = createAction<
+  SmartFiltersType,
   "setContractsListFilters"
 >("setContractsListFilters");
 const setListLoadingAction = createAction<boolean, "setListLoading">(
