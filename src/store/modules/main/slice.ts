@@ -21,13 +21,25 @@ export interface ModalInterface {
 
 interface MainStateInterface {
   modal: ModalInterface | null;
-  waiter: Array<string>;
+  waiter: {
+    events: Array<string>;
+    message: string | undefined;
+  }
   orientation: AllowOrientationType;
 }
 
+interface WaiterActionInterface {
+  event: string;
+  message?: string;
+}
+
+
 const initialState: MainStateInterface = {
   modal: null,
-  waiter: [],
+  waiter: {
+    events: [],
+    message: undefined,
+  },
   orientation: OrientationLock.PORTRAIT_UP,
 };
 
@@ -37,8 +49,8 @@ const setModalAction = createAction<
   "setModal"
 >("setModal");
 const closeModalAction = createAction<undefined, "closeModal">("closeModal");
-const addToWaiterAction = createAction<string, "addToWaiter">("addToWaiter");
-const removeFromWaiterAction = createAction<string, "removeFromWaiter">(
+const addToWaiterAction = createAction<WaiterActionInterface, "addToWaiter">("addToWaiter");
+const removeFromWaiterAction = createAction<WaiterActionInterface, "removeFromWaiter">(
   "removeFromWaiter"
 );
 const setOrientationAction = createAction<OrientationType, "setOrientation">(
@@ -77,15 +89,17 @@ export const mainSlice = createSlice({
     },
     [addToWaiterAction.type]: (
       state: Draft<MainStateInterface>,
-      action: PayloadAction<string>
+      action: PayloadAction<WaiterActionInterface>
     ) => {
-      state.waiter.push(action.payload);
+      state.waiter.events.push(action.payload.event);
+      state.waiter.message = action.payload.message ?? action.payload.message;
     },
     [removeFromWaiterAction.type]: (
       state: Draft<MainStateInterface>,
-      action: PayloadAction<string>
+      action: PayloadAction<WaiterActionInterface>
     ) => {
-      state.waiter.splice(state.waiter.indexOf(action.payload), 1);
+      state.waiter.events.splice(state.waiter.events.indexOf(action.payload.event), 1);
+      state.waiter.message = action.payload.message ?? action.payload.message;
     },
     [setOrientationAction.type]: (
       state: Draft<MainStateInterface>,
