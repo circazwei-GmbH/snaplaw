@@ -355,7 +355,7 @@ export default {
         "Vergessen Sie bitte nicht, den Kunden einzuladen. Den Vertrag finden Sie im ^In Bearbeitung^ Ordner.",
       found_in_pregress_folder:
         "Der Vertrag ist gespeichert und befindet sich in dem ^Bearbeitungsordner^.",
-      coming_soon: "Functionality is coming soon",
+      coming_soon: "Die Funktionalität kommt bald dazu.",
     },
     validation: {
       field_empty: "Das Feld kann nicht leer sein",
@@ -369,7 +369,7 @@ export default {
     },
     finalize: {
       message:
-        "The contract is finalized and can be found in the corresponding tab",
+        "Der Vertrag ist fertig und befindet sich in einem entsprechenden Tab.",
     },
   },
   sign_form: {
