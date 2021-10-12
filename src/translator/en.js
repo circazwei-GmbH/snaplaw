@@ -226,6 +226,7 @@ export default {
   },
   menu: {
     cancel: "Cancel",
+    confirm: "Confirm"
   },
   notifications: {
     title: "Notifications",

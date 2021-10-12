@@ -46,7 +46,7 @@ PODS:
   - ExpoModulesCore/Interfaces (0.2.0):
     - ExpoModulesCore/Core
     - UMCore
-  - EXScreenOrientation (3.2.1):
+  - EXScreenOrientation (3.3.0):
     - React-Core
     - UMCore
   - EXSplashScreen (0.11.2):
@@ -606,15 +606,15 @@ SPEC CHECKSUMS:
   EXLocalization: 356f4e16a606cec21a77d6250528fde526152b45
   EXNotifications: 171ccaf17643811673c78f4c4830560d6e5a92aa
   ExpoModulesCore: 2734852616127a6c1fc23012197890a6f3763dc7
-  EXScreenOrientation: d94f791c7ade3639352f34fcf5353f7c554b7d69
+  EXScreenOrientation: 09fe6b6b87899ae0c9320255bda7b7513cdfc8ec
   EXSplashScreen: 6208ca88470ff5979fd49a08ef3feb01143a2b79
   EXStructuredHeaders: e52b880264d15b8ad07d36670226c29476af6334
   EXUpdates: af3ecad91644a171deaa310326e73b4e70f6963c
   EXUpdatesInterface: b68e78b912a03fff7901a5f46ec200c45e3506a5
   FBLazyVector: 3bb422f41b18121b71783a905c10e58606f7dc3e
   FBReactNativeSpec: f2c97f2529dd79c083355182cc158c9f98f4bd6e
-  Folly: aeb27d02cdff07ca01f8a8a5a6dd5bcaf6be6f70
-  glog: 2ad46e202fbaa5641fceb4b2af37dcd88fd8762d
+  Folly: b73c3869541e86821df3c387eb0af5f65addfab4
+  glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   libwebp: e90b9c01d99205d03b6bb8f2c8c415e5a4ef66f0
   RCTRequired: 082f10cd3f905d6c124597fd1c14f6f2655ff65e
   RCTTypeSafety: 8c9c544ecbf20337d069e4ae7fd9a377aadf504b

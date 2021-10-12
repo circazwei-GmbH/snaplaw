@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import { Modal, StyleSheet, View, Text, Pressable } from "react-native";
+import { Modal, StyleSheet, View, Text, Pressable, TouchableHighlight } from "react-native";
 import dayjs from "dayjs";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { useI18n } from "../../../translator/i18n";
@@ -12,6 +12,8 @@ import { CONTRACT_TYPES } from "../../../store/modules/contract/constants";
 import { setContractsListFilters } from "../../../store/modules/contract/slice";
 import { requestContractsList } from "../../../store/modules/contract/action-creators";
 import { CONTRACT_LIST_STATE } from "../../../store/modules/contract/types";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import DatePickerModalCustom from "./DatePickerModalCustom";
 
 type FiltersModalProps = {
   visible: boolean;
@@ -50,6 +52,16 @@ export default function FiltersModal({ visible, onClose, switchState }: FiltersM
   const clearFilters = () => {
     setSelectedCategories([]);
     setSelectedDate("");
+  }
+
+  const onCancelDate = () => {
+    setSelectedDate("");
+    setDatePickerOpened(false);
+  }
+
+  const onConfirmDate = (date: string) => {
+    setSelectedDate(date)
+    setDatePickerOpened(false);
   }
 
   const applyFilters = () => {
@@ -125,12 +137,14 @@ export default function FiltersModal({ visible, onClose, switchState }: FiltersM
             </View>
           </Pressable>
         </Pressable>
+        <DatePickerModalCustom 
+          onCancelDate={onCancelDate}
+          onConfirmDate={onConfirmDate}
+          datePickerOpened={datePickerOpened}
+          setDatePickerOpened={setDatePickerOpened}
+          setedDate={selectedDate}
+        />
       </Modal>
-      <DatePickerModal
-        open={datePickerOpened}
-        modalHandler={setDatePickerOpened}
-        changeDate={setSelectedDate}
-      />
     </View>
   );
 }
@@ -190,4 +204,22 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingHorizontal: 20,
   },
+  datePickerContainerWrapper: {
+    justifyContent: "center",
+  },
+  datePickerContainer: {
+    padding: 20,
+    backgroundColor: "#fff",
+    alignItems: "flex-end",
+  },
+  dataPickerButtonsContainer: {
+    flexDirection: "row",
+  },
+  dataPickerButton: {
+    marginLeft: 20,
+  },
+  dataPickerButtonText: {
+    fontSize: 16,
+    textTransform: "uppercase",
+  }
 });
