@@ -6,7 +6,7 @@ import { getAuthTokens } from "../auth/tokens";
 
 let socket: Socket | null = null;
 let dispatcher: Dispatch | null = null;
-let reconnectTimer: number | null = null;
+let reconnectTimer: NodeJS.Timeout | null = null;
 
 export const connect = (
   dispatch: Dispatch | null = dispatcher
@@ -30,7 +30,7 @@ export const connect = (
       resolve(socket);
     });
     localSocket.on("connect_error", () => {
-      reconnectTimer = setTimeout(connect, 2000);
+      reconnectTimer = setTimeout(() => {connect().then(resolve)}, 2000);
       localSocket.disconnect();
     });
     localSocket.connect();
