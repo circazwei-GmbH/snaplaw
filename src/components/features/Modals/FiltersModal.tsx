@@ -54,11 +54,6 @@ export default function FiltersModal({ visible, onClose, switchState }: FiltersM
     setSelectedDate("");
   }
 
-  const onCancelDate = () => {
-    setSelectedDate("");
-    setDatePickerOpened(false);
-  }
-
   const onConfirmDate = (date: string) => {
     setSelectedDate(date)
     setDatePickerOpened(false);
@@ -138,7 +133,7 @@ export default function FiltersModal({ visible, onClose, switchState }: FiltersM
           </Pressable>
         </Pressable>
         <DatePickerModalCustom 
-          onCancelDate={onCancelDate}
+          onCancelDate={() => setDatePickerOpened(false)}
           onConfirmDate={onConfirmDate}
           datePickerOpened={datePickerOpened}
           setDatePickerOpened={setDatePickerOpened}
