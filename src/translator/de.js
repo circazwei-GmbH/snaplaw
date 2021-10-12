@@ -199,6 +199,7 @@ export default {
       invite_partner: "Benutzer einladen",
       view_pdf: "Ansehen",
       decline: "Ablehnen",
+      contract_history: "Vertragänderungsverlauf sehen"
     },
     delete_modal: {
       message: "Sind Sie sicher, dass Sie den Kontakt löschen möchten?",
@@ -354,6 +355,7 @@ export default {
         "Vergessen Sie bitte nicht, den Kunden einzuladen. Den Vertrag finden Sie im ^In Bearbeitung^ Ordner.",
       found_in_pregress_folder:
         "Der Vertrag ist gespeichert und befindet sich in dem ^Bearbeitungsordner^.",
+      coming_soon: "Functionality is coming soon"
     },
     validation: {
       field_empty: "Das Feld kann nicht leer sein",

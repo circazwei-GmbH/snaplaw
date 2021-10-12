@@ -197,6 +197,7 @@ export default {
       invite_partner: "Invite user",
       view_pdf: "View",
       decline: "Decline",
+      contract_history: "See contract change history"
     },
     delete_modal: {
       message: "Are you sure you want to delete the contract?",
@@ -355,6 +356,7 @@ export default {
         "Don't forget to invite the buyer. The contract can be found in ^In progress^ folder.",
       found_in_pregress_folder:
         "The contract saved and can be found in ^In progress^ folder.",
+      coming_soon: "Functionality is coming soon"
     },
     validation: {
       field_empty: "The field can't be empty",
