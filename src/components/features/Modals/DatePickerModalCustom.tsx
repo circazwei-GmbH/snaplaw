@@ -2,8 +2,7 @@
 import React, { useState } from "react";
 import DatePickerModal from "./DatePickerModal";
 import { useI18n } from "../../../translator/i18n";
-import { Modal, Text, View, StyleSheet } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { Modal, Text, View, StyleSheet, TouchableOpacity } from "react-native";
 
 interface DatePickerModalCustomInterface {
   datePickerOpened: boolean;
