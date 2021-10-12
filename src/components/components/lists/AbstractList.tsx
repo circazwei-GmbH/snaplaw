@@ -8,10 +8,10 @@ import {
 } from "react-native";
 import { ListItemConponent } from "./ListItems/list-item-type";
 
-type AbstractListProps = {
+type AbstractListProps<T> = {
   messageOnEmpty: string;
   elements: Array<any>;
-  listItem: ListItemConponent;
+  listItem: ListItemConponent<T>;
   isLoading?: boolean;
   onEndReached?: () => void;
   onRefresh?: () => void;
@@ -28,7 +28,7 @@ export default function AbstractList({
   onRefresh,
   isRefreshing,
   style,
-}: AbstractListProps) {
+}: AbstractListProps<any>) {
   if (isLoading) {
     return (
       <View style={styles.emptyContainer}>

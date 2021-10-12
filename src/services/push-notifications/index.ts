@@ -5,19 +5,6 @@ import httpClient from "../api";
 
 export class PermissionNotGranted extends Error {}
 
-const registerReciver = () => {
-  Notifications.setNotificationHandler({
-    handleNotification: async () => ({
-      shouldShowAlert: true,
-      shouldPlaySound: false,
-      shouldSetBadge: true,
-    }),
-  });
-  // This way to recive push like app notification, may be need
-  // Notifications.addNotificationReceivedListener(_n => {
-  //   console.log('NOTIFICATION: ', _n)
-  // })
-};
 
 export const init = async () => {
   if (!Constants.isDevice) {
@@ -32,9 +19,7 @@ export const init = async () => {
       throw new PermissionNotGranted();
     }
   }
-  const token = (await Notifications.getExpoPushTokenAsync()).data;
-  registerReciver();
-  return token;
+  return (await Notifications.getExpoPushTokenAsync()).data;
 };
 
 export const storeTokenToApi = (hash: string) =>

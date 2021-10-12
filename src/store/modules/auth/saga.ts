@@ -254,6 +254,10 @@ function* requestTokenHandler() {
 function* clearToken() {
   try {
     yield call(removePushTokenFromApi);
+  } catch (error) {
+    // do nothing for case if token expired
+  }
+  try {
     yield call(clearAuthTokens);
     yield put(killToken());
     yield put(clearUser());
