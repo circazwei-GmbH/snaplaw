@@ -8,7 +8,12 @@ import { PHOTO_LOADING_WAIT } from "../contract/constants";
 
 function* uploadMedia({ payload }: UploadMediaAction) {
   try {
-    yield put(addToWaiter({event: PHOTO_LOADING_WAIT, message: "Don’t close the application while images are being uploaded"}));
+    yield put(
+      addToWaiter({
+        event: PHOTO_LOADING_WAIT,
+        message: "Don’t close the application while images are being uploaded",
+      })
+    );
     const mediaPath = yield call(API.mediaProcess, payload);
     yield put(
       mutateFileUploadsAction(
@@ -20,7 +25,7 @@ function* uploadMedia({ payload }: UploadMediaAction) {
   } catch (error) {
     yield put(setMessage(Translator.getInstance().trans("errors.abstract")));
   } finally {
-    yield put(removeFromWaiter({event: PHOTO_LOADING_WAIT}));
+    yield put(removeFromWaiter({ event: PHOTO_LOADING_WAIT }));
   }
 }
 

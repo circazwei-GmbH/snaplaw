@@ -52,7 +52,7 @@ export const contractScreensConfig: Record<
       title: `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.title`,
       type: CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION,
       granted: [CONTRACT_ROLE.OWNER],
-    }, 
+    },
     {
       component: Confirmation,
       title: `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.CONFIRMATION}.title`,

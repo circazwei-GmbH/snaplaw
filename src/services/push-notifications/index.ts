@@ -5,7 +5,6 @@ import httpClient from "../api";
 
 export class PermissionNotGranted extends Error {}
 
-
 export const init = async () => {
   if (!Constants.isDevice) {
     throw new PermissionNotGranted();
