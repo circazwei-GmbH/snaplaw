@@ -73,8 +73,11 @@ export default function ContractView({
 
   const onEnterDetailsButtonPress = () => {
     onClose();
-    RootNavigation.navigate(HOME_ROUTER.CONTRACT, { screenCount: 0, id: contractId })
-  }
+    RootNavigation.navigate(HOME_ROUTER.CONTRACT, {
+      screenCount: 0,
+      id: contractId,
+    });
+  };
 
   return (
     <View>
@@ -155,19 +158,16 @@ export default function ContractView({
                   />
                 </>
               ) : null}
-              {
-                !fromStepper && 
-                viewerRole === CONTRACT_ROLE.PARTNER ? (
-                  <View style={styles.enterDetailsButtonContainer}>
-                    <Button
-                      text={t("contracts.pdf_view.enter_contract_details")}
-                      type="primary"
-                      shadowNone
-                      onPress={onEnterDetailsButtonPress}
-                    />
-                  </View>
-                ) : null
-              }
+              {!fromStepper && viewerRole === CONTRACT_ROLE.PARTNER ? (
+                <View style={styles.enterDetailsButtonContainer}>
+                  <Button
+                    text={t("contracts.pdf_view.enter_contract_details")}
+                    type="primary"
+                    shadowNone
+                    onPress={onEnterDetailsButtonPress}
+                  />
+                </View>
+              ) : null}
             </View>
           </ScrollView>
         </View>
@@ -207,5 +207,5 @@ const styles = StyleSheet.create({
   enterDetailsButtonContainer: {
     paddingHorizontal: 43,
     paddingTop: 5,
-  }
+  },
 });

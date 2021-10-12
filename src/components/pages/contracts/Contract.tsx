@@ -57,7 +57,7 @@ export default function Contract({
   }, [id]);
 
   useEffect(() => {
-    if (!contract) {
+    if (!contract || previousVersionOfCurrentScreen) {
       return;
     }
     const currentContractScreen = findScreentByType(
@@ -65,7 +65,7 @@ export default function Contract({
       currentContractConfig[screenCount].type
     );
     setPreviousVersionOfCurrentScreen(currentContractScreen);
-  }, []);
+  }, [contract]);
 
   if (!contract) {
     return null;

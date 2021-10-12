@@ -93,8 +93,7 @@ export default {
     errors: {
       password_length: "Password must be at least 6 characters",
       confirm_password: "Passwords don't match.",
-      new_password_are_same_as_old:
-        "New password must not match the old one.",
+      new_password_are_same_as_old: "New password must not match the old one.",
     },
   },
   errors: {
@@ -197,6 +196,7 @@ export default {
       invite_partner: "Invite user",
       view_pdf: "View",
       decline: "Decline",
+      contract_history: "See contract change history",
     },
     delete_modal: {
       message: "Are you sure you want to delete the contract?",
@@ -356,6 +356,7 @@ export default {
         "Don't forget to invite the buyer. The contract can be found in ^In progress^ folder.",
       found_in_pregress_folder:
         "The contract saved and can be found in ^In progress^ folder.",
+      coming_soon: "Functionality is coming soon",
     },
     validation: {
       field_empty: "The field can't be empty",
@@ -366,6 +367,10 @@ export default {
         "Are you sure you want to request the change? The opponent will be required to re-sign the contract.",
       yes: "Yes",
       no: "No",
+    },
+    finalize: {
+      message:
+        "The contract is finalized and can be found in the corresponding tab",
     },
   },
   sign_form: {

@@ -88,6 +88,7 @@ export type ContractDataListType = {
   title: string | undefined;
   partnerId: string | undefined;
   meRole: CONTRACT_ROLE;
+  finalizedAt: string | undefined;
 };
 
 export enum CONTRACT_STATUS {
