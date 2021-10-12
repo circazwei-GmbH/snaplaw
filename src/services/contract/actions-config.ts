@@ -1,19 +1,22 @@
-import {CONTRACT_STATUS, ContractDataListType,} from "../../store/modules/contract/types";
-import {CONTRACT_ROLE} from "../../store/modules/contract/contract-roles";
-import {navigate} from "../../store/modules/main/action-creators";
-import {ROUTER_TABS} from "../../router/TabRouterTypes";
-import {HOME_ROUTER} from "../../router/HomeRouterType";
-import {setMessage, setModal} from "../../store/modules/main/slice";
-import {BUTTON_COLORTYPE} from "../../store/modules/main/types";
+import {
+  CONTRACT_STATUS,
+  ContractDataListType,
+} from "../../store/modules/contract/types";
+import { CONTRACT_ROLE } from "../../store/modules/contract/contract-roles";
+import { navigate } from "../../store/modules/main/action-creators";
+import { ROUTER_TABS } from "../../router/TabRouterTypes";
+import { HOME_ROUTER } from "../../router/HomeRouterType";
+import { setMessage, setModal } from "../../store/modules/main/slice";
+import { BUTTON_COLORTYPE } from "../../store/modules/main/types";
 import {
   requestContractDetailForPdfView,
   requestDeleteContract,
   requestDeleteContractPartner,
   requestLeaveContract,
 } from "../../store/modules/contract/action-creators";
-import {TType} from "../../translator/i18n";
-import {MY_CONTRACT_ROUTE} from "../../router/MyContractRouterTypes";
-import {AnyAction} from "@reduxjs/toolkit";
+import { TType } from "../../translator/i18n";
+import { MY_CONTRACT_ROUTE } from "../../router/MyContractRouterTypes";
+import { AnyAction } from "@reduxjs/toolkit";
 
 type ListActionType = {
   contractRole: CONTRACT_ROLE;
@@ -153,9 +156,9 @@ const listActionConfig: ListActionType[] = [
     contractStatus: [CONTRACT_STATUS.FINNALIZED],
     action: {
       title: "my_contracts.actions.contract_history",
-      handler: (item, t) => setMessage(t("contracts.messages.coming_soon"))
-    }
-  }
+      handler: (item, t) => setMessage(t("contracts.messages.coming_soon")),
+    },
+  },
 ];
 
 export const getListItemAction = (item: ContractDataListType) => {

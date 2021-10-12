@@ -15,7 +15,7 @@ export const translateContractForList = (
   title: contract.title,
   partnerId: contract.partnerId,
   meRole: detectContractRole(contract.partnerId, contract.ownerId, meId),
-  finalizedAt: contract.finalizedAt
+  finalizedAt: contract.finalizedAt,
 });
 
 export const translateContract = (

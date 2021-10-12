@@ -40,7 +40,9 @@ function* navigatePop() {
 function* initPushNotifications() {
   try {
     const expoPushNotificationToken = yield call(NotificationService.init);
-    const userPushToken = yield select(state => state.profile.user.pushNotificationToken);
+    const userPushToken = yield select(
+      (state) => state.profile.user.pushNotificationToken
+    );
     if (userPushToken === expoPushNotificationToken) {
       return;
     }

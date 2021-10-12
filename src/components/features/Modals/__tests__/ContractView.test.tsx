@@ -190,6 +190,9 @@ describe("ContractView", () => {
       </Provider>
     );
     fireEvent.press(getByText("contracts.pdf_view.enter_contract_details"));
-    expect(RootNavigation.navigate).toBeCalledWith(HOME_ROUTER.CONTRACT, { screenCount: 0, id: "testId" });
+    expect(RootNavigation.navigate).toBeCalledWith(HOME_ROUTER.CONTRACT, {
+      screenCount: 0,
+      id: "testId",
+    });
   });
 });

@@ -59,7 +59,7 @@ import {
 import { BUTTON_COLORTYPE } from "../main/types";
 import { clearUser } from "../profile/slice";
 import { clearNotificationModule } from "../notifications/slice";
-import {removePushTokenFromApi} from "../../../services/push-notifications";
+import { removePushTokenFromApi } from "../../../services/push-notifications";
 
 function* fetchSignUp(action: RequestSignUpAction) {
   try {
@@ -212,7 +212,6 @@ function* fetchChangePassword({ payload }: ChangePasswordAction) {
     yield put(requestMe());
   } catch (error) {
     if (error.response?.data.code === NEW_PASSWORD_SAME_AS_OLD) {
-      
       return yield put(
         changePasswordFailed(
           Translator.getInstance().trans(

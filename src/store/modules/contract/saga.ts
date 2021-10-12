@@ -65,11 +65,11 @@ import { BaseScreenDataInterface } from "./base-types";
 import { Translator } from "../../../translator/i18n";
 import { USER_SELF_INVITE } from "../../../services/error-codes";
 import { CONTRACT_ROLE } from "./contract-roles";
-import {navigatePop, navigationPopToTop} from "../main/action-creators";
+import { navigatePop, navigationPopToTop } from "../main/action-creators";
 
 function* createContract({ payload }: RequestCreateContractAction) {
   try {
-    yield put(addToWaiter({event: CONTRACT_CREATION_WAIT}));
+    yield put(addToWaiter({ event: CONTRACT_CREATION_WAIT }));
     const response = yield call(API.createContract, payload);
     yield put(
       setInitedContract({
@@ -93,7 +93,7 @@ function* createContract({ payload }: RequestCreateContractAction) {
   } catch (error) {
     yield put(responseError(error));
   } finally {
-    yield put(removeFromWaiter({event: CONTRACT_CREATION_WAIT}));
+    yield put(removeFromWaiter({ event: CONTRACT_CREATION_WAIT }));
   }
 }
 
@@ -240,33 +240,33 @@ function* requestContract({ payload }: RequestContractAction) {
 
 function* requestContractDelete({ payload }: RequestContractAction) {
   try {
-    yield put(addToWaiter({event: "requestDeleteContract"}));
+    yield put(addToWaiter({ event: "requestDeleteContract" }));
     yield call(API.requestDeleteContract, payload);
     yield put(deleteContract(payload));
   } catch (error) {
     yield put(responseError(error));
   } finally {
-    yield put(removeFromWaiter({event: "requestDeleteContract"}));
+    yield put(removeFromWaiter({ event: "requestDeleteContract" }));
   }
 }
 
 function* signContract({ payload }: SignContractAction) {
   try {
     yield put(updateContractSign(payload));
-    const contract = yield select(
-      (state) => state.contract.currentContract
-    );
+    const contract = yield select((state) => state.contract.currentContract);
     const response = yield call(API.signContract, contract.id, payload);
-    if(response.data.isFinalized) {
-      yield put(setModal({
-        message: Translator.getInstance().trans("contracts.finalize.message"),
-        actions: [
-          {
-            name: Translator.getInstance().trans("ok"),
-            action: navigationPopToTop()
-          }
-        ]
-      }))
+    if (response.data.isFinalized) {
+      yield put(
+        setModal({
+          message: Translator.getInstance().trans("contracts.finalize.message"),
+          actions: [
+            {
+              name: Translator.getInstance().trans("ok"),
+              action: navigationPopToTop(),
+            },
+          ],
+        })
+      );
     }
   } catch (error) {
     yield put(responseError(error));
@@ -326,7 +326,7 @@ function* requestUsersEmail({ payload }: RequestGetEmailsAction) {
 }
 
 function* requestAcceptInvite({ payload }: RequestAcceptInviteAction) {
-  yield put(addToWaiter({event: REQUEST_ACCEPT_INVITE}));
+  yield put(addToWaiter({ event: REQUEST_ACCEPT_INVITE }));
   try {
     yield call(API.acceptInvite, payload);
     yield put(
@@ -349,46 +349,45 @@ function* requestAcceptInvite({ payload }: RequestAcceptInviteAction) {
       yield put(responseError(error));
     }
   } finally {
-    yield put(removeFromWaiter({event: REQUEST_ACCEPT_INVITE}));
+    yield put(removeFromWaiter({ event: REQUEST_ACCEPT_INVITE }));
   }
 }
 
 function* requestDeleteContractPartner({
   payload,
 }: RequestDeleteContractPartnerAction) {
-  yield put(addToWaiter({event: REQUEST_DELETE_CONTRACT_PARTNER}));
+  yield put(addToWaiter({ event: REQUEST_DELETE_CONTRACT_PARTNER }));
   try {
     yield call(API.deleteContractPartner, payload);
     yield put(removeContractPartnerFromList(payload));
   } catch (error) {
     yield put(responseError(error));
   } finally {
-    yield put(removeFromWaiter({event: REQUEST_DELETE_CONTRACT_PARTNER}));
+    yield put(removeFromWaiter({ event: REQUEST_DELETE_CONTRACT_PARTNER }));
   }
 }
 
 function* requestContractDetailPdf({ payload }: RequestContractAction) {
-  yield put(addToWaiter({event: REQUEST_CONTRACT_DETAIL_FOR_PDF}));
+  yield put(addToWaiter({ event: REQUEST_CONTRACT_DETAIL_FOR_PDF }));
   try {
     const contract = yield call(API.requestContract, payload);
     yield put(setPdfViewOnListContract(contract));
-    
   } catch (error) {
     yield put(responseError(error));
   } finally {
-    yield put(removeFromWaiter({event: REQUEST_CONTRACT_DETAIL_FOR_PDF}));
+    yield put(removeFromWaiter({ event: REQUEST_CONTRACT_DETAIL_FOR_PDF }));
   }
 }
 
 function* requestLeaveContract({ payload }: RequestContractAction) {
-  yield put(addToWaiter({event: REQUEST_LEAVE_CONTRACT}));
+  yield put(addToWaiter({ event: REQUEST_LEAVE_CONTRACT }));
   try {
     yield call(API.requestLeaveContract, payload);
     yield put(deleteContract(payload));
   } catch (error) {
     yield put(responseError(error));
   } finally {
-    yield put(removeFromWaiter({event: REQUEST_LEAVE_CONTRACT}));
+    yield put(removeFromWaiter({ event: REQUEST_LEAVE_CONTRACT }));
   }
 }
 

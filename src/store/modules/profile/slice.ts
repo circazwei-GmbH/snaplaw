@@ -19,7 +19,7 @@ export type UserType = {
   phone?: string;
   address?: string;
   postCode?: string;
-  pushNotificationToken?: string
+  pushNotificationToken?: string;
 };
 
 export type UserTypeNoAvatar = Omit<UserType, "avatar">;
