@@ -94,7 +94,7 @@ export default {
       password_length: "Passwort muss mindestens 6 Zeichen lang sein",
       confirm_password: "Passwörter stimmen nicht überein.",
       new_password_are_same_as_old:
-        "Ihr neues Passwort muss sich von den zuvor verwendeten Passwörtern unterscheiden",
+        "Das neue Passwort soll nicht mit dem alten übereinstimmen.",
     },
   },
   errors: {

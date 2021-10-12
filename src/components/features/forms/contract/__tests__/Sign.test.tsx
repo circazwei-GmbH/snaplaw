@@ -28,7 +28,10 @@ const initialState = {
     },
   },
   main: {
-    waiter: [],
+    waiter: {
+      events: [],
+      message: undefined,
+    },
   },
 };
 const reduser = () => initialState;
