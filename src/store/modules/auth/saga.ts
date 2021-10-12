@@ -211,6 +211,7 @@ function* fetchChangePassword({ payload }: ChangePasswordAction) {
     yield put(requestMe());
   } catch (error) {
     if (error.response?.data.code === NEW_PASSWORD_SAME_AS_OLD) {
+      
       return yield put(
         changePasswordFailed(
           Translator.getInstance().trans(
