@@ -229,6 +229,7 @@ export default {
   },
   menu: {
     cancel: "Abbrechen",
+    confirm: "Bestätigen",
   },
   notifications: {
     title: "Benachrichtigungen",

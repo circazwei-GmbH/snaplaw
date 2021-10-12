@@ -7,11 +7,11 @@ import Button from "../../basics/buttons/Button";
 import TextButton from "../../basics/buttons/TextButton";
 import Checkbox from "../../basics/checkboxes/Checkbox";
 import CalendarInput from "../../basics/inputs/CalendarInput";
-import DatePickerModal from "./DatePickerModal";
 import { CONTRACT_TYPES } from "../../../store/modules/contract/constants";
 import { setContractsListFilters } from "../../../store/modules/contract/slice";
 import { requestContractsList } from "../../../store/modules/contract/action-creators";
 import { CONTRACT_LIST_STATE } from "../../../store/modules/contract/types";
+import DatePickerModalCustom from "./DatePickerModalCustom";
 
 type FiltersModalProps = {
   visible: boolean;
@@ -57,6 +57,11 @@ export default function FiltersModal({
     setSelectedCategories([]);
     setSelectedDate("");
   };
+
+  const onConfirmDate = (date: string) => {
+    setSelectedDate(date)
+    setDatePickerOpened(false);
+  }
 
   const applyFilters = () => {
     dispatch(
@@ -149,12 +154,14 @@ export default function FiltersModal({
             </View>
           </Pressable>
         </Pressable>
+        <DatePickerModalCustom 
+          onCancelDate={() => setDatePickerOpened(false)}
+          onConfirmDate={onConfirmDate}
+          datePickerOpened={datePickerOpened}
+          setDatePickerOpened={setDatePickerOpened}
+          setedDate={selectedDate}
+        />
       </Modal>
-      <DatePickerModal
-        open={datePickerOpened}
-        modalHandler={setDatePickerOpened}
-        changeDate={setSelectedDate}
-      />
     </View>
   );
 }
@@ -214,4 +221,22 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingHorizontal: 20,
   },
+  datePickerContainerWrapper: {
+    justifyContent: "center",
+  },
+  datePickerContainer: {
+    padding: 20,
+    backgroundColor: "#fff",
+    alignItems: "flex-end",
+  },
+  dataPickerButtonsContainer: {
+    flexDirection: "row",
+  },
+  dataPickerButton: {
+    marginLeft: 20,
+  },
+  dataPickerButtonText: {
+    fontSize: 16,
+    textTransform: "uppercase",
+  }
 });

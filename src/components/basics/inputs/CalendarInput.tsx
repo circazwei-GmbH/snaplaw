@@ -23,7 +23,7 @@ export default function CalendarInput({
   dateHandler,
 }: CalendarInputProps) {
   return (
-    <Pressable onPress={dateHandler} style={[styles.container, style]}>
+    <View style={[styles.container, style]}>
       <View style={styles.signContainer}>
         <DefaultText text={date} testID="CalendarInputDate" />
       </View>
@@ -31,15 +31,15 @@ export default function CalendarInput({
         <View style={styles.dividerContainer}>
           <VerticalDivider />
         </View>
-        <View style={styles.iconContainer} testID="InvitePressabelAreaID">
+        <Pressable onPress={dateHandler} style={styles.iconContainer} testID="InvitePressabelAreaID">
           <MaterialCommunityIcons
             name="calendar-month-outline"
             size={22}
             color="#668395"
           />
-        </View>
+        </Pressable>
       </View>
-    </Pressable>
+    </View>
   );
 }
 
