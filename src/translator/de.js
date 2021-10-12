@@ -365,6 +365,9 @@ export default {
       yes: "Ja",
       no: "Nein",
     },
+    finalize: {
+      message: "The contract is finalized and can be found in the corresponding tab"
+    }
   },
   sign_form: {
     title: "Vertrag mit dem Finger unterschreiben",

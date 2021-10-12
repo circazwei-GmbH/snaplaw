@@ -65,7 +65,7 @@ import { BaseScreenDataInterface } from "./base-types";
 import { Translator } from "../../../translator/i18n";
 import { USER_SELF_INVITE } from "../../../services/error-codes";
 import { CONTRACT_ROLE } from "./contract-roles";
-import { navigatePop } from "../main/action-creators";
+import {navigatePop, navigationPopToTop} from "../main/action-creators";
 
 function* createContract({ payload }: RequestCreateContractAction) {
   try {
@@ -253,10 +253,21 @@ function* requestContractDelete({ payload }: RequestContractAction) {
 function* signContract({ payload }: SignContractAction) {
   try {
     yield put(updateContractSign(payload));
-    const contractId = yield select(
-      (state) => state.contract.currentContract.id
+    const contract = yield select(
+      (state) => state.contract.currentContract
     );
-    yield call(API.signContract, contractId, payload);
+    const response = yield call(API.signContract, contract.id, payload);
+    if(response.data.isFinalized) {
+      yield put(setModal({
+        message: Translator.getInstance().trans("contracts.finalize.message"),
+        actions: [
+          {
+            name: Translator.getInstance().trans("ok"),
+            action: navigationPopToTop()
+          }
+        ]
+      }))
+    }
   } catch (error) {
     yield put(responseError(error));
   }

@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from "redux-saga/effects";
+import { call, put, takeLatest, select } from "redux-saga/effects";
 import {
   INIT_PUSH_NOTIFICATIONS,
   NAVIGATE,
@@ -40,6 +40,10 @@ function* navigatePop() {
 function* initPushNotifications() {
   try {
     const expoPushNotificationToken = yield call(NotificationService.init);
+    const userPushToken = yield select(state => state.profile.user.pushNotificationToken);
+    if (userPushToken === expoPushNotificationToken) {
+      return;
+    }
     yield call(NotificationService.storeTokenToApi, expoPushNotificationToken);
   } catch (error) {
     if (error instanceof NotificationService.PermissionNotGranted) {
