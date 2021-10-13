@@ -24,7 +24,7 @@ interface MainStateInterface {
   waiter: {
     events: Array<string>;
     message: string | undefined;
-  }
+  };
   orientation: AllowOrientationType;
 }
 
@@ -32,7 +32,6 @@ interface WaiterActionInterface {
   event: string;
   message?: string;
 }
-
 
 const initialState: MainStateInterface = {
   modal: null,
@@ -49,10 +48,13 @@ const setModalAction = createAction<
   "setModal"
 >("setModal");
 const closeModalAction = createAction<undefined, "closeModal">("closeModal");
-const addToWaiterAction = createAction<WaiterActionInterface, "addToWaiter">("addToWaiter");
-const removeFromWaiterAction = createAction<WaiterActionInterface, "removeFromWaiter">(
-  "removeFromWaiter"
+const addToWaiterAction = createAction<WaiterActionInterface, "addToWaiter">(
+  "addToWaiter"
 );
+const removeFromWaiterAction = createAction<
+  WaiterActionInterface,
+  "removeFromWaiter"
+>("removeFromWaiter");
 const setOrientationAction = createAction<OrientationType, "setOrientation">(
   "setOrientation"
 );
@@ -98,7 +100,10 @@ export const mainSlice = createSlice({
       state: Draft<MainStateInterface>,
       action: PayloadAction<WaiterActionInterface>
     ) => {
-      state.waiter.events.splice(state.waiter.events.indexOf(action.payload.event), 1);
+      state.waiter.events.splice(
+        state.waiter.events.indexOf(action.payload.event),
+        1
+      );
       state.waiter.message = action.payload.message ?? action.payload.message;
     },
     [setOrientationAction.type]: (

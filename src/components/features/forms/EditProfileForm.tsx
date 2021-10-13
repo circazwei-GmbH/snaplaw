@@ -30,8 +30,7 @@ export default function EditProfileForm({
   onChangeHandler,
 }: EditProfileFormPropsInterface): JSX.Element {
   const { t } = useI18n();
-  const [datePickerOpened, setDatePickerOpened] = useState(false);
-
+  const [datePickerOpened, setDatePickerOpened] = useState(false);  
   return (
     <KeyboardAwareScrollView>
       <View
@@ -61,7 +60,7 @@ export default function EditProfileForm({
         >
           <TextFieldImitation
             placeholder={t("edit_profile.placeholders.dateOfBirth")}
-            value={dayjs(form.dateOfBirth.value).format("DD.MM.YYYY")}
+            value={form.dateOfBirth.value ? dayjs(form.dateOfBirth.value).format("DD.MM.YYYY") : ""}
             settings
           />
         </TouchableOpacity>

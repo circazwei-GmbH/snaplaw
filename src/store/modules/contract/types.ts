@@ -88,6 +88,7 @@ export type ContractDataListType = {
   title: string | undefined;
   partnerId: string | undefined;
   meRole: CONTRACT_ROLE;
+  finalizedAt: string | undefined;
 };
 
 export enum CONTRACT_STATUS {
@@ -105,7 +106,7 @@ export interface RequestContractAction extends BaseAction {
 export type SmartFiltersType = {
   types: CONTRACT_TYPES[];
   date: string;
-}
+};
 
 export interface ValidateAllScreensAction extends BaseAction {
   payload: CONTRACT_TYPES;

@@ -57,7 +57,7 @@ export default function Contract({
   }, [id]);
 
   useEffect(() => {
-    if (!contract) {
+    if (!contract || previousVersionOfCurrentScreen) {
       return;
     }
     const currentContractScreen = findScreentByType(
@@ -65,7 +65,7 @@ export default function Contract({
       currentContractConfig[screenCount].type
     );
     setPreviousVersionOfCurrentScreen(currentContractScreen);
-  }, []);
+  }, [contract]);
 
   if (!contract) {
     return null;
@@ -132,7 +132,8 @@ export default function Contract({
     navigation.pop();
   };
 
-  const cancelHandler = () => {dispatch(
+  const cancelHandler = () => {
+    dispatch(
       setModal({
         message: t("contracts.confirmation_modal.message"),
         actions: [

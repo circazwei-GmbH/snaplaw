@@ -27,6 +27,9 @@ describe("API", () => {
       method: "GET",
       url: `test_host/${url}`,
       data: null,
+      params: {
+        locale: "en",
+      },
       headers: {
         authorization: `Bearer ${API.getToken()}`,
       },
@@ -38,6 +41,9 @@ describe("API", () => {
       method: "POST",
       url: `test_host/${url}`,
       data: body,
+      params: {
+        locale: "en",
+      },
       headers: {
         authorization: `Bearer ${API.getToken()}`,
         ...options.headers,
@@ -50,6 +56,9 @@ describe("API", () => {
       method: "PUT",
       url: `test_host/${url}`,
       data: body,
+      params: {
+        locale: "en",
+      },
       headers: {
         authorization: `Bearer ${API.getToken()}`,
       },
@@ -60,6 +69,9 @@ describe("API", () => {
     expect(axios.request).toBeCalledWith({
       method: "DELETE",
       url: `test_host/${url}`,
+      params: {
+        locale: "en",
+      },
       headers: {
         authorization: `Bearer ${API.getToken()}`,
       },
@@ -71,6 +83,9 @@ describe("API", () => {
       method: "PATCH",
       url: `test_host/${url}`,
       data: body,
+      params: {
+        locale: "en",
+      },
       headers: {
         authorization: `Bearer ${API.getToken()}`,
       },

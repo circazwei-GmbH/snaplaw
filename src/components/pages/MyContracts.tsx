@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
 import TopBar from "../layouts/TopBar";
 import NotificationBell from "../components/NotificationBell";
 import FiltersModal from "../features/Modals/FiltersModal";
@@ -16,7 +15,10 @@ import {
   CONTRACT_LIST_STATE,
   ContractDataType,
 } from "../../store/modules/contract/types";
-import { CONTRACT_LIST_LOADING_TYPE, setContractsListFilters } from "../../store/modules/contract/slice";
+import {
+  CONTRACT_LIST_LOADING_TYPE,
+  setContractsListFilters,
+} from "../../store/modules/contract/slice";
 
 export default function MyContracts() {
   const { t } = useI18n();
@@ -29,7 +31,7 @@ export default function MyContracts() {
     (state) => state.contract.isListLoading
   );
   const dispatch = useAppDispatch();
-    
+
   useEffect(() => {
     dispatch(requestContractsList(switchState));
   }, [dispatch, requestContractsList]);
@@ -41,62 +43,56 @@ export default function MyContracts() {
         : CONTRACT_LIST_STATE.IN_PROGRESS;
     setSwitchState(nextState);
     dispatch(requestContractsList(nextState));
-    dispatch(setContractsListFilters({
-      types: [],
-      date: "",
-    }));
+    dispatch(
+      setContractsListFilters({
+        types: [],
+        date: "",
+      })
+    );
   };
   return (
     <>
-    <TopBar
-      leftButton={<NotificationBell />}
-      pageName={t("my_contracts.tab_name")}
-      rightButton={
-        <FiltersButton onPress={() => setFiltersModalVisibility(true)}/>
-      }
-      bottomElement={
-        <TextSwitch
-          left={t("my_contracts.lists.finalized")}
-          right={t("my_contracts.lists.in_progress")}
-          currentPosition={
-            switchState === CONTRACT_LIST_STATE.FINALIZED
-              ? TEXT_SWITCH_POSITION.LEFT
-              : TEXT_SWITCH_POSITION.RIGHT
+      <TopBar
+        leftButton={<NotificationBell />}
+        pageName={t("my_contracts.tab_name")}
+        rightButton={
+          <FiltersButton onPress={() => setFiltersModalVisibility(true)} />
+        }
+        bottomElement={
+          <TextSwitch
+            left={t("my_contracts.lists.finalized")}
+            right={t("my_contracts.lists.in_progress")}
+            currentPosition={
+              switchState === CONTRACT_LIST_STATE.FINALIZED
+                ? TEXT_SWITCH_POSITION.LEFT
+                : TEXT_SWITCH_POSITION.RIGHT
+            }
+            onChange={listTypeChangeHandler}
+          />
+        }
+        withBackground
+      >
+        <AbstractList
+          messageOnEmpty={t("my_contracts.empty_list")}
+          elements={contracts}
+          listItem={({ item }: { item: ContractDataType }) => (
+            <ContractListItem item={item} />
+          )}
+          isLoading={
+            isLoadingAndLoadingType === CONTRACT_LIST_LOADING_TYPE.INITIAL
           }
-          onChange={listTypeChangeHandler}
+          isRefreshing={
+            isLoadingAndLoadingType === CONTRACT_LIST_LOADING_TYPE.REFRESH
+          }
+          onEndReached={() => dispatch(requestContractsList(switchState))}
+          onRefresh={() => dispatch(requestContractsList(switchState, true))}
         />
-      }
-      withBackground
-    >
-      <AbstractList
-        messageOnEmpty={t("my_contracts.empty_list")}
-        elements={contracts}
-        listItem={({ item }: { item: ContractDataType }) => (
-          <ContractListItem item={item} />
-        )}
-        isLoading={
-          isLoadingAndLoadingType === CONTRACT_LIST_LOADING_TYPE.INITIAL
-        }
-        isRefreshing={
-          isLoadingAndLoadingType === CONTRACT_LIST_LOADING_TYPE.REFRESH
-        }
-        onEndReached={() => dispatch(requestContractsList(switchState))}
-        onRefresh={() => dispatch(requestContractsList(switchState, true))}
+      </TopBar>
+      <FiltersModal
+        visible={isFiltersModalVisible}
+        onClose={() => setFiltersModalVisibility(false)}
+        switchState={switchState}
       />
-    </TopBar>
-    <FiltersModal 
-      visible={isFiltersModalVisible} 
-      onClose={() => setFiltersModalVisibility(false)}
-      switchState={switchState}
-    />
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  test: {
-    marginTop: 50,
-    textAlign: "center",
-    fontSize: 30,
-  },
-});

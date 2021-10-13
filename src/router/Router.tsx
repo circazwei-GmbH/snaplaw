@@ -22,14 +22,17 @@ import Invite from "../components/pages/contracts/Invite";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { requestLanguage } from "../store/modules/profile/action-creators";
 import { requestToken } from "../store/modules/auth/action-creators";
-import { orientationChange } from "../store/modules/main/action-creators";
+import {
+  initPushNotifications,
+  orientationChange,
+} from "../store/modules/main/action-creators";
 import { ROUTER_TABS } from "./TabRouterTypes";
 import { MY_CONTRACT_ROUTE } from "./MyContractRouterTypes";
 import { AUTH_ROUTE } from "./AuthRouterTypes";
 import { HOME_ROUTER } from "./HomeRouterType";
 import { PROFILE_ROUTER } from "./ProfileRouterTypes";
 import { connect, disconnect } from "../services/socket";
-import {requestNotifications} from "../store/modules/notifications/action-creators";
+import { requestNotifications } from "../store/modules/notifications/action-creators";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -54,6 +57,7 @@ export default function Router() {
     if (token) {
       dispatch(requestNotifications());
       connect(dispatch).then(() => {});
+      dispatch(initPushNotifications());
     } else {
       disconnect().then(() => {});
     }

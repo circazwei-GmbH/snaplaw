@@ -6,6 +6,7 @@ interface TextFieldImitationPropsInterface {
   value?: string;
   settings?: boolean;
   gray?: boolean;
+  errorMessage?: string;
 }
 
 export default function TextFieldImitation({
@@ -13,7 +14,9 @@ export default function TextFieldImitation({
   value,
   settings,
   gray,
+  errorMessage
 }: TextFieldImitationPropsInterface): JSX.Element {
+  
   return (
     <View
       style={[
@@ -22,27 +25,52 @@ export default function TextFieldImitation({
       ]}
     >
       <View style={styles.labelBox}>
-        <Text style={[settings ? styles.labelMargin : null, styles.label]}>
+        <Text style={[
+          value ? null : styles.labelWithEmptyInputDance,
+          settings ? styles.labelMargin : null, 
+          styles.label
+        ]}>
           {placeholder}
         </Text>
-        {settings ? null : <Text style={styles.redText}>*</Text>}
+        {settings ? null : <Text style={[value ? null : styles.labelWithEmptyInputDance,styles.redText]}>*</Text>}
       </View>
       <View
         style={[
           settings ? styles.input : styles.emptyInput,
           gray ? styles.inputNotEditable : null,
+          errorMessage ? styles.errorBorder : null,
         ]}
       >
-        <Text
-          style={[
-            styles.inputWithText,
-            settings ? null : styles.lineHeight,
-            gray ? styles.grayText : null,
-          ]}
-        >
-          {value}
-        </Text>
+        { value 
+         ? (
+              <Text
+                style={[
+                  styles.inputWithText,
+                  settings ? null : styles.lineHeight,
+                  gray ? styles.grayText : null,
+                ]}
+              >
+                {value}
+              </Text>
+            )
+          : (
+            <Text
+              style={[
+                styles.inputWithText,
+                styles.placeholder,
+                settings ? null : styles.lineHeight,
+              ]}
+            >
+              {placeholder}
+            </Text>
+          )
+        }
       </View>
+      <Text
+        style={[styles.errorText, errorMessage ? null : styles.displayNone]}
+      >
+        {errorMessage}
+      </Text>
     </View>
   );
 }
@@ -61,11 +89,16 @@ const styles = StyleSheet.create({
   },
   labelBox: {
     flexDirection: "row",
+    height: 21,
   },
   input: {
+    borderWidth: 1,
+    borderColor: "transparent",
     paddingHorizontal: 16,
   },
   emptyInput: {
+    borderWidth: 1,
+    borderColor: "transparent",
     borderRadius: 10,
     fontSize: 15,
     paddingHorizontal: 16,
@@ -78,6 +111,7 @@ const styles = StyleSheet.create({
     fontFamily: "P",
     fontSize: 17,
     lineHeight: 40,
+    color: "#000"
   },
   lineHeight: {
     lineHeight: 44,
@@ -91,9 +125,26 @@ const styles = StyleSheet.create({
   label: {
     color: "#1696E2",
     fontSize: 14,
-    lineHeight: 22,
   },
   labelMargin: {
     marginHorizontal: 16,
+  },
+  placeholder: {
+    color: "#909090",
+    fontSize: 15,
+  },
+  errorBorder: {
+    borderColor: "#FA7171",
+  },
+  errorText: {
+    paddingTop: 5,
+    color: "#FA7171",
+  },
+  displayNone: {
+    display: "none",
+    marginBottom: 8,
+  },
+  labelWithEmptyInputDance: {
+    display: "none",
   },
 });

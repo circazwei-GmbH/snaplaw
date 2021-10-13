@@ -199,6 +199,7 @@ export default {
       invite_partner: "Benutzer einladen",
       view_pdf: "Ansehen",
       decline: "Ablehnen",
+      contract_history: "Vertragänderungsverlauf sehen",
     },
     delete_modal: {
       message: "Sind Sie sicher, dass Sie den Kontakt löschen möchten?",
@@ -228,6 +229,7 @@ export default {
   },
   menu: {
     cancel: "Abbrechen",
+    confirm: "Bestätigen",
   },
   notifications: {
     title: "Benachrichtigungen",
@@ -354,6 +356,7 @@ export default {
         "Vergessen Sie bitte nicht, den Kunden einzuladen. Den Vertrag finden Sie im ^In Bearbeitung^ Ordner.",
       found_in_pregress_folder:
         "Der Vertrag ist gespeichert und befindet sich in dem ^Bearbeitungsordner^.",
+      coming_soon: "Die Funktionalität kommt bald dazu.",
     },
     validation: {
       field_empty: "Das Feld kann nicht leer sein",
@@ -364,6 +367,10 @@ export default {
         "Sind Sie sicher, dass Sie die Änderungen anfordern möchten? Der Opponent sollte den Vertrag aufs Neue unterschreiben.",
       yes: "Ja",
       no: "Nein",
+    },
+    finalize: {
+      message:
+        "Der Vertrag ist fertig und befindet sich in einem entsprechenden Tab.",
     },
   },
   sign_form: {

@@ -10,7 +10,6 @@ import { ContractDataListType } from "../../../../store/modules/contract/types";
 import { getListItemAction } from "../../../../services/contract/actions-config";
 import ContractView from "../../../features/Modals/ContractView";
 import { setPdfViewOnListContract } from "../../../../store/modules/contract/slice";
-import contract from "../../../../services/contract";
 
 export default function ContractListItem({
   item,
@@ -27,7 +26,7 @@ export default function ContractListItem({
       title: t(action.title),
       handler: () => {
         setInProgressMenuVisible(false);
-        dispatch(action.handler(item, t));        
+        dispatch(action.handler(item, t));
       },
     })
   );

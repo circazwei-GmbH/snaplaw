@@ -5,22 +5,28 @@ import { useI18n } from "../../../translator/i18n";
 interface DatePickerModalInterface {
   open: boolean;
   modalHandler: React.Dispatch<React.SetStateAction<boolean>>;
-  changeDate: Function;
+  changeDate?: Function;
+  onDateChange?: React.Dispatch<React.SetStateAction<string>>;
+  modal?: boolean;
+  date?: Date;
 }
 
 export default function DatePickerModal({
   open,
   modalHandler,
-  changeDate,
+  changeDate = () => {},
+  onDateChange = () => {},
+  modal = true,
+  date = new Date(),
 }: DatePickerModalInterface): JSX.Element {
   const { t } = useI18n();
 
   return (
     <DatePicker
-      modal
+      modal={modal}
       open={open}
-      date={new Date()}
-      onDateChange={() => {}}
+      date={date}
+      onDateChange={(date) => onDateChange(`${date}`)}
       onConfirm={(newDate) => {
         modalHandler(false);
         changeDate(`${newDate}`, "dateOfBirth");
