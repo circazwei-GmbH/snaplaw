@@ -15,19 +15,21 @@ import {
   updateAvatar,
 } from "../../store/modules/profile/action-creators";
 import { setAvatarLoading } from "../../store/modules/profile/slice";
-import { MEDIA_TYPE } from "../../services/media";
+import { MediaType, MEDIA_TYPE } from "../../services/media";
 
 type UploadAvatarProps = {
   isChangable: boolean;
+  avatar?: MediaType | null;
 };
 
 export default function UploadAvatar({
   isChangable = true,
+  avatar,
 }: UploadAvatarProps) {
   const [menuVisible, setMenuVisible] = useState(false);
   const dispatch = useAppDispatch();
   const { t } = useI18n();
-  const avatar = useAppSelector((state) => state.profile.user?.avatar);
+  // const avatar = useAppSelector((state) => state.profile.user?.avatar);
 
   const postChooseFileHandler = (uri: string) => {
     setMenuVisible(false);

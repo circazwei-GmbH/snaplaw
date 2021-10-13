@@ -22,7 +22,7 @@ export type UserType = {
   pushNotificationToken?: string;
 };
 
-export type UserTypeNoAvatar = Omit<UserType, "avatar">;
+export type UserTypeNoAvatar = Omit<UserType, "avatar" | "id">;
 
 type ProfileStateInterface = {
   language: LanguageType | undefined;

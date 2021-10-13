@@ -13,7 +13,7 @@ import { useI18n } from "../../../translator/i18n";
 
 // TODO move to abstract place because used in SignUp
 export interface FieldInterface {
-  value: string;
+  value?: string;
   error: string;
   displayError: boolean;
   validators: Array<ValidatorFormInterface>;

@@ -1,4 +1,4 @@
-import { LanguageType, UserType } from "./slice";
+import { LanguageType, UserType, UserTypeNoAvatar } from "./slice";
 import { BaseAction } from "../auth/types";
 import { MediaType } from "../../../services/media";
 
@@ -31,7 +31,7 @@ export interface RequestMeAction extends BaseAction {
 }
 
 export interface RequestEditProfileAction extends BaseAction {
-  payload: UserType;
+  payload: UserTypeNoAvatar;
 }
 
 export interface RequestUserProfileAction extends BaseAction {
@@ -64,7 +64,7 @@ export const requestMe = (): RequestMeAction => ({
 });
 
 export const requestEditProfile = (
-  user: UserType
+  user: UserTypeNoAvatar
 ): RequestEditProfileAction => ({
   type: REQUEST_EDIT_PROFILE,
   payload: user,

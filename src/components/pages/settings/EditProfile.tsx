@@ -23,6 +23,7 @@ import {
   UserTypeNoAvatar,
   setUserProfile,
   setCurretnPartner,
+  UserType,
 } from "../../../store/modules/profile/slice";
 import { setModal } from "../../../store/modules/main/slice";
 import { BUTTON_COLORTYPE } from "../../../store/modules/main/types";
@@ -42,7 +43,7 @@ export default function EditProfile({ route }: EditProfileProps) {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
   const [edit, setEdit] = useState(false);
-  const userData: UserTypeNoAvatar | undefined = useAppSelector((state) =>
+  const userData: UserType | undefined = useAppSelector((state) =>
     userId ? state.profile.currentPartner : state.profile.user
   );
 
@@ -236,7 +237,7 @@ export default function EditProfile({ route }: EditProfileProps) {
       <TouchableWithoutFeedback accessible={false} onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <View style={styles.uploadAvatarBox}>
-            <UploadAvatar isChangable={!userId} />
+            <UploadAvatar isChangable={!userId} avatar={userData?.avatar}/>
           </View>
           <EditProfileForm edit={edit} form={form} onChangeHandler={onChange} />
         </View>
