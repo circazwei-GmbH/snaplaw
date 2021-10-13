@@ -29,7 +29,6 @@ export default function UploadAvatar({
   const [menuVisible, setMenuVisible] = useState(false);
   const dispatch = useAppDispatch();
   const { t } = useI18n();
-  // const avatar = useAppSelector((state) => state.profile.user?.avatar);
 
   const postChooseFileHandler = (uri: string) => {
     setMenuVisible(false);
