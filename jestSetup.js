@@ -1,5 +1,3 @@
-import { Translator } from "./src/translator/i18n";
-
 jest.mock("./src/translator/Translator", () => ({
   translator: (text) => text,
 }));
@@ -55,3 +53,5 @@ jest.mock("react-native-pdf", () => {
   return (props) =>
     React.createElement("View", { ...props, testID: "react-native-pdf" });
 });
+
+jest.mock("socket.io-client")
