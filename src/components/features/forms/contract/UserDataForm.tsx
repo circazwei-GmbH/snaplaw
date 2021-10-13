@@ -69,6 +69,7 @@ export default function UserDataForm(): JSX.Element {
       }
     }
   }, [userData]);
+  
 
   return (
     <View style={styles.inputBox}>
@@ -94,10 +95,11 @@ export default function UserDataForm(): JSX.Element {
       >
         <TextFieldImitation
           placeholder={t("edit_profile.placeholders.dateOfBirth")}
-          value={
+          errorMessage={screenErrors?.[USER_DATA_FIELDS.dateOfBirth]}
+          value={userData?.data[USER_DATA_FIELDS.dateOfBirth] ?
             dayjs(userData?.data[USER_DATA_FIELDS.dateOfBirth]).format(
               "DD.MM.YYYY"
-            ) ?? ""
+            ) : ""
           }
         />
       </TouchableOpacity>

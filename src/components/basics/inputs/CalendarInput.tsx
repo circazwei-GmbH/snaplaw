@@ -31,7 +31,7 @@ export default function CalendarInput({
         <View style={styles.dividerContainer}>
           <VerticalDivider />
         </View>
-        <Pressable onPress={dateHandler} style={styles.iconContainer} testID="InvitePressabelAreaID">
+        <Pressable onPress={dateHandler} style={styles.iconContainer} testID="DataPickerPressabelAreaID">
           <MaterialCommunityIcons
             name="calendar-month-outline"
             size={22}

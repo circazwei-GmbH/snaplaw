@@ -111,7 +111,7 @@ export default function EditProfile({ route }: EditProfileProps) {
   };
 
   const [form, setForm] = useState<EditProfileFormInterface | any>(formInitial);
-
+  
   const formToSave: UserTypeNoAvatar = {
     name: form.name.value ?? "",
     lastName: form.lastName.value ?? "",

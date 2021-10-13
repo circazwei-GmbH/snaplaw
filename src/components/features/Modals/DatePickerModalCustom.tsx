@@ -21,7 +21,6 @@ export default function DatePickerModalCustom({
 }: DatePickerModalCustomInterface): JSX.Element {
   const { t } = useI18n();
   const [date, setDate] = useState(setedDate || `${new Date()}`);
-
   return (
     <Modal visible={datePickerOpened} transparent={true} animationType="none">
       <View style={[styles.container, styles.datePickerContainerWrapper]}>
@@ -31,7 +30,6 @@ export default function DatePickerModalCustom({
             modal={false}
             open={datePickerOpened}
             modalHandler={setDatePickerOpened}
-            changeDate={()=>{}}
             onDateChange={setDate}
           />  
           <View style={styles.dataPickerButtonsContainer}>
@@ -69,6 +67,7 @@ const styles = StyleSheet.create({
   },
   dataPickerButtonsContainer: {
     flexDirection: "row",
+    marginTop: 15,
   },
   dataPickerButton: {
     marginLeft: 20,
