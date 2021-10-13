@@ -18,7 +18,9 @@ import { MEDIA_TYPE } from "../../../services/media";
 const initialState = {
   profile: {
     user: {
-      avatar: "test/url",
+      avatar: {
+        uri: "test/url"
+      },
     },
   },
 };
@@ -63,7 +65,7 @@ describe("UploadAvatar", () => {
   it("Should display user avatar and menu", () => {
     const { getByTestId } = render(
       <Provider store={customStore}>
-        <UploadAvatar isChangable />
+        <UploadAvatar isChangable avatar={initialState.profile.user.avatar} />
       </Provider>
     );
 
