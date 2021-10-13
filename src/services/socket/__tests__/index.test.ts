@@ -18,6 +18,9 @@ const ioInstance = {
       ioInstance.callbacks.connect()
     }
   }),
+  listeners: (name: "connect" | "connect_error" | "disconnect") => {
+    return [ioInstance.callbacks[name]]
+  },
   callbacks: {
     connect: () => {},
     connect_error: () => {},

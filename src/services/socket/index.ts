@@ -18,22 +18,24 @@ export const connect = (
     return Promise.reject("dispatch not provided");
   }
   dispatcher = dispatch;
-  if (socket) {
-    return Promise.resolve(socket);
-  }
   return new Promise(async (resolve) => {
     const { token } = await getAuthTokens();
-    const localSocket = io(API_HOST, { autoConnect: false, auth: { token } });
-    localSocket.on("connect", () => {
-      socket = localSocket;
+    if (!socket) {
+      socket = io(API_HOST, { autoConnect: false, auth: { token } });
+    } else {
+      socket.auth.token = token;
+    }
+    socket.on("connect", () => {
       appliyHandlers(dispatch);
+      // @ts-ignore
       resolve(socket);
     });
-    localSocket.on("connect_error", () => {
+    socket.on("connect_error", () => {
       reconnectTimer = setTimeout(() => {connect().then(resolve)}, 2000);
-      localSocket.disconnect();
+      // @ts-ignore
+      socket.disconnect();
     });
-    localSocket.connect();
+    socket.connect();
   });
 };
 
@@ -58,6 +60,9 @@ export const appliyHandlers = (dispatch: Dispatch) => {
     throw new Error("Socket not connected");
   }
   for (let handlerName in Handlers) {
+    if(socket.listeners(handlerName).length) {
+      continue;
+    }
     socket.on(handlerName, (event) =>
       Handlers[handlerName as SOKET_EVENT](dispatch, event)
     );
