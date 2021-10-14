@@ -7,7 +7,6 @@ interface TextFieldImitationPropsInterface {
   settings?: boolean;
   gray?: boolean;
   errorMessage?: string;
-  contract?: boolean,
 }
 
 export default function TextFieldImitation({

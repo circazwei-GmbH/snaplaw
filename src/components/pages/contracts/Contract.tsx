@@ -80,6 +80,7 @@ export default function Contract({
     if (!contract) {
       return;
     }
+    // TODO: Fing issue with trigger change request without changing screen data
     // console.log(previousVersionOfCurrentScreen, findScreentByType(
     //   contract.screens,
     //   currentContractConfig[screenCount].type
