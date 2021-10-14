@@ -8,7 +8,8 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "test": "jest",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "expo": "expo"
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.5",
