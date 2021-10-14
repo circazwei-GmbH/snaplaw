@@ -35,7 +35,6 @@ export default function UserDataForm(): JSX.Element {
       ? state.contract.contractErrors[CONTRACT_SCREEN_TYPES.USER_DATA]
       : undefined
   );
-
   const onChangeAction = (value: string, fieldName: USER_DATA_FIELDS) => {
     dispatch(
       setScreenData({
@@ -104,6 +103,7 @@ export default function UserDataForm(): JSX.Element {
         />
       </TouchableOpacity>
       <TextFieldImitation
+        contract
         placeholder={t("edit_profile.placeholders.email")}
         value={userData?.data[USER_DATA_FIELDS.email]}
         gray
@@ -135,6 +135,7 @@ export default function UserDataForm(): JSX.Element {
         }
       />
       <DatePickerModal
+        date={userData?.data[USER_DATA_FIELDS.dateOfBirth] ? new Date(userData?.data[USER_DATA_FIELDS.dateOfBirth]) : undefined}
         open={datePickerOpened}
         modalHandler={setDatePickerOpened}
         changeDate={onChangeAction}

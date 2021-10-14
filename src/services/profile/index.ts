@@ -5,7 +5,7 @@ import { MediaType } from "../media";
 
 const updateUserAvatar = (avatarPath: MediaType | null) => {
   const token = httpClient.getToken();
-  if (!token) {
+  if (!token) {    
     throw new Error("Trying to update user avatar with empty token");
   }
   const user = getUserFromToken(token);

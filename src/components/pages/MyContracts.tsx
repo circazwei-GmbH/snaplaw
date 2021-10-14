@@ -23,13 +23,14 @@ import {
 export default function MyContracts() {
   const { t } = useI18n();
   const [switchState, setSwitchState] = useState<CONTRACT_LIST_STATE>(
-    CONTRACT_LIST_STATE.FINALIZED
+    CONTRACT_LIST_STATE.IN_PROGRESS
   );
   const [isFiltersModalVisible, setFiltersModalVisibility] = useState(false);
   const contracts = useAppSelector((state) => state.contract.contracts);
   const isLoadingAndLoadingType = useAppSelector(
     (state) => state.contract.isListLoading
   );
+  
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -41,6 +42,7 @@ export default function MyContracts() {
       state === TEXT_SWITCH_POSITION.LEFT
         ? CONTRACT_LIST_STATE.FINALIZED
         : CONTRACT_LIST_STATE.IN_PROGRESS;
+        
     setSwitchState(nextState);
     dispatch(requestContractsList(nextState));
     dispatch(

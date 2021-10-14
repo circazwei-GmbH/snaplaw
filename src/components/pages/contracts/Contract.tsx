@@ -80,6 +80,11 @@ export default function Contract({
     if (!contract) {
       return;
     }
+    // console.log(previousVersionOfCurrentScreen, findScreentByType(
+    //   contract.screens,
+    //   currentContractConfig[screenCount].type
+    // ));
+    
     const isNeedRequestModal = checkIsItChangeRequest(
       contract,
       currentContractConfig[screenCount].type,

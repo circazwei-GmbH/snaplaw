@@ -34,7 +34,7 @@ export default function EditProfileTextField({
     if (typeof onChangeFunction === "function") {
       onChangeFunction(text);
     }
-  };
+  };  
 
   return (
     <View

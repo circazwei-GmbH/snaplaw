@@ -21,7 +21,7 @@ export default function UserAvatar({
       ? buildMediaSource(url.uri)
       : require("../../../assets/user_profile.png");
   };
-
+  
   const onStartLoadHandler = () => {
     setIsLoading(true);
   };

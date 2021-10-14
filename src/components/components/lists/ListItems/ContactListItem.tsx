@@ -29,7 +29,7 @@ export default function ContractListItem({
         dispatch(action.handler(item, t));
       },
     })
-  );
+  );  
 
   return (
     <>

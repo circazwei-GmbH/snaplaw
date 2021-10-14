@@ -18,8 +18,11 @@ export default function DatePickerModal({
   onDateChange = () => {},
   modal = true,
   date = new Date(),
-}: DatePickerModalInterface): JSX.Element {
+}: DatePickerModalInterface): JSX.Element | null {
   const { t } = useI18n();
+  if (!open) {
+    return null
+  }
 
   return (
     <DatePicker
