@@ -103,7 +103,6 @@ export default function UserDataForm(): JSX.Element {
         />
       </TouchableOpacity>
       <TextFieldImitation
-        contract
         placeholder={t("edit_profile.placeholders.email")}
         value={userData?.data[USER_DATA_FIELDS.email]}
         gray
