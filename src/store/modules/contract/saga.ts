@@ -207,7 +207,7 @@ function* requestContractsList({
         )
       );
     }
-    const filters = yield select((state) => state.contract.smartFilters);
+    const filters = yield select((state) => state.contract.smartFilters);    
     const contracts = yield call(
       API.requestContractList,
       type,
