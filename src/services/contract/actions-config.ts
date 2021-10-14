@@ -159,6 +159,14 @@ const listActionConfig: ListActionType[] = [
       handler: (item, t) => setMessage(t("contracts.messages.coming_soon")),
     },
   },
+  {
+    contractRole: CONTRACT_ROLE.PARTNER,
+    contractStatus: [CONTRACT_STATUS.FINNALIZED],
+    action: {
+      title: "my_contracts.actions.contract_history",
+      handler: (item, t) => setMessage(t("contracts.messages.coming_soon")),
+    },
+  },
 ];
 
 export const getListItemAction = (item: ContractDataListType) => {
