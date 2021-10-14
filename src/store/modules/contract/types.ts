@@ -87,6 +87,7 @@ export type ContractDataListType = {
   createdAt: string;
   title: string | undefined;
   partnerId: string | undefined;
+  ownerId: string | undefined;
   meRole: CONTRACT_ROLE;
   finalizedAt: string | undefined;
 };

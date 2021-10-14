@@ -61,6 +61,7 @@ export default function EditProfileForm({
           <TextFieldImitation
             placeholder={t("edit_profile.placeholders.dateOfBirth")}
             value={form.dateOfBirth.value ? dayjs(form.dateOfBirth.value).format("DD.MM.YYYY") : ""}
+            errorMessage={form.dateOfBirth.error}
             settings
           />
         </TouchableOpacity>
@@ -97,6 +98,7 @@ export default function EditProfileForm({
         />
       </View>
       <DatePickerModal
+        date={form.dateOfBirth.value ? new Date(form.dateOfBirth.value) : undefined}
         open={datePickerOpened}
         modalHandler={setDatePickerOpened}
         changeDate={onChangeHandler}

@@ -14,34 +14,33 @@ export default function TextFieldImitation({
   value,
   settings,
   gray,
-  errorMessage
+  errorMessage,
 }: TextFieldImitationPropsInterface): JSX.Element {
-  
   return (
     <View
       style={[
         styles.inputContainer,
+        settings ? { paddingHorizontal: 16 } :  null,
         settings ? styles.borderSettings : styles.border,
       ]}
     >
       <View style={styles.labelBox}>
         <Text style={[
-          value ? null : styles.labelWithEmptyInputDance,
-          settings ? styles.labelMargin : null, 
+           !settings && !value ? styles.labelWithEmptyInputDance : null,
           styles.label
         ]}>
           {placeholder}
         </Text>
-        {settings ? null : <Text style={[value ? null : styles.labelWithEmptyInputDance,styles.redText]}>*</Text>}
+        {settings || !value ? null : <Text style={styles.redText}>*</Text>}
       </View>
       <View
         style={[
           settings ? styles.input : styles.emptyInput,
           gray ? styles.inputNotEditable : null,
-          errorMessage ? styles.errorBorder : null,
+          !settings && errorMessage ? styles.errorBorder : null,
         ]}
       >
-        { value 
+        { value || (settings && errorMessage) 
          ? (
               <Text
                 style={[
@@ -94,7 +93,6 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: "transparent",
-    paddingHorizontal: 16,
   },
   emptyInput: {
     borderWidth: 1,
