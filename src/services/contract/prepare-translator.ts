@@ -13,6 +13,7 @@ export const translateContractForList = (
   type: contract.type,
   createdAt: contract.createdAt,
   title: contract.title,
+  ownerId: contract.ownerId,
   partnerId: contract.partnerId,
   meRole: detectContractRole(contract.partnerId, contract.ownerId, meId),
   finalizedAt: contract.finalizedAt,

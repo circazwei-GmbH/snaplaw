@@ -135,11 +135,11 @@ const listActionConfig: ListActionType[] = [
   },
   {
     contractRole: CONTRACT_ROLE.PARTNER,
-    contractStatus: [CONTRACT_STATUS.FINNALIZED],
+    contractStatus: [CONTRACT_STATUS.FINNALIZED, CONTRACT_STATUS.WITH_PARTNER],
     action: {
       title: "my_contracts.actions.see_partner",
       handler: (item) =>
-        navigate({ [MY_CONTRACT_ROUTE.PROFILE]: { id: item.partnerId } }),
+        navigate({ [MY_CONTRACT_ROUTE.PROFILE]: { id: item.ownerId } }),
     },
   },
   {

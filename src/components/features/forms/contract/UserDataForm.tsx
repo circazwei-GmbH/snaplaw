@@ -35,7 +35,6 @@ export default function UserDataForm(): JSX.Element {
       ? state.contract.contractErrors[CONTRACT_SCREEN_TYPES.USER_DATA]
       : undefined
   );
-
   const onChangeAction = (value: string, fieldName: USER_DATA_FIELDS) => {
     dispatch(
       setScreenData({
@@ -135,6 +134,7 @@ export default function UserDataForm(): JSX.Element {
         }
       />
       <DatePickerModal
+        date={userData?.data[USER_DATA_FIELDS.dateOfBirth] ? new Date(userData?.data[USER_DATA_FIELDS.dateOfBirth]) : undefined}
         open={datePickerOpened}
         modalHandler={setDatePickerOpened}
         changeDate={onChangeAction}
