@@ -268,11 +268,11 @@ function* clearToken() {
   }
 }
 
-function* responseErrorHandler({ payload }: ResponseErrorAction) {
+function* responseErrorHandler({ payload, error }: ResponseErrorAction) {
   if (!payload) {
     console.error("ERROR without body");
     return yield put(
-      setMessage(Translator.getInstance().trans("errors.abstract"))
+      setMessage(Translator.getInstance().trans("errors.abstract") + " " + error.message)
     );
   }
   if (payload.status === 401 || payload.data?.code === USER_NOT_FOUND) {

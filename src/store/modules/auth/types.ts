@@ -83,4 +83,5 @@ export interface ResponseErrorAction extends BaseAction {
         data: any;
       }
     | undefined;
+  error?: any
 }

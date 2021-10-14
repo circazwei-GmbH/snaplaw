@@ -93,6 +93,7 @@ export const responseError = (error: any): ResponseErrorAction => {
     return {
       type: RESPONSE_ERROR,
       payload: undefined,
+      error
     };
   }
   return {
