@@ -4,6 +4,7 @@ import {
 } from "../store/modules/contract/constants";
 import { CONDITION_VALUE } from "../store/modules/contract/purchase/product-condition";
 import { CONFIRMATION_FIELDS } from "../store/modules/contract/purchase/confirmation";
+import { SELLER_TYPE_VALUE } from "../store/modules/contract/carSales/seller-type";
 
 export default {
   welcome: {
@@ -332,6 +333,14 @@ export default {
     },
     [CONTRACT_TYPES.CAR]: {
       title: "Autokaufvertrag",
+      [CONTRACT_SCREEN_TYPES.SELLER_TYPE]: {
+        title: "Verkäufertyp",
+        secondTitle: "Bitte geben Sie an, welcher Verkäufer Sie sind",
+        checkboxes: {
+          [SELLER_TYPE_VALUE.COMMERCIAL]: "Gewerblich",
+          [SELLER_TYPE_VALUE.PRIVAT]: "Privat",
+        }
+      },
       [CONTRACT_SCREEN_TYPES.USER_DATA]: {
         title: "Benutzerdaten",
       },

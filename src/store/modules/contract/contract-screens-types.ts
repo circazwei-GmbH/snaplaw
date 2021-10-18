@@ -8,6 +8,7 @@ import Confirmation from "../../../components/features/forms/contract/Confirmati
 import Payment from "../../../components/features/forms/contract/Payment";
 import Sign from "../../../components/features/forms/contract/Sign";
 import { CONTRACT_ROLE } from "./contract-roles";
+import SellerType from "../../../components/features/forms/contract/SellerType";
 
 export interface ContractScreenConfigType {
   component: React.ElementType;
@@ -74,8 +75,14 @@ export const contractScreensConfig: Record<
   ],
   [CONTRACT_TYPES.CAR]: [
     {
+      component: SellerType,
+      title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.SELLER_TYPE}.title`,
+      type: CONTRACT_SCREEN_TYPES.SELLER_TYPE,
+      granted: [CONTRACT_ROLE.OWNER],
+    },
+    {
       component: UserDataForm,
-      title: `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.USER_DATA}.title`,
+      title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.USER_DATA}.title`,
       type: CONTRACT_SCREEN_TYPES.USER_DATA,
       granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
     },
@@ -93,7 +100,7 @@ export const contractScreensConfig: Record<
     },
     {
       component: Sign,
-      title: `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.SIGN}.title`,
+      title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.SIGN}.title`,
       type: CONTRACT_SCREEN_TYPES.SIGN,
       granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
     },

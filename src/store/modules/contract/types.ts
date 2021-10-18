@@ -7,12 +7,17 @@ import {
 import {
   USER_DATA_FIELDS,
   UserDataScreenInterface,
-} from "./purchase/user-data";
+} from "./user-data";
 import {
   CONDITION_VALUE,
   CONDITIONS,
   ProductConditionScreenInterface,
 } from "./purchase/product-condition";
+import {
+  SELLER_TYPE_VALUE,
+  SELLER_TYPES,
+  SellerTypeScreenInterface,
+} from "./carSales/seller-type";
 import {
   CONFIRMATION,
   CONFIRMATION_FIELDS,
@@ -153,3 +158,4 @@ export { ProductConditionScreenInterface, CONDITION_VALUE, CONDITIONS };
 export { ConfirmationScreenInterface, CONFIRMATION_FIELDS, CONFIRMATION };
 export { PaymentScreenInterface, PAYMENT_METHODS, PAYMENT_FIELDS };
 export { ProductDescriptionScreenInterface, PRODUCT_DESCRIPTION_FIELDS };
+export { SellerTypeScreenInterface, SELLER_TYPE_VALUE, SELLER_TYPES };
