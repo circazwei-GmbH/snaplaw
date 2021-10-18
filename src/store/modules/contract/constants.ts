@@ -1,8 +1,8 @@
 export const enum CONTRACT_TYPES {
   PURCHASE = "PURCHASE",
   WORK = "WORK",
-  CAR = "CAR",
-  FREE = "FREE",
+  CAR = "CAR_SALES",
+  FREE = "FREE_FORM",
   RENTAL = "RENTAL",
 }
 
