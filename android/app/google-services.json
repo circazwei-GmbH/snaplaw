@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "719165210348",
-    "project_id": "snaplaw-jsn",
-    "storage_bucket": "snaplaw-jsn.appspot.com"
+    "project_number": "891132454880",
+    "project_id": "snaplaw-jsn-sckit",
+    "storage_bucket": "snaplaw-jsn-sckit.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:719165210348:android:93b22a7e10dbeb5ad7efc9",
+        "mobilesdk_app_id": "1:891132454880:android:6e6b926ca4ac57efc0ad85",
         "android_client_info": {
           "package_name": "com.snaplaw.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "719165210348-k5uhe74qqud8iejvnnr584hn6p9ljbqn.apps.googleusercontent.com",
+          "client_id": "891132454880-52qjumj4hinsodcpccmevadb1cetegjn.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCLgm4popThlJqH1bu_ilR_l6ktWlR2AZE"
+          "current_key": "AIzaSyDhiEE1GWmBLbEshdAKX_r2QkZ9MjBUOuA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "719165210348-k5uhe74qqud8iejvnnr584hn6p9ljbqn.apps.googleusercontent.com",
+              "client_id": "891132454880-52qjumj4hinsodcpccmevadb1cetegjn.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
