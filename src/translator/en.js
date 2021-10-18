@@ -1,3 +1,4 @@
+import { SELLER_TYPE_VALUE } from "../store/modules/contract/carSales/seller-type";
 import {
   CONTRACT_SCREEN_TYPES,
   CONTRACT_TYPES,
@@ -332,6 +333,14 @@ export default {
     },
     [CONTRACT_TYPES.CAR]: {
       title: "Car sales contract",
+      [CONTRACT_SCREEN_TYPES.SELLER_TYPE]: {
+        title: "Seller type",
+        secondTitle: "Please indicate which seller you are",
+        checkboxes: {
+          [SELLER_TYPE_VALUE.COMMERCIAL]: "Commercial",
+          [SELLER_TYPE_VALUE.PRIVAT]: "Private",
+        }
+      },
       [CONTRACT_SCREEN_TYPES.USER_DATA]: {
         title: "user data",
       },
@@ -354,7 +363,7 @@ export default {
             "Seller details have been verified and match",
         },
         partner_text: "Please recheck their identity with a passport.",
-      },
+      },   
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "sign contract",
         signature: "Please enter your signature",
