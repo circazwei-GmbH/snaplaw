@@ -330,6 +330,9 @@ export default {
         invite: "Please invite user",
       },
     },
+    [CONTRACT_TYPES.CAR]: {
+      title: "Car sales contract",
+    },
     confirmation_modal: {
       message: "Are you sure, you want to cancel contract creation?",
       buttons: {
