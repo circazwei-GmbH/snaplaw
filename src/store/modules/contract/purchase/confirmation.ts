@@ -5,6 +5,7 @@ import { CONTRACT_ROLE } from "../contract-roles";
 export enum CONFIRMATION_FIELDS {
   FIRST = "FIRST",
   SECOND = "SECOND",
+  THIRD = "THIRD",
   SELLER_DETAIL = "SELLER_DETAIL",
 }
 

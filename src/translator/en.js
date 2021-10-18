@@ -332,6 +332,34 @@ export default {
     },
     [CONTRACT_TYPES.CAR]: {
       title: "Car sales contract",
+      [CONTRACT_SCREEN_TYPES.USER_DATA]: {
+        title: "user data",
+      },
+      [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
+        title: "Car description",
+        titleTwo: "Please add car description",
+        placeholder: "Write here everything that you think is important",
+        button: "Upload file",
+      },
+      [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
+        title: "Confirmation",
+        confirmation: {
+          [CONFIRMATION_FIELDS.FIRST]:
+            "The seller warrants that he is not aware of any further damage or defect",
+          [CONFIRMATION_FIELDS.SECOND]:
+            "Buyer details have been verified and match",
+          [CONFIRMATION_FIELDS.THIRD]:
+            "The seller certifies that the vehicle was used for personal purposes and not for commercial purposes",
+          [CONFIRMATION_FIELDS.SELLER_DETAIL]:
+            "Seller details have been verified and match",
+        },
+        partner_text: "Please recheck their identity with a passport.",
+      },
+      [CONTRACT_SCREEN_TYPES.SIGN]: {
+        title: "sign contract",
+        signature: "Please enter your signature",
+        invite: "Please invite user",
+      },      
     },
     confirmation_modal: {
       message: "Are you sure, you want to cancel contract creation?",

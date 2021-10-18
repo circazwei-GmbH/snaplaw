@@ -79,5 +79,23 @@ export const contractScreensConfig: Record<
       type: CONTRACT_SCREEN_TYPES.USER_DATA,
       granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
     },
+    {
+      component: ProductDescriptionForm,
+      title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.title`,
+      type: CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION,
+      granted: [CONTRACT_ROLE.OWNER],
+    },
+    {
+      component: Confirmation,
+      title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.CONFIRMATION}.title`,
+      type: CONTRACT_SCREEN_TYPES.CONFIRMATION,
+      granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
+    },
+    {
+      component: Sign,
+      title: `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.SIGN}.title`,
+      type: CONTRACT_SCREEN_TYPES.SIGN,
+      granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
+    },
   ],
 };
