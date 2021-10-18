@@ -1,5 +1,5 @@
-import { CONTRACT_SCREEN_TYPES } from "../constants";
-import { BaseScreenDataInterface } from "../base-types";
+import { CONTRACT_SCREEN_TYPES } from "./constants";
+import { BaseScreenDataInterface } from "./base-types";
 
 export const enum USER_DATA_FIELDS {
   name = "name",

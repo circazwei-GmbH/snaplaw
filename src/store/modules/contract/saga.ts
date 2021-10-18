@@ -39,7 +39,7 @@ import {
   setMessage,
   setModal,
 } from "../main/slice";
-import { CONTRACT_CREATION_WAIT } from "./constants";
+import { CONTRACT_CREATION_WAIT, CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
 import {
   clearErrors,
   CONTRACT_LIST_LOADING_TYPE,
@@ -66,11 +66,25 @@ import { Translator } from "../../../translator/i18n";
 import { USER_SELF_INVITE } from "../../../services/error-codes";
 import { CONTRACT_ROLE } from "./contract-roles";
 import { navigatePop, navigationPopToTop } from "../main/action-creators";
+import { SELLER_TYPE_FIELD_NAME, SELLER_TYPE_VALUE } from "./carSales/seller-type";
 
 function* createContract({ payload }: RequestCreateContractAction) {
   try {
     yield put(addToWaiter({ event: CONTRACT_CREATION_WAIT }));
     const response = yield call(API.createContract, payload);
+    const screens: BaseScreenDataInterface[] = [
+      prefillUserData(
+        yield select<SelectType>((state) => state.profile.user)
+      ),
+    ];
+    if (payload === CONTRACT_TYPES.CAR) {
+      screens.push({
+        type: CONTRACT_SCREEN_TYPES.SELLER_TYPE,
+        data: {
+          [SELLER_TYPE_FIELD_NAME]: SELLER_TYPE_VALUE.COMMERCIAL,
+        }
+      })
+    }
     yield put(
       setInitedContract({
         id: response.data.id,
@@ -81,11 +95,7 @@ function* createContract({ payload }: RequestCreateContractAction) {
         sign: undefined,
         oponentSign: null,
         partnerName: null,
-        screens: [
-          prefillUserData(
-            yield select<SelectType>((state) => state.profile.user)
-          ),
-        ],
+        screens,
       })
     );
     yield put(clearErrors());

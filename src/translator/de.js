@@ -4,6 +4,7 @@ import {
 } from "../store/modules/contract/constants";
 import { CONDITION_VALUE } from "../store/modules/contract/purchase/product-condition";
 import { CONFIRMATION_FIELDS } from "../store/modules/contract/purchase/confirmation";
+import { SELLER_TYPE_VALUE } from "../store/modules/contract/carSales/seller-type";
 
 export default {
   welcome: {
@@ -329,6 +330,45 @@ export default {
         signature: "1. Bitte Ihre Unterschift eingeben",
         invite: "2. Bitte Benutzer einladen",
       },
+    },
+    [CONTRACT_TYPES.CAR]: {
+      title: "Autokaufvertrag",
+      [CONTRACT_SCREEN_TYPES.SELLER_TYPE]: {
+        title: "Verkäufertyp",
+        secondTitle: "Bitte geben Sie an, welcher Verkäufer Sie sind",
+        checkboxes: {
+          [SELLER_TYPE_VALUE.COMMERCIAL]: "Gewerblich",
+          [SELLER_TYPE_VALUE.PRIVAT]: "Privat",
+        }
+      },
+      [CONTRACT_SCREEN_TYPES.USER_DATA]: {
+        title: "Benutzerdaten",
+      },
+      [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
+        title: "Fahrzeugbeschreibung",
+        titleTwo: "Bitte Fahrzeugbeschreibung angeben",
+        placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
+        button: "Datei hochladen",
+      },
+      [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
+        title: "Besätigung",
+        confirmation: {
+          [CONFIRMATION_FIELDS.FIRST]:
+            "Der Verkäufer versichert, dass ihm keine weiteren Schäden und Mängel bekannt sind",
+          [CONFIRMATION_FIELDS.SECOND]:
+            "Die Käuferdaten wurden überprüft und stimmen überein",
+          [CONFIRMATION_FIELDS.THIRD]:
+            "Der Verkäufer versichert, dass das Fahrzeug privat und nicht gewerblich genutzt wurde",
+          [CONFIRMATION_FIELDS.SELLER_DETAIL]:
+            "Die Verkäuferdaten wurden überprüft und stimmen überein",
+        },
+        partner_text: "Bitte überprüfen Sie seine Identität mit einem Pass",
+      },
+      [CONTRACT_SCREEN_TYPES.SIGN]: {
+        title: "Vertrag unterzeichnen",
+        signature: "Bitte Ihre Unterschift eingeben",
+        invite: "Bitte Benutzer einladen",
+      },      
     },
     confirmation_modal: {
       message: "Wollten Sie die Vertragserstellung wirklich abbrechen?",
