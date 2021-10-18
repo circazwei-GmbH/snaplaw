@@ -71,7 +71,7 @@ describe("FiltersModal", () => {
       </Provider>
     );
 
-    fireEvent.press(getByTestId("TypeCheckboxCAR"));
+    fireEvent.press(getByTestId("TypeCheckboxCAR_SALES"));
     fireEvent.press(getByText("my_contracts.smart_filters.apply"));
     expect(actions.mock.calls[0][0]).toEqual(
       setContractsListFilters({
@@ -82,7 +82,7 @@ describe("FiltersModal", () => {
     expect(actions.mock.calls[1][0]).toEqual(
       requestContractsList(CONTRACT_LIST_STATE.FINALIZED, true)
     );
-    fireEvent.press(getByTestId("TypeCheckboxCAR"));
+    fireEvent.press(getByTestId("TypeCheckboxCAR_SALES"));
     fireEvent.press(getByText("my_contracts.smart_filters.apply"));
     expect(actions.mock.calls[2][0]).toEqual(
       setContractsListFilters({
