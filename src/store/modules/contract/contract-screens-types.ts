@@ -72,4 +72,12 @@ export const contractScreensConfig: Record<
       granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
     },
   ],
+  [CONTRACT_TYPES.CAR]: [
+    {
+      component: UserDataForm,
+      title: `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.USER_DATA}.title`,
+      type: CONTRACT_SCREEN_TYPES.USER_DATA,
+      granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
+    },
+  ],
 };

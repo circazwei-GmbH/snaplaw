@@ -38,7 +38,7 @@ export default function ContractListItem({
           <Text style={styles.title}>{item.title}</Text>
           <Text style={styles.type}>{t(`contracts.${item.type}.title`)}</Text>
           <Text style={styles.date}>
-            {dayjs(item.createdAt).format("DD/MM/YYYY")}
+            {dayjs(item.finalizedAt ?? item.createdAt).format("DD/MM/YYYY")}
           </Text>
         </View>
         <TouchableOpacity onPress={() => setInProgressMenuVisible(true)}>

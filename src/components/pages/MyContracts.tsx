@@ -44,13 +44,13 @@ export default function MyContracts() {
         : CONTRACT_LIST_STATE.IN_PROGRESS;
         
     setSwitchState(nextState);
-    dispatch(requestContractsList(nextState));
     dispatch(
       setContractsListFilters({
         types: [],
         date: "",
       })
     );
+    dispatch(requestContractsList(nextState));
   };
   return (
     <>
