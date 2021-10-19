@@ -30,6 +30,9 @@ import { checkIsItChangeRequest } from "../../../store/modules/contract/request-
 import { BaseScreenDataInterface } from "../../../store/modules/contract/base-types";
 import { findScreentByType } from "../../../utils/helpers";
 import { BUTTON_COLORTYPE } from "../../../store/modules/main/types";
+import { CONTRACT_SCREEN_TYPES } from "../../../store/modules/contract/constants";
+import { MEMBER_TYPE_FIELD_NAME, MEMBER_TYPE_VALUE } from "../../../store/modules/contract/carSales/member-type";
+import { PAYMENT_FIELDS, PAYMENT_METHODS } from "../../../store/modules/contract/types";
 
 type ContractProps = {
   route: {
@@ -44,6 +47,12 @@ export default function Contract({
 }: ContractProps) {
   const navigation = useNavigation();
   const contract = useAppSelector((state) => state.contract.currentContract);
+  const memberType = useAppSelector((state) => state.contract.currentContract?.screens.find(
+    (screen) => screen.type === CONTRACT_SCREEN_TYPES.MEMBER_TYPE
+  )?.data[MEMBER_TYPE_FIELD_NAME] as MEMBER_TYPE_VALUE | undefined);
+  const paymentType = useAppSelector((state) => state.contract.currentContract?.screens.find(
+    (screen) => screen.type === CONTRACT_SCREEN_TYPES.PAYMENT
+  )?.data[PAYMENT_FIELDS.SELLER_PAYMENT_METHOD] as PAYMENT_METHODS | undefined);
   const [previousVersionOfCurrentScreen, setPreviousVersionOfCurrentScreen] =
     useState<BaseScreenDataInterface | undefined>(undefined);
   const [contractViewVisible, setContractViewVisible] = useState(false);
@@ -73,7 +82,9 @@ export default function Contract({
 
   const currentContractConfig = getContractScreensConfig(
     contract.type,
-    contract.meRole
+    contract.meRole,
+    memberType,
+    paymentType,
   );
 
   const nextHandler = () => {

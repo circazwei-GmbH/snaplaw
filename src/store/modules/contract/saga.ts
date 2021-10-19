@@ -66,7 +66,7 @@ import { Translator } from "../../../translator/i18n";
 import { USER_SELF_INVITE } from "../../../services/error-codes";
 import { CONTRACT_ROLE } from "./contract-roles";
 import { navigatePop, navigationPopToTop } from "../main/action-creators";
-import { SELLER_TYPE_FIELD_NAME, SELLER_TYPE_VALUE } from "./carSales/seller-type";
+import { MEMBER_TYPE_FIELD_NAME, MEMBER_TYPE_VALUE } from "./carSales/member-type";
 
 function* createContract({ payload }: RequestCreateContractAction) {
   try {
@@ -79,9 +79,9 @@ function* createContract({ payload }: RequestCreateContractAction) {
     ];
     if (payload === CONTRACT_TYPES.CAR) {
       screens.push({
-        type: CONTRACT_SCREEN_TYPES.SELLER_TYPE,
+        type: CONTRACT_SCREEN_TYPES.MEMBER_TYPE,
         data: {
-          [SELLER_TYPE_FIELD_NAME]: SELLER_TYPE_VALUE.COMMERCIAL,
+          [MEMBER_TYPE_FIELD_NAME]: MEMBER_TYPE_VALUE.COMMERCIAL,
         }
       })
     }

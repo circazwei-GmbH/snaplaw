@@ -14,10 +14,10 @@ import {
   ProductConditionScreenInterface,
 } from "./purchase/product-condition";
 import {
-  SELLER_TYPE_VALUE,
-  SELLER_TYPES,
-  SellerTypeScreenInterface,
-} from "./carSales/seller-type";
+  MEMBER_TYPE_VALUE,
+  MEMBER_TYPES,
+  MemberTypeScreenInterface,
+} from "./carSales/member-type";
 import {
   CONFIRMATION,
   CONFIRMATION_FIELDS,
@@ -158,4 +158,4 @@ export { ProductConditionScreenInterface, CONDITION_VALUE, CONDITIONS };
 export { ConfirmationScreenInterface, CONFIRMATION_FIELDS, CONFIRMATION };
 export { PaymentScreenInterface, PAYMENT_METHODS, PAYMENT_FIELDS };
 export { ProductDescriptionScreenInterface, PRODUCT_DESCRIPTION_FIELDS };
-export { SellerTypeScreenInterface, SELLER_TYPE_VALUE, SELLER_TYPES };
+export { MemberTypeScreenInterface, MEMBER_TYPE_VALUE, MEMBER_TYPES };
