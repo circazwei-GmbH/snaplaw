@@ -8,40 +8,29 @@ import Confirmation from "../../../components/features/forms/contract/Confirmati
 import Payment from "../../../components/features/forms/contract/Payment";
 import Sign from "../../../components/features/forms/contract/Sign";
 import { CONTRACT_ROLE } from "./contract-roles";
-import { PAYMENT_METHODS, MEMBER_TYPE_VALUE } from "./types";
 import MemberType from "../../../components/features/forms/contract/MemberType";
+import { BaseScreenDataInterface } from "./base-types";
+import { checkByMemberType } from "./exclusions-checkers";
 
 export interface ContractScreenConfigType {
   component: React.ElementType;
   title: string;
   type: CONTRACT_SCREEN_TYPES;
   granted: Array<CONTRACT_ROLE>;
-  memberType?: Array<MEMBER_TYPE_VALUE>;
-  paymentType?: Array<PAYMENT_METHODS>
+  exclusionChecker?: (screens : BaseScreenDataInterface[]) => boolean;
 }
 
 export const getContractScreensConfig = (
   contractType: CONTRACT_TYPES,
   contractRole: CONTRACT_ROLE,
-  memberType?: MEMBER_TYPE_VALUE,
-  paymentType?: PAYMENT_METHODS,
-): Array<ContractScreenConfigType> => {
-  let resultScreens = contractScreensConfig[contractType].filter((screen) => 
-    screen.granted.includes(contractRole));
-
-    if (contractType === CONTRACT_TYPES.CAR && memberType) {
-      resultScreens = resultScreens.filter((screen) => 
-        screen.memberType?.includes(memberType));
-
-      resultScreens = paymentType
-        ? resultScreens.filter((screen) => 
-          screen.paymentType?.includes(paymentType))
-        : resultScreens.filter((screen) => 
-          screen.paymentType?.includes(PAYMENT_METHODS.ALL))
+  screens: BaseScreenDataInterface[] | undefined,
+): Array<ContractScreenConfigType> => contractScreensConfig[contractType].filter((screen) => {
+    let flag = screen.granted.includes(contractRole);
+    if (flag && typeof screen.exclusionChecker === "function" && screens) {
+        return screen.exclusionChecker(screens);
     }
-
-    return resultScreens;
-};
+    return flag;
+});
 
 export const contractScreensConfig: Record<
   CONTRACT_TYPES,
@@ -97,40 +86,34 @@ export const contractScreensConfig: Record<
       title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.MEMBER_TYPE}.title`,
       type: CONTRACT_SCREEN_TYPES.MEMBER_TYPE,
       granted: [CONTRACT_ROLE.OWNER],
-      memberType: [MEMBER_TYPE_VALUE.COMMERCIAL, MEMBER_TYPE_VALUE.PRIVAT],
-      paymentType: [PAYMENT_METHODS.ALL, PAYMENT_METHODS.CASH, PAYMENT_METHODS.CASH_ADVANCE, PAYMENT_METHODS.TRANSFER],
     },
     {
       component: UserDataForm,
       title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.USER_DATA}.title`,
       type: CONTRACT_SCREEN_TYPES.USER_DATA,
       granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
-      memberType: [MEMBER_TYPE_VALUE.PRIVAT ],
-      paymentType: [PAYMENT_METHODS.ALL, PAYMENT_METHODS.CASH, PAYMENT_METHODS.CASH_ADVANCE, PAYMENT_METHODS.TRANSFER],
+      exclusionChecker: checkByMemberType
     },
     {
       component: ProductDescriptionForm,
       title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.title`,
       type: CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION,
       granted: [CONTRACT_ROLE.OWNER],
-      memberType: [MEMBER_TYPE_VALUE.COMMERCIAL, MEMBER_TYPE_VALUE.PRIVAT],
-      paymentType: [PAYMENT_METHODS.ALL, PAYMENT_METHODS.CASH, PAYMENT_METHODS.CASH_ADVANCE, PAYMENT_METHODS.TRANSFER],
     },
     {
       component: Confirmation,
       title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.CONFIRMATION}.title`,
       type: CONTRACT_SCREEN_TYPES.CONFIRMATION,
       granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
-      memberType: [MEMBER_TYPE_VALUE.COMMERCIAL, MEMBER_TYPE_VALUE.PRIVAT],
-      paymentType: [PAYMENT_METHODS.ALL, PAYMENT_METHODS.CASH, PAYMENT_METHODS.CASH_ADVANCE, PAYMENT_METHODS.TRANSFER],
     },
     {
       component: Sign,
       title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.SIGN}.title`,
       type: CONTRACT_SCREEN_TYPES.SIGN,
       granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
-      memberType: [MEMBER_TYPE_VALUE.COMMERCIAL, MEMBER_TYPE_VALUE.PRIVAT],
-      paymentType: [PAYMENT_METHODS.ALL, PAYMENT_METHODS.CASH, PAYMENT_METHODS.CASH_ADVANCE, PAYMENT_METHODS.TRANSFER],
     },
   ],
+  [CONTRACT_TYPES.FREE]: [],
+  [CONTRACT_TYPES.WORK]: [],
+  [CONTRACT_TYPES.RENTAL]: [],
 };

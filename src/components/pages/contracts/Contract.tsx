@@ -47,12 +47,6 @@ export default function Contract({
 }: ContractProps) {
   const navigation = useNavigation();
   const contract = useAppSelector((state) => state.contract.currentContract);
-  const memberType = useAppSelector((state) => state.contract.currentContract?.screens.find(
-    (screen) => screen.type === CONTRACT_SCREEN_TYPES.MEMBER_TYPE
-  )?.data[MEMBER_TYPE_FIELD_NAME] as MEMBER_TYPE_VALUE | undefined);
-  const paymentType = useAppSelector((state) => state.contract.currentContract?.screens.find(
-    (screen) => screen.type === CONTRACT_SCREEN_TYPES.PAYMENT
-  )?.data[PAYMENT_FIELDS.SELLER_PAYMENT_METHOD] as PAYMENT_METHODS | undefined);
   const [previousVersionOfCurrentScreen, setPreviousVersionOfCurrentScreen] =
     useState<BaseScreenDataInterface | undefined>(undefined);
   const [contractViewVisible, setContractViewVisible] = useState(false);
@@ -83,8 +77,7 @@ export default function Contract({
   const currentContractConfig = getContractScreensConfig(
     contract.type,
     contract.meRole,
-    memberType,
-    paymentType,
+    contract.screens,
   );
 
   const nextHandler = () => {
