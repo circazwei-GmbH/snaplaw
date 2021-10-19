@@ -1,4 +1,4 @@
-import { SELLER_TYPE_VALUE } from "../store/modules/contract/carSales/seller-type";
+import { MEMBER_TYPE_VALUE } from "../store/modules/contract/carSales/member-type";
 import {
   CONTRACT_SCREEN_TYPES,
   CONTRACT_TYPES,
@@ -333,12 +333,12 @@ export default {
     },
     [CONTRACT_TYPES.CAR]: {
       title: "Car sales contract",
-      [CONTRACT_SCREEN_TYPES.SELLER_TYPE]: {
+      [CONTRACT_SCREEN_TYPES.MEMBER_TYPE]: {
         title: "Seller type",
         secondTitle: "Please indicate which seller you are",
         checkboxes: {
-          [SELLER_TYPE_VALUE.COMMERCIAL]: "Commercial",
-          [SELLER_TYPE_VALUE.PRIVAT]: "Private",
+          [MEMBER_TYPE_VALUE.COMMERCIAL]: "Commercial",
+          [MEMBER_TYPE_VALUE.PRIVAT]: "Private",
         }
       },
       [CONTRACT_SCREEN_TYPES.USER_DATA]: {

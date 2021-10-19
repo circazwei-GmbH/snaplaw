@@ -13,7 +13,8 @@ export default function ContractScreenCounter({
   return (
     <View style={styles.container}>
       <Text style={styles.text}>
-        <Text style={[styles.text, styles.current]}>{current}</Text>/{total}
+        <Text style={[styles.text, styles.current]}>{current}</Text>/
+        <Text testID="CounterTotal">{total}</Text>
       </Text>
     </View>
   );

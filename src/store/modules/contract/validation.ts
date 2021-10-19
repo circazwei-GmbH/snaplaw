@@ -16,7 +16,7 @@ import {
 } from "../../../validations/default";
 import { PRODUCT_CONDITION_FIELD_NAME } from "./purchase/product-condition";
 import { CONTRACT_ROLE } from "./contract-roles";
-import { SELLER_TYPE_FIELD_NAME } from "./carSales/seller-type";
+import { MEMBER_TYPE_FIELD_NAME } from "./carSales/member-type";
 
 export const contractValidationConfig = {
   [CONTRACT_TYPES.PURCHASE]: {
@@ -156,9 +156,9 @@ export const contractValidationConfig = {
     [CONTRACT_SCREEN_TYPES.SIGN]: {},
   },
   [CONTRACT_TYPES.CAR]: {
-    [CONTRACT_SCREEN_TYPES.SELLER_TYPE]: {
+    [CONTRACT_SCREEN_TYPES.MEMBER_TYPE]: {
       [CONTRACT_ROLE.OWNER]: {
-        [SELLER_TYPE_FIELD_NAME]: [
+        [MEMBER_TYPE_FIELD_NAME]: [
           length("contracts.validation.field_empty", 1),
         ],
       },

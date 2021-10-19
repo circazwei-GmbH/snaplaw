@@ -8,22 +8,29 @@ import Confirmation from "../../../components/features/forms/contract/Confirmati
 import Payment from "../../../components/features/forms/contract/Payment";
 import Sign from "../../../components/features/forms/contract/Sign";
 import { CONTRACT_ROLE } from "./contract-roles";
-import SellerType from "../../../components/features/forms/contract/SellerType";
+import MemberType from "../../../components/features/forms/contract/MemberType";
+import { BaseScreenDataInterface } from "./base-types";
+import { checkByMemberType } from "./exclusions-checkers";
 
 export interface ContractScreenConfigType {
   component: React.ElementType;
   title: string;
   type: CONTRACT_SCREEN_TYPES;
   granted: Array<CONTRACT_ROLE>;
+  exclusionChecker?: (screens : BaseScreenDataInterface[]) => boolean;
 }
 
 export const getContractScreensConfig = (
   contractType: CONTRACT_TYPES,
-  contractRole: CONTRACT_ROLE
-): Array<ContractScreenConfigType> =>
-  contractScreensConfig[contractType].filter((screen) =>
-    screen.granted.includes(contractRole)
-  );
+  contractRole: CONTRACT_ROLE,
+  screens: BaseScreenDataInterface[] | undefined,
+): Array<ContractScreenConfigType> => contractScreensConfig[contractType].filter((screen) => {
+    let flag = screen.granted.includes(contractRole);
+    if (flag && typeof screen.exclusionChecker === "function" && screens) {
+        return screen.exclusionChecker(screens);
+    }
+    return flag;
+});
 
 export const contractScreensConfig: Record<
   CONTRACT_TYPES,
@@ -75,9 +82,9 @@ export const contractScreensConfig: Record<
   ],
   [CONTRACT_TYPES.CAR]: [
     {
-      component: SellerType,
-      title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.SELLER_TYPE}.title`,
-      type: CONTRACT_SCREEN_TYPES.SELLER_TYPE,
+      component: MemberType,
+      title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.MEMBER_TYPE}.title`,
+      type: CONTRACT_SCREEN_TYPES.MEMBER_TYPE,
       granted: [CONTRACT_ROLE.OWNER],
     },
     {
@@ -85,6 +92,7 @@ export const contractScreensConfig: Record<
       title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.USER_DATA}.title`,
       type: CONTRACT_SCREEN_TYPES.USER_DATA,
       granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
+      exclusionChecker: checkByMemberType
     },
     {
       component: ProductDescriptionForm,
@@ -105,4 +113,7 @@ export const contractScreensConfig: Record<
       granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
     },
   ],
+  [CONTRACT_TYPES.FREE]: [],
+  [CONTRACT_TYPES.WORK]: [],
+  [CONTRACT_TYPES.RENTAL]: [],
 };

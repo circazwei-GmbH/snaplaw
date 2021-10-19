@@ -15,15 +15,17 @@ export enum PAYMENT_METHODS {
   CASH = "CASH",
   PAYPAL = "PAYPAL",
   TRANSFER = "TRANSFER",
+  CASH_ADVANCE = "CASH_ADVANCE",
+  ALL = "ALL"
 }
-
+ 
 export enum PAYMENT_FIELDS {
   COST = "price",
   CURRENCY = "currency",
   PAYMENT_METHOD = "paymentMethod",
   CARD_NAME = "cardHolderName",
   CARD_NUMBER = "cardNumber",
-  SELLER_PAYMENT_METHOD = "sellerPaymentPethod",
+  SELLER_PAYMENT_METHOD = "sellerPaymentMethod",
 }
 
 export interface PaymentScreenInterface extends BaseScreenDataInterface {

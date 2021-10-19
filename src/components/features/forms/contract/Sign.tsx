@@ -49,6 +49,7 @@ export default function Sign() {
         countToPopLength(
           currentContract.type,
           currentContract.meRole,
+          contract?.screens,
           emptyScreen
         )
       );
@@ -58,7 +59,8 @@ export default function Sign() {
           getTypeByContractAndScreen(
             currentContract.type,
             currentContract.meRole,
-            emptyScreen
+            contract?.screens,
+            emptyScreen,
           )
         )
       );
