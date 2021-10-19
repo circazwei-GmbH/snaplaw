@@ -83,16 +83,22 @@ export const contractScreensConfig: Record<
   [CONTRACT_TYPES.CAR]: [
     {
       component: MemberType,
-      title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.MEMBER_TYPE}.title`,
+      title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.MEMBER_TYPE}.titleSeller`,
       type: CONTRACT_SCREEN_TYPES.MEMBER_TYPE,
       granted: [CONTRACT_ROLE.OWNER],
+    },
+    {
+      component: MemberType,
+      title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.MEMBER_TYPE}.titleBuyer`,
+      type: CONTRACT_SCREEN_TYPES.MEMBER_TYPE,
+      granted: [CONTRACT_ROLE.PARTNER],
     },
     {
       component: UserDataForm,
       title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.USER_DATA}.title`,
       type: CONTRACT_SCREEN_TYPES.USER_DATA,
       granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
-      exclusionChecker: checkByMemberType
+      exclusionChecker: checkByMemberType,
     },
     {
       component: ProductDescriptionForm,

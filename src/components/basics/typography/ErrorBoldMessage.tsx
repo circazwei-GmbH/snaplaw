@@ -21,7 +21,7 @@ export default function ErrorBoldMessage({
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start",
   },
   star: {
     paddingRight: 10,
