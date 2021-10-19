@@ -360,6 +360,13 @@ export default {
           phone: "Phone"
         }
       },
+      [CONTRACT_SCREEN_TYPES.PASSPORT_DATA]: {
+        title: "Passport data",
+        placeholders: {
+          idCard: "ID card number",
+          identificationCode: "Identification code",
+        }
+      },
       [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
         title: "Car description",
         titleTwo: "Please add car description",

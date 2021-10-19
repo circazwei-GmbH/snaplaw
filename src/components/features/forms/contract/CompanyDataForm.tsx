@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { StyleSheet, View } from "react-native";
 import TextField from "../../../components/TextField";
 import { useI18n } from "../../../../translator/i18n";
@@ -7,7 +7,6 @@ import { setScreenData } from "../../../../store/modules/contract/slice";
 import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/constants";
 import { useAppSelector } from "../../../../store/hooks";
 import { validateScreen } from "../../../../store/modules/contract/action-creators";
-import TextFieldImitation from "../../../components/TextFieldImitation";
 import { CompanyDataScreenInterface, COMPANY_DATA_FIELDS } from "../../../../store/modules/contract/company-data";
 
 export default function CompanyDataForm(): JSX.Element {

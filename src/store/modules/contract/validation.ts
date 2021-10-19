@@ -18,6 +18,7 @@ import { PRODUCT_CONDITION_FIELD_NAME } from "./purchase/product-condition";
 import { CONTRACT_ROLE } from "./contract-roles";
 import { MEMBER_TYPE_FIELD_NAME } from "./carSales/member-type";
 import { COMPANY_DATA_FIELDS } from "./company-data";
+import { PASSPORT_DATA_FIELDS } from "./passport-data";
 
 export const contractValidationConfig = {
   [CONTRACT_TYPES.PURCHASE]: {
@@ -212,6 +213,24 @@ export const contractValidationConfig = {
         ],
       },
     },
+    [CONTRACT_SCREEN_TYPES.PASSPORT_DATA]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [PASSPORT_DATA_FIELDS.idCard]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [PASSPORT_DATA_FIELDS.identificationCode]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+      [CONTRACT_ROLE.PARTNER]: {
+        [PASSPORT_DATA_FIELDS.idCard]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [PASSPORT_DATA_FIELDS.identificationCode]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+    },
     [CONTRACT_SCREEN_TYPES.COMPANY_DATA]: {
       [CONTRACT_ROLE.OWNER]: {
         [COMPANY_DATA_FIELDS.companyName]: [
@@ -289,7 +308,7 @@ export const contractValidator = (
   screens: Array<BaseScreenDataInterface>,
   myRole: CONTRACT_ROLE
 ) => {
-  const contractConfig = getContractScreensConfig(contractType, myRole);
+  const contractConfig = getContractScreensConfig(contractType, myRole, screens);
 
   let firstEmptyScreen = null;
   for (let i = 0; contractConfig.length > i; i++) {
