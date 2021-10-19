@@ -24,6 +24,7 @@ interface TextFieldPropsInterface extends TextInputProps {
   search?: boolean;
   onChangeFunction: OnChanfeFunction;
   containerStyle?: StyleProp<TextStyle>;
+  testID?: string,
 }
 
 export default function TextField({

@@ -17,6 +17,7 @@ import {
 import { PRODUCT_CONDITION_FIELD_NAME } from "./purchase/product-condition";
 import { CONTRACT_ROLE } from "./contract-roles";
 import { MEMBER_TYPE_FIELD_NAME } from "./carSales/member-type";
+import { COMPANY_DATA_FIELDS } from "./company-data";
 
 export const contractValidationConfig = {
   [CONTRACT_TYPES.PURCHASE]: {
@@ -159,6 +160,96 @@ export const contractValidationConfig = {
     [CONTRACT_SCREEN_TYPES.MEMBER_TYPE]: {
       [CONTRACT_ROLE.OWNER]: {
         [MEMBER_TYPE_FIELD_NAME]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+    },
+    [CONTRACT_SCREEN_TYPES.USER_DATA]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [USER_DATA_FIELDS.name]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.lastName]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.dateOfBirth]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.email]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.phone]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.address]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.postCode]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+      [CONTRACT_ROLE.PARTNER]: {
+        [USER_DATA_FIELDS.name]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.lastName]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.dateOfBirth]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.email]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.phone]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.address]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.postCode]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+    },
+    [CONTRACT_SCREEN_TYPES.COMPANY_DATA]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [COMPANY_DATA_FIELDS.companyName]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [COMPANY_DATA_FIELDS.vatId]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [COMPANY_DATA_FIELDS.email]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [COMPANY_DATA_FIELDS.address]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [COMPANY_DATA_FIELDS.postCode]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [COMPANY_DATA_FIELDS.phone]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+      [CONTRACT_ROLE.PARTNER]: {
+        [COMPANY_DATA_FIELDS.companyName]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [COMPANY_DATA_FIELDS.vatId]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [COMPANY_DATA_FIELDS.email]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [COMPANY_DATA_FIELDS.address]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [COMPANY_DATA_FIELDS.postCode]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [COMPANY_DATA_FIELDS.phone]: [
           length("contracts.validation.field_empty", 1),
         ],
       },

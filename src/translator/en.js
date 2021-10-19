@@ -349,6 +349,17 @@ export default {
       [CONTRACT_SCREEN_TYPES.USER_DATA]: {
         title: "user data",
       },
+      [CONTRACT_SCREEN_TYPES.COMPANY_DATA]: {
+        title: "Company data",
+        placeholders: {
+          companyName: "Company Name",
+          vatId: "VAT ID",
+          email: "E-Mail",
+          address: "Address (Street, City)",
+          postCode: "Postal code",
+          phone: "Phone"
+        }
+      },
       [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
         title: "Car description",
         titleTwo: "Please add car description",
