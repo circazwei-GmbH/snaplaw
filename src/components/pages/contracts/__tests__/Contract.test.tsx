@@ -3,13 +3,12 @@ import { fireEvent, render } from "@testing-library/react-native";
 import { Provider } from "react-redux";
 import Contract from "../Contract";
 import { createStore } from "@reduxjs/toolkit";
-import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "../../../../store/modules/contract/constants";
+import { CONTRACT_TYPES } from "../../../../store/modules/contract/constants";
 import { useNavigation } from "@react-navigation/native";
 import { HOME_ROUTER } from "../../../../router/HomeRouterType";
 import { LANGUAGE_ENGLISH } from "../../../../store/modules/profile/constants";
 import { LanguageType } from "../../../../store/modules/profile/slice";
 import { BaseScreenDataInterface } from "../../../../store/modules/contract/base-types";
-import { MEMBER_TYPE_FIELD_NAME, MEMBER_TYPE_VALUE } from "../../../../store/modules/contract/carSales/member-type";
 
 jest.mock("../../../../store/modules/contract/contract-screens-types", () => {
   const {
@@ -85,7 +84,7 @@ type InitialStateType = {
   };
 };
 
-let initialState: InitialStateType = {
+const initialState: InitialStateType = {
   contract: {
     currentContract: {
       type: CONTRACT_TYPES.PURCHASE,
