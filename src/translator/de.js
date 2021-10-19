@@ -334,11 +334,16 @@ export default {
     [CONTRACT_TYPES.CAR]: {
       title: "Autokaufvertrag",
       [CONTRACT_SCREEN_TYPES.MEMBER_TYPE]: {
-        title: "Verkäufertyp",
+        titleSeller: "Verkäufertyp",
+        titleBuyer: "Käuferdaten",
         secondTitle: "Bitte geben Sie an, welcher Verkäufer Sie sind",
         checkboxes: {
           [MEMBER_TYPE_VALUE.COMMERCIAL]: "Gewerblich",
           [MEMBER_TYPE_VALUE.PRIVAT]: "Privat",
+        },
+        buyerWarning: {
+          fee: "Als gewerblicher Kunde müssen Sie zusätzlich 19% Steuer zahlen.",
+          calculation: "Die ursprüngliche Summe betrug %{sum} Euro. Inkl. Steuer beträgt die Gesamtsumme %{total} Euro."
         }
       },
       [CONTRACT_SCREEN_TYPES.USER_DATA]: {

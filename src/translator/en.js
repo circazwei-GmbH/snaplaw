@@ -334,11 +334,16 @@ export default {
     [CONTRACT_TYPES.CAR]: {
       title: "Car sales contract",
       [CONTRACT_SCREEN_TYPES.MEMBER_TYPE]: {
-        title: "Seller type",
+        titleSeller: "Seller type",
+        titleBuyer: "Buyer data",
         secondTitle: "Please indicate which seller you are",
         checkboxes: {
           [MEMBER_TYPE_VALUE.COMMERCIAL]: "Commercial",
           [MEMBER_TYPE_VALUE.PRIVAT]: "Private",
+        },
+        buyerWarning: {
+          fee: "As commercial user you will need to pay 19% fee additionally.",
+          calculation: "The initial sum was %{sum} euro. Incl. fee the total sum will be %{total} euro."
         }
       },
       [CONTRACT_SCREEN_TYPES.USER_DATA]: {

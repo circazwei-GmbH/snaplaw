@@ -30,9 +30,6 @@ import { checkIsItChangeRequest } from "../../../store/modules/contract/request-
 import { BaseScreenDataInterface } from "../../../store/modules/contract/base-types";
 import { findScreentByType } from "../../../utils/helpers";
 import { BUTTON_COLORTYPE } from "../../../store/modules/main/types";
-import { CONTRACT_SCREEN_TYPES } from "../../../store/modules/contract/constants";
-import { MEMBER_TYPE_FIELD_NAME, MEMBER_TYPE_VALUE } from "../../../store/modules/contract/carSales/member-type";
-import { PAYMENT_FIELDS, PAYMENT_METHODS } from "../../../store/modules/contract/types";
 
 type ContractProps = {
   route: {
