@@ -10,6 +10,7 @@ interface TopBarProps {
   bottomElement?: JSX.Element;
   withBackground?: boolean;
   style?: object;
+  noPlaceholder?: boolean;
 }
 
 export default function TopBar({
@@ -20,11 +21,13 @@ export default function TopBar({
   bottomElement,
   withBackground = false,
   style,
+  noPlaceholder,
 }: TopBarProps) {
   return (
     <>
       <View
         style={[
+          !noPlaceholder ? styles.headerPadding : null,  
           styles.header,
           withBackground ? styles.background : null,
           style,
@@ -32,7 +35,7 @@ export default function TopBar({
       >
         {leftButton === undefined ? <BackButton /> : leftButton}
         <Text style={styles.headerText}>{pageName}</Text>
-        <View style={styles.buttonPlaceholder}>
+        <View style={!noPlaceholder ? styles.buttonPlaceholder : null}>
           {rightButton ? rightButton : null}
         </View>
       </View>
@@ -60,6 +63,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+  },
+  headerPadding: {
     ...Platform.select({
       ios: {
         paddingTop: 47,

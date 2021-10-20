@@ -19,6 +19,7 @@ import { CONTRACT_ROLE } from "./contract-roles";
 import { MEMBER_TYPE_FIELD_NAME } from "./carSales/member-type";
 import { COMPANY_DATA_FIELDS } from "./company-data";
 import { PASSPORT_DATA_FIELDS } from "./passport-data";
+import { CAR_DATA_FIELDS } from "./carSales/car-data";
 
 export const contractValidationConfig = {
   [CONTRACT_TYPES.PURCHASE]: {
@@ -269,6 +270,31 @@ export const contractValidationConfig = {
           length("contracts.validation.field_empty", 1),
         ],
         [COMPANY_DATA_FIELDS.phone]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+    },
+    [CONTRACT_SCREEN_TYPES.PRODUCT_DATA]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [CAR_DATA_FIELDS.producer]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [CAR_DATA_FIELDS.model]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [CAR_DATA_FIELDS.type]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [CAR_DATA_FIELDS.year]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [CAR_DATA_FIELDS.prevRegistrationNumber]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [CAR_DATA_FIELDS.serialNumber]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [CAR_DATA_FIELDS.run]: [
           length("contracts.validation.field_empty", 1),
         ],
       },

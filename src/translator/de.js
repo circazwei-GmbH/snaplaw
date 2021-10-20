@@ -367,6 +367,24 @@ export default {
           identificationCode: "Identifikationsnummer",
         }
       },
+      [CONTRACT_SCREEN_TYPES.PRODUCT_DATA]: {
+        title: "Produktdaten",
+        placeholders: {
+          producer: "Hersteller",
+          model: "Auto Model",
+          type: "Typ",
+          year: "Ausgabejahr",
+          prevRegistrationNumber: "Bisherige amtliches Kennzeichen",
+          serialNumber: "Seriennummer",
+          run: "KM-Stand",
+        },
+        modalTitles: {
+          producer: "Hersteller",
+          model: "Auto Model",
+          type: "Typ",
+          year: "Ausgabejahr",
+        }
+      }, 
       [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
         title: "Fahrzeugbeschreibung",
         titleTwo: "Bitte Fahrzeugbeschreibung angeben",

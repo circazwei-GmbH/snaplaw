@@ -67,7 +67,7 @@ const requestContractList = async (
     convertDate.setHours(0);
     convertDate.setMinutes(0);
     convertDate.setSeconds(0);
-    
+
     url += `&date=${convertDate.getTime()}`;
   }
 
@@ -101,6 +101,9 @@ const deleteContractPartner = (id: string) =>
 const requestLeaveContract = (id: string) =>
   httpClient.patch(`api/contracts/${id}/leave`, {});
 
+const requestCarInformation = (id: string) =>
+  httpClient.get(`api/contracts/${id}/car-info`);
+
 export const buildPDFSource = (
   id: string,
   locale: LanguageType | undefined
@@ -127,4 +130,5 @@ export default {
   acceptInvite,
   deleteContractPartner,
   requestLeaveContract,
+  requestCarInformation,
 };

@@ -10,6 +10,7 @@ import {
   RequestGetEmailsAction,
   RequestAcceptInviteAction,
   RequestDeleteContractPartnerAction,
+  RequeCarInformationAction,
 } from "./types";
 import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
 import { MediaType } from "../../../services/media";
@@ -30,6 +31,7 @@ export const REQUEST_DELETE_CONTRACT_PARTNER =
 export const REQUEST_CONTRACT_DETAIL_FOR_PDF =
   "REQUEST_CONTRACT_DETAIL_FOR_PDF";
 export const REQUEST_LEAVE_CONTRACT = "REQUEST_LEAVE_CONTRACT";
+export const REQUEST_CAR_INFORMATION = "REQUEST_CAR_INFORMATION";
 
 export const SET_SCREEN_DATA_WITH_CHECK_REQUEST =
   "SET_SCREEN_DATA_WITH_CHECK_REQUEST";
@@ -136,5 +138,10 @@ export const requestLeaveContract = (
   contractId: string
 ): RequestContractAction => ({
   type: REQUEST_LEAVE_CONTRACT,
+  payload: contractId,
+});
+
+export const requestCarInformation = (contractId: string): RequeCarInformationAction => ({
+  type: REQUEST_CAR_INFORMATION,
   payload: contractId,
 });

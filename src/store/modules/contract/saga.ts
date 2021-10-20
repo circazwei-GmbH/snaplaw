@@ -15,6 +15,7 @@ import {
   REQUEST_DELETE_CONTRACT_PARTNER,
   REQUEST_CONTRACT_DETAIL_FOR_PDF,
   REQUEST_LEAVE_CONTRACT,
+  REQUEST_CAR_INFORMATION,
 } from "./action-creators";
 import {
   RequestContractAction,
@@ -30,6 +31,7 @@ import {
   ContractDataType,
   RequestAcceptInviteAction,
   RequestDeleteContractPartnerAction,
+  RequeCarInformationAction,
 } from "./types";
 import API from "../../../services/contract/index";
 import { responseError } from "../auth/action-creators";
@@ -401,6 +403,17 @@ function* requestLeaveContract({ payload }: RequestContractAction) {
   }
 }
 
+function* requestCarInformation({ payload }: RequeCarInformationAction) {
+  yield put(addToWaiter({ event: REQUEST_CAR_INFORMATION }));
+  try {
+    const carInfo = yield call(API.requestCarInformation, payload);
+  } catch (error) {
+    yield put(responseError(error));
+  } finally {
+    yield put(removeFromWaiter({ event: REQUEST_CAR_INFORMATION }));
+  }
+}
+
 function* contractSaga() {
   yield takeLatest(REQUEST_CREATE_CONTRACT, createContract);
   yield takeLatest(REQUEST_SCREEN_DATA, requestScreenData);
@@ -419,6 +432,7 @@ function* contractSaga() {
   );
   yield takeLatest(REQUEST_CONTRACT_DETAIL_FOR_PDF, requestContractDetailPdf);
   yield takeLatest(REQUEST_LEAVE_CONTRACT, requestLeaveContract);
+  yield takeLatest(REQUEST_CAR_INFORMATION, requestCarInformation);
 }
 
 export default contractSaga;
