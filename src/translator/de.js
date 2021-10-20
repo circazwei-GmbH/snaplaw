@@ -349,6 +349,24 @@ export default {
       [CONTRACT_SCREEN_TYPES.USER_DATA]: {
         title: "Benutzerdaten",
       },
+      [CONTRACT_SCREEN_TYPES.COMPANY_DATA]: {
+        title: "Firmendaten",
+        placeholders: {
+          companyName: "Firmenname",
+          vatId: "Umsatzsteuer-ID",
+          email: "E-Mail",
+          address: "Adresse (Straße, Stadt)",
+          postCode: "Postleitzahl",
+          phone: "Nummer"
+        }
+      },
+      [CONTRACT_SCREEN_TYPES.PASSPORT_DATA]: {
+        title: "Passdaten",
+        placeholders: {
+          idCard: "ID Kartennummer",
+          identificationCode: "Identifikationsnummer",
+        }
+      },
       [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
         title: "Fahrzeugbeschreibung",
         titleTwo: "Bitte Fahrzeugbeschreibung angeben",

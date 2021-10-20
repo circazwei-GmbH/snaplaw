@@ -15,6 +15,8 @@ export const enum CONTRACT_SCREEN_TYPES {
   PAYMENT = "payment",
   SIGN = "signContract",
   MEMBER_TYPE = "memberType",
+  COMPANY_DATA = "companyData",
+  PASSPORT_DATA = "passportData",
 }
 
 export const CONTRACT_CREATION_WAIT = "CONTRACT_CREATION_WAIT";

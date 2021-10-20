@@ -10,7 +10,9 @@ import Sign from "../../../components/features/forms/contract/Sign";
 import { CONTRACT_ROLE } from "./contract-roles";
 import MemberType from "../../../components/features/forms/contract/MemberType";
 import { BaseScreenDataInterface } from "./base-types";
-import { checkByMemberType } from "./exclusions-checkers";
+import { checkMemberTypeCommercial, checkMemberTypePrivat } from "./exclusions-checkers";
+import CompanyDataForm from "../../../components/features/forms/contract/CompanyDataForm";
+import PassportDataForm from "../../../components/features/forms/contract/PassportDataForm";
 
 export interface ContractScreenConfigType {
   component: React.ElementType;
@@ -94,11 +96,25 @@ export const contractScreensConfig: Record<
       granted: [CONTRACT_ROLE.PARTNER],
     },
     {
+      component: CompanyDataForm,
+      title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.COMPANY_DATA}.title`,
+      type: CONTRACT_SCREEN_TYPES.COMPANY_DATA,
+      granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
+      exclusionChecker: checkMemberTypeCommercial,
+    },
+    {
       component: UserDataForm,
       title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.USER_DATA}.title`,
       type: CONTRACT_SCREEN_TYPES.USER_DATA,
       granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
-      exclusionChecker: checkByMemberType,
+      exclusionChecker: checkMemberTypePrivat,
+    },
+    {
+      component: PassportDataForm,
+      title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.PASSPORT_DATA}.title`,
+      type: CONTRACT_SCREEN_TYPES.PASSPORT_DATA ,
+      granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
+      exclusionChecker: checkMemberTypePrivat,
     },
     {
       component: ProductDescriptionForm,
