@@ -41,9 +41,9 @@ function* initPushNotifications() {
   try {
     const expoPushNotificationToken = yield call(NotificationService.init);
     const userPushToken = yield select(
-      (state) => state.profile.user.pushNotificationToken
+      (state) => state.profile.user?.pushNotificationToken
     );
-    if (userPushToken === expoPushNotificationToken) {
+    if (!userPushToken || userPushToken === expoPushNotificationToken) {
       return;
     }
     yield call(NotificationService.storeTokenToApi, expoPushNotificationToken);
