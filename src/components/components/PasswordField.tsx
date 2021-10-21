@@ -11,14 +11,14 @@ interface TextFieldPropsInterface {
   fixed?: boolean;
   validations?: Array<Function>;
   errorMessage?: string;
-  value: string;
+  value?: string;
   onChange: OnChangeFunction;
 }
 
 export default function PasswordField({
   placeholder,
   fixed = false,
-  errorMessage,
+  errorMessage,  
   onChange,
   value,
 }: TextFieldPropsInterface) {

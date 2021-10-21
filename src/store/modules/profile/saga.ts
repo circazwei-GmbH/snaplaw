@@ -83,14 +83,14 @@ function* requestEditProfile({ payload }: RequestEditProfileAction) {
 }
 
 function* requestUserProfile({ payload }: RequestUserProfileAction) {
-  yield put(addToWaiter(REQUEST_USER_PROFILE));
+  yield put(addToWaiter({event: REQUEST_USER_PROFILE}));
   try {
     const user = yield call(API.requestUserProfile, payload);
     yield put(setCurretnPartner(user.data.user));
   } catch (error) {
     yield put(responseError(error));
   } finally {
-    yield put(removeFromWaiter(REQUEST_USER_PROFILE));
+    yield put(removeFromWaiter({event: REQUEST_USER_PROFILE}));
   }
 }
 

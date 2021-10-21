@@ -39,7 +39,11 @@ import {
   setMessage,
   setModal,
 } from "../main/slice";
-import { CONTRACT_CREATION_WAIT, CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
+import {
+  CONTRACT_CREATION_WAIT,
+  CONTRACT_SCREEN_TYPES,
+  CONTRACT_TYPES,
+} from "./constants";
 import {
   clearErrors,
   CONTRACT_LIST_LOADING_TYPE,
@@ -66,24 +70,25 @@ import { Translator } from "../../../translator/i18n";
 import { USER_SELF_INVITE } from "../../../services/error-codes";
 import { CONTRACT_ROLE } from "./contract-roles";
 import { navigatePop, navigationPopToTop } from "../main/action-creators";
-import { MEMBER_TYPE_FIELD_NAME, MEMBER_TYPE_VALUE } from "./carSales/member-type";
+import {
+  MEMBER_TYPE_FIELD_NAME,
+  MEMBER_TYPE_VALUE,
+} from "./carSales/member-type";
 
 function* createContract({ payload }: RequestCreateContractAction) {
   try {
     yield put(addToWaiter({ event: CONTRACT_CREATION_WAIT }));
     const response = yield call(API.createContract, payload);
     const screens: BaseScreenDataInterface[] = [
-      prefillUserData(
-        yield select<SelectType>((state) => state.profile.user)
-      ),
+      prefillUserData(yield select<SelectType>((state) => state.profile.user)),
     ];
     if (payload === CONTRACT_TYPES.CAR) {
       screens.push({
         type: CONTRACT_SCREEN_TYPES.MEMBER_TYPE,
         data: {
           [MEMBER_TYPE_FIELD_NAME]: MEMBER_TYPE_VALUE.COMMERCIAL,
-        }
-      })
+        },
+      });
     }
     yield put(
       setInitedContract({
@@ -217,7 +222,7 @@ function* requestContractsList({
         )
       );
     }
-    const filters = yield select((state) => state.contract.smartFilters);    
+    const filters = yield select((state) => state.contract.smartFilters);
     const contracts = yield call(
       API.requestContractList,
       type,
