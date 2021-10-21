@@ -3,9 +3,14 @@ import { MEMBER_TYPE_FIELD_NAME } from "./carSales/member-type";
 import { CONTRACT_SCREEN_TYPES } from "./constants";
 import { MEMBER_TYPE_VALUE, PAYMENT_FIELDS, PAYMENT_METHODS } from "./types";
 
-export const checkByMemberType = (screens: BaseScreenDataInterface[]) => {
+export const checkMemberTypePrivat = (screens: BaseScreenDataInterface[]) => {
   const screen = screens.find(screen => screen.type === CONTRACT_SCREEN_TYPES.MEMBER_TYPE);
   return screen ? screen.data[MEMBER_TYPE_FIELD_NAME] === MEMBER_TYPE_VALUE.PRIVAT : true
+}
+
+export const checkMemberTypeCommercial  = (screens: BaseScreenDataInterface[]) => {
+  const screen = screens.find(screen => screen.type === CONTRACT_SCREEN_TYPES.MEMBER_TYPE);
+  return screen ? screen.data[MEMBER_TYPE_FIELD_NAME] === MEMBER_TYPE_VALUE.COMMERCIAL : true
 }
 
 export const checkByPaymentType = (screens: BaseScreenDataInterface[]) => {

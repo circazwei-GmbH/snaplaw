@@ -367,6 +367,19 @@ export default {
           identificationCode: "Identifikationsnummer",
         }
       },
+      [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
+        title: "Fahrzeugbeschreibung",
+        titleTwo: "Bitte Fahrzeugbeschreibung angeben",
+        placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
+        button: "Datei hochladen",
+      },
+      [CONTRACT_SCREEN_TYPES.PASSPORT_DATA]: {
+        title: "Passdaten",
+        placeholders: {
+          idCard: "ID Kartennummer",
+          identificationCode: "Identifikationsnummer",
+        }
+      },
       [CONTRACT_SCREEN_TYPES.PRODUCT_DATA]: {
         title: "Produktdaten",
         placeholders: {

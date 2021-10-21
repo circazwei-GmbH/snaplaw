@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     marginTop: 12,
-    marginBottom: 24,
+    marginBottom: 10,
     paddingHorizontal: 16,
   },
 });

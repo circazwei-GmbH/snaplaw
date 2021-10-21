@@ -366,25 +366,7 @@ export default {
           idCard: "ID card number",
           identificationCode: "Identification code",
         }
-      },
-      [CONTRACT_SCREEN_TYPES.PRODUCT_DATA]: {
-        title: "Product data",
-        placeholders: {
-          producer: "Producer",
-          model: "Car model",
-          type: "Type",
-          year: "Year of issue",
-          prevRegistrationNumber: "Previous official registration number",
-          serialNumber: "Serial number",
-          run: "Run (operational kilometers)",
-        },
-        modalTitles: {
-          producer: "Producer",
-          model: "Car model",
-          type: "Type",
-          year: "Year of issue",
-        }
-      },  
+      }, 
       [CONTRACT_SCREEN_TYPES.SPECIFICATIONS]: {
         title: "Specifications",
         placeholders: {
