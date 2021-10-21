@@ -48,7 +48,7 @@ export default function CalendarInput({
               testID="CalendarInputDate"
             />
           ) : (
-            <Text style={styles.placeholder}>{placeholder}</Text>
+            <Text testID="CalendarInputDate" style={styles.placeholder}>{placeholder}</Text>
           )}
         </View>
         <View style={styles.rightPart}>
