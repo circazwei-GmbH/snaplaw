@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, StyleProp, TextStyle } from "react-native";
 
 interface TextFieldImitationPropsInterface {
   placeholder?: string;
@@ -7,6 +7,7 @@ interface TextFieldImitationPropsInterface {
   settings?: boolean;
   gray?: boolean;
   errorMessage?: string;
+  children?: JSX.Element;
 }
 
 export default function TextFieldImitation({
@@ -15,6 +16,7 @@ export default function TextFieldImitation({
   settings,
   gray,
   errorMessage,
+  children,
 }: TextFieldImitationPropsInterface): JSX.Element {
   return (
     <View
@@ -64,6 +66,7 @@ export default function TextFieldImitation({
             </Text>
           )
         }
+        {children || null}
       </View>
       <Text
         style={[styles.errorText, errorMessage ? null : styles.displayNone]}
@@ -101,6 +104,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
     paddingHorizontal: 16,
     backgroundColor: "#EFF7FD",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   inputNotEditable: {
     backgroundColor: "#F2F2F2",

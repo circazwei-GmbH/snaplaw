@@ -22,6 +22,7 @@ import {
 import { validateScreen } from "../../../../store/modules/contract/action-creators";
 import { MediaTypeOptions } from "expo-image-picker";
 import { MEDIA_TYPE } from "../../../../services/media";
+import MultilineWithPhotos from "../../../components/MultilineWithPhotos";
 
 export default function ProductDescriptionForm() {
   const { t } = useI18n();
@@ -144,14 +145,11 @@ export default function ProductDescriptionForm() {
 
   return (
     <View style={styles.container}>
-      <DefaultText
+      <MultilineWithPhotos 
         text={t(
           `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.titleTwo`
         )}
-        style={styles.titleTwo}
-      />
-      <MultilineTextField
-        value={description}
+        description={description}
         errorMessage={screenError?.[PRODUCT_DESCRIPTION_FIELDS.description]}
         placeholder={t(
           `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.placeholder`
@@ -160,18 +158,13 @@ export default function ProductDescriptionForm() {
           onChangeHandler(newValue, PRODUCT_DESCRIPTION_FIELDS.description)
         }
         checked={checked}
-      />
-      <IconButton
-        text={t(
+        iconText={t(
           `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.button`
         )}
-        onPress={() =>
-          choosePhotoHandler(PRODUCT_DESCRIPTION_FIELDS.productPhotos)
-        }
-      />
-      <DescriptionPhotos
+        choosePhotoHandler={() =>
+          choosePhotoHandler(PRODUCT_DESCRIPTION_FIELDS.productPhotos)}
         photos={photosProduct ?? []}
-        onPressDelete={removePhoto}
+        removePhoto={removePhoto}
         fieldName={PRODUCT_DESCRIPTION_FIELDS.productPhotos}
       />
       <Checkbox

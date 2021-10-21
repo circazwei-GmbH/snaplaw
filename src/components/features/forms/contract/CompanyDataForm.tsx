@@ -51,7 +51,6 @@ export default function CompanyDataForm(): JSX.Element {
         onChangeFunction={(newValue) =>
           onChangeAction(newValue, COMPANY_DATA_FIELDS.companyName)
         }
-        testID="companyName"
       />
       <TextField
         placeholder={t(`contracts.${contractType}.${CONTRACT_SCREEN_TYPES.COMPANY_DATA}.placeholders.vatId`)}
@@ -60,7 +59,6 @@ export default function CompanyDataForm(): JSX.Element {
         onChangeFunction={(newValue) =>
           onChangeAction(newValue, COMPANY_DATA_FIELDS.vatId)
         }
-        testID="vatId"
       />
       <TextField
         placeholder={t(`contracts.${contractType}.${CONTRACT_SCREEN_TYPES.COMPANY_DATA}.placeholders.email`)}
@@ -69,7 +67,6 @@ export default function CompanyDataForm(): JSX.Element {
         onChangeFunction={(newValue) =>
           onChangeAction(newValue, COMPANY_DATA_FIELDS.email)
         }
-        testID="email"
       />
       <TextField
         placeholder={t(`contracts.${contractType}.${CONTRACT_SCREEN_TYPES.COMPANY_DATA}.placeholders.address`)}
@@ -78,7 +75,6 @@ export default function CompanyDataForm(): JSX.Element {
         onChangeFunction={(newValue) =>
           onChangeAction(newValue, COMPANY_DATA_FIELDS.address)
         }
-        testID="address"
       />
       <TextField
         keyboardType="number-pad"
@@ -88,7 +84,6 @@ export default function CompanyDataForm(): JSX.Element {
         onChangeFunction={(newValue) =>
           onChangeAction(newValue, COMPANY_DATA_FIELDS.postCode)
         }
-        testID="postalCode"
       />
       <TextField
         keyboardType="phone-pad"
@@ -98,7 +93,6 @@ export default function CompanyDataForm(): JSX.Element {
         onChangeFunction={(newValue) =>
           onChangeAction(newValue, COMPANY_DATA_FIELDS.phone)
         }
-        testID="phone"
       />
     </View>
   );

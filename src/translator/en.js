@@ -367,6 +367,24 @@ export default {
           identificationCode: "Identification code",
         }
       }, 
+      [CONTRACT_SCREEN_TYPES.PRODUCT_DATA]: {
+        title: "Product data",
+        placeholders: {
+          producer: "Producer",
+          model: "Car model",
+          type: "Type",
+          year: "Year of issue",
+          prevRegistrationNumber: "Previous official registration number",
+          serialNumber: "Serial number",
+          run: "Run (operational kilometers)",
+        },
+        modalTitles: {
+          producer: "Producer",
+          model: "Car model",
+          type: "Type",
+          year: "Year of issue",
+        }
+      }, 
       [CONTRACT_SCREEN_TYPES.SPECIFICATIONS]: {
         title: "Specifications",
         placeholders: {
@@ -376,14 +394,16 @@ export default {
           technicalWork: "Technical work was carried out",
           service: "Service book included",
           deregistered: "Vehicle deregistered",
+          deregisteredDate: "Vehicle is deregistered until",
+          inspectionDate: "Specify due date",
         },
-      }, 
+      },
       [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
         title: "Car description",
         titleTwo: "Please add car description",
         placeholder: "Write here everything that you think is important",
         button: "Upload file",
-      },
+      }, 
       [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
         title: "Confirmation",
         confirmation: {

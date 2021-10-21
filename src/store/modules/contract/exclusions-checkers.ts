@@ -15,5 +15,5 @@ export const checkMemberTypeCommercial  = (screens: BaseScreenDataInterface[]) =
 
 export const checkByPaymentType = (screens: BaseScreenDataInterface[]) => {
   const screen = screens.find(screen => screen.type === CONTRACT_SCREEN_TYPES.PAYMENT);
-  return screen ? !(screen.data[PAYMENT_FIELDS.PAYMENT_METHOD] === PAYMENT_METHODS.CASH) : false
+  return screen ? screen.data[PAYMENT_FIELDS.PAYMENT_METHOD] === PAYMENT_METHODS.TRANSFER : false
 }

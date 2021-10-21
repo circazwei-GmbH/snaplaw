@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import DatePickerModal from "./DatePickerModal";
 import { useI18n } from "../../../translator/i18n";
@@ -9,7 +8,7 @@ interface DatePickerModalCustomInterface {
   setDatePickerOpened: React.Dispatch<React.SetStateAction<boolean>>;
   onCancelDate: () => void;
   onConfirmDate: (date: string) => void;
-  setedDate: string
+  setedDate: string;
 }
 
 export default function DatePickerModalCustom({
@@ -21,6 +20,7 @@ export default function DatePickerModalCustom({
 }: DatePickerModalCustomInterface): JSX.Element {
   const { t } = useI18n();
   const [date, setDate] = useState(setedDate || `${new Date()}`);
+
   return (
     <Modal visible={datePickerOpened} transparent={true} animationType="none">
       <View style={[styles.container, styles.datePickerContainerWrapper]}>
@@ -31,19 +31,23 @@ export default function DatePickerModalCustom({
             open={datePickerOpened}
             modalHandler={setDatePickerOpened}
             onDateChange={setDate}
-          />  
+          />
           <View style={styles.dataPickerButtonsContainer}>
             <TouchableOpacity onPress={onCancelDate}>
               <View style={styles.dataPickerButton}>
-                <Text style={styles.dataPickerButtonText}>{t("menu.cancel")}</Text>
+                <Text style={styles.dataPickerButtonText}>
+                  {t("menu.cancel")}
+                </Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => onConfirmDate(date)}>
               <View style={styles.dataPickerButton}>
-                <Text style={styles.dataPickerButtonText}>{t("menu.confirm")}</Text>
+                <Text style={styles.dataPickerButtonText}>
+                  {t("menu.confirm")}
+                </Text>
               </View>
-            </TouchableOpacity>  
-          </View>  
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </Modal>
@@ -75,5 +79,5 @@ const styles = StyleSheet.create({
   dataPickerButtonText: {
     fontSize: 16,
     textTransform: "uppercase",
-  }
+  },
 });

@@ -67,7 +67,7 @@ const requestContractList = async (
     convertDate.setHours(0);
     convertDate.setMinutes(0);
     convertDate.setSeconds(0);
-    
+
     url += `&date=${convertDate.getTime()}`;
   }
 
