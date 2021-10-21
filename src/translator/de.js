@@ -349,12 +349,53 @@ export default {
       [CONTRACT_SCREEN_TYPES.USER_DATA]: {
         title: "Benutzerdaten",
       },
-      [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
-        title: "Fahrzeugbeschreibung",
-        titleTwo: "Bitte Fahrzeugbeschreibung angeben",
-        placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
-        button: "Datei hochladen",
+      [CONTRACT_SCREEN_TYPES.COMPANY_DATA]: {
+        title: "Firmendaten",
+        placeholders: {
+          companyName: "Firmenname",
+          vatId: "Umsatzsteuer-ID",
+          email: "E-Mail",
+          address: "Adresse (Straße, Stadt)",
+          postCode: "Postleitzahl",
+          phone: "Nummer"
+        }
       },
+      [CONTRACT_SCREEN_TYPES.PASSPORT_DATA]: {
+        title: "Passdaten",
+        placeholders: {
+          idCard: "ID Kartennummer",
+          identificationCode: "Identifikationsnummer",
+        }
+      },
+      [CONTRACT_SCREEN_TYPES.PRODUCT_DATA]: {
+        title: "Produktdaten",
+        placeholders: {
+          producer: "Hersteller",
+          model: "Auto Model",
+          type: "Typ",
+          year: "Ausgabejahr",
+          prevRegistrationNumber: "Bisherige amtliches Kennzeichen",
+          serialNumber: "Seriennummer",
+          run: "KM-Stand",
+        },
+        modalTitles: {
+          producer: "Hersteller",
+          model: "Auto Model",
+          type: "Typ",
+          year: "Ausgabejahr",
+        }
+      }, 
+      [CONTRACT_SCREEN_TYPES.SPECIFICATIONS]: {
+        title: "Angaben",
+        placeholders: {
+          inspection: "TÜV",
+          commercial: "Gewerblich genutztes Fahrzeug",
+          foreignMade: "Importfahrzeug",
+          technicalWork: "Technische Arbeiten wurden durchgeführt",
+          service: "Service Heft liegt bei",
+          deregistered: "Das Fahrzeug ist abgemeldet",
+        },
+      }, 
       [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
         title: "Besätigung",
         confirmation: {
