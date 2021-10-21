@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Modal,
   StyleSheet,
@@ -9,8 +9,6 @@ import {
   TouchableOpacity,
   ListRenderItem,
 } from "react-native";
-import { useAppDispatch } from "../../../store/hooks";
-import { useI18n } from "../../../translator/i18n";
 import TopBar from "../../layouts/TopBar";
 import CloseButton from "../../basics/buttons/CloseButton";
 import TextField from "../../components/TextField";
@@ -31,14 +29,8 @@ export default function SearchModal({
   onClose,
   onDone,
 }: SearchModalProps) {
-  const dispatch = useAppDispatch();
-  const { t } = useI18n();
   const [searchedList, setSearchedList] = useState<DataListInterface[]>(data);
   const [selectedItem, setSelectedItem] = useState("");
-
-  const onEmptyPlaceTouch = () => {
-    onClose();
-  };
 
   const renderItem: ListRenderItem<DataListInterface> = ({ item }) => {
     const background =
@@ -54,24 +46,33 @@ export default function SearchModal({
     );
   };
 
-  const onSearch = (text: string) => {
-    const filteredList = data.filter(item => {
-      if (item.key === "other") return true;
-      
-      for (let i = 0; i < text.length; i++) {
-        if (item.value[i] !== text[i]) return false
-      }
-      return true
-    })
-
-    setSearchedList(filteredList)
+  const handleClose = () => {
+    onClose();
+    setSearchedList(data);
   }
+
+  const onSearch = (text: string) => {
+    const filteredList = data.filter((item) => {
+      if (item.key.toLowerCase() === "other") return true;
+
+      for (let i = 0; i < text.length; i++) {
+        if (item.value[i].toLowerCase() !== text[i].toLowerCase()) return false;
+      }
+      return true;
+    });
+
+    setSearchedList(filteredList);
+  };
+
+  useEffect(() => {
+    setSearchedList(data);
+  }, [data]);
 
   return (
     <View>
       <Modal visible={visible} transparent={true} animationType="none">
         <Pressable
-          onPress={onEmptyPlaceTouch}
+          onPress={handleClose}
           style={styles.container}
           testID="ModalBackScreen"
         >
@@ -79,7 +80,7 @@ export default function SearchModal({
             <View>
               <TopBar
                 leftButton={
-                  <CloseButton style={styles.closeButton} onPress={onClose} />
+                  <CloseButton style={styles.closeButton} onPress={handleClose} />
                 }
                 pageName={title}
                 rightButton={<Done onPress={() => onDone(selectedItem)} />}
@@ -91,11 +92,13 @@ export default function SearchModal({
                   </View>
 
                   <FlatList
+                    style={{ width: 500 }}
                     data={searchedList}
                     renderItem={renderItem}
                     ItemSeparatorComponent={() => (
                       <View style={styles.separator}></View>
                     )}
+                    extraData={searchedList}
                   />
                 </View>
               </TopBar>
@@ -149,7 +152,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#202020",
     marginVertical: 11,
-    paddingHorizontal: 16
+    paddingHorizontal: 16,
   },
   closeButton: {
     paddingLeft: 20,

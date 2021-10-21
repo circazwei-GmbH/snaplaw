@@ -15,7 +15,6 @@ import {
   REQUEST_DELETE_CONTRACT_PARTNER,
   REQUEST_CONTRACT_DETAIL_FOR_PDF,
   REQUEST_LEAVE_CONTRACT,
-  REQUEST_CAR_INFORMATION,
 } from "./action-creators";
 import {
   RequestContractAction,
@@ -31,7 +30,6 @@ import {
   ContractDataType,
   RequestAcceptInviteAction,
   RequestDeleteContractPartnerAction,
-  RequeCarInformationAction,
 } from "./types";
 import API from "../../../services/contract/index";
 import { responseError } from "../auth/action-creators";
@@ -41,7 +39,11 @@ import {
   setMessage,
   setModal,
 } from "../main/slice";
-import { CONTRACT_CREATION_WAIT, CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
+import {
+  CONTRACT_CREATION_WAIT,
+  CONTRACT_SCREEN_TYPES,
+  CONTRACT_TYPES,
+} from "./constants";
 import {
   clearErrors,
   CONTRACT_LIST_LOADING_TYPE,
@@ -68,24 +70,25 @@ import { Translator } from "../../../translator/i18n";
 import { USER_SELF_INVITE } from "../../../services/error-codes";
 import { CONTRACT_ROLE } from "./contract-roles";
 import { navigatePop, navigationPopToTop } from "../main/action-creators";
-import { MEMBER_TYPE_FIELD_NAME, MEMBER_TYPE_VALUE } from "./carSales/member-type";
+import {
+  MEMBER_TYPE_FIELD_NAME,
+  MEMBER_TYPE_VALUE,
+} from "./carSales/member-type";
 
 function* createContract({ payload }: RequestCreateContractAction) {
   try {
     yield put(addToWaiter({ event: CONTRACT_CREATION_WAIT }));
     const response = yield call(API.createContract, payload);
     const screens: BaseScreenDataInterface[] = [
-      prefillUserData(
-        yield select<SelectType>((state) => state.profile.user)
-      ),
+      prefillUserData(yield select<SelectType>((state) => state.profile.user)),
     ];
     if (payload === CONTRACT_TYPES.CAR) {
       screens.push({
         type: CONTRACT_SCREEN_TYPES.MEMBER_TYPE,
         data: {
           [MEMBER_TYPE_FIELD_NAME]: MEMBER_TYPE_VALUE.COMMERCIAL,
-        }
-      })
+        },
+      });
     }
     yield put(
       setInitedContract({
@@ -219,7 +222,7 @@ function* requestContractsList({
         )
       );
     }
-    const filters = yield select((state) => state.contract.smartFilters);    
+    const filters = yield select((state) => state.contract.smartFilters);
     const contracts = yield call(
       API.requestContractList,
       type,
@@ -403,17 +406,6 @@ function* requestLeaveContract({ payload }: RequestContractAction) {
   }
 }
 
-function* requestCarInformation({ payload }: RequeCarInformationAction) {
-  yield put(addToWaiter({ event: REQUEST_CAR_INFORMATION }));
-  try {
-    const carInfo = yield call(API.requestCarInformation, payload);
-  } catch (error) {
-    yield put(responseError(error));
-  } finally {
-    yield put(removeFromWaiter({ event: REQUEST_CAR_INFORMATION }));
-  }
-}
-
 function* contractSaga() {
   yield takeLatest(REQUEST_CREATE_CONTRACT, createContract);
   yield takeLatest(REQUEST_SCREEN_DATA, requestScreenData);
@@ -432,7 +424,6 @@ function* contractSaga() {
   );
   yield takeLatest(REQUEST_CONTRACT_DETAIL_FOR_PDF, requestContractDetailPdf);
   yield takeLatest(REQUEST_LEAVE_CONTRACT, requestLeaveContract);
-  yield takeLatest(REQUEST_CAR_INFORMATION, requestCarInformation);
 }
 
 export default contractSaga;

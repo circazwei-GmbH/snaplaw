@@ -157,10 +157,6 @@ export interface DataListInterface {
   value: string;
 }
 
-export interface RequeCarInformationAction extends BaseAction {
-  payload: string;
-}
-
 export { ProductDataScreenInterface, PRODUCT_DATA_FIELDS };
 export { UserDataScreenInterface, USER_DATA_FIELDS };
 export { ProductConditionScreenInterface, CONDITION_VALUE, CONDITIONS };

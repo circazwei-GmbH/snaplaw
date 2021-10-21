@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import TextField from "../../../components/TextField";
 import { useI18n } from "../../../../translator/i18n";
@@ -6,89 +6,18 @@ import { useDispatch } from "react-redux";
 import { setScreenData } from "../../../../store/modules/contract/slice";
 import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/constants";
 import { useAppSelector } from "../../../../store/hooks";
-import {
-  requestCarInformation,
-  validateScreen,
-} from "../../../../store/modules/contract/action-creators";
+import { validateScreen } from "../../../../store/modules/contract/action-creators";
 import {
   CarDataScreenInterface,
   CAR_DATA_FIELDS,
 } from "../../../../store/modules/contract/carSales/car-data";
 import DropdownInput from "../../../basics/inputs/DropdownInput";
-import { DataListInterface } from "../../../../store/modules/contract/types";
-
-interface DataListsInterface {
-  producer: DataListInterface[];
-  model: DataListInterface[];
-  type: DataListInterface[];
-  year: DataListInterface[];
-}
-
-const initialsearchListState: DataListsInterface = {
-  producer: [
-    {
-      key: "1aaa",
-      value: "aaa",
-    },
-    {
-      key: "2aab",
-      value: "aab",
-    },
-    {
-      key: "3bba",
-      value: "bba",
-    },
-  ],
-  model: [
-    {
-      key: "4aaa",
-      value: "aaa",
-    },
-    {
-      key: "5aab",
-      value: "aab",
-    },
-    {
-      key: "6bba",
-      value: "bba",
-    },
-  ],
-  type: [
-    {
-      key: "aaa",
-      value: "aaa",
-    },
-    {
-      key: "aab",
-      value: "aab",
-    },
-    {
-      key: "bba",
-      value: "bba",
-    },
-  ],
-  year: [
-    {
-      key: "aaa",
-      value: "aaa",
-    },
-    {
-      key: "aab",
-      value: "aab",
-    },
-    {
-      key: "bba",
-      value: "bba",
-    },
-  ],
-};
+import { requestCarInformation } from "../../../../store/modules/lib/action-creators";
+import { CarInfoInterface } from "../../../../store/modules/lib/slice";
 
 export default function ProductDataCarForm(): JSX.Element {
   const { t } = useI18n();
   const dispatch = useDispatch();
-  const [dataLists, setDataLists] = useState<DataListsInterface>(
-    initialsearchListState
-  );
 
   const productData = useAppSelector(
     (state) =>
@@ -97,9 +26,12 @@ export default function ProductDataCarForm(): JSX.Element {
       ) as CarDataScreenInterface | undefined
   );
 
+  const dataLists = useAppSelector(
+    (state) => state.lib.carInfo as CarInfoInterface
+  );  
+
   const contractId = useAppSelector(
-    (state) =>
-      state.contract.currentContract?.id as string
+    (state) => state.contract.currentContract?.id as string
   );
 
   const contractType = useAppSelector(
@@ -129,8 +61,10 @@ export default function ProductDataCarForm(): JSX.Element {
   };
 
   useEffect(() => {
-    dispatch(requestCarInformation(contractId));
-  }, []);
+    if (!dataLists.producer.length) {
+      dispatch(requestCarInformation(contractId));
+    }
+  }, [dataLists]);
 
   return (
     <View style={styles.inputBox}>

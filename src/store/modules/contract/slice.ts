@@ -341,16 +341,15 @@ const contractSlice = createSlice({
         return;
       }
       if (action.payload.screen) {
-        state.currentContract.screens =
-          state.currentContract.screens.map<BaseScreenDataInterface>(
-            (screen) => {
-              if (screen.type !== action.payload.screen?.type) {
-                return screen;
-              } else {
-                return action.payload.screen;
-              }
-            }
-          );
+        state.currentContract.screens = state.currentContract.screens.map<
+          BaseScreenDataInterface
+        >((screen) => {
+          if (screen.type !== action.payload.screen?.type) {
+            return screen;
+          } else {
+            return action.payload.screen;
+          }
+        });
       } else {
         const index = state.currentContract.screens.findIndex(
           (screen) => screen.type === action.payload.type
