@@ -5,6 +5,7 @@ import {
 import { CONDITION_VALUE } from "../store/modules/contract/purchase/product-condition";
 import { CONFIRMATION_FIELDS } from "../store/modules/contract/purchase/confirmation";
 import { MEMBER_TYPE_VALUE } from "../store/modules/contract/carSales/member-type";
+import { CONTRACT_ROLE } from "../store/modules/contract/contract-roles";
 
 export default {
   welcome: {
@@ -300,12 +301,16 @@ export default {
       [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
         title: "Besätigung",
         confirmation: {
-          [CONFIRMATION_FIELDS.FIRST]:
-            "Der Verkäufer versichert, dass der oben beschriebene Artikel in seinem alleinigen Eigentum steht, nicht gestohlen ist und frei von Rechten Dritter ist.",
-          [CONFIRMATION_FIELDS.SECOND]:
-            "Die Käuferdaten wurden überprüft und stimmen überein.",
-          [CONFIRMATION_FIELDS.SELLER_DETAIL]:
-            "Die Verkäuferdaten wurden überprüft und stimmen überein.",
+          [CONTRACT_ROLE.OWNER]: {
+            [CONFIRMATION_FIELDS.FIRST]:
+              "Der Verkäufer versichert, dass der oben beschriebene Artikel in seinem alleinigen Eigentum steht, nicht gestohlen ist und frei von Rechten Dritter ist.",
+            [CONFIRMATION_FIELDS.SECOND]:
+              "Die Käuferdaten wurden überprüft und stimmen überein.",
+          },
+          [CONTRACT_ROLE.PARTNER]: {
+            [CONFIRMATION_FIELDS.SELLER_DETAIL]:
+              "Die Verkäuferdaten wurden überprüft und stimmen überein.",
+          },
         },
         partner_text: "Bitte überprüfen Sie seine Identität mit einem Pass.",
       },
@@ -384,7 +389,7 @@ export default {
           type: "Typ",
           year: "Ausgabejahr",
         }
-      }, 
+      },
       [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
         title: "Fahrzeugbeschreibung",
         titleTwo: "Bitte Fahrzeugbeschreibung angeben",
@@ -415,7 +420,7 @@ export default {
           type: "Typ",
           year: "Ausgabejahr",
         }
-      }, 
+      },
       [CONTRACT_SCREEN_TYPES.SPECIFICATIONS]: {
         title: "Angaben",
         placeholders: {
@@ -429,7 +434,7 @@ export default {
           inspectionDate: "Fälligkeitsdatum angeben",
         },
       },
-      [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO ]: {
+      [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO]: {
         title: "Additionale Information",
         fields: {
           accidentDamage: "Unfallschäden",
@@ -445,7 +450,7 @@ export default {
           placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
           uploadFiles: "Datei hochladen",
         }
-      }, 
+      },
       [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
         title: "Besätigung",
         confirmation: {
@@ -464,7 +469,7 @@ export default {
         title: "Vertrag unterzeichnen",
         signature: "Bitte Ihre Unterschift eingeben",
         invite: "Bitte Benutzer einladen",
-      },      
+      },
     },
     confirmation_modal: {
       message: "Wollten Sie die Vertragserstellung wirklich abbrechen?",
