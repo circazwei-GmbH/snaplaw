@@ -21,6 +21,7 @@ import { COMPANY_DATA_FIELDS } from "./company-data";
 import { PASSPORT_DATA_FIELDS } from "./passport-data";
 import { CAR_DATA_FIELDS } from "./carSales/car-data";
 import { SPECIFICATIONS_DATA_FIELDS } from "./specifications-data";
+import { ADDITIONAL_INFO_FIELDS } from "./additional-info-data";
 
 export const contractValidationConfig = {
   [CONTRACT_TYPES.PURCHASE]: {
@@ -314,6 +315,24 @@ export const contractValidationConfig = {
             "contracts.validation.field_empty",
             1,
             SPECIFICATIONS_DATA_FIELDS.DEREGISTERED
+          ),
+        ],
+      },
+    },
+    [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [ADDITIONAL_INFO_FIELDS.ACCIDENT_DAMAGE_DESCRIPTION]: [
+          lengthCheckIfAnotherFieldIsTrue(
+            "contracts.validation.field_empty",
+            1,
+            ADDITIONAL_INFO_FIELDS.ACCIDENT_DAMAGE
+          ),
+        ],
+        [ADDITIONAL_INFO_FIELDS.OTHER_DEFECTS_DESCRIPTION]: [
+          lengthCheckIfAnotherFieldIsTrue(
+            "contracts.validation.field_empty",
+            1,
+            ADDITIONAL_INFO_FIELDS.OTHER_DEFECTS
           ),
         ],
       },

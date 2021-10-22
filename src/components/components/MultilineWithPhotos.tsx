@@ -1,59 +1,90 @@
-import React from "react";
-import { StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { StyleProp, StyleSheet, TextStyle, View } from "react-native";
 import { MediaType } from "../../services/media";
-import { PRODUCT_DESCRIPTION_FIELDS } from "../../store/modules/contract/types";
+import { useAppDispatch } from "../../store/hooks";
+import { CONTRACT_SCREEN_TYPES } from "../../store/modules/contract/constants";
+import { setScreenData } from "../../store/modules/contract/slice";
 import IconButton from "../basics/buttons/IconButton";
 import DefaultText from "../basics/typography/DefaultText";
+import PhotoMenuModal from "../features/Modals/PhotoMenuModal";
 import DescriptionPhotos from "./DescriptionPhotos";
 import MultilineTextField from "./MultilineTextField";
 
 interface MultilineWithPhotosInterface {
   text: string;
-  description?: string;
-  errorMessage?: string;
   placeholder: string;
-  onChangeFunction: (newValue: string) => void;
-  choosePhotoHandler: () => void;
-  checked?: boolean;
   iconText: string;
-  fieldName: PRODUCT_DESCRIPTION_FIELDS;
+  fieldName: string;
+  photosFieldName: string;
   photos: MediaType[];
-  removePhoto: (id: string, fieldName: PRODUCT_DESCRIPTION_FIELDS) => void;
+  onChangeFunction: (newValue: string) => void;
+  screenType?: CONTRACT_SCREEN_TYPES;
+  checked?: boolean;
+  errorMessage?: string;
+  description?: string;
+  isDirectionReverse?: boolean;
+  titleStyle?: StyleProp<TextStyle>;
 }
 
 export default function MultilineWithPhotos({
   text,
-  description,
-  errorMessage,
   placeholder,
+  iconText,
+  fieldName,
+  photosFieldName,
+  photos,
   onChangeFunction,
   checked,
-  iconText,
-  choosePhotoHandler,
-  fieldName,
-  photos,
-  removePhoto,
+  errorMessage,
+  description,
+  isDirectionReverse,
+  titleStyle,
+  screenType,
 }: MultilineWithPhotosInterface) {
+  const dispatch = useAppDispatch();
+
+  const [menuVisible, setMenuVisible] = useState(false);
+
+  const removePhoto = (id: string, fieldName: string) => {
+    const newValue = photos?.filter((item) => item.uri !== id);
+
+    dispatch(
+      setScreenData({
+        screenType: screenType,
+        fieldName,
+        value: newValue,
+      })
+    );
+  };
+
   return (
-    <>
-      <DefaultText text={text} style={styles.titleTwo} />
-      <MultilineTextField
-        value={description}
-        errorMessage={errorMessage}
-        placeholder={placeholder}
-        onChangeFunction={onChangeFunction}
-        checked={checked}
+    <View style={isDirectionReverse ? styles.directionReverse : null}>
+      <View>
+        <DefaultText text={text} style={[styles.titleTwo, titleStyle]} />
+        <MultilineTextField
+          value={description}
+          errorMessage={errorMessage}
+          placeholder={placeholder}
+          onChangeFunction={onChangeFunction}
+          checked={checked}
+        />
+      </View>
+      <View>
+        <IconButton text={iconText} onPress={() => setMenuVisible(true)} />
+        <DescriptionPhotos
+          photos={photos}
+          onPressDelete={removePhoto}
+          fieldName={fieldName}
+        />
+      </View>
+      <PhotoMenuModal
+        visible={menuVisible}
+        currentArray={photos}
+        currentField={photosFieldName}
+        screenType={screenType}
+        onClose={() => setMenuVisible(false)}
       />
-      <IconButton
-        text={iconText}
-        onPress={choosePhotoHandler}
-      />
-      <DescriptionPhotos
-        photos={photos}
-        onPressDelete={removePhoto}
-        fieldName={fieldName}
-      />
-    </>
+    </View>
   );
 }
 
@@ -64,9 +95,6 @@ const styles = StyleSheet.create({
   titleTwo: {
     fontSize: 16,
   },
-  titleThree: {
-    marginTop: 23,
-  },
   checkbox: {
     marginVertical: 23,
   },
@@ -74,5 +102,8 @@ const styles = StyleSheet.create({
     width: "85%",
     marginLeft: 18,
     fontSize: 16,
+  },
+  directionReverse: {
+    flexDirection: "column-reverse",
   },
 });

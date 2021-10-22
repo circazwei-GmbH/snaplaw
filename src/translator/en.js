@@ -404,6 +404,23 @@ export default {
         placeholder: "Write here everything that you think is important",
         button: "Upload file",
       }, 
+      [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO ]: {
+        title: "Additional information",
+        fields: {
+          accidentDamage: "Accident damage",
+          otherDefects: "Other known defects",
+        },
+        damage: {
+          title: "Please add accident damage description",
+          placeholder: "Write here everything that you think is important",
+          uploadFiles: "Upload file",
+        },
+        defect: {
+          title: "Please add defect description",
+          placeholder: "Write here everything that you think is important",
+          uploadFiles: "Upload file",
+        }
+      },
       [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
         title: "Confirmation",
         confirmation: {
