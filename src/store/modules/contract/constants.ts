@@ -11,13 +11,14 @@ export const enum CONTRACT_SCREEN_TYPES {
   PRODUCT_DATA = "productData",
   PRODUCT_CONDITION = "productCondition",
   CONFIRMATION = "confirmation",
-  PRODUCT_DESCRIPTION = "additionalInformation",
+  PRODUCT_DESCRIPTION = "productDescription",
   PAYMENT = "payment",
   SIGN = "signContract",
   MEMBER_TYPE = "memberType",
   COMPANY_DATA = "companyData",
   PASSPORT_DATA = "passportData",
   SPECIFICATIONS = "specifications",
+  ADDITIONAL_INFO = "additionalInfo",
 }
 
 export const CONTRACT_CREATION_WAIT = "CONTRACT_CREATION_WAIT";

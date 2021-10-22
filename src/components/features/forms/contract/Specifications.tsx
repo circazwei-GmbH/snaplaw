@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { useI18n } from "../../../../translator/i18n";
-import DefaultSwitch from "../../../basics/switches/DefaultSwitch";
 import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/constants";
-import { setScreenData } from "../../../../store/modules/contract/slice";
-import { validateScreen } from "../../../../store/modules/contract/action-creators";
 import {
   SpecificationsDataScreenInterface,
   SPECIFICATIONS_DATA_FIELDS,
 } from "../../../../store/modules/contract/specifications-data";
+import { validateScreen } from "../../../../store/modules/contract/action-creators";
+import { setScreenData } from "../../../../store/modules/contract/slice";
+import DefaultSwitch from "../../../basics/switches/DefaultSwitch";
 import CalendarInput from "../../../basics/inputs/CalendarInput";
 
 const initialState = {
@@ -22,17 +22,20 @@ const initialState = {
 };
 
 export default function Specifications(): JSX.Element {
+  const { t } = useI18n();
+  const dispatch = useAppDispatch();
+
+  const [specifications, serSpecifications] = useState(initialState);
+  
   const screenErrors = useAppSelector((state) =>
     state.contract.contractErrors
       ? state.contract.contractErrors[CONTRACT_SCREEN_TYPES.SPECIFICATIONS]
       : undefined
   );
 
-  const { t } = useI18n();
   const contractType = useAppSelector(
     (state) => state.contract.currentContract?.type
   );
-  const dispatch = useAppDispatch();
 
   const specificationsScreen = useAppSelector(
     (state) =>
@@ -40,8 +43,6 @@ export default function Specifications(): JSX.Element {
         (screen) => screen.type === CONTRACT_SCREEN_TYPES.SPECIFICATIONS
       ) as SpecificationsDataScreenInterface | undefined
   );
-
-  const [specifications, serSpecifications] = useState(initialState);
 
   const onToggleSpecification = (fieldName: SPECIFICATIONS_DATA_FIELDS) => {
     serSpecifications({
@@ -69,6 +70,7 @@ export default function Specifications(): JSX.Element {
         value: value,
       })
     );
+
     if (screenErrors?.[fieldName] && contractType) {
       dispatch(
         validateScreen(contractType, CONTRACT_SCREEN_TYPES.SPECIFICATIONS)
@@ -94,7 +96,7 @@ export default function Specifications(): JSX.Element {
       {specifications.inspection ? (
         <View style={styles.calendarInputContainer}>
           <CalendarInput
-            date={specificationsScreen?.data.inspectionDate || ""}
+            date={specificationsScreen?.data[SPECIFICATIONS_DATA_FIELDS.INSPECTION_DATE] || ""}
             dateHandler={(date) =>
               onChangeAction(date, SPECIFICATIONS_DATA_FIELDS.INSPECTION_DATE)
             }

@@ -428,6 +428,23 @@ export default {
           deregisteredDate: "Das Fahrzeug ist abgemeldet bis",
           inspectionDate: "Fälligkeitsdatum angeben",
         },
+      },
+      [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO ]: {
+        title: "Additionale Information",
+        fields: {
+          accidentDamage: "Unfallschäden",
+          otherDefects: "Sonstige bekannte Mängel",
+        },
+        damage: {
+          title: "Bitte Unfallschädenbeschreibung hinzufügen",
+          placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
+          uploadFiles: "Datei hochladen",
+        },
+        defect: {
+          title: "Bitte Fehlerbeschreibung hinzufügen",
+          placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
+          uploadFiles: "Datei hochladen",
+        }
       }, 
       [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
         title: "Besätigung",

@@ -15,6 +15,7 @@ import CompanyDataForm from "../../../components/features/forms/contract/Company
 import PassportDataForm from "../../../components/features/forms/contract/PassportDataForm";
 import ProductDataCarForm from "../../../components/features/forms/contract/ProdactDataCarForm";
 import Specifications from "../../../components/features/forms/contract/Specifications";
+import AdditionalInfo from "../../../components/features/forms/contract/AdditionalInformationCar";
 
 export interface ContractScreenConfigType {
   component: React.ElementType;
@@ -134,6 +135,12 @@ export const contractScreensConfig: Record<
       component: ProductDescriptionForm,
       title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.title`,
       type: CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION,
+      granted: [CONTRACT_ROLE.OWNER],
+    },
+    {
+      component: AdditionalInfo,
+      title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO}.title`,
+      type: CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO,
       granted: [CONTRACT_ROLE.OWNER],
     },
     {

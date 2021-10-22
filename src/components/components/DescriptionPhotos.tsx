@@ -9,7 +9,7 @@ import { MediaType } from "../../services/media";
 export interface DescriptionPhotosPropsInterface {
   photos: MediaType[];
   onPressDelete?: Function;
-  fieldName: PRODUCT_DESCRIPTION_FIELDS;
+  fieldName: string;
 }
 
 export default function DescriptionPhotos({
