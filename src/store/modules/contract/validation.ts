@@ -302,18 +302,18 @@ export const contractValidationConfig = {
     },
     [CONTRACT_SCREEN_TYPES.SPECIFICATIONS]: {
       [CONTRACT_ROLE.OWNER]: {
-        [SPECIFICATIONS_DATA_FIELDS.inspectionDate]: [
+        [SPECIFICATIONS_DATA_FIELDS.INSPECTION_DATE]: [
           lengthCheckIfAnotherFieldIsTrue(
             "contracts.validation.field_empty",
             1,
-            SPECIFICATIONS_DATA_FIELDS.inspection
+            SPECIFICATIONS_DATA_FIELDS.INSPECTION
           ),
         ],
-        [SPECIFICATIONS_DATA_FIELDS.deregisteredDate]: [
+        [SPECIFICATIONS_DATA_FIELDS.DEREGISTERED_DATE]: [
           lengthCheckIfAnotherFieldIsTrue(
             "contracts.validation.field_empty",
             1,
-            SPECIFICATIONS_DATA_FIELDS.deregistered
+            SPECIFICATIONS_DATA_FIELDS.DEREGISTERED
           ),
         ],
       },

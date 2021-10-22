@@ -3,7 +3,6 @@ import { StyleSheet, View } from "react-native";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { useI18n } from "../../../../translator/i18n";
 import DefaultSwitch from "../../../basics/switches/DefaultSwitch";
-import { toggleBoolValue } from "../../../../utils/toggleBoolValue";
 import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/constants";
 import { setScreenData } from "../../../../store/modules/contract/slice";
 import { validateScreen } from "../../../../store/modules/contract/action-creators";
@@ -12,15 +11,14 @@ import {
   SPECIFICATIONS_DATA_FIELDS,
 } from "../../../../store/modules/contract/specifications-data";
 import CalendarInput from "../../../basics/inputs/CalendarInput";
-import dayjs from "dayjs";
 
 const initialState = {
-  [SPECIFICATIONS_DATA_FIELDS.inspection]: false,
-  [SPECIFICATIONS_DATA_FIELDS.commercial]: false,
-  [SPECIFICATIONS_DATA_FIELDS.foreignMade]: false,
-  [SPECIFICATIONS_DATA_FIELDS.technicalWork]: false,
-  [SPECIFICATIONS_DATA_FIELDS.service]: false,
-  [SPECIFICATIONS_DATA_FIELDS.deregistered]: false,
+  [SPECIFICATIONS_DATA_FIELDS.INSPECTION]: false,
+  [SPECIFICATIONS_DATA_FIELDS.COMMERCIAL]: false,
+  [SPECIFICATIONS_DATA_FIELDS.FOREIGN_MADE]: false,
+  [SPECIFICATIONS_DATA_FIELDS.TECHNICAL_WORK]: false,
+  [SPECIFICATIONS_DATA_FIELDS.SERVICE]: false,
+  [SPECIFICATIONS_DATA_FIELDS.DEREGISTERED]: false,
 };
 
 export default function Specifications(): JSX.Element {
@@ -89,7 +87,7 @@ export default function Specifications(): JSX.Element {
           `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.SPECIFICATIONS}.placeholders.inspection`
         )}
         onChange={() =>
-          onToggleSpecification(SPECIFICATIONS_DATA_FIELDS.inspection)
+          onToggleSpecification(SPECIFICATIONS_DATA_FIELDS.INSPECTION)
         }
         value={specifications.inspection}
       />
@@ -98,10 +96,10 @@ export default function Specifications(): JSX.Element {
           <CalendarInput
             date={specificationsScreen?.data.inspectionDate || ""}
             dateHandler={(date) =>
-              onChangeAction(date, SPECIFICATIONS_DATA_FIELDS.inspectionDate)
+              onChangeAction(date, SPECIFICATIONS_DATA_FIELDS.INSPECTION_DATE)
             }
             placeholder={t(`contracts.${contractType}.${CONTRACT_SCREEN_TYPES.SPECIFICATIONS}.placeholders.inspectionDate`)}
-            errorMessage={screenErrors?.[SPECIFICATIONS_DATA_FIELDS.inspectionDate]}
+            errorMessage={screenErrors?.[SPECIFICATIONS_DATA_FIELDS.INSPECTION_DATE]}
           />
         </View>
       ) : null}
@@ -110,7 +108,7 @@ export default function Specifications(): JSX.Element {
           `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.SPECIFICATIONS}.placeholders.commercial`
         )}
         onChange={() =>
-          onToggleSpecification(SPECIFICATIONS_DATA_FIELDS.commercial)
+          onToggleSpecification(SPECIFICATIONS_DATA_FIELDS.COMMERCIAL)
         }
         value={specifications.commercial}
       />
@@ -119,7 +117,7 @@ export default function Specifications(): JSX.Element {
           `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.SPECIFICATIONS}.placeholders.foreignMade`
         )}
         onChange={() =>
-          onToggleSpecification(SPECIFICATIONS_DATA_FIELDS.foreignMade)
+          onToggleSpecification(SPECIFICATIONS_DATA_FIELDS.FOREIGN_MADE)
         }
         value={specifications.foreignMade}
       />
@@ -128,7 +126,7 @@ export default function Specifications(): JSX.Element {
           `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.SPECIFICATIONS}.placeholders.technicalWork`
         )}
         onChange={() =>
-          onToggleSpecification(SPECIFICATIONS_DATA_FIELDS.technicalWork)
+          onToggleSpecification(SPECIFICATIONS_DATA_FIELDS.TECHNICAL_WORK)
         }
         value={specifications.technicalWork}
       />
@@ -137,7 +135,7 @@ export default function Specifications(): JSX.Element {
           `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.SPECIFICATIONS}.placeholders.service`
         )}
         onChange={() =>
-          onToggleSpecification(SPECIFICATIONS_DATA_FIELDS.service)
+          onToggleSpecification(SPECIFICATIONS_DATA_FIELDS.SERVICE)
         }
         value={specifications.service}
       />
@@ -146,7 +144,7 @@ export default function Specifications(): JSX.Element {
           `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.SPECIFICATIONS}.placeholders.deregistered`
         )}
         onChange={() =>
-          onToggleSpecification(SPECIFICATIONS_DATA_FIELDS.deregistered)
+          onToggleSpecification(SPECIFICATIONS_DATA_FIELDS.DEREGISTERED)
         }
         value={specifications.deregistered}
       />
@@ -155,10 +153,10 @@ export default function Specifications(): JSX.Element {
           <CalendarInput
             date={specificationsScreen?.data.deregisteredDate || ""}
             dateHandler={(date) =>
-              onChangeAction(date, SPECIFICATIONS_DATA_FIELDS.deregisteredDate)
+              onChangeAction(date, SPECIFICATIONS_DATA_FIELDS.DEREGISTERED_DATE)
             }
             placeholder={t(`contracts.${contractType}.${CONTRACT_SCREEN_TYPES.SPECIFICATIONS}.placeholders.deregisteredDate`)}
-            errorMessage={screenErrors?.[SPECIFICATIONS_DATA_FIELDS.deregisteredDate]}
+            errorMessage={screenErrors?.[SPECIFICATIONS_DATA_FIELDS.DEREGISTERED_DATE]}
           />
         </View>
       ) : null}
