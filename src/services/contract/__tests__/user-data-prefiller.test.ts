@@ -10,11 +10,10 @@ describe("UserDataPrefiller", () => {
         type: MEDIA_TYPE.IMAGE,
         uri: "testUri"
       },
-      name: "firstName"
     })).toEqual({
       type: CONTRACT_SCREEN_TYPES.USER_DATA,
       data: {
-        name: "firstName",
+        name: "",
         lastName: "",
         email: "",
         address: "",
