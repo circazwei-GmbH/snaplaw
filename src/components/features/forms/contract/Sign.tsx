@@ -90,7 +90,7 @@ export default function Sign() {
     }
     setSignVisible(false);
     dispatch(orientationChange(OrientationLock.PORTRAIT_UP));
-    dispatch(removeFromWaiter(SIGN_LOADER));
+    dispatch(removeFromWaiter({event: SIGN_LOADER}));
   }, [sign]);
 
   if (!contract) {

@@ -30,19 +30,15 @@ export default function ProductDataCarForm(): JSX.Element {
     (state) => state.lib.carInfo as CarInfoInterface
   );  
 
-  const contractId = useAppSelector(
-    (state) => state.contract.currentContract?.id as string
-  );
-
-  const contractType = useAppSelector(
-    (state) => state.contract.currentContract?.type
+  const contract = useAppSelector(
+    (state) => state.contract.currentContract
   );
 
   const screenErrors = useAppSelector((state) =>
     state.contract.contractErrors
       ? state.contract.contractErrors[CONTRACT_SCREEN_TYPES.PRODUCT_DATA]
       : undefined
-  );
+  );  
 
   const onChangeAction = (value: string, fieldName: CAR_DATA_FIELDS) => {
     dispatch(
@@ -53,16 +49,16 @@ export default function ProductDataCarForm(): JSX.Element {
       })
     );
 
-    if (screenErrors?.[fieldName] && contractType) {
+    if (screenErrors?.[fieldName] && contract?.type) {
       dispatch(
-        validateScreen(contractType, CONTRACT_SCREEN_TYPES.PRODUCT_DATA)
+        validateScreen(contract.type, CONTRACT_SCREEN_TYPES.PRODUCT_DATA)
       );
     }
   };
 
   useEffect(() => {
-    if (!dataLists.producer.length) {
-      dispatch(requestCarInformation(contractId));
+    if (!dataLists.producer.length && contract) {
+      dispatch(requestCarInformation(contract.id));
     }
   }, [dataLists]);
 
@@ -70,7 +66,7 @@ export default function ProductDataCarForm(): JSX.Element {
     <View style={styles.inputBox}>
       <DropdownInput
         placeholder={t(
-          `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.producer`
+          `contracts.${contract?.type}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.producer`
         )}
         errorMessage={screenErrors?.[CAR_DATA_FIELDS.producer]}
         value={
@@ -85,7 +81,7 @@ export default function ProductDataCarForm(): JSX.Element {
       />
       <DropdownInput
         placeholder={t(
-          `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.model`
+          `contracts.${contract?.type}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.model`
         )}
         errorMessage={screenErrors?.[CAR_DATA_FIELDS.model]}
         value={
@@ -98,7 +94,7 @@ export default function ProductDataCarForm(): JSX.Element {
       />
       <DropdownInput
         placeholder={t(
-          `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.type`
+          `contracts.${contract?.type}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.type`
         )}
         errorMessage={screenErrors?.[CAR_DATA_FIELDS.type]}
         value={
@@ -111,7 +107,7 @@ export default function ProductDataCarForm(): JSX.Element {
       />
       <DropdownInput
         placeholder={t(
-          `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.year`
+          `contracts.${contract?.type}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.year`
         )}
         errorMessage={screenErrors?.[CAR_DATA_FIELDS.year]}
         value={
@@ -124,7 +120,7 @@ export default function ProductDataCarForm(): JSX.Element {
       />
       <TextField
         placeholder={t(
-          `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.prevRegistrationNumber`
+          `contracts.${contract?.type}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.prevRegistrationNumber`
         )}
         value={productData?.data[CAR_DATA_FIELDS.prevRegistrationNumber]}
         errorMessage={screenErrors?.[CAR_DATA_FIELDS.prevRegistrationNumber]}
@@ -134,7 +130,7 @@ export default function ProductDataCarForm(): JSX.Element {
       />
       <TextField
         placeholder={t(
-          `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.serialNumber`
+          `contracts.${contract?.type}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.serialNumber`
         )}
         value={productData?.data[CAR_DATA_FIELDS.serialNumber]}
         errorMessage={screenErrors?.[CAR_DATA_FIELDS.serialNumber]}
@@ -145,7 +141,7 @@ export default function ProductDataCarForm(): JSX.Element {
       <TextField
         keyboardType="number-pad"
         placeholder={t(
-          `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.run`
+          `contracts.${contract?.type}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.placeholders.run`
         )}
         value={productData?.data[CAR_DATA_FIELDS.run]}
         errorMessage={screenErrors?.[CAR_DATA_FIELDS.run]}
