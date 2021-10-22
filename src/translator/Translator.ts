@@ -10,7 +10,7 @@ export const translate: TranslateType = (key, args, config) => {
     }
     currentText = currentText[splitedKey[i]];
   }
-
+  
   if (!args) {
     return currentText;
   }

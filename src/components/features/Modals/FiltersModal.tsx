@@ -32,7 +32,6 @@ export default function FiltersModal({
     CONTRACT_TYPES[]
   >(filters.types);
   const [selectedDate, setSelectedDate] = useState(filters.date);
-  const [datePickerOpened, setDatePickerOpened] = useState(false);
 
   const contractTypes = {
     [CONTRACT_TYPES.CAR]: t("homepage.contract_types.car"),
@@ -57,11 +56,6 @@ export default function FiltersModal({
     setSelectedCategories([]);
     setSelectedDate("");
   };
-
-  const onConfirmDate = (date: string) => {
-    setSelectedDate(date)
-    setDatePickerOpened(false);
-  }
 
   const applyFilters = () => {
     dispatch(
@@ -133,12 +127,8 @@ export default function FiltersModal({
                   </Text>
                   <CalendarInput
                     style={styles.dateInput}
-                    date={
-                      dayjs(selectedDate).isValid()
-                        ? dayjs(selectedDate).format("DD.MM.YYYY")
-                        : selectedDate
-                    }
-                    dateHandler={() => setDatePickerOpened(true)}
+                    date={selectedDate}
+                    dateHandler={setSelectedDate}
                   />
                 </View>
               </View>
@@ -154,13 +144,6 @@ export default function FiltersModal({
             </View>
           </Pressable>
         </Pressable>
-        <DatePickerModalCustom 
-          onCancelDate={() => setDatePickerOpened(false)}
-          onConfirmDate={onConfirmDate}
-          datePickerOpened={datePickerOpened}
-          setDatePickerOpened={setDatePickerOpened}
-          setedDate={selectedDate}
-        />
       </Modal>
     </View>
   );
@@ -238,5 +221,5 @@ const styles = StyleSheet.create({
   dataPickerButtonText: {
     fontSize: 16,
     textTransform: "uppercase",
-  }
+  },
 });

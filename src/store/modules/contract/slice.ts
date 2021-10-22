@@ -80,8 +80,7 @@ export type ScreenData = {
 
 type FieldErrorData = {
   screenType: CONTRACT_SCREEN_TYPES;
-  field: string;
-  message: string | undefined;
+  screenErrors: Record<string, string | undefined> | undefined;
 };
 
 type UpdateScreenDataPayload = {
@@ -204,21 +203,8 @@ const contractSlice = createSlice({
       // @ts-ignore
       state.contractErrors = {
         ...state.contractErrors,
-        [action.payload.screenType]: {
-          ...(state.contractErrors &&
-          state.contractErrors[action.payload.screenType]
-            ? state.contractErrors[action.payload.screenType]
-            : {}),
-          ...(state.contractErrors &&
-          state.contractErrors[action.payload.screenType] &&
-          state.contractErrors[action.payload.screenType][action.payload.field]
-            ? state.contractErrors[action.payload.screenType][
-                action.payload.field
-              ]
-            : {}),
-          [action.payload.field]: action.payload.message,
-        },
-      };
+        [action.payload.screenType]: action.payload.screenErrors
+      }
     },
     [clearErrorsAction.type]: (state: Draft<ContractState>) => {
       state.contractErrors = undefined;

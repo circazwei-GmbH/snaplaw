@@ -14,6 +14,7 @@ import { checkMemberTypeCommercial, checkMemberTypePrivat } from "./exclusions-c
 import CompanyDataForm from "../../../components/features/forms/contract/CompanyDataForm";
 import PassportDataForm from "../../../components/features/forms/contract/PassportDataForm";
 import ProductDataCarForm from "../../../components/features/forms/contract/ProdactDataCarForm";
+import Specifications from "../../../components/features/forms/contract/Specifications";
 
 export interface ContractScreenConfigType {
   component: React.ElementType;
@@ -118,9 +119,15 @@ export const contractScreensConfig: Record<
       exclusionChecker: checkMemberTypePrivat,
     },
     {
-      component: ProductDataCarForm        ,
+      component: ProductDataCarForm,
       title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.PRODUCT_DATA}.title`,
       type: CONTRACT_SCREEN_TYPES.PRODUCT_DATA,
+      granted: [CONTRACT_ROLE.OWNER],
+    },
+    {
+      component: Specifications,
+      title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.SPECIFICATIONS}.title`,
+      type: CONTRACT_SCREEN_TYPES.SPECIFICATIONS,
       granted: [CONTRACT_ROLE.OWNER],
     },
     {

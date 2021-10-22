@@ -118,7 +118,7 @@ export default function ProductDataForm(): JSX.Element {
             onChangeFunction={(newValue) =>
               onChangeAction(newValue, PRODUCT_DATA_FIELDS.serial)
             }
-          />
+          /> 
         </View>
       ) : null}
     </View>

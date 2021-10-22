@@ -74,6 +74,7 @@ import {
   MEMBER_TYPE_FIELD_NAME,
   MEMBER_TYPE_VALUE,
 } from "./carSales/member-type";
+import { waitFor } from "@testing-library/react-native";
 
 function* createContract({ payload }: RequestCreateContractAction) {
   try {
@@ -160,6 +161,12 @@ function* screenValidate({
   if (!validationConfig) {
     return;
   }
+
+  let screenErrors: Record<string, string | undefined> = yield select(
+    (state) =>
+      state.contract.contractErrors && state.contract.contractErrors[screenType]
+  );
+
   for (let field in validationConfig) {
     const validated = screenFieldValidator(
       field,
@@ -168,24 +175,15 @@ function* screenValidate({
       contractType,
       myRole
     );
-    if (validated) {
-      yield put(
-        setFieldError({
-          screenType,
-          message: Translator.getInstance().trans(validated),
-          field,
-        })
-      );
-    } else {
-      yield put(
-        setFieldError({
-          screenType,
-          message: undefined,
-          field,
-        })
-      );
-    }
+
+    screenErrors = {
+      ...screenErrors,
+      [field]: validated
+        ? Translator.getInstance().trans(validated)
+        : undefined,
+    };
   }
+  yield put(setFieldError({ screenType, screenErrors }));
 }
 
 function* validateAllScreens({ payload }: ValidateAllScreensAction) {

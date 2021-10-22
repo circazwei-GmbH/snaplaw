@@ -366,7 +366,7 @@ export default {
           idCard: "ID card number",
           identificationCode: "Identification code",
         }
-      },
+      }, 
       [CONTRACT_SCREEN_TYPES.PRODUCT_DATA]: {
         title: "Product data",
         placeholders: {
@@ -385,6 +385,19 @@ export default {
           year: "Year of issue",
         }
       }, 
+      [CONTRACT_SCREEN_TYPES.SPECIFICATIONS]: {
+        title: "Specifications",
+        placeholders: {
+          inspection: "Vehicle inspection",
+          commercial: "Commercial vehicle",
+          foreignMade: "Foreign-made car",
+          technicalWork: "Technical work was carried out",
+          service: "Service book included",
+          deregistered: "Vehicle deregistered",
+          deregisteredDate: "Vehicle is deregistered until",
+          inspectionDate: "Specify due date",
+        },
+      },
       [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
         title: "Car description",
         titleTwo: "Please add car description",

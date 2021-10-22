@@ -20,6 +20,7 @@ import { MEMBER_TYPE_FIELD_NAME } from "./carSales/member-type";
 import { COMPANY_DATA_FIELDS } from "./company-data";
 import { PASSPORT_DATA_FIELDS } from "./passport-data";
 import { CAR_DATA_FIELDS } from "./carSales/car-data";
+import { SPECIFICATIONS_DATA_FIELDS } from "./specifications-data";
 
 export const contractValidationConfig = {
   [CONTRACT_TYPES.PURCHASE]: {
@@ -296,6 +297,24 @@ export const contractValidationConfig = {
         ],
         [CAR_DATA_FIELDS.run]: [
           length("contracts.validation.field_empty", 1),
+        ],
+      },
+    },
+    [CONTRACT_SCREEN_TYPES.SPECIFICATIONS]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [SPECIFICATIONS_DATA_FIELDS.INSPECTION_DATE]: [
+          lengthCheckIfAnotherFieldIsTrue(
+            "contracts.validation.field_empty",
+            1,
+            SPECIFICATIONS_DATA_FIELDS.INSPECTION
+          ),
+        ],
+        [SPECIFICATIONS_DATA_FIELDS.DEREGISTERED_DATE]: [
+          lengthCheckIfAnotherFieldIsTrue(
+            "contracts.validation.field_empty",
+            1,
+            SPECIFICATIONS_DATA_FIELDS.DEREGISTERED
+          ),
         ],
       },
     },
