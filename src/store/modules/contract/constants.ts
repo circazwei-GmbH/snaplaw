@@ -13,6 +13,7 @@ export const enum CONTRACT_SCREEN_TYPES {
   CONFIRMATION = "confirmation",
   PRODUCT_DESCRIPTION = "productDescription",
   PAYMENT = "payment",
+  PAYMENT_INFO = "paymentInfo",
   SIGN = "signContract",
   MEMBER_TYPE = "memberType",
   COMPANY_DATA = "companyData",

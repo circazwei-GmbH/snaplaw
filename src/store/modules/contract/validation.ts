@@ -22,6 +22,7 @@ import { PASSPORT_DATA_FIELDS } from "./passport-data";
 import { CAR_DATA_FIELDS } from "./carSales/car-data";
 import { SPECIFICATIONS_DATA_FIELDS } from "./specifications-data";
 import { ADDITIONAL_INFO_FIELDS } from "./additional-info-data";
+import { PAYMENT_INFO_FIELDS } from "./carSales/payment-info";
 
 export const contractValidationConfig = {
   [CONTRACT_TYPES.PURCHASE]: {
@@ -357,6 +358,22 @@ export const contractValidationConfig = {
           length("contracts.validation.field_empty", 1),
         ],
         [CONFIRMATION_FIELDS.SELLER_DETAIL]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+    },
+    [CONTRACT_SCREEN_TYPES.PAYMENT_INFO]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [PAYMENT_INFO_FIELDS.ACCOUNT_OWNER]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [PAYMENT_INFO_FIELDS.ACCOUNT_NUMBER]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [PAYMENT_INFO_FIELDS.IBAN]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [PAYMENT_INFO_FIELDS.BIC]: [
           length("contracts.validation.field_empty", 1),
         ],
       },

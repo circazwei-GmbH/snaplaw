@@ -16,6 +16,7 @@ import PassportDataForm from "../../../components/features/forms/contract/Passpo
 import ProductDataCarForm from "../../../components/features/forms/contract/ProdactDataCarForm";
 import Specifications from "../../../components/features/forms/contract/Specifications";
 import AdditionalInfo from "../../../components/features/forms/contract/AdditionalInformationCar";
+import PaymentInfo from "../../../components/features/forms/contract/PaymentInfo";
 
 export interface ContractScreenConfigType {
   component: React.ElementType;
@@ -147,6 +148,12 @@ export const contractScreensConfig: Record<
       component: Confirmation,
       title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.CONFIRMATION}.title`,
       type: CONTRACT_SCREEN_TYPES.CONFIRMATION,
+      granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
+    },
+    {
+      component: PaymentInfo,
+      title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.PAYMENT_INFO}.title`,
+      type: CONTRACT_SCREEN_TYPES.PAYMENT_INFO,
       granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
     },
     {

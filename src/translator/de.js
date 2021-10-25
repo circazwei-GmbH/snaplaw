@@ -6,6 +6,7 @@ import { CONDITION_VALUE } from "../store/modules/contract/purchase/product-cond
 import { CONFIRMATION_FIELDS } from "../store/modules/contract/purchase/confirmation";
 import { MEMBER_TYPE_VALUE } from "../store/modules/contract/carSales/member-type";
 import { CONTRACT_ROLE } from "../store/modules/contract/contract-roles";
+import { PAYMENT_INFO_FIELDS } from "../store/modules/contract/carSales/payment-info";
 
 export default {
   welcome: {
@@ -464,6 +465,15 @@ export default {
             "Die Verkäuferdaten wurden überprüft und stimmen überein",
         },
         partner_text: "Bitte überprüfen Sie seine Identität mit einem Pass",
+      },
+      [CONTRACT_SCREEN_TYPES.PAYMENT_INFO]: {
+        title: "Payment information", //translate
+        placeholders: {
+          [PAYMENT_INFO_FIELDS.ACCOUNT_OWNER]: "Account owner",//translate
+          [PAYMENT_INFO_FIELDS.ACCOUNT_NUMBER]: "Account number",//translate
+          [PAYMENT_INFO_FIELDS.IBAN]: "IBAN",//translate
+          [PAYMENT_INFO_FIELDS.BIC]: "BIC",//translate
+        }
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "Vertrag unterzeichnen",
