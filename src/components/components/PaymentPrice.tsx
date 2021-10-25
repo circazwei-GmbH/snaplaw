@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import {
   CURRENCIES,
-  CURRENSY,
+  CURRENCY,
 } from "../../store/modules/contract/payment";
 import Select from "../basics/selects/Select";
 import DefaultText from "../basics/typography/DefaultText";
@@ -12,7 +12,7 @@ interface PaymentPriceInterface {
   defaultText: string;
   cost: string;
   placeholder: string;
-  currentCurrency: CURRENSY;
+  currentCurrency: CURRENCY;
   errorMessage?: string;
   onChangeFunction: (value: string) => void;
   onValueChange: (text: string) => void;

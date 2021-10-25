@@ -10,13 +10,13 @@ import {
   PAYMENT_METHODS,
   PaymentScreenInterface,
 } from "../../../../store/modules/contract/types";
-import { CURRENSY } from "../../../../store/modules/contract/payment";
 import DefaultText from "../../../basics/typography/DefaultText";
 import Checkbox from "../../../basics/checkboxes/Checkbox";
 import AbstractErrorMessage from "../../../basics/typography/AbstractErrorMessage";
 import TextField from "../../../components/TextField";
 import CalendarInput from "../../../basics/inputs/CalendarInput";
 import PaymentLayout from "../../../layouts/PaymentLayout";
+import { CURRENCY } from "../../../../store/modules/contract/payment";
 
 export default function PaymentCar() {
   const { t } = useI18n();
@@ -51,7 +51,7 @@ export default function PaymentCar() {
       setScreenData({
         screenType: CONTRACT_SCREEN_TYPES.PAYMENT,
         fieldName: PAYMENT_FIELDS.CURRENCY,
-        value: CURRENSY.EUR,
+        value: CURRENCY.EUR,
       })
     );
   }, []);

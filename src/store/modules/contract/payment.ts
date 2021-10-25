@@ -1,14 +1,14 @@
 import { BaseScreenDataInterface } from "./base-types";
 import { CONTRACT_SCREEN_TYPES } from "./constants";
 
-export enum CURRENSY {
+export enum CURRENCY {
   EUR = "EUR",
   USD = "USD",
 }
 
 export interface CurrencyInterface {
-  value: CURRENSY;
-  label: CURRENSY;
+  value: CURRENCY;
+  label: CURRENCY;
 }
 
 export enum PAYMENT_METHODS {
@@ -38,7 +38,7 @@ export interface PaymentScreenInterface extends BaseScreenDataInterface {
   type: CONTRACT_SCREEN_TYPES.PAYMENT;
   data: {
     [PAYMENT_FIELDS.COST]: string;
-    [PAYMENT_FIELDS.CURRENCY]: CURRENSY;
+    [PAYMENT_FIELDS.CURRENCY]: CURRENCY;
     [PAYMENT_FIELDS.PAYMENT_METHOD]: PAYMENT_METHODS;
     [PAYMENT_FIELDS.SELLER_PAYMENT_METHOD]: PAYMENT_METHODS;
     [PAYMENT_FIELDS.CARD_NAME]: string | undefined;
@@ -53,11 +53,11 @@ export interface PaymentScreenInterface extends BaseScreenDataInterface {
 
 export const CURRENCIES: CurrencyInterface[] = [
   {
-    label: CURRENSY.EUR,
-    value: CURRENSY.EUR,
+    label: CURRENCY.EUR,
+    value: CURRENCY.EUR,
   },
   {
-    label: CURRENSY.USD,
-    value: CURRENSY.USD,
+    label: CURRENCY.USD,
+    value: CURRENCY.USD,
   },
 ];

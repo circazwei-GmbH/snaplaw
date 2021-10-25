@@ -11,7 +11,7 @@ import {
   PAYMENT_FIELDS,
   PAYMENT_METHODS,
 } from "../../../../../store/modules/contract/types";
-import { CURRENSY } from "../../../../../store/modules/contract/payment";
+import { CURRENCY } from "../../../../../store/modules/contract/payment";
 import { setScreenData } from "../../../../../store/modules/contract/slice";
 import { validateScreen } from "../../../../../store/modules/contract/action-creators";
 import { CONTRACT_ROLE } from "../../../../../store/modules/contract/contract-roles";
@@ -25,7 +25,7 @@ const INITIAL_STATE = {
         {
           type: CONTRACT_SCREEN_TYPES.PAYMENT,
           data: {
-            [PAYMENT_FIELDS.CURRENCY]: CURRENSY.EUR,
+            [PAYMENT_FIELDS.CURRENCY]: CURRENCY.EUR,
             [PAYMENT_FIELDS.PAYMENT_METHOD]: PAYMENT_METHODS.CASH,
           },
         },
@@ -132,7 +132,7 @@ describe("Payment", () => {
       setScreenData({
         screenType: CONTRACT_SCREEN_TYPES.PAYMENT,
         fieldName: PAYMENT_FIELDS.CURRENCY,
-        value: CURRENSY.EUR,
+        value: CURRENCY.EUR,
       })
     );
     const test_string = "test-string";

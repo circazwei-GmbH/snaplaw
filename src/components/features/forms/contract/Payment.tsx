@@ -11,7 +11,7 @@ import {
   PaymentScreenInterface,
 } from "../../../../store/modules/contract/types";
 import {
-  CURRENSY,
+  CURRENCY,
 } from "../../../../store/modules/contract/payment";
 import DefaultText from "../../../basics/typography/DefaultText";
 import Checkbox from "../../../basics/checkboxes/Checkbox";
@@ -52,7 +52,7 @@ export default function Payment() {
       setScreenData({
         screenType: CONTRACT_SCREEN_TYPES.PAYMENT,
         fieldName: PAYMENT_FIELDS.CURRENCY,
-        value: CURRENSY.EUR,
+        value: CURRENCY.EUR,
       })
     );
   }, []);
