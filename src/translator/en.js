@@ -3,6 +3,7 @@ import {
   CONTRACT_SCREEN_TYPES,
   CONTRACT_TYPES,
 } from "../store/modules/contract/constants";
+import { CONTRACT_ROLE } from "../store/modules/contract/contract-roles";
 import {
   CONDITION_VALUE,
   CONFIRMATION_FIELDS,
@@ -295,12 +296,18 @@ export default {
       [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
         title: "Confirmation",
         confirmation: {
-          [CONFIRMATION_FIELDS.FIRST]:
-            "The seller assures that the goods described above are their exclusive property, have not been stolen and are free from the rights of third parties.",
-          [CONFIRMATION_FIELDS.SECOND]:
-            "Buyer details have been verified and match.",
-          [CONFIRMATION_FIELDS.SELLER_DETAIL]:
-            "Seller details have been verified and match",
+          [CONTRACT_ROLE.OWNER]: {
+            [CONFIRMATION_FIELDS.FIRST]:
+              "The seller assures that the goods described above are their exclusive property, have not been stolen and are free from the rights of third parties.",
+            [CONFIRMATION_FIELDS.SECOND]:
+              "Buyer details have been verified and match.",
+            [CONFIRMATION_FIELDS.SELLER_DETAIL]:
+              "Seller details have been verified and match",
+          },
+          [CONTRACT_ROLE.PARTNER]: {
+            [CONFIRMATION_FIELDS.SELLER_DETAIL]:
+              "Seller details have been verified and match",
+          }
         },
         partner_text: "Please recheck their identity with a passport.",
       },
@@ -366,7 +373,7 @@ export default {
           idCard: "ID card number",
           identificationCode: "Identification code",
         }
-      }, 
+      },
       [CONTRACT_SCREEN_TYPES.PRODUCT_DATA]: {
         title: "Product data",
         placeholders: {
@@ -384,7 +391,7 @@ export default {
           type: "Type",
           year: "Year of issue",
         }
-      }, 
+      },
       [CONTRACT_SCREEN_TYPES.SPECIFICATIONS]: {
         title: "Specifications",
         placeholders: {
@@ -403,8 +410,8 @@ export default {
         titleTwo: "Please add car description",
         placeholder: "Write here everything that you think is important",
         button: "Upload file",
-      }, 
-      [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO ]: {
+      },
+      [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO]: {
         title: "Additional information",
         fields: {
           accidentDamage: "Accident damage",
@@ -424,14 +431,22 @@ export default {
       [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
         title: "Confirmation",
         confirmation: {
-          [CONFIRMATION_FIELDS.FIRST]:
-            "The seller warrants that he is not aware of any further damage or defect",
-          [CONFIRMATION_FIELDS.SECOND]:
-            "Buyer details have been verified and match",
-          [CONFIRMATION_FIELDS.THIRD]:
-            "The seller certifies that the vehicle was used for personal purposes and not for commercial purposes",
-          [CONFIRMATION_FIELDS.SELLER_DETAIL]:
-            "Seller details have been verified and match",
+          [CONTRACT_ROLE.OWNER]: {
+            [CONFIRMATION_FIELDS.FIRST]:
+              "The seller warrants that he is not aware of any further damage or defect",
+            [CONFIRMATION_FIELDS.SECOND]:
+              "The seller certifies that the vehicle was used for personal purposes and not for commercial purposes",
+            [CONFIRMATION_FIELDS.THIRD]:
+              "Buyer details have been verified and match",
+          },
+          [CONTRACT_ROLE.PARTNER]: {
+            [CONFIRMATION_FIELDS.FIRST]:
+              "The buyer acknowledges that the vehicle remains the property of the seller until full payment has been made",
+            [CONFIRMATION_FIELDS.SELLER_DETAIL]:
+              "The seller and the buyer agree that the buyer will transfer the payment in the amount of %{amount}",
+            [CONFIRMATION_FIELDS.SECOND]:
+              "Seller details have been verified and match",
+          }
         },
       },
       [CONTRACT_SCREEN_TYPES.PAYMENT]: {
@@ -462,7 +477,7 @@ export default {
         title: "sign contract",
         signature: "Please enter your signature",
         invite: "Please invite user",
-      },      
+      },
     },
     confirmation_modal: {
       message: "Are you sure, you want to cancel contract creation?",

@@ -337,6 +337,30 @@ export const contractValidationConfig = {
         ],
       },
     },
+    [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [CONFIRMATION_FIELDS.FIRST]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [CONFIRMATION_FIELDS.SECOND]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [CONFIRMATION_FIELDS.THIRD]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+      [CONTRACT_ROLE.PARTNER]: {
+        [CONFIRMATION_FIELDS.FIRST]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [CONFIRMATION_FIELDS.SECOND]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [CONFIRMATION_FIELDS.SELLER_DETAIL]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+    },
   },
 };
 
