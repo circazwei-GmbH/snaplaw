@@ -46,17 +46,23 @@ describe("Confirmation", () => {
       </Provider>
     );
 
-    Object.keys(CONFIRMATION).forEach((confirmation) => {
-      // @ts-ignore
-      if (!CONFIRMATION[confirmation].includes(CONTRACT_ROLE.OWNER)) {
-        return;
+    Object.keys(CONFIRMATION[CONTRACT_TYPES.PURCHASE]).forEach(
+      (confirmation) => {
+        // @ts-ignore
+        if (
+          !CONFIRMATION[CONTRACT_TYPES.PURCHASE][confirmation].includes(
+            CONTRACT_ROLE.OWNER
+          )
+        ) {
+          return;
+        }
+        expect(
+          getByText(
+            `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.CONFIRMATION}.confirmation.${CONTRACT_ROLE.OWNER}.${confirmation}`
+          )
+        ).toBeTruthy();
       }
-      expect(
-        getByText(
-          `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.CONFIRMATION}.confirmation.${confirmation}`
-        )
-      ).toBeTruthy();
-    });
+    );
   });
   it("Should dispatch action on check", () => {
     const { getByText } = render(
@@ -64,24 +70,30 @@ describe("Confirmation", () => {
         <Confirmation />
       </Provider>
     );
-    Object.keys(CONFIRMATION).forEach((confirmation) => {
-      // @ts-ignore
-      if (!CONFIRMATION[confirmation].includes(CONTRACT_ROLE.OWNER)) {
-        return;
+    Object.keys(CONFIRMATION[CONTRACT_TYPES.PURCHASE]).forEach(
+      (confirmation) => {
+        // @ts-ignore
+        if (
+          !CONFIRMATION[CONTRACT_TYPES.PURCHASE][confirmation].includes(
+            CONTRACT_ROLE.OWNER
+          )
+        ) {
+          return;
+        }
+        fireEvent.press(
+          getByText(
+            `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.CONFIRMATION}.confirmation.${CONTRACT_ROLE.OWNER}.${confirmation}`
+          )
+        );
+        expect(actions).toBeCalledWith(
+          setScreenData({
+            screenType: CONTRACT_SCREEN_TYPES.CONFIRMATION,
+            fieldName: confirmation,
+            value: true,
+          })
+        );
       }
-      fireEvent.press(
-        getByText(
-          `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.CONFIRMATION}.confirmation.${confirmation}`
-        )
-      );
-      expect(actions).toBeCalledWith(
-        setScreenData({
-          screenType: CONTRACT_SCREEN_TYPES.CONFIRMATION,
-          fieldName: confirmation,
-          value: true,
-        })
-      );
-    });
+    );
   });
   it("Should dispatch validator", () => {
     initialState.contract = {
@@ -100,7 +112,7 @@ describe("Confirmation", () => {
     );
     fireEvent.press(
       getByText(
-        `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.CONFIRMATION}.confirmation.${CONFIRMATION_FIELDS.FIRST}`
+        `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.CONFIRMATION}.confirmation.${CONTRACT_ROLE.OWNER}.${CONFIRMATION_FIELDS.FIRST}`
       )
     );
     expect(actions).toBeCalledWith(
@@ -120,7 +132,7 @@ describe("Confirmation", () => {
     );
     expect(
       queryByText(
-        `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.CONFIRMATION}.confirmation.${CONFIRMATION_FIELDS.FIRST}`
+        `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.CONFIRMATION}.confirmation.${CONTRACT_ROLE.OWNER}.${CONFIRMATION_FIELDS.FIRST}`
       )
     ).not.toBeTruthy();
   });
