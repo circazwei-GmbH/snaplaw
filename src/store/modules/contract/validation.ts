@@ -284,21 +284,15 @@ export const contractValidationConfig = {
         [CAR_DATA_FIELDS.model]: [
           length("contracts.validation.field_empty", 1),
         ],
-        [CAR_DATA_FIELDS.type]: [
-          length("contracts.validation.field_empty", 1),
-        ],
-        [CAR_DATA_FIELDS.year]: [
-          length("contracts.validation.field_empty", 1),
-        ],
+        [CAR_DATA_FIELDS.type]: [length("contracts.validation.field_empty", 1)],
+        [CAR_DATA_FIELDS.year]: [length("contracts.validation.field_empty", 1)],
         [CAR_DATA_FIELDS.prevRegistrationNumber]: [
           length("contracts.validation.field_empty", 1),
         ],
         [CAR_DATA_FIELDS.serialNumber]: [
           length("contracts.validation.field_empty", 1),
         ],
-        [CAR_DATA_FIELDS.run]: [
-          length("contracts.validation.field_empty", 1),
-        ],
+        [CAR_DATA_FIELDS.run]: [length("contracts.validation.field_empty", 1)],
       },
     },
     [CONTRACT_SCREEN_TYPES.SPECIFICATIONS]: {
@@ -361,6 +355,59 @@ export const contractValidationConfig = {
         ],
       },
     },
+    [CONTRACT_SCREEN_TYPES.PAYMENT]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [PAYMENT_FIELDS.COST]: [length("contracts.validation.field_empty", 1)],
+        [PAYMENT_FIELDS.PAYMENT_METHOD]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [PAYMENT_FIELDS.PAYMENT_DATE]: [
+          lengthCheckIfAnotherFieldHasSpecificValue(
+            "contracts.validation.field_empty",
+            1,
+            PAYMENT_FIELDS.PAYMENT_METHOD,
+            PAYMENT_METHODS.CASH
+          ),
+        ],
+        [PAYMENT_FIELDS.DUE_DATE]: [
+          lengthCheckIfAnotherFieldHasSpecificValue(
+            "contracts.validation.field_empty",
+            1,
+            PAYMENT_FIELDS.PAYMENT_METHOD,
+            PAYMENT_METHODS.TRANSFER
+          ),
+        ],
+        [PAYMENT_FIELDS.ADVANCE_COST]: [
+          lengthCheckIfAnotherFieldHasSpecificValue(
+            "contracts.validation.field_empty",
+            1,
+            PAYMENT_FIELDS.PAYMENT_METHOD,
+            PAYMENT_METHODS.CASH_ADVANCE
+          ),
+        ],
+        [PAYMENT_FIELDS.ADVANCE_DATE]: [
+          lengthCheckIfAnotherFieldHasSpecificValue(
+            "contracts.validation.field_empty",
+            1,
+            PAYMENT_FIELDS.PAYMENT_METHOD,
+            PAYMENT_METHODS.CASH_ADVANCE
+          ),
+        ],
+        [PAYMENT_FIELDS.LEFT_SUM]: [
+          lengthCheckIfAnotherFieldHasSpecificValue(
+            "contracts.validation.field_empty",
+            1,
+            PAYMENT_FIELDS.PAYMENT_METHOD,
+            PAYMENT_METHODS.CASH_ADVANCE
+          ),
+        ],
+      },
+      [CONTRACT_ROLE.PARTNER]: {
+        [PAYMENT_FIELDS.PAYMENT_METHOD]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+    },
   },
 };
 
@@ -396,7 +443,11 @@ export const contractValidator = (
   screens: Array<BaseScreenDataInterface>,
   myRole: CONTRACT_ROLE
 ) => {
-  const contractConfig = getContractScreensConfig(contractType, myRole, screens);
+  const contractConfig = getContractScreensConfig(
+    contractType,
+    myRole,
+    screens
+  );
 
   let firstEmptyScreen = null;
   for (let i = 0; contractConfig.length > i; i++) {

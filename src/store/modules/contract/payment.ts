@@ -28,10 +28,9 @@ export enum PAYMENT_FIELDS {
   ADVANCE_DATE = "advanceDate",
   ADVANCE_COST = "advanceCost",
   LEFT_SUM = "leftSum",
-  ADVANCE_COSTCARD_NAME = "cardHolderName",
   CARD_NUMBER = "cardNumber",
   SELLER_PAYMENT_METHOD = "sellerPaymentMethod",
-  CARD_NAME = "cardName",
+  CARD_NAME = "cardHolderName",
 }
 
 export interface PaymentScreenInterface extends BaseScreenDataInterface {
