@@ -51,7 +51,7 @@ export interface PaymentScreenInterface extends BaseScreenDataInterface {
   };
 }
 
-export const CURRENSIES: CurrencyInterface[] = [
+export const CURRENCIES: CurrencyInterface[] = [
   {
     label: CURRENSY.EUR,
     value: CURRENSY.EUR,

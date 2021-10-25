@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import {
-  CURRENSIES,
+  CURRENCIES,
   CURRENSY,
 } from "../../store/modules/contract/payment";
 import Select from "../basics/selects/Select";
@@ -44,8 +44,8 @@ export default function PaymentPrice({
           style={[styles.select, errorMessage ? styles.paddingForError : null]}
         >
           <Select
-            items={CURRENSIES}
-            selectedValue={CURRENSIES.find(
+            items={CURRENCIES}
+            selectedValue={CURRENCIES.find(
               (currency) => currentCurrency === currency.value
             )}
             onValueChange={(item) => onValueChange(item.value)}
