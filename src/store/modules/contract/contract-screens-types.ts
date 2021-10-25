@@ -11,6 +11,7 @@ import { CONTRACT_ROLE } from "./contract-roles";
 import MemberType from "../../../components/features/forms/contract/MemberType";
 import { BaseScreenDataInterface } from "./base-types";
 import {
+  checkByPaymentType,
   checkMemberTypeCommercial,
   checkMemberTypePrivat,
 } from "./exclusions-checkers";
@@ -166,6 +167,7 @@ export const contractScreensConfig: Record<
       title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.PAYMENT_INFO}.title`,
       type: CONTRACT_SCREEN_TYPES.PAYMENT_INFO,
       granted: [CONTRACT_ROLE.OWNER],
+      exclusionChecker: checkByPaymentType,
     },
     {
       component: Sign,
