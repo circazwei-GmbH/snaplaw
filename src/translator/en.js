@@ -1,3 +1,4 @@
+import { PAYMENT_INFO_FIELDS } from "../store/modules/contract/carSales/payment-info";
 import { MEMBER_TYPE_VALUE } from "../store/modules/contract/carSales/member-type";
 import {
   CONTRACT_SCREEN_TYPES,
@@ -449,6 +450,15 @@ export default {
           }
         },
       },
+      [CONTRACT_SCREEN_TYPES.PAYMENT_INFO]: {
+        title: "Payment information",
+        placeholders: {
+          [PAYMENT_INFO_FIELDS.ACCOUNT_OWNER]: "Account owner",
+          [PAYMENT_INFO_FIELDS.ACCOUNT_NUMBER]: "Account number",
+          [PAYMENT_INFO_FIELDS.IBAN]: "IBAN",
+          [PAYMENT_INFO_FIELDS.BIC]: "BIC",
+        }
+      },
       [CONTRACT_SCREEN_TYPES.PAYMENT]: {
         title: "Payment",
         product_price: "Please enter car price",
@@ -460,7 +470,7 @@ export default {
           advance_date: "Advance payment date",
           advance_cost: "Advance cost",
           left_sum: "Left sum due date",
-        }, 
+        },
         checkboxes: {
           cash: "Cash",
           transfer: "Money transfer",
