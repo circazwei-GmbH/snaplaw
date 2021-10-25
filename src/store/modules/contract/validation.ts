@@ -314,6 +314,13 @@ export const contractValidationConfig = {
         ],
       },
     },
+    [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [PRODUCT_DESCRIPTION_FIELDS.description]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+    },
     [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO]: {
       [CONTRACT_ROLE.OWNER]: {
         [ADDITIONAL_INFO_FIELDS.ACCIDENT_DAMAGE_DESCRIPTION]: [
