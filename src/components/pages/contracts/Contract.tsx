@@ -117,7 +117,7 @@ export default function Contract({
           ],
         })
       );
-    } else {
+    } else {      
       dispatch(
         requestScreenData(
           contract.type,

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  GestureResponderEvent,
   Pressable,
   StyleProp,
   StyleSheet,
@@ -38,17 +37,25 @@ export default function CalendarInput({
 
   return (
     <>
+      {placeholder && date ? (
+        <Text style={styles.label}>
+          {placeholder}
+          <Text style={styles.redText}>*</Text>
+        </Text>
+      ) : null}
       <View
-        style={[styles.container, style, errorMessage ? styles.error : null]}
+        style={[styles.container, style, errorMessage ? styles.error : null, placeholder && date ? null : styles.marginForLabel]}
       >
-        <View style={styles.signContainer}>
+        <View style={styles.dateContainer}>
           {dayjs(date).isValid() ? (
             <DefaultText
               text={dayjs(date).format("DD.MM.YYYY")}
               testID="CalendarInputDate"
             />
           ) : (
-            <Text testID="CalendarInputDate" style={styles.placeholder}>{placeholder}</Text>
+            <Text testID="CalendarInputDate" style={styles.placeholder}>
+              {placeholder}
+            </Text>
           )}
         </View>
         <View style={styles.rightPart}>
@@ -103,7 +110,7 @@ const styles = StyleSheet.create({
   dividerContainer: {
     paddingVertical: 7,
   },
-  signContainer: {
+  dateContainer: {
     width: "70%",
     alignItems: "center",
     justifyContent: "center",
@@ -128,5 +135,19 @@ const styles = StyleSheet.create({
   },
   displayNone: {
     display: "none",
+  },
+  labelWithEmptyInputDance: {
+    display: "none",
+  },
+  redText: {
+    color: "#FA7171",
+  },
+  label: {
+    color: "#1696E2",
+    fontSize: 14,
+    lineHeight: 22,
+  },
+  marginForLabel: {
+    marginTop: 22,
   },
 });

@@ -449,6 +449,30 @@ export default {
           }
         },
       },
+      [CONTRACT_SCREEN_TYPES.PAYMENT]: {
+        title: "Payment",
+        product_price: "Please enter car price",
+        payment_method: "Please select a payment method",
+        fields: {
+          cost: "Cost",
+          payment_date: "Payment date",
+          due_date: "Due date",
+          advance_date: "Advance payment date",
+          advance_cost: "Advance cost",
+          left_sum: "Left sum due date",
+        }, 
+        checkboxes: {
+          cash: "Cash",
+          transfer: "Money transfer",
+          cash_advance: "Cash advance",
+        },
+        payment_methods: {
+          [PAYMENT_METHODS.CASH]: "cash",
+          [PAYMENT_METHODS.TRANSFER]: "money transfer",
+          [PAYMENT_METHODS.CASH_ADVANCE]: "cash advance",
+        },
+        partner_text: "The seller chose to pay in %{method}.",
+      },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "sign contract",
         signature: "Please enter your signature",
