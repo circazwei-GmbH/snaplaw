@@ -4,7 +4,7 @@ import { BaseScreenDataInterface } from "../base-types";
 export const enum CAR_DATA_FIELDS {
   producer = "producer",
   model = "model",
-  type = "type",
+  type = "carType",
   year = "year",
   prevRegistrationNumber = "prevRegistrationNumber",
   serialNumber = "serialNumber",

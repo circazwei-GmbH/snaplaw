@@ -329,7 +329,7 @@ export default {
           paypal: "Paypal",
           transfer: "Überweisung",
         },
-        partner_text: "Der Verkäufer hat sich für Barzahlung entschieden.",
+        partner_text: "Der Verkäufer hat sich für Barzahlung entschieden.",//translate
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "Vertrag unterzeichnen",
@@ -474,6 +474,25 @@ export default {
           [PAYMENT_INFO_FIELDS.IBAN]: "IBAN",//translate
           [PAYMENT_INFO_FIELDS.BIC]: "BIC",//translate
         }
+      },
+      [CONTRACT_SCREEN_TYPES.PAYMENT]: {
+        title: "Bezahlung",
+        product_price: "Bitte geben Sie den Preis des Artikels an",//translate
+        payment_method: "Bitte Zahlungsart wählen",
+        fields: {
+          cost: "Preis",
+          payment_date: "Zahlungsdatum",
+          due_date: "Due date",//translate
+          advance_date: "Vorauszahlungsdatum",
+          advance_cost: "Vorauszahlungspreis",
+          left_sum: "Restbetrag Fälligkeitsdatum",
+        },
+        checkboxes: {
+          cash: "Cash",
+          transfer: "Überweisung",
+          cash_advance: "Vorauszahlung",
+        },
+        partner_text: "Der Verkäufer hat sich für Barzahlung entschieden.",//translate%{method}
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "Vertrag unterzeichnen",

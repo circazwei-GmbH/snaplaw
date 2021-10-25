@@ -10,33 +10,38 @@ import Sign from "../../../components/features/forms/contract/Sign";
 import { CONTRACT_ROLE } from "./contract-roles";
 import MemberType from "../../../components/features/forms/contract/MemberType";
 import { BaseScreenDataInterface } from "./base-types";
-import { checkMemberTypeCommercial, checkMemberTypePrivat } from "./exclusions-checkers";
+import {
+  checkMemberTypeCommercial,
+  checkMemberTypePrivat,
+} from "./exclusions-checkers";
 import CompanyDataForm from "../../../components/features/forms/contract/CompanyDataForm";
 import PassportDataForm from "../../../components/features/forms/contract/PassportDataForm";
 import ProductDataCarForm from "../../../components/features/forms/contract/ProdactDataCarForm";
 import Specifications from "../../../components/features/forms/contract/Specifications";
 import AdditionalInfo from "../../../components/features/forms/contract/AdditionalInformationCar";
 import PaymentInfo from "../../../components/features/forms/contract/PaymentInfo";
+import PaymentCar from "../../../components/features/forms/contract/PaymentCar";
 
 export interface ContractScreenConfigType {
   component: React.ElementType;
   title: string;
   type: CONTRACT_SCREEN_TYPES;
   granted: Array<CONTRACT_ROLE>;
-  exclusionChecker?: (screens : BaseScreenDataInterface[]) => boolean;
+  exclusionChecker?: (screens: BaseScreenDataInterface[]) => boolean;
 }
 
 export const getContractScreensConfig = (
   contractType: CONTRACT_TYPES,
   contractRole: CONTRACT_ROLE,
-  screens: BaseScreenDataInterface[] | undefined,
-): Array<ContractScreenConfigType> => contractScreensConfig[contractType].filter((screen) => {
+  screens: BaseScreenDataInterface[] | undefined
+): Array<ContractScreenConfigType> =>
+  contractScreensConfig[contractType].filter((screen) => {
     let flag = screen.granted.includes(contractRole);
     if (flag && typeof screen.exclusionChecker === "function" && screens) {
-        return screen.exclusionChecker(screens);
+      return screen.exclusionChecker(screens);
     }
     return flag;
-});
+  });
 
 export const contractScreensConfig: Record<
   CONTRACT_TYPES,
@@ -116,7 +121,7 @@ export const contractScreensConfig: Record<
     {
       component: PassportDataForm,
       title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.PASSPORT_DATA}.title`,
-      type: CONTRACT_SCREEN_TYPES.PASSPORT_DATA ,
+      type: CONTRACT_SCREEN_TYPES.PASSPORT_DATA,
       granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
       exclusionChecker: checkMemberTypePrivat,
     },
@@ -151,10 +156,16 @@ export const contractScreensConfig: Record<
       granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
     },
     {
+      component: PaymentCar,
+      title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.PAYMENT}.title`,
+      type: CONTRACT_SCREEN_TYPES.PAYMENT,
+      granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
+    },
+    {
       component: PaymentInfo,
       title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.PAYMENT_INFO}.title`,
       type: CONTRACT_SCREEN_TYPES.PAYMENT_INFO,
-      granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
+      granted: [CONTRACT_ROLE.OWNER],
     },
     {
       component: Sign,
