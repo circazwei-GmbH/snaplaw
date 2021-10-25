@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { Feather, Entypo } from "@expo/vector-icons";
 
-interface OnChanfeFunction {
+interface OnChangeFunction {
   (text: string): void;
 }
 
@@ -22,7 +22,7 @@ interface TextFieldPropsInterface extends TextInputProps {
   errorMessage?: string;
   value?: string;
   search?: boolean;
-  onChangeFunction: OnChanfeFunction;
+  onChangeFunction: OnChangeFunction;
   containerStyle?: StyleProp<TextStyle>;
 }
 

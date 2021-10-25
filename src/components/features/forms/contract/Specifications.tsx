@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   calendarInputContainer: {
-    padding: 16,
+    paddingHorizontal: 16,
     paddingBottom: 5,
   },
 });

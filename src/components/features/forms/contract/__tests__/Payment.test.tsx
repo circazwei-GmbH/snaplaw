@@ -11,7 +11,7 @@ import {
   PAYMENT_FIELDS,
   PAYMENT_METHODS,
 } from "../../../../../store/modules/contract/types";
-import { CURRENSY } from "../../../../../store/modules/contract/purchase/payment";
+import { CURRENSY } from "../../../../../store/modules/contract/payment";
 import { setScreenData } from "../../../../../store/modules/contract/slice";
 import { validateScreen } from "../../../../../store/modules/contract/action-creators";
 import { CONTRACT_ROLE } from "../../../../../store/modules/contract/contract-roles";

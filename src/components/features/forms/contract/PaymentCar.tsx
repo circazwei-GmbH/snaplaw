@@ -10,16 +10,15 @@ import {
   PAYMENT_METHODS,
   PaymentScreenInterface,
 } from "../../../../store/modules/contract/types";
-import {
-  CURRENSY,
-} from "../../../../store/modules/contract/payment";
+import { CURRENSY } from "../../../../store/modules/contract/payment";
 import DefaultText from "../../../basics/typography/DefaultText";
 import Checkbox from "../../../basics/checkboxes/Checkbox";
 import AbstractErrorMessage from "../../../basics/typography/AbstractErrorMessage";
 import TextField from "../../../components/TextField";
+import CalendarInput from "../../../basics/inputs/CalendarInput";
 import PaymentLayout from "../../../layouts/PaymentLayout";
 
-export default function Payment() {
+export default function PaymentCar() {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
 
@@ -88,23 +87,22 @@ export default function Payment() {
               `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.checkboxes.cash`
             )}
           />
-          <Checkbox
-            style={styles.checkboxes}
-            isError={!!screenErrors?.[PAYMENT_FIELDS.PAYMENT_METHOD]}
-            isChecked={
-              screenData?.data[PAYMENT_FIELDS.PAYMENT_METHOD] ===
-              PAYMENT_METHODS.PAYPAL
-            }
-            onChange={() =>
-              updateDataHandler(
-                PAYMENT_FIELDS.PAYMENT_METHOD,
-                PAYMENT_METHODS.PAYPAL
-              )
-            }
-            text={t(
-              `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.checkboxes.paypal`
-            )}
-          />
+          {screenData?.data[PAYMENT_FIELDS.PAYMENT_METHOD] ===
+          PAYMENT_METHODS.CASH ? (
+            <View style={styles.additionalDataContainer}>
+              <CalendarInput
+                dateHandler={(text) =>
+                  updateDataHandler(PAYMENT_FIELDS.PAYMENT_DATE, text)
+                }
+                errorMessage={screenErrors?.[PAYMENT_FIELDS.PAYMENT_DATE]}
+                date={screenData?.data[PAYMENT_FIELDS.PAYMENT_DATE] || ""}
+                placeholder={t(
+                  `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.payment_date`
+                )}
+              />
+            </View>
+          ) : null}
+
           <Checkbox
             style={styles.checkboxes}
             isError={!!screenErrors?.[PAYMENT_FIELDS.PAYMENT_METHOD]}
@@ -122,35 +120,78 @@ export default function Payment() {
               `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.checkboxes.transfer`
             )}
           />
+          {screenData?.data[PAYMENT_FIELDS.PAYMENT_METHOD] ===
+          PAYMENT_METHODS.TRANSFER ? (
+            <View style={styles.additionalDataContainer}>
+              <CalendarInput
+                dateHandler={(text) =>
+                  updateDataHandler(PAYMENT_FIELDS.DUE_DATE, text)
+                }
+                errorMessage={screenErrors?.[PAYMENT_FIELDS.DUE_DATE]}
+                date={screenData?.data[PAYMENT_FIELDS.DUE_DATE] || ""}
+                placeholder={t(
+                  `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.due_date`
+                )}
+              />
+            </View>
+          ) : null}
+
+          <Checkbox
+            style={styles.checkboxes}
+            isError={!!screenErrors?.[PAYMENT_FIELDS.PAYMENT_METHOD]}
+            isChecked={
+              screenData?.data[PAYMENT_FIELDS.PAYMENT_METHOD] ===
+              PAYMENT_METHODS.CASH_ADVANCE
+            }
+            onChange={() =>
+              updateDataHandler(
+                PAYMENT_FIELDS.PAYMENT_METHOD,
+                PAYMENT_METHODS.CASH_ADVANCE
+              )
+            }
+            text={t(
+              `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.checkboxes.cash_advance`
+            )}
+          />
+          {screenData?.data[PAYMENT_FIELDS.PAYMENT_METHOD] ===
+          PAYMENT_METHODS.CASH_ADVANCE ? (
+            <View style={styles.additionalDataContainer}>
+              <CalendarInput
+                dateHandler={(text) =>
+                  updateDataHandler(PAYMENT_FIELDS.ADVANCE_DATE, text)
+                }
+                errorMessage={screenErrors?.[PAYMENT_FIELDS.ADVANCE_DATE]}
+                date={screenData?.data[PAYMENT_FIELDS.ADVANCE_DATE] || ""}
+                placeholder={t(
+                  `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.advance_date`
+                )}
+              />
+              <TextField
+                onChangeFunction={(text) =>
+                  updateDataHandler(PAYMENT_FIELDS.ADVANCE_COST, text)
+                }
+                errorMessage={screenErrors?.[PAYMENT_FIELDS.ADVANCE_COST]}
+                value={screenData?.data[PAYMENT_FIELDS.ADVANCE_COST]}
+                placeholder={t(
+                  `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.advance_cost`
+                )}
+              />
+              <CalendarInput
+                dateHandler={(text) =>
+                  updateDataHandler(PAYMENT_FIELDS.LEFT_SUM, text)
+                }
+                errorMessage={screenErrors?.[PAYMENT_FIELDS.LEFT_SUM]}
+                date={screenData?.data[PAYMENT_FIELDS.LEFT_SUM] || ""}
+                placeholder={t(
+                  `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.left_sum`
+                )}
+              />
+            </View>
+          ) : null}
         </View>
         <AbstractErrorMessage
           message={screenErrors?.[PAYMENT_FIELDS.PAYMENT_METHOD]}
         />
-        {screenData?.data[PAYMENT_FIELDS.PAYMENT_METHOD] ===
-        PAYMENT_METHODS.TRANSFER ? (
-          <>
-            <TextField
-              onChangeFunction={(text) =>
-                updateDataHandler(PAYMENT_FIELDS.CARD_NAME, text)
-              }
-              errorMessage={screenErrors?.[PAYMENT_FIELDS.CARD_NAME]}
-              value={screenData?.data[PAYMENT_FIELDS.CARD_NAME]}
-              placeholder={t(
-                `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.name`
-              )}
-            />
-            <TextField
-              onChangeFunction={(text) =>
-                updateDataHandler(PAYMENT_FIELDS.CARD_NUMBER, text)
-              }
-              errorMessage={screenErrors?.[PAYMENT_FIELDS.CARD_NUMBER]}
-              value={screenData?.data[PAYMENT_FIELDS.CARD_NUMBER]}
-              placeholder={t(
-                `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.card`
-              )}
-            />
-          </>
-        ) : null}
       </>
     </PaymentLayout>
   );
@@ -171,5 +212,8 @@ const styles = StyleSheet.create({
   },
   secondText: {
     marginTop: 24,
+  },
+  additionalDataContainer: {
+    paddingBottom: 14,
   },
 });
