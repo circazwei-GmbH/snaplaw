@@ -10,6 +10,7 @@ import {
   PAYMENT_METHODS,
 } from "./types";
 import {
+  correctDateOrderCheck,
   length,
   lengthCheckIfAnotherFieldHasSpecificValue,
   lengthCheckIfAnotherFieldIsTrue,
@@ -409,7 +410,7 @@ export const contractValidationConfig = {
             PAYMENT_METHODS.CASH_ADVANCE
           ),
         ],
-        [PAYMENT_FIELDS.ADVANCE_DATE]: [
+        [PAYMENT_FIELDS.FIRST_DATE]: [
           lengthCheckIfAnotherFieldHasSpecificValue(
             "contracts.validation.field_empty",
             1,
@@ -417,12 +418,17 @@ export const contractValidationConfig = {
             PAYMENT_METHODS.CASH_ADVANCE
           ),
         ],
-        [PAYMENT_FIELDS.LEFT_SUM]: [
+        [PAYMENT_FIELDS.SECOND_DATE]: [
           lengthCheckIfAnotherFieldHasSpecificValue(
             "contracts.validation.field_empty",
             1,
             PAYMENT_FIELDS.PAYMENT_METHOD,
             PAYMENT_METHODS.CASH_ADVANCE
+          ),
+          correctDateOrderCheck(
+            "contracts.validation.uncorrect_date_order",
+            PAYMENT_FIELDS.FIRST_DATE,
+            PAYMENT_FIELDS.SECOND_DATE
           ),
         ],
       },
@@ -432,6 +438,7 @@ export const contractValidationConfig = {
         ],
       },
     },
+    [CONTRACT_SCREEN_TYPES.SIGN]: {},
   },
 };
 
@@ -445,6 +452,7 @@ export const screenFieldValidator = (
   const validationConfig =
     // @ts-ignore
     contractValidationConfig[contractType][screenType][myRole];
+    
   // @ts-ignore
   if (!validationConfig[field]) {
     return;
@@ -452,13 +460,17 @@ export const screenFieldValidator = (
   // @ts-ignore
   for (let i = 0; Object.keys(validationConfig[field]).length > i; i++) {
     // @ts-ignore
+
+    
     const validated = validationConfig[field][i](
       screen?.data?.[field],
       screen?.data
     );
+    
     if (validated) {
       return validated;
     }
+    
   }
 };
 
@@ -478,14 +490,18 @@ export const contractValidator = (
     const currentScreen = screens.find(
       (screen) => screen.type === contractConfig[i].type
     );
+    
     const validationConfig =
       // @ts-ignore
       contractValidationConfig[contractType][contractConfig[i].type][myRole];
     if (!validationConfig) {
       continue;
-    }
+    }    
+    
     if (
       !currentScreen &&
+      contractConfig[i].type !== CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO &&
+      contractConfig[i].type !== CONTRACT_SCREEN_TYPES.SPECIFICATIONS &&
       validationConfig &&
       Object.keys(validationConfig).length
     ) {

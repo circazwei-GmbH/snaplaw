@@ -25,9 +25,9 @@ export enum PAYMENT_FIELDS {
   PAYMENT_METHOD = "paymentMethod",
   PAYMENT_DATE = "paymentDate",
   DUE_DATE = "dueDate",
-  ADVANCE_DATE = "advanceDate",
+  FIRST_DATE = "advanceDate",
   ADVANCE_COST = "advanceCost",
-  LEFT_SUM = "leftSum",
+  SECOND_DATE = "leftSum",
   CARD_NUMBER = "cardNumber",
   SELLER_PAYMENT_METHOD = "sellerPaymentMethod",
   CARD_NAME = "cardHolderName",
@@ -44,9 +44,9 @@ export interface PaymentScreenInterface extends BaseScreenDataInterface {
     [PAYMENT_FIELDS.CARD_NUMBER]: string | undefined;
     [PAYMENT_FIELDS.PAYMENT_DATE]: string | undefined;
     [PAYMENT_FIELDS.DUE_DATE]: string | undefined;
-    [PAYMENT_FIELDS.ADVANCE_DATE]: string | undefined;
+    [PAYMENT_FIELDS.FIRST_DATE]: string | undefined;
     [PAYMENT_FIELDS.ADVANCE_COST]: string | undefined;
-    [PAYMENT_FIELDS.LEFT_SUM]: string | undefined;
+    [PAYMENT_FIELDS.SECOND_DATE]: string | undefined;
   };
 }
 

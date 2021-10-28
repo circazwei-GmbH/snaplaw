@@ -43,6 +43,7 @@ export default function Sign() {
       currentContract.screens,
       currentContract.meRole
     );
+    
     if (emptyScreen !== null) {
       // @ts-ignore
       navigator.pop(
