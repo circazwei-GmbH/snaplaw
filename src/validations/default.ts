@@ -29,15 +29,24 @@ export interface ValidationWithCheckOnScecificValueInterface {
   ): ValidatorInterface;
 }
 
-export const length: ValidatorBuilderInterface =
-  (message, length) => (text: string | undefined) => {
-    if (!length) {
-      return;
-    }
-    if (!text || text.length < length) {
-      return message;
-    }
-  };
+export interface ValidationWithDateOrderCheckInterface {
+  (
+    message: string,
+    firsteDateField: string,
+    secondDateField: string
+  ): ValidatorInterface;
+}
+
+export const length: ValidatorBuilderInterface = (message, length) => (
+  text: string | undefined
+) => {
+  if (!length) {
+    return;
+  }
+  if (!text || text.length < length) {
+    return message;
+  }
+};
 
 export const email: ValidatorBuilderInterface = (message) => (text: string) => {
   if (text.search(/^[^@]+@{1,1}[^@]+\.[^.@\d]{2,}$/)) {
@@ -45,34 +54,54 @@ export const email: ValidatorBuilderInterface = (message) => (text: string) => {
   }
 };
 
-export const match =
-  (message: string, target: string): ValidatorFormInterface =>
-  (text: string, form: FormInterface) => {
-    if (form[target].value === text) {
-      return;
-    }
+export const match = (
+  message: string,
+  target: string
+): ValidatorFormInterface => (text: string, form: FormInterface) => {
+  if (form[target].value === text) {
+    return;
+  }
+  return message;
+};
+
+export const lengthCheckIfAnotherFieldIsTrue: ValidatiorWithCheckInterface = (
+  message,
+  length,
+  field
+) => (text: string | undefined, form: Record<string, unknown>) => {
+  if (form && !form[field]) {
+    return;
+  }
+  if (!text || text.length < length) {
     return message;
-  };
+  }
+};
 
-export const lengthCheckIfAnotherFieldIsTrue: ValidatiorWithCheckInterface =
-  (message, length, field) =>
-  (text: string | undefined, form: Record<string, unknown>) => {
-    if (form && !form[field]) {
-      return;
-    }
-    if (!text || text.length < length) {
-      return message;
-    }
-  };
+export const lengthCheckIfAnotherFieldHasSpecificValue: ValidationWithCheckOnScecificValueInterface = (
+  message,
+  length,
+  field,
+  specificValue
+) => (text: string | undefined, form: Record<string, unknown>) => {
+  if ((form && !form[field]) || form[field] !== specificValue) {
+    return;
+  }
+  
+  if (!text || text.length < length) {
+    return message;
+  }
+};
 
-export const lengthCheckIfAnotherFieldHasSpecificValue: ValidationWithCheckOnScecificValueInterface =
+export const correctDateOrderCheck: ValidationWithDateOrderCheckInterface = (
+  message,
+  firstDateField,
+  secondFieldDate,
+) => (text: string | undefined, form: Record<string, unknown>) => {
+  if ((form && (!form[firstDateField]) || !form[secondFieldDate])) {
+    return;
+  }  
 
-    (message, length, field, specificValue) =>
-    (text: string | undefined, form: Record<string, unknown>) => {
-      if ((form && !form[field]) || form[field] !== specificValue) {
-        return;
-      }
-      if (!text || text.length < length) {
-        return message;
-      }
-    };
+  if(new Date(form[firstDateField]) > new Date(form[secondFieldDate])) {
+    return message
+  }
+};

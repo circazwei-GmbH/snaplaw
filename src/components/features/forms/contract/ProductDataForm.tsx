@@ -21,6 +21,7 @@ export default function ProductDataForm(): JSX.Element {
         (screen) => screen.type === CONTRACT_SCREEN_TYPES.PRODUCT_DATA
       ) as ProductDataScreenInterface | undefined
   );
+  
   const screenErrors = useAppSelector((state) =>
     state.contract.contractErrors
       ? state.contract.contractErrors[CONTRACT_SCREEN_TYPES.PRODUCT_DATA]

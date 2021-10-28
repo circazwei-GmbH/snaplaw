@@ -161,7 +161,7 @@ function* screenValidate({
   if (!validationConfig) {
     return;
   }
-
+  
   let screenErrors: Record<string, string | undefined> = yield select(
     (state) =>
       state.contract.contractErrors && state.contract.contractErrors[screenType]

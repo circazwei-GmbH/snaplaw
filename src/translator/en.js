@@ -510,6 +510,7 @@ export default {
     validation: {
       field_empty: "The field can't be empty",
       product_condition: "Please specify the product condition",
+      uncorrect_date_order: "The date can’t be earlier than advance payment date",
     },
     change_prequest_modal: {
       message:

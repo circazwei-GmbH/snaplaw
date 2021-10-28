@@ -158,10 +158,10 @@ export default function PaymentCar() {
             <View style={styles.additionalDataContainer}>
               <CalendarInput
                 dateHandler={(text) =>
-                  updateDataHandler(PAYMENT_FIELDS.ADVANCE_DATE, text)
+                  updateDataHandler(PAYMENT_FIELDS.FIRST_DATE, text)
                 }
-                errorMessage={screenErrors?.[PAYMENT_FIELDS.ADVANCE_DATE]}
-                date={screenData?.data[PAYMENT_FIELDS.ADVANCE_DATE] || ""}
+                errorMessage={screenErrors?.[PAYMENT_FIELDS.FIRST_DATE]}
+                date={screenData?.data[PAYMENT_FIELDS.FIRST_DATE] || ""}
                 placeholder={t(
                   `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.advance_date`
                 )}
@@ -178,10 +178,10 @@ export default function PaymentCar() {
               />
               <CalendarInput
                 dateHandler={(text) =>
-                  updateDataHandler(PAYMENT_FIELDS.LEFT_SUM, text)
+                  updateDataHandler(PAYMENT_FIELDS.SECOND_DATE, text)
                 }
-                errorMessage={screenErrors?.[PAYMENT_FIELDS.LEFT_SUM]}
-                date={screenData?.data[PAYMENT_FIELDS.LEFT_SUM] || ""}
+                errorMessage={screenErrors?.[PAYMENT_FIELDS.SECOND_DATE]}
+                date={screenData?.data[PAYMENT_FIELDS.SECOND_DATE] || ""}
                 placeholder={t(
                   `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.left_sum`
                 )}

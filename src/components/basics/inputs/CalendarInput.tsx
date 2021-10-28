@@ -120,6 +120,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   placeholder: {
+    fontFamily: "P",
     color: "#909090",
     fontSize: 15,
     width: "100%",

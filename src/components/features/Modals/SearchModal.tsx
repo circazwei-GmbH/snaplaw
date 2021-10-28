@@ -51,11 +51,11 @@ export default function SearchModal({
     setSearchedList(data);
   }
 
-  const onSearch = (text: string) => {
+  const onSearch = (text: string) => {    
     const filteredList = data.filter((item) => {
       if (item.key.toLowerCase() === "other") return true;
 
-      for (let i = 0; i < text.length; i++) {
+      for (let i = 0; i < text.length; i++) {                
         if (item.value[i].toLowerCase() !== text[i].toLowerCase()) return false;
       }
       return true;

@@ -452,18 +452,25 @@ export default {
         }
       },
       [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
-        title: "Besätigung",
+        title: "Confirmation",
         confirmation: {
-          [CONFIRMATION_FIELDS.FIRST]:
-            "Der Verkäufer versichert, dass ihm keine weiteren Schäden und Mängel bekannt sind",
-          [CONFIRMATION_FIELDS.SECOND]:
-            "Die Käuferdaten wurden überprüft und stimmen überein",
-          [CONFIRMATION_FIELDS.THIRD]:
-            "Der Verkäufer versichert, dass das Fahrzeug privat und nicht gewerblich genutzt wurde",
-          [CONFIRMATION_FIELDS.SELLER_DETAIL]:
-            "Die Verkäuferdaten wurden überprüft und stimmen überein",
+          [CONTRACT_ROLE.OWNER]: {
+            [CONFIRMATION_FIELDS.FIRST]:
+              "Der Verkäufer versichert, dass ihm keine weiteren Schäden und Mängel bekannt sind",
+            [CONFIRMATION_FIELDS.SECOND]:
+              "Der Verkäufer versichert, dass das Fahrzeug privat und nicht gewerblich genutzt wurde",
+            [CONFIRMATION_FIELDS.THIRD]:
+              "Buyer details have been verified and match",//translate
+          },
+          [CONTRACT_ROLE.PARTNER]: {
+            [CONFIRMATION_FIELDS.FIRST]:
+              "Der Käufer erkennt an, dass das Fahrzeug bis zur vollständigen Bezahlung Eigentum des Verkäufers bleibt",
+            [CONFIRMATION_FIELDS.SELLER_DETAIL]:
+              "Verkäufer und Käufer vereinbaren, dass der Käufer die Zahlung in Höhe von %{amount} überweisen wird",
+            [CONFIRMATION_FIELDS.SECOND]:
+              "Die Verkäuferdaten wurden überprüft und stimmen überein",
+          }
         },
-        partner_text: "Bitte überprüfen Sie seine Identität mit einem Pass",
       },
       [CONTRACT_SCREEN_TYPES.PAYMENT]: {
         title: "Bezahlung",
@@ -521,6 +528,7 @@ export default {
     validation: {
       field_empty: "Das Feld kann nicht leer sein",
       product_condition: "Klären Sie bitte den Produktzustand",
+      uncorrect_date_order: "Das Datum sollte nicht früher als Vorauszahlungdatum sein.",
     },
     change_prequest_modal: {
       message:

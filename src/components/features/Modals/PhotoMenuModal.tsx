@@ -32,7 +32,6 @@ export default function PhotoMenuModal({
 
   const postChooseFileHandler = (uri: string) => {
     let descriptionPhotos = [...(currentArray ?? [])];
-    console.log(screenType, currentField);
     
     onClose(false);
     descriptionPhotos.push({ uri: "", type: MEDIA_TYPE.IMAGE });
