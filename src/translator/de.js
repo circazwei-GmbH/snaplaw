@@ -526,6 +526,8 @@ export default {
       cancel: "Abbrechen",
       additional_media: "Additionale Information",
       accessories_media: "Zubehör",
+      accident_damage_media: "Unfallschäden",
+      other_defects_media: "Sonstige bekannte Mängel",
       enter_contract_details: "Vertragsdetails eingeben",
     },
     messages: {

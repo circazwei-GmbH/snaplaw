@@ -19,6 +19,7 @@ import { BaseScreenDataInterface } from "../../../store/modules/contract/base-ty
 import Button from "../../basics/buttons/Button";
 import { CONTRACT_ROLE } from "../../../store/modules/contract/contract-roles";
 import { HOME_ROUTER } from "../../../router/HomeRouterType";
+import { AdditionalInfoScreenInterface, ADDITIONAL_INFO_FIELDS } from "../../../store/modules/contract/additional-info-data";
 
 type ContractViewProps = {
   visible: boolean;
@@ -46,6 +47,10 @@ export default function ContractView({
   const descriptionScreen = screens?.find(
     (screen) => screen.type === CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION
   ) as ProductDescriptionScreenInterface;
+
+  const additionalInfoScreen = screens?.find(
+    (screen) => screen.type === CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO
+  ) as AdditionalInfoScreenInterface;
 
   const onSaveHandler = () => {
     onClose();
@@ -155,6 +160,52 @@ export default function ContractView({
                       ]
                     }
                     fieldName={PRODUCT_DESCRIPTION_FIELDS.productPhotos}
+                  />
+                </>
+              ) : null}
+              {additionalInfoScreen &&
+              additionalInfoScreen.data[
+                ADDITIONAL_INFO_FIELDS.ACCIDENT_DAMAGE_PHOTOS
+              ] ? (
+                <>
+                  <DefaultText
+                    text={t("contracts.pdf_view.accident_damage_media")}
+                    style={[
+                      styles.buttonText,
+                      styles.padding,
+                      styles.titleMargin,
+                    ]}
+                  />
+                  <DescriptionPhotos
+                    photos={
+                      additionalInfoScreen.data[
+                        ADDITIONAL_INFO_FIELDS.ACCIDENT_DAMAGE_PHOTOS
+                      ]
+                    }
+                    fieldName={ADDITIONAL_INFO_FIELDS.ACCIDENT_DAMAGE_PHOTOS}
+                  />
+                </>
+              ) : null}
+              {additionalInfoScreen &&
+              additionalInfoScreen.data[
+                ADDITIONAL_INFO_FIELDS.OTHER_DEFECTS_PHOTOS
+              ] ? (
+                <>
+                  <DefaultText
+                    text={t("contracts.pdf_view.other_defects_media")}
+                    style={[
+                      styles.buttonText,
+                      styles.padding,
+                      styles.titleMargin,
+                    ]}
+                  />
+                  <DescriptionPhotos
+                    photos={
+                      additionalInfoScreen.data[
+                        ADDITIONAL_INFO_FIELDS.OTHER_DEFECTS_PHOTOS
+                      ]
+                    }
+                    fieldName={ADDITIONAL_INFO_FIELDS.OTHER_DEFECTS_PHOTOS}
                   />
                 </>
               ) : null}
