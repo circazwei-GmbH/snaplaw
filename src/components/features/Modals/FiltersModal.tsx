@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Modal, StyleSheet, View, Text, Pressable } from "react-native";
-import dayjs from "dayjs";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { useI18n } from "../../../translator/i18n";
 import Button from "../../basics/buttons/Button";
@@ -11,7 +10,6 @@ import { CONTRACT_TYPES } from "../../../store/modules/contract/constants";
 import { setContractsListFilters } from "../../../store/modules/contract/slice";
 import { requestContractsList } from "../../../store/modules/contract/action-creators";
 import { CONTRACT_LIST_STATE } from "../../../store/modules/contract/types";
-import DatePickerModalCustom from "./DatePickerModalCustom";
 
 type FiltersModalProps = {
   visible: boolean;

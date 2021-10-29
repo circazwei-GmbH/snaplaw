@@ -24,6 +24,7 @@ interface TextFieldPropsInterface extends TextInputProps {
   search?: boolean;
   onChangeFunction: OnChangeFunction;
   containerStyle?: StyleProp<TextStyle>;
+  onFocus?: () => void;
 }
 
 export default function TextField({
@@ -34,6 +35,7 @@ export default function TextField({
   value,
   search,
   containerStyle,
+  onFocus,
   ...props
 }: TextFieldPropsInterface): JSX.Element {
   const [localValue, setLocalValue] = useState(value);
@@ -50,6 +52,11 @@ export default function TextField({
     setLocalValue("");
     input.current.blur();
   };
+
+  const handleFocus = () => {
+    if (typeof onFocus === "function") onFocus();
+    setFocused(true);
+  }
 
   useEffect(() => {
     setLocalValue(value);
@@ -106,7 +113,7 @@ export default function TextField({
         ]}
         value={localValue}
         onChangeText={textChangeHandler}
-        onFocus={() => setFocused(true)}
+        onFocus={handleFocus}
         onBlur={() => setFocused(false)}
       />
       <Text

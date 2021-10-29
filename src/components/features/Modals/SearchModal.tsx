@@ -49,14 +49,21 @@ export default function SearchModal({
   const handleClose = () => {
     onClose();
     setSearchedList(data);
-  }
+    setSelectedItem("");
+  };
+
+  const handleDone = () => {
+    onDone(selectedItem);
+    setSearchedList(data);
+  };
 
   const onSearch = (text: string) => {    
     const filteredList = data.filter((item) => {
       if (item.key.toLowerCase() === "other") return true;
 
-      for (let i = 0; i < text.length; i++) {                
-        if (item.value[i].toLowerCase() !== text[i].toLowerCase()) return false;
+      for (let i = 0; i < text.length; i++) {
+        if (item?.value[i]?.toLowerCase() !== text[i]?.toLowerCase())
+          return false;
       }
       return true;
     });
@@ -80,15 +87,22 @@ export default function SearchModal({
             <View>
               <TopBar
                 leftButton={
-                  <CloseButton style={styles.closeButton} onPress={handleClose} />
+                  <CloseButton
+                    style={styles.closeButton}
+                    onPress={handleClose}
+                  />
                 }
                 pageName={title}
-                rightButton={<Done onPress={() => onDone(selectedItem)} />}
+                rightButton={<Done onPress={handleDone} />}
                 noPlaceholder
               >
                 <View>
                   <View style={styles.searchInput}>
-                    <TextField onChangeFunction={onSearch} search />
+                    <TextField
+                      onChangeFunction={onSearch}
+                      onFocus={() => setSelectedItem("")}
+                      search
+                    />
                   </View>
 
                   <FlatList
