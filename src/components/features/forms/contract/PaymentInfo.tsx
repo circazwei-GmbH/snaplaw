@@ -58,6 +58,7 @@ export default function PaymentInfo() {
               `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PAYMENT_INFO}.placeholders.${field}`
             )}
             onChangeFunction={(newValue) => onChangeAction(newValue, field)}
+            key={field}
           />
         ))}
       </View>
