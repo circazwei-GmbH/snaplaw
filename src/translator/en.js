@@ -508,6 +508,8 @@ export default {
       cancel: "Cancel",
       additional_media: "Additional information",
       accessories_media: "Accessories",
+      accident_damage_media: "Accident damage",
+      other_defects_media: "Other known defects",
       enter_contract_details: "Enter contract details",
     },
     messages: {
