@@ -18,7 +18,7 @@ import { TType } from "../../translator/i18n";
 import { MY_CONTRACT_ROUTE } from "../../router/MyContractRouterTypes";
 import { AnyAction } from "@reduxjs/toolkit";
 
-type ListActionType = {
+export type ListActionType = {
   contractRole: CONTRACT_ROLE;
   contractStatus: string[];
   action: {
