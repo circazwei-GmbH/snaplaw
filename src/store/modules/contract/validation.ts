@@ -25,6 +25,8 @@ import { SPECIFICATIONS_DATA_FIELDS } from "./specifications-data";
 import { ADDITIONAL_INFO_FIELDS } from "./additional-info-data";
 import { PAYMENT_INFO_FIELDS } from "./carSales/payment-info";
 
+const canBeEmptyScreens = [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO, CONTRACT_SCREEN_TYPES.SPECIFICATIONS]
+
 export const contractValidationConfig = {
   [CONTRACT_TYPES.PURCHASE]: {
     [CONTRACT_SCREEN_TYPES.USER_DATA]: {
@@ -440,6 +442,77 @@ export const contractValidationConfig = {
     },
     [CONTRACT_SCREEN_TYPES.SIGN]: {},
   },
+  [CONTRACT_TYPES.WORK]: {
+    [CONTRACT_SCREEN_TYPES.USER_DATA]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [USER_DATA_FIELDS.name]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.lastName]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.dateOfBirth]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.email]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.phone]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.address]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.postCode]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+      [CONTRACT_ROLE.PARTNER]: {
+        [USER_DATA_FIELDS.name]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.lastName]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.dateOfBirth]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.email]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.phone]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.address]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.postCode]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+    },
+    [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [PRODUCT_DESCRIPTION_FIELDS.description]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+    },
+    [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [CONFIRMATION_FIELDS.FIRST]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+      [CONTRACT_ROLE.PARTNER]: {
+        [CONFIRMATION_FIELDS.SELLER_DETAIL]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+    },
+    [CONTRACT_SCREEN_TYPES.SIGN]: {},
+    [CONTRACT_SCREEN_TYPES.INVITE_USER]: {},
+  },
 };
 
 export const screenFieldValidator = (
@@ -500,8 +573,7 @@ export const contractValidator = (
     
     if (
       !currentScreen &&
-      contractConfig[i].type !== CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO &&
-      contractConfig[i].type !== CONTRACT_SCREEN_TYPES.SPECIFICATIONS &&
+      !canBeEmptyScreens.includes(contractConfig[i].type) &&
       validationConfig &&
       Object.keys(validationConfig).length
     ) {

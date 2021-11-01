@@ -489,11 +489,65 @@ export default {
         invite: "Please invite user",
       },
     },
+    [CONTRACT_TYPES.WORK]: {
+      title: "Work contract",
+      [CONTRACT_SCREEN_TYPES.USER_DATA]: {
+        title: "user data",
+      },
+      [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
+        title: "additional information",
+        titleTwo: "Please add product description",
+        placeholder: "Write here everything that you think is important",
+        button: "Upload file",
+      },
+      [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
+        title: "Confirmation",
+        confirmation: {
+          [CONTRACT_ROLE.OWNER]: {
+            [CONFIRMATION_FIELDS.FIRST]:
+              "Customer details have been verified and match.",
+          },
+          [CONTRACT_ROLE.PARTNER]: {
+            [CONFIRMATION_FIELDS.SELLER_DETAIL]:
+              "Customer details have been verified and match.",
+          }
+        },
+        partner_text: "Please recheck their identity with a passport.",
+      },
+      [CONTRACT_SCREEN_TYPES.INVITE_USER]: {
+        title: "invite user",
+        titleTwo: "Please invite user"
+      },
+      [CONTRACT_SCREEN_TYPES.PAYMENT]: {
+        title: "Payment",
+        product_price: "Please enter the product price",
+        payment_method: "Please select a payment method",
+        fields: {
+          cost: "Cost",
+          name: "Cardholder name",
+          card: "Card number",
+        },
+        checkboxes: {
+          cash: "Cash",
+          paypal: "PayPal",
+          transfer: "Money transfer",
+        },
+        payment_methods: {
+          [PAYMENT_METHODS.CASH]: "cash",
+          [PAYMENT_METHODS.PAYPAL]: "PayPal",
+          [PAYMENT_METHODS.TRANSFER]: "money transfer",
+        },
+        partner_text: "The seller chose to pay in %{method}.",
+      },
+    },
     confirmation_modal: {
-      message: "Are you sure, you want to cancel contract creation?",
+      message: "Are you sure, yo u want to cancel contract creation?",
+      confirm_contract_sign: "You will not be able to edit the contract after signing it. Check your contract details or sign.",
       buttons: {
         ok: "Yes",
         cancel: "No",
+        check: "Check",
+        sign: "Sign"
       },
     },
     buttons: {
