@@ -80,7 +80,7 @@ export default function Sign() {
             },
             {
               name: t("contracts.confirmation_modal.buttons.sign"),
-              // action: navigationPopToTop(),
+              //TODO: add action for showing sign modal,
             },
           ],
         })
