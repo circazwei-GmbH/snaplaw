@@ -207,7 +207,6 @@ export const contractScreensConfig: Record<
       title: `contracts.${CONTRACT_TYPES.WORK}.${CONTRACT_SCREEN_TYPES.SIGN}.title`,
       type: CONTRACT_SCREEN_TYPES.SIGN,
       granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
-      exclusionChecker: checkAllNeededData,
     },
   ],
   [CONTRACT_TYPES.FREE]: [],

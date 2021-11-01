@@ -541,7 +541,7 @@ export default {
       },
     },
     confirmation_modal: {
-      message: "Are you sure, yo u want to cancel contract creation?",
+      message: "Are you sure, you want to cancel contract creation?",
       confirm_contract_sign: "You will not be able to edit the contract after signing it. Check your contract details or sign.",
       buttons: {
         ok: "Yes",

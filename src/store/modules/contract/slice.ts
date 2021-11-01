@@ -26,7 +26,7 @@ interface ContractState {
   contractErrors:
     | Record<
         CONTRACT_SCREEN_TYPES,
-        Record<string, string> | Array<unknown> | undefined
+        Record<string, string> | undefined
       >
     | undefined;
   contracts: ContractListType | [];

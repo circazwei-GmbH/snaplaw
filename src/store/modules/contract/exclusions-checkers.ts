@@ -17,8 +17,3 @@ export const checkByPaymentType = (screens: BaseScreenDataInterface[]) => {
   const screen = screens.find(screen => screen.type === CONTRACT_SCREEN_TYPES.PAYMENT);
   return screen ? screen.data[PAYMENT_FIELDS.PAYMENT_METHOD] === PAYMENT_METHODS.TRANSFER : false
 }
-
-export const checkAllNeededData = (screens: BaseScreenDataInterface[]) => {
-  const screen = screens.find(screen => screen.type === CONTRACT_SCREEN_TYPES.PAYMENT);
-  return screen ? !!(screen.data[PAYMENT_FIELDS.COST] && screen.data[PAYMENT_FIELDS.PAYMENT_METHOD]): false
-}
