@@ -74,7 +74,6 @@ import {
   MEMBER_TYPE_FIELD_NAME,
   MEMBER_TYPE_VALUE,
 } from "./carSales/member-type";
-import { waitFor } from "@testing-library/react-native";
 
 function* createContract({ payload }: RequestCreateContractAction) {
   try {

@@ -3,14 +3,14 @@ import { StyleSheet, View } from "react-native";
 import DefaultText from "../../../basics/typography/DefaultText";
 import { useI18n } from "../../../../translator/i18n";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/constants";
+import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "../../../../store/modules/contract/constants";
 import SignInput from "../../../basics/inputs/SignInput";
 import InviteInput from "../../../basics/inputs/InviteInput";
 import SignModal from "../../Modals/SignModal";
 import { orientationChange } from "../../../../store/modules/main/action-creators";
 import { OrientationLock } from "expo-screen-orientation";
 import { SIGN_LOADER } from "../../../../store/modules/contract/purchase/sign";
-import { removeFromWaiter } from "../../../../store/modules/main/slice";
+import { removeFromWaiter, setModal } from "../../../../store/modules/main/slice";
 import { contractValidator } from "../../../../store/modules/contract/validation";
 import { ContractDataType } from "../../../../store/modules/contract/types";
 import { useNavigation } from "@react-navigation/native";
@@ -26,6 +26,7 @@ import {
 import * as RootNavigation from "../../../../router/RootNavigation";
 import { HOME_ROUTER } from "../../../../router/HomeRouterType";
 import { CONTRACT_ROLE } from "../../../../store/modules/contract/contract-roles";
+import { BUTTON_COLORTYPE } from "../../../../store/modules/main/types";
 
 export default function Sign() {
   const { t } = useI18n();
@@ -64,6 +65,25 @@ export default function Sign() {
             emptyScreen,
           )
         )
+      );
+      return;
+    }
+
+    if (contract?.type === CONTRACT_TYPES.WORK) {
+      dispatch(
+        setModal({
+          message: t("contracts.confirmation_modal.confirm_contract_sign"),
+          actions: [
+            {
+              name: t("contracts.confirmation_modal.buttons.check"),
+              colortype: BUTTON_COLORTYPE.ERROR,
+            },
+            {
+              name: t("contracts.confirmation_modal.buttons.sign"),
+              //TODO: add action for showing sign modal,
+            },
+          ],
+        })
       );
       return;
     }

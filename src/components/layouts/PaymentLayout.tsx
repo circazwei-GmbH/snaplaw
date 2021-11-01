@@ -1,7 +1,10 @@
 import React, { ReactElement } from "react";
 import { StyleSheet, View } from "react-native";
 import { useAppSelector } from "../../store/hooks";
-import { CONTRACT_SCREEN_TYPES } from "../../store/modules/contract/constants";
+import {
+  CONTRACT_SCREEN_TYPES,
+  CONTRACT_TYPES,
+} from "../../store/modules/contract/constants";
 import { CONTRACT_ROLE } from "../../store/modules/contract/contract-roles";
 import {
   PaymentScreenInterface,
@@ -40,6 +43,7 @@ export default function PaymentLayout({
   return (
     <View style={styles.container}>
       {contract.meRole === CONTRACT_ROLE.PARTNER &&
+      contract.type !== CONTRACT_TYPES.WORK &&
       screenData?.data[PAYMENT_FIELDS.PAYMENT_METHOD] &&
       screenData?.data[PAYMENT_FIELDS.SELLER_PAYMENT_METHOD] ? (
         <ErrorBoldMessage
@@ -58,7 +62,9 @@ export default function PaymentLayout({
         />
       ) : null}
 
-      {contract.meRole === CONTRACT_ROLE.OWNER ? (
+      {contract.meRole === CONTRACT_ROLE.OWNER ||
+      (contract.type === CONTRACT_TYPES.WORK &&
+        contract.meRole === CONTRACT_ROLE.PARTNER) ? (
         <PaymentPrice
           defaultText={t(
             `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.product_price`

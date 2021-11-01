@@ -20,6 +20,8 @@ export const enum CONTRACT_SCREEN_TYPES {
   PASSPORT_DATA = "passportData",
   SPECIFICATIONS = "specifications",
   ADDITIONAL_INFO = "additionalInfo",
+  SERVICES = "services",
+  INVITE_USER = "inviteUser",
 }
 
 export const CONTRACT_CREATION_WAIT = "CONTRACT_CREATION_WAIT";

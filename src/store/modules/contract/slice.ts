@@ -24,7 +24,10 @@ export enum CONTRACT_LIST_LOADING_TYPE {
 interface ContractState {
   currentContract: ContractDataType | undefined;
   contractErrors:
-    | Record<CONTRACT_SCREEN_TYPES, Record<string, string> | undefined>
+    | Record<
+        CONTRACT_SCREEN_TYPES,
+        Record<string, string> | undefined
+      >
     | undefined;
   contracts: ContractListType | [];
   isListLoading: CONTRACT_LIST_LOADING_TYPE | undefined;
@@ -203,8 +206,8 @@ const contractSlice = createSlice({
       // @ts-ignore
       state.contractErrors = {
         ...state.contractErrors,
-        [action.payload.screenType]: action.payload.screenErrors
-      }
+        [action.payload.screenType]: action.payload.screenErrors,
+      };
     },
     [clearErrorsAction.type]: (state: Draft<ContractState>) => {
       state.contractErrors = undefined;

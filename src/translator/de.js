@@ -507,11 +507,60 @@ export default {
         invite: "Bitte Benutzer einladen",
       },
     },
+    [CONTRACT_TYPES.WORK]: {
+      title: "Werkvertrag",
+      [CONTRACT_SCREEN_TYPES.USER_DATA]: {
+        title: "Benutzerdaten",
+      },
+      [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
+        title: "additionale Information",
+        titleTwo: "Bitte geben Sie die Beschreibung des Artikels an",
+        placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
+        button: "Datei hochladen",
+      },
+      [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
+        title: "Besätigung",
+        confirmation: {
+          [CONTRACT_ROLE.OWNER]: {
+            [CONFIRMATION_FIELDS.FIRST]:
+              "Customer details have been verified and match.",
+          },
+          [CONTRACT_ROLE.PARTNER]: {
+            [CONFIRMATION_FIELDS.SELLER_DETAIL]:
+              "Customer details have been verified and match.",
+          },
+        },
+        partner_text: "Bitte überprüfen Sie seine Identität mit einem Pass.",
+      },
+      [CONTRACT_SCREEN_TYPES.INVITE_USER]: {
+        title: "Benutzer einladen",
+        titleTwo: "Bitte Benutzer einladen"
+      },
+      [CONTRACT_SCREEN_TYPES.PAYMENT]: {
+        title: "Bezahlung",
+        product_price: "1. Bitte geben Sie den Preis des Artikels an",
+        payment_method: "2. Bitte Zahlungsart wählen",
+        fields: {
+          cost: "Cost",
+          name: "Name des Karteninhabers",
+          card: "Kartennummer",
+        },
+        checkboxes: {
+          cash: "Bar",
+          paypal: "Paypal",
+          transfer: "Überweisung",
+        },
+        partner_text: "Der Verkäufer hat sich für Barzahlung entschieden.",//translate
+      },
+    },
     confirmation_modal: {
       message: "Wollten Sie die Vertragserstellung wirklich abbrechen?",
+      confirm_contract_sign: "You will not be able to edit the contract after signing it. Check your contract details or sign.",//translate
       buttons: {
         ok: "Ja",
         cancel: "Nein",
+        check: "Check",//translate
+        sign: "Sign",//translate
       },
     },
     buttons: {

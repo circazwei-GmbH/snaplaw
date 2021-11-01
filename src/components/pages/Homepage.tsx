@@ -42,6 +42,9 @@ export default function Homepage(): JSX.Element {
             <ContractTypeCard
               image={require("../../../assets/work_contract.png")}
               title={t("homepage.contract_types.work")}
+              onPress={() =>
+                dispatch(requestCreateContract(CONTRACT_TYPES.WORK))
+              }
             />
             <ContractTypeCard
               image={require("../../../assets/free_contract.png")}
