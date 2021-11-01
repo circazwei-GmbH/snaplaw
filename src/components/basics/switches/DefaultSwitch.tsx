@@ -12,6 +12,7 @@ export default function DefaultSwitch({
   onChange,
   value,
 }: DefaultSwitchProps) {
+  
   return (
     <View style={styles.container}>
       <Text style={styles.buttonText}>{title}</Text>

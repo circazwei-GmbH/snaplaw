@@ -5,6 +5,8 @@ import {
 import { CONDITION_VALUE } from "../store/modules/contract/purchase/product-condition";
 import { CONFIRMATION_FIELDS } from "../store/modules/contract/purchase/confirmation";
 import { MEMBER_TYPE_VALUE } from "../store/modules/contract/carSales/member-type";
+import { CONTRACT_ROLE } from "../store/modules/contract/contract-roles";
+import { PAYMENT_INFO_FIELDS } from "../store/modules/contract/carSales/payment-info";
 
 export default {
   welcome: {
@@ -300,12 +302,16 @@ export default {
       [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
         title: "Besätigung",
         confirmation: {
-          [CONFIRMATION_FIELDS.FIRST]:
-            "Der Verkäufer versichert, dass der oben beschriebene Artikel in seinem alleinigen Eigentum steht, nicht gestohlen ist und frei von Rechten Dritter ist.",
-          [CONFIRMATION_FIELDS.SECOND]:
-            "Die Käuferdaten wurden überprüft und stimmen überein.",
-          [CONFIRMATION_FIELDS.SELLER_DETAIL]:
-            "Die Verkäuferdaten wurden überprüft und stimmen überein.",
+          [CONTRACT_ROLE.OWNER]: {
+            [CONFIRMATION_FIELDS.FIRST]:
+              "Der Verkäufer versichert, dass der oben beschriebene Artikel in seinem alleinigen Eigentum steht, nicht gestohlen ist und frei von Rechten Dritter ist.",
+            [CONFIRMATION_FIELDS.SECOND]:
+              "Die Käuferdaten wurden überprüft und stimmen überein.",
+          },
+          [CONTRACT_ROLE.PARTNER]: {
+            [CONFIRMATION_FIELDS.SELLER_DETAIL]:
+              "Die Verkäuferdaten wurden überprüft und stimmen überein.",
+          },
         },
         partner_text: "Bitte überprüfen Sie seine Identität mit einem Pass.",
       },
@@ -323,7 +329,7 @@ export default {
           paypal: "Paypal",
           transfer: "Überweisung",
         },
-        partner_text: "Der Verkäufer hat sich für Barzahlung entschieden.",
+        partner_text: "Der Verkäufer hat sich für Barzahlung entschieden.",//translate
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "Vertrag unterzeichnen",
@@ -384,32 +390,122 @@ export default {
           type: "Typ",
           year: "Ausgabejahr",
         }
-      }, 
+      },
       [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
         title: "Fahrzeugbeschreibung",
         titleTwo: "Bitte Fahrzeugbeschreibung angeben",
         placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
         button: "Datei hochladen",
       },
-      [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
-        title: "Besätigung",
-        confirmation: {
-          [CONFIRMATION_FIELDS.FIRST]:
-            "Der Verkäufer versichert, dass ihm keine weiteren Schäden und Mängel bekannt sind",
-          [CONFIRMATION_FIELDS.SECOND]:
-            "Die Käuferdaten wurden überprüft und stimmen überein",
-          [CONFIRMATION_FIELDS.THIRD]:
-            "Der Verkäufer versichert, dass das Fahrzeug privat und nicht gewerblich genutzt wurde",
-          [CONFIRMATION_FIELDS.SELLER_DETAIL]:
-            "Die Verkäuferdaten wurden überprüft und stimmen überein",
+      [CONTRACT_SCREEN_TYPES.PASSPORT_DATA]: {
+        title: "Passdaten",
+        placeholders: {
+          idCard: "ID Kartennummer",
+          identificationCode: "Identifikationsnummer",
+        }
+      },
+      [CONTRACT_SCREEN_TYPES.PRODUCT_DATA]: {
+        title: "Produktdaten",
+        placeholders: {
+          producer: "Hersteller",
+          model: "Auto Model",
+          type: "Typ",
+          year: "Ausgabejahr",
+          prevRegistrationNumber: "Bisherige amtliches Kennzeichen",
+          serialNumber: "Seriennummer",
+          run: "KM-Stand",
         },
-        partner_text: "Bitte überprüfen Sie seine Identität mit einem Pass",
+        modalTitles: {
+          producer: "Hersteller",
+          model: "Auto Model",
+          type: "Typ",
+          year: "Ausgabejahr",
+        }
+      },
+      [CONTRACT_SCREEN_TYPES.SPECIFICATIONS]: {
+        title: "Angaben",
+        placeholders: {
+          inspection: "TÜV",
+          commercial: "Gewerblich genutztes Fahrzeug",
+          foreignMade: "Importfahrzeug",
+          technicalWork: "Technische Arbeiten wurden durchgeführt",
+          service: "Service Heft liegt bei",
+          deregistered: "Das Fahrzeug ist abgemeldet",
+          deregisteredDate: "Das Fahrzeug ist abgemeldet bis",
+          inspectionDate: "Fälligkeitsdatum angeben",
+        },
+      },
+      [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO]: {
+        title: "Additionale Information",
+        fields: {
+          accidentDamage: "Unfallschäden",
+          otherDefects: "Sonstige bekannte Mängel",
+        },
+        damage: {
+          title: "Bitte Unfallschädenbeschreibung hinzufügen",
+          placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
+          uploadFiles: "Datei hochladen",
+        },
+        defect: {
+          title: "Bitte Fehlerbeschreibung hinzufügen",
+          placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
+          uploadFiles: "Datei hochladen",
+        }
+      },
+      [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
+        title: "Confirmation",
+        confirmation: {
+          [CONTRACT_ROLE.OWNER]: {
+            [CONFIRMATION_FIELDS.FIRST]:
+              "Der Verkäufer versichert, dass ihm keine weiteren Schäden und Mängel bekannt sind",
+            [CONFIRMATION_FIELDS.SECOND]:
+              "Der Verkäufer versichert, dass das Fahrzeug privat und nicht gewerblich genutzt wurde",
+            [CONFIRMATION_FIELDS.THIRD]:
+              "Buyer details have been verified and match",//translate
+          },
+          [CONTRACT_ROLE.PARTNER]: {
+            [CONFIRMATION_FIELDS.FIRST]:
+              "Der Käufer erkennt an, dass das Fahrzeug bis zur vollständigen Bezahlung Eigentum des Verkäufers bleibt",
+            [CONFIRMATION_FIELDS.SELLER_DETAIL]:
+              "Verkäufer und Käufer vereinbaren, dass der Käufer die Zahlung in Höhe von %{amount} überweisen wird",
+            [CONFIRMATION_FIELDS.SECOND]:
+              "Die Verkäuferdaten wurden überprüft und stimmen überein",
+          }
+        },
+      },
+      [CONTRACT_SCREEN_TYPES.PAYMENT_INFO]: {
+        title: "Payment information", //translate
+        placeholders: {
+          [PAYMENT_INFO_FIELDS.ACCOUNT_OWNER]: "Account owner",//translate
+          [PAYMENT_INFO_FIELDS.ACCOUNT_NUMBER]: "Account number",//translate
+          [PAYMENT_INFO_FIELDS.IBAN]: "IBAN",//translate
+          [PAYMENT_INFO_FIELDS.BIC]: "BIC",//translate
+        }
+      },
+      [CONTRACT_SCREEN_TYPES.PAYMENT]: {
+        title: "Bezahlung",
+        product_price: "Bitte geben Sie den Preis des Artikels an",//translate
+        payment_method: "Bitte Zahlungsart wählen",
+        fields: {
+          cost: "Preis",
+          payment_date: "Zahlungsdatum",
+          due_date: "Due date",//translate
+          advance_date: "Vorauszahlungsdatum",
+          advance_cost: "Vorauszahlungspreis",
+          left_sum: "Restbetrag Fälligkeitsdatum",
+        },
+        checkboxes: {
+          cash: "Cash",
+          transfer: "Überweisung",
+          cash_advance: "Vorauszahlung",
+        },
+        partner_text: "Der Verkäufer hat sich für Barzahlung entschieden.",//translate%{method}
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "Vertrag unterzeichnen",
         signature: "Bitte Ihre Unterschift eingeben",
         invite: "Bitte Benutzer einladen",
-      },      
+      },
     },
     confirmation_modal: {
       message: "Wollten Sie die Vertragserstellung wirklich abbrechen?",
@@ -430,6 +526,8 @@ export default {
       cancel: "Abbrechen",
       additional_media: "Additionale Information",
       accessories_media: "Zubehör",
+      accident_damage_media: "Unfallschäden",
+      other_defects_media: "Sonstige bekannte Mängel",
       enter_contract_details: "Vertragsdetails eingeben",
     },
     messages: {
@@ -442,6 +540,7 @@ export default {
     validation: {
       field_empty: "Das Feld kann nicht leer sein",
       product_condition: "Klären Sie bitte den Produktzustand",
+      uncorrect_date_order: "Das Datum sollte nicht früher als Vorauszahlungdatum sein.",
     },
     change_prequest_modal: {
       message:

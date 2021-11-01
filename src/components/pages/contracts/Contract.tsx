@@ -44,8 +44,10 @@ export default function Contract({
 }: ContractProps) {
   const navigation = useNavigation();
   const contract = useAppSelector((state) => state.contract.currentContract);
-  const [previousVersionOfCurrentScreen, setPreviousVersionOfCurrentScreen] =
-    useState<BaseScreenDataInterface | undefined>(undefined);
+  const [
+    previousVersionOfCurrentScreen,
+    setPreviousVersionOfCurrentScreen,
+  ] = useState<BaseScreenDataInterface | undefined>(undefined);
   const [contractViewVisible, setContractViewVisible] = useState(false);
   const { t } = useI18n();
   const dispatch = useAppDispatch();
@@ -74,7 +76,7 @@ export default function Contract({
   const currentContractConfig = getContractScreensConfig(
     contract.type,
     contract.meRole,
-    contract.screens,
+    contract.screens
   );
 
   const nextHandler = () => {
@@ -86,7 +88,7 @@ export default function Contract({
     //   contract.screens,
     //   currentContractConfig[screenCount].type
     // ));
-    
+
     const isNeedRequestModal = checkIsItChangeRequest(
       contract,
       currentContractConfig[screenCount].type,

@@ -10,6 +10,7 @@ import {
   PAYMENT_METHODS,
 } from "./types";
 import {
+  correctDateOrderCheck,
   length,
   lengthCheckIfAnotherFieldHasSpecificValue,
   lengthCheckIfAnotherFieldIsTrue,
@@ -20,6 +21,9 @@ import { MEMBER_TYPE_FIELD_NAME } from "./carSales/member-type";
 import { COMPANY_DATA_FIELDS } from "./company-data";
 import { PASSPORT_DATA_FIELDS } from "./passport-data";
 import { CAR_DATA_FIELDS } from "./carSales/car-data";
+import { SPECIFICATIONS_DATA_FIELDS } from "./specifications-data";
+import { ADDITIONAL_INFO_FIELDS } from "./additional-info-data";
+import { PAYMENT_INFO_FIELDS } from "./carSales/payment-info";
 
 export const contractValidationConfig = {
   [CONTRACT_TYPES.PURCHASE]: {
@@ -282,23 +286,159 @@ export const contractValidationConfig = {
         [CAR_DATA_FIELDS.model]: [
           length("contracts.validation.field_empty", 1),
         ],
-        [CAR_DATA_FIELDS.type]: [
-          length("contracts.validation.field_empty", 1),
-        ],
-        [CAR_DATA_FIELDS.year]: [
-          length("contracts.validation.field_empty", 1),
-        ],
+        [CAR_DATA_FIELDS.type]: [length("contracts.validation.field_empty", 1)],
+        [CAR_DATA_FIELDS.year]: [length("contracts.validation.field_empty", 1)],
         [CAR_DATA_FIELDS.prevRegistrationNumber]: [
           length("contracts.validation.field_empty", 1),
         ],
         [CAR_DATA_FIELDS.serialNumber]: [
           length("contracts.validation.field_empty", 1),
         ],
-        [CAR_DATA_FIELDS.run]: [
+        [CAR_DATA_FIELDS.run]: [length("contracts.validation.field_empty", 1)],
+      },
+    },
+    [CONTRACT_SCREEN_TYPES.SPECIFICATIONS]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [SPECIFICATIONS_DATA_FIELDS.INSPECTION_DATE]: [
+          lengthCheckIfAnotherFieldIsTrue(
+            "contracts.validation.field_empty",
+            1,
+            SPECIFICATIONS_DATA_FIELDS.INSPECTION
+          ),
+        ],
+        [SPECIFICATIONS_DATA_FIELDS.DEREGISTERED_DATE]: [
+          lengthCheckIfAnotherFieldIsTrue(
+            "contracts.validation.field_empty",
+            1,
+            SPECIFICATIONS_DATA_FIELDS.DEREGISTERED
+          ),
+        ],
+      },
+    },
+    [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [PRODUCT_DESCRIPTION_FIELDS.description]: [
           length("contracts.validation.field_empty", 1),
         ],
       },
     },
+    [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [ADDITIONAL_INFO_FIELDS.ACCIDENT_DAMAGE_DESCRIPTION]: [
+          lengthCheckIfAnotherFieldIsTrue(
+            "contracts.validation.field_empty",
+            1,
+            ADDITIONAL_INFO_FIELDS.ACCIDENT_DAMAGE
+          ),
+        ],
+        [ADDITIONAL_INFO_FIELDS.OTHER_DEFECTS_DESCRIPTION]: [
+          lengthCheckIfAnotherFieldIsTrue(
+            "contracts.validation.field_empty",
+            1,
+            ADDITIONAL_INFO_FIELDS.OTHER_DEFECTS
+          ),
+        ],
+      },
+    },
+    [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [CONFIRMATION_FIELDS.FIRST]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [CONFIRMATION_FIELDS.SECOND]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [CONFIRMATION_FIELDS.THIRD]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+      [CONTRACT_ROLE.PARTNER]: {
+        [CONFIRMATION_FIELDS.FIRST]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [CONFIRMATION_FIELDS.SECOND]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [CONFIRMATION_FIELDS.SELLER_DETAIL]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+    },
+    [CONTRACT_SCREEN_TYPES.PAYMENT_INFO]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [PAYMENT_INFO_FIELDS.ACCOUNT_OWNER]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [PAYMENT_INFO_FIELDS.ACCOUNT_NUMBER]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [PAYMENT_INFO_FIELDS.IBAN]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [PAYMENT_INFO_FIELDS.BIC]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+    },
+    [CONTRACT_SCREEN_TYPES.PAYMENT]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [PAYMENT_FIELDS.COST]: [length("contracts.validation.field_empty", 1)],
+        [PAYMENT_FIELDS.PAYMENT_METHOD]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [PAYMENT_FIELDS.PAYMENT_DATE]: [
+          lengthCheckIfAnotherFieldHasSpecificValue(
+            "contracts.validation.field_empty",
+            1,
+            PAYMENT_FIELDS.PAYMENT_METHOD,
+            PAYMENT_METHODS.CASH
+          ),
+        ],
+        [PAYMENT_FIELDS.DUE_DATE]: [
+          lengthCheckIfAnotherFieldHasSpecificValue(
+            "contracts.validation.field_empty",
+            1,
+            PAYMENT_FIELDS.PAYMENT_METHOD,
+            PAYMENT_METHODS.TRANSFER
+          ),
+        ],
+        [PAYMENT_FIELDS.ADVANCE_COST]: [
+          lengthCheckIfAnotherFieldHasSpecificValue(
+            "contracts.validation.field_empty",
+            1,
+            PAYMENT_FIELDS.PAYMENT_METHOD,
+            PAYMENT_METHODS.CASH_ADVANCE
+          ),
+        ],
+        [PAYMENT_FIELDS.FIRST_DATE]: [
+          lengthCheckIfAnotherFieldHasSpecificValue(
+            "contracts.validation.field_empty",
+            1,
+            PAYMENT_FIELDS.PAYMENT_METHOD,
+            PAYMENT_METHODS.CASH_ADVANCE
+          ),
+        ],
+        [PAYMENT_FIELDS.SECOND_DATE]: [
+          lengthCheckIfAnotherFieldHasSpecificValue(
+            "contracts.validation.field_empty",
+            1,
+            PAYMENT_FIELDS.PAYMENT_METHOD,
+            PAYMENT_METHODS.CASH_ADVANCE
+          ),
+          correctDateOrderCheck(
+            "contracts.validation.uncorrect_date_order",
+            PAYMENT_FIELDS.FIRST_DATE,
+            PAYMENT_FIELDS.SECOND_DATE
+          ),
+        ],
+      },
+      [CONTRACT_ROLE.PARTNER]: {
+        [PAYMENT_FIELDS.PAYMENT_METHOD]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+    },
+    [CONTRACT_SCREEN_TYPES.SIGN]: {},
   },
 };
 
@@ -312,6 +452,7 @@ export const screenFieldValidator = (
   const validationConfig =
     // @ts-ignore
     contractValidationConfig[contractType][screenType][myRole];
+    
   // @ts-ignore
   if (!validationConfig[field]) {
     return;
@@ -319,13 +460,17 @@ export const screenFieldValidator = (
   // @ts-ignore
   for (let i = 0; Object.keys(validationConfig[field]).length > i; i++) {
     // @ts-ignore
+
+    
     const validated = validationConfig[field][i](
       screen?.data?.[field],
       screen?.data
     );
+    
     if (validated) {
       return validated;
     }
+    
   }
 };
 
@@ -334,21 +479,29 @@ export const contractValidator = (
   screens: Array<BaseScreenDataInterface>,
   myRole: CONTRACT_ROLE
 ) => {
-  const contractConfig = getContractScreensConfig(contractType, myRole, screens);
+  const contractConfig = getContractScreensConfig(
+    contractType,
+    myRole,
+    screens
+  );
 
   let firstEmptyScreen = null;
   for (let i = 0; contractConfig.length > i; i++) {
     const currentScreen = screens.find(
       (screen) => screen.type === contractConfig[i].type
     );
+    
     const validationConfig =
       // @ts-ignore
       contractValidationConfig[contractType][contractConfig[i].type][myRole];
     if (!validationConfig) {
       continue;
-    }
+    }    
+    
     if (
       !currentScreen &&
+      contractConfig[i].type !== CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO &&
+      contractConfig[i].type !== CONTRACT_SCREEN_TYPES.SPECIFICATIONS &&
       validationConfig &&
       Object.keys(validationConfig).length
     ) {

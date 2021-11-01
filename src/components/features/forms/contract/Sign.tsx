@@ -43,6 +43,7 @@ export default function Sign() {
       currentContract.screens,
       currentContract.meRole
     );
+    
     if (emptyScreen !== null) {
       // @ts-ignore
       navigator.pop(
@@ -90,7 +91,7 @@ export default function Sign() {
     }
     setSignVisible(false);
     dispatch(orientationChange(OrientationLock.PORTRAIT_UP));
-    dispatch(removeFromWaiter(SIGN_LOADER));
+    dispatch(removeFromWaiter({event: SIGN_LOADER}));
   }, [sign]);
 
   if (!contract) {

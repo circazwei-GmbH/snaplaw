@@ -1,8 +1,10 @@
+import { PAYMENT_INFO_FIELDS } from "../store/modules/contract/carSales/payment-info";
 import { MEMBER_TYPE_VALUE } from "../store/modules/contract/carSales/member-type";
 import {
   CONTRACT_SCREEN_TYPES,
   CONTRACT_TYPES,
 } from "../store/modules/contract/constants";
+import { CONTRACT_ROLE } from "../store/modules/contract/contract-roles";
 import {
   CONDITION_VALUE,
   CONFIRMATION_FIELDS,
@@ -295,12 +297,18 @@ export default {
       [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
         title: "Confirmation",
         confirmation: {
-          [CONFIRMATION_FIELDS.FIRST]:
-            "The seller assures that the goods described above are their exclusive property, have not been stolen and are free from the rights of third parties.",
-          [CONFIRMATION_FIELDS.SECOND]:
-            "Buyer details have been verified and match.",
-          [CONFIRMATION_FIELDS.SELLER_DETAIL]:
-            "Seller details have been verified and match",
+          [CONTRACT_ROLE.OWNER]: {
+            [CONFIRMATION_FIELDS.FIRST]:
+              "The seller assures that the goods described above are their exclusive property, have not been stolen and are free from the rights of third parties.",
+            [CONFIRMATION_FIELDS.SECOND]:
+              "Buyer details have been verified and match.",
+            [CONFIRMATION_FIELDS.SELLER_DETAIL]:
+              "Seller details have been verified and match",
+          },
+          [CONTRACT_ROLE.PARTNER]: {
+            [CONFIRMATION_FIELDS.SELLER_DETAIL]:
+              "Seller details have been verified and match",
+          }
         },
         partner_text: "Please recheck their identity with a passport.",
       },
@@ -384,32 +392,102 @@ export default {
           type: "Type",
           year: "Year of issue",
         }
-      }, 
+      },
+      [CONTRACT_SCREEN_TYPES.SPECIFICATIONS]: {
+        title: "Specifications",
+        placeholders: {
+          inspection: "Vehicle inspection",
+          commercial: "Commercial vehicle",
+          foreignMade: "Foreign-made car",
+          technicalWork: "Technical work was carried out",
+          service: "Service book included",
+          deregistered: "Vehicle deregistered",
+          deregisteredDate: "Vehicle is deregistered until",
+          inspectionDate: "Specify due date",
+        },
+      },
       [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
         title: "Car description",
         titleTwo: "Please add car description",
         placeholder: "Write here everything that you think is important",
         button: "Upload file",
-      }, 
+      },
+      [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO]: {
+        title: "Additional information",
+        fields: {
+          accidentDamage: "Accident damage",
+          otherDefects: "Other known defects",
+        },
+        damage: {
+          title: "Please add accident damage description",
+          placeholder: "Write here everything that you think is important",
+          uploadFiles: "Upload file",
+        },
+        defect: {
+          title: "Please add defect description",
+          placeholder: "Write here everything that you think is important",
+          uploadFiles: "Upload file",
+        }
+      },
       [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
         title: "Confirmation",
         confirmation: {
-          [CONFIRMATION_FIELDS.FIRST]:
-            "The seller warrants that he is not aware of any further damage or defect",
-          [CONFIRMATION_FIELDS.SECOND]:
-            "Buyer details have been verified and match",
-          [CONFIRMATION_FIELDS.THIRD]:
-            "The seller certifies that the vehicle was used for personal purposes and not for commercial purposes",
-          [CONFIRMATION_FIELDS.SELLER_DETAIL]:
-            "Seller details have been verified and match",
+          [CONTRACT_ROLE.OWNER]: {
+            [CONFIRMATION_FIELDS.FIRST]:
+              "The seller warrants that he is not aware of any further damage or defect",
+            [CONFIRMATION_FIELDS.SECOND]:
+              "The seller certifies that the vehicle was used for personal purposes and not for commercial purposes",
+            [CONFIRMATION_FIELDS.THIRD]:
+              "Buyer details have been verified and match",
+          },
+          [CONTRACT_ROLE.PARTNER]: {
+            [CONFIRMATION_FIELDS.FIRST]:
+              "The buyer acknowledges that the vehicle remains the property of the seller until full payment has been made",
+            [CONFIRMATION_FIELDS.SELLER_DETAIL]:
+              "The seller and the buyer agree that the buyer will transfer the payment in the amount of %{amount}",
+            [CONFIRMATION_FIELDS.SECOND]:
+              "Seller details have been verified and match",
+          }
         },
-        partner_text: "Please recheck their identity with a passport.",
-      },   
+      },
+      [CONTRACT_SCREEN_TYPES.PAYMENT_INFO]: {
+        title: "Payment information",
+        placeholders: {
+          [PAYMENT_INFO_FIELDS.ACCOUNT_OWNER]: "Account owner",
+          [PAYMENT_INFO_FIELDS.ACCOUNT_NUMBER]: "Account number",
+          [PAYMENT_INFO_FIELDS.IBAN]: "IBAN",
+          [PAYMENT_INFO_FIELDS.BIC]: "BIC",
+        }
+      },
+      [CONTRACT_SCREEN_TYPES.PAYMENT]: {
+        title: "Payment",
+        product_price: "Please enter car price",
+        payment_method: "Please select a payment method",
+        fields: {
+          cost: "Cost",
+          payment_date: "Payment date",
+          due_date: "Due date",
+          advance_date: "Advance payment date",
+          advance_cost: "Advance cost",
+          left_sum: "Left sum due date",
+        },
+        checkboxes: {
+          cash: "Cash",
+          transfer: "Money transfer",
+          cash_advance: "Cash advance",
+        },
+        payment_methods: {
+          [PAYMENT_METHODS.CASH]: "cash",
+          [PAYMENT_METHODS.TRANSFER]: "money transfer",
+          [PAYMENT_METHODS.CASH_ADVANCE]: "cash advance",
+        },
+        partner_text: "The seller chose to pay in %{method}.",
+      },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "sign contract",
         signature: "Please enter your signature",
         invite: "Please invite user",
-      },      
+      },
     },
     confirmation_modal: {
       message: "Are you sure, you want to cancel contract creation?",
@@ -430,6 +508,8 @@ export default {
       cancel: "Cancel",
       additional_media: "Additional information",
       accessories_media: "Accessories",
+      accident_damage_media: "Accident damage",
+      other_defects_media: "Other known defects",
       enter_contract_details: "Enter contract details",
     },
     messages: {
@@ -442,6 +522,7 @@ export default {
     validation: {
       field_empty: "The field can't be empty",
       product_condition: "Please specify the product condition",
+      uncorrect_date_order: "The date can’t be earlier than advance payment date",
     },
     change_prequest_modal: {
       message:

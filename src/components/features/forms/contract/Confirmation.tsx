@@ -4,11 +4,15 @@ import {
   CONFIRMATION,
   CONFIRMATION_FIELDS,
   ConfirmationScreenInterface,
+  PAYMENT_FIELDS,
 } from "../../../../store/modules/contract/types";
 import Checkbox from "../../../basics/checkboxes/Checkbox";
 import { useI18n } from "../../../../translator/i18n";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/constants";
+import {
+  CONTRACT_SCREEN_TYPES,
+  CONTRACT_TYPES,
+} from "../../../../store/modules/contract/constants";
 import { setScreenData } from "../../../../store/modules/contract/slice";
 import { validateScreen } from "../../../../store/modules/contract/action-creators";
 import { CONTRACT_ROLE } from "../../../../store/modules/contract/contract-roles";
@@ -22,6 +26,13 @@ export default function Confirmation() {
       state.contract.currentContract?.screens.find(
         (screen) => screen.type === CONTRACT_SCREEN_TYPES.CONFIRMATION
       ) as ConfirmationScreenInterface | undefined
+  );
+
+  const paymentScreenData = useAppSelector(
+    (state) =>
+      state.contract.currentContract?.screens.find(
+        (screen) => screen.type === CONTRACT_SCREEN_TYPES.PAYMENT
+      )?.data
   );
   const screenError = useAppSelector(
     (state) =>
@@ -50,7 +61,9 @@ export default function Confirmation() {
 
   return (
     <View style={styles.container}>
-      {contract.meRole === CONTRACT_ROLE.PARTNER ? (
+      {contract.meRole === CONTRACT_ROLE.PARTNER &&
+      contract.type !== CONTRACT_TYPES.CAR &&
+      contract.type !== CONTRACT_TYPES.RENTAL ? (
         <DefaultText
           style={styles.text}
           text={t(
@@ -60,9 +73,13 @@ export default function Confirmation() {
       ) : null}
       {
         //@ts-ignore
-        Object.keys(CONFIRMATION).map(
+        Object.keys(CONFIRMATION[contract.type]).map(
           (confirmation: CONFIRMATION_FIELDS, index) => {
-            if (CONFIRMATION[confirmation].includes(contract.meRole)) {
+            if (
+              CONFIRMATION[contract.type][confirmation].includes(
+                contract.meRole
+              )
+            ) {
               return (
                 <Checkbox
                   style={index === 0 ? null : styles.checkbox}
@@ -72,7 +89,14 @@ export default function Confirmation() {
                   isChecked={!!confirmationScreen?.data[confirmation]}
                   onChange={() => confirmationHandler(confirmation)}
                   text={t(
-                    `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.CONFIRMATION}.confirmation.${confirmation}`
+                    `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.CONFIRMATION}.confirmation.${contract.meRole}.${confirmation}`,
+                    {
+                      amount: paymentScreenData
+                        ? `${paymentScreenData[PAYMENT_FIELDS.COST]} ${
+                            paymentScreenData[PAYMENT_FIELDS.CURRENCY]
+                          }`
+                        : "-to be specified-",
+                    }
                   )}
                 />
               );

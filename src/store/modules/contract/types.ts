@@ -27,7 +27,7 @@ import {
   PAYMENT_FIELDS,
   PAYMENT_METHODS,
   PaymentScreenInterface,
-} from "./purchase/payment";
+} from "./payment";
 import {
   PRODUCT_DESCRIPTION_FIELDS,
   ProductDescriptionScreenInterface,
