@@ -161,7 +161,7 @@ function* screenValidate({
     return;
   }
   
-  let screenErrors: Record<string, string | undefined> = yield select(
+  let screenErrors: Record<string, string | undefined> | Array<Record<string, string | undefined>> = yield select(
     (state) =>
       state.contract.contractErrors && state.contract.contractErrors[screenType]
   );
@@ -175,12 +175,26 @@ function* screenValidate({
       myRole
     );
 
-    screenErrors = {
-      ...screenErrors,
-      [field]: validated
-        ? Translator.getInstance().trans(validated)
-        : undefined,
-    };
+    if (Array.isArray(validated)) {
+      screenErrors = {
+        ...screenErrors,
+        [field]: validated.map(error => {
+          const translatedError = {};
+          for (let [key, value] of Object.entries(error)) {
+            translatedError[key] = value ? Translator.getInstance().trans(value)
+            : undefined;
+          }
+          return translatedError;
+        })
+      };
+    } else {
+      screenErrors = {
+        ...screenErrors,
+        [field]: validated
+          ? Translator.getInstance().trans(validated)
+          : undefined,
+      };
+    }
   }
   yield put(setFieldError({ screenType, screenErrors }));
 }

@@ -494,6 +494,16 @@ export default {
       [CONTRACT_SCREEN_TYPES.USER_DATA]: {
         title: "user data",
       },
+      [CONTRACT_SCREEN_TYPES.SERVICES]: {
+        title: "services",
+        serviceTitle: "Please indicate the service you need to provide",
+        dateTitle: "The service must be provided before:",
+        placeholders: {
+          service: "Services",
+          date: "Date",
+        },
+        button: "Add another service"
+      },
       [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
         title: "additional information",
         titleTwo: "Please add product description",

@@ -512,6 +512,16 @@ export default {
       [CONTRACT_SCREEN_TYPES.USER_DATA]: {
         title: "Benutzerdaten",
       },
+      [CONTRACT_SCREEN_TYPES.SERVICES]: {
+        title: "Dienstleistungen",
+        serviceTitle: "Bitte geben Sie an, welche Dienstleistung Sie erbringen müssen",
+        dateTitle: "Die Dienstleistung muss erbracht werden vor:",
+        placeholders: {
+          service: "Dienstleistungen",
+          date: "Datum",
+        },
+        button: "Noch eine Dienstleistung hinzufügen",
+      },
       [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
         title: "additionale Information",
         titleTwo: "Bitte geben Sie die Beschreibung des Artikels an",

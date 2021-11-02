@@ -14,6 +14,7 @@ import {
   length,
   lengthCheckIfAnotherFieldHasSpecificValue,
   lengthCheckIfAnotherFieldIsTrue,
+  validateArrayByDataLength,
 } from "../../../validations/default";
 import { PRODUCT_CONDITION_FIELD_NAME } from "./purchase/product-condition";
 import { CONTRACT_ROLE } from "./contract-roles";
@@ -24,6 +25,7 @@ import { CAR_DATA_FIELDS } from "./carSales/car-data";
 import { SPECIFICATIONS_DATA_FIELDS } from "./specifications-data";
 import { ADDITIONAL_INFO_FIELDS } from "./additional-info-data";
 import { PAYMENT_INFO_FIELDS } from "./carSales/payment-info";
+import { SERVICES_DATA_FIELDS } from "./work/services-data";
 
 const canBeEmptyScreens = [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO, CONTRACT_SCREEN_TYPES.SPECIFICATIONS]
 
@@ -488,6 +490,13 @@ export const contractValidationConfig = {
         ],
         [USER_DATA_FIELDS.postCode]: [
           length("contracts.validation.field_empty", 1),
+        ],
+      },
+    },
+    [CONTRACT_SCREEN_TYPES.SERVICES]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [SERVICES_DATA_FIELDS.SERVICES_DATA]: [
+          validateArrayByDataLength("contracts.validation.field_empty", 1)
         ],
       },
     },

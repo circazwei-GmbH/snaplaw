@@ -1,4 +1,5 @@
 import { FieldInterface } from "../components/features/forms/SignInForm";
+import { ServiceDataInterface } from "../store/modules/contract/work/services-data";
 
 export interface FormInterface {
   [fielName: string]: FieldInterface;
@@ -8,12 +9,20 @@ export interface ValidatorFormInterface {
   (text: string, form: FormInterface): string | undefined;
 }
 
+export interface ValidatorArrayInterface {
+  (array: any[]): any[];
+}
+
 export interface ValidatorInterface {
   (text: string, form: Record<string, unknown>): string | undefined;
 }
 
 export interface ValidatorBuilderInterface {
   (message: string, option?: number | string): ValidatorFormInterface;
+}
+
+export interface ValidatorArrayBuilderInterface {
+  (message: string, option?: number | string): ValidatorArrayInterface;
 }
 
 export interface ValidatiorWithCheckInterface {
@@ -86,7 +95,7 @@ export const lengthCheckIfAnotherFieldHasSpecificValue: ValidationWithCheckOnSce
   if ((form && !form[field]) || form[field] !== specificValue) {
     return;
   }
-  
+
   if (!text || text.length < length) {
     return message;
   }
@@ -95,13 +104,27 @@ export const lengthCheckIfAnotherFieldHasSpecificValue: ValidationWithCheckOnSce
 export const correctDateOrderCheck: ValidationWithDateOrderCheckInterface = (
   message,
   firstDateField,
-  secondFieldDate,
+  secondFieldDate
 ) => (text: string | undefined, form: Record<string, unknown>) => {
-  if ((form && (!form[firstDateField]) || !form[secondFieldDate])) {
+  if ((form && !form[firstDateField]) || !form[secondFieldDate]) {
     return;
-  }  
-
-  if(new Date(form[firstDateField]) > new Date(form[secondFieldDate])) {
-    return message
   }
+
+  if (new Date(form[firstDateField]) > new Date(form[secondFieldDate])) {
+    return message;
+  }
+};
+
+export const validateArrayByDataLength: ValidatorArrayBuilderInterface = (
+  message,
+  len
+) => (array: ServiceDataInterface[]) => {
+  const errors = array.map((el => {
+    const error = {};
+    for (let [key, value] of Object.entries(el)) {
+      error[key] = length(message, len)(value)
+    }
+    return error;
+  }));
+  return errors
 };

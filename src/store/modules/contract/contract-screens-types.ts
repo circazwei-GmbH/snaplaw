@@ -23,6 +23,7 @@ import Specifications from "../../../components/features/forms/contract/Specific
 import AdditionalInfo from "../../../components/features/forms/contract/AdditionalInformationCar";
 import PaymentInfo from "../../../components/features/forms/contract/PaymentInfo";
 import PaymentCar from "../../../components/features/forms/contract/PaymentCar";
+import ServicesForm from "../../../components/features/forms/contract/ServicesForm";
 
 export interface ContractScreenConfigType {
   component: React.ElementType;
@@ -183,6 +184,12 @@ export const contractScreensConfig: Record<
       title: `contracts.${CONTRACT_TYPES.WORK}.${CONTRACT_SCREEN_TYPES.USER_DATA}.title`,
       type: CONTRACT_SCREEN_TYPES.USER_DATA,
       granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
+    },
+    {
+      component: ServicesForm,
+      title: `contracts.${CONTRACT_TYPES.WORK}.${CONTRACT_SCREEN_TYPES.SERVICES}.title`,
+      type: CONTRACT_SCREEN_TYPES.SERVICES,
+      granted: [CONTRACT_ROLE.OWNER],
     },
     {
       component: ProductDescriptionForm,
