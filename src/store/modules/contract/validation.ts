@@ -523,6 +523,30 @@ export const contractValidationConfig = {
         ],
       },
     },
+    [CONTRACT_SCREEN_TYPES.PAYMENT]: {
+      [CONTRACT_ROLE.PARTNER]: {
+        [PAYMENT_FIELDS.COST]: [length("contracts.validation.field_empty", 1)],
+        [PAYMENT_FIELDS.PAYMENT_METHOD]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [PAYMENT_FIELDS.CARD_NAME]: [
+          lengthCheckIfAnotherFieldHasSpecificValue(
+            "contracts.validation.field_empty",
+            1,
+            PAYMENT_FIELDS.PAYMENT_METHOD,
+            PAYMENT_METHODS.TRANSFER
+          ),
+        ],
+        [PAYMENT_FIELDS.CARD_NUMBER]: [
+          lengthCheckIfAnotherFieldHasSpecificValue(
+            "contracts.validation.field_empty",
+            1,
+            PAYMENT_FIELDS.PAYMENT_METHOD,
+            PAYMENT_METHODS.TRANSFER
+          ),
+        ],
+      },
+    },
     [CONTRACT_SCREEN_TYPES.SIGN]: {},
     [CONTRACT_SCREEN_TYPES.INVITE_USER]: {},
   },
@@ -569,7 +593,9 @@ export const contractValidator = (contract: ContractDataType) => {
 
     const validationConfig =
       // @ts-ignore
-      contractValidationConfig[contract.type][contractConfig[i].type][contract.meRole];
+      contractValidationConfig[contract.type][contractConfig[i].type][
+        contract.meRole
+      ];
     if (!validationConfig) {
       continue;
     }
@@ -586,7 +612,9 @@ export const contractValidator = (contract: ContractDataType) => {
     } else {
       const validationConfig =
         // @ts-ignore
-        contractValidationConfig[contract.type][currentScreen.type][contract.meRole];
+        contractValidationConfig[contract.type][currentScreen.type][
+          contract.meRole
+        ];
       if (validationConfig) {
         for (let field in validationConfig) {
           const validated = screenFieldValidator(
