@@ -43,7 +43,6 @@ export default function PaymentLayout({
   return (
     <View style={styles.container}>
       {contract.meRole === CONTRACT_ROLE.PARTNER &&
-      contract.type !== CONTRACT_TYPES.WORK &&
       screenData?.data[PAYMENT_FIELDS.PAYMENT_METHOD] &&
       screenData?.data[PAYMENT_FIELDS.SELLER_PAYMENT_METHOD] ? (
         <ErrorBoldMessage
@@ -62,9 +61,7 @@ export default function PaymentLayout({
         />
       ) : null}
 
-      {contract.meRole === CONTRACT_ROLE.OWNER ||
-      (contract.type === CONTRACT_TYPES.WORK &&
-        contract.meRole === CONTRACT_ROLE.PARTNER) ? (
+      {contract.meRole === CONTRACT_ROLE.OWNER ? (
         <PaymentPrice
           defaultText={t(
             `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.product_price`

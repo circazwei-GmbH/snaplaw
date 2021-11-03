@@ -24,10 +24,7 @@ export enum CONTRACT_LIST_LOADING_TYPE {
 interface ContractState {
   currentContract: ContractDataType | undefined;
   contractErrors:
-    | Record<
-        CONTRACT_SCREEN_TYPES,
-        Record<string, string> | undefined
-      >
+    | Record<CONTRACT_SCREEN_TYPES, Record<string, string> | undefined>
     | undefined;
   contracts: ContractListType | [];
   isListLoading: CONTRACT_LIST_LOADING_TYPE | undefined;
@@ -47,6 +44,7 @@ interface ContractState {
     error: string;
   };
   pdfViewOnListContract: ContractDataType | undefined;
+  signModal: boolean;
 }
 
 const initialState: ContractState = {
@@ -73,6 +71,7 @@ const initialState: ContractState = {
     error: "",
   },
   pdfViewOnListContract: undefined,
+  signModal: false,
 };
 
 export type ScreenData = {
@@ -150,6 +149,9 @@ const updateScreenDataAction = createAction<
 >("updateScreenData");
 const clearAllSignAction = createAction<undefined, "clearAllSign">(
   "clearAllSign"
+);
+const setSignModalAction = createAction<undefined, "setSignModal">(
+  "setSignModal"
 );
 
 const contractSlice = createSlice({
@@ -355,6 +357,12 @@ const contractSlice = createSlice({
       state.currentContract.oponentSign = null;
       state.currentContract.sign = undefined;
     },
+    [setSignModalAction.type]: (
+      state: Draft<ContractState>,
+      action: PayloadAction<boolean>
+    ) => {
+      state.signModal = action.payload;
+    },
   },
 });
 
@@ -377,6 +385,7 @@ export const {
   setPartnerNameAfterInvite,
   updateScreenData,
   clearAllSign,
+  setSignModal,
 } = contractSlice.actions;
 
 export default contractSlice.reducer;

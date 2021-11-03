@@ -542,12 +542,11 @@ export default {
           paypal: "PayPal",
           transfer: "Money transfer",
         },
-        payment_methods: {
-          [PAYMENT_METHODS.CASH]: "cash",
-          [PAYMENT_METHODS.PAYPAL]: "PayPal",
-          [PAYMENT_METHODS.TRANSFER]: "money transfer",
-        },
-        partner_text: "The seller chose to pay in %{method}.",
+      },
+      [CONTRACT_SCREEN_TYPES.SIGN]: {
+        title: "sign contract",
+        signature: "Please enter your signature",
+        invite: "Please invite user",
       },
     },
     confirmation_modal: {

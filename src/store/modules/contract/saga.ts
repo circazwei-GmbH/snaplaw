@@ -15,6 +15,7 @@ import {
   REQUEST_DELETE_CONTRACT_PARTNER,
   REQUEST_CONTRACT_DETAIL_FOR_PDF,
   REQUEST_LEAVE_CONTRACT,
+  REQUEST_SIGN_MODAL,
 } from "./action-creators";
 import {
   RequestContractAction,
@@ -59,6 +60,7 @@ import {
   setPdfViewOnListContract,
   setPartnerNameAfterInvite,
   clearAllSign,
+  setSignModal,
 } from "./slice";
 import * as RootNavigation from "../../../router/RootNavigation";
 import { HOME_ROUTER } from "../../../router/HomeRouterType";
@@ -69,11 +71,12 @@ import { BaseScreenDataInterface } from "./base-types";
 import { Translator } from "../../../translator/i18n";
 import { USER_SELF_INVITE } from "../../../services/error-codes";
 import { CONTRACT_ROLE } from "./contract-roles";
-import { navigatePop, navigationPopToTop } from "../main/action-creators";
+import { navigatePop, navigationPopToTop, orientationChange } from "../main/action-creators";
 import {
   MEMBER_TYPE_FIELD_NAME,
   MEMBER_TYPE_VALUE,
 } from "./carSales/member-type";
+import { OrientationLock } from "expo-screen-orientation";
 
 function* createContract({ payload }: RequestCreateContractAction) {
   try {
@@ -160,8 +163,10 @@ function* screenValidate({
   if (!validationConfig) {
     return;
   }
-  
-  let screenErrors: Record<string, string | undefined> | Array<Record<string, string | undefined>> = yield select(
+
+  let screenErrors:
+    | Record<string, string | undefined>
+    | Array<Record<string, string | undefined>> = yield select(
     (state) =>
       state.contract.contractErrors && state.contract.contractErrors[screenType]
   );
@@ -178,14 +183,17 @@ function* screenValidate({
     if (Array.isArray(validated)) {
       screenErrors = {
         ...screenErrors,
-        [field]: validated.map(error => {
-          const translatedError = {};
-          for (let [key, value] of Object.entries(error)) {
-            translatedError[key] = value ? Translator.getInstance().trans(value)
-            : undefined;
+        [field]: validated.map((error) => {
+          if (error) {
+            const translatedError = {};
+            for (let [key, value] of Object.entries(error)) {
+              translatedError[key] = value
+                ? Translator.getInstance().trans(value)
+                : undefined;
+            }
+            return translatedError;
           }
-          return translatedError;
-        })
+        }),
       };
     } else {
       screenErrors = {
@@ -417,6 +425,22 @@ function* requestLeaveContract({ payload }: RequestContractAction) {
   }
 }
 
+function* requestSignModal({ payload }: { payload: boolean }) {
+  try {
+    yield put(addToWaiter({ event: REQUEST_SIGN_MODAL }));
+    yield put(setSignModal(payload));
+    yield put(orientationChange(
+      payload
+        ? OrientationLock.LANDSCAPE_RIGHT
+        : OrientationLock.PORTRAIT_UP
+    ))
+  } catch (error) {
+    yield put(responseError(error));
+  } finally {
+    yield put(removeFromWaiter({ event: REQUEST_SIGN_MODAL }));
+  }
+}
+
 function* contractSaga() {
   yield takeLatest(REQUEST_CREATE_CONTRACT, createContract);
   yield takeLatest(REQUEST_SCREEN_DATA, requestScreenData);
@@ -435,6 +459,7 @@ function* contractSaga() {
   );
   yield takeLatest(REQUEST_CONTRACT_DETAIL_FOR_PDF, requestContractDetailPdf);
   yield takeLatest(REQUEST_LEAVE_CONTRACT, requestLeaveContract);
+  yield takeLatest(REQUEST_SIGN_MODAL, requestSignModal);
 }
 
 export default contractSaga;

@@ -560,7 +560,6 @@ export default {
           paypal: "Paypal",
           transfer: "Überweisung",
         },
-        partner_text: "Der Verkäufer hat sich für Barzahlung entschieden.",//translate
       },
     },
     confirmation_modal: {

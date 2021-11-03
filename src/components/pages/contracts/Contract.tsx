@@ -58,6 +58,8 @@ export default function Contract({
     }
   }, [id]);
 
+  useEffect(() => setPreviousVersionOfCurrentScreen(undefined), []);
+
   useEffect(() => {
     if (!contract || previousVersionOfCurrentScreen) {
       return;
@@ -67,27 +69,18 @@ export default function Contract({
       currentContractConfig[screenCount].type
     );
     setPreviousVersionOfCurrentScreen(currentContractScreen);
-  }, [contract]);
+  }, []);
 
   if (!contract) {
     return null;
   }
 
-  const currentContractConfig = getContractScreensConfig(
-    contract.type,
-    contract.meRole,
-    contract.screens
-  );
+  const currentContractConfig = getContractScreensConfig(contract);
 
   const nextHandler = () => {
     if (!contract) {
       return;
     }
-    // TODO: Find issue with trigger change request without changing screen data
-    // console.log(previousVersionOfCurrentScreen, findScreentByType(
-    //   contract.screens,
-    //   currentContractConfig[screenCount].type
-    // ));
 
     const isNeedRequestModal = checkIsItChangeRequest(
       contract,
