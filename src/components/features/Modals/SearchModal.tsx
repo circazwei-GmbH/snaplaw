@@ -57,7 +57,7 @@ export default function SearchModal({
     setSearchedList(data);
   };
 
-  const onSearch = (text: string) => {    
+  const onSearch = (text: string) => {
     const filteredList = data.filter((item) => {
       if (item.key.toLowerCase() === "other") return true;
 
@@ -84,7 +84,7 @@ export default function SearchModal({
           testID="ModalBackScreen"
         >
           <Pressable style={styles.searchModalContainer}>
-            <View>
+            <View style={styles.contentContainer}>
               <TopBar
                 leftButton={
                   <CloseButton
@@ -96,7 +96,7 @@ export default function SearchModal({
                 rightButton={<Done onPress={handleDone} />}
                 noPlaceholder
               >
-                <View>
+                <View style={styles.listContainer}>
                   <View style={styles.searchInput}>
                     <TextField
                       onChangeFunction={onSearch}
@@ -106,7 +106,6 @@ export default function SearchModal({
                   </View>
 
                   <FlatList
-                    style={{ width: 500 }}
                     data={searchedList}
                     renderItem={renderItem}
                     ItemSeparatorComponent={() => (
@@ -147,7 +146,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "90%",
     paddingTop: 16,
-    paddingBottom: 25,
     backgroundColor: "#fff",
     borderTopLeftRadius: 32,
     borderTopRightRadius: 32,
@@ -174,5 +172,11 @@ const styles = StyleSheet.create({
   searchInput: {
     paddingHorizontal: 16,
     marginBottom: 6,
+  },
+  contentContainer: {
+    height: "100%",
+  },
+  listContainer: {
+    flex: 1,
   },
 });

@@ -49,7 +49,8 @@ export default function SignModal({ visible, onClose }: SignModalProps) {
         MEDIA_FOLDERS.SIGNATURE,
         signContract({ uri: "", type: MEDIA_TYPE.IMAGE })
       )
-    );  };
+    );
+  };
 
   const onChange = () => {
     setCreateDisabled(signatureRef?.getLinesCount() === 0);
