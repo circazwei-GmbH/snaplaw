@@ -11,10 +11,10 @@ import { CONTRACT_ROLE } from "./contract-roles";
 import MemberType from "../../../components/features/forms/contract/MemberType";
 import { BaseScreenDataInterface } from "./base-types";
 import {
-  checkAllNeededData,
   checkByPaymentType,
   checkMemberTypeCommercial,
   checkMemberTypePrivat,
+  checkPartnerSign,
 } from "./exclusions-checkers";
 import CompanyDataForm from "../../../components/features/forms/contract/CompanyDataForm";
 import PassportDataForm from "../../../components/features/forms/contract/PassportDataForm";
@@ -24,24 +24,25 @@ import AdditionalInfo from "../../../components/features/forms/contract/Addition
 import PaymentInfo from "../../../components/features/forms/contract/PaymentInfo";
 import PaymentCar from "../../../components/features/forms/contract/PaymentCar";
 import ServicesForm from "../../../components/features/forms/contract/ServicesForm";
+import InviteUserForm from "../../../components/features/forms/contract/InviteUserForm";
+import { ContractDataType } from "./types";
+import PaymentPartnerFirst from "../../../components/features/forms/contract/PaymentPartnerFirst";
 
 export interface ContractScreenConfigType {
   component: React.ElementType;
   title: string;
   type: CONTRACT_SCREEN_TYPES;
   granted: Array<CONTRACT_ROLE>;
-  exclusionChecker?: (screens: BaseScreenDataInterface[]) => boolean;
+  exclusionChecker?: (contract: ContractDataType) => boolean;
 }
 
 export const getContractScreensConfig = (
-  contractType: CONTRACT_TYPES,
-  contractRole: CONTRACT_ROLE,
-  screens: BaseScreenDataInterface[] | undefined
+  contract: ContractDataType
 ): Array<ContractScreenConfigType> =>
-  contractScreensConfig[contractType].filter((screen) => {
-    let flag = screen.granted.includes(contractRole);
-    if (flag && typeof screen.exclusionChecker === "function" && screens) {
-      return screen.exclusionChecker(screens);
+  contractScreensConfig[contract.type].filter((screen) => {
+    let flag = screen.granted.includes(contract.meRole);
+    if (flag && typeof screen.exclusionChecker === "function" && contract.screens) {
+      return screen.exclusionChecker(contract);
     }
     return flag;
   });
@@ -204,7 +205,14 @@ export const contractScreensConfig: Record<
       granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
     },
     {
-      component: Payment,
+      component: InviteUserForm,
+      title: `contracts.${CONTRACT_TYPES.WORK}.${CONTRACT_SCREEN_TYPES.INVITE_USER}.title`,
+      type: CONTRACT_SCREEN_TYPES.INVITE_USER,
+      granted: [CONTRACT_ROLE.OWNER],
+      exclusionChecker: (contract) => !checkPartnerSign(contract)
+    },
+    {
+      component: PaymentPartnerFirst,
       title: `contracts.${CONTRACT_TYPES.WORK}.${CONTRACT_SCREEN_TYPES.PAYMENT}.title`,
       type: CONTRACT_SCREEN_TYPES.PAYMENT,
       granted: [CONTRACT_ROLE.PARTNER],
@@ -214,6 +222,7 @@ export const contractScreensConfig: Record<
       title: `contracts.${CONTRACT_TYPES.WORK}.${CONTRACT_SCREEN_TYPES.SIGN}.title`,
       type: CONTRACT_SCREEN_TYPES.SIGN,
       granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
+      exclusionChecker: checkPartnerSign
     },
   ],
   [CONTRACT_TYPES.FREE]: [],

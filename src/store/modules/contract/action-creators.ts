@@ -13,6 +13,7 @@ import {
 } from "./types";
 import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
 import { MediaType } from "../../../services/media";
+import { BaseAction } from "../auth/types";
 
 export const REQUEST_CREATE_CONTRACT = "REQUEST_CREATE_CONTRACT";
 export const REQUEST_SCREEN_DATA = "REQUEST_SCREEN_DATA";
@@ -30,6 +31,7 @@ export const REQUEST_DELETE_CONTRACT_PARTNER =
 export const REQUEST_CONTRACT_DETAIL_FOR_PDF =
   "REQUEST_CONTRACT_DETAIL_FOR_PDF";
 export const REQUEST_LEAVE_CONTRACT = "REQUEST_LEAVE_CONTRACT";
+export const REQUEST_SIGN_MODAL = "REQUEST_SIGN_MODAL";
 
 export const SET_SCREEN_DATA_WITH_CHECK_REQUEST =
   "SET_SCREEN_DATA_WITH_CHECK_REQUEST";
@@ -139,3 +141,9 @@ export const requestLeaveContract = (
   payload: contractId,
 });
 
+export const requestModalSign = (
+  isModalvisible: boolean
+): BaseAction => ({
+  type: REQUEST_SIGN_MODAL,
+  payload: isModalvisible,
+});

@@ -3,18 +3,25 @@ import { StyleSheet, View } from "react-native";
 import DefaultText from "../../../basics/typography/DefaultText";
 import { useI18n } from "../../../../translator/i18n";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "../../../../store/modules/contract/constants";
+import {
+  CONTRACT_SCREEN_TYPES,
+  CONTRACT_TYPES,
+} from "../../../../store/modules/contract/constants";
 import SignInput from "../../../basics/inputs/SignInput";
 import InviteInput from "../../../basics/inputs/InviteInput";
 import SignModal from "../../Modals/SignModal";
 import { orientationChange } from "../../../../store/modules/main/action-creators";
 import { OrientationLock } from "expo-screen-orientation";
 import { SIGN_LOADER } from "../../../../store/modules/contract/purchase/sign";
-import { removeFromWaiter, setModal } from "../../../../store/modules/main/slice";
+import {
+  removeFromWaiter,
+  setModal,
+} from "../../../../store/modules/main/slice";
 import { contractValidator } from "../../../../store/modules/contract/validation";
 import { ContractDataType } from "../../../../store/modules/contract/types";
 import { useNavigation } from "@react-navigation/native";
 import {
+  requestModalSign,
   validateAllScreens,
   validateScreen,
 } from "../../../../store/modules/contract/action-creators";
@@ -32,44 +39,29 @@ export default function Sign() {
   const { t } = useI18n();
   const contract = useAppSelector((state) => state.contract.currentContract);
   const sign = useAppSelector((state) => state.contract.currentContract?.sign);
-  const [signVisible, setSignVisible] = useState(false);
   const dispatch = useAppDispatch();
   const navigator = useNavigation();
+
+  const signVisible = useAppSelector((state) => state.contract.signModal);
 
   const signModalHandler = (currentContract: ContractDataType) => {
     dispatch(clearErrors());
     dispatch(validateAllScreens(currentContract.type));
-    const emptyScreen = contractValidator(
-      currentContract.type,
-      currentContract.screens,
-      currentContract.meRole
-    );
-    
+    const emptyScreen = contractValidator(currentContract);
+
     if (emptyScreen !== null) {
       // @ts-ignore
-      navigator.pop(
-        countToPopLength(
-          currentContract.type,
-          currentContract.meRole,
-          contract?.screens,
-          emptyScreen
-        )
-      );
+      navigator.pop(countToPopLength(currentContract, emptyScreen));
       dispatch(
         validateScreen(
           currentContract.type,
-          getTypeByContractAndScreen(
-            currentContract.type,
-            currentContract.meRole,
-            contract?.screens,
-            emptyScreen,
-          )
+          getTypeByContractAndScreen(currentContract, emptyScreen)
         )
       );
       return;
     }
 
-    if (contract?.type === CONTRACT_TYPES.WORK) {
+    if (contract?.type === CONTRACT_TYPES.WORK && !signVisible) {
       dispatch(
         setModal({
           message: t("contracts.confirmation_modal.confirm_contract_sign"),
@@ -80,7 +72,7 @@ export default function Sign() {
             },
             {
               name: t("contracts.confirmation_modal.buttons.sign"),
-              //TODO: add action for showing sign modal,
+              action: requestModalSign(true),
             },
           ],
         })
@@ -88,14 +80,7 @@ export default function Sign() {
       return;
     }
 
-    setSignVisible(!signVisible);
-    dispatch(
-      orientationChange(
-        !signVisible
-          ? OrientationLock.LANDSCAPE_RIGHT
-          : OrientationLock.PORTRAIT_UP
-      )
-    );
+    dispatch(requestModalSign(false));
   };
 
   const inviteHandler = () => {
@@ -109,9 +94,8 @@ export default function Sign() {
     if (!signVisible) {
       return () => {};
     }
-    setSignVisible(false);
-    dispatch(orientationChange(OrientationLock.PORTRAIT_UP));
-    dispatch(removeFromWaiter({event: SIGN_LOADER}));
+    dispatch(requestModalSign(false));
+    dispatch(removeFromWaiter({ event: SIGN_LOADER }));
   }, [sign]);
 
   if (!contract) {

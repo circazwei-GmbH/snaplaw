@@ -8,6 +8,7 @@ import {
   CONFIRMATION_FIELDS,
   PAYMENT_FIELDS,
   PAYMENT_METHODS,
+  ContractDataType,
 } from "./types";
 import {
   correctDateOrderCheck,
@@ -27,7 +28,10 @@ import { ADDITIONAL_INFO_FIELDS } from "./additional-info-data";
 import { PAYMENT_INFO_FIELDS } from "./carSales/payment-info";
 import { SERVICES_DATA_FIELDS } from "./work/services-data";
 
-const canBeEmptyScreens = [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO, CONTRACT_SCREEN_TYPES.SPECIFICATIONS]
+const canBeEmptyScreens = [
+  CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO,
+  CONTRACT_SCREEN_TYPES.SPECIFICATIONS,
+];
 
 export const contractValidationConfig = {
   [CONTRACT_TYPES.PURCHASE]: {
@@ -496,7 +500,7 @@ export const contractValidationConfig = {
     [CONTRACT_SCREEN_TYPES.SERVICES]: {
       [CONTRACT_ROLE.OWNER]: {
         [SERVICES_DATA_FIELDS.SERVICES_DATA]: [
-          validateArrayByDataLength("contracts.validation.field_empty", 1)
+          validateArrayByDataLength("contracts.validation.field_empty", 1),
         ],
       },
     },
@@ -534,7 +538,7 @@ export const screenFieldValidator = (
   const validationConfig =
     // @ts-ignore
     contractValidationConfig[contractType][screenType][myRole];
-    
+
   // @ts-ignore
   if (!validationConfig[field]) {
     return;
@@ -543,43 +547,33 @@ export const screenFieldValidator = (
   for (let i = 0; Object.keys(validationConfig[field]).length > i; i++) {
     // @ts-ignore
 
-    
     const validated = validationConfig[field][i](
       screen?.data?.[field],
       screen?.data
     );
-    
+
     if (validated) {
       return validated;
     }
-    
   }
 };
 
-export const contractValidator = (
-  contractType: CONTRACT_TYPES,
-  screens: Array<BaseScreenDataInterface>,
-  myRole: CONTRACT_ROLE
-) => {
-  const contractConfig = getContractScreensConfig(
-    contractType,
-    myRole,
-    screens
-  );
+export const contractValidator = (contract: ContractDataType) => {
+  const contractConfig = getContractScreensConfig(contract);
 
   let firstEmptyScreen = null;
   for (let i = 0; contractConfig.length > i; i++) {
-    const currentScreen = screens.find(
+    const currentScreen = contract.screens.find(
       (screen) => screen.type === contractConfig[i].type
     );
-    
+
     const validationConfig =
       // @ts-ignore
-      contractValidationConfig[contractType][contractConfig[i].type][myRole];
+      contractValidationConfig[contract.type][contractConfig[i].type][contract.meRole];
     if (!validationConfig) {
       continue;
-    }    
-    
+    }
+
     if (
       !currentScreen &&
       !canBeEmptyScreens.includes(contractConfig[i].type) &&
@@ -592,15 +586,15 @@ export const contractValidator = (
     } else {
       const validationConfig =
         // @ts-ignore
-        contractValidationConfig[contractType][currentScreen.type][myRole];
+        contractValidationConfig[contract.type][currentScreen.type][contract.meRole];
       if (validationConfig) {
         for (let field in validationConfig) {
           const validated = screenFieldValidator(
             field,
             currentScreen.type,
             currentScreen,
-            contractType,
-            myRole
+            contract.type,
+            contract.meRole
           );
           if (validated) {
             return i;

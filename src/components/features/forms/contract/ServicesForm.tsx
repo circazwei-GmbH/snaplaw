@@ -36,8 +36,8 @@ export default function ServicesForm() {
   );
   const contractType = useAppSelector(
     (state) => state.contract.currentContract?.type
-  );
-
+  );    
+  
   const onChangeAction = (
     value: string,
     fieldName: SERVICES_DATA_FIELDS,
@@ -102,7 +102,7 @@ export default function ServicesForm() {
                 `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.SERVICES}.placeholders.service`
               )}
               errorMessage={
-                screenErrors?.[SERVICES_DATA_FIELDS.SERVICES_DATA][index]?.[
+                screenErrors?.[SERVICES_DATA_FIELDS.SERVICES_DATA]?.[index]?.[
                   SERVICES_DATA_FIELDS.SERVICE_TITLE
                 ]
               }
@@ -130,7 +130,7 @@ export default function ServicesForm() {
                 )
               }
               errorMessage={
-                screenErrors?.[SERVICES_DATA_FIELDS.SERVICES_DATA][index]?.[
+                screenErrors?.[SERVICES_DATA_FIELDS.SERVICES_DATA]?.[index]?.[
                   SERVICES_DATA_FIELDS.SERVICE_DATE
                 ]
               }

@@ -18,7 +18,8 @@ export const checkIsItChangeRequest = (
   if (!screenPreviousVersion) {
     return true;
   }
-  for (let fieldName in currentScreenData.data) {
+  
+  for (let fieldName in screenPreviousVersion.data) {    
     if (
       screenPreviousVersion.data[fieldName] !==
       currentScreenData.data[fieldName]

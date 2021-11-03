@@ -120,11 +120,18 @@ export const validateArrayByDataLength: ValidatorArrayBuilderInterface = (
   len
 ) => (array: ServiceDataInterface[]) => {
   const errors = array.map((el => {
-    const error = {};
+    const errorData = {};
     for (let [key, value] of Object.entries(el)) {
-      error[key] = length(message, len)(value)
+      const error = length(message, len)(value);
+      if (error) {
+        errorData[key] = error;
+      }
     }
-    return error;
+    if (Object.keys(errorData).length !== 0) {
+      return errorData;
+  }
   }));
-  return errors
+  const isError = errors.find(error => error);
+  
+  return isError ? errors : undefined;
 };
