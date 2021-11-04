@@ -581,6 +581,21 @@ export default {
           partner_text: "Please recheck their identity with a passport.",
         },
       },
+      [CONTRACT_SCREEN_TYPES.ABOUT_HOUSING]: {
+        title: "information about housing",
+        placeholders: {
+          area: "Living area in m²",
+          roomsNumber: "Number of rooms without secondary",
+          location: "Location of the rental property",
+          isFurnished: "Apartment is furnished / partially furnished"
+        },
+        furnished: {
+          warning: "Details on the furnishing inventory can be found in the handover protocol",
+          title: "Please add description",
+          placeholder: "Write here everything that you think is important",
+          uploadFiles: "Upload file",
+        }
+      },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "sign contract",
         signature: "Please enter your signature",

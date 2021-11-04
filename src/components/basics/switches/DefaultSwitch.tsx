@@ -36,8 +36,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
-    height: 45,
+    minHeight: 45,
     paddingHorizontal: 16,
+    paddingVertical: 6,
     marginTop: 10,
     backgroundColor: "#F8FCFF",
     elevation: 1,
@@ -52,5 +53,8 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 17,
     color: "#202020",
+    fontFamily: "P",
+    flex: 1,
+    paddingRight: 10,
   },
 });

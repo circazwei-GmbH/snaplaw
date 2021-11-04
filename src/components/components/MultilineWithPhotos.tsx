@@ -50,7 +50,7 @@ export default function MultilineWithPhotos({
 
     dispatch(
       setScreenData({
-        screenType: screenType,
+        screenType,
         fieldName,
         value: newValue,
       })
@@ -74,7 +74,7 @@ export default function MultilineWithPhotos({
         <DescriptionPhotos
           photos={photos}
           onPressDelete={removePhoto}
-          fieldName={fieldName}
+          fieldName={photosFieldName}
         />
       </View>
       <PhotoMenuModal

@@ -25,7 +25,7 @@ export default function Specifications(): JSX.Element {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
 
-  const [specifications, serSpecifications] = useState(initialState);
+  const [specifications, setSpecifications] = useState(initialState);
   
   const screenErrors = useAppSelector((state) =>
     state.contract.contractErrors
@@ -45,7 +45,7 @@ export default function Specifications(): JSX.Element {
   );
 
   const onToggleSpecification = (fieldName: SPECIFICATIONS_DATA_FIELDS) => {
-    serSpecifications({
+    setSpecifications({
       ...specifications,
       [fieldName]: !specifications[fieldName],
     });
@@ -79,7 +79,7 @@ export default function Specifications(): JSX.Element {
   };
 
   useEffect(() => {
-    if (specificationsScreen) serSpecifications(specificationsScreen.data);
+    if (specificationsScreen) setSpecifications(specificationsScreen.data);
   }, [specificationsScreen]);
 
   return (

@@ -27,6 +27,7 @@ import { SPECIFICATIONS_DATA_FIELDS } from "./specifications-data";
 import { ADDITIONAL_INFO_FIELDS } from "./additional-info-data";
 import { PAYMENT_INFO_FIELDS } from "./carSales/payment-info";
 import { SERVICES_DATA_FIELDS } from "./work/services-data";
+import { HOUSING_DATA_FIELDS } from "./housing-data";
 
 const canBeEmptyScreens = [
   CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO,
@@ -632,6 +633,26 @@ export const contractValidationConfig = {
         ],
         [CONFIRMATION_FIELDS.THIRD]: [
           length("contracts.validation.field_empty", 1),
+        ],
+      },
+    },
+    [CONTRACT_SCREEN_TYPES.ABOUT_HOUSING]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [HOUSING_DATA_FIELDS.AREA]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [HOUSING_DATA_FIELDS.ROOMS_NUMBER]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [HOUSING_DATA_FIELDS.LOCATION]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [HOUSING_DATA_FIELDS.FURNISHED_DESCRIPTION]: [
+          lengthCheckIfAnotherFieldIsTrue(
+            "contracts.validation.field_empty",
+            1,
+            HOUSING_DATA_FIELDS.IS_FURNISHED
+          ),
         ],
       },
     },

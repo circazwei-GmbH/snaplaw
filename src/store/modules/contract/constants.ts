@@ -22,6 +22,7 @@ export const enum CONTRACT_SCREEN_TYPES {
   ADDITIONAL_INFO = "additionalInfo",
   SERVICES = "services",
   INVITE_USER = "inviteUser",
+  ABOUT_HOUSING = "aboutHousing",
 }
 
 export const CONTRACT_CREATION_WAIT = "CONTRACT_CREATION_WAIT";
