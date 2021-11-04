@@ -550,6 +550,93 @@ export const contractValidationConfig = {
     [CONTRACT_SCREEN_TYPES.SIGN]: {},
     [CONTRACT_SCREEN_TYPES.INVITE_USER]: {},
   },
+  [CONTRACT_TYPES.RENTAL]: {
+    [CONTRACT_SCREEN_TYPES.USER_DATA]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [USER_DATA_FIELDS.name]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.lastName]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.dateOfBirth]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.email]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.phone]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.address]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.postCode]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+      [CONTRACT_ROLE.PARTNER]: {
+        [USER_DATA_FIELDS.name]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.lastName]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.dateOfBirth]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.email]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.phone]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.address]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.postCode]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+    },
+    [CONTRACT_SCREEN_TYPES.PASSPORT_DATA]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [PASSPORT_DATA_FIELDS.idCard]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [PASSPORT_DATA_FIELDS.identificationCode]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+      [CONTRACT_ROLE.PARTNER]: {
+        [PASSPORT_DATA_FIELDS.idCard]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [PASSPORT_DATA_FIELDS.identificationCode]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+    },
+    [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [CONFIRMATION_FIELDS.FIRST]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+      [CONTRACT_ROLE.PARTNER]: {
+        [CONFIRMATION_FIELDS.FIRST]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [CONFIRMATION_FIELDS.SECOND]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [CONFIRMATION_FIELDS.THIRD]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+    },
+    [CONTRACT_SCREEN_TYPES.SIGN]: {},
+  }
 };
 
 export const screenFieldValidator = (

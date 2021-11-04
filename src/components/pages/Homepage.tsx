@@ -53,6 +53,9 @@ export default function Homepage(): JSX.Element {
             <ContractTypeCard
               image={require("../../../assets/rental_contract.png")}
               title={t("homepage.contract_types.rental")}
+              onPress={() =>
+                dispatch(requestCreateContract(CONTRACT_TYPES.RENTAL))
+              }
             />
           </View>
         </ScrollView>
