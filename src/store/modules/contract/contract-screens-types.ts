@@ -107,6 +107,12 @@ export const contractScreensConfig: Record<
       granted: [CONTRACT_ROLE.OWNER],
     },
     {
+      component: MemberType,
+      title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.MEMBER_TYPE}.titleBuyer`,
+      type: CONTRACT_SCREEN_TYPES.MEMBER_TYPE,
+      granted: [CONTRACT_ROLE.PARTNER],
+    },
+    {
       component: CompanyDataForm,
       title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.COMPANY_DATA}.title`,
       type: CONTRACT_SCREEN_TYPES.COMPANY_DATA,
