@@ -2,8 +2,8 @@ import { CONTRACT_SCREEN_TYPES } from "../constants";
 import { BaseScreenDataInterface } from "../base-types";
 
 export const enum SERVICES_DATA_FIELDS {
-  SERVICES_DATA = "sevicesData",
-  SERVICE_TITLE = "seviceTitle",
+  SERVICES_DATA = "servicesData",
+  SERVICE_TITLE = "serviceTitle",
   SERVICE_DATE = "serviceDate",
 }
 

@@ -259,6 +259,7 @@ export default {
         "Vertrag %{contract} wurde gerade von %{partner} gelöscht",
       contract_change_request:
         "Vertrag %{contract} wurde von %{partner} aktualisiert",
+      sign_request: "Der Lieferant hat den Preis für die Dienstleistungen festgestellt und den Vertrag %{contract} unterschrieben.",
     },
     modal_buttons: {
       accept: "Akzeptieren",

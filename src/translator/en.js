@@ -254,6 +254,7 @@ export default {
       contract_deleted:
         "Contract %{contract} has just been deleted by %{partner}",
       contract_change_request: "Contract %{contract} updated by %{partner}",
+      sign_request: "Contractor has set the price for services and signed the contract %{contract}",
     },
     modal_buttons: {
       accept: "Accept",

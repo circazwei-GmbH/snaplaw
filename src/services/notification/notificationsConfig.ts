@@ -19,6 +19,7 @@ export enum NOTIFICATION_TYPE {
   CONTRACTOR_LAFT = "contractor_left",
   CONTRACT_DELETED = "contract_deleted",
   CHANGE_REQUEST = "contract_change_request",
+  SIGN_REQUEST = "sign_request",
 }
 
 export type notificationConfigInterface = Record<
@@ -88,6 +89,15 @@ export const notificationConfig: notificationConfigInterface = {
   },
   contract_change_request: {
     message: "notifications.messages.contract_change_request",
+    actions: [
+      {
+        name: "notifications.modal_buttons.ok",
+        colortype: BUTTON_COLORTYPE.PRIMARY,
+      },
+    ],
+  },
+  sign_request: {
+    message: "notifications.messages.sign_request",
     actions: [
       {
         name: "notifications.modal_buttons.ok",
