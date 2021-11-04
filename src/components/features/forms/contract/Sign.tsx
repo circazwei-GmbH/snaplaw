@@ -34,7 +34,6 @@ import * as RootNavigation from "../../../../router/RootNavigation";
 import { HOME_ROUTER } from "../../../../router/HomeRouterType";
 import { CONTRACT_ROLE } from "../../../../store/modules/contract/contract-roles";
 import { BUTTON_COLORTYPE } from "../../../../store/modules/main/types";
-import { tupleExpression } from "@babel/types";
 
 export default function Sign() {
   const { t } = useI18n();
