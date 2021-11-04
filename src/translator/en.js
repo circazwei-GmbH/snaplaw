@@ -550,6 +550,43 @@ export default {
         invite: "Please invite user",
       },
     },
+    [CONTRACT_TYPES.RENTAL]: {
+      title: "Rental contract",
+      [CONTRACT_SCREEN_TYPES.USER_DATA]: {
+        title: "user data",
+      },
+      [CONTRACT_SCREEN_TYPES.PASSPORT_DATA]: {
+        title: "Passport data",
+        placeholders: {
+          idCard: "ID card number",
+          identificationCode: "Identification code",
+        }
+      },
+      [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
+        title: "Confirmation",
+        confirmation: {
+          [CONTRACT_ROLE.OWNER]: {
+            [CONFIRMATION_FIELDS.FIRST]:
+              "Tenant details have been verified and match",
+          },
+          [CONTRACT_ROLE.PARTNER]: {
+            [CONFIRMATION_FIELDS.FIRST]:
+              "The tenant is aware of the condition of the rental property. An inspection took place",
+            [CONFIRMATION_FIELDS.SECOND]:
+              "Landlord details have been verified and match",
+            [CONFIRMATION_FIELDS.THIRD]:
+              "Мeter reading is checked and approved",
+
+          },
+          partner_text: "Please recheck their identity with a passport.",
+        },
+      },
+      [CONTRACT_SCREEN_TYPES.SIGN]: {
+        title: "sign contract",
+        signature: "Please enter your signature",
+        invite: "Please invite user",
+      },
+    },
     confirmation_modal: {
       message: "Are you sure, you want to cancel contract creation?",
       confirm_contract_sign: "You will not be able to edit the contract after signing it. Check your contract details or sign.",

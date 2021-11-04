@@ -562,6 +562,48 @@ export default {
           transfer: "Überweisung",
         },
       },
+      [CONTRACT_SCREEN_TYPES.SIGN]: {
+        title: "Vertrag unterzeichnen",
+        signature: "Bitte Ihre Unterschift eingeben",
+        invite: "Bitte Benutzer einladen",
+      },
+    },
+    [CONTRACT_TYPES.RENTAL]: {
+      title: "Rental contract",
+      [CONTRACT_SCREEN_TYPES.USER_DATA]: {
+        title: "Benutzerdaten",
+      },
+      [CONTRACT_SCREEN_TYPES.PASSPORT_DATA]: {
+        title: "Passdaten",
+        placeholders: {
+          idCard: "ID Kartennummer",
+          identificationCode: "Identifikationsnummer",
+        }
+      },
+      [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
+        title: "Besätigung",
+        confirmation: {
+          [CONTRACT_ROLE.OWNER]: {
+            [CONFIRMATION_FIELDS.FIRST]:
+              "Die Mieterdetails wurden überprüft und stimmen überein",
+          },
+          [CONTRACT_ROLE.PARTNER]: {
+            [CONFIRMATION_FIELDS.FIRST]:
+              "Dem Mieter ist der Zustand des Mietgegenstandes bekannt. Es fand eine Inspektion statt",
+            [CONFIRMATION_FIELDS.SECOND]:
+              "Die Angaben des Vermieters wurden überprüft und stimmen überein",
+            [CONFIRMATION_FIELDS.THIRD]:
+              "Мeter reading is checked and approved",//translate
+
+          },
+          partner_text: "Bitte überprüfen Sie seine Identität mit einem Pass.",
+        },
+      },
+      [CONTRACT_SCREEN_TYPES.SIGN]: {
+        title: "Vertrag unterzeichnen",
+        signature: "1. Bitte Ihre Unterschift eingeben",
+        invite: "2. Bitte Benutzer einladen",
+      },
     },
     confirmation_modal: {
       message: "Wollten Sie die Vertragserstellung wirklich abbrechen?",

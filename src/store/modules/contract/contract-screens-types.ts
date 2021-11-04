@@ -41,7 +41,11 @@ export const getContractScreensConfig = (
 ): Array<ContractScreenConfigType> =>
   contractScreensConfig[contract.type].filter((screen) => {
     let flag = screen.granted.includes(contract.meRole);
-    if (flag && typeof screen.exclusionChecker === "function" && contract.screens) {
+    if (
+      flag &&
+      typeof screen.exclusionChecker === "function" &&
+      contract.screens
+    ) {
       return screen.exclusionChecker(contract);
     }
     return flag;
@@ -209,7 +213,7 @@ export const contractScreensConfig: Record<
       title: `contracts.${CONTRACT_TYPES.WORK}.${CONTRACT_SCREEN_TYPES.INVITE_USER}.title`,
       type: CONTRACT_SCREEN_TYPES.INVITE_USER,
       granted: [CONTRACT_ROLE.OWNER],
-      exclusionChecker: (contract) => !checkPartnerSign(contract)
+      exclusionChecker: (contract) => !checkPartnerSign(contract),
     },
     {
       component: PaymentPartnerFirst,
@@ -222,9 +226,34 @@ export const contractScreensConfig: Record<
       title: `contracts.${CONTRACT_TYPES.WORK}.${CONTRACT_SCREEN_TYPES.SIGN}.title`,
       type: CONTRACT_SCREEN_TYPES.SIGN,
       granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
-      exclusionChecker: checkPartnerSign
+      exclusionChecker: checkPartnerSign,
+    },
+  ],
+  [CONTRACT_TYPES.RENTAL]: [
+    {
+      component: UserDataForm,
+      title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.USER_DATA}.title`,
+      type: CONTRACT_SCREEN_TYPES.USER_DATA,
+      granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
+    },
+    {
+      component: PassportDataForm,
+      title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.PASSPORT_DATA}.title`,
+      type: CONTRACT_SCREEN_TYPES.PASSPORT_DATA,
+      granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
+    },
+    {
+      component: Confirmation,
+      title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.CONFIRMATION}.title`,
+      type: CONTRACT_SCREEN_TYPES.CONFIRMATION,
+      granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
+    },
+    {
+      component: Sign,
+      title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.SIGN}.title`,
+      type: CONTRACT_SCREEN_TYPES.SIGN,
+      granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
     },
   ],
   [CONTRACT_TYPES.FREE]: [],
-  [CONTRACT_TYPES.RENTAL]: [],
 };
