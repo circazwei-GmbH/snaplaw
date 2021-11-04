@@ -599,6 +599,21 @@ export default {
           partner_text: "Bitte überprüfen Sie seine Identität mit einem Pass.",
         },
       },
+      [CONTRACT_SCREEN_TYPES.ABOUT_HOUSING]: {
+        title: "Informationen zum Wohnen",
+        placeholders: {
+          area: "Wohnfläche in m²",
+          roomsNumber: "Anzahl der Zimmer ohne Nebenräumeumber of rooms without secondary",
+          location: "Lage des Mietobjektes",
+          isFurnished: "Wohnung ist möbliert / teilmöbliert",
+        },
+        furnished: {
+          warning: "Details zur Möblierung/Inventar sind dem Übergabeprotokoll",
+          title: "Please add description",//translate
+          placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
+          uploadFiles: "Datei hochladen",
+        }
+      },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "Vertrag unterzeichnen",
         signature: "1. Bitte Ihre Unterschift eingeben",

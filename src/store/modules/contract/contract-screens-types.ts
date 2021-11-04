@@ -9,7 +9,6 @@ import Payment from "../../../components/features/forms/contract/Payment";
 import Sign from "../../../components/features/forms/contract/Sign";
 import { CONTRACT_ROLE } from "./contract-roles";
 import MemberType from "../../../components/features/forms/contract/MemberType";
-import { BaseScreenDataInterface } from "./base-types";
 import {
   checkByPaymentType,
   checkMemberTypeCommercial,
@@ -27,6 +26,7 @@ import ServicesForm from "../../../components/features/forms/contract/ServicesFo
 import InviteUserForm from "../../../components/features/forms/contract/InviteUserForm";
 import { ContractDataType } from "./types";
 import PaymentPartnerFirst from "../../../components/features/forms/contract/PaymentPartnerFirst";
+import AboutHousing from "../../../components/features/forms/contract/AboutHousingForm";
 
 export interface ContractScreenConfigType {
   component: React.ElementType;
@@ -247,6 +247,12 @@ export const contractScreensConfig: Record<
       title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.CONFIRMATION}.title`,
       type: CONTRACT_SCREEN_TYPES.CONFIRMATION,
       granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
+    },
+    {
+      component: AboutHousing,
+      title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.ABOUT_HOUSING}.title`,
+      type: CONTRACT_SCREEN_TYPES.ABOUT_HOUSING,
+      granted: [CONTRACT_ROLE.OWNER],
     },
     {
       component: Sign,
