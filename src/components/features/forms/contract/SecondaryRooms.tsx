@@ -1,15 +1,15 @@
 import React from "react";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { validateScreen } from "../../../store/modules/contract/action-creators";
-import { CONTRACT_SCREEN_TYPES } from "../../../store/modules/contract/constants";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import { validateScreen } from "../../../../store/modules/contract/action-creators";
+import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/constants";
 import {
   SecondaryRoomsScreenInterface,
   SECONDARY_ROOMS_FIELDS,
   SECONDARY_ROOMS_FIELDS_ARR,
-} from "../../../store/modules/contract/secondary-rooms-data";
-import { setScreenData } from "../../../store/modules/contract/slice";
-import { useI18n } from "../../../translator/i18n";
-import CheckboxesList, { ItemType } from "../../components/CheckboxesList";
+} from "../../../../store/modules/contract/secondary-rooms-data";
+import { setScreenData } from "../../../../store/modules/contract/slice";
+import { useI18n } from "../../../../translator/i18n";
+import CheckboxesList, { ItemType } from "../../../components/CheckboxesList";
 
 type FunctionType = () => ItemType[];
 

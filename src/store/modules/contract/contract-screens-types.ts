@@ -27,7 +27,8 @@ import InviteUserForm from "../../../components/features/forms/contract/InviteUs
 import { ContractDataType } from "./types";
 import PaymentPartnerFirst from "../../../components/features/forms/contract/PaymentPartnerFirst";
 import AboutHousing from "../../../components/features/forms/contract/AboutHousingForm";
-import SecondaryRooms from "../../../components/features/forms/SecondaryRooms";
+import SecondaryRooms from "../../../components/features/forms/contract/SecondaryRooms";
+import UsableSpaces from "../../../components/features/forms/contract/UsableSpaces";
 
 export interface ContractScreenConfigType {
   component: React.ElementType;
@@ -259,6 +260,12 @@ export const contractScreensConfig: Record<
       component: SecondaryRooms,
       title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.SECONDARY_ROOMS}.title`,
       type: CONTRACT_SCREEN_TYPES.SECONDARY_ROOMS,
+      granted: [CONTRACT_ROLE.OWNER],
+    },
+    {
+      component: UsableSpaces,
+      title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.USABLE_SPACES}.title`,
+      type: CONTRACT_SCREEN_TYPES.USABLE_SPACES,
       granted: [CONTRACT_ROLE.OWNER],
     },
     {
