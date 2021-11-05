@@ -27,6 +27,7 @@ import InviteUserForm from "../../../components/features/forms/contract/InviteUs
 import { ContractDataType } from "./types";
 import PaymentPartnerFirst from "../../../components/features/forms/contract/PaymentPartnerFirst";
 import AboutHousing from "../../../components/features/forms/contract/AboutHousingForm";
+import SecondaryRooms from "../../../components/features/forms/SecondaryRooms";
 
 export interface ContractScreenConfigType {
   component: React.ElementType;
@@ -252,6 +253,12 @@ export const contractScreensConfig: Record<
       component: AboutHousing,
       title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.ABOUT_HOUSING}.title`,
       type: CONTRACT_SCREEN_TYPES.ABOUT_HOUSING,
+      granted: [CONTRACT_ROLE.OWNER],
+    },
+    {
+      component: SecondaryRooms,
+      title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.SECONDARY_ROOMS}.title`,
+      type: CONTRACT_SCREEN_TYPES.SECONDARY_ROOMS,
       granted: [CONTRACT_ROLE.OWNER],
     },
     {

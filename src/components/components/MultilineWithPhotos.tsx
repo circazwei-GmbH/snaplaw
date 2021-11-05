@@ -14,7 +14,6 @@ interface MultilineWithPhotosInterface {
   text: string;
   placeholder: string;
   iconText: string;
-  fieldName: string;
   photosFieldName: string;
   photos: MediaType[];
   onChangeFunction: (newValue: string) => void;
@@ -24,13 +23,13 @@ interface MultilineWithPhotosInterface {
   description?: string;
   isDirectionReverse?: boolean;
   titleStyle?: StyleProp<TextStyle>;
+  isMultilineHidden?: boolean;
 }
 
 export default function MultilineWithPhotos({
   text,
   placeholder,
   iconText,
-  fieldName,
   photosFieldName,
   photos,
   onChangeFunction,
@@ -40,6 +39,7 @@ export default function MultilineWithPhotos({
   isDirectionReverse,
   titleStyle,
   screenType,
+  isMultilineHidden,
 }: MultilineWithPhotosInterface) {
   const dispatch = useAppDispatch();
 
@@ -59,16 +59,18 @@ export default function MultilineWithPhotos({
 
   return (
     <View style={isDirectionReverse ? styles.directionReverse : null}>
-      <View>
-        <DefaultText text={text} style={[styles.titleTwo, titleStyle]} />
-        <MultilineTextField
-          value={description}
-          errorMessage={errorMessage}
-          placeholder={placeholder}
-          onChangeFunction={onChangeFunction}
-          checked={checked}
-        />
-      </View>
+      {!isMultilineHidden ? (
+        <View>
+          <DefaultText text={text} style={[styles.titleTwo, titleStyle]} />
+          <MultilineTextField
+            value={description}
+            errorMessage={errorMessage}
+            placeholder={placeholder}
+            onChangeFunction={onChangeFunction}
+            checked={checked}
+          />
+        </View>
+      ) : null}
       <View>
         <IconButton text={iconText} onPress={() => setMenuVisible(true)} />
         <DescriptionPhotos

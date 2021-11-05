@@ -76,7 +76,6 @@ export default function ProductDescriptionForm() {
           `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.button`
         )}
         screenType={CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}
-        fieldName={PRODUCT_DESCRIPTION_FIELDS.description}
         photosFieldName={PRODUCT_DESCRIPTION_FIELDS.productPhotos}
         description={description}
         errorMessage={screenError?.[PRODUCT_DESCRIPTION_FIELDS.description]}
@@ -112,7 +111,6 @@ export default function ProductDescriptionForm() {
               iconText={t(
                 `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}.button`
               )}
-              fieldName={PRODUCT_DESCRIPTION_FIELDS.descriptionAccessories}
               photosFieldName={PRODUCT_DESCRIPTION_FIELDS.accessoriesPhotos}
               description={descriptionAccessories}
               errorMessage={
