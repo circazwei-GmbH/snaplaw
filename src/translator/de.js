@@ -8,6 +8,7 @@ import { MEMBER_TYPE_VALUE } from "../store/modules/contract/carSales/member-typ
 import { CONTRACT_ROLE } from "../store/modules/contract/contract-roles";
 import { PAYMENT_INFO_FIELDS } from "../store/modules/contract/carSales/payment-info";
 import { SECONDARY_ROOMS_FIELDS } from "../store/modules/contract/secondary-rooms-data";
+import { USABLE_SPACES_FIELDS } from "../store/modules/contract/usable-spaces-data";
 
 export default {
   welcome: {
@@ -625,6 +626,20 @@ export default {
           [SECONDARY_ROOMS_FIELDS.BALCONY]: "Balkon",
           [SECONDARY_ROOMS_FIELDS.TERRACE]: "Terrasse",
           [SECONDARY_ROOMS_FIELDS.OTHER]: "Sonstiges",
+        },
+        titleMultiline: "Please add description",//translate
+        placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
+        uploadFiles: "Datei hochladen",
+      },
+      [CONTRACT_SCREEN_TYPES.USABLE_SPACES]: {
+        title: "Nutzungsräume",
+        checkboxes: {
+          [USABLE_SPACES_FIELDS.GARAGE]: "Garage",
+          [USABLE_SPACES_FIELDS.UNDERGROUND_PARKING]: "Tiefgaragenstellplatz",
+          [USABLE_SPACES_FIELDS.PARKING]: "Stellplatz",
+          [USABLE_SPACES_FIELDS.CELLAR]: "Keller",
+          [USABLE_SPACES_FIELDS.GARDEN]: "Garten",
+          [USABLE_SPACES_FIELDS.OTHER]: "Sonstiges",
         },
         titleMultiline: "Please add description",//translate
         placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",

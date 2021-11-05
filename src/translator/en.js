@@ -11,6 +11,7 @@ import {
   PAYMENT_METHODS,
 } from "../store/modules/contract/types";
 import { SECONDARY_ROOMS_FIELDS } from "../store/modules/contract/secondary-rooms-data";
+import { USABLE_SPACES_FIELDS } from "../store/modules/contract/usable-spaces-data";
 
 export default {
   welcome: {
@@ -607,6 +608,20 @@ export default {
           [SECONDARY_ROOMS_FIELDS.BALCONY]: "Balcony",
           [SECONDARY_ROOMS_FIELDS.TERRACE]: "Terrace",
           [SECONDARY_ROOMS_FIELDS.OTHER]: "Other",
+        },
+        titleMultiline: "Please add description",
+        placeholder: "Write here everything that you think is important",
+        uploadFiles: "Upload file",
+      },
+      [CONTRACT_SCREEN_TYPES.USABLE_SPACES]: {
+        title: "Usable spaces",
+        checkboxes: {
+          [USABLE_SPACES_FIELDS.GARAGE]: "Garage",
+          [USABLE_SPACES_FIELDS.UNDERGROUND_PARKING]: "Underground parking space",
+          [USABLE_SPACES_FIELDS.PARKING]: "Parking space",
+          [USABLE_SPACES_FIELDS.CELLAR]: "Cellar",
+          [USABLE_SPACES_FIELDS.GARDEN]: "Garden",
+          [USABLE_SPACES_FIELDS.OTHER]: "Other",
         },
         titleMultiline: "Please add description",
         placeholder: "Write here everything that you think is important",
