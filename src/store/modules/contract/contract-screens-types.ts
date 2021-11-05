@@ -29,6 +29,7 @@ import PaymentPartnerFirst from "../../../components/features/forms/contract/Pay
 import AboutHousing from "../../../components/features/forms/contract/AboutHousingForm";
 import SecondaryRooms from "../../../components/features/forms/contract/SecondaryRooms";
 import UsableSpaces from "../../../components/features/forms/contract/UsableSpaces";
+import CommonRooms from "../../../components/features/forms/contract/CommonRooms";
 
 export interface ContractScreenConfigType {
   component: React.ElementType;
@@ -266,6 +267,12 @@ export const contractScreensConfig: Record<
       component: UsableSpaces,
       title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.USABLE_SPACES}.title`,
       type: CONTRACT_SCREEN_TYPES.USABLE_SPACES,
+      granted: [CONTRACT_ROLE.OWNER],
+    },
+    {
+      component: CommonRooms,
+      title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.COMMON_ROOMS}.title`,
+      type: CONTRACT_SCREEN_TYPES.COMMON_ROOMS,
       granted: [CONTRACT_ROLE.OWNER],
     },
     {

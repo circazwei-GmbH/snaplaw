@@ -41,6 +41,8 @@ export default function CheckboxesList({
     <View style={styles.container}>
       {list.map((item) => (
         <Checkbox
+          key={item.name}
+          testID={item.name}
           style={styles.checkboxes}
           isError={!!item.error}
           isChecked={item.checked}

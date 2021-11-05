@@ -12,6 +12,7 @@ import {
 } from "../store/modules/contract/types";
 import { SECONDARY_ROOMS_FIELDS } from "../store/modules/contract/secondary-rooms-data";
 import { USABLE_SPACES_FIELDS } from "../store/modules/contract/usable-spaces-data";
+import { COMMON_ROOMS_FIELDS } from "../store/modules/contract/common-rooms-data";
 
 export default {
   welcome: {
@@ -622,6 +623,18 @@ export default {
           [USABLE_SPACES_FIELDS.CELLAR]: "Cellar",
           [USABLE_SPACES_FIELDS.GARDEN]: "Garden",
           [USABLE_SPACES_FIELDS.OTHER]: "Other",
+        },
+        titleMultiline: "Please add description",
+        placeholder: "Write here everything that you think is important",
+        uploadFiles: "Upload file",
+      },
+      [CONTRACT_SCREEN_TYPES.COMMON_ROOMS]: {
+        title: "Common rooms",
+        checkboxes: {
+          [COMMON_ROOMS_FIELDS.WASHING]: "Washing room",
+          [COMMON_ROOMS_FIELDS.DRYING]: "Drying area",
+          [COMMON_ROOMS_FIELDS.SHARED_GARDEN]: "PShared garden",
+          [COMMON_ROOMS_FIELDS.OTHER]: "Other",
         },
         titleMultiline: "Please add description",
         placeholder: "Write here everything that you think is important",

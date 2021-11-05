@@ -2,6 +2,7 @@ import React from "react";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { validateScreen } from "../../../../store/modules/contract/action-creators";
 import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/constants";
+import { getCheckboxesList } from "../../../../store/modules/contract/helper";
 import { setScreenData } from "../../../../store/modules/contract/slice";
 import {
   UsableSpacesScreenInterface,
@@ -9,9 +10,7 @@ import {
   USABLE_SPACES_FIELDS_ARR,
 } from "../../../../store/modules/contract/usable-spaces-data";
 import { useI18n } from "../../../../translator/i18n";
-import CheckboxesList, { ItemType } from "../../../components/CheckboxesList";
-
-type FunctionType = () => ItemType[];
+import CheckboxesList from "../../../components/CheckboxesList";
 
 export default function UsableSpaces() {
   const { t } = useI18n();
@@ -31,16 +30,6 @@ export default function UsableSpaces() {
   const contractType = useAppSelector(
     (state) => state.contract.currentContract?.type
   );
-
-  const getCheckboxesList: FunctionType = () =>
-    USABLE_SPACES_FIELDS_ARR.map((field) => ({
-      name: field,
-      checked: !!usableSpacesScreen?.data?.[field],
-      error: screenErrors?.[field],
-      translate: t(
-        `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.USABLE_SPACES}.checkboxes.${field}`
-      ),
-    }));
 
   const onChangeAction = (
     value: string | boolean,
@@ -65,7 +54,13 @@ export default function UsableSpaces() {
 
   return (
     <CheckboxesList
-      list={getCheckboxesList()}
+      list={getCheckboxesList(
+        USABLE_SPACES_FIELDS_ARR,
+        usableSpacesScreen?.data,
+        contractType,
+        CONTRACT_SCREEN_TYPES.USABLE_SPACES,
+        t
+      )}
       updateDataHandler={onChangeAction}
       text={t(
         `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.USABLE_SPACES}.titleMultiline`
