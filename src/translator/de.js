@@ -10,6 +10,7 @@ import { PAYMENT_INFO_FIELDS } from "../store/modules/contract/carSales/payment-
 import { SECONDARY_ROOMS_FIELDS } from "../store/modules/contract/secondary-rooms-data";
 import { USABLE_SPACES_FIELDS } from "../store/modules/contract/usable-spaces-data";
 import { COMMON_ROOMS_FIELDS } from "../store/modules/contract/common-rooms-data";
+import { DIRECT_SUPPLY_FIELDS } from "../store/modules/contract/direct-supply-data";
 
 export default {
   welcome: {
@@ -657,6 +658,22 @@ export default {
         titleMultiline: "Please add description",//translate
         placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
         uploadFiles: "Datei hochladen",
+      },
+      [CONTRACT_SCREEN_TYPES.DIRECT_SUPPLY]: {
+        title: "Direktversorgung",
+        text: "Der Mieter verpflichtet sich auf eigen Kosten folgenden Verasorgungsverträge abzuschließen:",
+        checkboxes: {
+          [DIRECT_SUPPLY_FIELDS.ELECTRICITY]: "Strom",
+          [DIRECT_SUPPLY_FIELDS.WATER]: "Warmwasser / Kaltwasser",
+          [DIRECT_SUPPLY_FIELDS.HEATING]: "Heizung",
+          [DIRECT_SUPPLY_FIELDS.HEATING_OIL]: "Heizöl",
+          [DIRECT_SUPPLY_FIELDS.GAS]: "Gas",
+          [DIRECT_SUPPLY_FIELDS.TELEPHONE]: "Telefon",
+          [DIRECT_SUPPLY_FIELDS.INTERNET]: "Internet",
+          [DIRECT_SUPPLY_FIELDS.GARBAGE_COLLECTION]: "Müllabfuhr",
+          [DIRECT_SUPPLY_FIELDS.ALARM]: "Alarm / Sicherheitsdienst",
+          [DIRECT_SUPPLY_FIELDS.OTHER]: "Sonstiges",
+        },
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "Vertrag unterzeichnen",
