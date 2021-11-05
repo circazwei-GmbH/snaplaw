@@ -10,6 +10,7 @@ import {
   CONFIRMATION_FIELDS,
   PAYMENT_METHODS,
 } from "../store/modules/contract/types";
+import { SECONDARY_ROOMS_FIELDS } from "../store/modules/contract/secondary-rooms-data";
 
 export default {
   welcome: {
@@ -595,6 +596,21 @@ export default {
           placeholder: "Write here everything that you think is important",
           uploadFiles: "Upload file",
         }
+      },
+      [CONTRACT_SCREEN_TYPES.SECONDARY_ROOMS]: {
+        title: "secondary rooms",
+        checkboxes: {
+          [SECONDARY_ROOMS_FIELDS.BATHROOM_WC]: "Bathroom with shower/bathtub and WC",
+          [SECONDARY_ROOMS_FIELDS.BATHROOM]: "Bathroom with shower/bathtub",
+          [SECONDARY_ROOMS_FIELDS.WC]: "WC",
+          [SECONDARY_ROOMS_FIELDS.STOREROOM]: "Storeroom",
+          [SECONDARY_ROOMS_FIELDS.BALCONY]: "Balcony",
+          [SECONDARY_ROOMS_FIELDS.TERRACE]: "Terrace",
+          [SECONDARY_ROOMS_FIELDS.OTHER]: "Other",
+        },
+        titleMultiline: "Please add description",
+        placeholder: "Write here everything that you think is important",
+        uploadFiles: "Upload file",
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "sign contract",

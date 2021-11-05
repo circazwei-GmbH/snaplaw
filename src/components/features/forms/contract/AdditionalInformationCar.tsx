@@ -103,7 +103,6 @@ export default function AdditionalInfo(): JSX.Element {
             iconText={t(
               `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO}.damage.uploadFiles`
             )}
-            fieldName={ADDITIONAL_INFO_FIELDS.ACCIDENT_DAMAGE_DESCRIPTION}
             photosFieldName={ADDITIONAL_INFO_FIELDS.ACCIDENT_DAMAGE_PHOTOS}
             photos={photosDamage ?? []}
             onChangeFunction={(newValue) =>
@@ -142,7 +141,6 @@ export default function AdditionalInfo(): JSX.Element {
             iconText={t(
               `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO}.defect.uploadFiles`
             )}
-            fieldName={ADDITIONAL_INFO_FIELDS.OTHER_DEFECTS_DESCRIPTION}
             photosFieldName={ADDITIONAL_INFO_FIELDS.OTHER_DEFECTS_PHOTOS}
             photos={photosDefects ?? []}
             onChangeFunction={(newValue) =>

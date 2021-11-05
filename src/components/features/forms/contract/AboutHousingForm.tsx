@@ -142,7 +142,6 @@ export default function AboutHousing() {
             iconText={t(
               `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.ABOUT_HOUSING}.furnished.uploadFiles`
             )}
-            fieldName={HOUSING_DATA_FIELDS.FURNISHED_DESCRIPTION}
             photosFieldName={HOUSING_DATA_FIELDS.FURNISHED_PHOTOS}
             photos={photosFurnished ?? []}
             onChangeFunction={(newValue) =>

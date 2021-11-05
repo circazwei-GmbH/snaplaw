@@ -7,6 +7,7 @@ import { CONFIRMATION_FIELDS } from "../store/modules/contract/purchase/confirma
 import { MEMBER_TYPE_VALUE } from "../store/modules/contract/carSales/member-type";
 import { CONTRACT_ROLE } from "../store/modules/contract/contract-roles";
 import { PAYMENT_INFO_FIELDS } from "../store/modules/contract/carSales/payment-info";
+import { SECONDARY_ROOMS_FIELDS } from "../store/modules/contract/secondary-rooms-data";
 
 export default {
   welcome: {
@@ -613,6 +614,21 @@ export default {
           placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
           uploadFiles: "Datei hochladen",
         }
+      },
+      [CONTRACT_SCREEN_TYPES.SECONDARY_ROOMS]: {
+        title: "Nebenräume",
+        checkboxes: {
+          [SECONDARY_ROOMS_FIELDS.BATHROOM_WC]: "Bad mit Dusche/Badewanne und WC",
+          [SECONDARY_ROOMS_FIELDS.BATHROOM]: "Bad mit Dusche/Badewanne",
+          [SECONDARY_ROOMS_FIELDS.WC]: "WC",
+          [SECONDARY_ROOMS_FIELDS.STOREROOM]: "Abstellraum",
+          [SECONDARY_ROOMS_FIELDS.BALCONY]: "Balkon",
+          [SECONDARY_ROOMS_FIELDS.TERRACE]: "Terrasse",
+          [SECONDARY_ROOMS_FIELDS.OTHER]: "Sonstiges",
+        },
+        titleMultiline: "Please add description",//translate
+        placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
+        uploadFiles: "Datei hochladen",
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "Vertrag unterzeichnen",
