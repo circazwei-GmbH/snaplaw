@@ -7,7 +7,6 @@ import MultilineWithPhotos from "./MultilineWithPhotos";
 
 export type ItemType = {
   name: string;
-  error?: string;
   translate: string;
   checked: boolean;
 };
@@ -44,7 +43,6 @@ export default function CheckboxesList({
           key={item.name}
           testID={item.name}
           style={styles.checkboxes}
-          isError={!!item.error}
           isChecked={item.checked}
           onChange={() => updateDataHandler(!item.checked, item.name)}
           text={item.translate}

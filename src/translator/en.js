@@ -13,6 +13,7 @@ import {
 import { SECONDARY_ROOMS_FIELDS } from "../store/modules/contract/secondary-rooms-data";
 import { USABLE_SPACES_FIELDS } from "../store/modules/contract/usable-spaces-data";
 import { COMMON_ROOMS_FIELDS } from "../store/modules/contract/common-rooms-data";
+import { DIRECT_SUPPLY_FIELDS } from "../store/modules/contract/direct-supply-data";
 
 export default {
   welcome: {
@@ -639,6 +640,22 @@ export default {
         titleMultiline: "Please add description",
         placeholder: "Write here everything that you think is important",
         uploadFiles: "Upload file",
+      },
+      [CONTRACT_SCREEN_TYPES.DIRECT_SUPPLY]: {
+        title: "direct supply",
+        text: "The tenant undertakes to conclude the following supply contracts at his own expense:",
+        checkboxes: {
+          [DIRECT_SUPPLY_FIELDS.ELECTRICITY]: "Electricity",
+          [DIRECT_SUPPLY_FIELDS.WATER]: "Warm water / cold water",
+          [DIRECT_SUPPLY_FIELDS.HEATING]: "Heating",
+          [DIRECT_SUPPLY_FIELDS.HEATING_OIL]: "Heating oil",
+          [DIRECT_SUPPLY_FIELDS.GAS]: "Gas",
+          [DIRECT_SUPPLY_FIELDS.TELEPHONE]: "Telephone",
+          [DIRECT_SUPPLY_FIELDS.INTERNET]: "Internet",
+          [DIRECT_SUPPLY_FIELDS.GARBAGE_COLLECTION]: "Garbage collection",
+          [DIRECT_SUPPLY_FIELDS.ALARM]: "Alarm / Security Service",
+          [DIRECT_SUPPLY_FIELDS.OTHER]: "Other",
+        },
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "sign contract",

@@ -692,6 +692,7 @@ export const contractValidationConfig = {
         ],
       },
     },
+    [CONTRACT_SCREEN_TYPES.DIRECT_SUPPLY]: {},
     [CONTRACT_SCREEN_TYPES.SIGN]: {},
   },
 };
