@@ -1,30 +1,30 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { validateScreen } from "../../../../store/modules/contract/action-creators";
+import {
+  CommonRoomsScreenInterface,
+  COMMON_ROOMS_FIELDS,
+  COMMON_ROOMS_FIELDS_ARR,
+} from "../../../../store/modules/contract/common-rooms-data";
 import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/constants";
 import { getCheckboxesList } from "../../../../store/modules/contract/helper";
-import {
-  SecondaryRoomsScreenInterface,
-  SECONDARY_ROOMS_FIELDS,
-  SECONDARY_ROOMS_FIELDS_ARR,
-} from "../../../../store/modules/contract/secondary-rooms-data";
 import { setScreenData } from "../../../../store/modules/contract/slice";
 import { useI18n } from "../../../../translator/i18n";
 import CheckboxesList from "../../../components/CheckboxesList";
 
-export default function SecondaryRooms() {
+export default function CommonRooms() {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
 
-  const secondaryRoomsScreen = useAppSelector(
+  const commonRoomsScreen = useAppSelector(
     (state) =>
       state.contract.currentContract?.screens.find(
-        (screen) => screen.type === CONTRACT_SCREEN_TYPES.SECONDARY_ROOMS
-      ) as SecondaryRoomsScreenInterface | undefined
+        (screen) => screen.type === CONTRACT_SCREEN_TYPES.COMMON_ROOMS
+      ) as CommonRoomsScreenInterface | undefined
   );
   const screenErrors = useAppSelector((state) =>
     state.contract.contractErrors
-      ? state.contract.contractErrors[CONTRACT_SCREEN_TYPES.SECONDARY_ROOMS]
+      ? state.contract.contractErrors[CONTRACT_SCREEN_TYPES.COMMON_ROOMS]
       : undefined
   );
   const contractType = useAppSelector(
@@ -33,11 +33,11 @@ export default function SecondaryRooms() {
 
   const onChangeAction = (
     value: string | boolean,
-    fieldName: SECONDARY_ROOMS_FIELDS = SECONDARY_ROOMS_FIELDS.DESCRIPTION
+    fieldName: COMMON_ROOMS_FIELDS = COMMON_ROOMS_FIELDS.DESCRIPTION
   ) => {
     dispatch(
       setScreenData({
-        screenType: CONTRACT_SCREEN_TYPES.SECONDARY_ROOMS,
+        screenType: CONTRACT_SCREEN_TYPES.COMMON_ROOMS,
         fieldName,
         value: value,
       })
@@ -45,39 +45,39 @@ export default function SecondaryRooms() {
 
     if (screenErrors?.[fieldName] && contractType) {
       dispatch(
-        validateScreen(contractType, CONTRACT_SCREEN_TYPES.SECONDARY_ROOMS)
+        validateScreen(contractType, CONTRACT_SCREEN_TYPES.COMMON_ROOMS)
       );
     }
   };
 
-  const photos = secondaryRoomsScreen?.data[SECONDARY_ROOMS_FIELDS.PHOTOS];
+  const photos = commonRoomsScreen?.data[COMMON_ROOMS_FIELDS.PHOTOS];
 
   return (
     <CheckboxesList
       list={getCheckboxesList(
-        SECONDARY_ROOMS_FIELDS_ARR,
-        secondaryRoomsScreen?.data,
+        COMMON_ROOMS_FIELDS_ARR,
+        commonRoomsScreen?.data,
         contractType,
-        CONTRACT_SCREEN_TYPES.SECONDARY_ROOMS,
+        CONTRACT_SCREEN_TYPES.COMMON_ROOMS,
         t
       )}
       updateDataHandler={onChangeAction}
       text={t(
-        `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.SECONDARY_ROOMS}.titleMultiline`
+        `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.COMMON_ROOMS}.titleMultiline`
       )}
       iconText={t(
-        `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.SECONDARY_ROOMS}.uploadFiles`
+        `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.COMMON_ROOMS}.uploadFiles`
       )}
       placeholder={t(
-        `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.SECONDARY_ROOMS}.placeholder`
+        `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.COMMON_ROOMS}.placeholder`
       )}
-      photosFieldName={SECONDARY_ROOMS_FIELDS.PHOTOS}
+      photosFieldName={COMMON_ROOMS_FIELDS.PHOTOS}
       photos={photos ?? []}
-      errorMessage={screenErrors?.[SECONDARY_ROOMS_FIELDS.DESCRIPTION]}
+      errorMessage={screenErrors?.[COMMON_ROOMS_FIELDS.DESCRIPTION]}
       description={
-        secondaryRoomsScreen?.data[SECONDARY_ROOMS_FIELDS.DESCRIPTION] ?? ""
+        commonRoomsScreen?.data[COMMON_ROOMS_FIELDS.DESCRIPTION] ?? ""
       }
-      screenType={CONTRACT_SCREEN_TYPES.SECONDARY_ROOMS}
+      screenType={CONTRACT_SCREEN_TYPES.COMMON_ROOMS}
     />
   );
 }

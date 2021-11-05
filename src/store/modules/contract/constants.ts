@@ -25,6 +25,7 @@ export const enum CONTRACT_SCREEN_TYPES {
   ABOUT_HOUSING = "aboutHousing",
   SECONDARY_ROOMS = "secondaryRooms",
   USABLE_SPACES = "usableSpaces",
+  COMMON_ROOMS = "commonRooms",
 }
 
 export const CONTRACT_CREATION_WAIT = "CONTRACT_CREATION_WAIT";
