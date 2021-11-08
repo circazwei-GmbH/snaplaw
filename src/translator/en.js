@@ -14,6 +14,7 @@ import { SECONDARY_ROOMS_FIELDS } from "../store/modules/contract/secondary-room
 import { USABLE_SPACES_FIELDS } from "../store/modules/contract/usable-spaces-data";
 import { COMMON_ROOMS_FIELDS } from "../store/modules/contract/common-rooms-data";
 import { DIRECT_SUPPLY_FIELDS } from "../store/modules/contract/direct-supply-data";
+import { ADDITIONAL_INFO_RENTAL_FIELDS } from "../store/modules/contract/additional-info-rental-data copy";
 
 export default {
   welcome: {
@@ -655,6 +656,14 @@ export default {
           [DIRECT_SUPPLY_FIELDS.GARBAGE_COLLECTION]: "Garbage collection",
           [DIRECT_SUPPLY_FIELDS.ALARM]: "Alarm / Security Service",
           [DIRECT_SUPPLY_FIELDS.OTHER]: "Other",
+        },
+      },
+      [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO]: {
+        text: "You can choose what of the following options the tenant is allowed to do in the rented property:",
+        checkboxes: {
+          [ADDITIONAL_INFO_RENTAL_FIELDS.COSMETIC_REPAIRS]: "Cosmetic repairs",
+          [ADDITIONAL_INFO_RENTAL_FIELDS.PETS_ALLOWED]: "Pets allowed",
+          [ADDITIONAL_INFO_RENTAL_FIELDS.SMALL_REPAIRS]: "Small repairs",
         },
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {

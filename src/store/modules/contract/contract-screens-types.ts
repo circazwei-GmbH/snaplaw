@@ -19,7 +19,7 @@ import CompanyDataForm from "../../../components/features/forms/contract/Company
 import PassportDataForm from "../../../components/features/forms/contract/PassportDataForm";
 import ProductDataCarForm from "../../../components/features/forms/contract/ProdactDataCarForm";
 import Specifications from "../../../components/features/forms/contract/Specifications";
-import AdditionalInfo from "../../../components/features/forms/contract/AdditionalInformationCar";
+import AdditionalInfoCar from "../../../components/features/forms/contract/AdditionalInformationCar";
 import PaymentInfo from "../../../components/features/forms/contract/PaymentInfo";
 import PaymentCar from "../../../components/features/forms/contract/PaymentCar";
 import ServicesForm from "../../../components/features/forms/contract/ServicesForm";
@@ -31,6 +31,7 @@ import SecondaryRooms from "../../../components/features/forms/contract/Secondar
 import UsableSpaces from "../../../components/features/forms/contract/UsableSpaces";
 import CommonRooms from "../../../components/features/forms/contract/CommonRooms";
 import DirectSupply from "../../../components/features/forms/contract/DirectSupply";
+import AdditionalInfoRental from "../../../components/features/forms/contract/AdditionalInformationRental";
 
 export interface ContractScreenConfigType {
   component: React.ElementType;
@@ -156,7 +157,7 @@ export const contractScreensConfig: Record<
       granted: [CONTRACT_ROLE.OWNER],
     },
     {
-      component: AdditionalInfo,
+      component: AdditionalInfoCar,
       title: `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO}.title`,
       type: CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO,
       granted: [CONTRACT_ROLE.OWNER],
@@ -280,6 +281,12 @@ export const contractScreensConfig: Record<
       component: DirectSupply,
       title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.DIRECT_SUPPLY}.title`,
       type: CONTRACT_SCREEN_TYPES.DIRECT_SUPPLY,
+      granted: [CONTRACT_ROLE.OWNER],
+    },
+    {
+      component: AdditionalInfoRental,
+      title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO}.title`,
+      type: CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO,
       granted: [CONTRACT_ROLE.OWNER],
     },
     {

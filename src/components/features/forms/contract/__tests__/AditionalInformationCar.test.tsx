@@ -9,7 +9,7 @@ import {
 import { setScreenData } from "../../../../../store/modules/contract/slice";
 import { CONTRACT_ROLE } from "../../../../../store/modules/contract/contract-roles";
 import AdditionalInfo from "../AdditionalInformationCar";
-import { ADDITIONAL_INFO_FIELDS } from "../../../../../store/modules/contract/additional-info-data";
+import { ADDITIONAL_INFO_CAR_FIELDS } from "../../../../../store/modules/contract/additional-info-car-data";
 
 const initialState = {
   contract: {
@@ -79,7 +79,7 @@ describe("AditionalInfoCar", () => {
     expect(actions.mock.calls[0][0]).toEqual(
       setScreenData({
         screenType: CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO,
-        fieldName: ADDITIONAL_INFO_FIELDS.ACCIDENT_DAMAGE,
+        fieldName: ADDITIONAL_INFO_CAR_FIELDS.ACCIDENT_DAMAGE,
         value: true,
       })
     );
@@ -87,11 +87,11 @@ describe("AditionalInfoCar", () => {
   it("Should dispaly external fields", () => {
       // @ts-ignore
     initialState.contract.currentContract.screens[0].data[
-      ADDITIONAL_INFO_FIELDS.ACCIDENT_DAMAGE
+      ADDITIONAL_INFO_CAR_FIELDS.ACCIDENT_DAMAGE
     ] = true;
       // @ts-ignore
     initialState.contract.currentContract.screens[0].data[
-      ADDITIONAL_INFO_FIELDS.OTHER_DEFECTS
+      ADDITIONAL_INFO_CAR_FIELDS.OTHER_DEFECTS
     ] = true;
     const { getByText } = render(
       <Provider store={store}>

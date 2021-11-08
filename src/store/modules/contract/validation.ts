@@ -24,7 +24,7 @@ import { COMPANY_DATA_FIELDS } from "./company-data";
 import { PASSPORT_DATA_FIELDS } from "./passport-data";
 import { CAR_DATA_FIELDS } from "./carSales/car-data";
 import { SPECIFICATIONS_DATA_FIELDS } from "./specifications-data";
-import { ADDITIONAL_INFO_FIELDS } from "./additional-info-data";
+import { ADDITIONAL_INFO_CAR_FIELDS } from "./additional-info-car-data";
 import { PAYMENT_INFO_FIELDS } from "./carSales/payment-info";
 import { SERVICES_DATA_FIELDS } from "./work/services-data";
 import { HOUSING_DATA_FIELDS } from "./housing-data";
@@ -336,18 +336,18 @@ export const contractValidationConfig = {
     },
     [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO]: {
       [CONTRACT_ROLE.OWNER]: {
-        [ADDITIONAL_INFO_FIELDS.ACCIDENT_DAMAGE_DESCRIPTION]: [
+        [ADDITIONAL_INFO_CAR_FIELDS.ACCIDENT_DAMAGE_DESCRIPTION]: [
           lengthCheckIfAnotherFieldIsTrue(
             "contracts.validation.field_empty",
             1,
-            ADDITIONAL_INFO_FIELDS.ACCIDENT_DAMAGE
+            ADDITIONAL_INFO_CAR_FIELDS.ACCIDENT_DAMAGE
           ),
         ],
-        [ADDITIONAL_INFO_FIELDS.OTHER_DEFECTS_DESCRIPTION]: [
+        [ADDITIONAL_INFO_CAR_FIELDS.OTHER_DEFECTS_DESCRIPTION]: [
           lengthCheckIfAnotherFieldIsTrue(
             "contracts.validation.field_empty",
             1,
-            ADDITIONAL_INFO_FIELDS.OTHER_DEFECTS
+            ADDITIONAL_INFO_CAR_FIELDS.OTHER_DEFECTS
           ),
         ],
       },
@@ -693,6 +693,7 @@ export const contractValidationConfig = {
       },
     },
     [CONTRACT_SCREEN_TYPES.DIRECT_SUPPLY]: {},
+    [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO]: {},
     [CONTRACT_SCREEN_TYPES.SIGN]: {},
   },
 };

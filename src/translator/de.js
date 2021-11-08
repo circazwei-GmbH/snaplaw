@@ -11,6 +11,7 @@ import { SECONDARY_ROOMS_FIELDS } from "../store/modules/contract/secondary-room
 import { USABLE_SPACES_FIELDS } from "../store/modules/contract/usable-spaces-data";
 import { COMMON_ROOMS_FIELDS } from "../store/modules/contract/common-rooms-data";
 import { DIRECT_SUPPLY_FIELDS } from "../store/modules/contract/direct-supply-data";
+import { ADDITIONAL_INFO_RENTAL_FIELDS } from "../store/modules/contract/additional-info-rental-data copy";
 
 export default {
   welcome: {
@@ -673,6 +674,14 @@ export default {
           [DIRECT_SUPPLY_FIELDS.GARBAGE_COLLECTION]: "Müllabfuhr",
           [DIRECT_SUPPLY_FIELDS.ALARM]: "Alarm / Sicherheitsdienst",
           [DIRECT_SUPPLY_FIELDS.OTHER]: "Sonstiges",
+        },
+      },
+      [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO]: {
+        text: "Sie können wählen, welche der folgenden Möglichkeiten der Mieter machen darf::",
+        checkboxes: {
+          [ADDITIONAL_INFO_RENTAL_FIELDS.COSMETIC_REPAIRS]: "Kosmetische Reparaturen",
+          [ADDITIONAL_INFO_RENTAL_FIELDS.PETS_ALLOWED]: "Haustiere erlaubt",
+          [ADDITIONAL_INFO_RENTAL_FIELDS.SMALL_REPAIRS]: "Kleine Reparaturen",
         },
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {

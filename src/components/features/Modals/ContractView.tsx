@@ -19,7 +19,7 @@ import { BaseScreenDataInterface } from "../../../store/modules/contract/base-ty
 import Button from "../../basics/buttons/Button";
 import { CONTRACT_ROLE } from "../../../store/modules/contract/contract-roles";
 import { HOME_ROUTER } from "../../../router/HomeRouterType";
-import { AdditionalInfoScreenInterface, ADDITIONAL_INFO_FIELDS } from "../../../store/modules/contract/additional-info-data";
+import { AdditionalInfoCarScreenInterface, ADDITIONAL_INFO_CAR_FIELDS } from "../../../store/modules/contract/additional-info-car-data";
 
 type ContractViewProps = {
   visible: boolean;
@@ -50,7 +50,7 @@ export default function ContractView({
 
   const additionalInfoScreen = screens?.find(
     (screen) => screen.type === CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO
-  ) as AdditionalInfoScreenInterface;
+  ) as AdditionalInfoCarScreenInterface;
 
   const onSaveHandler = () => {
     onClose();
@@ -165,7 +165,7 @@ export default function ContractView({
               ) : null}
               {additionalInfoScreen &&
               additionalInfoScreen.data[
-                ADDITIONAL_INFO_FIELDS.ACCIDENT_DAMAGE_PHOTOS
+                ADDITIONAL_INFO_CAR_FIELDS.ACCIDENT_DAMAGE_PHOTOS
               ] ? (
                 <>
                   <DefaultText
@@ -179,16 +179,16 @@ export default function ContractView({
                   <DescriptionPhotos
                     photos={
                       additionalInfoScreen.data[
-                        ADDITIONAL_INFO_FIELDS.ACCIDENT_DAMAGE_PHOTOS
+                        ADDITIONAL_INFO_CAR_FIELDS.ACCIDENT_DAMAGE_PHOTOS
                       ]
                     }
-                    fieldName={ADDITIONAL_INFO_FIELDS.ACCIDENT_DAMAGE_PHOTOS}
+                    fieldName={ADDITIONAL_INFO_CAR_FIELDS.ACCIDENT_DAMAGE_PHOTOS}
                   />
                 </>
               ) : null}
               {additionalInfoScreen &&
               additionalInfoScreen.data[
-                ADDITIONAL_INFO_FIELDS.OTHER_DEFECTS_PHOTOS
+                ADDITIONAL_INFO_CAR_FIELDS.OTHER_DEFECTS_PHOTOS
               ] ? (
                 <>
                   <DefaultText
@@ -202,10 +202,10 @@ export default function ContractView({
                   <DescriptionPhotos
                     photos={
                       additionalInfoScreen.data[
-                        ADDITIONAL_INFO_FIELDS.OTHER_DEFECTS_PHOTOS
+                        ADDITIONAL_INFO_CAR_FIELDS.OTHER_DEFECTS_PHOTOS
                       ]
                     }
-                    fieldName={ADDITIONAL_INFO_FIELDS.OTHER_DEFECTS_PHOTOS}
+                    fieldName={ADDITIONAL_INFO_CAR_FIELDS.OTHER_DEFECTS_PHOTOS}
                   />
                 </>
               ) : null}

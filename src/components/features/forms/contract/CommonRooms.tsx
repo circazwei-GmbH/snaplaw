@@ -56,10 +56,10 @@ export default function CommonRooms() {
     <CheckboxesList
       list={getCheckboxesList(
         COMMON_ROOMS_FIELDS_ARR,
+        CONTRACT_SCREEN_TYPES.COMMON_ROOMS,
+        t,
         commonRoomsScreen?.data,
         contractType,
-        CONTRACT_SCREEN_TYPES.COMMON_ROOMS,
-        t
       )}
       updateDataHandler={onChangeAction}
       text={t(
