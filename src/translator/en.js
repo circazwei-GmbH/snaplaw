@@ -641,7 +641,7 @@ export default {
         checkboxes: {
           [COMMON_ROOMS_FIELDS.WASHING]: "Washing room",
           [COMMON_ROOMS_FIELDS.DRYING]: "Drying area",
-          [COMMON_ROOMS_FIELDS.SHARED_GARDEN]: "PShared garden",
+          [COMMON_ROOMS_FIELDS.SHARED_GARDEN]: "Shared garden",
           [COMMON_ROOMS_FIELDS.OTHER]: "Other",
         },
         titleMultiline: "Please add description",
@@ -693,11 +693,19 @@ export default {
         startText: "Please indicate the start of the rental period",
         date: "Date",
         switchers: {
-          [RENTAL_PERIOD_FIELDS.MIN_TERM]:
-            "Minimum term",
+          [RENTAL_PERIOD_FIELDS.MIN_TERM]: "Minimum term",
           [RENTAL_PERIOD_FIELDS.RENTING_LIMITED]:
             "Is the renting relationship limited in time",
         },
+      },
+      [CONTRACT_SCREEN_TYPES.OPERATING_COSTS]: {
+        title: "Operating costs",
+        product_price: "Set the amount of operating expenses",
+        fields: {
+          cost: "Cost",
+        },
+        warning:
+          "The tenant bears the costs proportionately for the jointly used area. The costs transferred are operating costs within the meaning of Section 1 — 2 BetrKV Annexure 1 in the currently applicable edition.",
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "sign contract",

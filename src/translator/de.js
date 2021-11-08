@@ -717,11 +717,19 @@ export default {
         startText: "Bitte geben Sie den Beginn der Mietzeit an",
         date: "Datum",
         switchers: {
-          [RENTAL_PERIOD_FIELDS.MIN_TERM]:
-            "Mindestlaufzeit",
+          [RENTAL_PERIOD_FIELDS.MIN_TERM]: "Mindestlaufzeit",
           [RENTAL_PERIOD_FIELDS.RENTING_LIMITED]:
             "Ist das Mietverhältnis zeitlich befristet",
         },
+      },
+      [CONTRACT_SCREEN_TYPES.OPERATING_COSTS]: {
+        title: "Betriebskosten",
+        product_price: "Legen Sie die Höhe der Betriebskosten fest",
+        fields: {
+          cost: "Preis",
+        },
+        warning:
+          "Der Mieter trägt die Kosten anteilig für die gemeinschaftlich genutzten Fläche. Bei den übertragenen Kosten handelt es sich um Betriebskosten i.S.d. § 1 - 2 BetrKV Anlage 1 in der jeweils geltenden Fassung.",
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "Vertrag unterzeichnen",

@@ -11,6 +11,7 @@ import { getCheckboxesList } from "../../../../store/modules/contract/helper";
 import { setScreenData } from "../../../../store/modules/contract/slice";
 import { useI18n } from "../../../../translator/i18n";
 import DefaultSwitch from "../../../basics/switches/DefaultSwitch";
+import DefaultText from "../../../basics/typography/DefaultText";
 
 export default function AdditionalInfoRental() {
   const { t } = useI18n();
@@ -48,11 +49,12 @@ export default function AdditionalInfoRental() {
 
   return (
     <View>
-      <Text style={styles.text}>
-        {t(
+      <DefaultText
+        text={t(
           `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO}.text`
         )}
-      </Text>
+        style={styles.text}
+      />
 
       {additionalInfoArray.map((item) => (
         <DefaultSwitch
@@ -71,8 +73,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   text: {
-    fontSize: 16,
-    fontFamily: "P",
     paddingHorizontal: 17,
   },
 });

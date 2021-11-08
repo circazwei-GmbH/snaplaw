@@ -36,6 +36,11 @@ import { RENTAL_PERIOD_FIELDS } from "./rental-period-data";
 const canBeEmptyScreens = [
   CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO,
   CONTRACT_SCREEN_TYPES.SPECIFICATIONS,
+  CONTRACT_SCREEN_TYPES.COMMON_ROOMS,
+  CONTRACT_SCREEN_TYPES.USABLE_SPACES,
+  CONTRACT_SCREEN_TYPES.SECONDARY_ROOMS,
+  CONTRACT_SCREEN_TYPES.DIRECT_SUPPLY,
+  CONTRACT_SCREEN_TYPES.RENTAL_PROPERTY,
 ];
 
 export const contractValidationConfig = {
@@ -714,6 +719,14 @@ export const contractValidationConfig = {
             1,
             RENTAL_PERIOD_FIELDS.RENTING_LIMITED
           ),
+        ],
+      },
+    },
+    [CONTRACT_SCREEN_TYPES.OPERATING_COSTS]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [PAYMENT_FIELDS.COST]: [length("contracts.validation.field_empty", 1)],
+        [PAYMENT_FIELDS.PAYMENT_METHOD]: [
+          length("contracts.validation.field_empty", 1),
         ],
       },
     },

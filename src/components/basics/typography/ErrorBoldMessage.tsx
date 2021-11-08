@@ -32,5 +32,6 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: "OS-SB",
     fontSize: 17,
+    flex: 1,
   },
 });

@@ -34,6 +34,7 @@ import DirectSupply from "../../../components/features/forms/contract/DirectSupp
 import AdditionalInfoRental from "../../../components/features/forms/contract/AdditionalInformationRental";
 import RentalProperty from "../../../components/features/forms/contract/RentalProperty";
 import RentalPeriod from "../../../components/features/forms/contract/RentalPeriod";
+import OperatingCosts from "../../../components/features/forms/contract/OperatingCosts";
 
 export interface ContractScreenConfigType {
   component: React.ElementType;
@@ -301,6 +302,12 @@ export const contractScreensConfig: Record<
       component: RentalPeriod,
       title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.RENTAL_PERIOD}.title`,
       type: CONTRACT_SCREEN_TYPES.RENTAL_PERIOD,
+      granted: [CONTRACT_ROLE.OWNER],
+    },
+    {
+      component: OperatingCosts,
+      title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.OPERATING_COSTS}.title`,
+      type: CONTRACT_SCREEN_TYPES.OPERATING_COSTS,
       granted: [CONTRACT_ROLE.OWNER],
     },
     {
