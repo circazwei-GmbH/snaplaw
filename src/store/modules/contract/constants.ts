@@ -28,6 +28,7 @@ export const enum CONTRACT_SCREEN_TYPES {
   COMMON_ROOMS = "commonRooms",
   DIRECT_SUPPLY = "directSupply",
   RENTAL_PROPERTY = "rentalProperty",
+  RENTAL_PERIOD = "rentalPeriod",
 }
 
 export const CONTRACT_CREATION_WAIT = "CONTRACT_CREATION_WAIT";

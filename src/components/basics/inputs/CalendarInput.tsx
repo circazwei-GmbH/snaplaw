@@ -19,6 +19,7 @@ type CalendarInputProps = {
   dateHandler: (date: string) => void;
   placeholder?: string;
   errorMessage?: string;
+  testID?: string;
 };
 
 export default function CalendarInput({
@@ -27,6 +28,7 @@ export default function CalendarInput({
   dateHandler,
   placeholder = "",
   errorMessage,
+  testID = "",
 }: CalendarInputProps) {
   const [datePickerOpened, setDatePickerOpened] = useState(false);
 
@@ -44,7 +46,12 @@ export default function CalendarInput({
         </Text>
       ) : null}
       <View
-        style={[styles.container, style, errorMessage ? styles.error : null, placeholder && date ? null : styles.marginForLabel]}
+        style={[
+          styles.container,
+          style,
+          errorMessage ? styles.error : null,
+          placeholder && date ? null : styles.marginForLabel,
+        ]}
       >
         <View style={styles.dateContainer}>
           {dayjs(date).isValid() ? (
@@ -65,7 +72,7 @@ export default function CalendarInput({
           <Pressable
             onPress={() => setDatePickerOpened(true)}
             style={styles.iconContainer}
-            testID="DataPickerPressabelAreaID"
+            testID={`DataPickerPressabelAreaID${testID}`}
           >
             <MaterialCommunityIcons
               name="calendar-month-outline"
@@ -80,6 +87,7 @@ export default function CalendarInput({
           datePickerOpened={datePickerOpened}
           setDatePickerOpened={setDatePickerOpened}
           setedDate={date}
+          testID={testID}
         />
       </View>
       <Text

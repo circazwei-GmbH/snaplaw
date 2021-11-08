@@ -78,6 +78,5 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     fontFamily: "P",
-    marginTop: 5,
   }
 });

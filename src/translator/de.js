@@ -13,6 +13,7 @@ import { COMMON_ROOMS_FIELDS } from "../store/modules/contract/common-rooms-data
 import { DIRECT_SUPPLY_FIELDS } from "../store/modules/contract/direct-supply-data";
 import { ADDITIONAL_INFO_RENTAL_FIELDS } from "../store/modules/contract/additional-info-rental-data";
 import { RENTAL_PROPERTY_FIELDS } from "../store/modules/contract/rental-property-data";
+import { RENTAL_PERIOD_FIELDS } from "../store/modules/contract/rental-period-data";
 
 export default {
   welcome: {
@@ -709,6 +710,17 @@ export default {
             "Er hat entsprechend der technischen Möglichkeiten regelmäßig zu lüften und zu heizen aller ihm überlassenen Räumlichkeiten.",
           [RENTAL_PROPERTY_FIELDS.REPORT]:
             "Auftretenden Mängel hat der Mieter unverzüglich dem Mieter zu melden.",
+        },
+      },
+      [CONTRACT_SCREEN_TYPES.RENTAL_PERIOD]: {
+        title: "Mietzeitraum",
+        startText: "Bitte geben Sie den Beginn der Mietzeit an",
+        date: "Datum",
+        switchers: {
+          [RENTAL_PERIOD_FIELDS.MIN_TERM]:
+            "Mindestlaufzeit",
+          [RENTAL_PERIOD_FIELDS.RENTING_LIMITED]:
+            "Ist das Mietverhältnis zeitlich befristet",
         },
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
