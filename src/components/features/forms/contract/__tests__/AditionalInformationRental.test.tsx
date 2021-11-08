@@ -9,7 +9,7 @@ import {
 import { setScreenData } from "../../../../../store/modules/contract/slice";
 import { CONTRACT_ROLE } from "../../../../../store/modules/contract/contract-roles";
 import AdditionalInfoRental from "../AdditionalInformationRental";
-import { ADDITIONAL_INFO_RENTAL_FIELDS_ARR } from "../../../../../store/modules/contract/additional-info-rental-data copy";
+import { ADDITIONAL_INFO_RENTAL_FIELDS_ARR } from "../../../../../store/modules/contract/additional-info-rental-data";
 
 const initialState = {
   contract: {

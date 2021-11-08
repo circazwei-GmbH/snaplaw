@@ -22,7 +22,7 @@ import {
   CONFIRMATION,
   CONFIRMATION_FIELDS,
   ConfirmationScreenInterface,
-} from "./purchase/confirmation";
+} from "./confirmation";
 import {
   PAYMENT_FIELDS,
   PAYMENT_METHODS,

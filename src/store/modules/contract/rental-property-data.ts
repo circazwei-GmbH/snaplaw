@@ -1,0 +1,26 @@
+import { BaseScreenDataInterface } from "./base-types";
+import { CONTRACT_SCREEN_TYPES } from "./constants";
+
+export const enum RENTAL_PROPERTY_FIELDS {
+  PERMITTED = "PERMITTED",
+  TREAT = "TREAT",
+  VENTILATE = "VENTILATE",
+  REPORT = "REPORT",
+}
+
+export interface RentalPropertyScreenInterface extends BaseScreenDataInterface {
+  type: CONTRACT_SCREEN_TYPES.RENTAL_PROPERTY;
+  data: {
+    [RENTAL_PROPERTY_FIELDS.PERMITTED]: boolean;
+    [RENTAL_PROPERTY_FIELDS.TREAT]: boolean;
+    [RENTAL_PROPERTY_FIELDS.VENTILATE]: boolean;
+    [RENTAL_PROPERTY_FIELDS.REPORT]: boolean;
+  };
+}
+
+export const RENTAL_PROPERTY_FIELDS_ARR: Array<RENTAL_PROPERTY_FIELDS> = [
+  RENTAL_PROPERTY_FIELDS.PERMITTED,
+  RENTAL_PROPERTY_FIELDS.TREAT,
+  RENTAL_PROPERTY_FIELDS.VENTILATE,
+  RENTAL_PROPERTY_FIELDS.REPORT,
+];
