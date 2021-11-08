@@ -3,9 +3,9 @@ import { StyleSheet, View } from "react-native";
 import { useI18n } from "../../../../translator/i18n";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import {
-  AdditionalInfoScreenInterface,
-  ADDITIONAL_INFO_FIELDS,
-} from "../../../../store/modules/contract/additional-info-data";
+  AdditionalInfoCarScreenInterface,
+  ADDITIONAL_INFO_CAR_FIELDS,
+} from "../../../../store/modules/contract/additional-info-car-data";
 import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/constants";
 import { setScreenData } from "../../../../store/modules/contract/slice";
 import { validateScreen } from "../../../../store/modules/contract/action-creators";
@@ -13,11 +13,11 @@ import DefaultSwitch from "../../../basics/switches/DefaultSwitch";
 import MultilineWithPhotos from "../../../components/MultilineWithPhotos";
 
 const initialState = {
-  [ADDITIONAL_INFO_FIELDS.ACCIDENT_DAMAGE]: false,
-  [ADDITIONAL_INFO_FIELDS.OTHER_DEFECTS]: false,
+  [ADDITIONAL_INFO_CAR_FIELDS.ACCIDENT_DAMAGE]: false,
+  [ADDITIONAL_INFO_CAR_FIELDS.OTHER_DEFECTS]: false,
 };
 
-export default function AdditionalInfo(): JSX.Element {
+export default function AdditionalInfoCar(): JSX.Element {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
 
@@ -37,15 +37,15 @@ export default function AdditionalInfo(): JSX.Element {
     (state) =>
       state.contract.currentContract?.screens.find(
         (screen) => screen.type === CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO
-      ) as AdditionalInfoScreenInterface | undefined
+      ) as AdditionalInfoCarScreenInterface | undefined
   );
 
   const photosDamage =
-    additionalInfoScreen?.data[ADDITIONAL_INFO_FIELDS.ACCIDENT_DAMAGE_PHOTOS];
+    additionalInfoScreen?.data[ADDITIONAL_INFO_CAR_FIELDS.ACCIDENT_DAMAGE_PHOTOS];
   const photosDefects =
-    additionalInfoScreen?.data[ADDITIONAL_INFO_FIELDS.OTHER_DEFECTS_PHOTOS];
+    additionalInfoScreen?.data[ADDITIONAL_INFO_CAR_FIELDS.OTHER_DEFECTS_PHOTOS];
 
-  const onToggleSpecification = (fieldName: ADDITIONAL_INFO_FIELDS) => {
+  const onToggleSpecification = (fieldName: ADDITIONAL_INFO_CAR_FIELDS) => {
     setAdditionalInfo({
       ...additionalInfo,
       [fieldName]: !additionalInfo[fieldName],
@@ -60,7 +60,7 @@ export default function AdditionalInfo(): JSX.Element {
     );
   };
 
-  const onChangeAction = (value: string, fieldName: ADDITIONAL_INFO_FIELDS) => {
+  const onChangeAction = (value: string, fieldName: ADDITIONAL_INFO_CAR_FIELDS) => {
     dispatch(
       setScreenData({
         screenType: CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO,
@@ -87,7 +87,7 @@ export default function AdditionalInfo(): JSX.Element {
           `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO}.fields.accidentDamage`
         )}
         onChange={() =>
-          onToggleSpecification(ADDITIONAL_INFO_FIELDS.ACCIDENT_DAMAGE)
+          onToggleSpecification(ADDITIONAL_INFO_CAR_FIELDS.ACCIDENT_DAMAGE)
         }
         value={additionalInfo.accidentDamage}
       />
@@ -103,18 +103,18 @@ export default function AdditionalInfo(): JSX.Element {
             iconText={t(
               `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO}.damage.uploadFiles`
             )}
-            photosFieldName={ADDITIONAL_INFO_FIELDS.ACCIDENT_DAMAGE_PHOTOS}
+            photosFieldName={ADDITIONAL_INFO_CAR_FIELDS.ACCIDENT_DAMAGE_PHOTOS}
             photos={photosDamage ?? []}
             onChangeFunction={(newValue) =>
-              onChangeAction(newValue, ADDITIONAL_INFO_FIELDS.ACCIDENT_DAMAGE_DESCRIPTION)
+              onChangeAction(newValue, ADDITIONAL_INFO_CAR_FIELDS.ACCIDENT_DAMAGE_DESCRIPTION)
             }
             description={
               additionalInfoScreen?.data[
-                ADDITIONAL_INFO_FIELDS.ACCIDENT_DAMAGE_DESCRIPTION
+                ADDITIONAL_INFO_CAR_FIELDS.ACCIDENT_DAMAGE_DESCRIPTION
               ] ?? ""
             }
             errorMessage={
-              screenErrors?.[ADDITIONAL_INFO_FIELDS.ACCIDENT_DAMAGE_DESCRIPTION]
+              screenErrors?.[ADDITIONAL_INFO_CAR_FIELDS.ACCIDENT_DAMAGE_DESCRIPTION]
             }
             screenType={CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO}
           />
@@ -125,7 +125,7 @@ export default function AdditionalInfo(): JSX.Element {
           `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO}.fields.otherDefects`
         )}
         onChange={() =>
-          onToggleSpecification(ADDITIONAL_INFO_FIELDS.OTHER_DEFECTS)
+          onToggleSpecification(ADDITIONAL_INFO_CAR_FIELDS.OTHER_DEFECTS)
         }
         value={additionalInfo.otherDefects}
       />
@@ -141,18 +141,18 @@ export default function AdditionalInfo(): JSX.Element {
             iconText={t(
               `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO}.defect.uploadFiles`
             )}
-            photosFieldName={ADDITIONAL_INFO_FIELDS.OTHER_DEFECTS_PHOTOS}
+            photosFieldName={ADDITIONAL_INFO_CAR_FIELDS.OTHER_DEFECTS_PHOTOS}
             photos={photosDefects ?? []}
             onChangeFunction={(newValue) =>
-              onChangeAction(newValue, ADDITIONAL_INFO_FIELDS.OTHER_DEFECTS_DESCRIPTION)
+              onChangeAction(newValue, ADDITIONAL_INFO_CAR_FIELDS.OTHER_DEFECTS_DESCRIPTION)
             }
             description={
               additionalInfoScreen?.data[
-                ADDITIONAL_INFO_FIELDS.OTHER_DEFECTS_DESCRIPTION
+                ADDITIONAL_INFO_CAR_FIELDS.OTHER_DEFECTS_DESCRIPTION
               ] ?? ""
             }
             errorMessage={
-              screenErrors?.[ADDITIONAL_INFO_FIELDS.OTHER_DEFECTS_DESCRIPTION]
+              screenErrors?.[ADDITIONAL_INFO_CAR_FIELDS.OTHER_DEFECTS_DESCRIPTION]
             }
             screenType={CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO}
           />

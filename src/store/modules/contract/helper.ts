@@ -1,7 +1,12 @@
 import { TType } from "../../../translator/i18n";
+import { ADDITIONAL_INFO_RENTAL_FIELDS } from "./additional-info-rental-data copy";
+import { COMMON_ROOMS_FIELDS } from "./common-rooms-data";
 import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
 import { getContractScreensConfig } from "./contract-screens-types";
+import { DIRECT_SUPPLY_FIELDS } from "./direct-supply-data";
+import { SECONDARY_ROOMS_FIELDS } from "./secondary-rooms-data";
 import { ContractDataType } from "./types";
+import { USABLE_SPACES_FIELDS } from "./usable-spaces-data";
 
 export const getTypeByContractAndScreen = (
   contract: ContractDataType,
@@ -18,11 +23,16 @@ export const countToPopLength = (
 };
 
 export const getCheckboxesList = (
-  fieldsArray: string[],
-  screenData: Record<string, any> | undefined,
-  contractType: CONTRACT_TYPES | undefined,
+  fieldsArray:
+    | ADDITIONAL_INFO_RENTAL_FIELDS[]
+    | COMMON_ROOMS_FIELDS[]
+    | DIRECT_SUPPLY_FIELDS[]
+    | SECONDARY_ROOMS_FIELDS[]
+    | USABLE_SPACES_FIELDS[],
   screenType: CONTRACT_SCREEN_TYPES,
-  translator: TType
+  translator: TType,
+  screenData?: Record<string, any>,
+  contractType?: CONTRACT_TYPES
 ) =>
   fieldsArray.map((field) => ({
     name: field,

@@ -56,10 +56,10 @@ export default function UsableSpaces() {
     <CheckboxesList
       list={getCheckboxesList(
         USABLE_SPACES_FIELDS_ARR,
+        CONTRACT_SCREEN_TYPES.USABLE_SPACES,
+        t,
         usableSpacesScreen?.data,
         contractType,
-        CONTRACT_SCREEN_TYPES.USABLE_SPACES,
-        t
       )}
       updateDataHandler={onChangeAction}
       text={t(

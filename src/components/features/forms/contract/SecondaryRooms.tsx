@@ -56,10 +56,10 @@ export default function SecondaryRooms() {
     <CheckboxesList
       list={getCheckboxesList(
         SECONDARY_ROOMS_FIELDS_ARR,
+        CONTRACT_SCREEN_TYPES.SECONDARY_ROOMS,
+        t,
         secondaryRoomsScreen?.data,
         contractType,
-        CONTRACT_SCREEN_TYPES.SECONDARY_ROOMS,
-        t
       )}
       updateDataHandler={onChangeAction}
       text={t(

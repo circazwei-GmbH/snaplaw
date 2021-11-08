@@ -27,18 +27,16 @@ export default function DirectSupply() {
 
   const directSupplyArray = getCheckboxesList(
     DIRECT_SUPPLY_FIELDS_ARR,
+    CONTRACT_SCREEN_TYPES.DIRECT_SUPPLY,
+    t,
     directSupplyScreen?.data,
     contractType,
-    CONTRACT_SCREEN_TYPES.DIRECT_SUPPLY,
-    t
   );
 
   const onChangeAction = (
     value: string | boolean,
     fieldName: DIRECT_SUPPLY_FIELDS
   ) => {
-    console.log(value, fieldName);
-    
     dispatch(
       setScreenData({
         screenType: CONTRACT_SCREEN_TYPES.DIRECT_SUPPLY,
