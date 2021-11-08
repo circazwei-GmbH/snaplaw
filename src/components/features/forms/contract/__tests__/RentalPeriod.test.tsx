@@ -131,11 +131,15 @@ describe("RentalPeriod", () => {
       getByTestId(`DataPickerPressabelAreaID${RENTAL_PERIOD_FIELDS.START}`)
     );
     fireEvent.press(getByTestId(`ConfirmDate${RENTAL_PERIOD_FIELDS.START}`));
+    const date =  new Date()
+    date.setHours(0);
+    date.setMinutes(0);
+    date.setSeconds(0)
     expect(actions).toBeCalledWith(
       setScreenData({
         screenType: CONTRACT_SCREEN_TYPES.RENTAL_PERIOD,
         fieldName: RENTAL_PERIOD_FIELDS.START,
-        value: `${new Date()}`,
+        value: `${date}`,
       })
     );
   });

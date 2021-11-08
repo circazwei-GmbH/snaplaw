@@ -21,7 +21,13 @@ export default function DatePickerModalCustom({
   testID = "",
 }: DatePickerModalCustomInterface): JSX.Element {
   const { t } = useI18n();
-  const [date, setDate] = useState(setedDate || `${new Date()}`);
+  const getTodayDate = (date: Date) => {
+    date.setHours(0);
+    date.setMinutes(0);
+    date.setSeconds(0)
+    return date
+  }
+  const [date, setDate] = useState(setedDate || `${getTodayDate(new Date())}`);
 
   return (
     <Modal visible={datePickerOpened} transparent={true} animationType="none">
