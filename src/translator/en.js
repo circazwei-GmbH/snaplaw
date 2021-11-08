@@ -16,6 +16,7 @@ import { COMMON_ROOMS_FIELDS } from "../store/modules/contract/common-rooms-data
 import { DIRECT_SUPPLY_FIELDS } from "../store/modules/contract/direct-supply-data";
 import { ADDITIONAL_INFO_RENTAL_FIELDS } from "../store/modules/contract/additional-info-rental-data";
 import { RENTAL_PROPERTY_FIELDS } from "../store/modules/contract/rental-property-data";
+import { RENTAL_PERIOD_FIELDS } from "../store/modules/contract/rental-period-data";
 
 export default {
   welcome: {
@@ -235,7 +236,7 @@ export default {
   },
   menu: {
     cancel: "Cancel",
-    confirm: "Confirm"
+    confirm: "Confirm",
   },
   notifications: {
     title: "Notifications",
@@ -260,7 +261,8 @@ export default {
       contract_deleted:
         "Contract %{contract} has just been deleted by %{partner}",
       contract_change_request: "Contract %{contract} updated by %{partner}",
-      sign_request: "Contractor has set the price for services and signed the contract %{contract}",
+      sign_request:
+        "Contractor has set the price for services and signed the contract %{contract}",
     },
     modal_buttons: {
       accept: "Accept",
@@ -315,7 +317,7 @@ export default {
           [CONTRACT_ROLE.PARTNER]: {
             [CONFIRMATION_FIELDS.SELLER_DETAIL]:
               "Seller details have been verified and match",
-          }
+          },
         },
         partner_text: "Please recheck their identity with a passport.",
       },
@@ -358,8 +360,9 @@ export default {
         },
         buyerWarning: {
           fee: "As commercial user you will need to pay 19% fee additionally.",
-          calculation: "The initial sum was %{sum} euro. Incl. fee the total sum will be %{total} euro."
-        }
+          calculation:
+            "The initial sum was %{sum} euro. Incl. fee the total sum will be %{total} euro.",
+        },
       },
       [CONTRACT_SCREEN_TYPES.USER_DATA]: {
         title: "user data",
@@ -372,15 +375,15 @@ export default {
           email: "E-Mail",
           address: "Address (Street, City)",
           postCode: "Postal code",
-          phone: "Phone"
-        }
+          phone: "Phone",
+        },
       },
       [CONTRACT_SCREEN_TYPES.PASSPORT_DATA]: {
         title: "Passport data",
         placeholders: {
           idCard: "ID card number",
           identificationCode: "Identification code",
-        }
+        },
       },
       [CONTRACT_SCREEN_TYPES.PRODUCT_DATA]: {
         title: "Product data",
@@ -398,7 +401,7 @@ export default {
           model: "Car model",
           type: "Type",
           year: "Year of issue",
-        }
+        },
       },
       [CONTRACT_SCREEN_TYPES.SPECIFICATIONS]: {
         title: "Specifications",
@@ -434,7 +437,7 @@ export default {
           title: "Please add defect description",
           placeholder: "Write here everything that you think is important",
           uploadFiles: "Upload file",
-        }
+        },
       },
       [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
         title: "Confirmation",
@@ -454,7 +457,7 @@ export default {
               "The seller and the buyer agree that the buyer will transfer the payment in the amount of %{amount}",
             [CONFIRMATION_FIELDS.SECOND]:
               "Seller details have been verified and match",
-          }
+          },
         },
       },
       [CONTRACT_SCREEN_TYPES.PAYMENT_INFO]: {
@@ -464,7 +467,7 @@ export default {
           [PAYMENT_INFO_FIELDS.ACCOUNT_NUMBER]: "Account number",
           [PAYMENT_INFO_FIELDS.IBAN]: "IBAN",
           [PAYMENT_INFO_FIELDS.BIC]: "BIC",
-        }
+        },
       },
       [CONTRACT_SCREEN_TYPES.PAYMENT]: {
         title: "Payment",
@@ -509,7 +512,7 @@ export default {
           service: "Services",
           date: "Date",
         },
-        button: "Add another service"
+        button: "Add another service",
       },
       [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
         title: "additional information",
@@ -527,13 +530,13 @@ export default {
           [CONTRACT_ROLE.PARTNER]: {
             [CONFIRMATION_FIELDS.SELLER_DETAIL]:
               "Customer details have been verified and match.",
-          }
+          },
         },
         partner_text: "Please recheck their identity with a passport.",
       },
       [CONTRACT_SCREEN_TYPES.INVITE_USER]: {
         title: "invite user",
-        titleTwo: "Please invite user"
+        titleTwo: "Please invite user",
       },
       [CONTRACT_SCREEN_TYPES.PAYMENT]: {
         title: "Payment",
@@ -566,7 +569,7 @@ export default {
         placeholders: {
           idCard: "ID card number",
           identificationCode: "Identification code",
-        }
+        },
       },
       [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
         title: "Confirmation",
@@ -582,7 +585,6 @@ export default {
               "Landlord details have been verified and match",
             [CONFIRMATION_FIELDS.THIRD]:
               "Мeter reading is checked and approved",
-
           },
           partner_text: "Please recheck their identity with a passport.",
         },
@@ -593,19 +595,21 @@ export default {
           area: "Living area in m²",
           roomsNumber: "Number of rooms without secondary",
           location: "Location of the rental property",
-          isFurnished: "Apartment is furnished / partially furnished"
+          isFurnished: "Apartment is furnished / partially furnished",
         },
         furnished: {
-          warning: "Details on the furnishing inventory can be found in the handover protocol",
+          warning:
+            "Details on the furnishing inventory can be found in the handover protocol",
           title: "Please add description",
           placeholder: "Write here everything that you think is important",
           uploadFiles: "Upload file",
-        }
+        },
       },
       [CONTRACT_SCREEN_TYPES.SECONDARY_ROOMS]: {
         title: "secondary rooms",
         checkboxes: {
-          [SECONDARY_ROOMS_FIELDS.BATHROOM_WC]: "Bathroom with shower/bathtub and WC",
+          [SECONDARY_ROOMS_FIELDS.BATHROOM_WC]:
+            "Bathroom with shower/bathtub and WC",
           [SECONDARY_ROOMS_FIELDS.BATHROOM]: "Bathroom with shower/bathtub",
           [SECONDARY_ROOMS_FIELDS.WC]: "WC",
           [SECONDARY_ROOMS_FIELDS.STOREROOM]: "Storeroom",
@@ -621,7 +625,8 @@ export default {
         title: "Usable spaces",
         checkboxes: {
           [USABLE_SPACES_FIELDS.GARAGE]: "Garage",
-          [USABLE_SPACES_FIELDS.UNDERGROUND_PARKING]: "Underground parking space",
+          [USABLE_SPACES_FIELDS.UNDERGROUND_PARKING]:
+            "Underground parking space",
           [USABLE_SPACES_FIELDS.PARKING]: "Parking space",
           [USABLE_SPACES_FIELDS.CELLAR]: "Cellar",
           [USABLE_SPACES_FIELDS.GARDEN]: "Garden",
@@ -645,7 +650,8 @@ export default {
       },
       [CONTRACT_SCREEN_TYPES.DIRECT_SUPPLY]: {
         title: "direct supply",
-        text: "The tenant undertakes to conclude the following supply contracts at his own expense:",
+        text:
+          "The tenant undertakes to conclude the following supply contracts at his own expense:",
         checkboxes: {
           [DIRECT_SUPPLY_FIELDS.ELECTRICITY]: "Electricity",
           [DIRECT_SUPPLY_FIELDS.WATER]: "Warm water / cold water",
@@ -661,7 +667,8 @@ export default {
       },
       [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO]: {
         title: "additional information",
-        text: "You can choose what of the following options the tenant is allowed to do in the rented property:",
+        text:
+          "You can choose what of the following options the tenant is allowed to do in the rented property:",
         checkboxes: {
           [ADDITIONAL_INFO_RENTAL_FIELDS.COSMETIC_REPAIRS]: "Cosmetic repairs",
           [ADDITIONAL_INFO_RENTAL_FIELDS.PETS_ALLOWED]: "Pets allowed",
@@ -671,10 +678,25 @@ export default {
       [CONTRACT_SCREEN_TYPES.RENTAL_PROPERTY]: {
         title: "Use of the rental property",
         checkboxes: {
-          [RENTAL_PROPERTY_FIELDS.PERMITTED]: "The use of the rental property is only permitted within the scope of the contractually agreed purpose.",
-          [RENTAL_PROPERTY_FIELDS.TREAT]: "The tenant must treat the rental property, including all commonly used rooms and furnishings with care and clean them properly.",
-          [RENTAL_PROPERTY_FIELDS.VENTILATE]: "He must regularly ventilate and heat all rooms left to him in accordance with technical capabilities.",
-          [RENTAL_PROPERTY_FIELDS.REPORT]: "The tenant must report any defects to the tenant immediately.",
+          [RENTAL_PROPERTY_FIELDS.PERMITTED]:
+            "The use of the rental property is only permitted within the scope of the contractually agreed purpose.",
+          [RENTAL_PROPERTY_FIELDS.TREAT]:
+            "The tenant must treat the rental property, including all commonly used rooms and furnishings with care and clean them properly.",
+          [RENTAL_PROPERTY_FIELDS.VENTILATE]:
+            "He must regularly ventilate and heat all rooms left to him in accordance with technical capabilities.",
+          [RENTAL_PROPERTY_FIELDS.REPORT]:
+            "The tenant must report any defects to the tenant immediately.",
+        },
+      },
+      [CONTRACT_SCREEN_TYPES.RENTAL_PERIOD]: {
+        title: "rental period",
+        startText: "Please indicate the start of the rental period",
+        date: "Date",
+        switchers: {
+          [RENTAL_PERIOD_FIELDS.MIN_TERM]:
+            "Minimum term",
+          [RENTAL_PERIOD_FIELDS.RENTING_LIMITED]:
+            "Is the renting relationship limited in time",
         },
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
@@ -685,12 +707,13 @@ export default {
     },
     confirmation_modal: {
       message: "Are you sure, you want to cancel contract creation?",
-      confirm_contract_sign: "You will not be able to edit the contract after signing it. Check your contract details or sign.",
+      confirm_contract_sign:
+        "You will not be able to edit the contract after signing it. Check your contract details or sign.",
       buttons: {
         ok: "Yes",
         cancel: "No",
         check: "Check",
-        sign: "Sign"
+        sign: "Sign",
       },
     },
     buttons: {
@@ -719,7 +742,8 @@ export default {
     validation: {
       field_empty: "The field can't be empty",
       product_condition: "Please specify the product condition",
-      uncorrect_date_order: "The date can’t be earlier than advance payment date",
+      uncorrect_date_order:
+        "The date can’t be earlier than advance payment date",
     },
     change_prequest_modal: {
       message:

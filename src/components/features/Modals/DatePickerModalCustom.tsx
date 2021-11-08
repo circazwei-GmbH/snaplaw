@@ -9,6 +9,7 @@ interface DatePickerModalCustomInterface {
   onCancelDate: () => void;
   onConfirmDate: (date: string) => void;
   setedDate: string;
+  testID?: string;
 }
 
 export default function DatePickerModalCustom({
@@ -17,6 +18,7 @@ export default function DatePickerModalCustom({
   onCancelDate,
   onConfirmDate,
   setedDate,
+  testID = "",
 }: DatePickerModalCustomInterface): JSX.Element {
   const { t } = useI18n();
   const [date, setDate] = useState(setedDate || `${new Date()}`);
@@ -40,7 +42,10 @@ export default function DatePickerModalCustom({
                 </Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => onConfirmDate(date)}>
+            <TouchableOpacity
+              onPress={() => onConfirmDate(date)}
+              testID={`ConfirmDate${testID}`}
+            >
               <View style={styles.dataPickerButton}>
                 <Text style={styles.dataPickerButtonText}>
                   {t("menu.confirm")}
