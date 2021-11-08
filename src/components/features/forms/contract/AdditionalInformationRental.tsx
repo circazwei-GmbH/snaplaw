@@ -5,7 +5,7 @@ import {
   AdditionalInfoRentalScreenInterface,
   ADDITIONAL_INFO_RENTAL_FIELDS,
   ADDITIONAL_INFO_RENTAL_FIELDS_ARR,
-} from "../../../../store/modules/contract/additional-info-rental-data copy";
+} from "../../../../store/modules/contract/additional-info-rental-data";
 import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/constants";
 import { getCheckboxesList } from "../../../../store/modules/contract/helper";
 import { setScreenData } from "../../../../store/modules/contract/slice";

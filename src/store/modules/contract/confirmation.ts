@@ -1,6 +1,6 @@
-import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "../constants";
-import { BaseScreenDataInterface } from "../base-types";
-import { CONTRACT_ROLE } from "../contract-roles";
+import { CONTRACT_SCREEN_TYPES, CONTRACT_TYPES } from "./constants";
+import { BaseScreenDataInterface } from "./base-types";
+import { CONTRACT_ROLE } from "./contract-roles";
 
 export enum CONFIRMATION_FIELDS {
   FIRST = "FIRST",

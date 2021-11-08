@@ -14,7 +14,8 @@ import { SECONDARY_ROOMS_FIELDS } from "../store/modules/contract/secondary-room
 import { USABLE_SPACES_FIELDS } from "../store/modules/contract/usable-spaces-data";
 import { COMMON_ROOMS_FIELDS } from "../store/modules/contract/common-rooms-data";
 import { DIRECT_SUPPLY_FIELDS } from "../store/modules/contract/direct-supply-data";
-import { ADDITIONAL_INFO_RENTAL_FIELDS } from "../store/modules/contract/additional-info-rental-data copy";
+import { ADDITIONAL_INFO_RENTAL_FIELDS } from "../store/modules/contract/additional-info-rental-data";
+import { RENTAL_PROPERTY_FIELDS } from "../store/modules/contract/rental-property-data";
 
 export default {
   welcome: {
@@ -659,11 +660,21 @@ export default {
         },
       },
       [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO]: {
+        title: "additional information",
         text: "You can choose what of the following options the tenant is allowed to do in the rented property:",
         checkboxes: {
           [ADDITIONAL_INFO_RENTAL_FIELDS.COSMETIC_REPAIRS]: "Cosmetic repairs",
           [ADDITIONAL_INFO_RENTAL_FIELDS.PETS_ALLOWED]: "Pets allowed",
           [ADDITIONAL_INFO_RENTAL_FIELDS.SMALL_REPAIRS]: "Small repairs",
+        },
+      },
+      [CONTRACT_SCREEN_TYPES.RENTAL_PROPERTY]: {
+        title: "Use of the rental property",
+        checkboxes: {
+          [RENTAL_PROPERTY_FIELDS.PERMITTED]: "The use of the rental property is only permitted within the scope of the contractually agreed purpose.",
+          [RENTAL_PROPERTY_FIELDS.TREAT]: "The tenant must treat the rental property, including all commonly used rooms and furnishings with care and clean them properly.",
+          [RENTAL_PROPERTY_FIELDS.VENTILATE]: "He must regularly ventilate and heat all rooms left to him in accordance with technical capabilities.",
+          [RENTAL_PROPERTY_FIELDS.REPORT]: "The tenant must report any defects to the tenant immediately.",
         },
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {

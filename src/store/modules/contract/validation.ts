@@ -694,6 +694,7 @@ export const contractValidationConfig = {
     },
     [CONTRACT_SCREEN_TYPES.DIRECT_SUPPLY]: {},
     [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO]: {},
+    [CONTRACT_SCREEN_TYPES.RENTAL_PROPERTY]: {},
     [CONTRACT_SCREEN_TYPES.SIGN]: {},
   },
 };

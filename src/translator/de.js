@@ -3,7 +3,7 @@ import {
   CONTRACT_TYPES,
 } from "../store/modules/contract/constants";
 import { CONDITION_VALUE } from "../store/modules/contract/purchase/product-condition";
-import { CONFIRMATION_FIELDS } from "../store/modules/contract/purchase/confirmation";
+import { CONFIRMATION_FIELDS } from "../store/modules/contract/confirmation";
 import { MEMBER_TYPE_VALUE } from "../store/modules/contract/carSales/member-type";
 import { CONTRACT_ROLE } from "../store/modules/contract/contract-roles";
 import { PAYMENT_INFO_FIELDS } from "../store/modules/contract/carSales/payment-info";
@@ -11,7 +11,8 @@ import { SECONDARY_ROOMS_FIELDS } from "../store/modules/contract/secondary-room
 import { USABLE_SPACES_FIELDS } from "../store/modules/contract/usable-spaces-data";
 import { COMMON_ROOMS_FIELDS } from "../store/modules/contract/common-rooms-data";
 import { DIRECT_SUPPLY_FIELDS } from "../store/modules/contract/direct-supply-data";
-import { ADDITIONAL_INFO_RENTAL_FIELDS } from "../store/modules/contract/additional-info-rental-data copy";
+import { ADDITIONAL_INFO_RENTAL_FIELDS } from "../store/modules/contract/additional-info-rental-data";
+import { RENTAL_PROPERTY_FIELDS } from "../store/modules/contract/rental-property-data";
 
 export default {
   welcome: {
@@ -61,7 +62,8 @@ export default {
     },
     modals: {
       information: {
-        text: "Wir haben bereits einen Bestätigungscode an Ihre E-Mail gesendet.",
+        text:
+          "Wir haben bereits einen Bestätigungscode an Ihre E-Mail gesendet.",
       },
       confirm: {
         text: "Der Code ist bereits abgelaufen. Code noch einmal senden?",
@@ -264,7 +266,8 @@ export default {
         "Vertrag %{contract} wurde gerade von %{partner} gelöscht",
       contract_change_request:
         "Vertrag %{contract} wurde von %{partner} aktualisiert",
-      sign_request: "Der Lieferant hat den Preis für die Dienstleistungen festgestellt und den Vertrag %{contract} unterschrieben.",
+      sign_request:
+        "Der Lieferant hat den Preis für die Dienstleistungen festgestellt und den Vertrag %{contract} unterschrieben.",
     },
     modal_buttons: {
       accept: "Akzeptieren",
@@ -335,7 +338,7 @@ export default {
           paypal: "Paypal",
           transfer: "Überweisung",
         },
-        partner_text: "Der Verkäufer hat sich für Barzahlung entschieden.",//translate
+        partner_text: "Der Verkäufer hat sich für Barzahlung entschieden.", //translate
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "Vertrag unterzeichnen",
@@ -354,9 +357,11 @@ export default {
           [MEMBER_TYPE_VALUE.PRIVAT]: "Privat",
         },
         buyerWarning: {
-          fee: "Als gewerblicher Kunde müssen Sie zusätzlich 19% Steuer zahlen.",
-          calculation: "Die ursprüngliche Summe betrug %{sum} Euro. Inkl. Steuer beträgt die Gesamtsumme %{total} Euro."
-        }
+          fee:
+            "Als gewerblicher Kunde müssen Sie zusätzlich 19% Steuer zahlen.",
+          calculation:
+            "Die ursprüngliche Summe betrug %{sum} Euro. Inkl. Steuer beträgt die Gesamtsumme %{total} Euro.",
+        },
       },
       [CONTRACT_SCREEN_TYPES.USER_DATA]: {
         title: "Benutzerdaten",
@@ -369,15 +374,15 @@ export default {
           email: "E-Mail",
           address: "Adresse (Straße, Stadt)",
           postCode: "Postleitzahl",
-          phone: "Nummer"
-        }
+          phone: "Nummer",
+        },
       },
       [CONTRACT_SCREEN_TYPES.PASSPORT_DATA]: {
         title: "Passdaten",
         placeholders: {
           idCard: "ID Kartennummer",
           identificationCode: "Identifikationsnummer",
-        }
+        },
       },
       [CONTRACT_SCREEN_TYPES.PRODUCT_DATA]: {
         title: "Produktdaten",
@@ -395,7 +400,7 @@ export default {
           model: "Auto Model",
           type: "Typ",
           year: "Ausgabejahr",
-        }
+        },
       },
       [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
         title: "Fahrzeugbeschreibung",
@@ -408,7 +413,7 @@ export default {
         placeholders: {
           idCard: "ID Kartennummer",
           identificationCode: "Identifikationsnummer",
-        }
+        },
       },
       [CONTRACT_SCREEN_TYPES.PRODUCT_DATA]: {
         title: "Produktdaten",
@@ -426,7 +431,7 @@ export default {
           model: "Auto Model",
           type: "Typ",
           year: "Ausgabejahr",
-        }
+        },
       },
       [CONTRACT_SCREEN_TYPES.SPECIFICATIONS]: {
         title: "Angaben",
@@ -449,14 +454,16 @@ export default {
         },
         damage: {
           title: "Bitte Unfallschädenbeschreibung hinzufügen",
-          placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
+          placeholder:
+            "Schreiben Sie hier alles auf, was Sie für wichtig halten",
           uploadFiles: "Datei hochladen",
         },
         defect: {
           title: "Bitte Fehlerbeschreibung hinzufügen",
-          placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
+          placeholder:
+            "Schreiben Sie hier alles auf, was Sie für wichtig halten",
           uploadFiles: "Datei hochladen",
-        }
+        },
       },
       [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
         title: "Confirmation",
@@ -467,7 +474,7 @@ export default {
             [CONFIRMATION_FIELDS.SECOND]:
               "Der Verkäufer versichert, dass das Fahrzeug privat und nicht gewerblich genutzt wurde",
             [CONFIRMATION_FIELDS.THIRD]:
-              "Buyer details have been verified and match",//translate
+              "Buyer details have been verified and match", //translate
           },
           [CONTRACT_ROLE.PARTNER]: {
             [CONFIRMATION_FIELDS.FIRST]:
@@ -476,26 +483,26 @@ export default {
               "Verkäufer und Käufer vereinbaren, dass der Käufer die Zahlung in Höhe von %{amount} überweisen wird",
             [CONFIRMATION_FIELDS.SECOND]:
               "Die Verkäuferdaten wurden überprüft und stimmen überein",
-          }
+          },
         },
       },
       [CONTRACT_SCREEN_TYPES.PAYMENT_INFO]: {
         title: "Payment information", //translate
         placeholders: {
-          [PAYMENT_INFO_FIELDS.ACCOUNT_OWNER]: "Account owner",//translate
-          [PAYMENT_INFO_FIELDS.ACCOUNT_NUMBER]: "Account number",//translate
-          [PAYMENT_INFO_FIELDS.IBAN]: "IBAN",//translate
-          [PAYMENT_INFO_FIELDS.BIC]: "BIC",//translate
-        }
+          [PAYMENT_INFO_FIELDS.ACCOUNT_OWNER]: "Account owner", //translate
+          [PAYMENT_INFO_FIELDS.ACCOUNT_NUMBER]: "Account number", //translate
+          [PAYMENT_INFO_FIELDS.IBAN]: "IBAN", //translate
+          [PAYMENT_INFO_FIELDS.BIC]: "BIC", //translate
+        },
       },
       [CONTRACT_SCREEN_TYPES.PAYMENT]: {
         title: "Bezahlung",
-        product_price: "Bitte geben Sie den Preis des Artikels an",//translate
+        product_price: "Bitte geben Sie den Preis des Artikels an", //translate
         payment_method: "Bitte Zahlungsart wählen",
         fields: {
           cost: "Preis",
           payment_date: "Zahlungsdatum",
-          due_date: "Due date",//translate
+          due_date: "Due date", //translate
           advance_date: "Vorauszahlungsdatum",
           advance_cost: "Vorauszahlungspreis",
           left_sum: "Restbetrag Fälligkeitsdatum",
@@ -505,7 +512,7 @@ export default {
           transfer: "Überweisung",
           cash_advance: "Vorauszahlung",
         },
-        partner_text: "Der Verkäufer hat sich für Barzahlung entschieden.",//translate%{method}
+        partner_text: "Der Verkäufer hat sich für Barzahlung entschieden.", //translate%{method}
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "Vertrag unterzeichnen",
@@ -520,7 +527,8 @@ export default {
       },
       [CONTRACT_SCREEN_TYPES.SERVICES]: {
         title: "Dienstleistungen",
-        serviceTitle: "Bitte geben Sie an, welche Dienstleistung Sie erbringen müssen",
+        serviceTitle:
+          "Bitte geben Sie an, welche Dienstleistung Sie erbringen müssen",
         dateTitle: "Die Dienstleistung muss erbracht werden vor:",
         placeholders: {
           service: "Dienstleistungen",
@@ -550,7 +558,7 @@ export default {
       },
       [CONTRACT_SCREEN_TYPES.INVITE_USER]: {
         title: "Benutzer einladen",
-        titleTwo: "Bitte Benutzer einladen"
+        titleTwo: "Bitte Benutzer einladen",
       },
       [CONTRACT_SCREEN_TYPES.PAYMENT]: {
         title: "Bezahlung",
@@ -583,7 +591,7 @@ export default {
         placeholders: {
           idCard: "ID Kartennummer",
           identificationCode: "Identifikationsnummer",
-        }
+        },
       },
       [CONTRACT_SCREEN_TYPES.CONFIRMATION]: {
         title: "Besätigung",
@@ -598,8 +606,7 @@ export default {
             [CONFIRMATION_FIELDS.SECOND]:
               "Die Angaben des Vermieters wurden überprüft und stimmen überein",
             [CONFIRMATION_FIELDS.THIRD]:
-              "Мeter reading is checked and approved",//translate
-
+              "Мeter reading is checked and approved", //translate
           },
           partner_text: "Bitte überprüfen Sie seine Identität mit einem Pass.",
         },
@@ -608,21 +615,24 @@ export default {
         title: "Informationen zum Wohnen",
         placeholders: {
           area: "Wohnfläche in m²",
-          roomsNumber: "Anzahl der Zimmer ohne Nebenräumeumber of rooms without secondary",
+          roomsNumber:
+            "Anzahl der Zimmer ohne Nebenräumeumber of rooms without secondary",
           location: "Lage des Mietobjektes",
           isFurnished: "Wohnung ist möbliert / teilmöbliert",
         },
         furnished: {
           warning: "Details zur Möblierung/Inventar sind dem Übergabeprotokoll",
-          title: "Please add description",//translate
-          placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
+          title: "Please add description", //translate
+          placeholder:
+            "Schreiben Sie hier alles auf, was Sie für wichtig halten",
           uploadFiles: "Datei hochladen",
-        }
+        },
       },
       [CONTRACT_SCREEN_TYPES.SECONDARY_ROOMS]: {
         title: "Nebenräume",
         checkboxes: {
-          [SECONDARY_ROOMS_FIELDS.BATHROOM_WC]: "Bad mit Dusche/Badewanne und WC",
+          [SECONDARY_ROOMS_FIELDS.BATHROOM_WC]:
+            "Bad mit Dusche/Badewanne und WC",
           [SECONDARY_ROOMS_FIELDS.BATHROOM]: "Bad mit Dusche/Badewanne",
           [SECONDARY_ROOMS_FIELDS.WC]: "WC",
           [SECONDARY_ROOMS_FIELDS.STOREROOM]: "Abstellraum",
@@ -630,7 +640,7 @@ export default {
           [SECONDARY_ROOMS_FIELDS.TERRACE]: "Terrasse",
           [SECONDARY_ROOMS_FIELDS.OTHER]: "Sonstiges",
         },
-        titleMultiline: "Please add description",//translate
+        titleMultiline: "Please add description", //translate
         placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
         uploadFiles: "Datei hochladen",
       },
@@ -644,7 +654,7 @@ export default {
           [USABLE_SPACES_FIELDS.GARDEN]: "Garten",
           [USABLE_SPACES_FIELDS.OTHER]: "Sonstiges",
         },
-        titleMultiline: "Please add description",//translate
+        titleMultiline: "Please add description", //translate
         placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
         uploadFiles: "Datei hochladen",
       },
@@ -656,13 +666,14 @@ export default {
           [COMMON_ROOMS_FIELDS.SHARED_GARDEN]: "Gemeinschaftsgarten",
           [COMMON_ROOMS_FIELDS.OTHER]: "Sonstiges",
         },
-        titleMultiline: "Please add description",//translate
+        titleMultiline: "Please add description", //translate
         placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
         uploadFiles: "Datei hochladen",
       },
       [CONTRACT_SCREEN_TYPES.DIRECT_SUPPLY]: {
         title: "Direktversorgung",
-        text: "Der Mieter verpflichtet sich auf eigen Kosten folgenden Verasorgungsverträge abzuschließen:",
+        text:
+          "Der Mieter verpflichtet sich auf eigen Kosten folgenden Verasorgungsverträge abzuschließen:",
         checkboxes: {
           [DIRECT_SUPPLY_FIELDS.ELECTRICITY]: "Strom",
           [DIRECT_SUPPLY_FIELDS.WATER]: "Warmwasser / Kaltwasser",
@@ -677,11 +688,27 @@ export default {
         },
       },
       [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO]: {
-        text: "Sie können wählen, welche der folgenden Möglichkeiten der Mieter machen darf::",
+        title: "Additionale Information",
+        text:
+          "Sie können wählen, welche der folgenden Möglichkeiten der Mieter machen darf::",
         checkboxes: {
-          [ADDITIONAL_INFO_RENTAL_FIELDS.COSMETIC_REPAIRS]: "Kosmetische Reparaturen",
+          [ADDITIONAL_INFO_RENTAL_FIELDS.COSMETIC_REPAIRS]:
+            "Kosmetische Reparaturen",
           [ADDITIONAL_INFO_RENTAL_FIELDS.PETS_ALLOWED]: "Haustiere erlaubt",
           [ADDITIONAL_INFO_RENTAL_FIELDS.SMALL_REPAIRS]: "Kleine Reparaturen",
+        },
+      },
+      [CONTRACT_SCREEN_TYPES.RENTAL_PROPERTY]: {
+        title: "Nutzung des Mietobjektes",
+        checkboxes: {
+          [RENTAL_PROPERTY_FIELDS.PERMITTED]:
+            "Die Nutzung des Mietobjektes ist nur im Rahmen des vertraglich vereinbarten Zweck gestattet.",
+          [RENTAL_PROPERTY_FIELDS.TREAT]:
+            "Der Mieter hat das Mietobjekt inklusive aller gemeinschaftlich genutzter Räume sowie Einrichtungsgegenstände pfleglich zu behandeln und ordnungsgemäß zu reinigen.",
+          [RENTAL_PROPERTY_FIELDS.VENTILATE]:
+            "Er hat entsprechend der technischen Möglichkeiten regelmäßig zu lüften und zu heizen aller ihm überlassenen Räumlichkeiten.",
+          [RENTAL_PROPERTY_FIELDS.REPORT]:
+            "Auftretenden Mängel hat der Mieter unverzüglich dem Mieter zu melden.",
         },
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
@@ -692,12 +719,13 @@ export default {
     },
     confirmation_modal: {
       message: "Wollten Sie die Vertragserstellung wirklich abbrechen?",
-      confirm_contract_sign: "You will not be able to edit the contract after signing it. Check your contract details or sign.",//translate
+      confirm_contract_sign:
+        "You will not be able to edit the contract after signing it. Check your contract details or sign.", //translate
       buttons: {
         ok: "Ja",
         cancel: "Nein",
-        check: "Check",//translate
-        sign: "Sign",//translate
+        check: "Check", //translate
+        sign: "Sign", //translate
       },
     },
     buttons: {
@@ -726,7 +754,8 @@ export default {
     validation: {
       field_empty: "Das Feld kann nicht leer sein",
       product_condition: "Klären Sie bitte den Produktzustand",
-      uncorrect_date_order: "Das Datum sollte nicht früher als Vorauszahlungdatum sein.",
+      uncorrect_date_order:
+        "Das Datum sollte nicht früher als Vorauszahlungdatum sein.",
     },
     change_prequest_modal: {
       message:
