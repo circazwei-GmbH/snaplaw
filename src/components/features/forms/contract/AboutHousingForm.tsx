@@ -73,15 +73,18 @@ export default function AboutHousing() {
   };
 
   useEffect(() => {
-    if (aboutHousing) setSwitchers({
-        [HOUSING_DATA_FIELDS.IS_FURNISHED]: aboutHousing.data[HOUSING_DATA_FIELDS.IS_FURNISHED]
-    });
+    if (aboutHousing)
+      setSwitchers({
+        [HOUSING_DATA_FIELDS.IS_FURNISHED]:
+          aboutHousing.data[HOUSING_DATA_FIELDS.IS_FURNISHED],
+      });
   }, [aboutHousing]);
 
   return (
     <>
       <View style={styles.container}>
         <TextField
+          keyboardType="numeric"
           placeholder={t(
             `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.ABOUT_HOUSING}.placeholders.area`
           )}
@@ -92,6 +95,7 @@ export default function AboutHousing() {
           }
         />
         <TextField
+          keyboardType="numeric"
           placeholder={t(
             `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.ABOUT_HOUSING}.placeholders.roomsNumber`
           )}
@@ -126,11 +130,11 @@ export default function AboutHousing() {
       {switchers[HOUSING_DATA_FIELDS.IS_FURNISHED] ? (
         <View style={styles.container}>
           <View style={styles.errorContainer}>
-          <ErrorBoldMessage
-            text={t(
-              `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.ABOUT_HOUSING}.furnished.warning`
-            )}
-          />
+            <ErrorBoldMessage
+              text={t(
+                `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.ABOUT_HOUSING}.furnished.warning`
+              )}
+            />
           </View>
           <MultilineWithPhotos
             text={t(
@@ -170,9 +174,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   switchContainer: {
-      paddingVertical: 16,
+    paddingVertical: 16,
   },
   errorContainer: {
-      paddingBottom: 16,
-  }
+    paddingBottom: 16,
+  },
 });
