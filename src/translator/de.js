@@ -687,6 +687,9 @@ export default {
           [DIRECT_SUPPLY_FIELDS.ALARM]: "Alarm / Sicherheitsdienst",
           [DIRECT_SUPPLY_FIELDS.OTHER]: "Sonstiges",
         },
+        titleMultiline: "Please add description", //translate
+        placeholder: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
+        uploadFiles: "Datei hochladen",
       },
       [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO]: {
         title: "Additionale Information",

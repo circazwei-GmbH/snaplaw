@@ -32,6 +32,7 @@ import { SECONDARY_ROOMS_FIELDS } from "./secondary-rooms-data";
 import { USABLE_SPACES_FIELDS } from "./usable-spaces-data";
 import { COMMON_ROOMS_FIELDS } from "./common-rooms-data";
 import { RENTAL_PERIOD_FIELDS } from "./rental-period-data";
+import { DIRECT_SUPPLY_FIELDS } from "./direct-supply-data";
 
 const canBeEmptyScreens = [
   CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO,
@@ -698,7 +699,17 @@ export const contractValidationConfig = {
         ],
       },
     },
-    [CONTRACT_SCREEN_TYPES.DIRECT_SUPPLY]: {},
+    [CONTRACT_SCREEN_TYPES.DIRECT_SUPPLY]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [DIRECT_SUPPLY_FIELDS.DESCRIPTION]: [
+          lengthCheckIfAnotherFieldIsTrue(
+            "contracts.validation.field_empty",
+            1,
+            DIRECT_SUPPLY_FIELDS.OTHER
+          ),
+        ],
+      },
+    },
     [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO]: {},
     [CONTRACT_SCREEN_TYPES.RENTAL_PROPERTY]: {},
     [CONTRACT_SCREEN_TYPES.RENTAL_PERIOD]: {
