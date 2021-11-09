@@ -16,7 +16,7 @@ import PaymentPrice from "../components/PaymentPrice";
 
 interface PaymentLayoutInterface {
   updateDataHandler: (field: PAYMENT_FIELDS, value: string) => void;
-  children: ReactElement;
+  children?: ReactElement;
 }
 
 export default function PaymentLayout({
