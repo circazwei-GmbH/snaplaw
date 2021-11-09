@@ -736,9 +736,11 @@ export const contractValidationConfig = {
     [CONTRACT_SCREEN_TYPES.OPERATING_COSTS]: {
       [CONTRACT_ROLE.OWNER]: {
         [PAYMENT_FIELDS.COST]: [length("contracts.validation.field_empty", 1)],
-        [PAYMENT_FIELDS.PAYMENT_METHOD]: [
-          length("contracts.validation.field_empty", 1),
-        ],
+      },
+    },
+    [CONTRACT_SCREEN_TYPES.RENTAL_PRICE]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [PAYMENT_FIELDS.COST]: [length("contracts.validation.field_empty", 1)],
       },
     },
     [CONTRACT_SCREEN_TYPES.SIGN]: {},

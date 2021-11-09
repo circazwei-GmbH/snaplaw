@@ -724,6 +724,7 @@ export default {
           [RENTAL_PERIOD_FIELDS.RENTING_LIMITED]:
             "Ist das Mietverhältnis zeitlich befristet",
         },
+        rentitngLimitedText: "Das Mietverhältnis ist befristet auf den"
       },
       [CONTRACT_SCREEN_TYPES.OPERATING_COSTS]: {
         title: "Betriebskosten",
@@ -733,6 +734,15 @@ export default {
         },
         warning:
           "Der Mieter trägt die Kosten anteilig für die gemeinschaftlich genutzten Fläche. Bei den übertragenen Kosten handelt es sich um Betriebskosten i.S.d. § 1 - 2 BetrKV Anlage 1 in der jeweils geltenden Fassung.",
+      },
+      [CONTRACT_SCREEN_TYPES.RENTAL_PRICE]: {
+        title: "Mietpreis",
+        product_price: "Die monatliche Miete beträgt",
+        fields: {
+          cost: "Preis",
+        },
+        warning:
+          "Und ist immer am 3. Werktag des Folgemonats fällig.",
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "Vertrag unterzeichnen",
