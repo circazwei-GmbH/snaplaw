@@ -13,6 +13,8 @@ export const enum DIRECT_SUPPLY_FIELDS {
   GARBAGE_COLLECTION = "garbageCollection",
   ALARM = "alarm",
   OTHER = "other",
+  DESCRIPTION = "description",
+  PHOTOS = "photos"
 }
 
 export interface DirectSupplyScreenInterface extends BaseScreenDataInterface {
@@ -28,6 +30,8 @@ export interface DirectSupplyScreenInterface extends BaseScreenDataInterface {
     [DIRECT_SUPPLY_FIELDS.GARBAGE_COLLECTION]: boolean;
     [DIRECT_SUPPLY_FIELDS.ALARM]: boolean;
     [DIRECT_SUPPLY_FIELDS.OTHER]: boolean;
+    [DIRECT_SUPPLY_FIELDS.DESCRIPTION]: string;
+    [DIRECT_SUPPLY_FIELDS.PHOTOS]: MediaType[];
   };
 }
 

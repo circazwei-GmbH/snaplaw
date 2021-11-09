@@ -664,6 +664,9 @@ export default {
           [DIRECT_SUPPLY_FIELDS.ALARM]: "Alarm / Security Service",
           [DIRECT_SUPPLY_FIELDS.OTHER]: "Other",
         },
+        titleMultiline: "Please add description",
+        placeholder: "Write here everything that you think is important",
+        uploadFiles: "Upload file",
       },
       [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO]: {
         title: "additional information",
