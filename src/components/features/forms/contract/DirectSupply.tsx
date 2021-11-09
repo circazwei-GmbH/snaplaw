@@ -11,6 +11,7 @@ import { getCheckboxesList } from "../../../../store/modules/contract/helper";
 import { setScreenData } from "../../../../store/modules/contract/slice";
 import { useI18n } from "../../../../translator/i18n";
 import Checkbox from "../../../basics/checkboxes/Checkbox";
+import DefaultText from "../../../basics/typography/DefaultText";
 
 export default function DirectSupply() {
   const { t } = useI18n();
@@ -30,7 +31,7 @@ export default function DirectSupply() {
     CONTRACT_SCREEN_TYPES.DIRECT_SUPPLY,
     t,
     directSupplyScreen?.data,
-    contractType,
+    contractType
   );
 
   const onChangeAction = (
@@ -48,22 +49,22 @@ export default function DirectSupply() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>
-        {t(
+      <DefaultText
+        text={t(
           `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.DIRECT_SUPPLY}.text`
         )}
-      </Text>
+      />
 
       {directSupplyArray.map((item) => (
-          <Checkbox
-            key={item.name}
-            testID={item.name}
-            style={styles.checkboxes}
-            isChecked={item.checked}
-            onChange={() => onChangeAction(!item.checked, item.name)}
-            text={item.translate}
-          />
-        ))}
+        <Checkbox
+          key={item.name}
+          testID={item.name}
+          style={styles.checkboxes}
+          isChecked={item.checked}
+          onChange={() => onChangeAction(!item.checked, item.name)}
+          text={item.translate}
+        />
+      ))}
     </View>
   );
 }
@@ -75,8 +76,4 @@ const styles = StyleSheet.create({
   checkboxes: {
     marginTop: 10,
   },
-  text: {
-    fontSize: 16,
-    fontFamily: "P",
-  }
 });

@@ -11,6 +11,7 @@ import { setScreenData } from "../../../../store/modules/contract/slice";
 import { useI18n } from "../../../../translator/i18n";
 import CalendarInput from "../../../basics/inputs/CalendarInput";
 import DefaultSwitch from "../../../basics/switches/DefaultSwitch";
+import DefaultText from "../../../basics/typography/DefaultText";
 
 const initialState = {
   [RENTAL_PERIOD_FIELDS.MIN_TERM]: false,
@@ -76,11 +77,11 @@ export default function RentalPeriod() {
   return (
     <View>
       <View style={styles.container}>
-        <Text style={styles.text}>
-          {t(
+        <DefaultText
+          text={t(
             `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.RENTAL_PERIOD}.startText`
           )}
-        </Text>
+        />
         <CalendarInput
           testID={RENTAL_PERIOD_FIELDS.START}
           date={rentalPeriodScreen?.data[RENTAL_PERIOD_FIELDS.START] || ""}
@@ -155,10 +156,6 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingHorizontal: 16,
     paddingBottom: 15,
-  },
-  text: {
-    fontFamily: "P",
-    fontSize: 16,
   },
   switchPadding: {
     paddingTop: 24,
