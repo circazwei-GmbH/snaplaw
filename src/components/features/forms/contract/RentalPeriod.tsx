@@ -105,7 +105,7 @@ export default function RentalPeriod() {
       {switchers[RENTAL_PERIOD_FIELDS.MIN_TERM] ? (
         <View style={styles.calendarInputContainer}>
           <CalendarInput
-            key={RENTAL_PERIOD_FIELDS.MIN_TERM}
+            testID={RENTAL_PERIOD_FIELDS.MIN_TERM_DATE}
             date={
               rentalPeriodScreen?.data[RENTAL_PERIOD_FIELDS.MIN_TERM_DATE] || ""
             }
@@ -136,7 +136,7 @@ export default function RentalPeriod() {
           />
 
           <CalendarInput
-            key={RENTAL_PERIOD_FIELDS.RENTING_LIMITED}
+            testID={RENTAL_PERIOD_FIELDS.RENTING_LIMITED_DATE}
             date={
               rentalPeriodScreen?.data[
                 RENTAL_PERIOD_FIELDS.RENTING_LIMITED_DATE

@@ -1,9 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import {
-  CURRENCIES,
-  CURRENCY,
-} from "../../store/modules/contract/payment";
+import { CURRENCIES, CURRENCY } from "../../store/modules/contract/payment";
 import Select from "../basics/selects/Select";
 import DefaultText from "../basics/typography/DefaultText";
 import TextField from "./TextField";
@@ -27,7 +24,6 @@ export default function PaymentPrice({
   onChangeFunction,
   onValueChange,
 }: PaymentPriceInterface) {
-    
   return (
     <>
       <DefaultText style={styles.text} text={defaultText} />

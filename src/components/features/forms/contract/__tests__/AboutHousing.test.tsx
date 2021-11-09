@@ -8,8 +8,6 @@ import {
 } from "../../../../../store/modules/contract/constants";
 import { setScreenData } from "../../../../../store/modules/contract/slice";
 import { CONTRACT_ROLE } from "../../../../../store/modules/contract/contract-roles";
-import { ABOUT_HOUSING_RENTAL_FIELDS } from "../../../../../store/modules/contract/additional-info-RENTAL-data";
-import AdditionalInfoRENTAL from "../AdditionalInformationRENTAL";
 import AboutHousing from "../AboutHousingForm";
 import { HOUSING_DATA_FIELDS } from "../../../../../store/modules/contract/housing-data";
 import { validateScreen } from "../../../../../store/modules/contract/action-creators";

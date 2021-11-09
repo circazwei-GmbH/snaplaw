@@ -744,6 +744,19 @@ export default {
         warning:
           "Und ist immer am 3. Werktag des Folgemonats fällig.",
       },
+      [CONTRACT_SCREEN_TYPES.PRICE_ADJUSTMENT]: {
+        title: "Preisanpassung",
+        fields: {
+          deposit: "Anzahlung",
+          graduatedLease: "Die Staffelmiete wird erhöht",
+        },
+        graduatedLease: {
+          priceText: "1. Bitte Preis festlegen",
+          price: "Preis",
+          dateText: "2. Bitte Datum der Preiserhöhung festlegen",
+          date: "Datum",
+        },
+      },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "Vertrag unterzeichnen",
         signature: "1. Bitte Ihre Unterschift eingeben",

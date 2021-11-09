@@ -166,19 +166,6 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
   },
-  inputBox: {
-    justifyContent: "flex-start",
-    paddingHorizontal: 16,
-  },
-  switchPadding: {
-    paddingTop: 24,
-    paddingBottom: 16,
-  },
-  switchText: {
-    fontSize: 16,
-    lineHeight: 22,
-    textAlign: "center",
-  },
   inputContainer: {
     padding: 16,
     paddingBottom: 5,
