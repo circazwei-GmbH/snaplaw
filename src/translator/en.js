@@ -720,6 +720,19 @@ export default {
         warning:
           "And is always due on the 3rd working day of the following month.",
       },
+      [CONTRACT_SCREEN_TYPES.PRICE_ADJUSTMENT]: {
+        title: "price adjustment",
+        fields: {
+          deposit: "Deposit",
+          graduatedLease: "The graduated lease will be increased",
+        },
+        graduatedLease: {
+          priceText: "1. Please set price",
+          price: "Cost",
+          dateText: "2. Please set date of price increase",
+          date: "Date",
+        },
+      },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "sign contract",
         signature: "Please enter your signature",

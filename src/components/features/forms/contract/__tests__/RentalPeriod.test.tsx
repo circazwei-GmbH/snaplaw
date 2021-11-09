@@ -8,11 +8,10 @@ import {
 } from "../../../../../store/modules/contract/constants";
 import { setScreenData } from "../../../../../store/modules/contract/slice";
 import { CONTRACT_ROLE } from "../../../../../store/modules/contract/contract-roles";
-import Specifications from "../Specifications";
-import { SPECIFICATIONS_DATA_FIELDS } from "../../../../../store/modules/contract/specifications-data";
 import RentalPeriod from "../RentalPeriod";
 import { RENTAL_PERIOD_FIELDS } from "../../../../../store/modules/contract/rental-period-data";
 import { validateScreen } from "../../../../../store/modules/contract/action-creators";
+import { getDateWithoutTime } from "../../../../../store/modules/contract/helper";
 
 const initialState = {
   contract: {
@@ -127,18 +126,48 @@ describe("RentalPeriod", () => {
       </Provider>
     );
 
+    const date = getDateWithoutTime(new Date());
+
     fireEvent.press(
       getByTestId(`DataPickerPressabelAreaID${RENTAL_PERIOD_FIELDS.START}`)
     );
     fireEvent.press(getByTestId(`ConfirmDate${RENTAL_PERIOD_FIELDS.START}`));
-    const date =  new Date()
-    date.setHours(0);
-    date.setMinutes(0);
-    date.setSeconds(0)
     expect(actions).toBeCalledWith(
       setScreenData({
         screenType: CONTRACT_SCREEN_TYPES.RENTAL_PERIOD,
         fieldName: RENTAL_PERIOD_FIELDS.START,
+        value: `${date}`,
+      })
+    );
+
+    fireEvent.press(
+      getByTestId(
+        `DataPickerPressabelAreaID${RENTAL_PERIOD_FIELDS.MIN_TERM_DATE}`
+      )
+    );
+    fireEvent.press(
+      getByTestId(`ConfirmDate${RENTAL_PERIOD_FIELDS.MIN_TERM_DATE}`)
+    );
+    expect(actions).toBeCalledWith(
+      setScreenData({
+        screenType: CONTRACT_SCREEN_TYPES.RENTAL_PERIOD,
+        fieldName: RENTAL_PERIOD_FIELDS.MIN_TERM_DATE,
+        value: `${date}`,
+      })
+    );
+
+    fireEvent.press(
+      getByTestId(
+        `DataPickerPressabelAreaID${RENTAL_PERIOD_FIELDS.RENTING_LIMITED_DATE}`
+      )
+    );
+    fireEvent.press(
+      getByTestId(`ConfirmDate${RENTAL_PERIOD_FIELDS.RENTING_LIMITED_DATE}`)
+    );
+    expect(actions).toBeCalledWith(
+      setScreenData({
+        screenType: CONTRACT_SCREEN_TYPES.RENTAL_PERIOD,
+        fieldName: RENTAL_PERIOD_FIELDS.RENTING_LIMITED_DATE,
         value: `${date}`,
       })
     );
@@ -164,6 +193,14 @@ describe("RentalPeriod", () => {
     fireEvent.press(getByTestId(`ConfirmDate${RENTAL_PERIOD_FIELDS.START}`));
     expect(actions).toBeCalledWith(
       validateScreen(CONTRACT_TYPES.RENTAL, CONTRACT_SCREEN_TYPES.RENTAL_PERIOD)
+    );
+  });
+  it("useEffect without screen", () => {
+    initialState.contract.currentContract.screens = [];
+    const {} = render(
+      <Provider store={store}>
+        <RentalPeriod />
+      </Provider>
     );
   });
 });

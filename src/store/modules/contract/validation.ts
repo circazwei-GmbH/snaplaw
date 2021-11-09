@@ -33,6 +33,7 @@ import { USABLE_SPACES_FIELDS } from "./usable-spaces-data";
 import { COMMON_ROOMS_FIELDS } from "./common-rooms-data";
 import { RENTAL_PERIOD_FIELDS } from "./rental-period-data";
 import { DIRECT_SUPPLY_FIELDS } from "./direct-supply-data";
+import { PRICE_ADJUSTMENT_FIELDS } from "./price-adjustment-data";
 
 const canBeEmptyScreens = [
   CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO,
@@ -42,6 +43,7 @@ const canBeEmptyScreens = [
   CONTRACT_SCREEN_TYPES.SECONDARY_ROOMS,
   CONTRACT_SCREEN_TYPES.DIRECT_SUPPLY,
   CONTRACT_SCREEN_TYPES.RENTAL_PROPERTY,
+  CONTRACT_SCREEN_TYPES.PRICE_ADJUSTMENT,
 ];
 
 export const contractValidationConfig = {
@@ -741,6 +743,24 @@ export const contractValidationConfig = {
     [CONTRACT_SCREEN_TYPES.RENTAL_PRICE]: {
       [CONTRACT_ROLE.OWNER]: {
         [PAYMENT_FIELDS.COST]: [length("contracts.validation.field_empty", 1)],
+      },
+    },
+    [CONTRACT_SCREEN_TYPES.PRICE_ADJUSTMENT]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [PRICE_ADJUSTMENT_FIELDS.GRADUATED_LEASE_PRICE]: [
+          lengthCheckIfAnotherFieldIsTrue(
+            "contracts.validation.field_empty",
+            1,
+            PRICE_ADJUSTMENT_FIELDS.GRADUATED_LEASE
+          ),
+        ],
+        [PRICE_ADJUSTMENT_FIELDS.GRADUATED_LEASE_DATE]: [
+          lengthCheckIfAnotherFieldIsTrue(
+            "contracts.validation.field_empty",
+            1,
+            PRICE_ADJUSTMENT_FIELDS.GRADUATED_LEASE
+          ),
+        ],
       },
     },
     [CONTRACT_SCREEN_TYPES.SIGN]: {},

@@ -43,3 +43,10 @@ export const getCheckboxesList = (
       `contracts.${contractType}.${screenType}.checkboxes.${field}`
     ),
   }));
+
+export const getDateWithoutTime = (date: Date) => {
+  date.setHours(0);
+  date.setMinutes(0);
+  date.setSeconds(0);
+  return date;
+};

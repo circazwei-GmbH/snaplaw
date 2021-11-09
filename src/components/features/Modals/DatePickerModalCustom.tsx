@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DatePickerModal from "./DatePickerModal";
 import { useI18n } from "../../../translator/i18n";
 import { Modal, Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { getDateWithoutTime } from "../../../store/modules/contract/helper";
 
 interface DatePickerModalCustomInterface {
   datePickerOpened: boolean;
@@ -21,13 +22,8 @@ export default function DatePickerModalCustom({
   testID = "",
 }: DatePickerModalCustomInterface): JSX.Element {
   const { t } = useI18n();
-  const getTodayDate = (date: Date) => {
-    date.setHours(0);
-    date.setMinutes(0);
-    date.setSeconds(0)
-    return date
-  }
-  const [date, setDate] = useState(setedDate || `${getTodayDate(new Date())}`);
+  
+  const [date, setDate] = useState(setedDate || `${getDateWithoutTime(new Date())}`);
 
   return (
     <Modal visible={datePickerOpened} transparent={true} animationType="none">
