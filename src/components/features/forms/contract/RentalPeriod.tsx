@@ -128,6 +128,13 @@ export default function RentalPeriod() {
       />
       {switchers[RENTAL_PERIOD_FIELDS.RENTING_LIMITED] ? (
         <View style={styles.calendarInputContainer}>
+          <DefaultText
+            text={t(
+              `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.RENTAL_PERIOD}.rentitngLimitedText`
+            )}
+            style={styles.text}
+          />
+
           <CalendarInput
             key={RENTAL_PERIOD_FIELDS.RENTING_LIMITED}
             date={
@@ -170,4 +177,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingBottom: 5,
   },
+  text: {
+    paddingTop: 16,
+  }
 });

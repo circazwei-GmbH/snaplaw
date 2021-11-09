@@ -700,6 +700,7 @@ export default {
           [RENTAL_PERIOD_FIELDS.RENTING_LIMITED]:
             "Is the renting relationship limited in time",
         },
+        rentitngLimitedText: "The renting relationship is limited to"
       },
       [CONTRACT_SCREEN_TYPES.OPERATING_COSTS]: {
         title: "Operating costs",
@@ -709,6 +710,15 @@ export default {
         },
         warning:
           "The tenant bears the costs proportionately for the jointly used area. The costs transferred are operating costs within the meaning of Section 1 — 2 BetrKV Annexure 1 in the currently applicable edition.",
+      },
+      [CONTRACT_SCREEN_TYPES.RENTAL_PRICE]: {
+        title: "Rental price",
+        product_price: "The monthly rent is",
+        fields: {
+          cost: "Cost",
+        },
+        warning:
+          "And is always due on the 3rd working day of the following month.",
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "sign contract",

@@ -30,6 +30,7 @@ export const enum CONTRACT_SCREEN_TYPES {
   RENTAL_PROPERTY = "rentalProperty",
   RENTAL_PERIOD = "rentalPeriod",
   OPERATING_COSTS = "operatingCosts",
+  RENTAL_PRICE = "rentalPrice",
 }
 
 export const CONTRACT_CREATION_WAIT = "CONTRACT_CREATION_WAIT";
