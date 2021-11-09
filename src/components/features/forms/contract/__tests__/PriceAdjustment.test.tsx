@@ -111,7 +111,7 @@ describe("PriceAdjustment", () => {
       PRICE_ADJUSTMENT_FIELDS.GRADUATED_LEASE
     ] = true;
     actions.mockClear();
-    const { getByTestId, getByPlaceholderText } = render(
+    const { getByTestId } = render(
       <Provider store={store}>
         <PriceAdjustment />
       </Provider>
@@ -124,8 +124,8 @@ describe("PriceAdjustment", () => {
         value: CURRENCY.EUR,
       })
     );
-    const date = getDateWithoutTime(new Date());
 
+    const date = getDateWithoutTime(new Date());
     fireEvent.press(
       getByTestId(
         `DataPickerPressabelAreaID${PRICE_ADJUSTMENT_FIELDS.GRADUATED_LEASE_DATE}`

@@ -11,6 +11,7 @@ import { CONTRACT_ROLE } from "./contract-roles";
 import MemberType from "../../../components/features/forms/contract/MemberType";
 import {
   checkByPaymentType,
+  checkDepositSelected,
   checkMemberTypeCommercial,
   checkMemberTypePrivat,
   checkPartnerSign,
@@ -37,6 +38,7 @@ import RentalPeriod from "../../../components/features/forms/contract/RentalPeri
 import OperatingCosts from "../../../components/features/forms/contract/OperatingCosts";
 import RentalPrice from "../../../components/features/forms/contract/RentalPrice";
 import PriceAdjustment from "../../../components/features/forms/contract/PriceAdjustment";
+import Deposit from "../../../components/features/forms/contract/Deposit";
 
 export interface ContractScreenConfigType {
   component: React.ElementType;
@@ -323,6 +325,13 @@ export const contractScreensConfig: Record<
       title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.PRICE_ADJUSTMENT}.title`,
       type: CONTRACT_SCREEN_TYPES.PRICE_ADJUSTMENT,
       granted: [CONTRACT_ROLE.OWNER],
+    },
+    {
+      component: Deposit,
+      title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.DEPOSIT}.title`,
+      type: CONTRACT_SCREEN_TYPES.DEPOSIT,
+      granted: [CONTRACT_ROLE.OWNER],
+      exclusionChecker: checkDepositSelected,
     },
     {
       component: Sign,
