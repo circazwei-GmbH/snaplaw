@@ -2,12 +2,11 @@ import { BaseScreenDataInterface } from "./base-types";
 import { MEMBER_TYPE_FIELD_NAME } from "./carSales/member-type";
 import { CONTRACT_SCREEN_TYPES } from "./constants";
 import { CONTRACT_ROLE } from "./contract-roles";
-import {
-  PriceAdjustmentScreenInterface,
-  PRICE_ADJUSTMENT_FIELDS,
-} from "./price-adjustment-data";
+import { NUMBER_OF_TENANTS_FIELDS } from "./number-of-tenants-data";
+import { PRICE_ADJUSTMENT_FIELDS } from "./price-adjustment-data";
 import {
   ContractDataType,
+  ExclusionCheckerIfAnotherFieldIsTrue,
   MEMBER_TYPE_VALUE,
   PAYMENT_FIELDS,
   PAYMENT_METHODS,
@@ -58,13 +57,11 @@ export const checkPartnerSign = (contract: ContractDataType) => {
     : true;
 };
 
-export const checkDepositSelected = ({
+export const checkAnotherFieldIsTrue = ({
   screens,
-}: {
-  screens: BaseScreenDataInterface[];
-}) => {
-  const screen = screens.find(
-    (screen) => screen.type === CONTRACT_SCREEN_TYPES.PRICE_ADJUSTMENT
-  ) as PriceAdjustmentScreenInterface;
-  return screen ? screen.data[PRICE_ADJUSTMENT_FIELDS.DEPOSIT] : false;
+  fieldName,
+  screenName,
+}: ExclusionCheckerIfAnotherFieldIsTrue) => {
+  const screen = screens.find((screen) => screen.type === screenName);
+  return screen ? !!screen.data[fieldName] : false;
 };

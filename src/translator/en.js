@@ -18,6 +18,9 @@ import { ADDITIONAL_INFO_RENTAL_FIELDS } from "../store/modules/contract/additio
 import { RENTAL_PROPERTY_FIELDS } from "../store/modules/contract/rental-property-data";
 import { RENTAL_PERIOD_FIELDS } from "../store/modules/contract/rental-period-data";
 import { DEPOSIT_TYPES } from "../store/modules/contract/deposit-data";
+import { USER_DATA_FIELDS } from "../store/modules/contract/user-data";
+import { COMPANY_DATA_FIELDS } from "../store/modules/contract/company-data";
+import { PASSPORT_DATA_FIELDS } from "../store/modules/contract/passport-data";
 
 export default {
   welcome: {
@@ -146,13 +149,13 @@ export default {
       save: "Save",
     },
     placeholders: {
-      name: "First name",
-      lastName: "Last name",
-      dateOfBirth: "Date of birth",
-      email: "E-mail",
-      phone: "Phone",
-      address: "Address (Street, City)",
-      postCode: "Postal code",
+      [USER_DATA_FIELDS.name]: "First name",
+      [USER_DATA_FIELDS.lastName]: "Last name",
+      [USER_DATA_FIELDS.dateOfBirth]: "Date of birth",
+      [USER_DATA_FIELDS.email]: "E-mail",
+      [USER_DATA_FIELDS.phone]: "Phone",
+      [USER_DATA_FIELDS.address]: "Address (Street, City)",
+      [USER_DATA_FIELDS.postCode]: "Postal code",
     },
     modals: {
       save: {
@@ -371,19 +374,19 @@ export default {
       [CONTRACT_SCREEN_TYPES.COMPANY_DATA]: {
         title: "Company data",
         placeholders: {
-          companyName: "Company Name",
-          vatId: "VAT ID",
-          email: "E-Mail",
-          address: "Address (Street, City)",
-          postCode: "Postal code",
-          phone: "Phone",
+          [COMPANY_DATA_FIELDS.companyName]: "Company Name",
+          [COMPANY_DATA_FIELDS.vatId]: "VAT ID",
+          [COMPANY_DATA_FIELDS.email]: "E-Mail",
+          [COMPANY_DATA_FIELDS.address]: "Address (Street, City)",
+          [COMPANY_DATA_FIELDS.postCode]: "Postal code",
+          [COMPANY_DATA_FIELDS.phone]: "Phone",
         },
       },
       [CONTRACT_SCREEN_TYPES.PASSPORT_DATA]: {
         title: "Passport data",
         placeholders: {
-          idCard: "ID card number",
-          identificationCode: "Identification code",
+          [PASSPORT_DATA_FIELDS.idCard]: "ID card number",
+          [PASSPORT_DATA_FIELDS.identificationCode]: "Identification code",
         },
       },
       [CONTRACT_SCREEN_TYPES.PRODUCT_DATA]: {
@@ -564,6 +567,9 @@ export default {
       title: "Rental contract",
       [CONTRACT_SCREEN_TYPES.USER_DATA]: {
         title: "user data",
+      },
+      [CONTRACT_SCREEN_TYPES.ANOTHER_PERSON_DATA]: {
+        title: "personal data of another person",
       },
       [CONTRACT_SCREEN_TYPES.PASSPORT_DATA]: {
         title: "Passport data",
@@ -761,6 +767,12 @@ export default {
         partner_warning: "The seller chose to pay in %{method} way.",
         owner_warning:
           "If you choose the bank guarantee payment method, the deposit is not active.",
+      },
+      [CONTRACT_SCREEN_TYPES.NUMBER_OF_TENANTS]: {
+        title: "Number of tenants",
+        text: "The rental property is occupied by",
+        placeholder: "Number of people",
+        switch: "Whether to include another person in the lease as a tenant",
       },
       [CONTRACT_SCREEN_TYPES.DEPOSIT]: {
         title: "deposit",

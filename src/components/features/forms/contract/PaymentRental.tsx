@@ -34,6 +34,12 @@ export default function PaymentRental() {
   const screenErrors = useAppSelector(
     (state) => state.contract.contractErrors?.[CONTRACT_SCREEN_TYPES.PAYMENT]
   );
+  const isDeposit = useAppSelector(
+    (state) =>
+      !!state.contract.currentContract?.screens.find(
+        (screen) => screen.type === CONTRACT_SCREEN_TYPES.PRICE_ADJUSTMENT
+      )?.data[PRICE_ADJUSTMENT_FIELDS.DEPOSIT]
+  );
 
   const updateDataHandler = (fieldName: PAYMENT_FIELDS, value: string) => {
     dispatch(
@@ -44,15 +50,6 @@ export default function PaymentRental() {
       })
     );
 
-    if (value === PAYMENT_METHODS.BANK_GUARANTEE) {
-      dispatch(
-        setScreenData({
-          screenType: CONTRACT_SCREEN_TYPES.PRICE_ADJUSTMENT,
-          fieldName: PRICE_ADJUSTMENT_FIELDS.DEPOSIT,
-          value: false,
-        })
-      );
-    }
     if (screenErrors?.[fieldName] && contract) {
       dispatch(validateScreen(contract.type, CONTRACT_SCREEN_TYPES.PAYMENT));
     }
@@ -168,6 +165,7 @@ export default function PaymentRental() {
           text={t(
             `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.checkboxes.bank_guarantee`
           )}
+          disabled={isDeposit}
         />
         {screenData?.data[PAYMENT_FIELDS.PAYMENT_METHOD] ===
         PAYMENT_METHODS.BANK_GUARANTEE ? (

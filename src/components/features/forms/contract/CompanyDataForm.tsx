@@ -2,16 +2,19 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import TextField from "../../../components/TextField";
 import { useI18n } from "../../../../translator/i18n";
-import { useDispatch } from "react-redux";
 import { setScreenData } from "../../../../store/modules/contract/slice";
 import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/constants";
-import { useAppSelector } from "../../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { validateScreen } from "../../../../store/modules/contract/action-creators";
-import { CompanyDataScreenInterface, COMPANY_DATA_FIELDS } from "../../../../store/modules/contract/company-data";
+import {
+  CompanyDataScreenInterface,
+  COMPANY_DATA_FIELDS,
+  COMPANY_DATA_FIELDS_ARR,
+} from "../../../../store/modules/contract/company-data";
 
 export default function CompanyDataForm(): JSX.Element {
   const { t } = useI18n();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const companyData = useAppSelector(
     (state) =>
@@ -27,6 +30,7 @@ export default function CompanyDataForm(): JSX.Element {
       ? state.contract.contractErrors[CONTRACT_SCREEN_TYPES.COMPANY_DATA]
       : undefined
   );
+
   const onChangeAction = (value: string, fieldName: COMPANY_DATA_FIELDS) => {
     dispatch(
       setScreenData({
@@ -35,6 +39,7 @@ export default function CompanyDataForm(): JSX.Element {
         value,
       })
     );
+
     if (screenErrors?.[fieldName] && contractType) {
       dispatch(
         validateScreen(contractType, CONTRACT_SCREEN_TYPES.COMPANY_DATA)
@@ -44,56 +49,17 @@ export default function CompanyDataForm(): JSX.Element {
 
   return (
     <View style={styles.inputBox}>
-      <TextField
-        placeholder={t(`contracts.${contractType}.${CONTRACT_SCREEN_TYPES.COMPANY_DATA}.placeholders.companyName`)}
-        errorMessage={screenErrors?.[COMPANY_DATA_FIELDS.companyName]}
-        value={companyData?.data[COMPANY_DATA_FIELDS.companyName]}
-        onChangeFunction={(newValue) =>
-          onChangeAction(newValue, COMPANY_DATA_FIELDS.companyName)
-        }
-      />
-      <TextField
-        placeholder={t(`contracts.${contractType}.${CONTRACT_SCREEN_TYPES.COMPANY_DATA}.placeholders.vatId`)}
-        errorMessage={screenErrors?.[COMPANY_DATA_FIELDS.vatId]}
-        value={companyData?.data[COMPANY_DATA_FIELDS.vatId]}
-        onChangeFunction={(newValue) =>
-          onChangeAction(newValue, COMPANY_DATA_FIELDS.vatId)
-        }
-      />
-      <TextField
-        placeholder={t(`contracts.${contractType}.${CONTRACT_SCREEN_TYPES.COMPANY_DATA}.placeholders.email`)}
-        value={companyData?.data[COMPANY_DATA_FIELDS.email]}
-        errorMessage={screenErrors?.[COMPANY_DATA_FIELDS.email]}
-        onChangeFunction={(newValue) =>
-          onChangeAction(newValue, COMPANY_DATA_FIELDS.email)
-        }
-      />
-      <TextField
-        placeholder={t(`contracts.${contractType}.${CONTRACT_SCREEN_TYPES.COMPANY_DATA}.placeholders.address`)}
-        value={companyData?.data[COMPANY_DATA_FIELDS.address]}
-        errorMessage={screenErrors?.[COMPANY_DATA_FIELDS.address]}
-        onChangeFunction={(newValue) =>
-          onChangeAction(newValue, COMPANY_DATA_FIELDS.address)
-        }
-      />
-      <TextField
-        keyboardType="number-pad"
-        placeholder={t(`contracts.${contractType}.${CONTRACT_SCREEN_TYPES.COMPANY_DATA}.placeholders.postCode`)}
-        value={companyData?.data[COMPANY_DATA_FIELDS.postCode]}
-        errorMessage={screenErrors?.[COMPANY_DATA_FIELDS.postCode]}
-        onChangeFunction={(newValue) =>
-          onChangeAction(newValue, COMPANY_DATA_FIELDS.postCode)
-        }
-      />
-      <TextField
-        keyboardType="phone-pad"
-        placeholder={t(`contracts.${contractType}.${CONTRACT_SCREEN_TYPES.COMPANY_DATA}.placeholders.phone`)}
-        value={companyData?.data[COMPANY_DATA_FIELDS.phone]}
-        errorMessage={screenErrors?.[COMPANY_DATA_FIELDS.phone]}
-        onChangeFunction={(newValue) =>
-          onChangeAction(newValue, COMPANY_DATA_FIELDS.phone)
-        }
-      />
+      {COMPANY_DATA_FIELDS_ARR.map((field) => (
+        <TextField
+          key={field}
+          placeholder={t(
+            `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.COMPANY_DATA}.placeholders.${field}`
+          )}
+          errorMessage={screenErrors?.[field]}
+          value={companyData?.data[field]}
+          onChangeFunction={(newValue) => onChangeAction(newValue, field)}
+        />
+      ))}
     </View>
   );
 }

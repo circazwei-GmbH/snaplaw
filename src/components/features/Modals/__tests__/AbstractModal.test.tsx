@@ -3,6 +3,7 @@ import { createStore } from "@reduxjs/toolkit";
 import { fireEvent, render } from "@testing-library/react-native";
 import AbstractModal from "../AbstractModal";
 import { Provider } from "react-redux";
+import { closeModal } from "../../../../store/modules/main/slice";
 
 const initialState = {
   main: {
@@ -54,5 +55,27 @@ describe("AbstractModal", () => {
     );
     fireEvent.press(getByText(initialState.main.modal.actions[0].name));
     expect(actions).toBeCalledWith(initialState.main.modal.actions[0].action);
+  });
+  it("Should dispatch closeModal", () => {
+    // @ts-ignore
+    initialState.main.modal.actions[0].action = undefined;
+    initialState.main.modal.actions.pop();
+    const { getByText } = render(
+      <Provider store={store}>
+        <AbstractModal />
+      </Provider>
+    );
+    fireEvent.press(getByText(initialState.main.modal.actions[0].name));
+    expect(actions).toBeCalledWith(closeModal());
+  });
+  it("Should not render on undefined contract type", () => {
+    // @ts-ignore
+    initialState.main.modal = undefined;
+    const { queryByTestId } = render(
+      <Provider store={store}>
+        <AbstractModal />
+      </Provider>
+    );
+    expect(queryByTestId("modal")).not.toBeTruthy();
   });
 });

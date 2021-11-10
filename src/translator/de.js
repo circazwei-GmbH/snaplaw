@@ -16,6 +16,9 @@ import { RENTAL_PROPERTY_FIELDS } from "../store/modules/contract/rental-propert
 import { RENTAL_PERIOD_FIELDS } from "../store/modules/contract/rental-period-data";
 import { PAYMENT_METHODS } from "../store/modules/contract/payment";
 import { DEPOSIT_TYPES } from "../store/modules/contract/deposit-data";
+import { USER_DATA_FIELDS } from "../store/modules/contract/user-data";
+import { COMPANY_DATA_FIELDS } from "../store/modules/contract/company-data";
+import { PASSPORT_DATA_FIELDS } from "../store/modules/contract/passport-data";
 
 export default {
   welcome: {
@@ -150,13 +153,13 @@ export default {
       save: "Speichern",
     },
     placeholders: {
-      name: "Vorname",
-      lastName: "Nachname",
-      dateOfBirth: "Geburtsdatum",
-      email: "E-Mail",
-      phone: "Nummer",
-      address: "Adresse (Straße, Stadt)",
-      postCode: "Postleitzahl",
+      [USER_DATA_FIELDS.name]: "Vorname",
+      [USER_DATA_FIELDS.lastName]: "Nachname",
+      [USER_DATA_FIELDS.dateOfBirth]: "Geburtsdatum",
+      [USER_DATA_FIELDS.email]: "E-Mail",
+      [USER_DATA_FIELDS.phone]: "Nummer",
+      [USER_DATA_FIELDS.address]: "Adresse (Straße, Stadt)",
+      [USER_DATA_FIELDS.postCode]: "Postleitzahl",
     },
     modals: {
       save: {
@@ -372,19 +375,19 @@ export default {
       [CONTRACT_SCREEN_TYPES.COMPANY_DATA]: {
         title: "Firmendaten",
         placeholders: {
-          companyName: "Firmenname",
-          vatId: "Umsatzsteuer-ID",
-          email: "E-Mail",
-          address: "Adresse (Straße, Stadt)",
-          postCode: "Postleitzahl",
-          phone: "Nummer",
+          [COMPANY_DATA_FIELDS.companyName]: "Firmenname",
+          [COMPANY_DATA_FIELDS.vatId]: "Umsatzsteuer-ID",
+          [COMPANY_DATA_FIELDS.email]: "E-Mail",
+          [COMPANY_DATA_FIELDS.address]: "Adresse (Straße, Stadt)",
+          [COMPANY_DATA_FIELDS.postCode]: "Postleitzahl",
+          [COMPANY_DATA_FIELDS.phone]: "Nummer",
         },
       },
       [CONTRACT_SCREEN_TYPES.PASSPORT_DATA]: {
         title: "Passdaten",
         placeholders: {
-          idCard: "ID Kartennummer",
-          identificationCode: "Identifikationsnummer",
+          [PASSPORT_DATA_FIELDS.idCard]: "ID Kartennummer",
+          [PASSPORT_DATA_FIELDS.identificationCode]: "Identifikationsnummer",
         },
       },
       [CONTRACT_SCREEN_TYPES.PRODUCT_DATA]: {
@@ -589,6 +592,9 @@ export default {
       [CONTRACT_SCREEN_TYPES.USER_DATA]: {
         title: "Benutzerdaten",
       },
+      [CONTRACT_SCREEN_TYPES.ANOTHER_PERSON_DATA]: {
+        title: "personal data of another person", //translate
+      },
       [CONTRACT_SCREEN_TYPES.PASSPORT_DATA]: {
         title: "Passdaten",
         placeholders: {
@@ -726,7 +732,7 @@ export default {
           [RENTAL_PERIOD_FIELDS.RENTING_LIMITED]:
             "Ist das Mietverhältnis zeitlich befristet",
         },
-        rentitngLimitedText: "Das Mietverhältnis ist befristet auf den"
+        rentitngLimitedText: "Das Mietverhältnis ist befristet auf den",
       },
       [CONTRACT_SCREEN_TYPES.OPERATING_COSTS]: {
         title: "Betriebskosten",
@@ -743,8 +749,7 @@ export default {
         fields: {
           cost: "Preis",
         },
-        warning:
-          "Und ist immer am 3. Werktag des Folgemonats fällig.",
+        warning: "Und ist immer am 3. Werktag des Folgemonats fällig.",
       },
       [CONTRACT_SCREEN_TYPES.PRICE_ADJUSTMENT]: {
         title: "Preisanpassung",
@@ -763,11 +768,13 @@ export default {
         title: "Bezahlung",
         payment_method: "Bitte Zahlungsart wählen",
         fields: {
-          partner_text: "Please select or confirm a payment method",//translate
+          partner_text: "Please select or confirm a payment method", //translate
           payment_date: "Datum",
-          bank_guarantee_text: "Please indicate the date by which the tenant must submit the guarantee",//translate
-          other_text: "Please add description",//translate
-          other_description: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
+          bank_guarantee_text:
+            "Please indicate the date by which the tenant must submit the guarantee", //translate
+          other_text: "Please add description", //translate
+          other_description:
+            "Schreiben Sie hier alles auf, was Sie für wichtig halten",
         },
         checkboxes: {
           cash: "Bar",
@@ -781,18 +788,26 @@ export default {
           [PAYMENT_METHODS.OTHER]: "Sonstiges",
           [PAYMENT_METHODS.BANK_GUARANTEE]: "Bankgarantie",
         },
-        partner_warning: "The seller chose to pay in %{method} way.",//translate
-        owner_warning: "Wenn Sie die Zahlungsmethode Bankgarantie wählen, ist die Einzahlung nicht aktiv."
+        partner_warning: "The seller chose to pay in %{method} way.", //translate
+        owner_warning:
+          "Wenn Sie die Zahlungsmethode Bankgarantie wählen, ist die Einzahlung nicht aktiv.",
+      },
+      [CONTRACT_SCREEN_TYPES.NUMBER_OF_TENANTS]: {
+        title: "Anzahl der Mieter",
+        text: "Wie viele Personen werden die Wohnung bewohnen",
+        placeholder: "Anzahl der Kunden",
+        switch:
+          "Ob eine andere Person als Mieter in den Mietvertrag aufgenommen werden soll",
       },
       [CONTRACT_SCREEN_TYPES.DEPOSIT]: {
         title: "Anzahlung",
         checkboxes: {
-          [DEPOSIT_TYPES.TWO_MONTH]: "+ 2 monthly rent",//translate
-          [DEPOSIT_TYPES.THREE_MONTH]: "+ 3 monthly rent",//translate
+          [DEPOSIT_TYPES.TWO_MONTH]: "+ 2 monthly rent", //translate
+          [DEPOSIT_TYPES.THREE_MONTH]: "+ 3 monthly rent", //translate
           [DEPOSIT_TYPES.OTHER]: "Sonstiges",
         },
-        priceText: "1. Please indicate deposit amount",//translate
-        dateText: "2. Please set the due date for payment",//translate
+        priceText: "1. Please indicate deposit amount", //translate
+        dateText: "2. Please set the due date for payment", //translate
         date: "Datum",
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {

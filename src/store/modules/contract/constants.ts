@@ -8,6 +8,7 @@ export const enum CONTRACT_TYPES {
 
 export const enum CONTRACT_SCREEN_TYPES {
   USER_DATA = "userData",
+  ANOTHER_PERSON_DATA = "anotherPersonData",
   PRODUCT_DATA = "productData",
   PRODUCT_CONDITION = "productCondition",
   CONFIRMATION = "confirmation",
@@ -33,6 +34,7 @@ export const enum CONTRACT_SCREEN_TYPES {
   RENTAL_PRICE = "rentalPrice",
   PRICE_ADJUSTMENT = "priceAdjustment",
   DEPOSIT = "deposit",
+  NUMBER_OF_TENANTS = "numberOfTenants",
 }
 
 export const CONTRACT_CREATION_WAIT = "CONTRACT_CREATION_WAIT";

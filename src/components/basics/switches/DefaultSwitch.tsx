@@ -5,17 +5,19 @@ type DefaultSwitchProps = {
   title: string;
   value: boolean;
   onChange: (isEnabled: boolean) => void;
+  disabled?: boolean
 };
 
 export default function DefaultSwitch({
   title,
   onChange,
   value,
+  disabled,
 }: DefaultSwitchProps) {
   
   return (
-    <View style={styles.container}>
-      <Text style={styles.buttonText}>{title}</Text>
+    <View style={[styles.container, disabled && styles.disabledContainder]}>
+      <Text style={[styles.buttonText, disabled && styles.disabledText]}>{title}</Text>
       <Switch
         testID={`Switch.${title}`}
         trackColor={{
@@ -25,6 +27,7 @@ export default function DefaultSwitch({
         thumbColor="#fff"
         onValueChange={onChange}
         value={value}
+        disabled={disabled}
       />
     </View>
   );
@@ -49,6 +52,12 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 1,
     shadowRadius: 1,
+  },
+  disabledContainder: {
+    backgroundColor: "#F2F2F2",
+  },
+  disabledText: {
+    color: "#909090"
   },
   buttonText: {
     fontSize: 17,

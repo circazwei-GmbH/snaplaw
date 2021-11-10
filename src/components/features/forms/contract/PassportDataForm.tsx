@@ -7,7 +7,11 @@ import { setScreenData } from "../../../../store/modules/contract/slice";
 import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/constants";
 import { useAppSelector } from "../../../../store/hooks";
 import { validateScreen } from "../../../../store/modules/contract/action-creators";
-import { PassportDataScreenInterface, PASSPORT_DATA_FIELDS } from "../../../../store/modules/contract/passport-data";
+import {
+  PassportDataScreenInterface,
+  PASSPORT_DATA_FIELDS,
+  PASSPORT_DATA_FIELDS_ARR,
+} from "../../../../store/modules/contract/passport-data";
 
 export default function PassportDataForm(): JSX.Element {
   const { t } = useI18n();
@@ -44,22 +48,17 @@ export default function PassportDataForm(): JSX.Element {
 
   return (
     <View style={styles.inputBox}>
-      <TextField
-        placeholder={t(`contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PASSPORT_DATA}.placeholders.idCard`)}
-        errorMessage={screenErrors?.[PASSPORT_DATA_FIELDS.idCard]}
-        value={passportData?.data[PASSPORT_DATA_FIELDS.idCard]}
-        onChangeFunction={(newValue) =>
-          onChangeAction(newValue, PASSPORT_DATA_FIELDS.idCard)
-        }
-      />
-      <TextField
-        placeholder={t(`contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PASSPORT_DATA}.placeholders.identificationCode`)}
-        errorMessage={screenErrors?.[PASSPORT_DATA_FIELDS.identificationCode]}
-        value={passportData?.data[PASSPORT_DATA_FIELDS.identificationCode]}
-        onChangeFunction={(newValue) =>
-          onChangeAction(newValue, PASSPORT_DATA_FIELDS.identificationCode)
-        }
-      />
+      {PASSPORT_DATA_FIELDS_ARR.map((field) => (
+        <TextField
+          key={field}
+          placeholder={t(
+            `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PASSPORT_DATA}.placeholders.${field}`
+          )}
+          errorMessage={screenErrors?.[field]}
+          value={passportData?.data[field]}
+          onChangeFunction={(newValue) => onChangeAction(newValue, field)}
+        />
+      ))}
     </View>
   );
 }

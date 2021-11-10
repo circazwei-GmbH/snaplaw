@@ -10,8 +10,8 @@ import Sign from "../../../components/features/forms/contract/Sign";
 import { CONTRACT_ROLE } from "./contract-roles";
 import MemberType from "../../../components/features/forms/contract/MemberType";
 import {
+  checkAnotherFieldIsTrue,
   checkByPaymentType,
-  checkDepositSelected,
   checkMemberTypeCommercial,
   checkMemberTypePrivat,
   checkPartnerSign,
@@ -39,7 +39,11 @@ import OperatingCosts from "../../../components/features/forms/contract/Operatin
 import RentalPrice from "../../../components/features/forms/contract/RentalPrice";
 import PriceAdjustment from "../../../components/features/forms/contract/PriceAdjustment";
 import PaymentRental from "../../../components/features/forms/contract/PaymentRental";
+import NumberOfTenants from "../../../components/features/forms/contract/NumberOfTenants";
 import Deposit from "../../../components/features/forms/contract/Deposit";
+import AnotherPersonDataForm from "../../../components/features/forms/contract/AnotherPersonDataForm";
+import { NUMBER_OF_TENANTS_FIELDS } from "./number-of-tenants-data";
+import { PRICE_ADJUSTMENT_FIELDS } from "./price-adjustment-data";
 
 export interface ContractScreenConfigType {
   component: React.ElementType;
@@ -256,6 +260,24 @@ export const contractScreensConfig: Record<
       granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
     },
     {
+      component: NumberOfTenants,
+      title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.NUMBER_OF_TENANTS}.title`,
+      type: CONTRACT_SCREEN_TYPES.NUMBER_OF_TENANTS,
+      granted: [CONTRACT_ROLE.PARTNER],
+    },
+    {
+      component: AnotherPersonDataForm,
+      title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.ANOTHER_PERSON_DATA}.title`,
+      type: CONTRACT_SCREEN_TYPES.ANOTHER_PERSON_DATA,
+      granted: [CONTRACT_ROLE.PARTNER],
+      exclusionChecker: (contract) =>
+        checkAnotherFieldIsTrue({
+          screens: contract.screens,
+          fieldName: NUMBER_OF_TENANTS_FIELDS.ANOTHER_PERSON,
+          screenName: CONTRACT_SCREEN_TYPES.NUMBER_OF_TENANTS,
+        }),
+    },
+    {
       component: Confirmation,
       title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.CONFIRMATION}.title`,
       type: CONTRACT_SCREEN_TYPES.CONFIRMATION,
@@ -332,7 +354,12 @@ export const contractScreensConfig: Record<
       title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.DEPOSIT}.title`,
       type: CONTRACT_SCREEN_TYPES.DEPOSIT,
       granted: [CONTRACT_ROLE.OWNER],
-      exclusionChecker: checkDepositSelected,
+      exclusionChecker: (contract) =>
+        checkAnotherFieldIsTrue({
+          screens: contract.screens,
+          fieldName: PRICE_ADJUSTMENT_FIELDS.DEPOSIT,
+          screenName: CONTRACT_SCREEN_TYPES.PRICE_ADJUSTMENT,
+        }),
     },
     {
       component: PaymentRental,

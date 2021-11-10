@@ -34,6 +34,7 @@ import { COMMON_ROOMS_FIELDS } from "./common-rooms-data";
 import { RENTAL_PERIOD_FIELDS } from "./rental-period-data";
 import { DIRECT_SUPPLY_FIELDS } from "./direct-supply-data";
 import { PRICE_ADJUSTMENT_FIELDS } from "./price-adjustment-data";
+import { NUMBER_OF_TENANTS_FIELDS } from "./number-of-tenants-data";
 import { DEPOSIT_FIELDS } from "./deposit-data";
 
 const canBeEmptyScreens = [
@@ -613,6 +614,31 @@ export const contractValidationConfig = {
         ],
       },
     },
+    [CONTRACT_SCREEN_TYPES.ANOTHER_PERSON_DATA]: {
+      [CONTRACT_ROLE.PARTNER]: {
+        [USER_DATA_FIELDS.name]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.lastName]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.dateOfBirth]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.email]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.phone]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.address]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [USER_DATA_FIELDS.postCode]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+      },
+    },
     [CONTRACT_SCREEN_TYPES.PASSPORT_DATA]: {
       [CONTRACT_ROLE.OWNER]: {
         [PASSPORT_DATA_FIELDS.idCard]: [
@@ -784,6 +810,13 @@ export const contractValidationConfig = {
             PAYMENT_FIELDS.PAYMENT_METHOD,
             PAYMENT_METHODS.BANK_GUARANTEE
           ),
+        ],
+      },
+    },
+    [CONTRACT_SCREEN_TYPES.NUMBER_OF_TENANTS]: {
+      [CONTRACT_ROLE.PARTNER]: {
+        [NUMBER_OF_TENANTS_FIELDS.NUMBER]: [
+          length("contracts.validation.field_empty", 1),
         ],
       },
     },

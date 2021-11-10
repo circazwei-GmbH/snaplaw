@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import TextField from "../../../components/TextField";
 import { useI18n } from "../../../../translator/i18n";
@@ -11,76 +11,56 @@ import {
   UserDataScreenInterface,
 } from "../../../../store/modules/contract/types";
 import { validateScreen } from "../../../../store/modules/contract/action-creators";
-import TextFieldImitation from "../../../components/TextFieldImitation";
 import CalendarInput from "../../../basics/inputs/CalendarInput";
 
-export default function UserDataForm(): JSX.Element {
+export default function AnotherPersonDataForm(): JSX.Element {
   const { t } = useI18n();
   const dispatch = useDispatch();
 
-  const userData = useAppSelector(
+  const anotherPersonData = useAppSelector(
     (state) =>
       state.contract.currentContract?.screens.find(
-        (screen) => screen.type === CONTRACT_SCREEN_TYPES.USER_DATA
+        (screen) => screen.type === CONTRACT_SCREEN_TYPES.ANOTHER_PERSON_DATA
       ) as UserDataScreenInterface | undefined
   );
-  const me = useAppSelector((state) => state.profile.user);
   const contractType = useAppSelector(
     (state) => state.contract.currentContract?.type
   );
   const screenErrors = useAppSelector((state) =>
     state.contract.contractErrors
-      ? state.contract.contractErrors[CONTRACT_SCREEN_TYPES.USER_DATA]
+      ? state.contract.contractErrors[CONTRACT_SCREEN_TYPES.ANOTHER_PERSON_DATA]
       : undefined
   );
 
   const onChangeAction = (value: string, fieldName: USER_DATA_FIELDS) => {
     dispatch(
       setScreenData({
-        screenType: CONTRACT_SCREEN_TYPES.USER_DATA,
+        screenType: CONTRACT_SCREEN_TYPES.ANOTHER_PERSON_DATA,
         fieldName,
         value,
       })
     );
+
     if (screenErrors?.[fieldName] && contractType) {
-      dispatch(validateScreen(contractType, CONTRACT_SCREEN_TYPES.USER_DATA));
+      dispatch(
+        validateScreen(contractType, CONTRACT_SCREEN_TYPES.ANOTHER_PERSON_DATA)
+      );
     }
   };
-
-  useEffect(() => {
-    if (userData || !me) {
-      return () => {};
-    }
-
-    // @ts-ignore
-    for (let fieldName in USER_DATA_FIELDS) {
-      // @ts-ignore
-      if (me[fieldName]) {
-        dispatch(
-          setScreenData({
-            screenType: CONTRACT_SCREEN_TYPES.USER_DATA,
-            fieldName,
-            // @ts-ignore
-            value: me[fieldName],
-          })
-        );
-      }
-    }
-  }, [userData]);
 
   return (
     <View style={styles.inputBox}>
       <TextField
         placeholder={t("edit_profile.placeholders.name")}
         errorMessage={screenErrors?.[USER_DATA_FIELDS.name]}
-        value={userData?.data[USER_DATA_FIELDS.name]}
+        value={anotherPersonData?.data[USER_DATA_FIELDS.name]}
         onChangeFunction={(newValue) =>
           onChangeAction(newValue, USER_DATA_FIELDS.name)
         }
       />
       <TextField
         placeholder={t("edit_profile.placeholders.lastName")}
-        value={userData?.data[USER_DATA_FIELDS.lastName]}
+        value={anotherPersonData?.data[USER_DATA_FIELDS.lastName]}
         errorMessage={screenErrors?.[USER_DATA_FIELDS.lastName]}
         onChangeFunction={(newValue) =>
           onChangeAction(newValue, USER_DATA_FIELDS.lastName)
@@ -88,7 +68,7 @@ export default function UserDataForm(): JSX.Element {
       />
       <CalendarInput
         testID={USER_DATA_FIELDS.dateOfBirth}
-        date={userData?.data[USER_DATA_FIELDS.dateOfBirth] || ""}
+        date={anotherPersonData?.data[USER_DATA_FIELDS.dateOfBirth] || ""}
         dateHandler={(date) =>
           onChangeAction(date, USER_DATA_FIELDS.dateOfBirth)
         }
@@ -97,15 +77,18 @@ export default function UserDataForm(): JSX.Element {
         )}
         errorMessage={screenErrors?.[USER_DATA_FIELDS.dateOfBirth]}
       />
-      <TextFieldImitation
+      <TextField
         placeholder={t("edit_profile.placeholders.email")}
-        value={userData?.data[USER_DATA_FIELDS.email]}
-        gray
+        value={anotherPersonData?.data[USER_DATA_FIELDS.email]}
+        errorMessage={screenErrors?.[USER_DATA_FIELDS.email]}
+        onChangeFunction={(newValue) =>
+          onChangeAction(newValue, USER_DATA_FIELDS.email)
+        }
       />
       <TextField
         keyboardType="phone-pad"
         placeholder={t("edit_profile.placeholders.phone")}
-        value={userData?.data[USER_DATA_FIELDS.phone]}
+        value={anotherPersonData?.data[USER_DATA_FIELDS.phone]}
         errorMessage={screenErrors?.[USER_DATA_FIELDS.phone]}
         onChangeFunction={(newValue) =>
           onChangeAction(newValue, USER_DATA_FIELDS.phone)
@@ -113,7 +96,7 @@ export default function UserDataForm(): JSX.Element {
       />
       <TextField
         placeholder={t("edit_profile.placeholders.address")}
-        value={userData?.data[USER_DATA_FIELDS.address]}
+        value={anotherPersonData?.data[USER_DATA_FIELDS.address]}
         errorMessage={screenErrors?.[USER_DATA_FIELDS.address]}
         onChangeFunction={(newValue) =>
           onChangeAction(newValue, USER_DATA_FIELDS.address)
@@ -122,7 +105,7 @@ export default function UserDataForm(): JSX.Element {
       <TextField
         keyboardType="number-pad"
         placeholder={t("edit_profile.placeholders.postCode")}
-        value={userData?.data[USER_DATA_FIELDS.postCode]}
+        value={anotherPersonData?.data[USER_DATA_FIELDS.postCode]}
         errorMessage={screenErrors?.[USER_DATA_FIELDS.postCode]}
         onChangeFunction={(newValue) =>
           onChangeAction(newValue, USER_DATA_FIELDS.postCode)
