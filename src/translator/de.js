@@ -757,6 +757,12 @@ export default {
           date: "Datum",
         },
       },
+      [CONTRACT_SCREEN_TYPES.NUMBER_OF_TENANTS]: {
+        title: "Anzahl der Mieter",
+        text: "Wie viele Personen werden die Wohnung bewohnen",
+        placeholder: "Anzahl der Kunden",
+        switch: "Ob eine andere Person als Mieter in den Mietvertrag aufgenommen werden soll"
+      },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "Vertrag unterzeichnen",
         signature: "1. Bitte Ihre Unterschift eingeben",

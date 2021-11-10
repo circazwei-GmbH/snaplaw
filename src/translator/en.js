@@ -733,6 +733,12 @@ export default {
           date: "Date",
         },
       },
+      [CONTRACT_SCREEN_TYPES.NUMBER_OF_TENANTS]: {
+        title: "Number of tenants",
+        text: "The rental property is occupied by",
+        placeholder: "Number of people",
+        switch: "Whether to include another person in the lease as a tenant"
+      },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "sign contract",
         signature: "Please enter your signature",

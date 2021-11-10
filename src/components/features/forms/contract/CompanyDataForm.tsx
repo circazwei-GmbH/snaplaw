@@ -2,16 +2,15 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import TextField from "../../../components/TextField";
 import { useI18n } from "../../../../translator/i18n";
-import { useDispatch } from "react-redux";
 import { setScreenData } from "../../../../store/modules/contract/slice";
 import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/constants";
-import { useAppSelector } from "../../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { validateScreen } from "../../../../store/modules/contract/action-creators";
 import { CompanyDataScreenInterface, COMPANY_DATA_FIELDS } from "../../../../store/modules/contract/company-data";
 
 export default function CompanyDataForm(): JSX.Element {
   const { t } = useI18n();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const companyData = useAppSelector(
     (state) =>
@@ -27,6 +26,7 @@ export default function CompanyDataForm(): JSX.Element {
       ? state.contract.contractErrors[CONTRACT_SCREEN_TYPES.COMPANY_DATA]
       : undefined
   );
+
   const onChangeAction = (value: string, fieldName: COMPANY_DATA_FIELDS) => {
     dispatch(
       setScreenData({
@@ -35,6 +35,7 @@ export default function CompanyDataForm(): JSX.Element {
         value,
       })
     );
+
     if (screenErrors?.[fieldName] && contractType) {
       dispatch(
         validateScreen(contractType, CONTRACT_SCREEN_TYPES.COMPANY_DATA)
