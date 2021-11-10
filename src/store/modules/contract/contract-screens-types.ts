@@ -38,6 +38,7 @@ import RentalPeriod from "../../../components/features/forms/contract/RentalPeri
 import OperatingCosts from "../../../components/features/forms/contract/OperatingCosts";
 import RentalPrice from "../../../components/features/forms/contract/RentalPrice";
 import PriceAdjustment from "../../../components/features/forms/contract/PriceAdjustment";
+import NumberOfTenants from "../../../components/features/forms/contract/NumberOfTenants";
 import Deposit from "../../../components/features/forms/contract/Deposit";
 
 export interface ContractScreenConfigType {
@@ -253,6 +254,12 @@ export const contractScreensConfig: Record<
       title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.PASSPORT_DATA}.title`,
       type: CONTRACT_SCREEN_TYPES.PASSPORT_DATA,
       granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
+    },
+    {
+      component: NumberOfTenants,
+      title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.NUMBER_OF_TENANTS}.title`,
+      type: CONTRACT_SCREEN_TYPES.NUMBER_OF_TENANTS,
+      granted: [CONTRACT_ROLE.PARTNER],
     },
     {
       component: Confirmation,

@@ -725,7 +725,7 @@ export default {
           [RENTAL_PERIOD_FIELDS.RENTING_LIMITED]:
             "Ist das Mietverhältnis zeitlich befristet",
         },
-        rentitngLimitedText: "Das Mietverhältnis ist befristet auf den"
+        rentitngLimitedText: "Das Mietverhältnis ist befristet auf den",
       },
       [CONTRACT_SCREEN_TYPES.OPERATING_COSTS]: {
         title: "Betriebskosten",
@@ -742,8 +742,7 @@ export default {
         fields: {
           cost: "Preis",
         },
-        warning:
-          "Und ist immer am 3. Werktag des Folgemonats fällig.",
+        warning: "Und ist immer am 3. Werktag des Folgemonats fällig.",
       },
       [CONTRACT_SCREEN_TYPES.PRICE_ADJUSTMENT]: {
         title: "Preisanpassung",
@@ -758,15 +757,22 @@ export default {
           date: "Datum",
         },
       },
+      [CONTRACT_SCREEN_TYPES.NUMBER_OF_TENANTS]: {
+        title: "Anzahl der Mieter",
+        text: "Wie viele Personen werden die Wohnung bewohnen",
+        placeholder: "Anzahl der Kunden",
+        switch:
+          "Ob eine andere Person als Mieter in den Mietvertrag aufgenommen werden soll",
+      },
       [CONTRACT_SCREEN_TYPES.DEPOSIT]: {
         title: "Anzahlung",
         checkboxes: {
-          [DEPOSIT_TYPES.TWO_MONTH]: "+ 2 monthly rent",//translate
-          [DEPOSIT_TYPES.THREE_MONTH]: "+ 3 monthly rent",//translate
+          [DEPOSIT_TYPES.TWO_MONTH]: "+ 2 monthly rent", //translate
+          [DEPOSIT_TYPES.THREE_MONTH]: "+ 3 monthly rent", //translate
           [DEPOSIT_TYPES.OTHER]: "Sonstiges",
         },
-        priceText: "1. Please indicate deposit amount",//translate
-        dateText: "2. Please set the due date for payment",//translate
+        priceText: "1. Please indicate deposit amount", //translate
+        dateText: "2. Please set the due date for payment", //translate
         date: "Datum",
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
