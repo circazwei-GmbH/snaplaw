@@ -15,6 +15,9 @@ import { ADDITIONAL_INFO_RENTAL_FIELDS } from "../store/modules/contract/additio
 import { RENTAL_PROPERTY_FIELDS } from "../store/modules/contract/rental-property-data";
 import { RENTAL_PERIOD_FIELDS } from "../store/modules/contract/rental-period-data";
 import { DEPOSIT_TYPES } from "../store/modules/contract/deposit-data";
+import { USER_DATA_FIELDS } from "../store/modules/contract/user-data";
+import { COMPANY_DATA_FIELDS } from "../store/modules/contract/company-data";
+import { PASSPORT_DATA_FIELDS } from "../store/modules/contract/passport-data";
 
 export default {
   welcome: {
@@ -149,13 +152,13 @@ export default {
       save: "Speichern",
     },
     placeholders: {
-      name: "Vorname",
-      lastName: "Nachname",
-      dateOfBirth: "Geburtsdatum",
-      email: "E-Mail",
-      phone: "Nummer",
-      address: "Adresse (Straße, Stadt)",
-      postCode: "Postleitzahl",
+      [USER_DATA_FIELDS.name]: "Vorname",
+      [USER_DATA_FIELDS.lastName]: "Nachname",
+      [USER_DATA_FIELDS.dateOfBirth]: "Geburtsdatum",
+      [USER_DATA_FIELDS.email]: "E-Mail",
+      [USER_DATA_FIELDS.phone]: "Nummer",
+      [USER_DATA_FIELDS.address]: "Adresse (Straße, Stadt)",
+      [USER_DATA_FIELDS.postCode]: "Postleitzahl",
     },
     modals: {
       save: {
@@ -371,19 +374,19 @@ export default {
       [CONTRACT_SCREEN_TYPES.COMPANY_DATA]: {
         title: "Firmendaten",
         placeholders: {
-          companyName: "Firmenname",
-          vatId: "Umsatzsteuer-ID",
-          email: "E-Mail",
-          address: "Adresse (Straße, Stadt)",
-          postCode: "Postleitzahl",
-          phone: "Nummer",
+          [COMPANY_DATA_FIELDS.companyName]: "Firmenname",
+          [COMPANY_DATA_FIELDS.vatId]: "Umsatzsteuer-ID",
+          [COMPANY_DATA_FIELDS.email]: "E-Mail",
+          [COMPANY_DATA_FIELDS.address]: "Adresse (Straße, Stadt)",
+          [COMPANY_DATA_FIELDS.postCode]: "Postleitzahl",
+          [COMPANY_DATA_FIELDS.phone]: "Nummer",
         },
       },
       [CONTRACT_SCREEN_TYPES.PASSPORT_DATA]: {
         title: "Passdaten",
         placeholders: {
-          idCard: "ID Kartennummer",
-          identificationCode: "Identifikationsnummer",
+          [PASSPORT_DATA_FIELDS.idCard]: "ID Kartennummer",
+          [PASSPORT_DATA_FIELDS.identificationCode]: "Identifikationsnummer",
         },
       },
       [CONTRACT_SCREEN_TYPES.PRODUCT_DATA]: {
@@ -587,6 +590,9 @@ export default {
       title: "Rental contract",
       [CONTRACT_SCREEN_TYPES.USER_DATA]: {
         title: "Benutzerdaten",
+      },
+      [CONTRACT_SCREEN_TYPES.ANOTHER_PERSON_DATA]: {
+        title: "personal data of another person", //translate
       },
       [CONTRACT_SCREEN_TYPES.PASSPORT_DATA]: {
         title: "Passdaten",
