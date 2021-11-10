@@ -763,6 +763,29 @@ export const contractValidationConfig = {
         ],
       },
     },
+    [CONTRACT_SCREEN_TYPES.PAYMENT]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [PAYMENT_FIELDS.PAYMENT_METHOD]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [PAYMENT_FIELDS.OTHER_DESCRIPTION]: [
+          lengthCheckIfAnotherFieldHasSpecificValue(
+            "contracts.validation.field_empty",
+            1,
+            PAYMENT_FIELDS.PAYMENT_METHOD,
+            PAYMENT_METHODS.OTHER
+          ),
+        ],
+        [PAYMENT_FIELDS.PAYMENT_DATE]: [
+          lengthCheckIfAnotherFieldHasSpecificValue(
+            "contracts.validation.field_empty",
+            1,
+            PAYMENT_FIELDS.PAYMENT_METHOD,
+            PAYMENT_METHODS.BANK_GUARANTEE
+          ),
+        ],
+      },
+    },
     [CONTRACT_SCREEN_TYPES.SIGN]: {},
   },
 };

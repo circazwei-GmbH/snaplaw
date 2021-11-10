@@ -14,6 +14,7 @@ import { DIRECT_SUPPLY_FIELDS } from "../store/modules/contract/direct-supply-da
 import { ADDITIONAL_INFO_RENTAL_FIELDS } from "../store/modules/contract/additional-info-rental-data";
 import { RENTAL_PROPERTY_FIELDS } from "../store/modules/contract/rental-property-data";
 import { RENTAL_PERIOD_FIELDS } from "../store/modules/contract/rental-period-data";
+import { PAYMENT_METHODS } from "../store/modules/contract/payment";
 
 export default {
   welcome: {
@@ -756,6 +757,31 @@ export default {
           dateText: "2. Bitte Datum der Preiserhöhung festlegen",
           date: "Datum",
         },
+      },
+      [CONTRACT_SCREEN_TYPES.PAYMENT]: {
+        title: "Bezahlung",
+        payment_method: "Bitte Zahlungsart wählen",
+        fields: {
+          partner_text: "Please select or confirm a payment method",//translate
+          payment_date: "Datum",
+          bank_guarantee_text: "Please indicate the date by which the tenant must submit the guarantee",//translate
+          other_text: "Please add description",//translate
+          other_description: "Schreiben Sie hier alles auf, was Sie für wichtig halten",
+        },
+        checkboxes: {
+          cash: "Bar",
+          transfer: "Überweisung",
+          cash_advance: "Bankgarantie",
+          other: "Sonstiges",
+        },
+        payment_methods: {
+          [PAYMENT_METHODS.CASH]: "Bar",
+          [PAYMENT_METHODS.TRANSFER]: "Überweisung",
+          [PAYMENT_METHODS.OTHER]: "Sonstiges",
+          [PAYMENT_METHODS.BANK_GUARANTEE]: "Bankgarantie",
+        },
+        partner_warning: "The seller chose to pay in %{method} way.",//translate
+        owner_warning: "Wenn Sie die Zahlungsmethode Bankgarantie wählen, ist die Einzahlung nicht aktiv."
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "Vertrag unterzeichnen",

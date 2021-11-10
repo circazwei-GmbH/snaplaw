@@ -37,6 +37,7 @@ import RentalPeriod from "../../../components/features/forms/contract/RentalPeri
 import OperatingCosts from "../../../components/features/forms/contract/OperatingCosts";
 import RentalPrice from "../../../components/features/forms/contract/RentalPrice";
 import PriceAdjustment from "../../../components/features/forms/contract/PriceAdjustment";
+import PaymentRental from "../../../components/features/forms/contract/PaymentRental";
 
 export interface ContractScreenConfigType {
   component: React.ElementType;
@@ -323,6 +324,12 @@ export const contractScreensConfig: Record<
       title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.PRICE_ADJUSTMENT}.title`,
       type: CONTRACT_SCREEN_TYPES.PRICE_ADJUSTMENT,
       granted: [CONTRACT_ROLE.OWNER],
+    },
+    {
+      component: PaymentRental,
+      title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.PAYMENT}.title`,
+      type: CONTRACT_SCREEN_TYPES.PAYMENT,
+      granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
     },
     {
       component: Sign,

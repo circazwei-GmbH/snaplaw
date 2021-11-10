@@ -16,6 +16,8 @@ export enum PAYMENT_METHODS {
   PAYPAL = "PAYPAL",
   TRANSFER = "TRANSFER",
   CASH_ADVANCE = "CASH_ADVANCE",
+  BANK_GUARANTEE = "BANK_GUARANTEE",
+  OTHER = "OTHER",
   ALL = "ALL"
 }
  
@@ -31,6 +33,7 @@ export enum PAYMENT_FIELDS {
   CARD_NUMBER = "cardNumber",
   SELLER_PAYMENT_METHOD = "sellerPaymentMethod",
   CARD_NAME = "cardHolderName",
+  OTHER_DESCRIPTION = "otherDescription",
 }
 
 export interface PaymentScreenInterface extends BaseScreenDataInterface {
@@ -47,6 +50,7 @@ export interface PaymentScreenInterface extends BaseScreenDataInterface {
     [PAYMENT_FIELDS.FIRST_DATE]: string | undefined;
     [PAYMENT_FIELDS.ADVANCE_COST]: string | undefined;
     [PAYMENT_FIELDS.SECOND_DATE]: string | undefined;
+    [PAYMENT_FIELDS.OTHER_DESCRIPTION]: string | undefined;
   };
 }
 

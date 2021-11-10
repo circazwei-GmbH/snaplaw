@@ -733,6 +733,31 @@ export default {
           date: "Date",
         },
       },
+      [CONTRACT_SCREEN_TYPES.PAYMENT]: {
+        title: "Payment",
+        payment_method: "Please select a payment method",
+        fields: {
+          partner_text: "Please select or confirm a payment method",
+          payment_date: "Date",
+          bank_guarantee_text: "Please indicate the date by which the tenant must submit the guarantee",
+          other_text: "Please add description",
+          other_description: "Write here everything that you think is important",
+        },
+        checkboxes: {
+          cash: "Cash",
+          transfer: "Money transfer",
+          bank_guarantee: "Bank guarantee",
+          other: "Other",
+        },
+        payment_methods: {
+          [PAYMENT_METHODS.CASH]: "cash",
+          [PAYMENT_METHODS.TRANSFER]: "money transfer",
+          [PAYMENT_METHODS.OTHER]: "other",
+          [PAYMENT_METHODS.BANK_GUARANTEE]: "bank guarantee",
+        },
+        partner_warning: "The seller chose to pay in %{method} way.",
+        owner_warning: "If you choose the bank guarantee payment method, the deposit is not active."
+      },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "sign contract",
         signature: "Please enter your signature",
