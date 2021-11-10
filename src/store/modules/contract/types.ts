@@ -35,6 +35,8 @@ import {
 import { BaseScreenDataInterface } from "./base-types";
 import { CONTRACT_ROLE } from "./contract-roles";
 import { MediaType } from "../../../services/media";
+import { PRICE_ADJUSTMENT_FIELDS } from "./price-adjustment-data";
+import { NUMBER_OF_TENANTS_FIELDS } from "./number-of-tenants-data";
 
 export type ContractType = CONTRACT_TYPES.PURCHASE;
 
@@ -155,6 +157,12 @@ export interface RequestDeleteContractPartnerAction extends BaseAction {
 export interface DataListInterface {
   key: string;
   value: string;
+}
+
+export type ExclusionCheckerIfAnotherFieldIsTrue = {
+  screens: BaseScreenDataInterface[];
+  fieldName: PRICE_ADJUSTMENT_FIELDS | NUMBER_OF_TENANTS_FIELDS;
+  screenName: CONTRACT_SCREEN_TYPES;
 }
 
 export { ProductDataScreenInterface, PRODUCT_DATA_FIELDS };

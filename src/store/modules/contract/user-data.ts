@@ -23,3 +23,13 @@ export interface UserDataScreenInterface extends BaseScreenDataInterface {
     [USER_DATA_FIELDS.postCode]: string;
   };
 }
+
+export const USER_DATA_FIELDS_ARR: Array<USER_DATA_FIELDS> = [
+  USER_DATA_FIELDS.name,
+  USER_DATA_FIELDS.lastName,
+  USER_DATA_FIELDS.dateOfBirth,
+  USER_DATA_FIELDS.email,
+  USER_DATA_FIELDS.phone,
+  USER_DATA_FIELDS.postCode,
+  USER_DATA_FIELDS.address,
+];

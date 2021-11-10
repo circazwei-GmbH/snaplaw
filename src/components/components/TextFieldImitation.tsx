@@ -25,6 +25,7 @@ export default function TextFieldImitation({
         settings ? { paddingHorizontal: 16 } :  null,
         settings ? styles.borderSettings : styles.border,
       ]}
+      testID={placeholder}
     >
       <View style={styles.labelBox}>
         <Text style={[
