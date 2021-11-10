@@ -1,8 +1,6 @@
 import React from "react";
 import {
   Pressable,
-  StyleSheet,
-  Dimensions,
   StyleProp,
   TextStyle,
 } from "react-native";
@@ -23,13 +21,3 @@ export default function CloseButton({
     </Pressable>
   );
 }
-
-const styles = StyleSheet.create({
-  backButton: {
-    justifyContent: "center",
-    alignItems: "flex-start",
-    paddingLeft: 16,
-    width: Dimensions.get("window").width * 0.28,
-    height: 45,
-  },
-});

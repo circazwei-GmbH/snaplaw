@@ -32,8 +32,8 @@ export const enum CONTRACT_SCREEN_TYPES {
   OPERATING_COSTS = "operatingCosts",
   RENTAL_PRICE = "rentalPrice",
   PRICE_ADJUSTMENT = "priceAdjustment",
-  NUMBER_OF_TENANTS = "numberOfTenants",
   DEPOSIT = "deposit",
+  NUMBER_OF_TENANTS = "numberOfTenants",
 }
 
 export const CONTRACT_CREATION_WAIT = "CONTRACT_CREATION_WAIT";
