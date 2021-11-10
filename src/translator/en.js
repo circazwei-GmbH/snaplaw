@@ -17,6 +17,7 @@ import { DIRECT_SUPPLY_FIELDS } from "../store/modules/contract/direct-supply-da
 import { ADDITIONAL_INFO_RENTAL_FIELDS } from "../store/modules/contract/additional-info-rental-data";
 import { RENTAL_PROPERTY_FIELDS } from "../store/modules/contract/rental-property-data";
 import { RENTAL_PERIOD_FIELDS } from "../store/modules/contract/rental-period-data";
+import { DEPOSIT_TYPES } from "../store/modules/contract/deposit-data";
 
 export default {
   welcome: {
@@ -700,7 +701,7 @@ export default {
           [RENTAL_PERIOD_FIELDS.RENTING_LIMITED]:
             "Is the renting relationship limited in time",
         },
-        rentitngLimitedText: "The renting relationship is limited to"
+        rentitngLimitedText: "The renting relationship is limited to",
       },
       [CONTRACT_SCREEN_TYPES.OPERATING_COSTS]: {
         title: "Operating costs",
@@ -737,7 +738,19 @@ export default {
         title: "Number of tenants",
         text: "The rental property is occupied by",
         placeholder: "Number of people",
-        switch: "Whether to include another person in the lease as a tenant"
+        switch: "Whether to include another person in the lease as a tenant",
+      },
+      [CONTRACT_SCREEN_TYPES.DEPOSIT]: {
+        title: "deposit",
+        checkboxes: {
+          [DEPOSIT_TYPES.TWO_MONTH]: "+ 2 monthly rent",
+          [DEPOSIT_TYPES.THREE_MONTH]: "+ 3 monthly rent",
+          [DEPOSIT_TYPES.OTHER]: "Other",
+        },
+        priceText: "1. Please indicate deposit amount",
+        price: "Cost",
+        dateText: "2. Please set the due date for payment",
+        date: "Date",
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "sign contract",

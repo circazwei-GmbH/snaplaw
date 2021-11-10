@@ -35,6 +35,7 @@ import { RENTAL_PERIOD_FIELDS } from "./rental-period-data";
 import { DIRECT_SUPPLY_FIELDS } from "./direct-supply-data";
 import { PRICE_ADJUSTMENT_FIELDS } from "./price-adjustment-data";
 import { NUMBER_OF_TENANTS_FIELDS } from "./number-of-tenants-data";
+import { DEPOSIT_FIELDS } from "./deposit-data";
 
 const canBeEmptyScreens = [
   CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO,
@@ -769,6 +770,15 @@ export const contractValidationConfig = {
         [NUMBER_OF_TENANTS_FIELDS.NUMBER]: [
           length("contracts.validation.field_empty", 1),
         ],
+      },
+    },
+    [CONTRACT_SCREEN_TYPES.DEPOSIT]: {
+      [CONTRACT_ROLE.OWNER]: {
+        [DEPOSIT_FIELDS.DEPOSIT]: [
+          length("contracts.validation.field_empty", 1),
+        ],
+        [DEPOSIT_FIELDS.DATE]: [length("contracts.validation.field_empty", 1)],
+        [DEPOSIT_FIELDS.COST]: [length("contracts.validation.field_empty", 1)],
       },
     },
     [CONTRACT_SCREEN_TYPES.SIGN]: {},
