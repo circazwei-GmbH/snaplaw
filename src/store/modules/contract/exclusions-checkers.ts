@@ -3,6 +3,10 @@ import { MEMBER_TYPE_FIELD_NAME } from "./carSales/member-type";
 import { CONTRACT_SCREEN_TYPES } from "./constants";
 import { CONTRACT_ROLE } from "./contract-roles";
 import {
+  PriceAdjustmentScreenInterface,
+  PRICE_ADJUSTMENT_FIELDS,
+} from "./price-adjustment-data";
+import {
   ContractDataType,
   MEMBER_TYPE_VALUE,
   PAYMENT_FIELDS,
@@ -52,4 +56,15 @@ export const checkPartnerSign = (contract: ContractDataType) => {
   return contract.meRole === CONTRACT_ROLE.OWNER
     ? !!contract.oponentSign
     : true;
+};
+
+export const checkDepositSelected = ({
+  screens,
+}: {
+  screens: BaseScreenDataInterface[];
+}) => {
+  const screen = screens.find(
+    (screen) => screen.type === CONTRACT_SCREEN_TYPES.PRICE_ADJUSTMENT
+  ) as PriceAdjustmentScreenInterface;
+  return screen ? screen.data[PRICE_ADJUSTMENT_FIELDS.DEPOSIT] : false;
 };

@@ -15,6 +15,7 @@ import { ADDITIONAL_INFO_RENTAL_FIELDS } from "../store/modules/contract/additio
 import { RENTAL_PROPERTY_FIELDS } from "../store/modules/contract/rental-property-data";
 import { RENTAL_PERIOD_FIELDS } from "../store/modules/contract/rental-period-data";
 import { PAYMENT_METHODS } from "../store/modules/contract/payment";
+import { DEPOSIT_TYPES } from "../store/modules/contract/deposit-data";
 
 export default {
   welcome: {
@@ -695,7 +696,7 @@ export default {
       [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO]: {
         title: "Additionale Information",
         text:
-          "Sie können wählen, welche der folgenden Möglichkeiten der Mieter machen darf::",
+          "Sie können wählen, welche der folgenden Möglichkeiten der Mieter machen darf:",
         checkboxes: {
           [ADDITIONAL_INFO_RENTAL_FIELDS.COSMETIC_REPAIRS]:
             "Kosmetische Reparaturen",
@@ -782,6 +783,17 @@ export default {
         },
         partner_warning: "The seller chose to pay in %{method} way.",//translate
         owner_warning: "Wenn Sie die Zahlungsmethode Bankgarantie wählen, ist die Einzahlung nicht aktiv."
+      },
+      [CONTRACT_SCREEN_TYPES.DEPOSIT]: {
+        title: "Anzahlung",
+        checkboxes: {
+          [DEPOSIT_TYPES.TWO_MONTH]: "+ 2 monthly rent",//translate
+          [DEPOSIT_TYPES.THREE_MONTH]: "+ 3 monthly rent",//translate
+          [DEPOSIT_TYPES.OTHER]: "Sonstiges",
+        },
+        priceText: "1. Please indicate deposit amount",//translate
+        dateText: "2. Please set the due date for payment",//translate
+        date: "Datum",
       },
       [CONTRACT_SCREEN_TYPES.SIGN]: {
         title: "Vertrag unterzeichnen",
