@@ -40,6 +40,7 @@ export default function SearchModal({
       <TouchableOpacity
         onPress={() => setSelectedItem(item.key)}
         style={background}
+        testID={item.key}
       >
         <Text style={styles.listItemText}>{item.value}</Text>
       </TouchableOpacity>
@@ -102,6 +103,7 @@ export default function SearchModal({
                       onChangeFunction={onSearch}
                       onFocus={() => setSelectedItem("")}
                       search
+                      testID="SearchField"
                     />
                   </View>
 
@@ -129,7 +131,7 @@ interface DoneInterface {
 
 const Done = ({ onPress }: DoneInterface) => {
   return (
-    <Pressable onPress={onPress}>
+    <Pressable onPress={onPress} testID="DoneButton">
       <Text style={styles.doneButton}>Done</Text>
     </Pressable>
   );

@@ -38,6 +38,7 @@ import RentalPeriod from "../../../components/features/forms/contract/RentalPeri
 import OperatingCosts from "../../../components/features/forms/contract/OperatingCosts";
 import RentalPrice from "../../../components/features/forms/contract/RentalPrice";
 import PriceAdjustment from "../../../components/features/forms/contract/PriceAdjustment";
+import PaymentRental from "../../../components/features/forms/contract/PaymentRental";
 import NumberOfTenants from "../../../components/features/forms/contract/NumberOfTenants";
 import Deposit from "../../../components/features/forms/contract/Deposit";
 import AnotherPersonDataForm from "../../../components/features/forms/contract/AnotherPersonDataForm";
@@ -359,6 +360,12 @@ export const contractScreensConfig: Record<
           fieldName: PRICE_ADJUSTMENT_FIELDS.DEPOSIT,
           screenName: CONTRACT_SCREEN_TYPES.PRICE_ADJUSTMENT,
         }),
+    },
+    {
+      component: PaymentRental,
+      title: `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.PAYMENT}.title`,
+      type: CONTRACT_SCREEN_TYPES.PAYMENT,
+      granted: [CONTRACT_ROLE.OWNER, CONTRACT_ROLE.PARTNER],
     },
     {
       component: Sign,

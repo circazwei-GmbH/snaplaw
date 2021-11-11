@@ -50,14 +50,13 @@ export default function PassportDataForm(): JSX.Element {
     <View style={styles.inputBox}>
       {PASSPORT_DATA_FIELDS_ARR.map((field) => (
         <TextField
+          key={field}
           placeholder={t(
             `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PASSPORT_DATA}.placeholders.${field}`
           )}
           errorMessage={screenErrors?.[field]}
           value={passportData?.data[field]}
-          onChangeFunction={(newValue) =>
-            onChangeAction(newValue, field)
-          }
+          onChangeFunction={(newValue) => onChangeAction(newValue, field)}
         />
       ))}
     </View>

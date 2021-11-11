@@ -14,6 +14,7 @@ import { DIRECT_SUPPLY_FIELDS } from "../store/modules/contract/direct-supply-da
 import { ADDITIONAL_INFO_RENTAL_FIELDS } from "../store/modules/contract/additional-info-rental-data";
 import { RENTAL_PROPERTY_FIELDS } from "../store/modules/contract/rental-property-data";
 import { RENTAL_PERIOD_FIELDS } from "../store/modules/contract/rental-period-data";
+import { PAYMENT_METHODS } from "../store/modules/contract/payment";
 import { DEPOSIT_TYPES } from "../store/modules/contract/deposit-data";
 import { USER_DATA_FIELDS } from "../store/modules/contract/user-data";
 import { COMPANY_DATA_FIELDS } from "../store/modules/contract/company-data";
@@ -752,6 +753,8 @@ export default {
       },
       [CONTRACT_SCREEN_TYPES.PRICE_ADJUSTMENT]: {
         title: "Preisanpassung",
+        warning:
+          "Die Anzahlung kann nicht aktiviert werden, wenn die Zahlungsweise für Bankgarantie ausgewählt ist.",
         fields: {
           deposit: "Anzahlung",
           graduatedLease: "Die Staffelmiete wird erhöht",
@@ -762,6 +765,34 @@ export default {
           dateText: "2. Bitte Datum der Preiserhöhung festlegen",
           date: "Datum",
         },
+      },
+      [CONTRACT_SCREEN_TYPES.PAYMENT]: {
+        title: "Bezahlung",
+        payment_method: "Bitte Zahlungsart wählen",
+        fields: {
+          partner_text: "Please select or confirm a payment method", //translate
+          payment_date: "Datum",
+          bank_guarantee_text:
+            "Please indicate the date by which the tenant must submit the guarantee", //translate
+          other_text: "Please add description", //translate
+          other_description:
+            "Schreiben Sie hier alles auf, was Sie für wichtig halten",
+        },
+        checkboxes: {
+          cash: "Bar",
+          transfer: "Überweisung",
+          cash_advance: "Bankgarantie",
+          other: "Sonstiges",
+        },
+        payment_methods: {
+          [PAYMENT_METHODS.CASH]: "Bar",
+          [PAYMENT_METHODS.TRANSFER]: "Überweisung",
+          [PAYMENT_METHODS.OTHER]: "Sonstiges",
+          [PAYMENT_METHODS.BANK_GUARANTEE]: "Bankgarantie",
+        },
+        partner_warning: "The seller chose to pay in %{method} way.", //translate
+        owner_warning:
+          "Die Option für Bankgarantie kann nicht mit der enthaltenen Anzahlung verwendet werden.",
       },
       [CONTRACT_SCREEN_TYPES.NUMBER_OF_TENANTS]: {
         title: "Anzahl der Mieter",

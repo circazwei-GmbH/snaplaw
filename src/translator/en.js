@@ -729,6 +729,7 @@ export default {
       },
       [CONTRACT_SCREEN_TYPES.PRICE_ADJUSTMENT]: {
         title: "price adjustment",
+        warning: "The deposit can't be enabled with the bank guarantee payment method selected.",
         fields: {
           deposit: "Deposit",
           graduatedLease: "The graduated lease will be increased",
@@ -739,6 +740,34 @@ export default {
           dateText: "2. Please set date of price increase",
           date: "Date",
         },
+      },
+      [CONTRACT_SCREEN_TYPES.PAYMENT]: {
+        title: "Payment",
+        payment_method: "Please select a payment method",
+        fields: {
+          partner_text: "Please select or confirm a payment method",
+          payment_date: "Date",
+          bank_guarantee_text:
+            "Please indicate the date by which the tenant must submit the guarantee",
+          other_text: "Please add description",
+          other_description:
+            "Write here everything that you think is important",
+        },
+        checkboxes: {
+          cash: "Cash",
+          transfer: "Money transfer",
+          bank_guarantee: "Bank guarantee",
+          other: "Other",
+        },
+        payment_methods: {
+          [PAYMENT_METHODS.CASH]: "cash",
+          [PAYMENT_METHODS.TRANSFER]: "money transfer",
+          [PAYMENT_METHODS.OTHER]: "other",
+          [PAYMENT_METHODS.BANK_GUARANTEE]: "bank guarantee",
+        },
+        partner_warning: "The seller chose to pay in %{method} way.",
+        owner_warning:
+          "The bank guarantee option can't be used with the deposit enabled.",
       },
       [CONTRACT_SCREEN_TYPES.NUMBER_OF_TENANTS]: {
         title: "Number of tenants",

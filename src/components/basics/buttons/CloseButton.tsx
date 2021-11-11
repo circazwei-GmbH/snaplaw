@@ -16,7 +16,7 @@ export default function CloseButton({
   style,
 }: CloseButtonInterface): JSX.Element {
   return (
-    <Pressable onPress={onPress} style={style}>
+    <Pressable onPress={onPress} style={style} testID="CloseButton">
       <EvilIcons name="close" size={24} color="#668395" />
     </Pressable>
   );

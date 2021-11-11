@@ -11,9 +11,14 @@ import {
   PRICE_ADJUSTMENT_FIELDS,
 } from "../../../../store/modules/contract/price-adjustment-data";
 import PaymentPrice from "../../../components/PaymentPrice";
-import { CURRENCY } from "../../../../store/modules/contract/payment";
+import {
+  CURRENCY,
+  PAYMENT_FIELDS,
+  PAYMENT_METHODS,
+} from "../../../../store/modules/contract/payment";
 import DefaultText from "../../../basics/typography/DefaultText";
 import CalendarInput from "../../../basics/inputs/CalendarInput";
+import ErrorBoldMessage from "../../../basics/typography/ErrorBoldMessage";
 
 const initialState = {
   [PRICE_ADJUSTMENT_FIELDS.DEPOSIT]: false,
@@ -39,6 +44,12 @@ export default function PriceAdjustment(): JSX.Element {
   );
   const contractType = useAppSelector(
     (state) => state.contract.currentContract?.type
+  );
+  const isBankGuarantee = useAppSelector(
+    (state) =>
+      state.contract.currentContract?.screens.find(
+        (screen) => screen.type === CONTRACT_SCREEN_TYPES.PAYMENT
+      )?.data[PAYMENT_FIELDS.PAYMENT_METHOD] === PAYMENT_METHODS.BANK_GUARANTEE
   );
 
   const onToggleSpecification = (fieldName: PRICE_ADJUSTMENT_FIELDS) => {
@@ -91,12 +102,22 @@ export default function PriceAdjustment(): JSX.Element {
 
   return (
     <View style={styles.container}>
+      {isBankGuarantee ? (
+        <ErrorBoldMessage
+          text={t(
+            `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRICE_ADJUSTMENT}.warning`
+          )}
+          style={styles.warning}
+        />
+      ) : null}
+
       <DefaultSwitch
         title={t(
           `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.PRICE_ADJUSTMENT}.fields.deposit`
         )}
         onChange={() => onToggleSpecification(PRICE_ADJUSTMENT_FIELDS.DEPOSIT)}
         value={priceAdjustment[PRICE_ADJUSTMENT_FIELDS.DEPOSIT]}
+        disabled={isBankGuarantee}
       />
 
       <DefaultSwitch
@@ -141,7 +162,7 @@ export default function PriceAdjustment(): JSX.Element {
                 test,
                 PRICE_ADJUSTMENT_FIELDS.GRADUATED_LEASE_PRICE
               )
-            } 
+            }
           />
           <View style={styles.dateContainer}>
             <DefaultText
@@ -180,6 +201,10 @@ export default function PriceAdjustment(): JSX.Element {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
+  },
+  warning: {
+    paddingHorizontal: 16,
+    paddingVertical: 10,
   },
   dateContainer: {
     paddingTop: 16,

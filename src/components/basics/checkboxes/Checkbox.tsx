@@ -16,6 +16,7 @@ type CheckboxProps = {
   errorMessage?: string;
   style?: StyleProp<TextStyle> | undefined;
   testID?: string;
+  disabled?: boolean;
 };
 
 export default function Checkbox({
@@ -26,6 +27,7 @@ export default function Checkbox({
   isError,
   errorMessage,
   testID,
+  disabled,
 }: CheckboxProps) {
   return (
     <>
@@ -33,15 +35,19 @@ export default function Checkbox({
         style={[styles.container, style]}
         onPress={onChange}
         testID={testID}
+        disabled={disabled}
       >
         <CheckBox
           isChecked={isChecked}
           onClick={onChange}
-          checkBoxColor={isError ? "#FA7171" : "#1696E2"}
-          checkedCheckBoxColor={isError ? "#FA7171" : "#1696E2"}
-          rightTextStyle={styles.checkboxText}
+          checkBoxColor={disabled ? "#909090" : isError ? "#FA7171" : "#1696E2"}
+          checkedCheckBoxColor={
+            disabled ? "#909090" : isError ? "#FA7171" : "#1696E2"
+          }
+          rightTextStyle={[styles.checkboxText, disabled && styles.disabledText]}
+          disabled={disabled}
         />
-        <Text style={styles.checkboxText}>{text}</Text>
+        <Text style={[styles.checkboxText, disabled && styles.disabledText]}>{text}</Text>
       </Pressable>
       {errorMessage ? (
         <Text style={styles.errorMessage}>{errorMessage}</Text>
@@ -60,6 +66,9 @@ const styles = StyleSheet.create({
     color: "#202020",
     paddingLeft: 14,
     flex: 1,
+  },
+  disabledText: {
+    color: "#909090",
   },
   errorMessage: {
     color: "#FA7171",
