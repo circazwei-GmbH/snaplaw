@@ -80,7 +80,7 @@ export default function Sign() {
       return;
     }
 
-    dispatch(requestModalSign(true));
+    dispatch(requestModalSign(!signVisible));
   };
 
   const inviteHandler = () => {
