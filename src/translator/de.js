@@ -754,7 +754,7 @@ export default {
       [CONTRACT_SCREEN_TYPES.PRICE_ADJUSTMENT]: {
         title: "Preisanpassung",
         warning:
-          "The deposit can't be enabled with the bank guarantee payment method selected.", //translate
+          "Die Anzahlung kann nicht aktiviert werden, wenn die Zahlungsweise für Bankgarantie ausgewählt ist.",
         fields: {
           deposit: "Anzahlung",
           graduatedLease: "Die Staffelmiete wird erhöht",
@@ -792,7 +792,7 @@ export default {
         },
         partner_warning: "The seller chose to pay in %{method} way.", //translate
         owner_warning:
-          "The bank guarantee option can't be used with the deposit enabled.", //translate
+          "Die Option für Bankgarantie kann nicht mit der enthaltenen Anzahlung verwendet werden.",
       },
       [CONTRACT_SCREEN_TYPES.NUMBER_OF_TENANTS]: {
         title: "Anzahl der Mieter",
