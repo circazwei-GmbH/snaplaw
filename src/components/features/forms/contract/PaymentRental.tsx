@@ -71,7 +71,7 @@ export default function PaymentRental() {
 
   return (
     <View style={styles.container}>
-      {contract.meRole === CONTRACT_ROLE.OWNER ? (
+      {contract.meRole === CONTRACT_ROLE.OWNER && isDeposit ? (
         <ErrorBoldMessage
           text={t(
             `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.owner_warning`,

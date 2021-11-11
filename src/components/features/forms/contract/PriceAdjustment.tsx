@@ -204,6 +204,7 @@ const styles = StyleSheet.create({
   },
   warning: {
     paddingHorizontal: 16,
+    paddingVertical: 10,
   },
   dateContainer: {
     paddingTop: 16,

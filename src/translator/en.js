@@ -729,6 +729,7 @@ export default {
       },
       [CONTRACT_SCREEN_TYPES.PRICE_ADJUSTMENT]: {
         title: "price adjustment",
+        warning: "The deposit can't be enabled with the bank guarantee payment method selected.",
         fields: {
           deposit: "Deposit",
           graduatedLease: "The graduated lease will be increased",
@@ -766,7 +767,7 @@ export default {
         },
         partner_warning: "The seller chose to pay in %{method} way.",
         owner_warning:
-          "If you choose the bank guarantee payment method, the deposit is not active.",
+          "The bank guarantee option can't be used with the deposit enabled.",
       },
       [CONTRACT_SCREEN_TYPES.NUMBER_OF_TENANTS]: {
         title: "Number of tenants",
