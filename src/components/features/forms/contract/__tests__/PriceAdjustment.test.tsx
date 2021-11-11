@@ -11,7 +11,11 @@ import { CONTRACT_ROLE } from "../../../../../store/modules/contract/contract-ro
 import PriceAdjustment from "../PriceAdjustment";
 import { PRICE_ADJUSTMENT_FIELDS } from "../../../../../store/modules/contract/price-adjustment-data";
 import { validateScreen } from "../../../../../store/modules/contract/action-creators";
-import { CURRENCY } from "../../../../../store/modules/contract/payment";
+import {
+  CURRENCY,
+  PAYMENT_FIELDS,
+  PAYMENT_METHODS,
+} from "../../../../../store/modules/contract/payment";
 import { getDateWithoutTime } from "../../../../../store/modules/contract/helper";
 
 const initialState = {
@@ -161,6 +165,26 @@ describe("PriceAdjustment", () => {
     expect(
       getByText(
         `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.PRICE_ADJUSTMENT}.graduatedLease.dateText`
+      )
+    ).toBeTruthy();
+  });
+  it("Should dispaly warning when bank guarantee selected", () => {
+    // @ts-ignore
+    initialState.contract.currentContract.screens[1] = {
+      type: CONTRACT_SCREEN_TYPES.PAYMENT,
+      data: {
+        //@ts-ignore
+        [PAYMENT_FIELDS.PAYMENT_METHOD]: PAYMENT_METHODS.BANK_GUARANTEE,
+      },
+    };
+    const { getByText } = render(
+      <Provider store={store}>
+        <PriceAdjustment />
+      </Provider>
+    );
+    expect(
+      getByText(
+        `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.PRICE_ADJUSTMENT}.warning`
       )
     ).toBeTruthy();
   });

@@ -185,6 +185,7 @@ export default function PaymentRental() {
               placeholder={t(
                 `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.payment_date`
               )}
+              testID={PAYMENT_FIELDS.PAYMENT_DATE}
             />
           </View>
         ) : null}
