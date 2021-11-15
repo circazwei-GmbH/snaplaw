@@ -13,4 +13,10 @@ describe("Link", () => {
     fireEvent.press(await findByText("TestLink"));
     expect(handler).toBeCalled();
   });
+  it("Link handler not called", async () => {
+    const handler = jest.fn();
+    const { findByText } = render(<Link text="TestLink" />);
+    fireEvent.press(await findByText("TestLink"));
+    expect(handler).not.toBeCalled();
+  });
 });

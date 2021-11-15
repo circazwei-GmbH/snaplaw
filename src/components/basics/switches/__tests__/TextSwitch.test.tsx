@@ -11,7 +11,7 @@ describe("TextSwitch", () => {
       <TextSwitch
         left={LEFT}
         right={RIGHT}
-        currentPosition={TEXT_SWITCH_POSITION.LEFT}
+        currentPosition={TEXT_SWITCH_POSITION.RIGHT}
         onChange={jest.fn()}
       />
     );

@@ -16,7 +16,7 @@ type TextSwitchProps = {
 export default function TextSwitch({
   left,
   right,
-  currentPosition = TEXT_SWITCH_POSITION.LEFT,
+  currentPosition,
   onChange,
 }: TextSwitchProps) {
   return (
