@@ -135,7 +135,7 @@ describe("AboutHousing", () => {
       })
     );
   });
-  it("Should dispaly external fields", () => {
+  it("Should dispaly additional fields", () => {
       // @ts-ignore
     initialState.contract.currentContract.screens[0].data[
       HOUSING_DATA_FIELDS.IS_FURNISHED

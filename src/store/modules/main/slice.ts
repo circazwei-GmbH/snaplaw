@@ -58,6 +58,10 @@ const removeFromWaiterAction = createAction<
 const setOrientationAction = createAction<OrientationType, "setOrientation">(
   "setOrientation"
 );
+const clearMainStateAction = createAction<
+  MainStateInterface,
+  "clearMainState"
+>("clearMainState");
 
 export const mainSlice = createSlice({
   name: "main",
@@ -112,6 +116,9 @@ export const mainSlice = createSlice({
     ) => {
       state.orientation = action.payload;
     },
+    [clearMainStateAction.type]: (state: Draft<MainStateInterface>) => {
+      return initialState;
+    },
   },
 });
 
@@ -122,6 +129,7 @@ export const {
   addToWaiter,
   removeFromWaiter,
   setOrientation,
+  clearMainState,
 } = mainSlice.actions;
 
 export default mainSlice.reducer;

@@ -31,7 +31,7 @@ const ioInstance = {
   }
 };
 // @ts-ignore
-const dispatchInstance: Dispatch = {};
+const dispatchInstance: Dispatch = () => {};
 
 describe("connect", () => {
   it("Should reject without dispatcher", () => {
@@ -48,7 +48,7 @@ describe("connect", () => {
     await connect(dispatchInstance)
     expect(getAuthTokens).toBeCalled()
     expect(ioInstance.connect).toBeCalled()
-    expect(io).toBeCalledWith(API_HOST, { autoConnect: false, auth: { token: "test-token" } })
+    expect(io).toBeCalledWith(API_HOST, { autoConnect: false, reconnection: false, auth: { token: "test-token" } })
   })
   it("Should dicsonnected", async () => {
     await disconnect();
@@ -71,6 +71,6 @@ describe("connect", () => {
     expect(getAuthTokens).toBeCalled()
     expect(ioInstance.connect).toBeCalled()
     expect(ioInstance.disconnect).toBeCalled()
-    expect(io).toBeCalledWith(API_HOST, { autoConnect: false, auth: { token: "test-token" } })
+    expect(io).toBeCalledWith(API_HOST, { autoConnect: false, reconnection: false, auth: { token: "test-token" } })
   })
 });
