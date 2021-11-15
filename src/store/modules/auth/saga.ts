@@ -36,7 +36,7 @@ import {
   signUpFailed,
   verificationFailed,
 } from "./slice";
-import { setMessage, setModal } from "../main/slice";
+import { clearMainState, setMessage, setModal } from "../main/slice";
 import { AUTH_ROUTE } from "../../../router/AuthRouterTypes";
 import * as RootNavigation from "../../../router/RootNavigation";
 import {
@@ -60,6 +60,7 @@ import { BUTTON_COLORTYPE } from "../main/types";
 import { clearUser } from "../profile/slice";
 import { clearNotificationModule } from "../notifications/slice";
 import { removePushTokenFromApi } from "../../../services/push-notifications";
+import { clearContractState } from "../contract/slice";
 
 function* fetchSignUp(action: RequestSignUpAction) {
   try {
@@ -262,6 +263,8 @@ function* clearToken() {
     yield put(killToken());
     yield put(clearUser());
     yield put(clearNotificationModule());
+    yield put(clearMainState());
+    yield put(clearContractState());
     yield call(BaseApi.setToken, undefined, undefined);
   } catch (error) {
     yield put(setMessage(Translator.getInstance().trans("errors.abstract")));

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import TextField from "../../../components/TextField";
@@ -21,7 +21,7 @@ export default function ProductDataForm(): JSX.Element {
         (screen) => screen.type === CONTRACT_SCREEN_TYPES.PRODUCT_DATA
       ) as ProductDataScreenInterface | undefined
   );
-  
+
   const screenErrors = useAppSelector((state) =>
     state.contract.contractErrors
       ? state.contract.contractErrors[CONTRACT_SCREEN_TYPES.PRODUCT_DATA]
@@ -60,6 +60,11 @@ export default function ProductDataForm(): JSX.Element {
       );
     }
   };
+
+  useEffect(() => {
+    if (productData)
+      setHaveSerial(productData.data[PRODUCT_DATA_FIELDS.isSerial]);
+  }, [productData]);
 
   return (
     <View style={styles.container}>
@@ -119,7 +124,7 @@ export default function ProductDataForm(): JSX.Element {
             onChangeFunction={(newValue) =>
               onChangeAction(newValue, PRODUCT_DATA_FIELDS.serial)
             }
-          /> 
+          />
         </View>
       ) : null}
     </View>

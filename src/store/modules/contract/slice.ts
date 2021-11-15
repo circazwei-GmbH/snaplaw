@@ -153,6 +153,9 @@ const clearAllSignAction = createAction<undefined, "clearAllSign">(
 const setSignModalAction = createAction<undefined, "setSignModal">(
   "setSignModal"
 );
+const clearContractStateAction = createAction<ContractState, "clearContractState">(
+  "clearContractState"
+);
 
 const contractSlice = createSlice({
   name: "contract",
@@ -363,6 +366,9 @@ const contractSlice = createSlice({
     ) => {
       state.signModal = action.payload;
     },
+    [clearContractStateAction.type]: (state: Draft<ContractState>) => {
+      return initialState;
+    },
   },
 });
 
@@ -386,6 +392,7 @@ export const {
   updateScreenData,
   clearAllSign,
   setSignModal,
+  clearContractState
 } = contractSlice.actions;
 
 export default contractSlice.reducer;
