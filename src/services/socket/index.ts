@@ -3,6 +3,7 @@ import { API_HOST } from "../../env/env";
 import { Dispatch } from "@reduxjs/toolkit";
 import Handlers, { SOKET_EVENT } from "./event-handlers";
 import { getAuthTokens } from "../auth/tokens";
+import { setMessage } from "../../store/modules/main/slice";
 
 let socket: Socket | null = null;
 let dispatcher: Dispatch | null = null;
@@ -21,20 +22,28 @@ export const connect = (
   return new Promise(async (resolve) => {
     const { token } = await getAuthTokens();
     if (!socket) {
-      socket = io(API_HOST, { autoConnect: false, auth: { token } });
+      socket = io(API_HOST, {
+        autoConnect: false,
+        reconnection: false,
+        auth: { token },
+      });
+      socket.on("connect", () => {
+        appliyHandlers(dispatch);
+        // @ts-ignore
+        resolve(socket);
+      });
+      socket.on("connect_error", () => {
+        reconnectTimer = setTimeout(() => {
+          connect().then(resolve);
+        }, 2000);
+        // @ts-ignore
+        //TODO: investigate why socket does not connect
+        dispatch(setMessage("socket connecion error"));
+        socket.disconnect();
+      });
     } else {
       socket.auth.token = token;
     }
-    socket.on("connect", () => {
-      appliyHandlers(dispatch);
-      // @ts-ignore
-      resolve(socket);
-    });
-    socket.on("connect_error", () => {
-      reconnectTimer = setTimeout(() => {connect().then(resolve)}, 2000);
-      // @ts-ignore
-      socket.disconnect();
-    });
     socket.connect();
   });
 };
@@ -60,7 +69,7 @@ export const appliyHandlers = (dispatch: Dispatch) => {
     throw new Error("Socket not connected");
   }
   for (let handlerName in Handlers) {
-    if(socket.listeners(handlerName).length) {
+    if (socket.listeners(handlerName).length) {
       continue;
     }
     socket.on(handlerName, (event) =>

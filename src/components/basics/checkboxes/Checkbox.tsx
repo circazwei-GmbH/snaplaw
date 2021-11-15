@@ -44,7 +44,6 @@ export default function Checkbox({
           checkedCheckBoxColor={
             disabled ? "#909090" : isError ? "#FA7171" : "#1696E2"
           }
-          rightTextStyle={[styles.checkboxText, disabled && styles.disabledText]}
           disabled={disabled}
         />
         <Text style={[styles.checkboxText, disabled && styles.disabledText]}>{text}</Text>

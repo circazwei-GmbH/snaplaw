@@ -1,0 +1,242 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CalensarInput Should call handler 1`] = `
+Array [
+  <Text
+    style={
+      Object {
+        "color": "#1696E2",
+        "fontSize": 14,
+        "lineHeight": 22,
+      }
+    }
+  >
+    Date
+    <Text
+      style={
+        Object {
+          "color": "#FA7171",
+        }
+      }
+    >
+      *
+    </Text>
+  </Text>,
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#EFF7FD",
+          "borderRadius": 10,
+          "flexDirection": "row",
+          "height": 44,
+          "justifyContent": "space-between",
+        },
+        undefined,
+        null,
+        null,
+      ]
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "width": "70%",
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#202020",
+              "fontFamily": "P",
+              "fontSize": 17,
+            },
+            undefined,
+          ]
+        }
+        testID="CalendarInputDate"
+      >
+        15.11.2021
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingVertical": 7,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "backgroundColor": "#919191",
+              "height": "100%",
+              "width": 0.5,
+            }
+          }
+        />
+      </View>
+      <View
+        accessible={true}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "paddingHorizontal": 29,
+          }
+        }
+        testID="DataPickerPressabelAreaID"
+      >
+        <Text />
+      </View>
+    </View>
+    <Modal
+      animationType="none"
+      hardwareAccelerated={false}
+      transparent={true}
+      visible={false}
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "rgba(0,0,0,0.7)",
+              "flex": 1,
+              "justifyContent": "flex-end",
+            },
+            Object {
+              "justifyContent": "center",
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "flex-end",
+              "backgroundColor": "#fff",
+              "padding": 20,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "marginTop": 15,
+              }
+            }
+          >
+            <View
+              accessible={true}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "marginLeft": 20,
+                  }
+                }
+              >
+                <Text
+                  style={
+                    Object {
+                      "fontSize": 16,
+                      "textTransform": "uppercase",
+                    }
+                  }
+                >
+                  menu.cancel
+                </Text>
+              </View>
+            </View>
+            <View
+              accessible={true}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              testID="ConfirmDate"
+            >
+              <View
+                style={
+                  Object {
+                    "marginLeft": 20,
+                  }
+                }
+              >
+                <Text
+                  style={
+                    Object {
+                      "fontSize": 16,
+                      "textTransform": "uppercase",
+                    }
+                  }
+                >
+                  menu.confirm
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </Modal>
+  </View>,
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#FA7171",
+          "paddingTop": 5,
+        },
+        Object {
+          "display": "none",
+        },
+      ]
+    }
+  />,
+]
+`;
