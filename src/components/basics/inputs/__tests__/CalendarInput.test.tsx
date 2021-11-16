@@ -10,12 +10,4 @@ describe("CalensarInput", () => {
     );
     expect(getByText("Date*")).toBeTruthy();
   });
-  it("Should call handler", () => {
-    const { toJSON, getByText, getByTestId } = render(
-      <CalendarInput date={`${new Date()}`} placeholder="Date" dateHandler={()=>{}} />
-    );
-    fireEvent.press(getByTestId("DataPickerPressabelAreaID"));
-    fireEvent.press(getByText("menu.cancel"));
-    expect(toJSON()).toMatchSnapshot();
-  });
 });

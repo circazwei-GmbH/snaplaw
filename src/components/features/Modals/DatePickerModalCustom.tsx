@@ -26,7 +26,7 @@ export default function DatePickerModalCustom({
   const [date, setDate] = useState(setedDate || `${getDateWithoutTime(new Date())}`);
 
   return (
-    <Modal visible={datePickerOpened} transparent={true} animationType="none">
+    <Modal testID="DatePickerModal" visible={datePickerOpened} transparent={true} animationType="none">
       <View style={[styles.container, styles.datePickerContainerWrapper]}>
         <View style={styles.datePickerContainer}>
           <DatePickerModal
