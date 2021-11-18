@@ -16,7 +16,7 @@ const reduser = (state = {}, action: unknown) => {
 
 const store = createStore(reduser);
 
-describe("MultilineTextField", () => {
+describe("MultilineWithPhotos", () => {
   it("Should dispatch action on remove photo", () => {
     const { getByTestId } = render(
       <Provider store={store}>

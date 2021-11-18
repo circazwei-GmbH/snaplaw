@@ -73,6 +73,7 @@ export default function SignModal({ visible, onClose }: SignModalProps) {
             }
             pageName={t("sign_form.title")}
             style={styles.topBar}
+            noPlaceholder
             rightButton={
               <TextButton
                 text={t(`sign_form.buttons.create`)}

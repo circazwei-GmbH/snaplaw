@@ -8,12 +8,9 @@ describe("MultilineTextField", () => {
       <MultilineTextField
         placeholder="placeholder"
         onChangeFunction={jest.fn()}
-        checked
       />
     );
     expect(getByTestId("placeholder").props.style[1]).toBeNull();
-    expect(getByTestId("placeholder").props.style[4]).not.toBeNull();
-    
     fireEvent(getByTestId("placeholder"), "focus");
     expect(getByTestId("placeholder").props.style[1]).not.toBeNull();
     fireEvent(getByTestId("placeholder"), "blur");

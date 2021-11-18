@@ -18,7 +18,6 @@ interface MultilineWithPhotosInterface {
   photos: MediaType[];
   onChangeFunction: (newValue: string) => void;
   screenType?: CONTRACT_SCREEN_TYPES;
-  checked?: boolean;
   errorMessage?: string;
   description?: string;
   isDirectionReverse?: boolean;
@@ -33,7 +32,6 @@ export default function MultilineWithPhotos({
   photosFieldName,
   photos,
   onChangeFunction,
-  checked,
   errorMessage,
   description,
   isDirectionReverse,
@@ -67,7 +65,6 @@ export default function MultilineWithPhotos({
             errorMessage={errorMessage}
             placeholder={placeholder}
             onChangeFunction={onChangeFunction}
-            checked={checked}
           />
         </View>
       ) : null}

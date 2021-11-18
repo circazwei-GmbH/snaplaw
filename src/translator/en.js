@@ -34,7 +34,7 @@ export default {
     email_field: "Email",
     password_field: "Password",
     submit: "Create",
-    alternative: "or sign up with ",
+    alternative: "or Sign up with ",
     to_login: "Already have an account?",
     log_in: "Sign in",
     errors: {
@@ -49,7 +49,7 @@ export default {
     email_field: "Email",
     password_field: "Password",
     forgot_password: "Forgot password?",
-    alternative: "Or sign in with",
+    alternative: "or Sign in with",
     to_sign_up: "Don’t have any account?",
     sign_up: "Sign up",
     errors: {

@@ -11,6 +11,9 @@ const initialState = {
     avatarLoading: true,
   },
 };
+const TEST_URI = "test_url";
+const url = { uri: TEST_URI, type: MEDIA_TYPE.IMAGE }
+
 const actions = jest.fn();
 
 const reduser = (state = initialState, action: any) => {
@@ -59,15 +62,23 @@ describe("UserAvatar", () => {
     expect(queryByTestId("AvatarLoadingActivityIndicator")).not.toBeTruthy();
   });
   it("Should use uri if it preset", () => {
-    const TEST_URI = "test_url";
     const { queryByTestId } = render(
       <Provider store={customStore}>
-        <UserAvatar sizeSmall url={{ uri: TEST_URI, type: MEDIA_TYPE.IMAGE }} />
+        <UserAvatar sizeSmall url={url} />
       </Provider>
     );
 
     expect(queryByTestId("AvatarImage").props.source).toEqual(
       buildMediaSource(TEST_URI)
     );
+  });
+  it("Should show big avatar", () => {
+    const { getByTestId } = render(
+      <Provider store={customStore}>
+        <UserAvatar url={url} />
+      </Provider>
+    );
+
+    expect(getByTestId("AvatarImageContainer").props.style[0].height).toEqual(300);
   });
 });

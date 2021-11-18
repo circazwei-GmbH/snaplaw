@@ -14,7 +14,6 @@ interface OnChangeFunction {
 interface MultilineTextFieldPropsInterface extends TextInputProps {
   placeholder?: string;
   value?: string;
-  checked?: boolean;
   onChangeFunction: OnChangeFunction;
   errorMessage?: string;
 }
@@ -22,7 +21,6 @@ interface MultilineTextFieldPropsInterface extends TextInputProps {
 export default function MultilineTextField({
   placeholder,
   value,
-  checked,
   onChangeFunction,
   errorMessage,
   ...props
@@ -49,7 +47,6 @@ export default function MultilineTextField({
           focused ? styles.fullInput : null,
           focused ? null : styles.focuslessInput,
           localValue ? styles.inputWithText : null,
-          checked ? styles.heightChecked : styles.heightNotChecked,
           errorMessage ? styles.fieldOnError : null,
         ]}
         value={localValue}
@@ -78,11 +75,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 11,
     fontFamily: "P",
-  },
-  heightChecked: {
-    height: 70,
-  },
-  heightNotChecked: {
     height: 140,
   },
   fullInput: {

@@ -22,51 +22,52 @@ export default function TextFieldImitation({
     <View
       style={[
         styles.inputContainer,
-        settings ? { paddingHorizontal: 16 } :  null,
+        settings ? { paddingHorizontal: 16 } : null,
         settings ? styles.borderSettings : styles.border,
       ]}
       testID={placeholder}
     >
       <View style={styles.labelBox}>
-        <Text style={[
-           !settings && !value ? styles.labelWithEmptyInputDance : null,
-          styles.label
-        ]}>
+        <Text
+          style={[
+            !settings && !value ? styles.labelWithEmptyInputDance : null,
+            styles.label,
+          ]}
+        >
           {placeholder}
         </Text>
         {settings || !value ? null : <Text style={styles.redText}>*</Text>}
       </View>
       <View
+        testID="TextFieldImitationView"
         style={[
           settings ? styles.input : styles.emptyInput,
           gray ? styles.inputNotEditable : null,
           !settings && errorMessage ? styles.errorBorder : null,
         ]}
       >
-        { value || (settings && errorMessage) 
-         ? (
-              <Text
-                style={[
-                  styles.inputWithText,
-                  settings ? null : styles.lineHeight,
-                  gray ? styles.grayText : null,
-                ]}
-              >
-                {value}
-              </Text>
-            )
-          : (
-            <Text
-              style={[
-                styles.inputWithText,
-                styles.placeholder,
-                settings ? null : styles.lineHeight,
-              ]}
-            >
-              {placeholder}
-            </Text>
-          )
-        }
+        {value || (settings && errorMessage) ? (
+          <Text
+            style={[
+              styles.inputWithText,
+              settings ? null : styles.lineHeight,
+              gray ? styles.grayText : null,
+            ]}
+          >
+            {value}
+          </Text>
+        ) : (
+          <Text
+            style={[
+              styles.inputWithText,
+              styles.placeholder,
+              settings ? null : styles.lineHeight,
+            ]}
+            testID={`Placeholder.${placeholder}`}
+          >
+            {placeholder}
+          </Text>
+        )}
         {children || null}
       </View>
       <Text
@@ -116,7 +117,7 @@ const styles = StyleSheet.create({
     fontFamily: "P",
     fontSize: 17,
     lineHeight: 40,
-    color: "#000"
+    color: "#000",
   },
   lineHeight: {
     lineHeight: 44,
