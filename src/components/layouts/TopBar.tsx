@@ -75,14 +75,14 @@ const styles = StyleSheet.create({
     }),
   },
   headerText: {
-    width: Dimensions.get("window").width * 0.44,
+    width: Dimensions.get("window").width * 0.6,
     justifyContent: "center",
     textAlign: "center",
     fontFamily: "OS-SB",
     fontSize: 16,
   },
   buttonPlaceholder: {
-    width: Dimensions.get("window").width * 0.28,
+    width: Dimensions.get("window").width * 0.2,
     height: 45,
     justifyContent: "center",
     alignItems: "flex-end",

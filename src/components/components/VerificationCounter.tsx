@@ -6,7 +6,7 @@ import { LANGUAGE_ENGLISH } from "../../store/modules/profile/constants";
 import { MediaType } from "../../services/media";
 
 interface VerificationCounterPropsInterface {
-  sizeSmall: boolean;
+  sizeSmall?: boolean;
   doHaveUrl?: MediaType | null;
 }
 
@@ -19,7 +19,7 @@ export default function VerificationCounter({
   const currentLanguage = useAppSelector((state) => state.profile.language);
 
   return (
-    <View style={!sizeSmall && doHaveUrl ? styles.horizontal : styles.vertical}>
+    <View testID="VerificationCounter" style={!sizeSmall && doHaveUrl ? styles.horizontal : styles.vertical}>
       <Text
         style={[
           styles.textGray,

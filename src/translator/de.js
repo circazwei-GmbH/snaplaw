@@ -332,8 +332,8 @@ export default {
       },
       [CONTRACT_SCREEN_TYPES.PAYMENT]: {
         title: "Bezahlung",
-        product_price: "1. Bitte geben Sie den Preis des Artikels an",
-        payment_method: "2. Bitte Zahlungsart wählen",
+        product_price: "Bitte geben Sie den Preis des Artikels an",
+        payment_method: "Bitte Zahlungsart wählen",
         fields: {
           cost: "Cost",
           name: "Name des Karteninhabers",
@@ -568,8 +568,8 @@ export default {
       },
       [CONTRACT_SCREEN_TYPES.PAYMENT]: {
         title: "Bezahlung",
-        product_price: "1. Bitte geben Sie den Preis des Artikels an",
-        payment_method: "2. Bitte Zahlungsart wählen",
+        product_price: "Bitte geben Sie den Preis des Artikels an",
+        payment_method: "Bitte Zahlungsart wählen",
         fields: {
           cost: "Cost",
           name: "Name des Karteninhabers",

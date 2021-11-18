@@ -10,7 +10,7 @@ export enum MEDIA_TYPE {
 
 export type MediaType = {
   uri: string;
-  type: MEDIA_TYPE | undefined;
+  type?: MEDIA_TYPE;
 };
 
 export type MediaProcessFunction = (option: MediaPayload) => Promise<MediaType>;

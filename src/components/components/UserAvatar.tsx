@@ -6,7 +6,7 @@ import FastImage from "react-native-fast-image";
 import { MediaType } from "../../services/media";
 
 interface UserAvatarPropsInterface {
-  sizeSmall: boolean;
+  sizeSmall?: boolean;
   url?: MediaType | null;
 }
 
@@ -36,6 +36,7 @@ export default function UserAvatar({
         !sizeSmall && url ? styles.containerBig : styles.containerSmall,
         styles.container,
       ]}
+      testID="AvatarImageContainer"
     >
       <FastImage
         source={getAvatar()}

@@ -64,3 +64,5 @@ buck-out/
 # Expo
 coverage
 # @end expo-cli
+
+/src/env/

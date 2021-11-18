@@ -70,11 +70,13 @@ export default function PasswordField({
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
         />
-        <Pressable testID="PasswordField.Icon" onPress={iconPressHandler}>
+        <Pressable
+          testID="PasswordField.Icon"
+          style={styles.icon}
+          onPress={iconPressHandler}
+        >
           <MaterialIcons
-            onPress={iconPressHandler}
             color="#668395"
-            style={styles.icon}
             size={20}
             name={visible ? "visibility-off" : "visibility"}
           />
@@ -131,6 +133,7 @@ const styles = StyleSheet.create({
     right: 21,
     bottom: 12,
     fontSize: 20,
+    zIndex: 1,
   },
   container: {
     justifyContent: "flex-end",

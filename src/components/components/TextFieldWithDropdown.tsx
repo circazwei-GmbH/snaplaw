@@ -49,9 +49,7 @@ export default function InviteTextField({
 
   const textChangeHandler = (text: string) => {
     setLocalValue(text);
-    if (typeof onChangeFunction === "function") {
-      onChangeFunction(text);
-    }
+    onChangeFunction(text);
   };
 
   useEffect(() => {
@@ -85,16 +83,17 @@ export default function InviteTextField({
 
   return (
     <View style={[containerStyle, styles.inputContainer]}>
-      <TouchableOpacity style={styles.button} onPress={inputButtonHandler}>
+      <TouchableOpacity testID="TouchableOpacity" style={styles.button} onPress={inputButtonHandler}>
         {focused ? (
           <SimpleLineIcons name="arrow-up" size={16} color="#668395" />
         ) : (
-          <SimpleLineIcons name="arrow-down" size={16} color="#668395" />
+          <SimpleLineIcons testID="arrow-down" name="arrow-down" size={16} color="#668395" />
         )}
       </TouchableOpacity>
       <TextInput
         {...props}
         ref={input}
+        testID={placeholder}
         placeholder={!focused ? placeholder : ""}
         placeholderTextColor="#909090"
         style={[
@@ -123,6 +122,7 @@ export default function InviteTextField({
                 ? styles.listTopPositionError
                 : styles.listTopPosition,
             ]}
+            testID="FlatList"
             data={list}
             keyExtractor={(item, i) => item._id + i}
             renderItem={({ item }) => renderItem(item)}
