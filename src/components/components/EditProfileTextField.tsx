@@ -30,12 +30,6 @@ export default function EditProfileTextField({
 }: EditProfileTextFieldPropsInterface): JSX.Element {
   const [focused, setFocused] = useState(false);
 
-  const textChangeHandler = (text: string) => {
-    if (typeof onChangeFunction === "function") {
-      onChangeFunction(text);
-    }
-  };  
-
   return (
     <View
       style={[
@@ -58,7 +52,7 @@ export default function EditProfileTextField({
           value ? styles.inputWithText : null,
         ]}
         value={value}
-        onChangeText={textChangeHandler}
+        onChangeText={onChangeFunction}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
       />

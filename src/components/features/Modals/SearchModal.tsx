@@ -78,7 +78,7 @@ export default function SearchModal({
 
   return (
     <View>
-      <Modal visible={visible} transparent={true} animationType="none">
+      <Modal testID={`Search.${title}`} visible={visible} transparent={true} animationType="none">
         <Pressable
           onPress={handleClose}
           style={styles.container}
@@ -94,7 +94,7 @@ export default function SearchModal({
                   />
                 }
                 pageName={title}
-                rightButton={<Done onPress={handleDone} />}
+                rightButton={<Done testID={title} onPress={handleDone} />}
                 noPlaceholder
               >
                 <View style={styles.listContainer}>
@@ -127,11 +127,12 @@ export default function SearchModal({
 
 interface DoneInterface {
   onPress: () => void;
+  testID?: string;
 }
 
-const Done = ({ onPress }: DoneInterface) => {
+const Done = ({ onPress, testID = "" }: DoneInterface) => {
   return (
-    <Pressable onPress={onPress} testID="DoneButton">
+    <Pressable onPress={onPress} testID={`DoneButton.${testID}`}>
       <Text style={styles.doneButton}>Done</Text>
     </Pressable>
   );

@@ -58,7 +58,7 @@ export default function MultilineWithPhotos({
   };
 
   return (
-    <View style={isDirectionReverse ? styles.directionReverse : null}>
+    <View style={isDirectionReverse ? styles.directionReverse : null} testID="MultilineTextField">
       {!isMultilineHidden ? (
         <View>
           <DefaultText text={text} style={[styles.titleTwo, titleStyle]} />

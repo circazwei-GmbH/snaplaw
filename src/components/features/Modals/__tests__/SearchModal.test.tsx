@@ -31,7 +31,7 @@ const data = [
 
 describe("SearchModal", () => {
   it("Should display modal", () => {
-    const { getByText, getByTestId } = render(
+    const { getByText } = render(
       <Provider store={store}>
         <SearchModal
           visible
@@ -76,7 +76,7 @@ describe("SearchModal", () => {
       </Provider>
     );
 
-    fireEvent.press(getByTestId("DoneButton"));
+    fireEvent.press(getByTestId("DoneButton.title"));
     expect(handler).toBeCalled();
   });
   it("Should search items", () => {

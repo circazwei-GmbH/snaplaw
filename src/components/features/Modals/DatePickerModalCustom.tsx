@@ -37,7 +37,7 @@ export default function DatePickerModalCustom({
             onDateChange={setDate}
           />
           <View style={styles.dataPickerButtonsContainer}>
-            <TouchableOpacity onPress={onCancelDate}>
+            <TouchableOpacity onPress={onCancelDate} testID="DatePickerModalonCancelDate">
               <View style={styles.dataPickerButton}>
                 <Text style={styles.dataPickerButtonText}>
                   {t("menu.cancel")}

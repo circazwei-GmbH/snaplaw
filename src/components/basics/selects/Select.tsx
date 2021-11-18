@@ -18,7 +18,7 @@ export default function Select({
 }: SelectProps) {
   return (
     <View style={{ ...style, ...styles.select }}>
-      <Picker onItemChange={onValueChange} item={selectedValue} items={items} />
+      <Picker testID="Picker" onItemChange={onValueChange} item={selectedValue} items={items} />
       <SimpleLineIcons
         style={styles.icon}
         name="arrow-down"

@@ -9,11 +9,7 @@ import {
 import { setScreenData } from "../../../../../store/modules/contract/slice";
 import { CONTRACT_ROLE } from "../../../../../store/modules/contract/contract-roles";
 import { validateScreen } from "../../../../../store/modules/contract/action-creators";
-import PassportDataForm from "../PassportDataForm";
-import {
-  PASSPORT_DATA_FIELDS,
-  PASSPORT_DATA_FIELDS_ARR,
-} from "../../../../../store/modules/contract/passport-data";
+
 import ProductDataForm from "../ProductDataForm";
 import { PRODUCT_DATA_FIELDS } from "../../../../../store/modules/contract/types";
 
@@ -41,7 +37,7 @@ const reduser = (state = initialState, action: unknown) => {
 
 const store = createStore(reduser);
 
-describe("PassportDataForm", () => {
+describe("ProductDataForm", () => {
   it("Should dispaly form", () => {
     const { getByPlaceholderText, queryByPlaceholderText, getByText } = render(
       <Provider store={store}>
@@ -208,7 +204,7 @@ describe("PassportDataForm", () => {
       )
     );
   });
-  it("Should dispatch validation", () => {
+  it("Should execute useEffect", () => {
     // @ts-ignore
     initialState.contract = {}
 

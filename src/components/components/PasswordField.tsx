@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextInput, View, StyleSheet, Text } from "react-native";
+import { TextInput, View, StyleSheet, Text, Pressable } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
 interface OnChangeFunction {
@@ -18,7 +18,7 @@ interface TextFieldPropsInterface {
 export default function PasswordField({
   placeholder,
   fixed = false,
-  errorMessage,  
+  errorMessage,
   onChange,
   value,
 }: TextFieldPropsInterface) {
@@ -27,9 +27,7 @@ export default function PasswordField({
   const [visible, setVisible] = useState(false);
 
   const textChangeHandler = (text: string) => {
-    if (typeof onChange === "function") {
-      onChange(text);
-    }
+    onChange(text);
     setLocalValue(text);
   };
 
@@ -55,6 +53,7 @@ export default function PasswordField({
           <Text style={styles.redText}>*</Text>
         </Text>
         <TextInput
+          testID={placeholder}
           placeholder={!focused ? placeholder : ""}
           placeholderTextColor="#909090"
           textContentType="password"
@@ -71,16 +70,15 @@ export default function PasswordField({
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
         />
-        <View>
+        <Pressable testID="PasswordField.Icon" onPress={iconPressHandler}>
           <MaterialIcons
-            testID="PasswordField.Icon"
             onPress={iconPressHandler}
             color="#668395"
             style={styles.icon}
             size={20}
             name={visible ? "visibility-off" : "visibility"}
           />
-        </View>
+        </Pressable>
       </View>
       <Text
         style={[styles.errorText, errorMessage ? null : styles.displayNone]}

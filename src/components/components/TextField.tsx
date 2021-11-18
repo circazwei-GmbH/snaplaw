@@ -44,10 +44,9 @@ export default function TextField({
 
   const textChangeHandler = (text: string) => {
     setLocalValue(text);
-    if (typeof onChangeFunction === "function") {
-      onChangeFunction(text);
-    }
+    onChangeFunction(text);
   };
+  
   const cancelButtonHandler = () => {
     setLocalValue("");
     input.current.blur();
@@ -56,7 +55,7 @@ export default function TextField({
   const handleFocus = () => {
     if (typeof onFocus === "function") onFocus();
     setFocused(true);
-  }
+  };
 
   useEffect(() => {
     setLocalValue(value);
@@ -93,6 +92,7 @@ export default function TextField({
         <TouchableOpacity
           style={styles.crossButton}
           onPress={cancelButtonHandler}
+          testID="EntypoCancelbutton"
         >
           <Entypo name="cross" size={20} color="#668395" />
         </TouchableOpacity>
