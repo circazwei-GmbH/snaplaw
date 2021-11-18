@@ -32,6 +32,7 @@ exports[`Select Select should display 1`] = `
     }
     onItemChange={[MockFunction]}
     placeholder="Test-label"
+    testID="Picker"
     value="Test-label"
   />
   <Text />

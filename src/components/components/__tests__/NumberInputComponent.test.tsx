@@ -4,7 +4,7 @@ import NumberInputComponent from "../NumberInputComponent";
 
 const TEST_ERROR_MESSAGE = "error-test";
 
-describe("NameInputComponent", () => {
+describe("NumberInputComponent", () => {
   it("Should call onCange prop", () => {
     const handler = jest.fn();
     const { getAllByTestId } = render(

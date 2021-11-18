@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import {
-  GestureResponderEvent,
-  StyleProp,
   StyleSheet,
-  TextStyle,
   TouchableOpacity,
 } from "react-native";
 import { SimpleLineIcons } from "@expo/vector-icons";
@@ -12,20 +9,19 @@ import SearchModal from "../../features/Modals/SearchModal";
 import { DataListInterface } from "../../../store/modules/contract/types";
 
 type DropdownInputProps = {
-  style?: StyleProp<TextStyle>;
-  value?: string;
   placeholder: string;
-  errorMessage?: string;
   data: DataListInterface[],
   onChangeFunction: (text: string) => void;
+  errorMessage?: string;
+  value?: string;
 };
 
 export default function DropdownInput({
   placeholder,
+  data,
+  onChangeFunction,
   errorMessage,
   value,
-  onChangeFunction,
-  data,
 }: DropdownInputProps) {
   const [isSearchModalVisible, setSearchModalVisibility] = useState(false);
 
@@ -36,7 +32,7 @@ export default function DropdownInput({
 
   return (
     <>
-      <TouchableOpacity onPress={() => setSearchModalVisibility(true)} activeOpacity={0.9}>
+      <TouchableOpacity testID={`DropdownInput.${placeholder}`} onPress={() => setSearchModalVisibility(true)} activeOpacity={0.9}>
         <TextFieldImitation
           placeholder={placeholder}
           errorMessage={errorMessage}

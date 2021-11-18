@@ -32,14 +32,13 @@ export default function MultilineTextField({
 
   const textChangeHandler = (text: string) => {
     setLocalValue(text);
-    if (typeof onChangeFunction === "function") {
-      onChangeFunction(text);
-    }
+    onChangeFunction(text);
   };
 
   return (
     <View style={[styles.inputContainer]}>
       <TextInput
+        testID={placeholder}
         {...props}
         placeholder={!focused ? placeholder : ""}
         placeholderTextColor="#909090"

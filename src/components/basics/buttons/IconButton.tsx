@@ -12,7 +12,7 @@ export default function IconButton({
   onPress,
 }: IconButtonPropsInterface): JSX.Element {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
+    <TouchableOpacity testID={text} onPress={onPress} style={styles.container}>
       <AntDesign name="pluscircle" size={32} color="#668395" />
       <Text style={[styles.text]}>{text}</Text>
     </TouchableOpacity>
