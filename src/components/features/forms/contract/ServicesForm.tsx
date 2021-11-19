@@ -78,18 +78,16 @@ export default function ServicesForm() {
 
   const deleteService = (index: number) => {
     if (servicesScreen) {
-      const length =
-        servicesScreen.data[SERVICES_DATA_FIELDS.SERVICES_DATA].length;
+      const services = [
+        ...servicesScreen.data[SERVICES_DATA_FIELDS.SERVICES_DATA],
+      ];
+      services.splice(index, 1);
+      
       dispatch(
         setScreenData({
           screenType: CONTRACT_SCREEN_TYPES.SERVICES,
           fieldName: SERVICES_DATA_FIELDS.SERVICES_DATA,
-          value: [
-            ...servicesScreen?.data[SERVICES_DATA_FIELDS.SERVICES_DATA].slice(
-              index + 1,
-              length
-            ),
-          ],
+          value: [...services],
         })
       );
     }
@@ -128,7 +126,8 @@ export default function ServicesForm() {
               }
               value={service[SERVICES_DATA_FIELDS.SERVICE_TITLE]}
               canDelete={
-                servicesScreen.data[SERVICES_DATA_FIELDS.SERVICES_DATA].length > 1
+                servicesScreen.data[SERVICES_DATA_FIELDS.SERVICES_DATA].length >
+                1
               }
               onDelete={() => deleteService(index)}
               onChangeFunction={(newValue) =>
