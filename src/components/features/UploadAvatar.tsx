@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import UserAvatar from "../components/UserAvatar";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { useAppDispatch } from "../../store/hooks";
 import Menu, { ButtonType } from "./Modals/Menu";
 import { useI18n } from "../../translator/i18n";
 import { uploadMedia } from "../../store/modules/media/action-creators";
@@ -18,12 +18,12 @@ import { setAvatarLoading } from "../../store/modules/profile/slice";
 import { MediaType, MEDIA_TYPE } from "../../services/media";
 
 type UploadAvatarProps = {
-  isChangable: boolean;
+  isChangable?: boolean;
   avatar?: MediaType | null;
 };
 
 export default function UploadAvatar({
-  isChangable = true,
+  isChangable,
   avatar,
 }: UploadAvatarProps) {
   const [menuVisible, setMenuVisible] = useState(false);

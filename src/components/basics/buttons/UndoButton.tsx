@@ -9,7 +9,7 @@ type UndoButton = {
 
 export default function UndoButton({ onPress, style }: UndoButton) {
   return (
-    <TouchableOpacity onPress={onPress} style={style}>
+    <TouchableOpacity testID="UndoButton" onPress={onPress} style={style}>
       <Ionicons name="md-arrow-undo-circle" size={30} color="#1696E2" />
     </TouchableOpacity>
   );

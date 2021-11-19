@@ -1,5 +1,13 @@
-import React from "react";
-import { Dimensions, Modal, ScrollView, StyleSheet, View } from "react-native";
+import React, { useState } from "react";
+import {
+  Dimensions,
+  Modal,
+  Platform,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  View,
+} from "react-native";
 import Pdf from "react-native-pdf";
 import * as RootNavigation from "../../../router/RootNavigation";
 import { useI18n } from "../../../translator/i18n";
@@ -19,7 +27,10 @@ import { BaseScreenDataInterface } from "../../../store/modules/contract/base-ty
 import Button from "../../basics/buttons/Button";
 import { CONTRACT_ROLE } from "../../../store/modules/contract/contract-roles";
 import { HOME_ROUTER } from "../../../router/HomeRouterType";
-import { AdditionalInfoCarScreenInterface, ADDITIONAL_INFO_CAR_FIELDS } from "../../../store/modules/contract/additional-info-car-data";
+import {
+  AdditionalInfoCarScreenInterface,
+  ADDITIONAL_INFO_CAR_FIELDS,
+} from "../../../store/modules/contract/additional-info-car-data";
 
 type ContractViewProps = {
   visible: boolean;
@@ -40,6 +51,9 @@ export default function ContractView({
   isPartnerInvited = false,
   viewerRole,
 }: ContractViewProps) {
+  const [page, setPage] = useState(1);
+  const [numOfPages, setNumOfPages] = useState(0);
+
   const { t } = useI18n();
   const dispatch = useAppDispatch();
   const locale = useAppSelector((state) => state.profile.language);
@@ -108,13 +122,27 @@ export default function ContractView({
               />
             ) : null}
           </View>
+
           <ScrollView>
             {visible && contractId ? (
-              <Pdf
-                style={styles.pdf}
-                onError={onError}
-                source={buildPDFSource(contractId, locale)}
-              />
+              <ScrollView>
+                <Pdf
+                  page={page}
+                  onLoadComplete={(numberOfPages) => {
+                    if (Platform.OS === "android") {
+                      setNumOfPages(numberOfPages);
+                    }
+                  }}
+                  onPageSingleTap={(page) => {
+                    if (Platform.OS === "android") {
+                      page < numOfPages ? setPage(page + 1) : setPage(1);
+                    }
+                  }}
+                  style={styles.pdf}
+                  onError={onError}
+                  source={buildPDFSource(contractId, locale)}
+                />
+              </ScrollView>
             ) : null}
             <View style={styles.mediaContainer}>
               {descriptionScreen &&
@@ -182,7 +210,9 @@ export default function ContractView({
                         ADDITIONAL_INFO_CAR_FIELDS.ACCIDENT_DAMAGE_PHOTOS
                       ]
                     }
-                    fieldName={ADDITIONAL_INFO_CAR_FIELDS.ACCIDENT_DAMAGE_PHOTOS}
+                    fieldName={
+                      ADDITIONAL_INFO_CAR_FIELDS.ACCIDENT_DAMAGE_PHOTOS
+                    }
                   />
                 </>
               ) : null}
