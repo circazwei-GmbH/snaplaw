@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react-native";
+import { fireEvent, render } from "@testing-library/react-native";
 import ContractListItem from "../ContactListItem";
 import dayjs from "dayjs";
 import { createStore } from "@reduxjs/toolkit";
@@ -7,6 +7,9 @@ import { Provider } from "react-redux";
 import { CONTRACT_TYPES } from "../../../../../store/modules/contract/constants";
 import { CONTRACT_ROLE } from "../../../../../store/modules/contract/contract-roles";
 import { LANGUAGE_ENGLISH } from "../../../../../store/modules/profile/constants";
+import { setPdfViewOnListContract } from "../../../../../store/modules/contract/slice";
+import { getListItemAction } from "../../../../../services/contract/actions-config";
+import { useI18n } from "../../../../../translator/i18n";
 
 jest.mock("@react-navigation/native", () => ({
   useNavigation: () => ({
@@ -21,6 +24,7 @@ const ITEM = {
   id: "t",
   partnerId: "partnerId",
   ownerId: "ownerId",
+  finalizedAt: undefined,
   meRole: CONTRACT_ROLE.OWNER,
 };
 
@@ -54,5 +58,39 @@ describe("ContractListItem", () => {
     expect(getByText(`contracts.${ITEM.type}.title`)).toBeTruthy();
     expect(getByText(ITEM.title)).toBeTruthy();
     expect(getByText(dayjs(ITEM.createdAt).format("DD/MM/YYYY"))).toBeTruthy();
+  });
+  it("Should open and close modal", () => {
+    const { getByText, getByTestId } = render(
+      <Provider store={state}>
+        <ContractListItem item={ITEM} />
+      </Provider>
+    );
+    expect(getByTestId("Menu").props.visible).toBeFalsy();
+    fireEvent.press(getByTestId("dots-three-vertical"));
+    expect(getByTestId("Menu").props.visible).toBeTruthy();
+    fireEvent.press(getByText("menu.cancel"));
+    expect(getByTestId("Menu").props.visible).toBeFalsy();
+  });
+  it("Should dipatch action on close contract view", () => {
+    const { getByText } = render(
+      <Provider store={state}>
+        <ContractListItem item={ITEM} />
+      </Provider>
+    );
+    fireEvent.press(getByText("contracts.pdf_view.cancel"));
+    expect(actions).toBeCalledWith(setPdfViewOnListContract(undefined));
+  });
+  it("Should dispatch actions on menu button press", () => {
+    const { getByText } = render(
+      <Provider store={state}>
+        <ContractListItem item={ITEM} />
+      </Provider>
+    );
+    getListItemAction(ITEM).map(
+      ({ action }) => {
+        fireEvent.press(getByText(action.title));
+        expect(actions).toBeCalledWith(action.handler(ITEM, useI18n().t))
+      }
+    ); 
   });
 });

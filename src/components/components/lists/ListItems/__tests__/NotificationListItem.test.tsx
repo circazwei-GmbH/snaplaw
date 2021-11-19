@@ -68,4 +68,15 @@ describe("NotificationListItem", () => {
       })
     );
   });
+  it("Should change styles", () => {
+    item.isNew = false;
+    item.createdAt = `${new Date("December 17, 1995")}`;
+    const { getByText } = render(
+      <Provider store={store}>
+        <NotificationListItem item={item} changeStatus={jest.fn} />
+      </Provider>
+    );
+    expect(getByText(notificationConfig[item.type]["message"]).props.style[1]).not.toBeNull();
+    expect(getByText(item.usernameFrom).props.style).not.toBeNull();
+  });
 });

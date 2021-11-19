@@ -83,7 +83,6 @@ export default function ProductDescriptionForm() {
         onChangeFunction={(newValue) =>
           onChangeHandler(newValue, PRODUCT_DESCRIPTION_FIELDS.description)
         }
-        checked={checked}
       />
       {contractType === CONTRACT_TYPES.PURCHASE ? (
         <>
@@ -123,7 +122,6 @@ export default function ProductDescriptionForm() {
                   PRODUCT_DESCRIPTION_FIELDS.descriptionAccessories
                 )
               }
-              checked={false}
               isDirectionReverse
               titleStyle={styles.titleThree}
               screenType={CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION}
