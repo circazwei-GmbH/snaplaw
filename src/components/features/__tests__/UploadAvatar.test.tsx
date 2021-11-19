@@ -184,4 +184,13 @@ describe("UploadAvatar", () => {
     expect(libraryWay).toBeCalled();
     expect(actions).toBeCalledWith(setMessage("test.message"));
   });
+  it("Should not show MaterialCommunityIcons", async () => {
+    actions.mockClear();
+    const { queryByTestId } = render(
+      <Provider store={customStore}>
+        <UploadAvatar />
+      </Provider>
+    );
+    expect(queryByTestId("openMenuIcon")).toBeNull();
+  });
 });
