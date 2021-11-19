@@ -37,7 +37,6 @@ export default function NotificationListItem({
   };
 
   const modalHandler = (
-    isNew: boolean,
     type: NOTIFICATION_TYPE,
     partner: string,
     contract: string
@@ -96,7 +95,7 @@ export default function NotificationListItem({
         testID="notificationItem.openModal"
         style={styles.container}
         activeOpacity={1}
-        onPress={() => modalHandler(isNew, type, usernameFrom, contractName)}
+        onPress={() => modalHandler(type, usernameFrom, contractName)}
       >
         <View
           style={[
@@ -194,7 +193,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 4,
     width: 100,
-    height: 70,
+    height: 80,
     paddingTop: 10,
     backgroundColor: "#1696E2",
   },

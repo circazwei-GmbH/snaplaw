@@ -60,14 +60,20 @@ export default function SearchModal({
 
   const onSearch = (text: string) => {
     const filteredList = data.filter((item) => {
-      if (item.key.toLowerCase() === "other") return true;
-
       for (let i = 0; i < text.length; i++) {
-        if (item?.value[i]?.toLowerCase() !== text[i]?.toLowerCase())
+        if (item?.value[i]?.toLowerCase() !== text[i]?.toLowerCase()) {
           return false;
+        }
       }
       return true;
     });
+
+    if (!filteredList.length) {
+      const other = data.find((item) => item.key.toLowerCase() === "other");
+      if (other) {
+        filteredList.push(other);
+      }
+    }
 
     setSearchedList(filteredList);
   };
@@ -78,7 +84,12 @@ export default function SearchModal({
 
   return (
     <View>
-      <Modal testID={`Search.${title}`} visible={visible} transparent={true} animationType="none">
+      <Modal
+        testID={`Search.${title}`}
+        visible={visible}
+        transparent={true}
+        animationType="none"
+      >
         <Pressable
           onPress={handleClose}
           style={styles.container}

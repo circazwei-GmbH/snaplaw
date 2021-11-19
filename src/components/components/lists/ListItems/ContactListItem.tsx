@@ -41,7 +41,7 @@ export default function ContractListItem({
             {dayjs(item.finalizedAt ?? item.createdAt).format("DD/MM/YYYY")}
           </Text>
         </View>
-        <TouchableOpacity onPress={() => setInProgressMenuVisible(true)}>
+        <TouchableOpacity testID="dots-three-vertical" onPress={() => setInProgressMenuVisible(true)}>
           <View style={styles.action}>
             <Entypo name="dots-three-vertical" size={16} color="#668395" />
           </View>
