@@ -13,6 +13,7 @@ import CalendarInput from "../../../basics/inputs/CalendarInput";
 import TextField from "../../../components/TextField";
 import { validateScreen } from "../../../../store/modules/contract/action-creators";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import InputWithDelete from "../../../basics/inputs/InputWithDelete";
 
 const initialService = {
   [SERVICES_DATA_FIELDS.SERVICE_TITLE]: "",
@@ -36,8 +37,8 @@ export default function ServicesForm() {
   );
   const contractType = useAppSelector(
     (state) => state.contract.currentContract?.type
-  );    
-  
+  );
+
   const onChangeAction = (
     value: string,
     fieldName: SERVICES_DATA_FIELDS,
@@ -75,8 +76,27 @@ export default function ServicesForm() {
     );
   };
 
+  const deleteService = (index: number) => {
+    if (servicesScreen) {
+      const length =
+        servicesScreen.data[SERVICES_DATA_FIELDS.SERVICES_DATA].length;
+      dispatch(
+        setScreenData({
+          screenType: CONTRACT_SCREEN_TYPES.SERVICES,
+          fieldName: SERVICES_DATA_FIELDS.SERVICES_DATA,
+          value: [
+            ...servicesScreen?.data[SERVICES_DATA_FIELDS.SERVICES_DATA].slice(
+              index + 1,
+              length
+            ),
+          ],
+        })
+      );
+    }
+  };
+
   useEffect(() => {
-    if (!servicesScreen) {
+    if (!servicesScreen?.data[SERVICES_DATA_FIELDS.SERVICES_DATA]?.length) {
       dispatch(
         setScreenData({
           screenType: CONTRACT_SCREEN_TYPES.SERVICES,
@@ -89,7 +109,7 @@ export default function ServicesForm() {
 
   return (
     <View style={styles.container}>
-      {servicesScreen?.data[SERVICES_DATA_FIELDS.SERVICES_DATA].map(
+      {servicesScreen?.data[SERVICES_DATA_FIELDS.SERVICES_DATA]?.map(
         (service, index) => (
           <View key={index}>
             <Text style={styles.title}>
@@ -97,7 +117,7 @@ export default function ServicesForm() {
                 `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.SERVICES}.serviceTitle`
               )}
             </Text>
-            <TextField
+            <InputWithDelete
               placeholder={t(
                 `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.SERVICES}.placeholders.service`
               )}
@@ -107,6 +127,10 @@ export default function ServicesForm() {
                 ]
               }
               value={service[SERVICES_DATA_FIELDS.SERVICE_TITLE]}
+              canDelete={
+                servicesScreen.data[SERVICES_DATA_FIELDS.SERVICES_DATA].length > 1
+              }
+              onDelete={() => deleteService(index)}
               onChangeFunction={(newValue) =>
                 onChangeAction(
                   newValue,

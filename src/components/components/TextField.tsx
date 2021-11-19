@@ -17,7 +17,6 @@ interface OnChangeFunction {
 
 interface TextFieldPropsInterface extends TextInputProps {
   placeholder?: string;
-  fixed?: boolean;
   validations?: Array<Function>;
   errorMessage?: string;
   value?: string;
@@ -29,7 +28,6 @@ interface TextFieldPropsInterface extends TextInputProps {
 
 export default function TextField({
   placeholder,
-  fixed = false,
   errorMessage,
   onChangeFunction,
   value,
