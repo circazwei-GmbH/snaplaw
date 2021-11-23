@@ -30,7 +30,7 @@ export default function DatePickerModalCustom({
       <View style={[styles.container, styles.datePickerContainerWrapper]}>
         <View style={styles.datePickerContainer}>
           <DatePickerModal
-            date={date ? new Date(date) : new Date()}
+            date={new Date(date)}
             modal={false}
             open={datePickerOpened}
             modalHandler={setDatePickerOpened}
