@@ -41,7 +41,7 @@ export default function NotificationListItem({
     partner: string,
     contract: string
   ) => {
-    dispatch(requestChangeNotificationStatus({ id }));
+    changeStatus(id);
     dispatch(
       setModal({
         message: t(notificationConfig[type]["message"], { contract, partner }),

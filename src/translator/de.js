@@ -47,7 +47,7 @@ export default {
     email_field: "E-Mail",
     password_field: "Passwort",
     forgot_password: "Passwort vergessen?",
-    alternative: "Oder loggen Sie sich ein mit",
+    alternative: "oder loggen Sie sich ein mit",
     to_sign_up: "Haben Sie noch kein Konto?",
     sign_up: "Anmelden",
     errors: {

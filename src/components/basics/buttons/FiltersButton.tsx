@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "flex-end",
     paddingRight: 16,
-    width: Dimensions.get("window").width * 0.2,
+    width: Dimensions.get("window").width * 0.28,
     height: 45,
   },
   settings: {

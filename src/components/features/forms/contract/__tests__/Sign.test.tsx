@@ -22,8 +22,10 @@ import {
 import { clearErrors } from "../../../../../store/modules/contract/slice";
 import { PRODUCT_CONDITION_FIELD_NAME } from "../../../../../store/modules/contract/purchase/product-condition";
 import { SIGN_LOADER } from "../../../../../store/modules/contract/purchase/sign";
-import { useNavigation } from "@react-navigation/core";
+import * as RootNavigation from "../../../../../router/RootNavigation";
 import { HOME_ROUTER } from "../../../../../router/HomeRouterType";
+
+jest.mock("../../../../../router/RootNavigation");
 
 const text = "text";
 const screens = [
@@ -144,6 +146,16 @@ describe("Sign", () => {
       )
     ).toBeTruthy();
   });
+  it("Should redirect", () => {
+    const { getByTestId } = render(
+      <Provider store={store}>
+        <Sign />
+      </Provider>
+    );
+
+    fireEvent.press(getByTestId("InvitePressabelAreaID"));
+    expect(RootNavigation.navigate).toBeCalledWith(HOME_ROUTER.INVITE, { contractId: initialState.contract.currentContract.id })
+  });
   it("Should dispatch clearErrors", () => {
     const { queryByTestId } = render(
       <Provider store={store}>
@@ -152,6 +164,17 @@ describe("Sign", () => {
     );
 
     fireEvent.press(queryByTestId("SignInputPressID"));
+    expect(actions).toBeCalledWith(clearErrors());
+  });
+  it("Should dispatch clearErrors", () => {
+    actions.mockClear();
+    const { queryByTestId } = render(
+      <Provider store={store}>
+        <Sign />
+      </Provider>
+    );
+
+    fireEvent.press(queryByTestId("sign_form.buttons.cancel"));
     expect(actions).toBeCalledWith(clearErrors());
   });
   it("Should dispatch requestModalSign", () => {

@@ -20,4 +20,19 @@ describe("Welcome", () => {
     expect(getByText("welcome.sign_in")).toBeTruthy();
     expect(getByText("welcome.sign_up")).toBeTruthy();
   });
+  it("Should display image", () => {
+    const Stack = createStackNavigator();
+    const { getByA11yLabel, getByText } = render(
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Welcome" component={Welcome} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+
+    expect(getByA11yLabel("welcome-to-snaplaw")).toBeTruthy();
+    expect(getByA11yLabel("welcome-image")).toBeTruthy();
+    expect(getByText("welcome.sign_in")).toBeTruthy();
+    expect(getByText("welcome.sign_up")).toBeTruthy();
+  });
 });
