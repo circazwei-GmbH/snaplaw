@@ -18,6 +18,7 @@ import Checkbox from "../../../basics/checkboxes/Checkbox";
 import AbstractErrorMessage from "../../../basics/typography/AbstractErrorMessage";
 import TextField from "../../../components/TextField";
 import PaymentLayout from "../../../layouts/PaymentLayout";
+import { CONTRACT_ROLE } from "../../../../store/modules/contract/contract-roles";
 
 export default function Payment() {
   const { t } = useI18n();
@@ -138,6 +139,7 @@ export default function Payment() {
               placeholder={t(
                 `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.name`
               )}
+              disabled={contract.meRole === CONTRACT_ROLE.PARTNER}
             />
             <TextField
               onChangeFunction={(text) =>
@@ -148,6 +150,7 @@ export default function Payment() {
               placeholder={t(
                 `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.card`
               )}
+              disabled={contract.meRole === CONTRACT_ROLE.PARTNER}
             />
           </>
         ) : null}

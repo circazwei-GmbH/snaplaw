@@ -186,6 +186,7 @@ export default function PaymentRental() {
                 `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.payment_date`
               )}
               testID={PAYMENT_FIELDS.PAYMENT_DATE}
+              disabled={contract.meRole === CONTRACT_ROLE.PARTNER}
             />
           </View>
         ) : null}

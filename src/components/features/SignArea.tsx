@@ -24,7 +24,7 @@ export default function SignArea({
   return (
     <View style={styles.container}>
       <View style={styles.signatureContainer}>
-        <Signature ref={refSetter} style={styles.pixi} onChange={onChange} />
+        <Signature testID="Signature" ref={refSetter} style={styles.pixi} onChange={onChange} />
       </View>
       <View style={styles.buttonContainer}>
         <UndoButton

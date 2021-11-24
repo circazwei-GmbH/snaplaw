@@ -12,6 +12,7 @@ import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/consta
 import { PRODUCT_DESCRIPTION_FIELDS } from "../../../../store/modules/contract/types";
 import { CONTRACT_ROLE } from "../../../../store/modules/contract/contract-roles";
 import { HOME_ROUTER } from "../../../../router/HomeRouterType";
+import { ADDITIONAL_INFO_CAR_FIELDS } from "../../../../store/modules/contract/additional-info-car-data";
 
 jest.mock("../../../../router/RootNavigation");
 
@@ -27,6 +28,17 @@ const initialState = {
               { uri: "test/additional" },
             ],
             [PRODUCT_DESCRIPTION_FIELDS.accessoriesPhotos]: [
+              { uri: "test/accessories" },
+            ],
+          },
+        },
+        {
+          type: CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO,
+          data: {
+            [ADDITIONAL_INFO_CAR_FIELDS.OTHER_DEFECTS_PHOTOS]: [
+              { uri: "test/additional" },
+            ],
+            [ADDITIONAL_INFO_CAR_FIELDS.ACCIDENT_DAMAGE_PHOTOS]: [
               { uri: "test/accessories" },
             ],
           },
@@ -175,6 +187,8 @@ describe("ContractView", () => {
     );
     expect(getByText("contracts.pdf_view.additional_media")).toBeTruthy();
     expect(getByText("contracts.pdf_view.accessories_media")).toBeTruthy();
+    expect(getByText("contracts.pdf_view.accident_damage_media")).toBeTruthy();
+    expect(getByText("contracts.pdf_view.other_defects_media")).toBeTruthy();
   });
   it("Should dispaly enter contract details button", () => {
     const handler = jest.fn();

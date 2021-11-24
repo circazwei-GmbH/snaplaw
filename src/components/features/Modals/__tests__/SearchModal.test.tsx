@@ -26,7 +26,7 @@ const data = [
   { key: "key1", value: "value1" },
   { key: "key2", value: "value2" },
   { key: "key3", value: "value3" },
-  { key: "other", value: "other" },
+  { key: "other", value: "Other" },
 ];
 
 describe("SearchModal", () => {
@@ -45,7 +45,7 @@ describe("SearchModal", () => {
 
     data.forEach((el) => expect(getByText(el.value)).toBeTruthy());
   });
-  it("Should call onCLose handler on close", () => {
+  it("Should call onClose handler on close", () => {
     const handler = jest.fn();
     const { getByTestId } = render(
       <Provider store={store}>
@@ -62,7 +62,7 @@ describe("SearchModal", () => {
     fireEvent.press(getByTestId("CloseButton"));
     expect(handler).toBeCalled();
   });
-  it("Should call onCLose handler on close", () => {
+  it("Should call onDone handler on close", () => {
     const handler = jest.fn();
     const { getByTestId } = render(
       <Provider store={store}>
@@ -96,7 +96,7 @@ describe("SearchModal", () => {
     expect(getByText("value1")).toBeTruthy();
     expect(queryByText("value2")).toBeNull();
   });
-  it("Should search items", () => {
+  it("Should select item", () => {
     const { getByTestId } = render(
       <Provider store={store}>
         <SearchModal
@@ -114,5 +114,38 @@ describe("SearchModal", () => {
     
     fireEvent(getByTestId("SearchField"), "focus");     
     expect(getByTestId("key1").props.style.backgroundColor).toBeUndefined();
+  });
+  it("Should find 'other' item", () => {
+    const { getByTestId, getByText } = render(
+      <Provider store={store}>
+        <SearchModal
+          visible
+          title="title"
+          data={data}
+          onClose={() => {}}
+          onDone={() => {}}
+        />
+      </Provider>
+    );
+
+    fireEvent.changeText(getByTestId("SearchField"), "non-existent value");
+    expect(getByText("Other")).toBeTruthy();
+  });
+  it("Should not find 'other' item", () => {
+    const newData = data.filter(el => el.key !== "other");
+    const { getByTestId, queryByText } = render(
+      <Provider store={store}>
+        <SearchModal
+          visible
+          title="title"
+          data={newData}
+          onClose={() => {}}
+          onDone={() => {}}
+        />
+      </Provider>
+    );
+
+    fireEvent.changeText(getByTestId("SearchField"), "non-existent value");
+    expect(queryByText("Other")).toBeFalsy();
   });
  });

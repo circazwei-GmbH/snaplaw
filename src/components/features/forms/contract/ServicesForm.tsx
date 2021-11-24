@@ -10,12 +10,11 @@ import {
 import { setScreenData } from "../../../../store/modules/contract/slice";
 import { useI18n } from "../../../../translator/i18n";
 import CalendarInput from "../../../basics/inputs/CalendarInput";
-import TextField from "../../../components/TextField";
 import { validateScreen } from "../../../../store/modules/contract/action-creators";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import InputWithDelete from "../../../basics/inputs/InputWithDelete";
 
-const initialService = {
+export const initialService = {
   [SERVICES_DATA_FIELDS.SERVICE_TITLE]: "",
   [SERVICES_DATA_FIELDS.SERVICE_DATE]: "",
 };
@@ -69,7 +68,7 @@ export default function ServicesForm() {
         screenType: CONTRACT_SCREEN_TYPES.SERVICES,
         fieldName: SERVICES_DATA_FIELDS.SERVICES_DATA,
         value: [
-          ...servicesScreen?.data[SERVICES_DATA_FIELDS.SERVICES_DATA],
+          ...servicesScreen!.data[SERVICES_DATA_FIELDS.SERVICES_DATA],
           initialService,
         ],
       })
@@ -77,20 +76,18 @@ export default function ServicesForm() {
   };
 
   const deleteService = (index: number) => {
-    if (servicesScreen) {
-      const services = [
-        ...servicesScreen.data[SERVICES_DATA_FIELDS.SERVICES_DATA],
-      ];
-      services.splice(index, 1);
-      
-      dispatch(
-        setScreenData({
-          screenType: CONTRACT_SCREEN_TYPES.SERVICES,
-          fieldName: SERVICES_DATA_FIELDS.SERVICES_DATA,
-          value: [...services],
-        })
-      );
-    }
+    const services = [
+      ...servicesScreen!.data[SERVICES_DATA_FIELDS.SERVICES_DATA],
+    ];
+    services.splice(index, 1);
+
+    dispatch(
+      setScreenData({
+        screenType: CONTRACT_SCREEN_TYPES.SERVICES,
+        fieldName: SERVICES_DATA_FIELDS.SERVICES_DATA,
+        value: [...services],
+      })
+    );
   };
 
   useEffect(() => {
@@ -137,6 +134,7 @@ export default function ServicesForm() {
                   index
                 )
               }
+              testID={`${index}`}
             />
             <Text style={styles.title}>
               {t(
@@ -160,6 +158,7 @@ export default function ServicesForm() {
               placeholder={t(
                 `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.SERVICES}.placeholders.date`
               )}
+              testID={SERVICES_DATA_FIELDS.SERVICE_DATE}
             />
           </View>
         )

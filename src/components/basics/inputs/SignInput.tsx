@@ -39,8 +39,8 @@ export default function SignInput({
         <View style={styles.dividerContainer}>
           <VerticalDivider />
         </View>
-        <Pressable onPress={signHandler}>
-          <View style={styles.iconContainer} testID="SignInputPressID">
+        <Pressable onPress={signHandler} testID="SignInputPressID">
+          <View style={styles.iconContainer}>
             <Feather name="edit-3" size={22} color="#668395" />
           </View>
         </Pressable>

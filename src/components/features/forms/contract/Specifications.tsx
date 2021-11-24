@@ -26,7 +26,7 @@ export default function Specifications(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const [specifications, setSpecifications] = useState(initialState);
-  
+
   const screenErrors = useAppSelector((state) =>
     state.contract.contractErrors
       ? state.contract.contractErrors[CONTRACT_SCREEN_TYPES.SPECIFICATIONS]
@@ -96,12 +96,21 @@ export default function Specifications(): JSX.Element {
       {specifications.inspection ? (
         <View style={styles.calendarInputContainer}>
           <CalendarInput
-            date={specificationsScreen?.data[SPECIFICATIONS_DATA_FIELDS.INSPECTION_DATE] || ""}
+            date={
+              specificationsScreen?.data[
+                SPECIFICATIONS_DATA_FIELDS.INSPECTION_DATE
+              ] || ""
+            }
             dateHandler={(date) =>
               onChangeAction(date, SPECIFICATIONS_DATA_FIELDS.INSPECTION_DATE)
             }
-            placeholder={t(`contracts.${contractType}.${CONTRACT_SCREEN_TYPES.SPECIFICATIONS}.placeholders.inspectionDate`)}
-            errorMessage={screenErrors?.[SPECIFICATIONS_DATA_FIELDS.INSPECTION_DATE]}
+            placeholder={t(
+              `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.SPECIFICATIONS}.placeholders.inspectionDate`
+            )}
+            errorMessage={
+              screenErrors?.[SPECIFICATIONS_DATA_FIELDS.INSPECTION_DATE]
+            }
+            testID={SPECIFICATIONS_DATA_FIELDS.INSPECTION_DATE}
           />
         </View>
       ) : null}
@@ -157,8 +166,13 @@ export default function Specifications(): JSX.Element {
             dateHandler={(date) =>
               onChangeAction(date, SPECIFICATIONS_DATA_FIELDS.DEREGISTERED_DATE)
             }
-            placeholder={t(`contracts.${contractType}.${CONTRACT_SCREEN_TYPES.SPECIFICATIONS}.placeholders.deregisteredDate`)}
-            errorMessage={screenErrors?.[SPECIFICATIONS_DATA_FIELDS.DEREGISTERED_DATE]}
+            placeholder={t(
+              `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.SPECIFICATIONS}.placeholders.deregisteredDate`
+            )}
+            errorMessage={
+              screenErrors?.[SPECIFICATIONS_DATA_FIELDS.DEREGISTERED_DATE]
+            }
+            testID={SPECIFICATIONS_DATA_FIELDS.DEREGISTERED_DATE}
           />
         </View>
       ) : null}

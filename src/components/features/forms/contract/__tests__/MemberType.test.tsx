@@ -8,25 +8,20 @@ import {
   CONTRACT_SCREEN_TYPES,
   CONTRACT_TYPES,
 } from "../../../../../store/modules/contract/constants";
-import { 
-  MEMBER_TYPES, 
-  MEMBER_TYPE_FIELD_NAME, 
-  MEMBER_TYPE_VALUE 
+import {
+  MEMBER_TYPES,
+  MEMBER_TYPE_FIELD_NAME,
+  MEMBER_TYPE_VALUE,
 } from "../../../../../store/modules/contract/carSales/member-type";
 import MemberType from "../MemberType";
+import { CONTRACT_ROLE } from "../../../../../store/modules/contract/contract-roles";
 
 const initialState = {
   contract: {
     currentContract: {
+      meRole: CONTRACT_ROLE.OWNER,
       type: CONTRACT_TYPES.CAR,
-      screens: [
-        {
-          type: CONTRACT_SCREEN_TYPES.MEMBER_TYPE,
-          data: {
-            [MEMBER_TYPE_FIELD_NAME]: MEMBER_TYPE_VALUE.COMMERCIAL,
-          },
-        },
-      ],
+      screens: [],
     },
     contractErrors: {
       [CONTRACT_SCREEN_TYPES.MEMBER_TYPE]: {
@@ -46,7 +41,29 @@ const reduser = (state = initialState, action: unknown) => {
 const store = createStore(reduser);
 
 describe("MemberType", () => {
+  it("Should dispatch action on component init", () => {
+    const {} = render(
+      <Provider store={store}>
+        <MemberType />
+      </Provider>
+    );
+    expect(actions).toBeCalledWith(
+      setScreenData({
+        screenType: CONTRACT_SCREEN_TYPES.MEMBER_TYPE,
+        fieldName: MEMBER_TYPE_FIELD_NAME,
+        value: MEMBER_TYPE_VALUE.COMMERCIAL,
+      })
+    );
+  });
   it("Should dispaly all checkboxes", () => {
+    initialState.contract.currentContract.screens = [
+      {
+        type: CONTRACT_SCREEN_TYPES.MEMBER_TYPE,
+        data: {
+          [MEMBER_TYPE_FIELD_NAME]: MEMBER_TYPE_VALUE.COMMERCIAL,
+        },
+      },
+    ];
     const { getByText } = render(
       <Provider store={store}>
         <MemberType />
@@ -81,10 +98,41 @@ describe("MemberType", () => {
       );
     });
   });
+  it("Should dispaly additional text", () => {
+    initialState.contract.currentContract.meRole = CONTRACT_ROLE.PARTNER;
+    const { getByText } = render(
+      <Provider store={store}>
+        <MemberType />
+      </Provider>
+    );
+    expect(
+      getByText(
+        `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.MEMBER_TYPE}.buyerWarning.fee`
+      )
+    ).toBeTruthy();
+  });
+  it("Should dispaly additional text with price", () => {
+    initialState.contract.currentContract.screens.push({
+      type: CONTRACT_SCREEN_TYPES.PAYMENT,
+      data: {
+        price: "price",
+      }
+    })
+    const { getByText } = render(
+      <Provider store={store}>
+        <MemberType />
+      </Provider>
+    );
+    expect(
+      getByText(
+        `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.MEMBER_TYPE}.buyerWarning.feecontracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.MEMBER_TYPE}.buyerWarning.calculation`
+      )
+    ).toBeTruthy();
+  });
   it("Should dispatch validator", () => {
-    initialState.contract.contractErrors[
-      CONTRACT_SCREEN_TYPES.MEMBER_TYPE
-    ][MEMBER_TYPE_FIELD_NAME] = "some error";
+    initialState.contract.contractErrors[CONTRACT_SCREEN_TYPES.MEMBER_TYPE][
+      MEMBER_TYPE_FIELD_NAME
+    ] = "some error";
     const { getByText } = render(
       <Provider store={store}>
         <MemberType />
@@ -96,10 +144,21 @@ describe("MemberType", () => {
       )
     );
     expect(actions).toBeCalledWith(
-      validateScreen(
-        CONTRACT_TYPES.CAR,
-        CONTRACT_SCREEN_TYPES.MEMBER_TYPE
-      )
+      validateScreen(CONTRACT_TYPES.CAR, CONTRACT_SCREEN_TYPES.MEMBER_TYPE)
     );
+  });
+  it("Should not dispaly component", () => {
+    //@ts-ignore
+    initialState.contract.currentContract = null;
+    const { queryByText } = render(
+      <Provider store={store}>
+        <MemberType />
+      </Provider>
+    );
+    expect(
+      queryByText(
+        `contracts.${CONTRACT_TYPES.CAR}.${CONTRACT_SCREEN_TYPES.MEMBER_TYPE}.secondTitle`
+      )
+    ).toBeFalsy();
   });
 });

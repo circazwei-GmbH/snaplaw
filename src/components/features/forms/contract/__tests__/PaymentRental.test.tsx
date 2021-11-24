@@ -2,7 +2,6 @@ import React from "react";
 import { createStore } from "@reduxjs/toolkit";
 import { fireEvent, render } from "@testing-library/react-native";
 import { Provider } from "react-redux";
-import Payment from "../Payment";
 import {
   CONTRACT_SCREEN_TYPES,
   CONTRACT_TYPES,
@@ -158,7 +157,7 @@ describe("PaymentRental", () => {
       PAYMENT_FIELDS.PAYMENT_METHOD
     ] = PAYMENT_METHODS.TRANSFER;
     const store = initStore(initialState);
-    const { getByText, getByTestId, getByPlaceholderText } = render(
+    const { getByText } = render(
       <Provider store={store}>
         <PaymentRental />
       </Provider>

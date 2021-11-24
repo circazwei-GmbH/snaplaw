@@ -24,6 +24,7 @@ interface TextFieldPropsInterface extends TextInputProps {
   onChangeFunction: OnChangeFunction;
   containerStyle?: StyleProp<TextStyle>;
   onFocus?: () => void;
+  disabled?: boolean
 }
 
 export default function TextField({
@@ -34,6 +35,7 @@ export default function TextField({
   search,
   containerStyle,
   onFocus,
+  disabled,
   ...props
 }: TextFieldPropsInterface): JSX.Element {
   const [localValue, setLocalValue] = useState(value);
@@ -100,6 +102,7 @@ export default function TextField({
         ref={input}
         placeholder={!focused ? placeholder : ""}
         placeholderTextColor="#909090"
+        editable={!disabled}
         style={[
           styles.emptyInput,
           focused ? styles.fullInput : null,
@@ -108,6 +111,7 @@ export default function TextField({
           props.editable === undefined ? null : styles.inputNotEditable,
           errorMessage ? styles.errorBorder : null,
           search && !focused ? styles.search : null,
+          disabled ? styles.inputNotEditable : null
         ]}
         value={localValue}
         onChangeText={textChangeHandler}
