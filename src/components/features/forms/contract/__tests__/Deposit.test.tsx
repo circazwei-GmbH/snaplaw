@@ -154,6 +154,15 @@ describe("Deposit", () => {
         value: `${date}`,
       })
     );
+
+    fireEvent(getByTestId("Picker"), "itemChange", { value: "value" });
+    expect(actions).toBeCalledWith(
+      setScreenData({
+        screenType: CONTRACT_SCREEN_TYPES.DEPOSIT,
+        fieldName: DEPOSIT_FIELDS.CURRENCY,
+        value: "value",
+      })
+    );
   });
   it("Should dispatch validator", () => {
     // @ts-ignore

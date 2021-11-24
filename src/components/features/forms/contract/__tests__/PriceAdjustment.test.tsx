@@ -145,6 +145,15 @@ describe("PriceAdjustment", () => {
         value: `${date}`,
       })
     );
+
+    fireEvent(getByTestId("Picker"), "itemChange", { value: "value" });
+    expect(actions).toBeCalledWith(
+      setScreenData({
+        screenType: CONTRACT_SCREEN_TYPES.PRICE_ADJUSTMENT,
+        fieldName: PRICE_ADJUSTMENT_FIELDS.GRADUATED_LEASE_CURRENCY,
+        value: "value",
+      })
+    );
   });
   it("Should dispaly additional fields", () => {
     // @ts-ignore

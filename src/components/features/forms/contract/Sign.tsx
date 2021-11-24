@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import DefaultText from "../../../basics/typography/DefaultText";
 import { useI18n } from "../../../../translator/i18n";
@@ -10,8 +10,6 @@ import {
 import SignInput from "../../../basics/inputs/SignInput";
 import InviteInput from "../../../basics/inputs/InviteInput";
 import SignModal from "../../Modals/SignModal";
-import { orientationChange } from "../../../../store/modules/main/action-creators";
-import { OrientationLock } from "expo-screen-orientation";
 import { SIGN_LOADER } from "../../../../store/modules/contract/purchase/sign";
 import {
   removeFromWaiter,

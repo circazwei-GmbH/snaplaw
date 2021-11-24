@@ -20,6 +20,7 @@ type CalendarInputProps = {
   placeholder?: string;
   errorMessage?: string;
   testID?: string;
+  disabled?: boolean;
 };
 
 export default function CalendarInput({
@@ -29,6 +30,7 @@ export default function CalendarInput({
   placeholder = "",
   errorMessage,
   testID = "",
+  disabled,
 }: CalendarInputProps) {
   const [datePickerOpened, setDatePickerOpened] = useState(false);
 
@@ -51,6 +53,7 @@ export default function CalendarInput({
           style,
           errorMessage ? styles.error : null,
           placeholder && date ? null : styles.marginForLabel,
+          disabled ? styles.inputNotEditable : null,
         ]}
       >
         <View style={styles.dateContainer}>
@@ -73,6 +76,7 @@ export default function CalendarInput({
             onPress={() => setDatePickerOpened(true)}
             style={styles.iconContainer}
             testID={`DataPickerPressabelAreaID${testID}`}
+            disabled={disabled}
           >
             <MaterialCommunityIcons
               name="calendar-month-outline"
@@ -158,5 +162,8 @@ const styles = StyleSheet.create({
   },
   marginForLabel: {
     marginTop: 22,
+  },
+  inputNotEditable: {
+    backgroundColor: "#F2F2F2",
   },
 });

@@ -122,6 +122,24 @@ describe("Confirmation", () => {
       )
     );
   });
+  it("Should show additionsl text", () => {
+    // @ts-ignore
+    initialState.contract.currentContract.meRole = CONTRACT_ROLE.PARTNER;
+    initialState.contract.currentContract.screens.push({
+      type: CONTRACT_SCREEN_TYPES.PAYMENT,
+      data: {},
+    });
+    const { getByText } = render(
+      <Provider store={store}>
+        <Confirmation />
+      </Provider>
+    );
+    expect(
+      getByText(
+        `contracts.${CONTRACT_TYPES.PURCHASE}.${CONTRACT_SCREEN_TYPES.CONFIRMATION}.partner_text`
+      )
+    ).toBeTruthy();
+  });
   it("Should not render screen with undefined contract type", () => {
     // @ts-ignore
     initialState.contract.currentContract = undefined;

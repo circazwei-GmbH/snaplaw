@@ -141,7 +141,7 @@ interface DoneInterface {
   testID?: string;
 }
 
-const Done = ({ onPress, testID = "" }: DoneInterface) => {
+const Done = ({ onPress, testID }: DoneInterface) => {
   return (
     <Pressable onPress={onPress} testID={`DoneButton.${testID}`}>
       <Text style={styles.doneButton}>Done</Text>

@@ -25,9 +25,11 @@ export default function TextButton({
 }: ButtonPropsInterface): JSX.Element {
   return (
     <TouchableOpacity
-      onPress={disabled ? () => {} : onPress}
+      onPress={onPress}
+      disabled={disabled}
       activeOpacity={disabled ? 1 : 0.2}
       style={styles.container}
+      testID={text}
     >
       <Text
         style={[

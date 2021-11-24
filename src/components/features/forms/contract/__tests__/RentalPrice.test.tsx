@@ -67,7 +67,7 @@ describe("RentalPrice", () => {
     actions.mockClear();
     const initialState = INITIAL_STATE;
     const store = initStore(initialState);
-    const { getByPlaceholderText } = render(
+    const { getByPlaceholderText, getByTestId } = render(
       <Provider store={store}>
         <RentalPrice />
       </Provider>
@@ -92,6 +92,14 @@ describe("RentalPrice", () => {
         screenType: CONTRACT_SCREEN_TYPES.RENTAL_PRICE,
         fieldName: PAYMENT_FIELDS.COST,
         value: test_string,
+      })
+    );
+    fireEvent(getByTestId("Picker"), "itemChange", { value: "value" });
+    expect(actions).toBeCalledWith(
+      setScreenData({
+        screenType: CONTRACT_SCREEN_TYPES.RENTAL_PRICE,
+        fieldName: PAYMENT_FIELDS.CURRENCY,
+        value: "value",
       })
     );
   });

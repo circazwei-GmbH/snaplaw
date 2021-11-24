@@ -1,15 +1,19 @@
 import React from "react";
 import { createStore } from "@reduxjs/toolkit";
-import { render } from "@testing-library/react-native";
+import { fireEvent, render } from "@testing-library/react-native";
 import { Provider } from "react-redux";
 import PaymentLayout from "../PaymentLayout";
-import { Text } from "react-native";
 import {
   CONTRACT_SCREEN_TYPES,
   CONTRACT_TYPES,
 } from "../../../store/modules/contract/constants";
 import { CONTRACT_ROLE } from "../../../store/modules/contract/contract-roles";
-import { CURRENCY, PAYMENT_FIELDS, PAYMENT_METHODS } from "../../../store/modules/contract/payment";
+import {
+  CURRENCY,
+  PAYMENT_FIELDS,
+  PAYMENT_METHODS,
+} from "../../../store/modules/contract/payment";
+import { setScreenData } from "../../../store/modules/contract/slice";
 
 const INITIAL_STATE = {
   contract: {
@@ -40,6 +44,17 @@ const initStore = (initialState: Record<string, unknown>) => {
 };
 
 describe("PaymentLayout", () => {
+  it("should dispatch action on change currency", () => {
+    const store = initStore(INITIAL_STATE);
+    const handler = jest.fn();
+    const { getByTestId } = render(
+      <Provider store={store}>
+        <PaymentLayout updateDataHandler={handler} />
+      </Provider>
+    );
+    fireEvent(getByTestId("Picker"), "itemChange", { value: "value" });
+    expect(handler).toBeCalledWith(PAYMENT_FIELDS.CURRENCY, "value");
+  });
   it("Should render error message", () => {
     const initialState = INITIAL_STATE;
     // @ts-ignore

@@ -17,6 +17,7 @@ import TextField from "../../../components/TextField";
 import CalendarInput from "../../../basics/inputs/CalendarInput";
 import PaymentLayout from "../../../layouts/PaymentLayout";
 import { CURRENCY } from "../../../../store/modules/contract/payment";
+import { CONTRACT_ROLE } from "../../../../store/modules/contract/contract-roles";
 
 export default function PaymentCar() {
   const { t } = useI18n();
@@ -99,6 +100,8 @@ export default function PaymentCar() {
                 placeholder={t(
                   `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.payment_date`
                 )}
+                disabled={contract.meRole === CONTRACT_ROLE.PARTNER}
+                testID={PAYMENT_FIELDS.PAYMENT_DATE}
               />
             </View>
           ) : null}
@@ -132,6 +135,8 @@ export default function PaymentCar() {
                 placeholder={t(
                   `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.due_date`
                 )}
+                disabled={contract.meRole === CONTRACT_ROLE.PARTNER}
+                testID={PAYMENT_FIELDS.DUE_DATE}
               />
             </View>
           ) : null}
@@ -165,6 +170,8 @@ export default function PaymentCar() {
                 placeholder={t(
                   `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.advance_date`
                 )}
+                disabled={contract.meRole === CONTRACT_ROLE.PARTNER}
+                testID={PAYMENT_FIELDS.FIRST_DATE}
               />
               <TextField
                 onChangeFunction={(text) =>
@@ -175,6 +182,7 @@ export default function PaymentCar() {
                 placeholder={t(
                   `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.advance_cost`
                 )}
+                disabled={contract.meRole === CONTRACT_ROLE.PARTNER}
               />
               <CalendarInput
                 dateHandler={(text) =>
@@ -185,6 +193,8 @@ export default function PaymentCar() {
                 placeholder={t(
                   `contracts.${contract.type}.${CONTRACT_SCREEN_TYPES.PAYMENT}.fields.left_sum`
                 )}
+                disabled={contract.meRole === CONTRACT_ROLE.PARTNER}
+                testID={PAYMENT_FIELDS.SECOND_DATE}
               />
             </View>
           ) : null}

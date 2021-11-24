@@ -9,7 +9,7 @@ import {
   TextStyle,
   Pressable,
 } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import VerticalDivider from "../dividers/VerticalDivieder";
 
 interface OnChangeFunction {
@@ -101,9 +101,9 @@ export default function InputWithDelete({
             <Pressable
               onPress={onDelete}
               style={styles.iconContainer}
-              testID={`DataPickerPressabelAreaID${testID}`}
+              testID={`Delete${testID}`}
             >
-              <FontAwesome name="trash-o" size={22} color="#668395" />
+              <MaterialIcons name="delete-outline" size={22} color="#668395" />
             </Pressable>
           </View>
         ) : null}

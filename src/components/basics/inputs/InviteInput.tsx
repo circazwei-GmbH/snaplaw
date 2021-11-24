@@ -31,8 +31,8 @@ export default function InviteInput({
         <View style={styles.dividerContainer}>
           <VerticalDivider />
         </View>
-        <Pressable onPress={inviteHandler}>
-          <View style={styles.iconContainer} testID="InvitePressabelAreaID">
+        <Pressable onPress={inviteHandler} testID="InvitePressabelAreaID">
+          <View style={styles.iconContainer}>
             <Feather name="user-plus" size={22} color="#668395" />
           </View>
         </Pressable>

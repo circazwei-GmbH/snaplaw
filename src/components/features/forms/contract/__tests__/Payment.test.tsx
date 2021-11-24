@@ -93,7 +93,7 @@ describe("Payment", () => {
       )
     ).not.toBeTruthy();
   });
-  it("Should dispaly external fields", () => {
+  it("Should dispaly additional fields", () => {
     const initialState = INITIAL_STATE;
     initialState.contract.currentContract.screens[0].data[
       PAYMENT_FIELDS.PAYMENT_METHOD
@@ -115,7 +115,7 @@ describe("Payment", () => {
       )
     ).toBeTruthy();
   });
-  it("Should dispath on initi and every field is changed", () => {
+  it("Should dispath on init and every field is changed", () => {
     actions.mockClear();
     const initialState = INITIAL_STATE;
     initialState.contract.currentContract.screens[0].data[

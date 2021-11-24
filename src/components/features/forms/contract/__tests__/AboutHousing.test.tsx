@@ -91,7 +91,7 @@ describe("AboutHousing", () => {
       })
     );
 
-    const test_string = "test"
+    const test_string = "test";
 
     fireEvent.changeText(
       getByPlaceholderText(
@@ -136,7 +136,7 @@ describe("AboutHousing", () => {
     );
   });
   it("Should dispaly additional fields", () => {
-      // @ts-ignore
+    // @ts-ignore
     initialState.contract.currentContract.screens[0].data[
       HOUSING_DATA_FIELDS.IS_FURNISHED
     ] = true;
@@ -157,6 +157,20 @@ describe("AboutHousing", () => {
         `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.ABOUT_HOUSING}.furnished.placeholder`
       )
     ).toBeTruthy();
+
+    fireEvent.changeText(
+      getByPlaceholderText(
+        `contracts.${CONTRACT_TYPES.RENTAL}.${CONTRACT_SCREEN_TYPES.ABOUT_HOUSING}.furnished.placeholder`
+      ),
+      "value"
+    );
+    expect(actions).toBeCalledWith(
+      setScreenData({
+        screenType: CONTRACT_SCREEN_TYPES.ABOUT_HOUSING,
+        fieldName: HOUSING_DATA_FIELDS.FURNISHED_DESCRIPTION,
+        value: "value",
+      })
+    );
   });
   it("Should dispatch validation", () => {
     // @ts-ignore
@@ -179,10 +193,7 @@ describe("AboutHousing", () => {
       "test"
     );
     expect(actions).toBeCalledWith(
-      validateScreen(
-        CONTRACT_TYPES.RENTAL,
-        CONTRACT_SCREEN_TYPES.ABOUT_HOUSING
-      )
+      validateScreen(CONTRACT_TYPES.RENTAL, CONTRACT_SCREEN_TYPES.ABOUT_HOUSING)
     );
   });
 });
