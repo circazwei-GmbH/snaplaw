@@ -19,7 +19,7 @@ export default function TopBar({
   leftButton,
   rightButton,
   bottomElement,
-  withBackground = false,
+  withBackground,
   style,
   noPlaceholder,
 }: TopBarProps) {
@@ -51,7 +51,7 @@ export default function TopBar({
         </View>
       ) : null}
       {withBackground ? (
-        <View style={[styles.border, styles.background]} />
+        <View style={[styles.border, styles.background]} testID="WithBackground"/>
       ) : null}
       {children}
     </>
@@ -75,14 +75,14 @@ const styles = StyleSheet.create({
     }),
   },
   headerText: {
-    width: Dimensions.get("window").width * 0.6,
+    width: Dimensions.get("window").width * 0.44,
     justifyContent: "center",
     textAlign: "center",
     fontFamily: "OS-SB",
     fontSize: 16,
   },
   buttonPlaceholder: {
-    width: Dimensions.get("window").width * 0.2,
+    width: Dimensions.get("window").width * 0.28,
     height: 45,
     justifyContent: "center",
     alignItems: "flex-end",

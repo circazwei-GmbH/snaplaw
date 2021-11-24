@@ -12,14 +12,20 @@ afterEach(() => {
   jest.restoreAllMocks();
 });
 
+const Child = () => (
+  <View>
+    <Text>SomeTestChild</Text>
+  </View>
+);
+
+const BottomElement = () => (
+  <View>
+    <Text>BottomElement</Text>
+  </View>
+);
+
 describe("HeaderNavigation", () => {
   it("Should display name and children", () => {
-    const Child = () => (
-      <View>
-        <Text>SomeTestChild</Text>
-      </View>
-    );
-
     const { getByText } = render(
       <TopBar pageName="TestName">
         <Child />
@@ -29,14 +35,7 @@ describe("HeaderNavigation", () => {
     expect(getByText("SomeTestChild")).toBeTruthy();
     expect(getByText("TestName")).toBeTruthy();
   });
-
   it("Default button should navigate back", () => {
-    const Child = () => (
-      <View>
-        <Text>SomeTestChild</Text>
-      </View>
-    );
-
     const { getByTestId } = render(
       <TopBar pageName="TestName">
         <Child />
@@ -46,14 +45,7 @@ describe("HeaderNavigation", () => {
     fireEvent.press(getByTestId("BackButton.back"));
     expect(RootNavigation.pop).toBeCalled();
   });
-
   it("Right button should navigate back", () => {
-    const Child = () => (
-      <View>
-        <Text>SomeTestChild</Text>
-      </View>
-    );
-
     const { getByTestId } = render(
       <TopBar
         pageName="TestName"
@@ -66,5 +58,25 @@ describe("HeaderNavigation", () => {
 
     fireEvent.press(getByTestId("BackButton.back"));
     expect(RootNavigation.pop).toBeCalled();
+  });
+  it("Should display BottomElement and WithBackground", () => {
+    const { getByText, getByTestId } = render(
+      <TopBar pageName="TestName" withBackground bottomElement={<BottomElement/>}>
+        <Child />
+      </TopBar>
+    );
+
+    expect(getByTestId("WithBackground")).toBeTruthy();
+    expect(getByText("BottomElement")).toBeTruthy();
+  });
+  it("Should display BottomElement", () => {
+    const { getByText, queryByTestId } = render(
+      <TopBar pageName="TestName" bottomElement={<BottomElement/>}>
+        <Child />
+      </TopBar>
+    );
+
+    expect(queryByTestId("WithBackground")).toBeFalsy();
+    expect(getByText("BottomElement")).toBeTruthy();
   });
 });

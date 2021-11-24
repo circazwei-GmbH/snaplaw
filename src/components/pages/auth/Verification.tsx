@@ -69,7 +69,7 @@ export default function Verification({
               <MessageAndLink
                 linkHandler={resendHandler}
                 linkText={t("verification.resend.link")}
-                messageTextKey="verification.resend.text"
+                messageTextKey={t("verification.resend.text")}
               />
             </View>
           </View>

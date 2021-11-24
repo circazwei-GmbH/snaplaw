@@ -58,6 +58,7 @@ export default function AbstractList({
       onEndReachedThreshold={0.5}
       refreshing={isRefreshing}
       onRefresh={onRefresh}
+      testID="FlatList"
     />
   );
 }
