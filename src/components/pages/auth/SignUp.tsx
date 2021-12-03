@@ -140,7 +140,7 @@ export default function SignUp({ navigation }: SignUpProps) {
               <MessageAndLink
                 linkHandler={linkHandler}
                 linkText={t("sign_up.log_in")}
-                messageTextKey="sign_up.to_login"
+                messageTextKey={t("sign_up.to_login")}
               />
             </View>
           </View>

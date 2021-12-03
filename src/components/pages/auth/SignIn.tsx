@@ -129,7 +129,7 @@ export default function SignIn({ navigation }: SignInProps) {
               <MessageAndLink
                 linkHandler={() => navigation.replace(AUTH_ROUTE.SIGNUP)}
                 linkText={t("sign_in.sign_up")}
-                messageTextKey="sign_in.to_sign_up"
+                messageTextKey={t("sign_in.to_sign_up")}
               />
             </View>
           </View>

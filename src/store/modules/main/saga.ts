@@ -52,7 +52,6 @@ function* initPushNotifications() {
       // do nothing
       return;
     }
-    yield put(responseError(error));
   }
 }
 
