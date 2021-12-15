@@ -450,6 +450,9 @@ export default {
           deregistered: "Das Fahrzeug ist abgemeldet",
           deregisteredDate: "Das Fahrzeug ist abgemeldet bis",
           inspectionDate: "Fälligkeitsdatum angeben",
+          firstRegistration: "ertse Registrierung",
+          firstRegistrationDate: "Datum der ersten Regitrierung",
+          numberOfKeysProvided: "Die Anzahl der bereitgestellten Schlüssel",
         },
       },
       [CONTRACT_SCREEN_TYPES.ADDITIONAL_INFO]: {

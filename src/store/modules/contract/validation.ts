@@ -336,6 +336,16 @@ export const contractValidationConfig = {
             SPECIFICATIONS_DATA_FIELDS.DEREGISTERED
           ),
         ],
+        [SPECIFICATIONS_DATA_FIELDS.FIRST_REGISTRATION_DATE]: [
+          lengthCheckIfAnotherFieldIsTrue(
+              "contracts.validation.field_empty",
+              1,
+              SPECIFICATIONS_DATA_FIELDS.FIRST_REGISTRATION
+          ),
+        ],
+        [SPECIFICATIONS_DATA_FIELDS.NUMBER_OF_KEYS_PROVIDED]: [
+          length("contracts.validation.field_empty", 1),
+        ],
       },
     },
     [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {
