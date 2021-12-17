@@ -1,16 +1,16 @@
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {useAppDispatch, useAppSelector} from '../../../../store/hooks';
-import {useI18n} from '../../../../translator/i18n';
-import {CONTRACT_SCREEN_TYPES} from '../../../../store/modules/contract/constants';
+import React, { useState, useEffect } from "react";
+import { StyleSheet, View } from "react-native";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import { useI18n } from "../../../../translator/i18n";
+import { CONTRACT_SCREEN_TYPES } from "../../../../store/modules/contract/constants";
 import {
     SpecificationsDataScreenInterface,
     SPECIFICATIONS_DATA_FIELDS,
-} from '../../../../store/modules/contract/specifications-data';
-import {validateScreen} from '../../../../store/modules/contract/action-creators';
-import {setScreenData} from '../../../../store/modules/contract/slice';
-import DefaultSwitch from '../../../basics/switches/DefaultSwitch';
-import CalendarInput from '../../../basics/inputs/CalendarInput';
+} from "../../../../store/modules/contract/specifications-data";
+import { validateScreen } from "../../../../store/modules/contract/action-creators";
+import { setScreenData } from "../../../../store/modules/contract/slice";
+import DefaultSwitch from "../../../basics/switches/DefaultSwitch";
+import CalendarInput from "../../../basics/inputs/CalendarInput";
 import TextField from '../../../components/TextField';
 
 const initialState = {
@@ -25,7 +25,7 @@ const initialState = {
 };
 
 export default function Specifications(): JSX.Element {
-    const {t} = useI18n();
+    const { t } = useI18n();
     const dispatch = useAppDispatch();
 
     const [specifications, setSpecifications] = useState(initialState);
@@ -102,7 +102,7 @@ export default function Specifications(): JSX.Element {
                         date={
                             specificationsScreen?.data[
                                 SPECIFICATIONS_DATA_FIELDS.INSPECTION_DATE
-                                ] || ''
+                                ] || ""
                         }
                         dateHandler={(date) =>
                             onChangeAction(date, SPECIFICATIONS_DATA_FIELDS.INSPECTION_DATE)
@@ -179,7 +179,7 @@ export default function Specifications(): JSX.Element {
             {specifications.deregistered ? (
                 <View style={styles.calendarInputContainer}>
                     <CalendarInput
-                        date={specificationsScreen?.data.deregisteredDate || ''}
+                        date={specificationsScreen?.data.deregisteredDate || ""}
                         dateHandler={(date) =>
                             onChangeAction(date, SPECIFICATIONS_DATA_FIELDS.DEREGISTERED_DATE)
                         }
@@ -228,24 +228,24 @@ export default function Specifications(): JSX.Element {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-  },
-  inputBox: {
-    justifyContent: "flex-start",
-    paddingHorizontal: 16,
-  },
-  switchPadding: {
-    paddingTop: 24,
-    paddingBottom: 16,
-  },
-  switchText: {
-    fontSize: 16,
-    lineHeight: 22,
-    textAlign: "center",
-  },
-  calendarInputContainer: {
-    paddingHorizontal: 16,
-    paddingBottom: 5,
-  },
+    container: {
+        width: "100%",
+    },
+    inputBox: {
+        justifyContent: "flex-start",
+        paddingHorizontal: 16,
+    },
+    switchPadding: {
+        paddingTop: 24,
+        paddingBottom: 16,
+    },
+    switchText: {
+        fontSize: 16,
+        lineHeight: 22,
+        textAlign: "center",
+    },
+    calendarInputContainer: {
+        paddingHorizontal: 16,
+        paddingBottom: 5,
+    },
 });
