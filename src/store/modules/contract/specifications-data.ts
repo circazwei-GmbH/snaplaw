@@ -9,7 +9,10 @@ export const enum SPECIFICATIONS_DATA_FIELDS {
   SERVICE = "service",
   DEREGISTERED = "deregistered",
   INSPECTION_DATE = "inspectionDate", 
-  DEREGISTERED_DATE = "deregisteredDate", 
+  DEREGISTERED_DATE = "deregisteredDate",
+  FIRST_REGISTRATION = "firstRegistration",
+  FIRST_REGISTRATION_DATE = "firstRegistrationDate",
+  NUMBER_OF_KEYS_PROVIDED = "numberOfKeysProvided"
 }
 
 export interface SpecificationsDataScreenInterface
@@ -24,5 +27,8 @@ export interface SpecificationsDataScreenInterface
     [SPECIFICATIONS_DATA_FIELDS.DEREGISTERED]: boolean;
     [SPECIFICATIONS_DATA_FIELDS.INSPECTION_DATE]: string;
     [SPECIFICATIONS_DATA_FIELDS.DEREGISTERED_DATE]: string;
+    [SPECIFICATIONS_DATA_FIELDS.FIRST_REGISTRATION]: boolean;
+    [SPECIFICATIONS_DATA_FIELDS.FIRST_REGISTRATION_DATE]: string;
+    [SPECIFICATIONS_DATA_FIELDS.NUMBER_OF_KEYS_PROVIDED]: number;
   };
 }

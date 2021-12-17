@@ -418,6 +418,9 @@ export default {
           deregistered: "Vehicle deregistered",
           deregisteredDate: "Vehicle is deregistered until",
           inspectionDate: "Specify due date",
+          firstRegistration: "First registration",
+          firstRegistrationDate: "First registration date",
+          numberOfKeysProvided: "Number of keys provided",
         },
       },
       [CONTRACT_SCREEN_TYPES.PRODUCT_DESCRIPTION]: {

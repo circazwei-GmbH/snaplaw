@@ -11,6 +11,7 @@ import { validateScreen } from "../../../../store/modules/contract/action-creato
 import { setScreenData } from "../../../../store/modules/contract/slice";
 import DefaultSwitch from "../../../basics/switches/DefaultSwitch";
 import CalendarInput from "../../../basics/inputs/CalendarInput";
+import TextField from '../../../components/TextField';
 
 const initialState = {
   [SPECIFICATIONS_DATA_FIELDS.INSPECTION]: false,
@@ -19,6 +20,8 @@ const initialState = {
   [SPECIFICATIONS_DATA_FIELDS.TECHNICAL_WORK]: false,
   [SPECIFICATIONS_DATA_FIELDS.SERVICE]: false,
   [SPECIFICATIONS_DATA_FIELDS.DEREGISTERED]: false,
+  [SPECIFICATIONS_DATA_FIELDS.FIRST_REGISTRATION]: false,
+  [SPECIFICATIONS_DATA_FIELDS.NUMBER_OF_KEYS_PROVIDED]: false,
 };
 
 export default function Specifications(): JSX.Element {
@@ -150,6 +153,18 @@ export default function Specifications(): JSX.Element {
         }
         value={specifications.service}
       />
+      <View style={styles.inputBox}>
+        <TextField
+          placeholder={t(
+            `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.SPECIFICATIONS}.placeholders.numberOfKeysProvided`
+          )}
+          value={specificationsScreen?.data[SPECIFICATIONS_DATA_FIELDS.NUMBER_OF_KEYS_PROVIDED]}
+          errorMessage={screenErrors?.[SPECIFICATIONS_DATA_FIELDS.NUMBER_OF_KEYS_PROVIDED]}
+          onChangeFunction={(newValue) =>
+            onChangeAction(newValue, SPECIFICATIONS_DATA_FIELDS.NUMBER_OF_KEYS_PROVIDED)
+          }
+        />
+      </View>
       <DefaultSwitch
         title={t(
           `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.SPECIFICATIONS}.placeholders.deregistered`
@@ -173,6 +188,34 @@ export default function Specifications(): JSX.Element {
               screenErrors?.[SPECIFICATIONS_DATA_FIELDS.DEREGISTERED_DATE]
             }
             testID={SPECIFICATIONS_DATA_FIELDS.DEREGISTERED_DATE}
+          />
+        </View>
+      ) : null}
+      <DefaultSwitch
+        title={t(
+          `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.SPECIFICATIONS}.placeholders.firstRegistration`
+        )}
+        onChange={() =>
+          onToggleSpecification(SPECIFICATIONS_DATA_FIELDS.FIRST_REGISTRATION)
+        }
+        value={specifications.firstRegistration}
+      />
+      {specifications.firstRegistration ? (
+        <View style={styles.calendarInputContainer}>
+          <CalendarInput
+            date={
+              specificationsScreen?.data[SPECIFICATIONS_DATA_FIELDS.FIRST_REGISTRATION_DATE] || ''
+            }
+            dateHandler={(date) =>
+              onChangeAction(date, SPECIFICATIONS_DATA_FIELDS.FIRST_REGISTRATION_DATE)
+            }
+            placeholder={t(
+              `contracts.${contractType}.${CONTRACT_SCREEN_TYPES.SPECIFICATIONS}.placeholders.firstRegistrationDate`
+            )}
+            errorMessage={
+              screenErrors?.[SPECIFICATIONS_DATA_FIELDS.FIRST_REGISTRATION_DATE]
+            }
+            testID={SPECIFICATIONS_DATA_FIELDS.FIRST_REGISTRATION_DATE}
           />
         </View>
       ) : null}
