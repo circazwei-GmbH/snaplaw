@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   delete: {
-    width: "80%",
+    width: "78%",
   },
   fullInput: {
     backgroundColor: "transparent",

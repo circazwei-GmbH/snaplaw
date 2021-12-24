@@ -7,7 +7,7 @@ export default function VerticalDivider() {
 
 const styles = StyleSheet.create({
   divider: {
-    width: 0.5,
+    width: 1.2,
     backgroundColor: "#919191",
     height: "100%",
   },
