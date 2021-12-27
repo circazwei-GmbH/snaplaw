@@ -60,7 +60,7 @@ export default function SignModal({ visible, onClose }: SignModalProps) {
     <View>
       <Modal
         visible={visible}
-        supportedOrientations={["portrait-upside-down", "landscape-right"]}
+        supportedOrientations={["portrait"]}
       >
         <SafeAreaView style={styles.safeArea}>
           <TopBar
