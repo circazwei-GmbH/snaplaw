@@ -784,7 +784,7 @@ export default {
         checkboxes: {
           cash: "Bar",
           transfer: "Überweisung",
-          cash_advance: "Bankgarantie",
+          bank_guarantee: "Bankgarantie",
           other: "Sonstiges",
         },
         payment_methods: {
